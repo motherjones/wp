@@ -16,6 +16,7 @@
 
 get_header(); ?>
 
+<h1> okay here not pages, eh?</h1>
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main" role="main">
 
