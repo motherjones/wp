@@ -6,7 +6,7 @@
  * @subpackage Content Types
  */
 
-//get_header(); ?>
+get_header(); ?>
 
 <h1> behold, a blog post </h1>
 <div id="primary" class="content-area">

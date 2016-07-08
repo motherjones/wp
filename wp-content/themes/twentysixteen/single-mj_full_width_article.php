@@ -5,8 +5,8 @@
  * @package Mother Jones Custom
  * @subpackage Content Types
  */
-
-//get_header(); ?>
+get_header();
+?>
 
 <h1> This is gonna be a full width article </h1>
 <div id="primary" class="content-area">
