@@ -86,6 +86,7 @@ function create_full_width_article_type() {
       ),
       'public' => true,
       'has_archive' => true,
+      'menu_position' => 5,
       'show_in_menu' => true
     )
   );
