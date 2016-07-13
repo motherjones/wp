@@ -62,19 +62,6 @@
  * 
  */
 
-add_action( 'init', 'create_article_type' );
-function create_article_type() {
-  register_post_type( 'mj_article',
-    array(
-      'labels' => array(
-        'name' => __( 'Normal Plain Jane Articles' ),
-        'singular_name' => __( 'Normal Plain Jane Article' )
-      ),
-      'public' => true,
-      'has_archive' => true
-    )
-  );
-}
 
 add_action( 'init', 'create_full_width_article_type' );
 function create_full_width_article_type() {
@@ -83,6 +70,20 @@ function create_full_width_article_type() {
       'labels' => array(
         'name' => __( 'Full Widths' ),
         'singular_name' => __( 'Full Width' )
+      ),
+      'public' => true,
+      'has_archive' => true
+    )
+  );
+}
+
+add_action( 'init', 'create_article_type' );
+function create_article_type() {
+  register_post_type( 'mj_article',
+    array(
+      'labels' => array(
+        'name' => __( 'Normal Plain Jane Articles' ),
+        'singular_name' => __( 'Normal Plain Jane Article' )
       ),
       'public' => true,
       'has_archive' => true
