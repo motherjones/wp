@@ -82,11 +82,11 @@ function create_full_width_article_type() {
       'labels' => array(
         'name' => __( 'Full Width Articles' ),
         'singular_name' => __( 'Full Width Article' ),
-        'add_new' => __( 'Create Full Width Article' )
+        'add_new' => __( 'Create Full Width Article' ),
+        'name_admin_bar' => __( 'Full Width Article')
       ),
       'public' => true,
       'has_archive' => true,
-      'menu_position' => 5,
       'show_in_menu' => true
     )
   );
