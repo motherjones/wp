@@ -67,8 +67,8 @@ function create_article_type() {
   register_post_type( 'mj_article',
     array(
       'labels' => array(
-        'name' => __( 'Articles' ),
-        'singular_name' => __( 'Article' )
+        'name' => __( 'Normal Plain Jane Articles' ),
+        'singular_name' => __( 'Normal Plain Jane Article' )
       ),
       'public' => true,
       'has_archive' => true
@@ -78,7 +78,7 @@ function create_article_type() {
 
 add_action( 'init', 'create_full_width_article_type' );
 function create_full_width_article_type() {
-  register_post_type( 'mj_full_width_article_mkII',
+  register_post_type( 'mj_full_width_article',
     array(
       'labels' => array(
         'name' => __( 'Full Widths' ),
@@ -112,7 +112,7 @@ function add_custom_types_to_query( $query ) {
   if ( is_home() && $query->is_main_query() )
     $query->set( 'post_type', 
 //      array( 'mj_article', 'mj_full_width_article_mkII', 'mj_blog_post' )
-      array( 'mj_article', 'mj_full_width_article_mkII' )
+      array( 'mj_article', 'mj_full_width_article' )
     );
   return $query;
 }
