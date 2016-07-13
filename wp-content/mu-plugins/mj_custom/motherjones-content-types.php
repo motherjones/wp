@@ -90,6 +90,7 @@ function create_full_width_article_type() {
   );
 }
 
+/*
 add_action( 'init', 'create_blog_post_type' );
 function create_blog_post_type() {
   register_post_type( 'mj_blog_post',
@@ -103,13 +104,15 @@ function create_blog_post_type() {
     )
   );
 }
+ */
 // Show the motherjones custom types on home page
 //
 add_action( 'pre_get_posts', 'add_custom_types_to_query' );
 function add_custom_types_to_query( $query ) {
   if ( is_home() && $query->is_main_query() )
     $query->set( 'post_type', 
-      array( 'mj_article', 'mj_full_width_article_mkII', 'mj_blog_post' )
+//      array( 'mj_article', 'mj_full_width_article_mkII', 'mj_blog_post' )
+      array( 'mj_article', 'mj_full_width_article_mkII' )
     );
   return $query;
 }
