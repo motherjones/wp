@@ -109,7 +109,7 @@ add_action( 'pre_get_posts', 'add_custom_types_to_query' );
 function add_custom_types_to_query( $query ) {
   if ( is_home() && $query->is_main_query() )
     $query->set( 'post_type', 
-      array( 'mj_article', 'mj_full_width_article', 'mj_blog_post' )
+      array( 'mj_article', 'mj_full_width_article_mkII', 'mj_blog_post' )
     );
   return $query;
 }
