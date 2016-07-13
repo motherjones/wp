@@ -82,8 +82,8 @@ function create_article_type() {
   register_post_type( 'mj_article',
     array(
       'labels' => array(
-        'name' => __( 'Normal Plain Jane Articles' ),
-        'singular_name' => __( 'Normal Plain Jane Article' )
+        'name' => __( 'Articles' ),
+        'singular_name' => __( 'Article' )
       ),
       'public' => true,
       'has_archive' => true
