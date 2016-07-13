@@ -78,7 +78,7 @@ function create_article_type() {
 
 add_action( 'init', 'create_full_width_article_type' );
 function create_full_width_article_type() {
-  register_post_type( 'mj_full_width_article',
+  register_post_type( 'mj_full_width_article_mkII',
     array(
       'labels' => array(
         'name' => __( 'Full Width Articles' ),
