@@ -75,19 +75,17 @@ function create_article_type() {
     )
   );
 }
+
 add_action( 'init', 'create_full_width_article_type' );
 function create_full_width_article_type() {
   register_post_type( 'mj_full_width_article',
     array(
       'labels' => array(
         'name' => __( 'Full Width Articles' ),
-        'singular_name' => __( 'Full Width Article' ),
-        'add_new' => __( 'Create Full Width Article' ),
-        'name_admin_bar' => __( 'Full Width Article')
+        'singular_name' => __( 'Full Width Article' )
       ),
       'public' => true,
-      'has_archive' => true,
-      'show_in_menu' => true
+      'has_archive' => true
     )
   );
 }
