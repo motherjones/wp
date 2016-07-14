@@ -16,7 +16,7 @@ $byline_override = array(
 function add_article_fields_to_edit() {
   $form_fields["byline_override"] = $byline_override;
 }
-add_filter("article_fields_to_edit", "add_article_fields_to_edit", null, 2);
+add_filter("mj_article_fields_to_edit", "add_article_fields_to_edit", null, 2);
 
 
 ?>
