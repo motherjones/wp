@@ -18,5 +18,8 @@ function add_article_fields_to_edit() {
 }
 add_filter("mj_article_fields_to_edit", "add_article_fields_to_edit", null, 2);
 
+//start smaller
+add_filter("post_fields_to_edit", "add_article_fields_to_edit", null, 2);
+
 
 ?>
