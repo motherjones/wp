@@ -72,7 +72,8 @@ function create_full_width_type() {
         'singular_name' => __( 'Full Width' )
       ),
       'public' => true,
-      'has_archive' => true
+      'has_archive' => true,
+      'supports' => array('title', 'editor', 'byline_override'),
     )
   );
 }
@@ -86,6 +87,7 @@ function create_article_type() {
         'singular_name' => __( 'Article' )
       ),
       'public' => true,
+      'supports' => array('title', 'editor', 'byline_override'),
       'has_archive' => true
     )
   );
@@ -100,6 +102,7 @@ function create_blog_post_type() {
         'singular_name' => __( 'Blog Post' )
       ),
       'public' => true,
+      'supports' => array('title', 'editor', 'byline_override'),
       'has_archive' => true
     )
   );
