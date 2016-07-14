@@ -8,5 +8,5 @@
 */
 
 
-require_once( 'mj_custom/motherjones-content-fields.php' );
 require_once( 'mj_custom/motherjones-content-types.php' );
+require_once( 'mj_custom/motherjones-content-fields.php' );
