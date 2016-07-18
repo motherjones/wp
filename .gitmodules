@@ -1,3 +1,0 @@
-[submodule "wp-content/mu-plugins/wordpress-fieldmanager"]
-	path = wp-content/mu-plugins/wordpress-fieldmanager
-	url = git@github.com:alleyinteractive/wordpress-fieldmanager.git
