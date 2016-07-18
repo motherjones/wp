@@ -8,6 +8,9 @@
 */
 
 
+//Add custom types for mj_article, mj_blog_post, mj_full_width
+require_once('mj_custom/motherjones-content-types.php');
+
 require_once('fieldmanager/fieldmanager.php');
 
 
