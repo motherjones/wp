@@ -72,7 +72,7 @@ function create_full_width_type() {
       ),
       'public' => true,
       'has_archive' => true,
-      'supports' => array('title', 'master_image', 'custom_fields'),
+      'supports' => array('title', 'master_image', 'custom_field'),
     )
   );
 }
