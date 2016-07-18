@@ -62,7 +62,6 @@
  * 
  */
 
-
 add_action( 'init', 'create_full_width_type' );
 function create_full_width_type() {
   register_post_type( 'mj_full_width',
@@ -73,7 +72,7 @@ function create_full_width_type() {
       ),
       'public' => true,
       'has_archive' => true,
-      'supports' => array('title', 'editor', 'byline_override'),
+      'supports' => array('title', 'editor', 'byline_override', 'master_image'),
     )
   );
 }
@@ -87,7 +86,7 @@ function create_article_type() {
         'singular_name' => __( 'Article' )
       ),
       'public' => true,
-      'supports' => array('title', 'editor', 'byline_override'),
+      'supports' => array('title', 'editor', 'byline_override', 'master_image'),
       'has_archive' => true
     )
   );
@@ -102,7 +101,7 @@ function create_blog_post_type() {
         'singular_name' => __( 'Blog Post' )
       ),
       'public' => true,
-      'supports' => array('title', 'editor', 'byline_override'),
+      'supports' => array('title', 'editor', 'byline_override', 'master_image'),
       'has_archive' => true
     )
   );
