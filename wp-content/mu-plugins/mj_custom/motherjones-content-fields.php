@@ -5,7 +5,10 @@
  *
  * wherein we define the fields that our custom types need
  */
-require_once( 'wordpress-fieldmanager/fieldmanager.php' );
+
+define('__ROOT__', dirname(dirname(__FILE__))); 
+require_once(__ROOT__.'/wordpress-fieldmanager/fieldmanager.php'); 
+
 
 add_action( 'fm_post_post', function() {
   $fm = new Fieldmanager_Group( array(
