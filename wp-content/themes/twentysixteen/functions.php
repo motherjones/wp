@@ -96,7 +96,7 @@ class MJ_custom_fields {
   function createCustomFields() {
       if ( function_exists( 'add_meta_box' ) ) {
           foreach ( $this->postTypes as $postType ) {
-              add_meta_box( 'mj-custom-fields', 'Custom Fields', array( &amp;$this, 'displayCustomFields' ), $postType, 'normal', 'high' );
+              add_meta_box( 'mj-custom-fields', 'Custom Fields', array( &$this, 'displayCustomFields' ), $postType, 'normal', 'high' );
           }
       }
   }
@@ -150,7 +150,7 @@ class MJ_custom_fields {
                                   <script type="text/javascript">
                                       jQuery( document ).ready( function() {
                                           jQuery( "<?php echo $this->prefix . $customField[ 'name' ]; ?>" ).addClass( "mceEditor" );
-                                          if ( typeof( tinyMCE ) == "object" &amp;&amp; typeof( tinyMCE.execCommand ) == "function" ) {
+                                          if ( typeof( tinyMCE ) == "object" &&; typeof( tinyMCE.execCommand ) == "function" ) {
                                               tinyMCE.execCommand( "mceAddControl", false, "<?php echo $this->prefix . $customField[ 'name' ]; ?>" );
                                           }
                                       });
@@ -182,7 +182,7 @@ class MJ_custom_fields {
           return;
       foreach ( $this->customFields as $customField ) {
           if ( current_user_can( $customField['capability'], $post_id ) ) {
-              if ( isset( $_POST[ $this->prefix . $customField['name'] ] ) &amp;&amp; trim( $_POST[ $this->prefix . $customField['name'] ] ) ) {
+              if ( isset( $_POST[ $this->prefix . $customField['name'] ] ) && trim( $_POST[ $this->prefix . $customField['name'] ] ) ) {
                   $value = $_POST[ $this->prefix . $customField['name'] ];
                   // Auto-paragraphs for any WYSIWYG
                   if ( $customField['type'] == "wysiwyg" ) $value = wpautop( $value );
