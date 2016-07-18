@@ -16,14 +16,21 @@ require_once('fieldmanager/fieldmanager.php');
 
 add_action( 'fm_post_post', function() {
   $fm = new Fieldmanager_Group( array(
-    'name' => 'contact_information',
+    'name' => 'Master Image',
     'children' => array(
-      'name' => new Fieldmanager_Textfield( 'Name' ),
-      'phone' => new Fieldmanager_Textfield( 'Phone Number' ),
-      'website' => new Fieldmanager_Link( 'Website' ),
+      'master_image' => new Fieldmanager_Media( 'Image' ),
+      'master_image_byline' => new Fieldmanager_Textfield( 'Art Byline' ),
+      'master_image_caption' => new Fieldmanager_Textfield( 'Caption' ),
+      'master_image_suppress' => new Fieldmanager_Checkbox( array(
+        'label' => 'Suppress Master Image',
+        'unchecked_value' => 'Show Master Image',
+        'checked_value' => 'Hide Master Image',
+      ) ),
     ),
   ) );
-  $fm->add_meta_box( 'Contact Information', 'post' );
+  $fm->add_meta_box( 'Master Image', 'mj_article' );
+  $fm->add_meta_box( 'Master Image', 'mj_blog_post' );
+  $fm->add_meta_box( 'Master Image', 'mj_full_width' );
 } );
 
 ?>
