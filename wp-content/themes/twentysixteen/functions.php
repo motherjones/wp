@@ -78,7 +78,7 @@ class MJ_custom_fields {
       add_action( 'admin_menu', array( &$this, 'createCustomFields' ) );
       add_action( 'save_post', array( &$this, 'saveCustomFields' ), 1, 2 );
       // Comment this line out if you want to keep default custom fields meta box
-      add_action( 'do_meta_boxes', array( &amp;$this, 'removeDefaultCustomFields' ), 10, 3 );
+      add_action( 'do_meta_boxes', array( &$this, 'removeDefaultCustomFields' ), 10, 3 );
   }
   /**
   * Remove the default Custom Fields meta box
