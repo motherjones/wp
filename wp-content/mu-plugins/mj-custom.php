@@ -28,10 +28,10 @@ add_action( 'fm_post_post', function() {
       ) )
     )
   ) );
-  $fm->add_meta_box( 'Master Image', 'post' );
   $fm->add_meta_box( 'Master Image', 'mj_article' );
   $fm->add_meta_box( 'Master Image', 'mj_blog_post' );
   $fm->add_meta_box( 'Master Image', 'mj_full_width' );
+  $fm->add_meta_box( 'Master Image', 'post' );
 } );
 
 ?>
