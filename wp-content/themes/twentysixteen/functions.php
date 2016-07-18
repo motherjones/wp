@@ -66,7 +66,7 @@ class MJ_custom_fields {
       "type"          => "textarea",
       "scope"         =>   array( "article", "blog_post", "full_width" ),
       "capability"    => "edit_pages"
-    ),
+    )
 
   );
 
