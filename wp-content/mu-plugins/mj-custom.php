@@ -38,4 +38,11 @@ add_action( 'fm_post_mj_full_width', function() {
   $master_image->add_meta_box( 'Master Image', 'mj_full_width' );
 } );
 
+//oh boy, what fun
+add_action( 'fm_user', function() {
+  $position = new Fieldmanager_Textfield( 'Position' );
+  $position->add_user_form( 'Position' );
+} );
+
+
 ?>
