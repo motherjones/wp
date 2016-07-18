@@ -8,7 +8,7 @@
 */
 
 
-require_once('wordpress-fieldmanager/fieldmanager.php');
+require_once('fieldmanager/fieldmanager.php');
 
 
 add_action( 'fm_post_post', function() {
