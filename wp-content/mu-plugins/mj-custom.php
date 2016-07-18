@@ -40,7 +40,9 @@ add_action( 'fm_post_mj_full_width', function() {
 
 //oh boy, what fun
 add_action( 'fm_user', function() {
-  $position = new Fieldmanager_Textfield( 'Position' );
+  $position = new Fieldmanager_Textfield(
+    'name' => 'position',
+  );
   $position->add_user_form( 'Position' );
 } );
 
