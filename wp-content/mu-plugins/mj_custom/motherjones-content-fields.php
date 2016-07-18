@@ -7,7 +7,7 @@
  */
 
 define('__ROOT__', dirname(__FILE__)); 
-require_once(__ROOT__.'/wordpress-fieldmanager/fieldmanager.php'); 
+require_once(__ROOT__.'../wordpress-fieldmanager/fieldmanager.php'); 
 
 
 add_action( 'fm_post_post', function() {
