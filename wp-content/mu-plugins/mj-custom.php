@@ -8,5 +8,19 @@
 */
 
 
-require_once( 'mj_custom/motherjones-content-types.php' );
-require_once( 'mj_custom/motherjones-content-fields.php' );
+require_once('wordpress-fieldmanager/fieldmanager.php');
+
+
+add_action( 'fm_post_post', function() {
+  $fm = new Fieldmanager_Group( array(
+    'name' => 'contact_information',
+    'children' => array(
+      'name' => new Fieldmanager_Textfield( 'Name' ),
+      'phone' => new Fieldmanager_Textfield( 'Phone Number' ),
+      'website' => new Fieldmanager_Link( 'Website' ),
+    ),
+  ) );
+  $fm->add_meta_box( 'Contact Information', 'post' );
+} );
+
+?>
