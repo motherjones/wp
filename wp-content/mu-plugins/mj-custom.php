@@ -14,7 +14,7 @@ require_once('mj_custom/motherjones-content-types.php');
 require_once('fieldmanager/fieldmanager.php');
 
 
-add_action( 'fm_post_post', function() {
+add_action( 'fm_post_blog_post', function() {
   $fm = new Fieldmanager_Group( array(
     'name' => 'master_image',
     'children' => array(

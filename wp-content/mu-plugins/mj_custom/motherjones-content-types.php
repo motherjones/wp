@@ -101,7 +101,7 @@ function create_blog_post_type() {
         'singular_name' => __( 'Blog Post' )
       ),
       'public' => true,
-      'supports' => array('title', 'editor', 'byline_override', 'master_image'),
+      'supports' => array('title'),
       'has_archive' => true
     )
   );
