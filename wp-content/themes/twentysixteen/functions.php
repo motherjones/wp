@@ -75,8 +75,8 @@ class MJ_custom_fields {
   * PHP 5 Constructor
   */
   function __construct() {
-      add_action( 'admin_menu', array( &amp;$this, 'createCustomFields' ) );
-      add_action( 'save_post', array( &amp;$this, 'saveCustomFields' ), 1, 2 );
+      add_action( 'admin_menu', array( &$this, 'createCustomFields' ) );
+      add_action( 'save_post', array( &$this, 'saveCustomFields' ), 1, 2 );
       // Comment this line out if you want to keep default custom fields meta box
       add_action( 'do_meta_boxes', array( &amp;$this, 'removeDefaultCustomFields' ), 10, 3 );
   }
