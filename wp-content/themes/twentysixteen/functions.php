@@ -42,8 +42,8 @@ if ( ! function_exists( 'twentysixteen_setup' ) ) :
  *
  * Create your own twentysixteen_setup() function to override in a child theme.
  *
- * @since Twenty Sixteen 1.0
- */
+  */
+
 function twentysixteen_setup() {
 	/*
 	 * Make theme available for translation.
