@@ -27,9 +27,9 @@ $title_image = new Fieldmanager_Group( array(
 ) );
 //end fullwidth only!
 
-$dek = new Fieldmanager_TextField(
+$dek = new Fieldmanager_TextField( array(
   'name' => 'dek',
-);
+) );
 
 $social = new Fieldmanager_Group( array(
   'name' => 'social',
@@ -83,9 +83,9 @@ $byline = new Fieldmanager_Group( array(
     'override' => new Fieldmanager_TextField( 'Byline Override' )
 ) );
 
-$body = new Fieldmanager_TextArea(
+$body = new Fieldmanager_TextArea( array(
   'name' => 'body'
-);
+) );
 
 //TAXONOMIES!!!! FFFFFFFFFUUUUUUUUUUUU
 
@@ -148,29 +148,29 @@ add_action( 'fm_post_mj_full_width', function() {
 
 //add fields to author types
 add_action( 'fm_post_mj_author', function() {
-  $position = new Fieldmanager_TextField(
+  $position = new Fieldmanager_TextField( array(
     'name' => 'position',
-  );
+  ) );
   $position->add_meta_box( 'Position', 'mj_author' );
 
-  $image = new Fieldmanager_Media( 
+  $image = new Fieldmanager_Media( array( 
     'name' => 'image'
-  );
+  ) );
   $image->add_meta_box( 'Author Photo', 'mj_author' );
 
-  $long_bio = new Fieldmanager_TextArea(
+  $long_bio = new Fieldmanager_TextArea( array(
     'name' => 'long_bio'
-  );
+  ) );
   $long_bio->add_meta_box( 'Long Bio', 'mj_author' );
 
-  $short_bio = new Fieldmanager_TextArea(
+  $short_bio = new Fieldmanager_TextArea( array(
     'name' => 'short_bio'
-  );
+  ) );
   $short_bio->add_meta_box( 'End of Article Bio', 'mj_author' );
 
-  $twitter = new Fieldmanager_TextField(
+  $twitter = new Fieldmanager_TextField( array(
     'name' => 'twitter',
-  );
+  ) );
   $twitter->add_meta_box( 'Twitter User', 'mj_author' );
 
 
