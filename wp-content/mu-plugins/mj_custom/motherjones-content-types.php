@@ -86,7 +86,7 @@ function create_article_type() {
         'singular_name' => __( 'Article' )
       ),
       'public' => true,
-      'supports' => array('title', 'editor', 'byline_override', 'master_image'),
+      'supports' => array('title'),
       'has_archive' => true
     )
   );
@@ -99,6 +99,21 @@ function create_blog_post_type() {
       'labels' => array(
         'name' => __( 'Blog Posts' ),
         'singular_name' => __( 'Blog Post' )
+      ),
+      'public' => true,
+      'supports' => array('title'),
+      'has_archive' => true
+    )
+  );
+}
+
+add_action( 'init', 'create_author_type' );
+function create_blog_post_type() {
+  register_post_type( 'mj_author',
+    array(
+      'labels' => array(
+        'name' => __( 'Authors' ),
+        'singular_name' => __( 'Author' )
       ),
       'public' => true,
       'supports' => array('title'),
