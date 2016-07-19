@@ -182,6 +182,7 @@ add_action( 'fm_post_mj_author', function() {
 //allow users to associate w/ an author type
 add_action( 'fm_user', function() {
 
+  /* autocomplete is being funky
   $author = new Fieldmanager_Autocomplete( array(
     'label'      => 'author',
     'datasource' => new Fieldmanager_Datasource_Post( array(
@@ -189,6 +190,7 @@ add_action( 'fm_user', function() {
     ) ),
   ) );
   $author->add_user_form( 'Author Bio' );
+   */
 
 });
 
