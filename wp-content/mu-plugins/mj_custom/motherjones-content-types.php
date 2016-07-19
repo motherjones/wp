@@ -108,7 +108,7 @@ function create_blog_post_type() {
 }
 
 add_action( 'init', 'create_author_type' );
-function create_blog_post_type() {
+function create_author_type() {
   register_post_type( 'mj_author',
     array(
       'labels' => array(
