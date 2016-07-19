@@ -70,6 +70,7 @@ $master_image = new Fieldmanager_Group( array(
 $byline = new Fieldmanager_Group( array( 
   'name' => 'byline',
   'children' => array(
+    /*
     'authors' => new Fieldmanager_Autocomplete( array(
       'label'      => 'Byline',
       'limit'      => 0,
@@ -79,6 +80,7 @@ $byline = new Fieldmanager_Group( array(
         'query_args' => array( 'post_type' => 'mj_author' )
       ) ),
     ) ),
+     */
     'override' => new Fieldmanager_TextField( 'Byline Override' )
   )
 ) );
