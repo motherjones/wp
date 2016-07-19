@@ -14,7 +14,6 @@ require_once('mj_custom/motherjones-content-types.php');
 
 require_once('fieldmanager/fieldmanager.php');
 
-
 //Add fields to article types
 
 //fullwidth only!
@@ -90,6 +89,7 @@ $body = new Fieldmanager_TextArea( array(
 
 //TAXONOMIES!!!! FFFFFFFFFUUUUUUUUUUUU
 
+/* FIXME probly oughta figure out the real query args there
 $related = new Fieldmanager_Autocomplete( array(
   'label'      => 'Related Articles',
   'limit'      => 0,
@@ -100,6 +100,7 @@ $related = new Fieldmanager_Autocomplete( array(
     'query_args' => array( 'post_type' => 'mj_article,mj_full_width,mj_blog_post' )
   ) ),
 ) );
+ */
 
 //scheduling?
 
@@ -121,7 +122,7 @@ add_action( 'fm_post_mj_blog_post', function() {
   $master_image->add_meta_box( 'Master Image', 'mj_blog_post' );
   $byline->add_meta_box( 'Byline', 'mj_blog_post' );
   $body->add_meta_box( 'Article Body', 'mj_blog_post' );
-  $related->add_meta_box( 'Related Articles', 'mj_blog_post' );
+  //$related->add_meta_box( 'Related Articles', 'mj_blog_post' );
   $css_js->add_meta_box( 'Extra CSS & JS', 'mj_blog_post' );
 } );
 add_action( 'fm_post_mj_article', function() {
@@ -131,7 +132,7 @@ add_action( 'fm_post_mj_article', function() {
   $master_image->add_meta_box( 'Master Image', 'mj_article' );
   $byline->add_meta_box( 'Byline', 'mj_article' );
   $body->add_meta_box( 'Article Body', 'mj_article' );
-  $related->add_meta_box( 'Related Articles', 'mj_article' );
+  //$related->add_meta_box( 'Related Articles', 'mj_article' );
   $css_js->add_meta_box( 'Extra CSS & JS', 'mj_article' );
 } );
 add_action( 'fm_post_mj_full_width', function() {
@@ -142,7 +143,7 @@ add_action( 'fm_post_mj_full_width', function() {
   $master_image->add_meta_box( 'Master Image', 'mj_full_width' );
   $byline->add_meta_box( 'Byline', 'mj_full_width' );
   $body->add_meta_box( 'Article Body', 'mj_full_width' );
-  $related->add_meta_box( 'Related Articles', 'mj_full_width' );
+  //$related->add_meta_box( 'Related Articles', 'mj_full_width' );
   $css_js->add_meta_box( 'Extra CSS & JS', 'mj_full_width' );
 } );
 
