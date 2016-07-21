@@ -67,22 +67,6 @@ $master_image = new Fieldmanager_Group( array(
   )
 ) );
 
-$byline = new Fieldmanager_Group( array(
-	'name'           => 'byline',
-	'limit'          => 0,
-	'add_more_label' => 'Add another author',
-	'sortable'       => true,
-	'label'          => 'Author',
-	'children'       => array(
-		'authors' => new Fieldmanager_Autocomplete( array(
-			'label'      => 'Datasource Post',
-			'datasource' => new Fieldmanager_Datasource_Post( array(
-				'query_args' => array( 'post_type' => 'mj_author' )
-			) ),
-		) )
-	)
-) );
-
 $body = new Fieldmanager_TextArea( array(
   'name' => 'body'
 ) );
@@ -115,12 +99,26 @@ $css_js = new Fieldmanager_Group( array(
   )
 ) );
 
+$byline = false;
 add_action( 'fm_post_mj_blog_post', function() {
+
+	$byline = $byline ? $byline : new Fieldmanager_Group( array( 
+		'name' => 'Byline',
+		'children' => array(
+			'authors' => new Fieldmanager_Autocomplete( "Authors", array(
+				'datasource' => new Fieldmanager_Datasource_Post( array(
+					'query_args' => array( 'post_type' => 'mj_author' )
+				) ),
+			) ),
+			'override' => new Fieldmanager_TextField( 'Byline Override' )
+		)
+	) );
+
   $dek->add_meta_box( 'Dek', 'mj_blog_post' );
   $social->add_meta_box( 'Social Titles', 'mj_blog_post' );
   $alt->add_meta_box( 'Alt Titles', 'mj_blog_post' );
   $master_image->add_meta_box( 'Master Image', 'mj_blog_post' );
-  //$byline->add_meta_box( 'Byline', 'mj_blog_post' );
+  $byline->add_meta_box( 'Byline', 'mj_blog_post' );
   $body->add_meta_box( 'Article Body', 'mj_blog_post' );
   //$related->add_meta_box( 'Related Articles', 'mj_blog_post' );
   $css_js->add_meta_box( 'Extra CSS & JS', 'mj_blog_post' );
