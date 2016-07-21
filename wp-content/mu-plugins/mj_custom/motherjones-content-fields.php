@@ -9,7 +9,8 @@
   This is the part where I define all the fields our custom parts need
 */
 
-require_once('../fieldmanager/fieldmanager.php');
+define('__ROOT__', dirname(dirname(__FILE__))); 
+require_once(__ROOT__.'/fieldmanager/fieldmanager.php');
 
 if ( !class_exists( 'MJ_Custom_Fields' ) ) {
 
