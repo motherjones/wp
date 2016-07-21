@@ -123,9 +123,9 @@ function byline() {
 
 function related() {
 	return new Fieldmanager_Group( array(
-		'label'      => 'Related Articles',
+		'name'      => 'Related Articles',
     'children'   => array(
-      'related_article' => new Fieldmanager_Autocomplete( array(
+      'related_article' => new Fieldmanager_Autocomplete( "Related", array(
         'limit'      => 0,
         'sortable'   => true,
         'add_more_label' => 'Add another article',
@@ -214,7 +214,7 @@ add_action( 'fm_post_mj_author', function() {
 add_action( 'fm_user', function() {
 
   $author = new Fieldmanager_Autocomplete( array(
-    'label'      => 'author',
+    'name'      => 'author',
     'datasource' => new Fieldmanager_Datasource_Post( array(
       'query_args' => array( 
         'post_type' => 'mj_author',
