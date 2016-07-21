@@ -122,7 +122,7 @@ function related() {
 		'sortable'   => true,
 		'add_more_label' => 'Add another article',
     'children'   => array(
-      'related_article' => Fieldmanager_Autocomplete( array(
+      'related_article' => new Fieldmanager_Autocomplete( array(
         'label' => 'Related Article',
         'datasource' => new Fieldmanager_Datasource_Post( array(
           'query_args' => array( 'post_type' => 'mj_article,mj_full_width,mj_blog_post' )
