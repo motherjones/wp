@@ -101,6 +101,7 @@ function byline() {
 	) );
 }
 
+/*
 function related() {
 	return new Fieldmanager_Autocomplete( array(
 		'label'      => 'Related Articles',
@@ -114,6 +115,7 @@ function related() {
 	) );
 
 }
+ */
 
 add_action( 'fm_post_mj_blog_post', function() {
 
