@@ -78,11 +78,11 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
 
 
     public function setup() {
-      $instance->create_full_width_type();
-      $instance->create_article_type();
-      $instance->create_blog_post_type();
-      $instance->create_author_type();
-      $instance->set_homepage_query();
+      self::create_full_width_type();
+      self::create_article_type();
+      self::create_blog_post_type();
+      self::create_author_type();
+      self::set_homepage_query();
     }
 
     public function create_full_width_type() {
