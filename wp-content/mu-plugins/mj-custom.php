@@ -68,10 +68,9 @@ $master_image = new Fieldmanager_Group( array(
 ) );
 
 $byline = new Fieldmanager_Group( array( 
-  'name' => 'byline',
+  'name' => 'Byline',
   'children' => array(
-    'authors' => new Fieldmanager_Autocomplete( array(
-      'label'      => 'Byline',
+    'authors' => new Fieldmanager_Autocomplete( "Authors", array(
       'limit'      => 0,
       'sortable'   => true,
       'add_more_label' => 'Add another author',
