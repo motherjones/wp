@@ -136,7 +136,8 @@ function related() {
             'post_status' => 'publish'
           )
 				) ),
-			) )
+			) ),
+			'override' => new Fieldmanager_TextField( 'Related Override' )
 		)
 	) );
 }
