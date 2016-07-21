@@ -26,9 +26,11 @@ $title_image = new Fieldmanager_Group( array(
 ) );
 //end fullwidth only!
 
-$dek = new Fieldmanager_TextField( array(
-  'name' => 'dek',
-) );
+function dek() {
+  return new Fieldmanager_TextField( array(
+    'name' => 'dek',
+  ) );
+}
 
 $social = new Fieldmanager_Group( array(
   'name' => 'social',
@@ -119,7 +121,7 @@ function related() {
 
 add_action( 'fm_post_mj_blog_post', function() {
 
-  $dek->add_meta_box( 'Dek', 'mj_blog_post' );
+  dek()->add_meta_box( 'Dek', 'mj_blog_post' );
   $social->add_meta_box( 'Social Titles', 'mj_blog_post' );
   $alt->add_meta_box( 'Alt Titles', 'mj_blog_post' );
   $master_image->add_meta_box( 'Master Image', 'mj_blog_post' );
