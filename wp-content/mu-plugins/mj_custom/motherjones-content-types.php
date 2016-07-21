@@ -78,32 +78,32 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
 
 
     public function setup() {
-      create_full_width_type();
-      create_article_type();
-      create_blog_post_type();
-      create_author_type();
-      set_homepage_query();
+      $instance->create_full_width_type();
+      $instance->create_article_type();
+      $instance->create_blog_post_type();
+      $instance->create_author_type();
+      $instance->set_homepage_query();
     }
 
     public function create_full_width_type() {
       add_action( 'init', array( $this, 'full_width_type' ) );
-      add_action( 'fm_post_mj_full_width', full_width_fields );
+      add_action( 'fm_post_mj_full_width', array( $this, full_width_fields)  );
     }
 
     public function create_article_type() {
       add_action( 'init', array( $this, 'article_type' ) );
-      add_action( 'fm_post_mj_article', article_fields );
+      add_action( 'fm_post_mj_article', array( $this, article_fields ) );
     }
 
     public function create_blog_post_type() {
       add_action( 'init', array( $this, 'blog_post_type' ) );
-      add_action( 'fm_post_mj_blog_post', blog_post_fields );
+      add_action( 'fm_post_mj_blog_post', array( $this, blog_post_fields ) );
     }
 
     public function create_author_type() {
       add_action( 'init', array( $this, 'author_type' ) );
-      add_action( 'fm_post_mj_author', author_fields );
-      add_action( 'fm_user', add_author_to_user );
+      add_action( 'fm_post_mj_author', array( $this, author_fields ) );
+      add_action( 'fm_user', array( $this, add_author_to_user ) );
     }
 
     public function set_homepage_query() {
