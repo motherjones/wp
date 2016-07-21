@@ -67,13 +67,6 @@ $master_image = new Fieldmanager_Group( array(
   )
 ) );
 
-$byline = new Fieldmanager_Autocomplete( array(
-  'label'      => 'author',
-  'datasource' => new Fieldmanager_Datasource_Post( array(
-    'query_args' => array( 'post_type' => 'mj_author' )
-  ) ),
-) );
-/*
 $byline = new Fieldmanager_Group( array( 
   'name' => 'Byline',
   'children' => array(
@@ -85,7 +78,6 @@ $byline = new Fieldmanager_Group( array(
     'override' => new Fieldmanager_TextField( 'Byline Override' )
   )
 ) );
- */
 
 $body = new Fieldmanager_TextArea( array(
   'name' => 'body'
@@ -124,7 +116,7 @@ add_action( 'fm_post_mj_blog_post', function() {
   $social->add_meta_box( 'Social Titles', 'mj_blog_post' );
   $alt->add_meta_box( 'Alt Titles', 'mj_blog_post' );
   $master_image->add_meta_box( 'Master Image', 'mj_blog_post' );
-  $byline->add_meta_box( 'Byline', 'mj_blog_post' );
+  //$byline->add_meta_box( 'Byline', 'mj_blog_post' );
   $body->add_meta_box( 'Article Body', 'mj_blog_post' );
   //$related->add_meta_box( 'Related Articles', 'mj_blog_post' );
   $css_js->add_meta_box( 'Extra CSS & JS', 'mj_blog_post' );
@@ -134,7 +126,7 @@ add_action( 'fm_post_mj_article', function() {
   $social->add_meta_box( 'Social Titles', 'mj_article' );
   $alt->add_meta_box( 'Alt Titles', 'mj_article' );
   $master_image->add_meta_box( 'Master Image', 'mj_article' );
-  $byline->add_meta_box( 'Byline', 'mj_article' );
+  //$byline->add_meta_box( 'Byline', 'mj_article' );
   $body->add_meta_box( 'Article Body', 'mj_article' );
   //$related->add_meta_box( 'Related Articles', 'mj_article' );
   $css_js->add_meta_box( 'Extra CSS & JS', 'mj_article' );
@@ -145,7 +137,7 @@ add_action( 'fm_post_mj_full_width', function() {
   $social->add_meta_box( 'Social Titles', 'mj_full_width' );
   $alt->add_meta_box( 'Alt Titles', 'mj_full_width' );
   $master_image->add_meta_box( 'Master Image', 'mj_full_width' );
-  $byline->add_meta_box( 'Byline', 'mj_full_width' );
+  //$byline->add_meta_box( 'Byline', 'mj_full_width' );
   $body->add_meta_box( 'Article Body', 'mj_full_width' );
   //$related->add_meta_box( 'Related Articles', 'mj_full_width' );
   $css_js->add_meta_box( 'Extra CSS & JS', 'mj_full_width' );
