@@ -132,15 +132,15 @@ function related() {
 add_action( 'fm_post_mj_blog_post', function() {
 
   dek()->add_meta_box( 'Dek', 'mj_blog_post' );
-  /*
   social()->add_meta_box( 'Social Titles', 'mj_blog_post' );
   alt()->add_meta_box( 'Alt Titles', 'mj_blog_post' );
   master_image()->add_meta_box( 'Master Image', 'mj_blog_post' );
-   */
+  /*
   byline()->add_meta_box( 'Byline', 'mj_blog_post' );
   body()->add_meta_box( 'Article Body', 'mj_blog_post' );
   related()->add_meta_box( 'Related Articles', 'mj_blog_post' );
   css_js()->add_meta_box( 'Extra CSS & JS', 'mj_blog_post' );
+   */
 } );
 
 
