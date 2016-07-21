@@ -103,7 +103,7 @@ function css_js() {
 //dumb thing we have to do because autocompletes can't happen too early
 function byline() {
 	return new Fieldmanager_Group( array( 
-		'name' => 'Byline',
+		'name' => 'byline',
 		'children' => array(
 			'authors' => new Fieldmanager_Autocomplete( "Author", array(
         'limit'      => 0,
@@ -123,7 +123,7 @@ function byline() {
 
 function related() {
 	return new Fieldmanager_Group( array( 
-		'name' => 'Related Articles',
+		'name' => 'related_articles',
 		'children' => array(
 			'relateds' => new Fieldmanager_Autocomplete( "Article", array(
         'limit'      => 0,
