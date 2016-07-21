@@ -73,19 +73,6 @@ $body = new Fieldmanager_TextArea( array(
 
 //TAXONOMIES!!!! FFFFFFFFFUUUUUUUUUUUU
 
-/* FIXME probly oughta figure out the real query args there
-$related = new Fieldmanager_Autocomplete( array(
-  'label'      => 'Related Articles',
-  'limit'      => 0,
-  'minimum_count' => 4,
-  'sortable'   => true,
-  'add_more_label' => 'Add another',
-  'datasource' => new Fieldmanager_Datasource_Post( array(
-    'query_args' => array( 'post_type' => 'mj_article,mj_full_width,mj_blog_post' )
-  ) ),
-) );
- */
-
 //scheduling?
 
 
@@ -100,8 +87,8 @@ $css_js = new Fieldmanager_Group( array(
 ) );
 
 $byline = false;
-add_action( 'fm_post_mj_blog_post', function() {
-
+$related = false;
+setup_autocompletes = function() {
 	$byline = $byline ? $byline : new Fieldmanager_Group( array( 
 		'name' => 'Byline',
 		'children' => array(
@@ -114,6 +101,22 @@ add_action( 'fm_post_mj_blog_post', function() {
 		)
 	) );
 
+	$related = $related ? $related : new Fieldmanager_Autocomplete( array(
+		'label'      => 'Related Articles',
+		'limit'      => 0,
+		'minimum_count' => 4,
+		'sortable'   => true,
+		'add_more_label' => 'Add another',
+		'datasource' => new Fieldmanager_Datasource_Post( array(
+			'query_args' => array( 'post_type' => 'mj_article,mj_full_width,mj_blog_post' )
+		) ),
+	) );
+
+}
+
+add_action( 'fm_post_mj_blog_post', function() {
+	setup_autocompletes();
+
   $dek->add_meta_box( 'Dek', 'mj_blog_post' );
   $social->add_meta_box( 'Social Titles', 'mj_blog_post' );
   $alt->add_meta_box( 'Alt Titles', 'mj_blog_post' );
@@ -123,7 +126,11 @@ add_action( 'fm_post_mj_blog_post', function() {
   //$related->add_meta_box( 'Related Articles', 'mj_blog_post' );
   $css_js->add_meta_box( 'Extra CSS & JS', 'mj_blog_post' );
 } );
+
+
 add_action( 'fm_post_mj_article', function() {
+	setup_autocompletes();
+
   $dek->add_meta_box( 'Dek', 'mj_article' );
   $social->add_meta_box( 'Social Titles', 'mj_article' );
   $alt->add_meta_box( 'Alt Titles', 'mj_article' );
@@ -133,7 +140,11 @@ add_action( 'fm_post_mj_article', function() {
   //$related->add_meta_box( 'Related Articles', 'mj_article' );
   $css_js->add_meta_box( 'Extra CSS & JS', 'mj_article' );
 } );
+
+
 add_action( 'fm_post_mj_full_width', function() {
+	setup_autocompletes();
+
   $title_image->add_meta_box( 'Title Image', 'mj_full_width' );
   $dek->add_meta_box( 'Dek', 'mj_full_width' );
   $social->add_meta_box( 'Social Titles', 'mj_full_width' );
