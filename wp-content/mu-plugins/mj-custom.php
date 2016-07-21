@@ -124,7 +124,9 @@ function related() {
         'sortable'   => true,
         'add_more_label' => 'Add another article',
         'datasource' => new Fieldmanager_Datasource_Post( array(
-          'query_args' => array( 'post_type' => 'mj_article,mj_full_width,mj_blog_post' )
+          'query_args' => array( 'post_type' => 
+                array( 'mj_article', 'mj_full_width', 'mj_blog_post' )
+          )
         ) ),
       ) ),
     )
