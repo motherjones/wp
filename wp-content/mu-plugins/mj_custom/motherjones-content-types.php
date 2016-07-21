@@ -111,7 +111,7 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
     }
 
 
-    private function full_width_type() {
+    public function full_width_type() {
       register_post_type( 'mj_full_width',
         array(
           'labels' => array(
@@ -124,7 +124,7 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
         )
       );
     }
-    private function full_width_fields() {
+    public function full_width_fields() {
       MJ_Custom_Fields::title_image()->add_meta_box( 'Title Image', 'mj_full_width' );
       MJ_Custom_Fields::dek()->add_meta_box( 'Dek', 'mj_full_width' );
       MJ_Custom_Fields::social()->add_meta_box( 'Social Titles', 'mj_full_width' );
@@ -137,7 +137,7 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
     }
 
 
-    private function article_type() {
+    public function article_type() {
       register_post_type( 'mj_article',
         array(
           'labels' => array(
@@ -150,7 +150,7 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
         )
       );
     }
-    private function article_fields() {
+    public function article_fields() {
       MJ_Custom_Fields::dek()->add_meta_box( 'Dek', 'mj_article' );
       MJ_Custom_Fields::social()->add_meta_box( 'Social Titles', 'mj_article' );
       MJ_Custom_Fields::alt()->add_meta_box( 'Alt Titles', 'mj_article' );
@@ -162,7 +162,7 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
     }
 
 
-    private function blog_post_type() {
+    public function blog_post_type() {
       register_post_type( 'mj_blog_post',
         array(
           'labels' => array(
@@ -175,7 +175,7 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
         )
       );
     }
-    private function blog_post_fields() {
+    public function blog_post_fields() {
       MJ_Custom_Fields::dek()->add_meta_box( 'Dek', 'mj_blog_post' );
       MJ_Custom_Fields::social()->add_meta_box( 'Social Titles', 'mj_blog_post' );
       MJ_Custom_Fields::alt()->add_meta_box( 'Alt Titles', 'mj_blog_post' );
@@ -187,7 +187,7 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
     }
 
 
-    private function author_type() {
+    public function author_type() {
       register_post_type( 'mj_author',
         array(
           'labels' => array(
@@ -200,19 +200,19 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
         )
       );
     }
-    private function author_fields() {
+    public function author_fields() {
       MJ_Custom_Fields::position()->add_meta_box( 'Position', 'mj_author' );
       MJ_Custom_Fields::image()->add_meta_box( 'Author Photo', 'mj_author' );
       MJ_Custom_Fields::long_bio()->add_meta_box( 'Long Bio', 'mj_author' );
       MJ_Custom_Fields::short_bio()->add_meta_box( 'End of Article Bio', 'mj_author' );
       MJ_Custom_Fields::twitter()->add_meta_box( 'Twitter User', 'mj_author' );
     }
-    private function add_author_to_user() {
+    public function add_author_to_user() {
       MJ_Custom_Fields::author()->add_user_form( 'Author Bio' );
     }
 
 
-    private function homepage_query( $query ) {
+    public function homepage_query( $query ) {
       if ( is_home() && $query->is_main_query() )
         $query->set( 'post_type', 
         array( 'mj_article', 'mj_full_width', 'mj_blog_post' )
