@@ -125,7 +125,7 @@ function related() {
 	return new Fieldmanager_Group( array(
 		'name'      => 'Related Articles',
     'children'   => array(
-      'related_article' => new Fieldmanager_Autocomplete( "Related", array(
+      'related_article' => new Fieldmanager_Autocomplete( "Article", array(
         'limit'      => 0,
         'sortable'   => true,
         'add_more_label' => 'Add another article',
