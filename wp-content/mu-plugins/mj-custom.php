@@ -18,7 +18,7 @@ require_once('fieldmanager/fieldmanager.php');
 
 //fullwidth only!
 function title_image() { 
-  new Fieldmanager_Group( array(
+  return new Fieldmanager_Group( array(
     'name' => 'full_width_title_image',
     'children' => array(
       'title_image' => new Fieldmanager_Media( 'Title Image' ),
@@ -35,7 +35,7 @@ function dek() {
 }
 
 function social() {
-  new Fieldmanager_Group( array(
+  return new Fieldmanager_Group( array(
     'name' => 'social',
     'children' => array(
       'social_title' => new Fieldmanager_TextField( 'Social Title' ),
@@ -51,7 +51,7 @@ function social() {
 }
 
 function alt() {
-  new Fieldmanager_Group( array(
+  return new Fieldmanager_Group( array(
     'name' => 'alt',
     'description' => "How this'll look on the homepage",
     'children' => array(
@@ -62,7 +62,7 @@ function alt() {
 }
 
 function master_image() {
-  new Fieldmanager_Group( array(
+  return new Fieldmanager_Group( array(
     'name' => 'master_image',
     'children' => array(
       'master_image' => new Fieldmanager_Media( 'Image' ),
@@ -78,7 +78,7 @@ function master_image() {
 }
 
 function body() { 
-    new Fieldmanager_TextArea( array(
+    return new Fieldmanager_TextArea( array(
     'name' => 'body'
   ) );
 }
@@ -91,7 +91,7 @@ function body() {
 //file attachments?
 
 function css_js() {
-  new Fieldmanager_Group( array(
+  return new Fieldmanager_Group( array(
     'name' => 'css_js',
     'children' => array(
       'css' => new Fieldmanager_TextArea( 'CSS' ),
