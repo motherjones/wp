@@ -1,4 +1,4 @@
-<?
+<?php
 
 /*
   Plugin Name: Mother Jones Custom
@@ -8,6 +8,7 @@
   Author URI: http://www.motherjones.com
   This is the part where I define all the fields our custom parts need
 */
+
 require_once('../fieldmanager/fieldmanager.php');
 
 if ( !class_exists( 'MJ_Custom_Fields' ) ) {
@@ -189,3 +190,5 @@ if ( !class_exists( 'MJ_Custom_Fields' ) ) {
   }
 
 }
+
+?>
