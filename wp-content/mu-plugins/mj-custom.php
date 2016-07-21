@@ -67,19 +67,21 @@ $master_image = new Fieldmanager_Group( array(
   )
 ) );
 
-/*
-$byline = new Fieldmanager_Group( array( 
-  'name' => 'Byline',
-  'children' => array(
-    'authors' => new Fieldmanager_Autocomplete( "Authors", array(
-      'datasource' => new Fieldmanager_Datasource_Post( array(
-        'query_args' => array( 'post_type' => 'mj_author' )
-      ) ),
-    ) ),
-    'override' => new Fieldmanager_TextField( 'Byline Override' )
-  )
+$byline = new Fieldmanager_Group( array(
+	'name'           => 'byline',
+	'limit'          => 0,
+	'add_more_label' => 'Add another author',
+	'sortable'       => true,
+	'label'          => 'Author',
+	'children'       => array(
+		'authors' => new Fieldmanager_Autocomplete( array(
+			'label'      => 'Datasource Post',
+			'datasource' => new Fieldmanager_Datasource_Post( array(
+				'query_args' => array( 'post_type' => 'mj_author' )
+			) ),
+		) )
+	)
 ) );
- */
 
 $body = new Fieldmanager_TextArea( array(
   'name' => 'body'
