@@ -88,7 +88,7 @@ $css_js = new Fieldmanager_Group( array(
 
 $byline = false;
 $related = false;
-setup_autocompletes = function() {
+function setup_autocompletes() {
 	$byline = $byline ? $byline : new Fieldmanager_Group( array( 
 		'name' => 'Byline',
 		'children' => array(
