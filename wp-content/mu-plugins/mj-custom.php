@@ -105,12 +105,15 @@ function byline() {
 	return new Fieldmanager_Group( array( 
 		'name' => 'Byline',
 		'children' => array(
-			'authors' => new Fieldmanager_Autocomplete( "Authors", array(
+			'authors' => new Fieldmanager_Autocomplete( "Author", array(
         'limit'      => 0,
         'sortable'   => true,
         'add_more_label' => 'Add another author',
 				'datasource' => new Fieldmanager_Datasource_Post( array(
-					'query_args' => array( 'post_type' => 'mj_author' )
+          'query_args' => array( 
+            'post_type' => 'mj_author',
+            'post_status' => 'publish'
+          )
 				) ),
 			) ),
 			'override' => new Fieldmanager_TextField( 'Byline Override' )
@@ -127,8 +130,9 @@ function related() {
         'sortable'   => true,
         'add_more_label' => 'Add another article',
         'datasource' => new Fieldmanager_Datasource_Post( array(
-          'query_args' => array( 'post_type' => 
-                array( 'mj_article', 'mj_full_width', 'mj_blog_post' )
+          'query_args' => array( 
+            'post_type' => array( 'mj_article', 'mj_full_width', 'mj_blog_post' ),
+            'post_status' => 'publish'
           )
         ) ),
       ) ),
@@ -212,7 +216,10 @@ add_action( 'fm_user', function() {
   $author = new Fieldmanager_Autocomplete( array(
     'label'      => 'author',
     'datasource' => new Fieldmanager_Datasource_Post( array(
-      'query_args' => array( 'post_type' => 'mj_author' )
+      'query_args' => array( 
+        'post_type' => 'mj_author',
+        'post_status' => 'publish'
+      )
     ) ),
   ) );
   $author->add_user_form( 'Author Bio' );
