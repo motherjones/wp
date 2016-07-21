@@ -86,10 +86,9 @@ $css_js = new Fieldmanager_Group( array(
   )
 ) );
 
-$byline = false;
-$related = false;
-function setup_autocompletes() {
-	$byline = $byline ? $byline : new Fieldmanager_Group( array( 
+//dumb thing we have to do because autocompletes can't happen too early
+function byline() {
+	return new Fieldmanager_Group( array( 
 		'name' => 'Byline',
 		'children' => array(
 			'authors' => new Fieldmanager_Autocomplete( "Authors", array(
@@ -100,8 +99,10 @@ function setup_autocompletes() {
 			'override' => new Fieldmanager_TextField( 'Byline Override' )
 		)
 	) );
+}
 
-	$related = $related ? $related : new Fieldmanager_Autocomplete( array(
+function related() {
+	return new Fieldmanager_Autocomplete( array(
 		'label'      => 'Related Articles',
 		'limit'      => 0,
 		'minimum_count' => 4,
@@ -115,13 +116,12 @@ function setup_autocompletes() {
 }
 
 add_action( 'fm_post_mj_blog_post', function() {
-	setup_autocompletes();
 
   $dek->add_meta_box( 'Dek', 'mj_blog_post' );
   $social->add_meta_box( 'Social Titles', 'mj_blog_post' );
   $alt->add_meta_box( 'Alt Titles', 'mj_blog_post' );
   $master_image->add_meta_box( 'Master Image', 'mj_blog_post' );
-  $byline->add_meta_box( 'Byline', 'mj_blog_post' );
+  byline()->add_meta_box( 'Byline', 'mj_blog_post' );
   $body->add_meta_box( 'Article Body', 'mj_blog_post' );
   //$related->add_meta_box( 'Related Articles', 'mj_blog_post' );
   $css_js->add_meta_box( 'Extra CSS & JS', 'mj_blog_post' );
