@@ -122,23 +122,22 @@ function byline() {
 }
 
 function related() {
-	return new Fieldmanager_Group( array(
-		'name'      => 'Related Articles',
-    'children'   => array(
-      'related_article' => new Fieldmanager_Autocomplete( "Article", array(
+	return new Fieldmanager_Group( array( 
+		'name' => 'Related Articles',
+		'children' => array(
+			'relateds' => new Fieldmanager_Autocomplete( "Article", array(
         'limit'      => 0,
         'sortable'   => true,
         'add_more_label' => 'Add another article',
-        'datasource' => new Fieldmanager_Datasource_Post( array(
+				'datasource' => new Fieldmanager_Datasource_Post( array(
           'query_args' => array( 
-            'post_type' => array( 'mj_article', 'mj_full_width', 'mj_blog_post' ),
+            'post_type' => array('mj_blog_post', 'mj_article', 'mj_full_width'),
             'post_status' => 'publish'
           )
-        ) ),
-      ) ),
-    )
+				) ),
+			) )
+		)
 	) );
-
 }
 
 add_action( 'fm_post_mj_blog_post', function() {
