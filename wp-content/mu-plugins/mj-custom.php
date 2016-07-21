@@ -67,6 +67,7 @@ $master_image = new Fieldmanager_Group( array(
   )
 ) );
 
+/*
 $byline = new Fieldmanager_Group( array( 
   'name' => 'Byline',
   'children' => array(
@@ -78,6 +79,7 @@ $byline = new Fieldmanager_Group( array(
     'override' => new Fieldmanager_TextField( 'Byline Override' )
   )
 ) );
+ */
 
 $body = new Fieldmanager_TextArea( array(
   'name' => 'body'
