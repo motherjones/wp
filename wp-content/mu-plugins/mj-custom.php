@@ -118,9 +118,6 @@ function byline() {
 function related() {
 	return new Fieldmanager_Autocomplete( array(
 		'label'      => 'Related Articles',
-		'limit'      => 0,
-		'sortable'   => true,
-		'add_more_label' => 'Add another',
 		'datasource' => new Fieldmanager_Datasource_Post( array(
 			'query_args' => array( 'post_type' => 'mj_article,mj_full_width,mj_blog_post' )
 		) ),
@@ -136,7 +133,7 @@ add_action( 'fm_post_mj_blog_post', function() {
   master_image()->add_meta_box( 'Master Image', 'mj_blog_post' );
   //byline()->add_meta_box( 'Byline', 'mj_blog_post' );
   body()->add_meta_box( 'Article Body', 'mj_blog_post' );
-  //related()->add_meta_box( 'Related Articles', 'mj_blog_post' );
+  related()->add_meta_box( 'Related Articles', 'mj_blog_post' );
   css_js()->add_meta_box( 'Extra CSS & JS', 'mj_blog_post' );
 } );
 
