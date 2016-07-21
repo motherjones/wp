@@ -61,6 +61,7 @@
  * add_action( 'init', 'custom_post_type', 0 );
  * 
  */
+require_once('motherjones-content-fields.php');
 
 add_action( 'init', 'create_full_width_type' );
 function create_full_width_type() {
@@ -77,6 +78,19 @@ function create_full_width_type() {
   );
 }
 
+add_action( 'fm_post_mj_full_width', function() {
+  MJ_Custom_Fields::title_image()->add_meta_box( 'Title Image', 'mj_full_width' );
+  MJ_Custom_Fields::dek()->add_meta_box( 'Dek', 'mj_full_width' );
+  MJ_Custom_Fields::social()->add_meta_box( 'Social Titles', 'mj_full_width' );
+  MJ_Custom_Fields::alt()->add_meta_box( 'Alt Titles', 'mj_full_width' );
+  MJ_Custom_Fields::master_image()->add_meta_box( 'Master Image', 'mj_full_width' );
+  MJ_Custom_Fields::byline()->add_meta_box( 'Byline', 'mj_full_width' );
+  MJ_Custom_Fields::body()->add_meta_box( 'Article Body', 'mj_full_width' );
+  MJ_Custom_Fields::related()->add_meta_box( 'Related Articles', 'mj_full_width' );
+  MJ_Custom_Fields::css_js()->add_meta_box( 'Extra CSS & JS', 'mj_full_width' );
+} );
+
+
 add_action( 'init', 'create_article_type' );
 function create_article_type() {
   register_post_type( 'mj_article',
@@ -92,6 +106,18 @@ function create_article_type() {
   );
 }
 
+add_action( 'fm_post_mj_article', function() {
+  MJ_Custom_Fields::dek()->add_meta_box( 'Dek', 'mj_article' );
+  MJ_Custom_Fields::social()->add_meta_box( 'Social Titles', 'mj_article' );
+  MJ_Custom_Fields::alt()->add_meta_box( 'Alt Titles', 'mj_article' );
+  MJ_Custom_Fields::master_image()->add_meta_box( 'Master Image', 'mj_article' );
+  MJ_Custom_Fields::byline()->add_meta_box( 'Byline', 'mj_article' );
+  MJ_Custom_Fields::body()->add_meta_box( 'Article Body', 'mj_article' );
+  MJ_Custom_Fields::related()->add_meta_box( 'Related Articles', 'mj_article' );
+  MJ_Custom_Fields::css_js()->add_meta_box( 'Extra CSS & JS', 'mj_article' );
+} );
+
+
 add_action( 'init', 'create_blog_post_type' );
 function create_blog_post_type() {
   register_post_type( 'mj_blog_post',
@@ -106,6 +132,17 @@ function create_blog_post_type() {
     )
   );
 }
+add_action( 'fm_post_mj_blog_post', function() {
+  MJ_Custom_Fields::dek()->add_meta_box( 'Dek', 'mj_blog_post' );
+  MJ_Custom_Fields::social()->add_meta_box( 'Social Titles', 'mj_blog_post' );
+  MJ_Custom_Fields::alt()->add_meta_box( 'Alt Titles', 'mj_blog_post' );
+  MJ_Custom_Fields::master_image()->add_meta_box( 'Master Image', 'mj_blog_post' );
+  MJ_Custom_Fields::byline()->add_meta_box( 'Byline', 'mj_blog_post' );
+  MJ_Custom_Fields::body()->add_meta_box( 'Article Body', 'mj_blog_post' );
+  MJ_Custom_Fields::related()->add_meta_box( 'Related Articles', 'mj_blog_post' );
+  MJ_Custom_Fields::css_js()->add_meta_box( 'Extra CSS & JS', 'mj_blog_post' );
+} );
+
 
 add_action( 'init', 'create_author_type' );
 function create_author_type() {
@@ -121,6 +158,21 @@ function create_author_type() {
     )
   );
 }
+
+add_action( 'fm_post_mj_author', function() {
+  MJ_Custom_Fields::position()->add_meta_box( 'Position', 'mj_author' );
+  MJ_Custom_Fields::image()->add_meta_box( 'Author Photo', 'mj_author' );
+  MJ_Custom_Fields::long_bio()->add_meta_box( 'Long Bio', 'mj_author' );
+  MJ_Custom_Fields::short_bio()->add_meta_box( 'End of Article Bio', 'mj_author' );
+  MJ_Custom_Fields::twitter()->add_meta_box( 'Twitter User', 'mj_author' );
+} );
+
+//allow users to associate w/ an author type
+add_action( 'fm_user', function() {
+  MJ_Custom_Fields::author()->add_user_form( 'Author Bio' );
+});
+
+
 
 // Show the motherjones custom types on home page
 //
