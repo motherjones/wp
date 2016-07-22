@@ -91,12 +91,13 @@ if ( !class_exists( 'MJ_Custom_Fields' ) ) {
     }
 
     public function taxonomies() {
+      $self = $this;
       return new Fieldmanager_Group( array(
         'name' => 'taxonomies',
         'children' => array(
-          'section' => $instance->section(),
-          'media_type' => $instance->media_type(),
-          'primary_tags' => $instance->primary_tags(),
+          'section' => $this->instance->section(),
+          'media_type' => $this->instance->media_type(),
+          'primary_tags' => $this->instance->primary_tags(),
         )
       ) );
     }
