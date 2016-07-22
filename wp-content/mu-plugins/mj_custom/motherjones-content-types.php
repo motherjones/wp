@@ -65,11 +65,7 @@
 if ( !class_exists( 'MJ_Custom_Types' ) ) {
 
   require_once('motherjones-content-fields.php');
-  $fields = MJ_Custom_Fields();
   require_once('motherjones-taxonomies.php');
-  $taxonomies = MJ_Taxonomy();
-  print_r('should hav taxonomy here');
-  print_r($taxonomies);
 
 
   class MJ_Custom_Types {
@@ -85,6 +81,8 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
 
 
     public function setup() {
+      $this->fields = MJ_Custom_Fields();
+      $this->taxonomies = MJ_Taxonomy();
       self::create_full_width_type();
       self::create_article_type();
       self::create_blog_post_type();
