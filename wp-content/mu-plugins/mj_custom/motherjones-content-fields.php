@@ -141,6 +141,7 @@ if ( !class_exists( 'MJ_Custom_Fields' ) ) {
             'sortable'   => true,
             'add_more_label' => 'Add another file',
           ) )
+        )
       ) );
     }
 
