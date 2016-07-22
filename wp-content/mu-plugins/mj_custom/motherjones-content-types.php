@@ -67,7 +67,6 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
   require_once('motherjones-content-fields.php');
   require_once('motherjones-taxonomies.php');
 
-
   class MJ_Custom_Types {
 
     private static $instance;
@@ -81,8 +80,8 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
 
 
     public function setup() {
-      $this->fields = MJ_Custom_Fields();
       $this->taxonomies = MJ_Taxonomy();
+      $this->fields = MJ_Custom_Fields();
       self::create_full_width_type();
       self::create_article_type();
       self::create_blog_post_type();
@@ -129,6 +128,7 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
       MJ_Custom_Fields::alt()->add_meta_box( 'Alt Titles', 'mj_full_width' );
       MJ_Custom_Fields::master_image()->add_meta_box( 'Master Image', 'mj_full_width' );
       MJ_Custom_Fields::byline()->add_meta_box( 'Byline', 'mj_full_width' );
+      MJ_Custom_Fields::taxonomies()->add_meta_box( 'Taxonomy', 'mj_full_width' );
       MJ_Custom_Fields::body()->add_meta_box( 'Article Body', 'mj_full_width' );
       MJ_Custom_Fields::related()->add_meta_box( 'Related Articles', 'mj_full_width' );
       MJ_Custom_Fields::css_js()->add_meta_box( 'Extra CSS & JS', 'mj_full_width' );
@@ -167,6 +167,7 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
       MJ_Custom_Fields::alt()->add_meta_box( 'Alt Titles', 'mj_article' );
       MJ_Custom_Fields::master_image()->add_meta_box( 'Master Image', 'mj_article' );
       MJ_Custom_Fields::byline()->add_meta_box( 'Byline', 'mj_article' );
+      MJ_Custom_Fields::taxonomies()->add_meta_box( 'Taxonomy', 'mj_article' );
       MJ_Custom_Fields::body()->add_meta_box( 'Article Body', 'mj_article' );
       MJ_Custom_Fields::related()->add_meta_box( 'Related Articles', 'mj_article' );
       MJ_Custom_Fields::css_js()->add_meta_box( 'Extra CSS & JS', 'mj_article' );
@@ -192,6 +193,7 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
       MJ_Custom_Fields::alt()->add_meta_box( 'Alt Titles', 'mj_blog_post' );
       MJ_Custom_Fields::master_image()->add_meta_box( 'Master Image', 'mj_blog_post' );
       MJ_Custom_Fields::byline()->add_meta_box( 'Byline', 'mj_blog_post' );
+      MJ_Custom_Fields::taxonomies()->add_meta_box( 'Taxonomy', 'mj_blog_post' );
       MJ_Custom_Fields::body()->add_meta_box( 'Article Body', 'mj_blog_post' );
       MJ_Custom_Fields::related()->add_meta_box( 'Related Articles', 'mj_blog_post' );
       MJ_Custom_Fields::css_js()->add_meta_box( 'Extra CSS & JS', 'mj_blog_post' );
