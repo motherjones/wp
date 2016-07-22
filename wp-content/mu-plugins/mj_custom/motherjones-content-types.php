@@ -78,6 +78,7 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
         self::$instance = new MJ_Custom_Types;
         self::$instance->setup();
       }
+      print_r('<h1>HEREIAM</h1>');
       print_r($taxonomies);
       return self::$instance;
     }
