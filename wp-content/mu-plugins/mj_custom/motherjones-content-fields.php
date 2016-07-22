@@ -125,17 +125,8 @@ if ( !class_exists( 'MJ_Custom_Fields' ) ) {
         'name' => 'primary_tags',
         'limit'      => 0,
         'add_more_label' => 'Add another tag',
-            'datasource' => new Fieldmanager_Datasource_Post( array(
-              'query_args' => array( 
-                'post_type' => 'mj_author',
-                'post_status' => 'publish'
-              )
-            ) ),
-        /*
         'datasource' => new Fieldmanager_Datasource_Term( array(
-          'query_args' => array( 
-            'taxonomy' => 'mj_primary_tag',
-          )
+          'taxonomy' => 'mj_primary_tag',
         ) )
          */
       ) );
