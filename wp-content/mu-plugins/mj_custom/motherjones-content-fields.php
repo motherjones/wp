@@ -15,6 +15,15 @@ require_once(__ROOT__.'/fieldmanager/fieldmanager.php');
 if ( !class_exists( 'MJ_Custom_Fields' ) ) {
 
   class MJ_Custom_Fields {
+
+    private static $instance;
+    public static function instance() {
+      if ( ! isset( self::$instance ) ) {
+        self::$instance = new MJ_Custom_Fields;
+      }
+      return self::$instance;
+    }
+
     /* Article type fields (also blogposts, full widths) */
     public function title_image() { 
       return new Fieldmanager_Group( array(
@@ -190,6 +199,10 @@ if ( !class_exists( 'MJ_Custom_Fields' ) ) {
     /* end user type fields */
   }
 
+}
+
+function MJ_Custom_Fields() {
+  return MJ_Custom_Fields::instance();
 }
 
 ?>

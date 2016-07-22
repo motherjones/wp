@@ -65,6 +65,10 @@
 if ( !class_exists( 'MJ_Custom_Types' ) ) {
 
   require_once('motherjones-content-fields.php');
+  $fields = MJ_Custom_Fields();
+  require_once('mj_custom/motherjones-taxonomies.php');
+  $taxonomies = MJ_Custom_Taxonomies();
+
 
   class MJ_Custom_Types {
 
@@ -86,8 +90,10 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
     }
 
     public function create_full_width_type() {
+      $type = 'mj_full_width';
+      $taxonomies->add_mj_taxonomies($type);
       add_action( 'init', array( $this, 'full_width_type' ) );
-      add_action( 'fm_post_mj_full_width', array( $this, full_width_fields)  );
+      add_action( 'fm_post_'.$type, array( $this, full_width_fields)  );
     }
 
     public function create_article_type() {
@@ -111,19 +117,6 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
     }
 
 
-    public function full_width_type() {
-      register_post_type( 'mj_full_width',
-        array(
-          'labels' => array(
-            'name' => __( 'Full Widths' ),
-            'singular_name' => __( 'Full Width' )
-          ),
-          'public' => true,
-          'has_archive' => true,
-          'supports' => array('title'),
-        )
-      );
-    }
     public function full_width_fields() {
       MJ_Custom_Fields::title_image()->add_meta_box( 'Title Image', 'mj_full_width' );
       MJ_Custom_Fields::dek()->add_meta_box( 'Dek', 'mj_full_width' );
