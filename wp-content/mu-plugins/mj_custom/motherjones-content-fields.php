@@ -132,8 +132,7 @@ if ( !class_exists( 'MJ_Custom_Fields' ) ) {
     }
 
 
-    //file attachments?
-    public function file_attachements() {
+    public function file_attachments() {
       return new Fieldmanager_Group( array( 
         'name' => 'file_attachments',
         'children' => array(
