@@ -76,6 +76,7 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
     public static function instance() {
       if ( ! isset( self::$instance ) ) {
         self::$instance = new MJ_Custom_Types;
+        self::$instance->setup();
       }
       print_r($taxonomies);
       return self::$instance;
