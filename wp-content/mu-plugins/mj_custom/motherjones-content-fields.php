@@ -106,9 +106,7 @@ if ( !class_exists( 'MJ_Custom_Fields' ) ) {
       return new Fieldmanager_Select("Section", array(
         'name' => 'section',
         'datasource' => new Fieldmanager_Datasource_Term( array(
-          'query_args' => array( 
-            'taxonomy' => 'mj_section',
-          )
+          'taxonomy' => 'mj_section',
         ) )
       ) );
     }
@@ -117,9 +115,7 @@ if ( !class_exists( 'MJ_Custom_Fields' ) ) {
       return new Fieldmanager_Select("Media Type", array(
         'name' => 'media_type',
         'datasource' => new Fieldmanager_Datasource_Term( array(
-          'query_args' => array( 
-            'taxonomy' => 'mj_media_type',
-          )
+          'taxonomy' => 'mj_media_type',
         ) )
       ) );
     }
