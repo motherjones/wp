@@ -91,7 +91,8 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
 
     public function create_full_width_type() {
       $type = 'mj_full_width';
-      $taxonomies->add_mj_taxonomies($type);
+      print_r($taxonomies);
+      //$taxonomies->add_mj_taxonomies($type);
       add_action( 'init', array( $this, 'full_width_type' ) );
       add_action( 'fm_post_'.$type, array( $this, full_width_fields)  );
     }
