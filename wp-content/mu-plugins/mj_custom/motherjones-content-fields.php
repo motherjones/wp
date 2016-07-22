@@ -128,7 +128,6 @@ if ( !class_exists( 'MJ_Custom_Fields' ) ) {
         'datasource' => new Fieldmanager_Datasource_Term( array(
           'taxonomy' => 'mj_primary_tag',
         ) )
-         */
       ) );
     }
 
