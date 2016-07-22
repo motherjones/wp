@@ -29,7 +29,7 @@ if ( !class_exists( 'MJ_Taxonomy' ) ) {
         'edit_terms' => 'Administrator',
         'delete_terms' => 'Administrator',
       ),
-      'types'  => array()
+      'types'  => array('post')
     );
 
     private $tag_id = 'mj_primary_tag';
@@ -41,7 +41,7 @@ if ( !class_exists( 'MJ_Taxonomy' ) ) {
         'edit_terms' => 'Administrator',
         'delete_terms' => 'Administrator',
       ),
-      'types'  => array()
+      'types'  => array('post')
     );
 
     private $section_id = 'mj_section';
@@ -53,7 +53,7 @@ if ( !class_exists( 'MJ_Taxonomy' ) ) {
         'edit_terms' => 'Administrator',
         'delete_terms' => 'Administrator',
       ),
-      'types'  => array()
+      'types'  => array('post')
     );
     private $section_terms = array(
       'Politics',
