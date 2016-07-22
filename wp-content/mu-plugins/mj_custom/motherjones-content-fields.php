@@ -105,22 +105,38 @@ if ( !class_exists( 'MJ_Custom_Fields' ) ) {
     public function section() {
       return new Fieldmanager_Select("Section", array(
         'name' => 'section',
+            'datasource' => new Fieldmanager_Datasource_Post( array(
+              'query_args' => array( 
+                'post_type' => 'mj_author',
+                'post_status' => 'publish'
+              )
+            ) ),
+        /*
         'datasource' => new Fieldmanager_Datasource_Term( array(
           'query_args' => array( 
             'taxonomy' => 'mj_section',
           )
         ) )
+         */
       ) );
     }
 
     public function media_type() {
       return new Fieldmanager_Select("Media Type", array(
         'name' => 'media_type',
+            'datasource' => new Fieldmanager_Datasource_Post( array(
+              'query_args' => array( 
+                'post_type' => 'mj_author',
+                'post_status' => 'publish'
+              )
+            ) ),
+        /*
         'datasource' => new Fieldmanager_Datasource_Term( array(
           'query_args' => array( 
             'taxonomy' => 'mj_media_type',
           )
         ) )
+         */
       ) );
     }
 
@@ -129,11 +145,19 @@ if ( !class_exists( 'MJ_Custom_Fields' ) ) {
         'name' => 'primary_tags',
         'limit'      => 0,
         'add_more_label' => 'Add another tag',
+            'datasource' => new Fieldmanager_Datasource_Post( array(
+              'query_args' => array( 
+                'post_type' => 'mj_author',
+                'post_status' => 'publish'
+              )
+            ) ),
+        /*
         'datasource' => new Fieldmanager_Datasource_Term( array(
           'query_args' => array( 
             'taxonomy' => 'mj_primary_tag',
           )
         ) )
+         */
       ) );
     }
 
