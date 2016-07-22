@@ -136,11 +136,11 @@ if ( !class_exists( 'MJ_Custom_Fields' ) ) {
       return new Fieldmanager_Group( array( 
         'name' => 'file_attachments',
         'children' => array(
-          'files' => new Fieldmanager_Media( 'File Attachments' ),
+          'files' => new Fieldmanager_Media( 'File Attachments', array(
             'limit'      => 0,
             'sortable'   => true,
             'add_more_label' => 'Add another file',
-          )
+          ) )
       ) );
     }
 
