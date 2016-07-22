@@ -5,6 +5,22 @@ if ( !class_exists( 'MJ_Taxonomy' ) ) {
   class MJ_Taxonomy {
 
     private $media_type_id = 'mj_media_type';
+    private $media_type_terms = array(
+      'Longreads',
+      'Interview',
+      'Interactives',
+      'Calculators',
+      'Cards',
+      'Full Width',
+      'Podcasts',
+      'Video',
+      'Quizzes',
+      'Maps',
+      'Photo Essays',
+      'Slideshows',
+      'Charts',
+      'Cartoon',
+    );
     private $media_taxonomy = array(
       'single' => 'Media Type',
       'plural' => 'Media Types',
@@ -39,6 +55,11 @@ if ( !class_exists( 'MJ_Taxonomy' ) ) {
       ),
       'types'  => array('post')
     );
+    private $section_terms = array(
+      'Politics',
+      'Environment',
+      'Culture',
+    );
 
     private $all_taxonomies = array();
 
@@ -72,6 +93,19 @@ if ( !class_exists( 'MJ_Taxonomy' ) ) {
       $this->all_taxonomies[$this->media_type_id] = $this->media_taxonomy;
       $this->all_taxonomies[$this->tag_id] = $this->tag_taxonomy;
       $this->all_taxonomies[$this->section_id] = $this->section_taxonomy;
+      add_action( 'created_mj_media_type', array($this, 'fill_media_type') );
+      add_action( 'created_mj_section', array($this, 'fill_section') );
+    }
+
+    public function fill_media_type() {
+      foreach ( $this->media_type_terms as $i => $term ) {
+        wp_insert_term($term, $this->media_type_id);
+      }
+    }
+    public function fill_section() {
+      foreach ( $this->section_terms as $i => $term ) {
+        wp_insert_term($term, $this->section_id);
+      }
     }
 
     public function register() {
