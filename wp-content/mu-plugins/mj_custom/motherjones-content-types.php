@@ -129,6 +129,19 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
       MJ_Custom_Fields::related()->add_meta_box( 'Related Articles', 'mj_full_width' );
       MJ_Custom_Fields::css_js()->add_meta_box( 'Extra CSS & JS', 'mj_full_width' );
     }
+    public function full_width_type() {
+      register_post_type( 'mj_full_width',
+        array(
+          'labels' => array(
+            'name' => __( 'Full Widths' ),
+            'singular_name' => __( 'Full Width' )
+          ),
+          'public' => true,
+          'supports' => array('title'),
+          'has_archive' => true
+        )
+      );
+    }
 
 
     public function article_type() {
