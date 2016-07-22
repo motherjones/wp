@@ -68,6 +68,8 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
   $fields = MJ_Custom_Fields();
   require_once('motherjones-taxonomies.php');
   $taxonomies = MJ_Taxonomy();
+  print_r('should hav taxonomy here');
+  print_r($taxonomies);
 
 
   class MJ_Custom_Types {
@@ -92,6 +94,11 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
 
     public function create_full_width_type() {
       $type = 'mj_full_width';
+      print_r('in fw');
+      print_r($taxonomies);
+      print_r('check this');
+      print_r($this->taxonomies);
+      print_r('welp');
       $this->taxonomies->add_mj_taxonomies($type);
       add_action( 'init', array( $this, 'full_width_type' ) );
       add_action( 'fm_post_'.$type, array( $this, full_width_fields)  );

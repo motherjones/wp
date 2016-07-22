@@ -42,8 +42,6 @@ if ( !class_exists( 'MJ_Taxonomy' ) ) {
       if ( ! isset( self::$instance ) ) {
         self::$instance = new MJ_Taxonomy;
         self::$instance->setup();
-        print_r('instance set up ');
-        print_r(self::$instance);
       }
       return self::$instance;
     }
