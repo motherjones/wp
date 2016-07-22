@@ -94,9 +94,9 @@ if ( !class_exists( 'MJ_Custom_Fields' ) ) {
       return new Fieldmanager_Group( array(
         'name' => 'taxonomies',
         'children' => array(
-          'section' => section(),
-          'media_type' => media_type(),
-          'primary_tags' => primary_tags(),
+          'section' => $instance->section(),
+          'media_type' => $instance->media_type(),
+          'primary_tags' => $instance->primary_tags(),
         )
       ) );
     }
