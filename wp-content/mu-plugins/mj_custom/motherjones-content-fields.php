@@ -131,10 +131,19 @@ if ( !class_exists( 'MJ_Custom_Fields' ) ) {
       ) );
     }
 
-    //scheduling?
-
 
     //file attachments?
+    public function file_attachements() {
+      return new Fieldmanager_Group( array( 
+        'name' => 'file_attachments',
+        'children' => array(
+          'files' => new Fieldmanager_Media( 'File Attachments' ),
+            'limit'      => 0,
+            'sortable'   => true,
+            'add_more_label' => 'Add another file',
+          )
+      ) );
+    }
 
     public function css_js() {
       return new Fieldmanager_Group( array(
