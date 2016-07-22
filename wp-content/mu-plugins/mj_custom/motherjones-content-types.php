@@ -92,24 +92,23 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
 
     public function create_full_width_type() {
       $type = 'mj_full_width';
-      print_r('in fw');
-      print_r($taxonomies);
-      print_r('check this');
-      print_r($this->taxonomies);
-      print_r('welp');
       $this->taxonomies->add_mj_taxonomies($type);
       add_action( 'init', array( $this, 'full_width_type' ) );
       add_action( 'fm_post_'.$type, array( $this, full_width_fields)  );
     }
 
     public function create_article_type() {
+      $type = 'mj_article';
+      $this->taxonomies->add_mj_taxonomies($type);
       add_action( 'init', array( $this, 'article_type' ) );
-      add_action( 'fm_post_mj_article', array( $this, article_fields ) );
+      add_action( 'fm_post_'.$type, array( $this, article_fields ) );
     }
 
     public function create_blog_post_type() {
+      $type = 'mj_blog_post';
+      $this->taxonomies->add_mj_taxonomies($type);
       add_action( 'init', array( $this, 'blog_post_type' ) );
-      add_action( 'fm_post_mj_blog_post', array( $this, blog_post_fields ) );
+      add_action( 'fm_post_'.$type, array( $this, blog_post_fields ) );
     }
 
     public function create_author_type() {
