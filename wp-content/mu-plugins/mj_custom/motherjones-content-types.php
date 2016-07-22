@@ -67,7 +67,7 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
   require_once('motherjones-content-fields.php');
   $fields = MJ_Custom_Fields();
   require_once('motherjones-taxonomies.php');
-  $taxonomies = MJ_Custom_Taxonomies();
+  $taxonomies = MJ_Taxonomies();
 
 
   class MJ_Custom_Types {
