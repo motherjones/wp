@@ -90,7 +90,50 @@ if ( !class_exists( 'MJ_Custom_Fields' ) ) {
       ) );
     }
 
-    //TAXONOMIES!!!! FFFFFFFFFUUUUUUUUUUUU
+    public function taxonomies() {
+      return new Fieldmanager_Group( array(
+        'name' => 'taxonomies',
+        'children' => array(
+          'section' => $this->section(),
+          'media_type' => $this->media_type(),
+          'primary_tags' => $this->primary_tags(),
+        )
+      ) );
+    }
+    public function section() {
+      return new FieldManager_Select("Section", array(
+        'name' => 'section',
+        'datasource' => new Fieldmanager_Datasource_Term( array(
+          'query_args' => array( 
+            'taxonomy' => 'mj_section',
+          )
+        ) )
+      ) );
+    }
+
+    public function media_type() {
+      return new FieldManager_Select("Media Type", array(
+        'name' => 'media_type',
+        'datasource' => new Fieldmanager_Datasource_Term( array(
+          'query_args' => array( 
+            'taxonomy' => 'mj_media_type',
+          )
+        ) )
+      ) );
+    }
+
+    public function primary_tags() {
+      return new Fieldmanager_Autocomplete( "Primary Tags", array(
+        'name' => 'primary_tags',
+        'limit'      => 0,
+        'add_more_label' => 'Add another tag',
+        'datasource' => new Fieldmanager_Datasource_Term( array(
+          'query_args' => array( 
+            'taxonomy' => 'mj_primary_tag',
+          )
+        ) )
+      ) );
+    }
 
     //scheduling?
 

@@ -64,9 +64,9 @@ if ( !class_exists( 'MJ_Taxonomy' ) ) {
 
     public function setup() {
       add_action( 'init', array( $this, 'register' ) );
-      $this->all_taxonomies['media_type'] = $this->media_taxonomy;
-      $this->all_taxonomies['primary_tag'] = $this->tag_taxonomy;
-      $this->all_taxonomies['section'] = $this->section_taxonomy;
+      $this->all_taxonomies['mj_media_type'] = $this->media_taxonomy;
+      $this->all_taxonomies['mj_primary_tag'] = $this->tag_taxonomy;
+      $this->all_taxonomies['mj_section'] = $this->section_taxonomy;
     }
 
     public function register() {
