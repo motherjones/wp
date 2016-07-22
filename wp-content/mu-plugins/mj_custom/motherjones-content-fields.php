@@ -103,7 +103,7 @@ if ( !class_exists( 'MJ_Custom_Fields' ) ) {
       ) );
     }
     public function section() {
-      return new FieldManager_Select("Section", array(
+      return new Fieldmanager_Select("Section", array(
         'name' => 'section',
         'datasource' => new Fieldmanager_Datasource_Term( array(
           'query_args' => array( 
@@ -114,7 +114,7 @@ if ( !class_exists( 'MJ_Custom_Fields' ) ) {
     }
 
     public function media_type() {
-      return new FieldManager_Select("Media Type", array(
+      return new Fieldmanager_Select("Media Type", array(
         'name' => 'media_type',
         'datasource' => new Fieldmanager_Datasource_Term( array(
           'query_args' => array( 
