@@ -25,9 +25,9 @@ if ( !class_exists( 'MJ_Taxonomy' ) ) {
       'single' => 'Media Type',
       'plural' => 'Media Types',
       'capabilites' => array(
-        'assign_terms' => 'Administrator',
-        'edit_terms' => 'Administrator',
-        'delete_terms' => 'Administrator',
+        'assign_terms' => 'edit_posts',
+        'edit_terms' => 'update_core',
+        'delete_terms' => 'update_core',
       ),
       'types'  => array('post')
     );
@@ -37,9 +37,9 @@ if ( !class_exists( 'MJ_Taxonomy' ) ) {
       'single' => 'Primary Tag',
       'plural' => 'Primary Tags',
       'capabilites' => array(
-        'assign_terms' => 'Administrator',
-        'edit_terms' => 'Administrator',
-        'delete_terms' => 'Administrator',
+        'assign_terms' => 'edit_posts',
+        'edit_terms' => 'update_core',
+        'delete_terms' => 'update_core',
       ),
       'types'  => array('post')
     );
@@ -49,9 +49,9 @@ if ( !class_exists( 'MJ_Taxonomy' ) ) {
       'single' => 'Section',
       'plural' => 'Sections',
       'capabilites' => array(
-        'assign_terms' => 'Administrator',
-        'edit_terms' => 'Administrator',
-        'delete_terms' => 'Administrator',
+        'assign_terms' => 'edit_posts',
+        'edit_terms' => 'update_core',
+        'delete_terms' => 'update_core',
       ),
       'types'  => array('post')
     );
