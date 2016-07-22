@@ -92,9 +92,9 @@ if ( !class_exists( 'MJ_Custom_Fields' ) ) {
 
     public function taxonomies() {
       $children = array(
-        'section' => $this->section(),
-        'media_type' => $this->media_type(),
-        'primary_tags' => $this->primary_tags(),
+        'section' => self::section(),
+        'media_type' => self::media_type(),
+        'primary_tags' => self::primary_tags(),
       );
 
       return new Fieldmanager_Group( array(
