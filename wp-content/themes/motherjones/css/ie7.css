@@ -158,19 +158,3 @@ Description: IE7 specific style.
 .gallery-columns-9 .gallery-item {
 	max-width: 8%;
 }
-
-.rtl .image-navigation .nav-previous + .nav-next,
-.rtl .comment-navigation .nav-previous + .nav-next {
-	margin-right: 14px;
-	margin-left: 0;
-}
-
-.rtl .entry-footer > span {
-	margin-right: 14px;
-	margin-left: 0;
-}
-
-.rtl .site-info .site-title {
-	margin-right: 0;
-	margin-left: 14px;
-}

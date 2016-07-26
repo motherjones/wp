@@ -14,7 +14,6 @@ Description: Used to style the TinyMCE editor.
  * 5.0 - Caption
  * 6.0 - Galleries
  * 7.0 - Audio / Video
- * 8.0 - RTL
  */
 
 
@@ -501,46 +500,3 @@ fieldset {
 	top: 10px;
 }
 
-
-/**
- * 8.0 - RTL
- */
-
-.rtl blockquote {
-	border: 0 solid #1a1a1a;
-	border-right-width: 4px;
-}
-
-.rtl blockquote.alignleft,
-.rtl blockquote.alignright {
-	border: 0 solid #1a1a1a;
-	border-top-width: 4px;
-}
-
-.rtl blockquote:not(.alignleft):not(.alignright) {
-	margin-right: -28px;
-	padding: 0 24px 0 0;
-}
-
-.rtl blockquote blockquote:not(.alignleft):not(.alignright) {
-	margin-right: 0;
-	margin-left: auto;
-}
-
-.rtl li > ul,
-.rtl blockquote > ul {
-	margin-right: 20px;
-	margin-left: auto;
-}
-
-.rtl li > ol,
-.rtl blockquote > ol {
-	margin-right: 24px;
-	margin-left: auto;
-}
-
-.rtl table th,
-.rtl .mce-item-table th,
-.rtl table caption {
-	text-align: right;
-}
