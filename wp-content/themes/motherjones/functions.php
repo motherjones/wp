@@ -131,7 +131,7 @@ add_action( 'after_setup_theme', 'twentysixteen_content_width', 0 );
 function mj_widgets_init() {
 	register_sidebar( array(
 		'name'          => __( 'Sidebar for Articles', 'motherjones' ),
-		'id'            => 'sidebar-1',
+		'id'            => 'sidebar-articles',
 		'description'   => __( 'Shows up on article pages', 'motherjones' ),
 		'before_widget' => '<section id="%1$s" class="widget %2$s">',
 		'after_widget'  => '</section>',
@@ -141,7 +141,7 @@ function mj_widgets_init() {
 
 	register_sidebar( array(
 		'name'          => __( 'Sidebar for Sections', 'motherjones' ),
-		'id'            => 'sidebar-2',
+		'id'            => 'sidebar-sections',
 		'description'   => __( 'Shows up on section and topic pages', 'motherjones' ),
 		'before_widget' => '<section id="%1$s" class="widget %2$s">',
 		'after_widget'  => '</section>',
@@ -151,7 +151,7 @@ function mj_widgets_init() {
 
 	register_sidebar( array(
 		'name'          => __( 'Sidebar for Blog posts', 'motherjones' ),
-		'id'            => 'sidebar-3',
+		'id'            => 'sidebar-blog',
 		'description'   => __( 'Shows up on blog posts', 'motherjones' ),
 		'before_widget' => '<section id="%1$s" class="widget %2$s">',
 		'after_widget'  => '</section>',
@@ -161,7 +161,7 @@ function mj_widgets_init() {
 
 	register_sidebar( array(
 		'name'          => __( 'Ticker', 'motherjones' ),
-		'id'            => 'sidebar-4',
+		'id'            => 'ticker',
 		'description'   => __( 'Shows up right beneath the top menu', 'motherjones' ),
 		'before_widget' => '<section id="%1$s" class="widget %2$s">',
 		'after_widget'  => '</section>',
@@ -171,7 +171,7 @@ function mj_widgets_init() {
 
 	register_sidebar( array(
 		'name'          => __( 'End of article', 'motherjones' ),
-		'id'            => 'sidebar-5',
+		'id'            => 'article-end',
 		'description'   => __( 'Between the comments and the footer', 'motherjones' ),
 		'before_widget' => '<section id="%1$s" class="widget %2$s">',
 		'after_widget'  => '</section>',
@@ -181,7 +181,7 @@ function mj_widgets_init() {
 
 	register_sidebar( array(
 		'name'          => __( 'End of page', 'motherjones' ),
-		'id'            => 'sidebar-6',
+		'id'            => 'page-end',
 		'description'   => __( 'after EVERYTHING else.', 'motherjones' ),
 		'before_widget' => '<section id="%1$s" class="widget %2$s">',
 		'after_widget'  => '</section>',
@@ -191,7 +191,7 @@ function mj_widgets_init() {
 
 	register_sidebar( array(
 		'name'          => __( 'Top of page', 'motherjones' ),
-		'id'            => 'sidebar-7',
+		'id'            => 'page-top',
 		'description'   => __( 'before EVERYTHING else.', 'motherjones' ),
 		'before_widget' => '<section id="%1$s" class="widget %2$s">',
 		'after_widget'  => '</section>',

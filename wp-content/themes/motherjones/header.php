@@ -20,6 +20,7 @@
 </head>
 
 <body <?php body_class(); ?>>
+<?php dynamic_sidebar( 'page-top' ); ?>
 <div id="page" class="site">
 	<div class="site-inner">
 		<a class="skip-link screen-reader-text" href="#content"><?php _e( 'Skip to content', 'twentysixteen' ); ?></a>
@@ -91,5 +92,7 @@
 				</div>
 			<?php endif; // End header image check. ?>
 		</header><!-- .site-header -->
+
+    <?php dynamic_sidebar( 'ticker' ); ?>
 
 		<div id="content" class="site-content">
