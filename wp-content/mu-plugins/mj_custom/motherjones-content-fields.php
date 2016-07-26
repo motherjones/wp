@@ -106,7 +106,7 @@ if ( !class_exists( 'MJ_Custom_Fields' ) ) {
       return new Fieldmanager_Select("Section", array(
         'name' => 'section',
         'datasource' => new Fieldmanager_Datasource_Term( array(
-          'taxonomy' => 'mj_section',
+          'taxonomy' => 'category',
         ) )
       ) );
     }
