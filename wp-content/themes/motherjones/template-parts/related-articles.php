@@ -5,7 +5,8 @@
         $related = get_post_field( 'related_articles', get_the_ID() ); 
         print_r($related);
         $related_query = new WP_Query(array(
-          'post__in' => $related['relateds']
+          'post_type' => Array('mj_blogpost', 'mj_article', 'mj_fullwidth'),
+          //'post__in' => $related['relateds'] 
         ) );
         print_r($related_query);
         while ( $related_query->have_posts() ) : $related_query->the_post(); 
