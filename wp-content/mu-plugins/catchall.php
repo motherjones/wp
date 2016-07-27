@@ -3,5 +3,5 @@
  * instead of a zillion files
  */
 
-require_once('responsve-images/responsive-images.php');
+require_once('responsive-images/responsive-images.php');
 ?>
