@@ -149,10 +149,11 @@ if ( ! function_exists( 'mj_dateline' ) ) {
   function mj_dateline($id) {
     if (!$id) { $id = get_the_ID(); }
     $override = get_post_field( 'dateline_override', $id)[0];
-    print_r( $override );
     if ( trim($override) ) {
       return $override;
     }
+    print_r($mj_dateline_format);
+    print_r(get_post_time());
     return get_post_time( $mj_dateline_format );
   }
 }
