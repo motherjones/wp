@@ -129,11 +129,12 @@ add_action( 'after_setup_theme', 'twentysixteen_content_width', 0 );
 if ( ! function_exists( 'mj_byline' ) ) {
   function mj_byline($id) {
     $byline = get_post_field( 'byline', $id);
-    if ( trim($byline['override'] ) ) {
-      return trim($byline['override']);
+    print_r($byline);
+    if ( trim($byline->override) ) {
+      return trim($byline->override);
     }
     //this is gonna have to get fancier if we want these to be links
-    return join(', ', $byline['authors'] );
+    return join(', ', $byline->authors );
   }
 }
 
