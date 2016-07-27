@@ -7,14 +7,14 @@
         print_r($related['relateds']);
         print_r(Array(60, 100));
         $related_query = new WP_Query(array(
-          'post__in' => Array(60, 61, 62),
+          'post__in' => $related['relateds'],
           'post_type' => Array('mj_blog_post', 'mj_article', 'mj_full_width')
         ) );
         while ( $related_query->have_posts() ) : $related_query->the_post(); 
       ?>
 <h1>lookin for an article</h1>
 
-        <?php get_template_part( 'standard-article-li', 'single' ); ?>
+        <?php get_template_part( 'standard-article-li'); ?>
 
       <?php endwhile; ?>
     </ul>
