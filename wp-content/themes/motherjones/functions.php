@@ -150,6 +150,30 @@ if ( ! function_exists( 'mj_dateline' ) ) {
   }
 }
 
+/** 
+ * create our social buttons
+ */
+if ( ! function_exists( 'mj_flat_twitter_button' ) ) {
+  function mj_flat_twitter_button($id) {
+    $href = 'http://twitter.com/something/';
+    return sprintf( 
+      '<a class="social" href="%s">'
+        . '<i class="fa-twitter"/>'
+        . '</a>',
+      $href );
+  }
+}
+
+if ( ! function_exists( 'mj_flat_facebook_button' ) ) {
+  function mj_flat_facebook_button($id) {
+    $href = 'http://facebook.com/something/';
+    return sprintf( 
+      '<a class="social" href="%s">'
+        . '<i class="fa-facebook"/>'
+        . '</a>',
+      $href );
+  }
+}
 /**
  * Registers a widget area.
  *
