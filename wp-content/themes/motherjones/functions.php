@@ -128,8 +128,10 @@ add_action( 'after_setup_theme', 'twentysixteen_content_width', 0 );
  */
 if ( ! function_exists( 'mj_byline' ) ) {
   function mj_byline($id) {
+    print_r($id);
     $byline = get_post_field( 'byline', $id);
     print_r($byline);
+    print_r('oh dont be empty');
     if ( trim($byline->override) ) {
       return trim($byline->override);
     }
