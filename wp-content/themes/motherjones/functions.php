@@ -148,8 +148,8 @@ if ( ! function_exists( 'mj_byline' ) ) {
 if ( ! function_exists( 'mj_dateline' ) ) {
   function mj_dateline($id) {
     $override = get_post_field( 'dateline_override', $id);
-    if ( trim($override) ) {
-      return $override;
+    if ( $override && trim($override[0]) ) {
+      return $override[0];
     }
     return get_post_time( $mj_dateline_format );
   }
