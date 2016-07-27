@@ -11,7 +11,8 @@
       ?>
 <h1>lookin for an article</h1>
 
-        <?php get_template_part( 'standard-article-li' ); ?>
+        <?php get_template_part( 'template-parts/standard-article-li' ); ?>
+
         WHY DON"T YOU PRING THE PART UGH!
 
       <?php endwhile; ?>
