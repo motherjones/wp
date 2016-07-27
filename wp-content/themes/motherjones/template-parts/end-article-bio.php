@@ -9,7 +9,7 @@
           );
         ?>
         <h3 class="author-bio">
-          <?php print $author['title'] ?>
+          <?php print get_the_title( $author_id ); ?>
           <span class="position">
             <?php print $author['position'] ?>
           </span>
