@@ -22,7 +22,7 @@ get_header(); ?>
             <span class="byline">
               <?php print mj_byline( get_the_ID() ); ?>
             </span>
-            <span class="byline">
+            <span class="dateline">
               <?php print mj_dateline( get_the_ID() ); ?>
             </span>
           </p>

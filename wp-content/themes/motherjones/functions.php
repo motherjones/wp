@@ -147,9 +147,11 @@ if ( ! function_exists( 'mj_byline' ) ) {
  */
 if ( ! function_exists( 'mj_dateline' ) ) {
   function mj_dateline($id) {
-    $override = get_post_field( 'dateline_override', $id);
-    if ( $override && trim($override[0]) ) {
-      return $override[0];
+    if (!$id) { $id = get_the_ID(); }
+    $override = get_post_field( 'dateline_override', $id)[0];
+    print_r( $override );
+    if ( trim($override) ) {
+      return $override;
     }
     return get_post_time( $mj_dateline_format );
   }
