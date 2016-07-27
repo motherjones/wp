@@ -5,15 +5,13 @@
         $related = get_post_field( 'related_articles', get_the_ID() ); 
         $related_query = new WP_Query(array(
           'post__in' => $related['relateds'],
-          'post_type' => Array('mj_blog_post', 'mj_article', 'mj_full_width')
+          'post_type' => Array('mj_blog_post', 'mj_article', 'mj_full_width'),
+          'posts_per_page' => 2
         ) );
         while ( $related_query->have_posts() ) : $related_query->the_post(); 
       ?>
-<h1>lookin for an article</h1>
 
         <?php get_template_part( 'template-parts/standard-article-li' ); ?>
-
-        WHY DON"T YOU PRING THE PART UGH!
 
       <?php endwhile; ?>
     </ul>
