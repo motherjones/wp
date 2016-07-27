@@ -207,9 +207,7 @@ if ( !class_exists( 'MJ_Custom_Fields' ) ) {
     /* begin author type fields */
 
     public function position() {
-      return new Fieldmanager_TextField( array(
-        'name' => 'position',
-      ) );
+      return new Fieldmanager_TextField( 'position');
     }
 
     public function image() {
