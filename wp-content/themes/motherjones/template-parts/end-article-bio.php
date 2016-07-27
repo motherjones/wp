@@ -11,7 +11,7 @@
         <h3 class="author-bio">
           <?php print get_the_title( $author_id ); ?>
           <span class="position">
-            <?php print $author['position'] ?>
+            <?php print_r ($author['position']) ?>
           </span>
           <a href="https://twitter.com/<?php print $author['twitter'] ?>">
             <i class="fa-twitter" />
