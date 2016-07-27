@@ -7,7 +7,7 @@
         print_r($related['relateds']);
         print_r(Array(60, 100));
         $related_query = new WP_Query(array(
-          'post__in' => $related['relateds'] 
+          'post__in' => Array(60, 61, 62)
         ) );
         while ( $related_query->have_posts() ) : $related_query->the_post(); 
       ?>
