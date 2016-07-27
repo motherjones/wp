@@ -11,14 +11,14 @@
         <h3 class="author-bio">
           <?php print get_the_title( $author_id ); ?>
           <span class="position">
-            <?php print_r ($author['position']) ?>
+            <?php print $author['position'][0] ?>
           </span>
           <a href="https://twitter.com/<?php print $author['twitter'] ?>">
-            <i class="fa-twitter" />
+            <i class="fa-twitter" /><?php print $author['twitter'] ?>
           </a>
         </h3>
         <p>
-          <?php print $author['short-bio'] ?>
+          <?php print $author['short_bio'] ?>
         </p>
       </li>
   <?php endforeach ?>
