@@ -10,7 +10,7 @@ get_header(); ?>
 
 <div id="primary" class="content-area">
 	<main id="main" class="site-main" role="main">
-<?php while ( have_posts() ) : ?>
+<?php while ( have_posts() ) : the_post(); ?>
       <article id="post-<?php get_the_ID(); ?>" class="article">
         <?php print get_post_field( 'css', get_the_ID() ); ?>
         <header class="entry-header">
