@@ -25,8 +25,6 @@
  * @since Twenty Sixteen 1.0
  */
 
-$mj_dateline_format = 'M\. j\, Y g\:i A';
-
 if ( ! function_exists( 'twentysixteen_setup' ) ) :
 /**
  * Sets up theme defaults and registers support for various WordPress features.
@@ -147,13 +145,13 @@ if ( ! function_exists( 'mj_byline' ) ) {
  */
 if ( ! function_exists( 'mj_dateline' ) ) {
   function mj_dateline($id) {
+    $mj_dateline_format = 'M\. j\, Y g\:i A';
+
     if (!$id) { $id = get_the_ID(); }
     $override = get_post_field( 'dateline_override', $id)[0];
     if ( trim($override) ) {
       return $override;
     }
-    print_r($mj_dateline_format);
-    print_r(get_post_time());
     return get_post_time( $mj_dateline_format );
   }
 }
