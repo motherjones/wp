@@ -25,6 +25,8 @@
  * @since Twenty Sixteen 1.0
  */
 
+$mj_dateline_format = 'M\. j\, Y g\:i A';
+
 if ( ! function_exists( 'twentysixteen_setup' ) ) :
 /**
  * Sets up theme defaults and registers support for various WordPress features.
@@ -122,11 +124,37 @@ function twentysixteen_content_width() {
 add_action( 'after_setup_theme', 'twentysixteen_content_width', 0 );
 
 /**
+ * create our bylines
+ */
+if ( ! function_exists( 'mj_byline' ) ) {
+  function mj_byline($id) {
+    $byline = get_post_field( 'byline', $id);
+    if ( trim($byline['override'] ) ) {
+      return trim($byline['override']);
+    }
+    //this is gonna have to get fancier if we want these to be links
+    return join(', ', $byline['authors'] );
+  }
+}
+
+/**
+ * create our datelines
+ */
+if ( ! function_exists( 'mj_dateline' ) ) {
+  function mj_dateline($id) {
+    $override = get_post_field( 'dateline_override', $id);
+    if ( trim($override) ) {
+      return $override;
+    }
+    return get_post_time( $mj_dateline_format );
+  }
+}
+
+/**
  * Registers a widget area.
  *
  * @link https://developer.wordpress.org/reference/functions/register_sidebar/
  *
- * @since Twenty Sixteen 1.0
  */
 function mj_widgets_init() {
 	register_sidebar( array(
@@ -296,39 +324,6 @@ function twentysixteen_scripts() {
 	) );
 }
 add_action( 'wp_enqueue_scripts', 'twentysixteen_scripts' );
-
-/**
- * Adds custom classes to the array of body classes.
- *
- * @since Twenty Sixteen 1.0
- *
- * @param array $classes Classes for the body element.
- * @return array (Maybe) filtered body classes.
- */
-function twentysixteen_body_classes( $classes ) {
-	// Adds a class of custom-background-image to sites with a custom background image.
-	if ( get_background_image() ) {
-		$classes[] = 'custom-background-image';
-	}
-
-	// Adds a class of group-blog to sites with more than 1 published author.
-	if ( is_multi_author() ) {
-		$classes[] = 'group-blog';
-	}
-
-	// Adds a class of no-sidebar to sites without active sidebar.
-	if ( ! is_active_sidebar( 'sidebar-1' ) ) {
-		$classes[] = 'no-sidebar';
-	}
-
-	// Adds a class of hfeed to non-singular pages.
-	if ( ! is_singular() ) {
-		$classes[] = 'hfeed';
-	}
-
-	return $classes;
-}
-add_filter( 'body_class', 'twentysixteen_body_classes' );
 
 /**
  * Converts a HEX value to RGB.

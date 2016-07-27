@@ -133,6 +133,7 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
       MJ_Custom_Fields::related()->add_meta_box( 'Related Articles', 'mj_full_width' );
       MJ_Custom_Fields::css_js()->add_meta_box( 'Extra CSS & JS', 'mj_full_width' );
       MJ_Custom_Fields::file_attachments()->add_meta_box( 'Extra File Attachments', 'mj_full_width' );
+      MJ_Custom_Fields::dateline_override()->add_meta_box( 'Dateline Override', 'mj_full_width' );
     }
     public function full_width_type() {
       register_post_type( 'mj_full_width',
@@ -172,7 +173,8 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
       MJ_Custom_Fields::body()->add_meta_box( 'Article Body', 'mj_article' );
       MJ_Custom_Fields::related()->add_meta_box( 'Related Articles', 'mj_article' );
       MJ_Custom_Fields::css_js()->add_meta_box( 'Extra CSS & JS', 'mj_article' );
-      MJ_Custom_Fields::file_attachments()->add_meta_box( 'Extra File Attachments', 'mj_full_width' );
+      MJ_Custom_Fields::file_attachments()->add_meta_box( 'Extra File Attachments', 'mj_article' );
+      MJ_Custom_Fields::dateline_override()->add_meta_box( 'Dateline Override', 'mj_article' );
     }
 
 
@@ -199,7 +201,9 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
       MJ_Custom_Fields::body()->add_meta_box( 'Article Body', 'mj_blog_post' );
       MJ_Custom_Fields::related()->add_meta_box( 'Related Articles', 'mj_blog_post' );
       MJ_Custom_Fields::css_js()->add_meta_box( 'Extra CSS & JS', 'mj_blog_post' );
-      MJ_Custom_Fields::file_attachments()->add_meta_box( 'Extra File Attachments', 'mj_full_width' );
+      MJ_Custom_Fields::file_attachments()->add_meta_box( 'Extra File Attachments', 'mj_blog_post' );
+      MJ_Custom_Fields::dateline_override()->add_meta_box( 'Dateline Override', 'mj_blog_post' );
+
     }
 
 

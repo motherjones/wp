@@ -155,6 +155,13 @@ if ( !class_exists( 'MJ_Custom_Fields' ) ) {
       ) );
     }
 
+    public function dateline_override() {
+      return new Fieldmanager_TextField( array(
+        'name' => 'dateline_override',
+      ) );
+    }
+
+
     //dumb thing we have to do because autocompletes can't happen too early
     public function byline() {
       return new Fieldmanager_Group( array( 
