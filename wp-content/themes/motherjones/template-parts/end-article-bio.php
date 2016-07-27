@@ -13,12 +13,12 @@
           <span class="position">
             <?php print $author['position'][0] ?>
           </span>
-          <a href="https://twitter.com/<?php print $author['twitter'] ?>">
-            <i class="fa-twitter" /><?php print $author['twitter'] ?>
+          <a href="https://twitter.com/<?php print $author['twitter'][0] ?>">
+            <i class="fa-twitter" /><?php print $author['twitter'][0] ?>
           </a>
         </h3>
         <p>
-          <?php print $author['short_bio'] ?>
+          <?php print $author['short_bio'][0] ?>
         </p>
       </li>
   <?php endforeach ?>
