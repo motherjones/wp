@@ -130,15 +130,15 @@ if ( ! function_exists( 'mj_byline' ) ) {
   function mj_byline($id) {
     if (!$id) { $id = get_the_ID(); }
     $byline = get_post_field( 'Byline', $id );
-    if ( trim($byline->override) ) {
-      return trim($byline->override);
+    if ( trim($byline['override']) ) {
+      return trim($byline['override']);
     }
 
-    $byline = [];
-    foreach ($byline->authors as $author) {
-      $byline[] = get_the_title( $author );
+    $authors = [];
+    foreach ($byline['authors'] as $author) {
+      $authors[] = get_the_title( $author );
     }
-    return join(', ', $byline->authors );
+    return join(', ', $authors );
   }
 }
 

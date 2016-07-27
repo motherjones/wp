@@ -1,6 +1,6 @@
 <ul class="author-bios article end">
   <?php foreach (get_post_field( 'Byline', get_the_ID() )['authors']  as $author_id):
-    $author = get_custom_fields( $author_id );
+    $author = get_post_custom( $author_id );
   ?>
       <li class="author-bio">
         <?php
