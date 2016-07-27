@@ -130,12 +130,14 @@ if ( ! function_exists( 'mj_byline' ) ) {
   function mj_byline($id) {
     if (!$id) { $id = get_the_ID(); }
     $byline = get_post_field( 'Byline', $id );
-    print_r($byline);
-    print_r('oh dont be empty');
     if ( trim($byline->override) ) {
       return trim($byline->override);
     }
-    //this is gonna have to get fancier if we want these to be links
+
+    $byline = [];
+    foreach ($byline->authors as $author) {
+      $byline[] = get_the_title( $author );
+    }
     return join(', ', $byline->authors );
   }
 }
@@ -150,6 +152,12 @@ if ( ! function_exists( 'mj_dateline' ) ) {
       return $override;
     }
     return get_post_time( $mj_dateline_format );
+  }
+}
+
+if ( ! function_exists( 'get_discus_thread' ) ) {
+  function get_discus_thread($id) {
+    return '<h1>fixme make me a disqus embed somehow</h1>';
   }
 }
 
