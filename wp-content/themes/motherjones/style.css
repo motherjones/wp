@@ -287,6 +287,12 @@ html {
 	box-sizing: inherit;
 }
 
+@media only screen and (min-width: 990px) {
+  #page {
+    width: 990px;
+  }
+}
+
 /* fonts */
 @font-face {
   font-family: 'Mallory';
@@ -724,10 +730,6 @@ button.accent {
   margin: 5px 0;
 }
 
-#page .node-type-article #node-body-top .master-image-data {
-  line-height: 20px;
-  margin: 10px 0 0 0;
-}
 .caption strong, .master-image-caption {
   color: black;
   font-style: normal;
