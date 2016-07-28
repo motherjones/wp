@@ -127,13 +127,13 @@ add_action( 'after_setup_theme', 'twentysixteen_content_width', 0 );
 if ( ! function_exists( 'mj_byline' ) ) {
   function mj_byline($id) {
     if (!$id) { $id = get_the_ID(); }
-    $byline = get_post_field( 'Byline', $id );
+    $byline = get_post_field( 'byline', $id );
     if ( trim($byline['override']) ) {
       return trim($byline['override']);
     }
 
     $authors = [];
-    foreach ($byline['byline_authors'] as $author) {
+    foreach ($byline['authors'] as $author) {
       $authors[] = get_the_title( $author );
     }
     return join(', ', $authors );
