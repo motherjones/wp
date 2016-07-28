@@ -616,7 +616,7 @@ button.accent {
 
 /* static navbar styling */
 
-tatic-navbar ul {
+#static-navbar ul {
   list-style-type: none;
   position: relative;
   padding: 0;
