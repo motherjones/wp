@@ -164,29 +164,30 @@ if ( !class_exists( 'MJ_Custom_Fields' ) ) {
 
     //dumb thing we have to do because autocompletes can't happen too early
     public function byline() {
-      $authors = new Fieldmanager_Autocomplete( "Author", array(
+      return new Fieldmanager_Group( array( 
+        'name' => 'byline',
+        'children' => array(
+          'authors' => new Fieldmanager_Autocomplete( "Author", array(
             'limit'      => 0,
             'sortable'   => true,
             'add_more_label' => 'Add another author',
             'datasource' => new Fieldmanager_Datasource_Post( array(
               'query_args' => array( 
-                'post_type' => 'mj_author',
+                'post_type' => array('mj_author'),
                 'post_status' => 'publish'
               )
             ) ),
-          ) );
-      print_r($authors);
-      return new Fieldmanager_Group( array( 
-        'name' => 'byline',
-        'children' => array(
-          'authors' => $authors,
+          ) ),
           'override' => new Fieldmanager_TextField( 'Byline Override' )
         )
       ) );
     }
 
     public function related() {
-      $relateds = new Fieldmanager_Autocomplete( "Article", array(
+      return new Fieldmanager_Group( array( 
+        'name' => 'related_articles',
+        'children' => array(
+          'relateds' => new Fieldmanager_Autocomplete( "Article", array(
             'limit'      => 0,
             'sortable'   => true,
             'add_more_label' => 'Add another article',
@@ -196,14 +197,7 @@ if ( !class_exists( 'MJ_Custom_Fields' ) ) {
                 'post_status' => 'publish'
               )
             ) ),
-          ) );
-      print_r($relateds);
-      return new Fieldmanager_Group( array( 
-        'name' => 'related_articles',
-        'children' => array(
-          'relateds' => $relateds,
-          'override' => new Fieldmanager_TextField( 'Byline Override' )
-
+          ) )
         )
       ) );
     }
