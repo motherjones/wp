@@ -166,6 +166,7 @@ if ( !class_exists( 'MJ_Custom_Fields' ) ) {
     public function byline() {
       return new Fieldmanager_Group( array( 
         'name' => 'byline',
+        /*
         'children' => array(
           'authors' => new Fieldmanager_Autocomplete( "Author", array(
             'limit'      => 0,
@@ -173,12 +174,26 @@ if ( !class_exists( 'MJ_Custom_Fields' ) ) {
             'add_more_label' => 'Add another author',
             'datasource' => new Fieldmanager_Datasource_Post( array(
               'query_args' => array( 
-                'post_type' => array('mj_author'),
+                'post_type' => 'mj_author',
                 'post_status' => 'publish'
               )
             ) ),
           ) ),
           'override' => new Fieldmanager_TextField( 'Byline Override' )
+        )
+         */
+        'children' => array(
+          'relateds' => new Fieldmanager_Autocomplete( "Article", array(
+            'limit'      => 0,
+            'sortable'   => true,
+            'add_more_label' => 'Add another article',
+            'datasource' => new Fieldmanager_Datasource_Post( array(
+              'query_args' => array( 
+                'post_type' => array('mj_blog_post', 'mj_article', 'mj_full_width'),
+                'post_status' => 'publish'
+              )
+            ) ),
+          ) )
         )
       ) );
     }
@@ -187,13 +202,13 @@ if ( !class_exists( 'MJ_Custom_Fields' ) ) {
       return new Fieldmanager_Group( array( 
         'name' => 'related_articles',
         'children' => array(
-          'authors' => new Fieldmanager_Autocomplete( "Article", array(
+          'relateds' => new Fieldmanager_Autocomplete( "Article", array(
             'limit'      => 0,
             'sortable'   => true,
             'add_more_label' => 'Add another article',
             'datasource' => new Fieldmanager_Datasource_Post( array(
               'query_args' => array( 
-                'post_type' => array('mj_author'),
+                'post_type' => array('mj_blog_post', 'mj_article', 'mj_full_width'),
                 'post_status' => 'publish'
               )
             ) ),
