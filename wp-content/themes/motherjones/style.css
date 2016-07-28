@@ -535,7 +535,7 @@ button.accent {
   font-size: 20px;
   font-family:  Mallory, sans-serif;
   font-weight: bold;
-  line-height: 40px;
+  line-height: 36px;
   border-bottom: none;
   text-shadow: none;
 }
@@ -580,7 +580,13 @@ button.accent {
 #navbar .donate-link a:hover,
 #navbar .subscribe-link a:hover {
   color: #ff6900;
+} 
+#navbar .menu-button {
+  padding-top: 4px;
+  width: 45px;
+  float: right;
 }
+
 @media only screen and (max-width: 1060px) {
   .article-page.subscribe-link {
     display:none!important;
