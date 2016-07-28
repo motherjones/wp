@@ -290,6 +290,8 @@ html {
 @media only screen and (min-width: 990px) {
   #page {
     width: 990px;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 
@@ -631,6 +633,11 @@ button.accent {
   margin-top: 20px;
   padding-bottom: 21px;
 }
+@media only screen and (max-width: 990px) {
+  #static-navbar {
+    display: none;
+  }
+}
 #static-navbar li {
   display: inline-block;
   padding: 0 45px 0 0;
@@ -804,5 +811,83 @@ button.accent {
 
 /* end within article body */
 
+/* footer */
+#footer #footer-list {
+  font-family: Mallory, sans-serif;
+  font-weight: bold;
+  text-transform: uppercase;
+  width: 200px;
+  color: #ff6900;
+}
+#footer #footer-list li { 
+  font-size: 15px;
+}
 
-/* end static navbar styling */
+#footer-social .toolbar-btn a,
+.hdr-tools .article-tools a {
+  text-decoration: none;
+  text-align: center;
+  font-size: 18px;
+  position: relative;
+  top: 4px;
+  left: 4px;
+  border-bottom: none;
+  text-shadow: 0 0;
+  display: block;
+}
+#footer-social .toolbar-btn,
+.hdr-tools .article-tools li {
+  height: 30px;
+  width: 30px;
+  border-radius: 30px;
+  margin: 0 5px;
+}
+.hdr-tools .article-tools li {
+  overflow: hidden;
+}
+#footer-social i,
+.hdr-tools i {
+  display: block;
+  font-size: 18px;
+  line-height: 20px;
+}
+a#footer-logo {
+  background-image: none;
+}
+#footer-logo img{
+  width: 274px;
+  height: auto;
+  margin: 0 auto;
+  display: block;
+}
+#footer-social li {
+  display: block;
+  float: left;
+}
+#footer-social .toolbar-btn {
+  background-image: none;
+  margin: 20px 5px;
+}
+#footer-social .toolbar-btn a {
+  color: #cccccc;
+  text-decoration: none;
+  height: 0px;
+}
+#footer-social i {
+  position: relative;
+}
+al .circled-icon {
+  width: 40px;
+}
+#footer-social .circled-icon i {
+    font-size: 26px;
+    padding: 4px;
+    position: relative;
+    top: -3px;
+    left: 0;
+}
+#footer-social .circled-icon.tweet i {
+  top: -2px;
+}
+
+/* end footer */
