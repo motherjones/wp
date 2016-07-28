@@ -34,7 +34,8 @@ html {
 }
 
 body {
-	margin: 0;
+  margin: 0;
+	padding-top: 32px;
   background: white;
 }
 
@@ -831,6 +832,7 @@ footer#colophon {
 	background-color: black;
   color: #ccc;
   text-align: center;
+  padding-top: 32px;
 }
 footer #footer-list {
   font-family: Mallory, sans-serif;
@@ -841,6 +843,10 @@ footer #footer-list {
 }
 footer #footer-list li { 
   font-size: 15px;
+}
+footer #footer-list a {
+  color: #ff6900;
+  margin: 0 5px;
 }
 footer #footer-list {
   font-family: Mallory, sans-serif;
