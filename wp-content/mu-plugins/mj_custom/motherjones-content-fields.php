@@ -167,7 +167,7 @@ if ( !class_exists( 'MJ_Custom_Fields' ) ) {
       return new Fieldmanager_Group( array( 
         'name' => 'byline',
         'children' => array(
-          'authors' => new Fieldmanager_Autocomplete( "Author", array(
+          'byline_authors' => new Fieldmanager_Autocomplete( "Author", array(
             'limit'      => 0,
             'sortable'   => true,
             'add_more_label' => 'Add another author',

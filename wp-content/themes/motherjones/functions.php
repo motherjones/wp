@@ -133,7 +133,7 @@ if ( ! function_exists( 'mj_byline' ) ) {
     }
 
     $authors = [];
-    foreach ($byline['authors'] as $author) {
+    foreach ($byline['byline_authors'] as $author) {
       $authors[] = get_the_title( $author );
     }
     return join(', ', $authors );
