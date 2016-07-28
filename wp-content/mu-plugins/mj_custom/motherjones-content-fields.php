@@ -162,28 +162,13 @@ if ( !class_exists( 'MJ_Custom_Fields' ) ) {
     }
 
 
+    //dumb thing we have to do because autocompletes can't happen too early
     public function byline() {
       return new Fieldmanager_Group( array( 
         'name' => 'byline',
         'children' => array(
           'authors' => new Fieldmanager_Autocomplete( "Author", array(
-            'limit'      => 0,
-            'sortable'   => true,
-            'add_more_label' => 'Add another author',
-            'datasource' => new Fieldmanager_Datasource_Post( array(
-              'query_args' => array( 
-                'post_type' => array('mj_author'),
-                'post_status' => 'publish'
-              )
-            ) ),
-          ) )
-        )
-      ) );
-      /*
-      return new Fieldmanager_Group( array( 
-        'name' => 'byline',
-        'children' => array(
-          'authors' => new Fieldmanager_Autocomplete( "Author", array(
+            'name'      => 'authors',
             'limit'      => 0,
             'sortable'   => true,
             'add_more_label' => 'Add another author',
@@ -197,7 +182,6 @@ if ( !class_exists( 'MJ_Custom_Fields' ) ) {
           'override' => new Fieldmanager_TextField( 'Byline Override' )
         )
       ) );
-       */
     }
 
     public function related() {
