@@ -30,10 +30,12 @@ html {
 	font-family: sans-serif;
 	-webkit-text-size-adjust: 100%;
 	-ms-text-size-adjust: 100%;
+  background: black;
 }
 
 body {
 	margin: 0;
+  background: white;
 }
 
 article,
