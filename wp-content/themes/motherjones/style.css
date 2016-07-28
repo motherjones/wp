@@ -384,6 +384,7 @@ a {
   background-position: 0% 90%;
 }
 
+#footer #copyright a,
 #main a {
   background-image: url('/wp-content/themes/motherjones/img/orange-border.png');
   background-repeat: repeat-x;
@@ -582,7 +583,6 @@ button.accent {
   color: #ff6900;
 } 
 #navbar .menu-button {
-  padding-top: 4px;
   width: 45px;
   float: right;
 }
@@ -955,6 +955,7 @@ a#footer-logo {
   margin: 35px auto;
 }
 #footer #copyright a {
+  color: #ccc;
   margin: 0 5px;
   text-shadow: -1px 0 0 black, 0 1px 0 black, 1px 0 0 black, 0 -1px 0 b
   -1px -1px 0 black, 1px 1px 0 black, 1px -1px 0 black, -1px 1px 0 blac
