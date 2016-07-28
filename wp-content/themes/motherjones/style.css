@@ -288,7 +288,7 @@ html {
 }
 
 @media only screen and (min-width: 990px) {
-  #page {
+  header, #content {
     width: 990px;
     margin-left: auto;
     margin-right: auto;
@@ -812,6 +812,9 @@ button.accent {
 /* end within article body */
 
 /* footer */
+footer {
+	background-color: black;
+}
 footer #footer-list {
   font-family: Mallory, sans-serif;
   font-weight: bold;
