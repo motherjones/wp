@@ -15,7 +15,7 @@
 					$custom_header_sizes = apply_filters( 'twentysixteen_custom_header_sizes', '(max-width: 709px) 85vw, (max-width: 909px) 81vw, (max-width: 1362px) 88vw, 1200px' );
 				?>
     <li class="first menu-item-home"><a href="/" title="Mother Jones Homepage">
-      <img src="/sites/all/assets/MJ_comp.png" srcset="<?php echo esc_attr( wp_get_attachment_image_srcset( 12 ) ); ?>" sizes="<?php echo esc_attr( $custom_header_sizes ); ?>" width="825px" height="161" alt="Mother Jones">
+      <img src="/wp-content/themes/img/MJ_comp.png" srcset="<?php echo esc_attr( wp_get_attachment_image_srcset( 12 ) ); ?>" sizes="<?php echo esc_attr( $custom_header_sizes ); ?>" alt="Mother Jones">
     </a></li>
     <li class="menu-item-politics"><a href="/politics" title="Politics">Politics</a></li>
     <li class="menu-item-environment"><a href="/environment" title="Environment">Environment</a></li>
