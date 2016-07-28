@@ -564,6 +564,22 @@ button.accent {
   font-family: Mallory, sans-serif;
   font-weight: bold;
 }
+#navbar .donate-link li,
+#navbar .subscribe-link li {
+  float: right;
+  width: 95px;
+}
+#navbar .donate-link a,
+#navbar .subscribe-link a {
+  color: #ccc;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+}
+#navbar .donate-link a:hover,
+#navbar .subscribe-link a:hover {
+  color: #ff6900;
+}
 @media only screen and (max-width: 1060px) {
   .article-page.subscribe-link {
     display:none!important;
@@ -815,13 +831,13 @@ button.accent {
 /* end within article body */
 
 /* footer */
-footer ul {
+footer#colophon ul {
   padding: 0;
   margin: 0 auto 15px;
   width: 165px;
   clear: both;
 }
-footer ul li {
+footer#colophon ul li {
   list-style: none;
   padding: 2px 0;
   font-size: 12px;
@@ -834,28 +850,28 @@ footer#colophon {
   text-align: center;
   padding-top: 32px;
 }
-footer #footer-list {
+footer#colophon #footer-list {
   font-family: Mallory, sans-serif;
   font-weight: bold;
   text-transform: uppercase;
   width: 200px;
   color: #ff6900;
 }
-footer #footer-list li { 
+footer#colophon #footer-list li { 
   font-size: 15px;
 }
-footer #footer-list a {
+footer#colophon #footer-list a {
   color: #ff6900;
   margin: 0 5px;
 }
-footer #footer-list {
+footer#colophon #footer-list {
   font-family: Mallory, sans-serif;
   font-weight: bold;
   text-transform: uppercase;
   width: 200px;
   color: #ff6900;
 }
-footer #footer-list li {
+footer#colophon #footer-list li {
   font-size: 15px;
 }
 
