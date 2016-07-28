@@ -564,8 +564,9 @@ button.accent {
   font-family: Mallory, sans-serif;
   font-weight: bold;
 }
-#navbar .donate-link li,
-#navbar .subscribe-link li {
+
+#navbar li.donate-link,
+#navbar li.subscribe-link {
   float: right;
   width: 95px;
 }
