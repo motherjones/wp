@@ -812,16 +812,27 @@ button.accent {
 /* end within article body */
 
 /* footer */
-#footer #footer-list {
+footer #footer-list {
   font-family: Mallory, sans-serif;
   font-weight: bold;
   text-transform: uppercase;
   width: 200px;
   color: #ff6900;
 }
-#footer #footer-list li { 
+footer #footer-list li { 
   font-size: 15px;
 }
+footer #footer-list {
+  font-family: Mallory, sans-serif;
+  font-weight: bold;
+  text-transform: uppercase;
+  width: 200px;
+  color: #ff6900;
+}
+footer #footer-list li {
+  font-size: 15px;
+}
+
 
 #footer-social .toolbar-btn a,
 .hdr-tools .article-tools a {
