@@ -170,7 +170,7 @@ if ( ! function_exists( 'mj_flat_twitter_button' ) ) {
     $href = 'http://twitter.com/something/';
     return sprintf( 
       '<a class="social" href="%s">'
-        . '<i class="fa-twitter"/>'
+        . '<i class="fa fa-twitter fw"></i>'
         . '</a>',
       $href );
   }
@@ -181,7 +181,7 @@ if ( ! function_exists( 'mj_flat_facebook_button' ) ) {
     $href = 'http://facebook.com/something/';
     return sprintf( 
       '<a class="social" href="%s">'
-        . '<i class="fa-facebook"/>'
+        . '<i class="fa fa-facebook fw"></i>'
         . '</a>',
       $href );
   }

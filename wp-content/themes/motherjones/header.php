@@ -16,6 +16,7 @@
 	<?php if ( is_singular() && pings_open( get_queried_object() ) ) : ?>
 	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
 	<?php endif; ?>
+  <link rel="stylesheet" href="/wp-content/themes/motherjones/css/font-awesome-4.6.3/css/font-awesome.min.css">
 	<?php wp_head(); ?>
 </head>
 
