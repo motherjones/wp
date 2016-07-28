@@ -7,41 +7,17 @@
 				alt="MotherJones" />
 			</a>
 		</li>
-	<?php if (request_uri() == '/' || !$node->nid): //front/section nav options ?>
-		<li class="menu-button">
-			<a onclick="expandMenu();">
-				<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Your_Icon" x="0px" y="0px" width="25px" height="25px" viewBox="0 0 125 125" enable-background="new 0 0 125 125" xml:space="preserve">
-					<path d="M0,100.869"></path>
-					<rect y="30" width="125" height="15"></rect>
-					<rect y="70" width="125" height="15"></rect>
-					<rect y="110" width="125" height="15"></rect>
-				</svg>
-			</a>
-		</li>
-		<li class="donate-link">
-			<a href="https://secure.motherjones.com/fnp/?action=SUBSCRIPTION&list_source=7HEGP002&extra_don=1&abver=A"
-				target="_blank"
-			>
-				Donate
-			</a>
-		</li>
-		<li class="subscribe-link">
-			<a href="https://secure.motherjones.com/fnx/?action=SUBSCRIPTION&pub_code=MJM&term_pub=MJM&list_source=SEGYN1&base_country=US"
-				target="_blank"
-			>
-				Subscribe
-			</a>
-		</li>
-		<?php else: //is an article page?>
-		<li class="nav-title">
-			<?php print $title; ?>
-		</li>
-		<li class="share-button facebook">
-			<?php print flat_facebook_button(get_defined_vars() );?>
-		</li>
-		<li class="share-button twitter">
-			<?php print flat_twitter_button(get_defined_vars() );?>
-		</li>
+		<?php if(false): //FIXME is an article page?>
+      <li class="nav-title">
+        <?php print $title; ?>
+      </li>
+      <li class="share-button facebook">
+        <?php print flat_facebook_button(get_defined_vars() );?>
+      </li>
+      <li class="share-button twitter">
+        <?php print flat_twitter_button(get_defined_vars() );?>
+      </li>
+		<?php endif; ?>
 		<li class="menu-button">
 			<a onclick="expandMenu();">
 				<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Your_Icon" x="0px" y="0px" width="25px" height="25px" viewBox="0 0 125 125" enable-background="new 0 0 125 125" xml:space="preserve">
@@ -66,7 +42,6 @@
 				Subscribe
 			</a>
 		</li>
-		<?php endif; ?>
 	</ul>
 	<div id="mj_menu_select" class="">
 			<ul id="mj_menu_options">
