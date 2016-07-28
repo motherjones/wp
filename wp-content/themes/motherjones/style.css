@@ -812,8 +812,23 @@ button.accent {
 /* end within article body */
 
 /* footer */
-footer {
+footer ul {
+  padding: 0;
+  margin: 0 auto 15px;
+  width: 165px;
+  clear: both;
+}
+footer ul li {
+  list-style: none;
+  padding: 2px 0;
+  font-size: 12px;
+  background-position: 0% 100%;
+}
+
+footer#colophon {
 	background-color: black;
+  color: #ccc;
+  text-align: center;
 }
 footer #footer-list {
   font-family: Mallory, sans-serif;
@@ -890,7 +905,7 @@ a#footer-logo {
 #footer-social i {
   position: relative;
 }
-al .circled-icon {
+#footer-social .circled-icon {
   width: 40px;
 }
 #footer-social .circled-icon i {
@@ -903,5 +918,17 @@ al .circled-icon {
 #footer-social .circled-icon.tweet i {
   top: -2px;
 }
+#copyright {
+  font-family: Calluna, serif;
+  font-size: 14px;
+  margin: 35px auto;
+}
+#footer #copyright a {
+  margin: 0 5px;
+  text-shadow: -1px 0 0 black, 0 1px 0 black, 1px 0 0 black, 0 -1px 0 b
+  -1px -1px 0 black, 1px 1px 0 black, 1px -1px 0 black, -1px 1px 0 blac
+}
+
+
 
 /* end footer */

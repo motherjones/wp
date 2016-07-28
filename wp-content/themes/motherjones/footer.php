@@ -30,7 +30,7 @@
           </li>
           <li class="circled-icon toolbar-btn newsletter">
               <a href="/about/interact-engage/free-email-newsletter" class="hover-newsletter">
-                <i class="fa fa-envelope-square fw"></i>
+                <i class="fa fa-envelope fw"></i>
               </a>
           </li>
       </ul>
