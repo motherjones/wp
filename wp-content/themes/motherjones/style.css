@@ -954,7 +954,7 @@ a#footer-logo {
   font-size: 14px;
   margin: 35px auto;
 }
-#footer #copyright a {
+footer#colophon #copyright a {
   color: #ccc;
   margin: 0 5px;
   text-shadow: -1px 0 0 black, 0 1px 0 black, 1px 0 0 black, 0 -1px 0 b
