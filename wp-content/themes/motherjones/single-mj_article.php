@@ -38,6 +38,9 @@ get_header(); ?>
           </ul>
         </div>
         
+body?
+        <?php print_r(get_post_field( 'body', get_the_ID() )); ?>
+body?
         <?php print get_post_field( 'body', get_the_ID() ); ?>
 
         <footer class="entry-footer">
