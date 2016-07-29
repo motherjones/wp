@@ -508,7 +508,7 @@ button.accent {
   left: 0px;
   transition: top .5s cubic-bezier(0.5, -0.5, 0.5, 1.5);
   box-shadow: 0 5px 10px 0 rgba(0,0,0,0.15),0 -5px 3px -10px #fff;
-  height: 40px;
+  height: 44px;
   padding: 5px 0 0 0; /* must be taller so the bounce doesn't have empty space on top */
   z-index: 5999999; /* ffs */
 }
@@ -593,6 +593,11 @@ button.accent {
   margin: 0;
   padding: 0;
   line-height: normal;
+}
+#navbar .logo img {
+  max-width: 90%;
+  max-height: 28px;
+  margin: 5px 5px 0;
 }
 
 
