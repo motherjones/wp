@@ -1182,6 +1182,10 @@ li.article-item h3 {
   max-width: 395px;
   margin-top: 4px;
 }
+li.article-item h3 {
+  font-size: 18px;
+  line-height: 18px;
+}
 .article-item .article-image,
 .article-item .article-data {
   float: left;
