@@ -508,7 +508,7 @@ button.accent {
   left: 0px;
   transition: top .5s cubic-bezier(0.5, -0.5, 0.5, 1.5);
   box-shadow: 0 5px 10px 0 rgba(0,0,0,0.15),0 -5px 3px -10px #fff;
-  height: 44px;
+  height: 45px;
   padding: 5px 0 0 0; /* must be taller so the bounce doesn't have empty space on top */
   z-index: 5999999; /* ffs */
 }
@@ -536,7 +536,7 @@ button.accent {
   font-size: 20px;
   font-family:  Mallory, sans-serif;
   font-weight: bold;
-  line-height: 36px;
+  line-height: 40px;
   border-bottom: none;
   text-shadow: none;
 }
@@ -585,6 +585,7 @@ button.accent {
 #navbar .menu-button {
   width: 45px;
   float: right;
+  margin-top: 4px;
 }
 #navbar .logo {
   width: 175px;
