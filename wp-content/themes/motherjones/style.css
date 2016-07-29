@@ -1025,8 +1025,9 @@ ul.social-tools li {
   padding: 0 15px;
 }
 .article .social-container.top {
-  height: 20px;
+  height: 17px;
   border-bottom: 1px solid #ccc;
+  margin-bottom: 20px;
 }
 
 .social-tools a {
@@ -1037,12 +1038,11 @@ ul.social-tools li {
   border-bottom: none;
   text-shadow: 0 0;
   display: block;
-  background-image: none;
+  background-image: none!important;
   border: 1px solid #ff6900;
   border-radius: 40px;
   height: 30px;
   width: 30px;
-  background-image: none;
 }
 .social-tools li {
   overflow: hidden;
