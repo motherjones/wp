@@ -5,7 +5,7 @@
       <li class="author-bio">
         <?php
           print wp_get_attachment_image( $author['image'][0], 
-            '(max-width: 100px)'
+            array('80', '80')
           );
         ?>
         <h3 class="author-bio byline">

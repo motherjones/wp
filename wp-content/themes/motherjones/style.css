@@ -1053,10 +1053,25 @@ a.social {
 /* end social buttons */
 
 /* begin end of article author stuff */
+
+ul.author-bios {
+  list-style-type: none;
+  padding: 0;
+}
 .author-bio-text {
   font-size: 12px;
   margin-top: 5px;
   font-family: Mallory, sans-serif;
+}
+
+.author-bio .author-image {
+  float: left;
+  margin-right: 15px;
+  margin-bottom: 20px;
+  height: 80px;
+  width: 80px;
+  border-radius: 50px;
+  overflow: hidden;
 }
 /* end end of article author stuff */
 
