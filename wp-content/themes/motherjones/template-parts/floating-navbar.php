@@ -7,16 +7,15 @@
 				alt="MotherJones" />
 			</a>
 		</li>
-<?php print_r($wp_query->found_posts) ?>
 		<?php if($wp_query->found_posts === 1): //is an articlish thing ?>
       <li class="nav-title">
         <?php print $title; ?>
       </li>
       <li class="share-button facebook">
-        <?php print flat_facebook_button(get_defined_vars() );?>
+        <?php print mj_flat_facebook_button(get_defined_vars() );?>
       </li>
       <li class="share-button twitter">
-        <?php print flat_twitter_button(get_defined_vars() );?>
+        <?php print mj_flat_twitter_button(get_defined_vars() );?>
       </li>
 		<?php endif; ?>
 		<li class="menu-button">
