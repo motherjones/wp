@@ -1061,6 +1061,10 @@ ul.author-bios {
 .author-data {
   float: left;
 }
+.author-bio .byline a {
+  background-image: none;
+  display: inline-block;
+}
 .author-bio-text {
   font-size: 12px;
   margin-top: 5px;

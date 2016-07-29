@@ -11,13 +11,12 @@
           ?>
         </div>
         <div class="author-data">
-          <h3 class="author-bio byline">
+          <span class="author-bio byline">
             <?php print get_the_title( $author_id ); ?>
-            <a class="social"
-               href="https://twitter.com/@<?php print $author['twitter'][0] ?>">
+            <a href="https://twitter.com/@<?php print $author['twitter'][0] ?>">
               <i class="fa fa-twitter fw"></i>
             </a>
-          </h3>
+          </span>
           <p class="author-bio-text">
             <?php print $author['short_bio'][0] ?>
           </p>
