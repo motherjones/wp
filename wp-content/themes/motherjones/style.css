@@ -1077,9 +1077,15 @@ a.social {
   width: 45%;
   margin: 0 2%;
 }
+#main .social-tools.bottom .social i {
+  display: inline;
+  margin-right: 5px;
+}
 
 #main .social-tools.bottom a {
   color: white;
+  text-shadow: none;
+  width: 100%;
 }
 .social-tools.bottom .facebook a {
   background-color: #3c5a98;
