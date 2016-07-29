@@ -7,7 +7,8 @@
 				alt="MotherJones" />
 			</a>
 		</li>
-		<?php if(false): //FIXME is an article page?>
+<?php print_r($wp_query->found_posts) ?>
+		<?php if($wp_query->found_posts === 1): //is an articlish thing ?>
       <li class="nav-title">
         <?php print $title; ?>
       </li>
