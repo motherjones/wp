@@ -1027,11 +1027,12 @@ ul.social-tools {
 }
 ul.social-tools li {
   display: inline-block;
+  padding: 0 15px;
 }
 
 .article .social-tools.top {
-  width: 95px;
-  padding: 0 15px;
+  width: 105px;
+  padding: 0;
 }
 .article .social-container.top {
   height: 17px;
