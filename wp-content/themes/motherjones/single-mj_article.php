@@ -56,12 +56,12 @@ get_header(); ?>
 
         </footer><!-- .entry-footer -->
       </article><!-- #post-## -->
-      <?php print get_discus_thread( get_the_ID() ); ?>
     <?php endwhile; ?>
 
     <div id="sidebar-right">
       <?php dynamic_sidebar( 'sidebar-article' ); ?>
     </div>
+    <?php print get_discus_thread( get_the_ID() ); ?>
 
 	</main><!-- .site-main -->
 
