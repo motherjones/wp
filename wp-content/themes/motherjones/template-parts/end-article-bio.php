@@ -4,8 +4,7 @@
   ?>
       <li class="author-bio">
         <?php
-          print $author['image'];
-          print $author['image']['id'];
+          print_r($author['image']);
           print wp_get_attachment_image( $author['image']['id'], 
             '(max-width: 100px)'
           );
