@@ -13,5 +13,6 @@
 require_once('mj_custom/motherjones-content-types.php');
 MJ_Custom_Types();
 
+require_once('mj_custom/top-stories-widget.php');
 
 ?>
