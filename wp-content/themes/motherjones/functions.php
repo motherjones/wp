@@ -170,10 +170,10 @@ if ( ! function_exists( 'mj_flat_twitter_button' ) ) {
     $id = $id ? $id : get_the_ID();
     $social = trim(get_post_field( 'social', $id )['social_title']);
     $status = $social ? $social : get_the_title( $id );
-    $href = 'http://twitter.com/home?status=' . $status
+    $href = 'http://twitter.com/home?status=' . $status . ' '
       . esc_url( get_permalink($id) ). ' via @MotherJones';
     return sprintf( 
-        '<a class="social" href="%s">'
+        '<a class="social" href="%s" target="_blank">'
           . '<i class="fa fa-twitter fw"></i>'
           . '<span class="share-text">Share on Twitter</span>'
         . '</a>',
@@ -186,7 +186,7 @@ if ( ! function_exists( 'mj_flat_facebook_button' ) ) {
     $id = $id ? $id : get_the_ID();
     $href = 'http://facebook.com/sharer.php?u=' . esc_url( get_permalink($id) );
     return sprintf( 
-      '<a class="social" href="%s">'
+      '<a class="social" href="%s" target="_blank">'
         . '<i class="fa fa-facebook fw"></i>'
           . '<span class="share-text">Share on Facebook</span>'
         . '</a>',

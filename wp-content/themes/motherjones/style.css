@@ -1030,12 +1030,12 @@ ul.social-tools.top {
 }
 ul.social-tools.top li {
   display: inline-block;
-  padding: 0 15px;
+  padding: 0 3px;
 }
 
 .article .social-tools.top {
-  width: 105px;
-  padding: 0;
+  width: 98px;
+  padding: 0 10px;
 }
 .social-tools.top .share-text {
   display: none;
@@ -1086,6 +1086,10 @@ a.social {
   color: white;
   text-shadow: none;
   width: 100%;
+  font-family: Mallory, sans-serif;
+  font-weight: bold;
+  height: 35px;
+  padding-top: 2px;
 }
 .social-tools.bottom .facebook a {
   background-color: #3c5a98;
