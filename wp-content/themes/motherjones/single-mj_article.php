@@ -9,7 +9,7 @@
 get_header(); ?>
 
 <div id="primary" class="content-area">
-	<main id="main" class="site-main" role="main">
+	<main id="main" class="site-main group" role="main">
     <?php while ( have_posts() ) : the_post(); ?>
       <header class="entry-header">
         <?php the_title( '<h1 class="article hed">', '</h1>' ); ?>
@@ -61,9 +61,9 @@ get_header(); ?>
     <div id="sidebar-right">
       <?php dynamic_sidebar( 'sidebar-article' ); ?>
     </div>
-    <?php print get_discus_thread( get_the_ID() ); ?>
 
 	</main><!-- .site-main -->
+  <?php print get_discus_thread( get_the_ID() ); ?>
 
 
 </div><!-- .content-area -->

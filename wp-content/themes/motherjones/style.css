@@ -307,6 +307,7 @@ html {
   }
   article {
     width: 630px;
+    float: left;
   }
 }
 
