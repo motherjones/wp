@@ -3,7 +3,7 @@
 	<ul>
 		<li class="logo">
 			<a href="/">
-				<img src="/wp-content/themes/img/MJ_comp.png" 
+				<img src="/wp-content/themes/motherjones/img/MJ_comp.png" 
 				alt="MotherJones" />
 			</a>
 		</li>
