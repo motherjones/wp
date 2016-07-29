@@ -290,11 +290,23 @@ html {
 	box-sizing: inherit;
 }
 
+#sidebar-right {
+  display: none;
+}
+
 @media only screen and (min-width: 990px) {
   header, #content {
     width: 990px;
     margin-left: auto;
     margin-right: auto;
+  }
+  #sidebar-right {
+    display: block;
+    float: right;
+    width: 330px;
+  }
+  article {
+    width: 630px;
   }
 }
 
