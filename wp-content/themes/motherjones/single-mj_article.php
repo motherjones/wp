@@ -39,6 +39,7 @@ get_header(); ?>
         </div>
         
         <?php print get_post_field( 'body', get_the_ID() ); ?>
+        <?php print get_post_field( 'js', get_the_ID() ); ?>
 
         <footer class="entry-footer">
 
@@ -52,18 +53,18 @@ get_header(); ?>
 
           <?php get_template_part( 'template-parts/related-articles' ); ?>
 
-          <?php print get_discus_thread( get_the_ID() ); ?>
 
         </footer><!-- .entry-footer -->
       </article><!-- #post-## -->
-      <?php print get_post_field( 'js', get_the_ID() ); ?>
+      <?php print get_discus_thread( get_the_ID() ); ?>
     <?php endwhile; ?>
+
+    <?php dynamic_sidebar( 'sidebar-article' ); ?>
 
 	</main><!-- .site-main -->
 
 
 </div><!-- .content-area -->
 
-<?php dynamic_sidebar( 'sidebar-article' ); ?>
 
 <?php get_footer(); ?>

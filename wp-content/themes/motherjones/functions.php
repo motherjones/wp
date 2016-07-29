@@ -202,7 +202,7 @@ if ( ! function_exists( 'mj_flat_facebook_button' ) ) {
 function mj_widgets_init() {
 	register_sidebar( array(
 		'name'          => __( 'Sidebar for Articles', 'motherjones' ),
-		'id'            => 'sidebar-articles',
+		'id'            => 'sidebar-article',
 		'description'   => __( 'Shows up on article pages', 'motherjones' ),
 		'before_widget' => '<section id="%1$s" class="widget %2$s">',
 		'after_widget'  => '</section>',
@@ -212,7 +212,7 @@ function mj_widgets_init() {
 
 	register_sidebar( array(
 		'name'          => __( 'Sidebar for Sections', 'motherjones' ),
-		'id'            => 'sidebar-sections',
+		'id'            => 'sidebar-section',
 		'description'   => __( 'Shows up on section and topic pages', 'motherjones' ),
 		'before_widget' => '<section id="%1$s" class="widget %2$s">',
 		'after_widget'  => '</section>',
