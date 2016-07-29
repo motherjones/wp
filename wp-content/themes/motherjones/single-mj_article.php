@@ -59,7 +59,9 @@ get_header(); ?>
       <?php print get_discus_thread( get_the_ID() ); ?>
     <?php endwhile; ?>
 
-    <?php dynamic_sidebar( 'sidebar-article' ); ?>
+    <div id="sidebar-right">
+      <?php dynamic_sidebar( 'sidebar-article' ); ?>
+    </div>
 
 	</main><!-- .site-main -->
 
