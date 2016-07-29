@@ -1020,6 +1020,15 @@ ul.social-tools li {
   display: inline-block;
 }
 
+.article .social-tools.top {
+  width: 95px;
+  padding: 0 15px;
+}
+.article .social-container.top {
+  height: 20px;
+  border-bottom: 1px solid #ccc;
+}
+
 .social-tools a {
   text-decoration: none;
   text-align: center;
@@ -1033,6 +1042,7 @@ ul.social-tools li {
   border-radius: 40px;
   height: 30px;
   width: 30px;
+  background-image: none;
 }
 .social-tools li {
   overflow: hidden;
