@@ -1204,3 +1204,7 @@ li.article-item h3 {
   float: left;
 }
 /* end article list items */
+
+h2.widget-title {
+  display: none;
+}
