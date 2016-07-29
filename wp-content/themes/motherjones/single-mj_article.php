@@ -44,13 +44,13 @@ get_header(); ?>
 
           <?php dynamic_sidebar( 'article-end' ); ?>
 
-          put end of article sharing here
+          <?php get_template_part( 'template-parts/end-article-sharing' ); ?>
 
-          <?php get_template_part( 'template-parts/end-article-bio', 'single' ); ?>
+          <?php get_template_part( 'template-parts/end-article-bio' ); ?>
 
-          <?php get_template_part( 'template-parts/members-like-you', 'single' ); ?>
+          <?php get_template_part( 'template-parts/members-like-you' ); ?>
 
-          <?php get_template_part( 'template-parts/related-articles', 'single' ); ?>
+          <?php get_template_part( 'template-parts/related-articles' ); ?>
 
           <?php print get_discus_thread( get_the_ID() ); ?>
 

@@ -958,6 +958,9 @@ a#footer-logo {
   display: block;
   float: left;
 }
+#footer-social .share-text {
+  display: none;
+}
 #footer-social .toolbar-btn {
   background-image: none;
   margin: 20px 5px;
@@ -1017,7 +1020,7 @@ footer#colophon #copyright a {
 /* end readers like you */
 
 /* social buttons */
-ul.social-tools {
+ul.social-tools.top {
   list-style-type: none;
   display: block;
   background: white;
@@ -1025,7 +1028,7 @@ ul.social-tools {
   height: 32px;
   float: none;
 }
-ul.social-tools li {
+ul.social-tools.top li {
   display: inline-block;
   padding: 0 15px;
 }
@@ -1033,6 +1036,9 @@ ul.social-tools li {
 .article .social-tools.top {
   width: 105px;
   padding: 0;
+}
+.social-tools.top .share-text {
+  display: none;
 }
 .article .social-container.top {
   height: 17px;
@@ -1063,6 +1069,31 @@ a.social {
   font-size: 20px;
   line-height: 30px;
 }
+
+.social-tools.bottom li {
+  display: inline;
+  float: left;
+  overflow: hidden;
+  width: 45%;
+  margin: 0 2%;
+}
+
+#main .social-tools.bottom a {
+  color: white;
+}
+.social-tools.bottom .facebook a {
+  background-color: #3c5a98;
+  border-color: #365391;
+  border-radius: 3px;
+  font-size: 16px;
+}
+.social-tools.bottom .twitter a {
+  background-color: #67add1;
+  border-color: #578dc1;
+  border-radius: 3px;
+  font-size: 16px;
+}
+
 
 /* end social buttons */
 

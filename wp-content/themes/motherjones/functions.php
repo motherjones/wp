@@ -167,10 +167,15 @@ if ( ! function_exists( 'get_discus_thread' ) ) {
  */
 if ( ! function_exists( 'mj_flat_twitter_button' ) ) {
   function mj_flat_twitter_button($id) {
-    $href = 'http://twitter.com/something/';
+    $id = $id ? $id : get_the_ID();
+    $social = trim(get_post_field( 'social', $id )['social_title']);
+    $status = $social ? $social : get_the_title( $id );
+    $href = 'http://twitter.com/home?status=' . $status
+      . esc_url( get_permalink($id) ). ' via @MotherJones';
     return sprintf( 
-      '<a class="social" href="%s">'
-        . '<i class="fa fa-twitter fw"></i>'
+        '<a class="social" href="%s">'
+          . '<i class="fa fa-twitter fw"></i>'
+          . '<span class="share-text">Share on Twitter</span>'
         . '</a>',
       $href );
   }
@@ -178,10 +183,12 @@ if ( ! function_exists( 'mj_flat_twitter_button' ) ) {
 
 if ( ! function_exists( 'mj_flat_facebook_button' ) ) {
   function mj_flat_facebook_button($id) {
-    $href = 'http://facebook.com/something/';
+    $id = $id ? $id : get_the_ID();
+    $href = 'http://facebook.com/sharer.php?u=' . esc_url( get_permalink($id) );
     return sprintf( 
       '<a class="social" href="%s">'
         . '<i class="fa fa-facebook fw"></i>'
+          . '<span class="share-text">Share on Facebook</span>'
         . '</a>',
       $href );
   }
