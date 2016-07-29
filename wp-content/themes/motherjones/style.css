@@ -1008,31 +1008,39 @@ footer#colophon #copyright a {
 /* end readers like you */
 
 /* social buttons */
+ul.social-tools {
+  list-style-type: none;
+  display: block;
+  background: white;
+  margin: 0 auto 20px;
+  height: 32px;
+  float: none;
+}
+ul.social-tools li {
+  display: inline-block;
+}
 
 .social-tools a {
   text-decoration: none;
   text-align: center;
   font-size: 18px;
   position: relative;
-  top: 4px;
-  left: 4px;
   border-bottom: none;
   text-shadow: 0 0;
   display: block;
-}
-.social-tools li {
+  background-image: none;
+  border: 1px solid #ff6900;
+  border-radius: 40px;
   height: 30px;
   width: 30px;
-  border-radius: 30px;
-  margin: 0 5px;
 }
 .social-tools li {
   overflow: hidden;
 }
 .social-tools i {
   display: block;
-  font-size: 18px;
-  line-height: 20px;
+  font-size: 20px;
+  line-height: 30px;
 }
 
 /* end social buttons */
