@@ -529,6 +529,9 @@ h1.hed {
   border-bottom: none;
   letter-spacing: 2px;
 }
+.byline a {
+  background-image: none!important;
+}
 
 /* Begin navbar styling */
 #navbar {
@@ -1062,7 +1065,6 @@ ul.author-bios {
   float: left;
 }
 .author-bio .byline a {
-  background-image: none;
   display: inline-block;
 }
 .author-bio-text {
