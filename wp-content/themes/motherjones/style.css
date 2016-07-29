@@ -797,7 +797,7 @@ h1.hed {
 /* end static navbar styling */
 
 /* article */
-.article header {
+header.article  {
   text-align: center;
 }
 /* end article */

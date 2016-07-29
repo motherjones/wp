@@ -11,7 +11,7 @@ get_header(); ?>
 <div id="primary" class="content-area">
 	<main id="main" class="site-main group" role="main">
     <?php while ( have_posts() ) : the_post(); ?>
-      <header class="entry-header">
+      <header class="entry-header article">
         <?php the_title( '<h1 class="article hed">', '</h1>' ); ?>
         <h3 class="dek">
           <?php print get_post_field( 'dek', get_the_ID() ); ?>
