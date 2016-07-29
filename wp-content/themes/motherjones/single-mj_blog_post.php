@@ -9,12 +9,11 @@
 get_header(); ?>
 
 <div id="primary" class="content-area">
-	<main id="main" class="site-main" role="main">
+	<main id="main" class="site-main group" role="main">
     <?php while ( have_posts() ) : the_post(); ?>
-      <article id="post-<?php get_the_ID(); ?>" class="article">
-        <?php print get_post_field( 'css', get_the_ID() ); ?>
-        <header class="entry-header">
-          <?php the_title( '<h1 class="article hed">', '</h1>' ); ?>
+      <article class="blog-post">
+        <header class="entry-header blog-post">
+          <?php the_title( '<h1 class="blog-post hed">', '</h1>' ); ?>
           <h3 class="dek">
             <?php print get_post_field( 'dek', get_the_ID() ); ?>
           </h3>
@@ -26,19 +25,21 @@ get_header(); ?>
               <?php print mj_dateline( get_the_ID() ); ?>
             </span>
           </p>
+          <div class="social-container blog-post top">
+            <ul class="social-tools blog-post top">
+              <li class="twitter">
+                <?php print mj_flat_twitter_button( get_the_ID() ); ?>
+              </li>
+              <li class="facebook">
+                <?php print mj_flat_facebook_button( get_the_ID() ); ?>
+              </li>
+            </ul>
+          </div>
         </header><!-- .entry-header -->
-        <div class="social-container article top">
-          <ul class="social-tools article top">
-            <li class="twitter">
-              <?php print mj_flat_twitter_button( get_the_ID() ); ?>
-            </li>
-            <li class="facebook">
-              <?php print mj_flat_facebook_button( get_the_ID() ); ?>
-            </li>
-          </ul>
-        </div>
+        <?php print get_post_field( 'css', get_the_ID() ); ?>
         
         <?php print get_post_field( 'body', get_the_ID() ); ?>
+        <?php print get_post_field( 'js', get_the_ID() ); ?>
 
         <footer class="entry-footer">
 
@@ -52,18 +53,20 @@ get_header(); ?>
 
           <?php get_template_part( 'template-parts/related-articles' ); ?>
 
-          <?php print get_discus_thread( get_the_ID() ); ?>
 
         </footer><!-- .entry-footer -->
       </article><!-- #post-## -->
-      <?php print get_post_field( 'js', get_the_ID() ); ?>
     <?php endwhile; ?>
 
+    <div id="sidebar-right">
+      <?php dynamic_sidebar( 'sidebar-blog' ); ?>
+    </div>
+
 	</main><!-- .site-main -->
+  <?php print get_discus_thread( get_the_ID() ); ?>
 
 
 </div><!-- .content-area -->
 
-<?php dynamic_sidebar( 'sidebar-article' ); ?>
 
 <?php get_footer(); ?>
