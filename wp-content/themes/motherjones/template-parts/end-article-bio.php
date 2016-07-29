@@ -13,7 +13,8 @@
           <span class="position">
             <?php print $author['position'][0] ?>
           </span>
-          <a href="https://twitter.com/@<?php print $author['twitter'][0] ?>">
+          <a class="social"
+             href="https://twitter.com/@<?php print $author['twitter'][0] ?>">
             <i class="fa fa-twitter fw"></i>
           </a>
         </h3>

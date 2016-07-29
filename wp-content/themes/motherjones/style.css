@@ -1030,7 +1030,7 @@ ul.social-tools li {
   margin-bottom: 20px;
 }
 
-.social-tools a {
+a.social {
   text-decoration: none;
   text-align: center;
   font-size: 18px;
