@@ -1058,6 +1058,9 @@ ul.author-bios {
   list-style-type: none;
   padding: 0;
 }
+.author-data {
+  float: left;
+}
 .author-bio-text {
   font-size: 12px;
   margin-top: 5px;

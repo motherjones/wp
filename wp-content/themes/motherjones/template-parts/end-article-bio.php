@@ -3,21 +3,25 @@
     $author = get_post_custom( $author_id );
   ?>
       <li class="author-bio">
-        <?php
-          print wp_get_attachment_image( $author['image'][0], 
-            array('80', '80')
-          );
-        ?>
-        <h3 class="author-bio byline">
-          <?php print get_the_title( $author_id ); ?>
-          <a class="social"
-             href="https://twitter.com/@<?php print $author['twitter'][0] ?>">
-            <i class="fa fa-twitter fw"></i>
-          </a>
-        </h3>
-        <p class="author-bio-text">
-          <?php print $author['short_bio'][0] ?>
-        </p>
+        <div class="author-image">
+          <?php
+            print wp_get_attachment_image( $author['image'][0], 
+              array('80', '80')
+            );
+          ?>
+        </div>
+        <div class="author-data">
+          <h3 class="author-bio byline">
+            <?php print get_the_title( $author_id ); ?>
+            <a class="social"
+               href="https://twitter.com/@<?php print $author['twitter'][0] ?>">
+              <i class="fa fa-twitter fw"></i>
+            </a>
+          </h3>
+          <p class="author-bio-text">
+            <?php print $author['short_bio'][0] ?>
+          </p>
+        </div>
       </li>
   <?php endforeach ?>
 </ul>
