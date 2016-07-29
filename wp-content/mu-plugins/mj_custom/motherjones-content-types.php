@@ -143,7 +143,7 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
             'singular_name' => __( 'Full Width' )
           ),
           'public' => true,
-          'supports' => array('title', 'zoninator'),
+          'supports' => array('title', 'zoninator_zones'),
           'has_archive' => true
         )
       );
@@ -158,7 +158,7 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
             'singular_name' => __( 'Article' )
           ),
           'public' => true,
-          'supports' => array('title', 'zoninator'),
+          'supports' => array('title', 'zoninator_zones'),
           'has_archive' => true
         )
       );
@@ -186,7 +186,7 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
             'singular_name' => __( 'Blog Post' )
           ),
           'public' => true,
-          'supports' => array('title', 'zoninator'),
+          'supports' => array('title', 'zoninator_zones'),
           'has_archive' => true
         )
       );
