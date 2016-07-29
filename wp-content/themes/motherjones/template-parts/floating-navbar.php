@@ -1,5 +1,4 @@
 <!-- begin following navbar -->
-<?php print_r($wp_query->posts[0]); ?>
 <div id="navbar">
 	<ul>
 		<li class="logo">
@@ -10,7 +9,7 @@
 		</li>
 		<?php if($wp_query->found_posts === 1): //is an articlish thing ?>
       <li class="nav-title">
-        <?php print $wp_query->posts[0]->title; ?>
+        <?php print $wp_query->posts[0]->post_name; ?>
       </li>
       <li class="share-button facebook">
         <?php print mj_flat_facebook_button($wp_query->posts[0]->ID);?>
