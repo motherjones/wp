@@ -586,6 +586,15 @@ button.accent {
   width: 45px;
   float: right;
 }
+#navbar .logo {
+  width: 175px;
+}
+#navbar .logo a {
+  margin: 0;
+  padding: 0;
+  line-height: normal;
+}
+
 
 @media only screen and (max-width: 1060px) {
   .article-page.subscribe-link {
