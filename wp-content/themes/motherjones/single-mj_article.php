@@ -7,7 +7,6 @@
  */
 
 get_header(); ?>
-<?php print_r(z_get_zone_query('top_stories')); ?>
 
 <div id="primary" class="content-area">
 	<main id="main" class="site-main group" role="main">
