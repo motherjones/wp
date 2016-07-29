@@ -363,9 +363,6 @@ h1, h2 {
   font-weight: bold;
   text-transform: uppercase;
 }
-h1.title {
-  text-transform: none;
-}
 h3, h4, h5 {
   font-weight: normal;
   font-family: Mallory, sans-serif;
@@ -384,7 +381,9 @@ a {
   background-position: 0% 90%;
 }
 
-#footer #copyright a,
+/* set orange underline */
+footer#colophon #copyright a,
+footer#colophon #footer-list a,
 #main a {
   background-image: url('/wp-content/themes/motherjones/img/orange-border.png');
   background-repeat: repeat-x;
@@ -392,11 +391,20 @@ a {
   text-shadow: -1px 0 0 white, 0 1px 0 white, 1px 0 0 white, 0 -1px 0 white,
   -1px -1px 0 white, 1px 1px 0 white, 1px -1px 0 white, -1px 1px 0 white;
 }
+
+footer#colophon #copyright a:hover,
+footer#colophon #footer-list a:hover,
 #main a:hover {
   background-image: none;
   color: #ff6900;
   text-shadow: none;
 }
+footer#colophon #copyright a,
+footer#colophon #footer-list a {
+  text-shadow: -1px 0 0 black, 0 1px 0 black, 1px 0 0 black, 0 -1px 0 black,
+  -1px -1px 0 black, 1px 1px 0 black, 1px -1px 0 black, -1px 1px 0 black;
+}
+
 a::selection {
   text-shadow: none!important;
 }
@@ -415,6 +423,31 @@ button.accent {
   display: none;
 }
 
+.promo {
+  font-size: 18px;
+  display: inline-block;
+  clear: both;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  padding: 0;
+  border-bottom: 3px solid #ff6900;
+  background: white;
+}
+
+h1.hed {
+  clear: both;
+  font-size: 36px;
+  line-height: 38px;
+  padding-top: 8px;
+  margin-bottom: 0;
+  color: black;
+  text-decoration: none;
+  letter-spacing: -1px;
+}
+
+.dek {
+  font-family: calluna, serif;
+}
 
 .pullquote-left, .pullquote-right {
   border-top: 10px solid black;
@@ -975,7 +1008,24 @@ footer#colophon #copyright a {
   text-shadow: -1px 0 0 black, 0 1px 0 black, 1px 0 0 black, 0 -1px 0 b
   -1px -1px 0 black, 1px 1px 0 black, 1px -1px 0 black, -1px 1px 0 blac
 }
-
-
-
 /* end footer */
+
+/* readers like you */
+.members-like-you {
+  font-style: italic;
+  line-height: 17px;
+  font-size: 14px;
+  clear: both;
+  padding-top: 18px;
+  border-top: 1px solid #ccc;
+}
+.members-like-you em {
+  font-style: normal;
+}
+.members-like-you a {
+  color: #ff6900;
+}
+.members-like-you a:hover {
+  opacity: .7;
+}
+/* end readers like you */
