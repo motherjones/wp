@@ -132,6 +132,7 @@ if ( ! function_exists( 'mj_byline' ) ) {
       return trim($byline['override']);
     }
 
+    if (!count($byline['authors'])) { return ''; }
     $authors = [];
     foreach ($byline['authors'] as $author) {
       $authors[] = get_the_title( $author );
