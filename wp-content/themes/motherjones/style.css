@@ -529,8 +529,8 @@ h1.hed {
   border-bottom: none;
   letter-spacing: 2px;
 }
-.byline a {
-  background-image: none!important;
+#main .byline a {
+  background-image: none;
 }
 
 /* Begin navbar styling */
@@ -1040,12 +1040,15 @@ a.social {
   border-bottom: none;
   text-shadow: 0 0;
   display: block;
-  background-image: none!important;
+  background-image: none;
   border: 1px solid #ff6900;
   border-radius: 40px;
   height: 30px;
   width: 30px;
   display: inline-block;
+}
+#main a.social {
+  background-image: none;
 }
 .social i {
   display: block;
@@ -1106,20 +1109,22 @@ li.article-item {
   list-style-type: none;
   padding-bottom: 10px;
 }
-li.article-item a {
+#main li.article-item a {
   background-image: none;
 }
 li.article-item img {
   height: auto;
   width: 208px; 
-  float: left;
   margin-right: 15px;
   margin-top: 4px;
 }
 li.article-item .byline,
 li.article-item h3 {
   max-width: 395px;
-  float: left;
   margin-top: 4px;
+}
+.article-item .article-image,
+.article-item .article-data {
+  float: left;
 }
 /* end article list items */
