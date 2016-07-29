@@ -85,7 +85,7 @@ if ( !class_exists( 'MJ_Custom_Fields' ) ) {
     }
 
     public function body() { 
-      return new Fieldmanager_TextArea( array(
+      return new Fieldmanager_RichTextArea( array(
         'name' => 'body'
       ) );
     }
@@ -219,7 +219,7 @@ if ( !class_exists( 'MJ_Custom_Fields' ) ) {
     }
 
     public function long_bio() {
-      return new Fieldmanager_TextArea( array(
+      return new Fieldmanager_RichTextArea( array(
         'name' => 'long_bio'
       ) );
     }
