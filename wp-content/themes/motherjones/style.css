@@ -609,6 +609,7 @@ h1.hed {
   white-space: nowrap;
   font-family: Mallory, sans-serif;
   font-weight: bold;
+  padding: 0 10px;
 }
 
 #navbar li.donate-link,
@@ -1089,7 +1090,7 @@ a.social {
   color: white;
   text-shadow: none;
   width: 100%;
-  font-family: Mallory, sans-serif;
+  font-family: "lucida grande",Helvetica,Arial,sans-serif;
   font-weight: bold;
   height: 35px;
   padding-top: 2px;
@@ -1106,7 +1107,12 @@ a.social {
   border-radius: 3px;
   font-size: 16px;
 }
-
+.social-tools.bottom .twitter a:hover {
+  background-color: #478db1;
+}
+.social-tools.bottom .facebook a:hover {
+  background-color: #304D8A;
+}
 
 /* end social buttons */
 
