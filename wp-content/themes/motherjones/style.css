@@ -348,6 +348,13 @@ html {
   font-style: italic;
 }
 
+/* clearfix hack */
+.group:after {
+  display: table;
+  content: "";
+  clear: both;
+}
+
 ::selection {
   background-color: #ddd;
 }
@@ -1108,6 +1115,7 @@ li.article-item {
   margin: 0;
   list-style-type: none;
   padding-bottom: 10px;
+  clear: both;
 }
 #main li.article-item a {
   background-image: none;

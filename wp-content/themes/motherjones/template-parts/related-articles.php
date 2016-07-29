@@ -1,4 +1,4 @@
-<div id="related-articles">
+<div id="related-articles" class="group">
   <h2 class="promo">Related</h2>
     <ul class="related-articles-list">
       <?php 
