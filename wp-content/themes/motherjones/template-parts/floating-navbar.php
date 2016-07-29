@@ -1,4 +1,5 @@
 <!-- begin following navbar -->
+<?php print_r($wp_query->posts[0]); ?>
 <div id="navbar">
 	<ul>
 		<li class="logo">
