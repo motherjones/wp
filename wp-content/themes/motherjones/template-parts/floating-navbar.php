@@ -12,10 +12,10 @@
         <?php print $title; ?>
       </li>
       <li class="share-button facebook">
-        <?php print mj_flat_facebook_button($wp_query->posts[0]['ID']);?>
+        <?php print mj_flat_facebook_button($wp_query->posts[0]->ID);?>
       </li>
       <li class="share-button twitter">
-        <?php print mj_flat_twitter_button($wp_query->posts[0]['ID']);?>
+        <?php print mj_flat_twitter_button($wp_query->posts[0]->ID);?>
       </li>
 		<?php endif; ?>
 		<li class="menu-button">
