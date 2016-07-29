@@ -128,6 +128,7 @@ if ( ! function_exists( 'mj_byline' ) ) {
   function mj_byline($id) {
     if (!$id) { $id = get_the_ID(); }
     $byline = get_post_field( 'byline', $id );
+    if ( !is_object($byline) ) { return ''; };
     if ( trim($byline['override']) ) {
       return trim($byline['override']);
     }
