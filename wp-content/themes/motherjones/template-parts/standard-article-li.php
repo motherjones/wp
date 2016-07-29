@@ -1,7 +1,10 @@
 <li class="article-item">
-  i am an articleish thing
   <a href="<?php print esc_url( get_permalink() ); ?>">
-    <?php twentysixteen_post_thumbnail(); ?>
+<?php print_r(get_post_field( 'master_image', get_the_ID() )); ?>
+    <?php print wp_get_attachment_image( 
+      get_post_field( 'master_image', get_the_ID() )['master_image'],
+      '208'
+    ); ?>
   </a>
   <h3 class="hed">
     <a href="<?php print esc_url( get_permalink() ); ?>">

@@ -1064,6 +1064,10 @@ ul.author-bios {
 .author-data {
   float: left;
 }
+.author-bio .byline {
+  display: block;
+  line-height: 14px;
+}
 .author-bio .byline a {
   display: inline-block;
 }
@@ -1084,3 +1088,38 @@ ul.author-bios {
 }
 /* end end of article author stuff */
 
+/* related articles */
+#related-articles {
+  text-align: center;
+}
+#related-articles-list {
+  list-style-type: none;
+  padding: 0;
+}
+/* end related articles */
+
+/* article list items */
+li.article-item {
+  text-align: left;
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+  padding-bottom: 10px;
+}
+li.article-item a {
+  background-image: none;
+}
+li.article-item img {
+  height: auto;
+  width: 208px; 
+  float: left;
+  margin-right: 15px;
+  margin-top: 4px;
+}
+li.article-item .byline,
+li.article-item h3 {
+  max-width: 395px;
+  float: left;
+  margin-top: 4px;
+}
+/* end article list items */
