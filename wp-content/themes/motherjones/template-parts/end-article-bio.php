@@ -4,21 +4,20 @@
   ?>
       <li class="author-bio">
         <?php
-          echo wp_get_attachment_image( $author['image']['id'], 
+          print $author['image'];
+          print $author['image']['id'];
+          print wp_get_attachment_image( $author['image']['id'], 
             '(max-width: 100px)'
           );
         ?>
-        <h3 class="author-bio">
+        <h3 class="author-bio byline">
           <?php print get_the_title( $author_id ); ?>
-          <span class="position">
-            <?php print $author['position'][0] ?>
-          </span>
           <a class="social"
              href="https://twitter.com/@<?php print $author['twitter'][0] ?>">
             <i class="fa fa-twitter fw"></i>
           </a>
         </h3>
-        <p>
+        <p class="author-bio-text">
           <?php print $author['short_bio'][0] ?>
         </p>
       </li>

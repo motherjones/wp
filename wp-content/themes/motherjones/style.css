@@ -354,7 +354,6 @@ html {
 body, caption, input, textarea, select, option, legend, fieldset {
 	font-family: Calluna, Georgia, "Times New Roman", "Bitstream Vera Serif", serif;
 	font-size: 18px;
-	font-family: 'Calluna';
 	line-height: 28px;
 }
 
@@ -1043,15 +1042,21 @@ a.social {
   border-radius: 40px;
   height: 30px;
   width: 30px;
+  display: inline-block;
 }
-.social-tools li {
-  overflow: hidden;
-}
-.social-tools i {
+.social i {
   display: block;
   font-size: 20px;
   line-height: 30px;
 }
 
 /* end social buttons */
+
+/* begin end of article author stuff */
+.author-bio-text {
+  font-size: 12px;
+  margin-top: 5px;
+  font-family: Mallory, sans-serif;
+}
+/* end end of article author stuff */
 
