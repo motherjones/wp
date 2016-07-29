@@ -9,7 +9,7 @@
 		</li>
 		<?php if($wp_query->found_posts === 1): //is an articlish thing ?>
       <li class="nav-title">
-        <?php print $title; ?>
+        <?php print $wp_query->posts[0]->title; ?>
       </li>
       <li class="share-button facebook">
         <?php print mj_flat_facebook_button($wp_query->posts[0]->ID);?>

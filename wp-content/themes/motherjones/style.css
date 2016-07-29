@@ -569,6 +569,9 @@ h1.hed {
   overflow: hidden;
 }
 
+#navbar i {
+  line-height: 40px;
+}
 #navbar a {
   display: block;
   text-align: center;
@@ -579,7 +582,7 @@ h1.hed {
   font-family:  Mallory, sans-serif;
   font-weight: bold;
   line-height: 40px;
-  border-bottom: none;
+  border: none;
   text-shadow: none;
 }
 
