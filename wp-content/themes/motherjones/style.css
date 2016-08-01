@@ -1163,17 +1163,24 @@ ul.author-bios {
 }
 /* end end of article author stuff */
 
-/* related articles */
-#related-articles {
+/* article list items */
+#related-articles,
+.main-index {
   text-align: center;
 }
+
+.articles-list,
 #related-articles-list {
   list-style-type: none;
   padding: 0;
 }
-/* end related articles */
 
-/* article list items */
+.articles-list .article-item {
+  margin: 20px 0;
+  padding: 0 0 20px 0;
+  border-bottom: 1px solid #ccc;
+}
+
 li.article-item {
   text-align: left;
   padding: 0;

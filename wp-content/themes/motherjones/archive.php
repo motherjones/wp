@@ -38,7 +38,7 @@ get_header(); ?>
         </h1>
 			</header><!-- .page-header -->
 
-      <ul>
+      <ul class="articles-list">
       <?php 
       $curated_length = 0;
         // if it's the first page, set up the curated posts
@@ -52,8 +52,10 @@ get_header(); ?>
         while ( $curated->have_posts() ) : $curated->the_post();
           if ($wp_query->current_post == 0) {
             //do sometihng funky for first post?
+            get_template_part( 'template-parts/top-index-article' );
+          } else {
+            get_template_part( 'template-parts/standard-article-li' );
           }
-          get_template_part( 'template-parts/standard-article-li' );
         endwhile;
       } // end curation mess
          
@@ -67,14 +69,10 @@ get_header(); ?>
           continue;
         } elseif ($wp_query->current_post + $curated_length == 0) {
           //do sometihng funky for first post?
+          get_template_part( 'template-parts/top-index-article' );
+        } else {
+          get_template_part( 'template-parts/standard-article-li' );
         }
-
-				/*
-				 * Include the Post-Format-specific template for the content.
-				 * If you want to override this in a child theme, then include a file
-				 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
-				 */
-				get_template_part( 'template-parts/standard-article-li' );
 
 			// End the loop.
 			endwhile;
