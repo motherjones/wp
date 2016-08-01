@@ -40,6 +40,7 @@ get_header(); ?>
 
       <ul>
 			<?php
+      print $wp_query->get_query_var('post_type');
 			// Start the Loop.
 			while ( have_posts() ) : the_post();
 
