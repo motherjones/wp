@@ -31,6 +31,7 @@ get_header(); ?>
               global $wp_query;
               $term = $wp_query->get_queried_object();
               print $term->name;
+              print_r ($term);
             } else {
               the_archive_title();
             }
