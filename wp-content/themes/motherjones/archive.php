@@ -40,7 +40,7 @@ get_header(); ?>
 
       <ul>
       <?php 
-        $posts = $wp_query['get_posts'];
+        $posts = $wp_query->get_posts;
 
           // if not the first page, set up the curated posts
         if ($wp_query->get_query_var('offset') > 1) {
