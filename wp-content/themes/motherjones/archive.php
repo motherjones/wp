@@ -58,7 +58,9 @@ get_header(); ?>
           get_template_part( 'template-parts/standard-article-li' );
         endwhile;
       } // end curation mess
-          
+      print '<h1> here' . $curated_length;
+      print  $wp_query->get_queried_object->slug;
+      print  '</h1> ending';
          
 			// Start the Loop.
 			while ( $wp_query->have_posts() ) : $wp_query->the_post();
