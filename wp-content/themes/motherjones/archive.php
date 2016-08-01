@@ -31,7 +31,6 @@ get_header(); ?>
               global $wp_query;
               $term = $wp_query->get_queried_object();
               print $term->name;
-              print_r ($term);
             } else {
               the_archive_title();
             }
@@ -43,10 +42,11 @@ get_header(); ?>
       <?php 
       $curated_length = 0;
         // if it's the first page, set up the curated posts
+print '<h1>' . $wp_query->get_query_var('offset') . '</h1>';
       if ($wp_query->get_query_var('offset') > 1) {
         //get the curated posts (but only 4)
         $curated = z_get_zone_query(
-          $wp_query->get_queried_object->slug,
+          $wp_query->get_queried_object->name,
           array(
             'posts_per_page' => 4,
           )
@@ -59,9 +59,6 @@ get_header(); ?>
           get_template_part( 'template-parts/standard-article-li' );
         endwhile;
       } // end curation mess
-      print '<h1> here' . $curated_length;
-      print_r ($wp_query->get_queried_object);
-      print  '</h1> ending';
          
 			// Start the Loop.
 			while ( $wp_query->have_posts() ) : $wp_query->the_post();
