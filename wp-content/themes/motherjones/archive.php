@@ -41,6 +41,7 @@ get_header(); ?>
       <ul class="articles-list">
       <?php 
       $curated_length = 0;
+      $is_first_post = true;
         // if it's the first page, set up the curated posts
       if (!$wp_query->get_query_var('offset')) {
         //get the curated posts (but only 4)
@@ -50,9 +51,9 @@ get_header(); ?>
         ));
         $curated_length = $curated->post_count;
         while ( $curated->have_posts() ) : $curated->the_post();
-print '<h1>'. $wp_query->current_post . '</h1>';
-          if ($wp_query->current_post == 0) {
+          if ($is_first_post) {
             //do sometihng funky for first post?
+            $is_first_post = false;
             get_template_part( 'template-parts/top-index-article' );
           } else {
             get_template_part( 'template-parts/standard-article-li' );
@@ -68,8 +69,9 @@ print '<h1>'. $wp_query->current_post . '</h1>';
           array_map(function($p) { return $p->ID; }, $curated->posts)
         )) {
           continue;
-        } elseif ($wp_query->current_post + $curated_length == 0) {
+        } elseif ($is_first_post) {
           //do sometihng funky for first post?
+          $is_first_post = false;
           get_template_part( 'template-parts/top-index-article' );
         } else {
           get_template_part( 'template-parts/standard-article-li' );
