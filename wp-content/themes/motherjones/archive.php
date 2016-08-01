@@ -53,6 +53,8 @@ print_r($wp_query->get_queried_object());
             'posts_per_page' => 4,
           )
         );
+        print '<h1>break</h1>';
+        print_r($curated);
         $curated_length = $curated->post_count;
         print '<h2> curated found '.$curated_length . '</h2>';
         while ( $curated->have_posts() ) : $curated->the_post();
