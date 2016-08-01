@@ -50,6 +50,7 @@ get_header(); ?>
         ));
         $curated_length = $curated->post_count;
         while ( $curated->have_posts() ) : $curated->the_post();
+print '<h1>'. $wp_query->current_post . '</h1>';
           if ($wp_query->current_post == 0) {
             //do sometihng funky for first post?
             get_template_part( 'template-parts/top-index-article' );
