@@ -59,7 +59,7 @@ get_header(); ?>
         endwhile;
       } // end curation mess
       print '<h1> here' . $curated_length;
-      print  $wp_query->get_queried_object->slug;
+      print_r ($wp_query->get_queried_object);
       print  '</h1> ending';
          
 			// Start the Loop.
