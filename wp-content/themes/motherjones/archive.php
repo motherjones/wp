@@ -30,7 +30,7 @@ get_header(); ?>
             if (is_tax() || is_category()) {
               global $wp_query;
               $term = $wp_query->get_queried_object();
-              return $term->name;
+              print $term->name;
             } else {
               print '<h1> not a tax?</h1>';
               the_archive_title();
