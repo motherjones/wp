@@ -41,7 +41,7 @@ get_header(); ?>
       <ul>
       <?php 
 print_r(z_get_zones());
-print_r($wp_query->get_queried_object());
+print_r($wp_query->get_queried_object()->slug);
       $curated_length = 0;
         // if it's the first page, set up the curated posts
   print '<h1> offset ' . $wp_query->get_query_var('offset') . '</h1>';
