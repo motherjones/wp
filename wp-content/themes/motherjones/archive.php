@@ -41,9 +41,12 @@ get_header(); ?>
       <ul>
       <?php 
         $posts = $wp_query->get_posts;
+        print_r($posts);
+        echo '<h1>posts should be above';
 
           // if not the first page, set up the curated posts
         if ($wp_query->get_query_var('offset') > 1) {
+          echo 'are we in here?';
           //get the curated posts (but only 4)
           $curated = z_get_zone_query(
             $wp_query->get_queried_object->slug,
@@ -51,6 +54,8 @@ get_header(); ?>
               'posts_per_page' => 4,
             )
           );
+          echo 'curated got, is below';
+          print_r($curated);
           //remove the curated posts from the posts we'd show otherwise
           for ($i = 0; $i < count($posts); $i++) {
             if (in_array(
@@ -60,10 +65,13 @@ get_header(); ?>
                 unset($posts[$i]);
             }
           }
+          echo 'past array';
           //merge curated posts w/ posts we'd show otherwise
           $posts = $curated + $posts;
+          print_r($posts);
           //cut down the number of posts to the number we want per page
           if ($wp_query->get_query_var('posts_per_page') > 0) { 
+            echo 'cutting down page';
             array_splice(
               $posts, 
               $wp_query->get_query_var('posts_per_page'),
