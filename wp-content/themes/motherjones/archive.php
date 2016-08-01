@@ -27,7 +27,7 @@ get_header(); ?>
 			<header class="page-header">
         <h1 class="page-title">
           <?php
-            if (is_tax()) {
+            if (is_tax() || is_category()) {
               global $wp_query;
               $term = $wp_query->get_queried_object();
               return $term->name;
