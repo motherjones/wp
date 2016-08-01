@@ -1221,8 +1221,10 @@ h2.widget-title {
   padding: 0;
 }
 #sidebar-right .top-stories li {
-  margin-bottom: 15px;
+  margin: 0 30px 15px;
+  padding: 15px 0 0 0;
   border-top: 1px solid #ccc;
+  text-align: center;
 }
 #sidebar-right .top-stories li:first-of-type {
   border-top: 0;
