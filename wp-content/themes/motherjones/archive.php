@@ -40,56 +40,37 @@ get_header(); ?>
 
       <ul>
       <?php 
-        $posts = $wp_query->get_posts;
-        print_r($posts);
-        echo '<h1>posts should be above';
-
-          // if not the first page, set up the curated posts
-        if ($wp_query->get_query_var('offset') > 1) {
-          echo 'are we in here?';
-          //get the curated posts (but only 4)
-          $curated = z_get_zone_query(
-            $wp_query->get_queried_object->slug,
-            array(
-              'posts_per_page' => 4,
-            )
-          );
-          echo 'curated got, is below';
-          print_r($curated);
-          //remove the curated posts from the posts we'd show otherwise
-          for ($i = 0; $i < count($posts); $i++) {
-            if (in_array(
-              $posts[$i],
-              array_map(function($p) { return $p->ID; }, $curated)
-            )) {
-                unset($posts[$i]);
-            }
+      $curated_length = 0;
+        // if it's the first page, set up the curated posts
+      if ($wp_query->get_query_var('offset') > 1) {
+        //get the curated posts (but only 4)
+        $curated = z_get_zone_query(
+          $wp_query->get_queried_object->slug,
+          array(
+            'posts_per_page' => 4,
+          )
+        );
+        $curated_length = $curated->post_count;
+        while ( $curated->have_posts() ) : $curated->the_post();
+          if ($wp_query->current_post == 0) {
+            //do sometihng funky for first post?
           }
-          echo 'past array';
-          //merge curated posts w/ posts we'd show otherwise
-          $posts = $curated + $posts;
-          print_r($posts);
-          //cut down the number of posts to the number we want per page
-          if ($wp_query->get_query_var('posts_per_page') > 0) { 
-            echo 'cutting down page';
-            array_splice(
-              $posts, 
-              $wp_query->get_query_var('posts_per_page'),
-              count($posts) - $wp_query->get_query_var('posts_per_page')
-            );
-          }
-        }
-        // end curation mess
+          get_template_part( 'template-parts/standard-article-li' );
+        endwhile;
+      } // end curation mess
+          
          
 			// Start the Loop.
-      // Manually.
-      //Don't know exactly what this does
-      $wp_query->in_the_loop = true;
-      //Don't know exactly what this does
-      do_action_ref_array( 'loop_start', array( &$wp_query ) );
-      print_r($posts);
-			foreach ( $posts as $post ) :
-        $wp_query->setup_postdata( $post );
+			while ( $wp_query->have_posts() ) : $wp_query->the_post();
+        //don't do it if it's in the curated bits
+        if ($curated_length && in_array(
+          $post->ID,
+          array_map(function($p) { return $p->ID; }, $curated->posts)
+        )) {
+          continue;
+        } elseif ($wp_query->current_post + $curated_length == 0) {
+          //do sometihng funky for first post?
+        }
 
 				/*
 				 * Include the Post-Format-specific template for the content.
@@ -99,9 +80,7 @@ get_header(); ?>
 				get_template_part( 'template-parts/standard-article-li' );
 
 			// End the loop.
-			endforeach;
-      //Don't know exactly what this does
-      $wp_query->in_the_loop = false;
+			endwhile;
     ?>
     </ul>
     <?php
