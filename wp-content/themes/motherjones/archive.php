@@ -42,8 +42,8 @@ get_header(); ?>
       <?php 
       $curated_length = 0;
         // if it's the first page, set up the curated posts
-print '<h1>' . $wp_query->get_query_var('offset') . '</h1>';
-      if ($wp_query->get_query_var('offset') > 1) {
+  print '<h1> offset ' . $wp_query->get_query_var('offset') . '</h1>';
+      if ($wp_query->get_query_var('offset')) {
         //get the curated posts (but only 4)
         $curated = z_get_zone_query(
           $wp_query->get_queried_object->name,
@@ -52,6 +52,7 @@ print '<h1>' . $wp_query->get_query_var('offset') . '</h1>';
           )
         );
         $curated_length = $curated->post_count;
+        print '<h2> curated found '.$curated_length . '</h2>';
         while ( $curated->have_posts() ) : $curated->the_post();
           if ($wp_query->current_post == 0) {
             //do sometihng funky for first post?
