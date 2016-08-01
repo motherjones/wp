@@ -1228,5 +1228,6 @@ h2.widget-title {
 }
 #sidebar-right .top-stories li:first-of-type {
   border-top: 0;
+  padding-top: 0;
 }
 /* end sidebar items */
