@@ -25,7 +25,7 @@ get_header(); ?>
 		<?php if ( have_posts() ) : ?>
 
 			<header class="page-header">
-        <h1 class="page-title">
+        <h1 class="page-title promo">
           <?php
             if (is_tax() || is_category()) {
               global $wp_query;
@@ -39,20 +39,60 @@ get_header(); ?>
 			</header><!-- .page-header -->
 
       <ul>
-			<?php
+      <?php 
+        $posts = $wp_query['get_posts'];
+
+          // if not the first page, set up the curated posts
+        if ($wp_query->get_query_var('offset') > 1) {
+          //get the curated posts (but only 4)
+          $curated = z_get_zone_query(
+            $wp_query->get_queried_object->slug,
+            array(
+              'posts_per_page' => 4,
+            )
+          );
+          //remove the curated posts from the posts we'd show otherwise
+          for ($i = 0; $i < count($posts); $i++) {
+            if (in_array(
+              $posts[$i],
+              array_map(function($p) { return $p->ID; }, $curated)
+            )) {
+                unset($posts[$i]);
+            }
+          }
+          //merge curated posts w/ posts we'd show otherwise
+          $posts = $curated + $posts;
+          //cut down the number of posts to the number we want per page
+          if ($wp_query->get_query_var('posts_per_page') > 0) { 
+            array_splice(
+              $posts, 
+              $wp_query->get_query_var('posts_per_page'),
+              count($posts) - $wp_query->get_query_var('posts_per_page')
+            );
+          }
+        }
+        // end curation mess
+         
 			// Start the Loop.
-			while ( have_posts() ) : the_post();
+      // Manually.
+      //Don't know exactly what this does
+      $wp_query->in_the_loop = true;
+      //Don't know exactly what this does
+      do_action_ref_array( 'loop_start', array( &$wp_query ) );
+			foreach ( $posts as $post ) :
+        $wp_query->setup_postdata( $post );
 
 				/*
 				 * Include the Post-Format-specific template for the content.
 				 * If you want to override this in a child theme, then include a file
 				 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
 				 */
-print '<h1>count!</h1>';
 				get_template_part( 'template-parts/standard-article-li' );
 
 			// End the loop.
-			endwhile;
+			endforeach;
+      //Don't know exactly what this does
+      $wp_query->in_the_loop = false;
     ?>
     </ul>
     <?php
