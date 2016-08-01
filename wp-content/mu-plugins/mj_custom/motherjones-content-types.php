@@ -142,6 +142,8 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
             'name' => __( 'Full Widths' ),
             'singular_name' => __( 'Full Width' )
           ),
+          'taxonomies' => array('category', 'mj_media_type', 'mj_primary_tag', 'mj_section'),
+
           'public' => true,
           'supports' => array('title', 'zoninator_zones'),
           'has_archive' => true
@@ -157,6 +159,7 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
             'name' => __( 'Articles' ),
             'singular_name' => __( 'Article' )
           ),
+          'taxonomies' => array('category', 'mj_media_type', 'mj_primary_tag', 'mj_section'),
           'public' => true,
           'supports' => array('title', 'zoninator_zones'),
           'has_archive' => true
@@ -185,6 +188,7 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
             'name' => __( 'Blog Posts' ),
             'singular_name' => __( 'Blog Post' )
           ),
+          'taxonomies' => array('category', 'mj_media_type', 'mj_primary_tag', 'mj_section'),
           'public' => true,
           'supports' => array('title', 'zoninator_zones'),
           'has_archive' => true
