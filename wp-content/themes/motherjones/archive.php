@@ -47,7 +47,7 @@ print_r($wp_query->get_queried_object());
       if (!$wp_query->get_query_var('offset')) {
         //get the curated posts (but only 4)
         $curated = z_get_zone_query(
-          $wp_query->get_queried_object->name,
+          $wp_query->get_queried_object->slug,
           array(
             'posts_per_page' => 4,
           )
