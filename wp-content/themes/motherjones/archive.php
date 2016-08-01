@@ -38,6 +38,7 @@ get_header(); ?>
         </h1>
 			</header><!-- .page-header -->
 
+      <ul>
 			<?php
 			// Start the Loop.
 			while ( have_posts() ) : the_post();
@@ -52,6 +53,9 @@ print '<h1>count!</h1>';
 
 			// End the loop.
 			endwhile;
+    ?>
+    </ul>
+    <?php
 
 			// Previous/next page navigation.
 			the_posts_pagination( array(
