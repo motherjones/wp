@@ -1208,3 +1208,23 @@ li.article-item h3 {
 h2.widget-title {
   display: none;
 }
+
+/* sidebar items */
+
+#sidebar-right .promo {
+  margin-bottom: 15px;
+}
+#sidebar-right .top-stories {
+  text-align: center;
+}
+#sidebar-right .top-stories ul {
+  padding: 0;
+}
+#sidebar-right .top-stories li {
+  margin-bottom: 15px;
+  border-top: 1px solid #ccc;
+}
+#sidebar-right .top-stories li:first-of-type {
+  border-top: 0;
+}
+/* end sidebar items */
