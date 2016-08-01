@@ -17,11 +17,11 @@
  */
 
 get_header(); ?>
-<h1>archive.php here</h1>
 
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main" role="main">
 
+      <div class="main-index"> 
 		<?php if ( have_posts() ) : ?>
 
 			<header class="page-header">
@@ -32,7 +32,6 @@ get_header(); ?>
               $term = $wp_query->get_queried_object();
               print $term->name;
             } else {
-              print '<h1> not a tax?</h1>';
               the_archive_title();
             }
           ?>
@@ -48,7 +47,7 @@ get_header(); ?>
 				 * If you want to override this in a child theme, then include a file
 				 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
 				 */
-				get_template_part( 'template-parts/content', get_post_format() );
+				get_template_part( 'template-parts/standard-article-li', get_post_format() );
 
 			// End the loop.
 			endwhile;
@@ -66,9 +65,12 @@ get_header(); ?>
 
 		endif;
 		?>
+    </div>
+
+    <div id="sidebar-right">
+      <?php dynamic_sidebar( 'sidebar-section' ); ?>
+    </div>
 
 		</main><!-- .site-main -->
 	</div><!-- .content-area -->
-
-<?php get_sidebar(); ?>
 <?php get_footer(); ?>

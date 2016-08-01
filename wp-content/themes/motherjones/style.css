@@ -305,6 +305,7 @@ html {
     float: right;
     width: 330px;
   }
+  .main-index, 
   article {
     width: 630px;
     float: left;
