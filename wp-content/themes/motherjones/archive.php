@@ -79,6 +79,7 @@ get_header(); ?>
       $wp_query->in_the_loop = true;
       //Don't know exactly what this does
       do_action_ref_array( 'loop_start', array( &$wp_query ) );
+      print_r($posts);
 			foreach ( $posts as $post ) :
         $wp_query->setup_postdata( $post );
 
