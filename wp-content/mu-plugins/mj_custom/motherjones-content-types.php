@@ -87,7 +87,6 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
       self::create_article_type();
       self::create_blog_post_type();
       self::create_author_type();
-      self::set_homepage_query();
       add_filter('pre_get_posts', array($this, 'set_index_query') );
     }
 
@@ -120,11 +119,6 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
       add_action( 'fm_post_mj_author', array( $this, author_fields ) );
       add_action( 'fm_user', array( $this, add_author_to_user ) );
     }
-
-    public function set_homepage_query() {
-      add_action( 'pre_get_posts', array( $this, 'homepage_query' ) );
-    }
-
 
     public function full_width_fields() {
       MJ_Custom_Fields::title_image()->add_meta_box( 'Title Image', 'mj_full_width' );
@@ -241,15 +235,7 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
     }
 
 
-    public function homepage_query( $query ) {
-      if ( is_home() && $query->is_main_query() )
-        $query->set( 'post_type', 
-        array( 'mj_article', 'mj_full_width', 'mj_blog_post' )
-      );
-      return $query;
-    }
-
-    public function set_index_query() {
+    public function set_index_query( $query ) {
       if(is_category() || is_tag() || is_tax()) {
         $post_type = get_query_var('post_type');
         if(!$post_type) { 
