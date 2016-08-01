@@ -95,7 +95,7 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
       $this->taxonomies->add_mj_taxonomies($type);
       add_action( 'init', array( $this, 'full_width_type' ) );
       add_action( 'fm_post_'.$type, array( $this, full_width_fields)  );
-      $sectionable_types[] = $type;
+      $this->sectionable_types[] = $type;
     }
 
     public function create_article_type() {
@@ -103,7 +103,7 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
       $this->taxonomies->add_mj_taxonomies($type);
       add_action( 'init', array( $this, 'article_type' ) );
       add_action( 'fm_post_'.$type, array( $this, article_fields ) );
-      $sectionable_types[] = $type;
+      $this->sectionable_types[] = $type;
     }
 
     public function create_blog_post_type() {
@@ -111,7 +111,7 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
       $this->taxonomies->add_mj_taxonomies($type);
       add_action( 'init', array( $this, 'blog_post_type' ) );
       add_action( 'fm_post_'.$type, array( $this, blog_post_fields ) );
-      //$sectionable_types[] = $type; No blog posts in sections/tags/etc
+      //$this->sectionable_types[] = $type; No blog posts in sections/tags/etc
     }
 
     public function create_author_type() {
@@ -239,10 +239,10 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
       print_r('<h1>IS HERE</h1>');
       if(is_category() || is_tag() || is_tax()) {
         print_r('<h1>IS PAST CONDITIONAL</h1>');
-        print_r($sectionable_types);
+        print_r($this->sectionable_types);
         $post_type = get_query_var('post_type');
         if(!$post_type) { 
-          $query->set('post_type', $sectionable_types);
+          $query->set('post_type', $this->sectionable_types);
         }
         return $query;
       }
