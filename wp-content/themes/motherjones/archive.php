@@ -22,6 +22,7 @@ get_header(); ?>
 		<main id="main" class="site-main" role="main">
 
       <div class="main-index"> 
+        <?php print $wp_query->get_query_var('post_type'); ?>
 		<?php if ( have_posts() ) : ?>
 
 			<header class="page-header">
@@ -40,7 +41,6 @@ get_header(); ?>
 
       <ul>
 			<?php
-      print $wp_query->get_query_var('post_type');
 			// Start the Loop.
 			while ( have_posts() ) : the_post();
 
