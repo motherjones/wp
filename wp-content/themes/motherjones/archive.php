@@ -22,17 +22,13 @@ get_header(); ?>
 		<main id="main" class="site-main" role="main">
 
       <div class="main-index"> 
-      <h1> here!
-        <?php 
-              global $wp_query;
-print $wp_query->get_query_var('post_type'); ?>
-</h1>
 		<?php if ( have_posts() ) : ?>
 
 			<header class="page-header">
         <h1 class="page-title">
           <?php
             if (is_tax() || is_category()) {
+              global $wp_query;
               $term = $wp_query->get_queried_object();
               print $term->name;
             } else {

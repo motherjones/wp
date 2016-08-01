@@ -236,10 +236,7 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
 
 
     public function set_index_query( $query ) {
-      print_r('<h1>IS HERE</h1>');
       if(is_category() || is_tag() || is_tax()) {
-        print_r('<h1>IS PAST CONDITIONAL</h1>');
-        print_r($this->sectionable_types);
         $post_type = get_query_var('post_type');
         if(!$post_type) { 
           $query->set('post_type', $this->sectionable_types);
