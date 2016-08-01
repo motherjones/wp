@@ -17,6 +17,7 @@
  */
 
 get_header(); ?>
+<h1>archive.php here</h1>
 
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main" role="main">
