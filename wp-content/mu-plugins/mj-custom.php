@@ -15,4 +15,7 @@ MJ_Custom_Types();
 
 require_once('mj_custom/top-stories-widget.php');
 
+require_once('mj_custom/motherjones-image-sizes.php');
+MJ_Images();
+
 ?>
