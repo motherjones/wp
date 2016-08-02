@@ -52,15 +52,12 @@ if ( !class_exists( 'MJ_Images' ) ) {
     );
 
     public function setup() {
-      print_r('<h1>in setups</h1>');
       add_action( 'after_setup_theme', array($this, 'create_image_sizes') );
     }
 
     public function create_image_sizes() {
       add_theme_support('post-thumbnails');
       foreach ($this->MJ_image_sizes as $image => $image_size) {
-        print '<h1>'.$image . '</h1>';
-        print_r($image_size);
         add_image_size($image, $image_size['width'], $image_size['height'], $image_size['crop']);
       }
     }
