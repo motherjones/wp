@@ -20,28 +20,23 @@ get_header(); ?>
     <main id="main" class="site-main group" role="main">
 
     <div class="page-header">
-      <h1 class="page-title promo">
-        <?php
-          if (is_tax() || is_category()) {
-            global $wp_query;
-            $term = $wp_query->get_queried_object();
-            if ($term->name === "Kevin Drum") {
-              print '<img src="/wp-content/themes/motherjones/img/KEVIN.png"></img>';
-            } else {
-              print $term->name;
-            }
-          } else {
-            the_archive_title();
-          }
-        ?>
-      </h1>
+      <?php
+        global $wp_query;
+        $term = $wp_query->get_queried_object();
+        if ($term->name === "Kevin Drum") {
+          print '<img src="/wp-content/themes/motherjones/img/KEVIN.png"></img>';
+        } else {
+          print '<h1 class="page-title promo">';
+          print $term->name;
+          print '</h1>';
+        }
+      ?>
     </div><!-- .page-header -->
 
     <div class="main-index"> 
 		<?php if ( have_posts() ) : ?>
 
 
-      <ul class="blog-posts-list">
       <?php 
          
 			// Start the Loop.
@@ -51,7 +46,6 @@ get_header(); ?>
 			// End the loop.
 			endwhile;
     ?>
-    </ul>
     <?php
 
 			// Previous/next page navigation.

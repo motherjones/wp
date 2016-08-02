@@ -807,6 +807,9 @@ header.article  {
 .blog.entry-header {
   text-align: left;
 }
+#main .blog.entry-header a {
+  background-image: none;
+}
 /* end article */
 
 /* start within article body */
