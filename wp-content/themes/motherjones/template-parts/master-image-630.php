@@ -1,14 +1,21 @@
-<?php if (get_post_field( 'master_image', get_the_ID() )['master_image']): ?>
+<?php if (get_post_field( 'master_image', get_the_ID() )['master_image']
+      && !get_post_field( 'master_image', get_the_ID() )['master_image_suppress']
+): ?>
   <div class="article-master-image group">
     <?php print wp_get_attachment_image( 
       get_post_field( 'master_image', get_the_ID() )['master_image'],
       'article_top'
     ); ?>
     <p class="master-image-data">
-      <span class="master-image-caption">
-      </span>
-      <span class="photo-byline">
-      </span>
+      <?php if ( get_post_field( 'master_image', get_the_ID() )['master_image_caption']
+        ||  get_post_field( 'master_image', get_the_ID() )['master_image_byline'] ) : ?>
+        <span class="master-image-caption">
+          <?php print get_post_field( 'master_image', get_the_ID() )['master_image_caption']; ?>
+        </span>
+        <span class="photo-byline">
+          <?php print get_post_field( 'master_image', get_the_ID() )['master_image_byline']; ?>
+        </span>
+      <?php endif; ?>
     </p>
   </div>
 <?php endif; ?>

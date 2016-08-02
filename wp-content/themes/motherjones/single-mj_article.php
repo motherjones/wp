@@ -13,9 +13,11 @@ get_header(); ?>
     <?php while ( have_posts() ) : the_post(); ?>
       <header class="entry-header article">
         <?php the_title( '<h1 class="article hed">', '</h1>' ); ?>
-        <h3 class="dek">
-          <?php print get_post_field( 'dek', get_the_ID() ); ?>
-        </h3>
+        <?php if ( get_post_field( 'dek', get_the_ID() ) ): ?>
+          <h3 class="dek">
+            <?php print get_post_field( 'dek', get_the_ID() ); ?>
+          </h3>
+        <?php endif; ?>
         <p class="byline-dateline">
           <span class="byline">
             <?php print mj_byline( get_the_ID() ); ?>
@@ -36,12 +38,16 @@ get_header(); ?>
         </div>
       </header><!-- .entry-header -->
       <article class="article">
-        <?php print get_post_field( 'css', get_the_ID() ); ?>
+        <style>
+          <?php print get_post_field( 'css', get_the_ID() ); ?>
+        </style>
         
         <?php get_template_part( 'template-parts/master-image-630' ); ?>
 
         <?php print get_post_field( 'body', get_the_ID() ); ?>
-        <?php print get_post_field( 'js', get_the_ID() ); ?>
+        <script>
+          <?php print get_post_field( 'js', get_the_ID() ); ?>
+        </script>
 
         <footer class="entry-footer">
 
