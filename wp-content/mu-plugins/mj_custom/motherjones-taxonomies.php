@@ -115,6 +115,7 @@ if ( !class_exists( 'MJ_Taxonomy' ) ) {
       $this->all_taxonomies[$this->blog_id] = $this->blog_taxonomy;
       add_action( 'created_mj_media_type', array($this, 'fill_media_type') );
       add_action( 'created_mj_section', array($this, 'fill_section') );
+      add_action( 'created_mj_blog_type', array($this, 'fill_blog_type') );
     }
 
     public function fill_media_type() {
