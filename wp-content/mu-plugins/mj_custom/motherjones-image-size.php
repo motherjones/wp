@@ -56,9 +56,10 @@ if ( !class_exists( 'MJ_Images' ) ) {
     }
 
     public function create_image_sizes() {
-      global $_wp_additional_image_sizes;
-
+      print_r('<h1>creating image sizes</h1>');
       foreach ($this->MJ_image_sizes as $image => $image_size) {
+        print '<h1>'.$image . '</h1>';
+        print_r($image_size);
         add_image_size($image, $image_size['width'], $image_size['height'], $image_size['crop']);
       }
     }
