@@ -30,7 +30,7 @@ class top_stories_widget extends WP_Widget {
 			'posts_per_page' => 3,
     ));
     $posts = new WP_Query( Array (
-      'name' => 'blog-post-no-category',
+      'name' => 'blog-post-title',
     ));
 		while ( $posts->have_posts() ) : $posts->the_post(); ?>
 				<li class="article-item">
