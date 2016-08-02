@@ -69,12 +69,11 @@ if ( !class_exists( 'MJ_Images' ) ) {
       }
     }
 
-    public function set_image_selection() {
+    public function set_image_selection( $sizes ) {
       $image_names = [];
       foreach ($this->MJ_image_sizes as $image => $image_size) {
         $image_names[$image] = $image_size['name'];
       }
-      print_r($image_names);
       return array_merge( $sizes, $image_names );
     }
 
