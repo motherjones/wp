@@ -30,9 +30,6 @@ class top_stories_widget extends WP_Widget {
 			'posts_per_page' => 3,
     ));
     $posts = new WP_Query( Array (
-      'page' => '',
-      'year' => '2016',
-      'monthnum' => '08',
       'name' => 'blog-post-no-category',
       'post_type' => 'mj_blogpost',
       'tax_query' => Array ( Array (
