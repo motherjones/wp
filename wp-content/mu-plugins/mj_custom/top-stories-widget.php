@@ -31,11 +31,6 @@ class top_stories_widget extends WP_Widget {
     ));
     $posts = new WP_Query( Array (
       'name' => 'blog-post-no-category',
-      'post_type' => 'mj_blogpost',
-      'tax_query' => Array ( Array (
-        'taxonomy' => 'mj_blog_type',
-        'field' => 'slug',
-        'terms' => 'kevin-drum' ) ) 
     ));
 		while ( $posts->have_posts() ) : $posts->the_post(); ?>
 				<li class="article-item">
