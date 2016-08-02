@@ -82,12 +82,13 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
             'taxonomy' => 'mj_blog_type', 
             'slug' => $request['category_name']) 
           ) ) {
-            $request['post_type'] = 'mj_blog_post';
+            $request['post_type'] = array('mj_blog_post');
             $request['tax_query'] = array( array(
               'taxonomy' => 'mj_blog_type',
               'field' => 'slug',
               'terms' => $request['category_name'],
             ) );
+            print_r($request['category_name']);
             unset($request['category_name']);
         }
         return $request;
