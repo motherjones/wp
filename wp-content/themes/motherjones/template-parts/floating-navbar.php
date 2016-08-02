@@ -7,7 +7,7 @@
 				alt="MotherJones" />
 			</a>
 		</li>
-		<?php if($wp_query->found_posts === 1): //is an articlish thing ?>
+		<?php if($wp_query->found_posts === 1 && $wp_query->query_vars['post_type'] !== 'mj_author'): //is an articlish thing ?>
       <li class="nav-title">
         <?php print $wp_query->posts[0]->post_name; ?>
       </li>
