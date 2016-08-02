@@ -18,4 +18,6 @@ require_once('mj_custom/top-stories-widget.php');
 require_once('mj_custom/motherjones-image-size.php');
 MJ_Images();
 
+require_once('mj_custom/motherjones-permalinks.php');
+MJ_Permalinks();
 ?>
