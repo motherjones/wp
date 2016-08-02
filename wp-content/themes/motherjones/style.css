@@ -1174,6 +1174,7 @@ ul.author-bios {
 /* end end of article author stuff */
 
 /* article list items */
+.photoessay-top,
 #related-articles,
 .main-index {
   text-align: center;
@@ -1190,6 +1191,9 @@ ul.author-bios {
   padding: 0 0 20px 0;
   border-bottom: 1px solid #ccc;
 }
+.photoessay-top {
+  border-bottom: 1px solid #ccc;
+}
 
 li.article-item {
   text-align: left;
@@ -1199,6 +1203,8 @@ li.article-item {
   padding-bottom: 10px;
   clear: both;
 }
+
+#main li.photoessay-top a,
 #main li.top-article-item a,
 #main li.article-item a {
   background-image: none;
