@@ -42,14 +42,18 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
           $request['name'] = str_replace ('author/', '', $dummy_query->query['category_name']);
           unset($request['category_name']);
         }  else {
-          print '<h1>is cat: ' .get_terms( array(
+          print '<h1>is cat: ' ;
+            print_r(get_terms( array(
             'taxonomy' => 'category', 
             'field' => 'slug',
-            'terms' => $request['category_name']) ) . '</h1>';
-          print '<h1>is prim tag: ' .get_terms( array(
+            'terms' => $request['category_name']) ) );
+         print '</h1>';
+          print '<h1>is prim tag: ';
+          print_r(get_terms( array(
             'taxonomy' => 'mj_primary_tag', 
             'field' => 'slug',
-            'terms' => $request['category_name']) ) . '</h1>';
+            'terms' => $request['category_name']) ) );
+         print '</h1>';
           print_r($request);
         }
         return $request;
