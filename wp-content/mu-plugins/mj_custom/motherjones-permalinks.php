@@ -29,7 +29,8 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
               'slug' => $dummy_query->query['category_name'],
               'taxonomy' => 'mj_blog_type'
           ) ) ) {
-            unset($request['category_name']);
+            //unset($request['category_name']);
+            $request['category_name'] = 'politics';
             $request['post_type'] = 'mj_blogpost';
           }
         }
