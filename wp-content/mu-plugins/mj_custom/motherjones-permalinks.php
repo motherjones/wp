@@ -39,7 +39,8 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
           }
         }
         print_r($request);
-
+        $wat = new WP_Query($request);
+        print_r($wat->get_the_posts());
         return $request;
     }
 
