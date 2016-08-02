@@ -24,6 +24,9 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
 
         print_r($dummy_query);
         // this is the actual manipulation; do whatever you need here
+        if ($dummy_query->query['category_name']) {
+          $request->query['post_type'] = array('mj_article', 'mj_fullwidth');
+        }
 
         return $request;
     }
