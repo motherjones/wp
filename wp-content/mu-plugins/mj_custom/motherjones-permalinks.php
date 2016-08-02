@@ -42,7 +42,6 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
           $request['name'] = str_replace ('author/', '', $dummy_query->query['category_name']);
           unset($request['category_name']);
         } 
-        print_r($request);
         return $request;
     }
 
