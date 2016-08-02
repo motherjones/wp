@@ -23,9 +23,9 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
         $dummy_query->parse_query( $request );
 
         // this is the actual manipulation; do whatever you need here
-        if ($dummy_query->query['category_name'] && $dummy_query->query['name']) {
+        if ($dummy_query->query['category_name'] && $dummy_query->query['name']) { //is article type
           $request['post_type'] = array('mj_article', 'mj_fullwidth');
-          if (get_terms( array(
+          if (get_terms( array( // is blog post
               'slug' => $dummy_query->query['category_name'],
               'taxonomy' => 'mj_blog_type'
           ) ) ) {
@@ -37,22 +37,26 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
             ) );
             unset($request['category_name']);
           }
-        } elseif ( preg_match('/^author\//', $dummy_query->query['category_name']) ) {
+        } elseif ( preg_match('/^author\//', $dummy_query->query['category_name']) ) { //is author
           $request['post_type'] = 'mj_author';
           $request['name'] = str_replace ('author/', '', $dummy_query->query['category_name']);
           unset($request['category_name']);
-        }  else {
-          print '<h1>is cat: ' ;
-            print_r(get_terms( array(
+        }  elseif ( //is topic
+          !get_terms( array(
             'taxonomy' => 'category', 
-            'slug' => $request['category_name']) ) );
-         print '</h1>';
-          print '<h1>is prim tag: ';
-          print_r(get_terms( array(
+            'slug' => $request['category_name']) 
+          ) &&
+          get_terms( array(
             'taxonomy' => 'mj_primary_tag', 
-            'slug' => $request['category_name']) ) );
-         print '</h1>';
-          print_r($request);
+            'slug' => $request['category_name']) 
+          ) ) {
+            $request['post_type'] = array('mj_article', 'mj_fullwidth', 'mj_blog_post');
+            $request['tax_query'] = array( array(
+              'taxonomy' => 'mj_primary_tag',
+              'field' => 'slug',
+              'terms' => $request['category_name'],
+            ) );
+            unset($request['category_name']);
         }
         return $request;
     }
