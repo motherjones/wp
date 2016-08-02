@@ -57,6 +57,22 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
               'terms' => $request['category_name'],
             ) );
             unset($request['category_name']);
+        }  elseif ( //is media type
+          !get_terms( array(
+            'taxonomy' => 'category', 
+            'slug' => $request['category_name']) 
+          ) &&
+          get_terms( array(
+            'taxonomy' => 'mj_media_type', 
+            'slug' => $request['category_name']) 
+          ) ) {
+            $request['post_type'] = array('mj_article', 'mj_fullwidth', 'mj_blog_post');
+            $request['tax_query'] = array( array(
+              'taxonomy' => 'mj_media_type',
+              'field' => 'slug',
+              'terms' => $request['category_name'],
+            ) );
+            unset($request['category_name']);
         }
         return $request;
     }
