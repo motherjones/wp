@@ -89,7 +89,6 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
               'terms' => $request['category_name'],
             ) );
             unset($request['category_name']);
-            print_r('<h1>is mj_blog_type</h1>');
         }
         return $request;
     }
