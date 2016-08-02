@@ -1,5 +1,5 @@
 <article class="blog">
-  <header class="entry-header blog">
+  <div class="entry-header blog">
     <?php the_title( '<h1 class="blog hed">', '</h1>' ); ?>
     <h3 class="dek">
       <?php print get_post_field( 'dek', get_the_ID() ); ?>
@@ -12,7 +12,7 @@
         <?php print mj_dateline( get_the_ID() ); ?>
       </span>
     </p>
-  </header><!-- .entry-header -->
+  </div><!-- .entry-header -->
     <?php print get_post_field( 'css', get_the_ID() ); ?>
     
     <div class="article-master-image group">

@@ -15,12 +15,9 @@
  */
 
 get_header(); ?>
-<h1>HERE WE ARE</h1>
 
 	<div id="primary" class="content-area">
     <main id="main" class="site-main group" role="main">
-
-		<?php if ( have_posts() ) : ?>
 
     <div class="page-header">
       <h1 class="page-title promo">
@@ -28,7 +25,11 @@ get_header(); ?>
           if (is_tax() || is_category()) {
             global $wp_query;
             $term = $wp_query->get_queried_object();
-            print $term->name;
+            if ($term->name === "Kevin Drum") {
+              print '<img src="/wp-content/themes/motherjones/img/KEVIN.png"></img>';
+            } else {
+              print $term->name;
+            }
           } else {
             the_archive_title();
           }
@@ -37,6 +38,9 @@ get_header(); ?>
     </div><!-- .page-header -->
 
     <div class="main-index"> 
+		<?php if ( have_posts() ) : ?>
+
+
       <ul class="blog-posts-list">
       <?php 
          
