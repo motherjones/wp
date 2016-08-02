@@ -864,6 +864,16 @@ header.article  {
   display: inline;
 }
 
+.article-master-image {
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #ccc;
+}
+.article-master-data {
+  line-height: 20px;
+  margin: 10px 0 0 0;
+}
+
 .section-lead {
   font-size: 20px;
   font-family: Mallory, sans-serif;
@@ -1189,6 +1199,7 @@ li.article-item {
   padding-bottom: 10px;
   clear: both;
 }
+#main li.top-article-item a,
 #main li.article-item a {
   background-image: none;
 }

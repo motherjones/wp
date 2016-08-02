@@ -3,7 +3,7 @@
     <a href="<?php print esc_url( get_permalink() ); ?>">
       <?php print wp_get_attachment_image( 
         get_post_field( 'master_image', get_the_ID() )['master_image'],
-        '208'
+        'index_thumb'
       ); ?>
     </a>
   </div>
