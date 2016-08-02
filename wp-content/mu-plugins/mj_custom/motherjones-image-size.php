@@ -52,9 +52,13 @@ if ( !class_exists( 'MJ_Images' ) ) {
     );
 
     public function setup() {
+      add_action( 'after_setup_theme', array($this, 'create_image_sizes') );
+    }
+
+    public function create_image_sizes() {
       global $_wp_additional_image_sizes;
 
-      foreach ($MJ_image_sizes as $image => $image_size) {
+      foreach ($this->MJ_image_sizes as $image => $image_size) {
         $_wp_additional_image_sizes[ $image ] = $image_size;
       }
     }
