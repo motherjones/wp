@@ -26,6 +26,7 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
         if ($dummy_query->query['category_name'] && $dummy_query->query['name']) {
           $request['post_type'] = array('mj_article', 'mj_fullwidth');
         }
+        print_r($dummy_query);
 
         return $request;
     }
