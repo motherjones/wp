@@ -24,7 +24,7 @@ get_header(); ?>
     <div class="main-index"> 
 		<?php if ( have_posts() ) : ?>
 
-			<header class="page-header">
+			<div class="page-header">
         <h1 class="page-title promo">
           <?php
             if (is_tax() || is_category()) {
@@ -36,7 +36,7 @@ get_header(); ?>
             }
           ?>
         </h1>
-			</header><!-- .page-header -->
+			</div><!-- .page-header -->
 
       <ul class="articles-list">
       <?php 
