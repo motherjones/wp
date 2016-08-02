@@ -810,6 +810,9 @@ header.article  {
 #main .blog.entry-header a {
   background-image: none;
 }
+article.blog {
+  text-align: left;
+}
 /* end article */
 
 /* start within article body */
