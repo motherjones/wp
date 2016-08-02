@@ -208,6 +208,11 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
           'has_archive' => true
         )
       );
+
+			global $wp_rewrite;
+      $blog_url_structure = '/%mj_blog_type%/%year%/%monthnum%/%mj_blog_post%';
+      $wp_rewrite->add_rewrite_tag("%mj_blog_post%", '([^/]+)', "mj_blog_post=");
+      $wp_rewrite->add_permastruct('mj_blog_post', $blog_url_structure, false);
     }
     public function blog_post_fields() {
       MJ_Custom_Fields::dek()->add_meta_box( 'Dek', 'mj_blog_post' );

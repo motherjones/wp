@@ -43,6 +43,7 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
 				$leavename? '' : '%postname%',
 				'%post_id%',
 				'%category%',
+				'%mj_blog_type%',
 				'%author%',
 				$leavename? '' : '%pagename%',
 			);
@@ -66,6 +67,9 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
 						$category = is_wp_error( $default_category ) ? '' : $default_category->slug;
 					}
 				}
+        if (get_post_field( 'taxonomies', $post->ID )) {
+          $mj_blog_type = get_post_field( 'taxonomies', $post->ID )['blog_type'];
+        }
 
 				$author = '';
 				if ( strpos($permalink, '%author%') !== false ) {
@@ -85,6 +89,7 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
 						$post->post_name,
 						$post->ID,
 						$category,
+            $mj_blog_type,
 						$author,
 						$post->post_name,
 					);
