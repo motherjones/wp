@@ -166,6 +166,8 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
           'has_archive' => true
         )
       );
+      global $wp_rewrite;
+      $wp_rewrite->flush_rules();
     }
     public function article_fields() {
       MJ_Custom_Fields::dek()->add_meta_box( 'Dek', 'mj_article' );
