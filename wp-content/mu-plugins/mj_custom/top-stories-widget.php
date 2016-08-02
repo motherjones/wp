@@ -29,9 +29,6 @@ class top_stories_widget extends WP_Widget {
     $posts = z_get_zone_query('top_stories', array(
 			'posts_per_page' => 3,
     ));
-    $posts = new WP_Query( Array (
-      'name' => 'blog-post-title',
-    ));
 		while ( $posts->have_posts() ) : $posts->the_post(); ?>
 				<li class="article-item">
 					<h3 class="hed">

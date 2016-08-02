@@ -29,7 +29,7 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
               'slug' => $dummy_query->query['category_name'],
               'taxonomy' => 'mj_blog_type'
           ) ) ) {
-            $request['post_type'] = 'mj_blogpost';
+            $request['post_type'] = 'mj_blog_post';
             $request['tax_query'] = array( array(
               'taxonomy' => 'mj_blog_type',
               'field' => 'slug',
