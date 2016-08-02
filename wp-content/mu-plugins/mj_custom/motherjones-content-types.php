@@ -200,7 +200,7 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
             'name' => __( 'Blog Posts' ),
             'singular_name' => __( 'Blog Post' )
           ),
-          'taxonomies' => array('category', 'mj_media_type', 'mj_primary_tag', 'mj_section'),
+          'taxonomies' => array('mj_blog_type', 'mj_media_type', 'mj_primary_tag'),
           'public' => true,
           'rewrite' => false,
           'query_arg' => true,
@@ -215,7 +215,7 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
       MJ_Custom_Fields::alt()->add_meta_box( 'Alt Titles', 'mj_blog_post' );
       MJ_Custom_Fields::master_image()->add_meta_box( 'Master Image', 'mj_blog_post' );
       MJ_Custom_Fields::byline()->add_meta_box( 'Byline', 'mj_blog_post' );
-      MJ_Custom_Fields::taxonomies()->add_meta_box( 'Taxonomy', 'mj_blog_post' );
+      MJ_Custom_Fields::blog_taxonomies()->add_meta_box( 'Taxonomy', 'mj_blog_post' );
       MJ_Custom_Fields::body()->add_meta_box( 'Article Body', 'mj_blog_post' );
       MJ_Custom_Fields::related()->add_meta_box( 'Related Articles', 'mj_blog_post' );
       MJ_Custom_Fields::css_js()->add_meta_box( 'Extra CSS & JS', 'mj_blog_post' );

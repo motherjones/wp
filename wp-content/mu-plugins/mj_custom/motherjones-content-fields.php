@@ -102,11 +102,34 @@ if ( !class_exists( 'MJ_Custom_Fields' ) ) {
         'children' => $children
       ) );
     }
+
+    public function blog_taxonomies() {
+      $children = array(
+        'blog_type' => self::blog_type(),
+        'media_type' => self::media_type(),
+        'primary_tags' => self::primary_tags(),
+      );
+
+      return new Fieldmanager_Group( array(
+        'name' => 'taxonomies',
+        'children' => $children
+      ) );
+    }
+
     public function section() {
       return new Fieldmanager_Select("Section", array(
         'name' => 'section',
         'datasource' => new Fieldmanager_Datasource_Term( array(
           'taxonomy' => 'category',
+        ) )
+      ) );
+    }
+
+    public function blog_type() {
+      return new Fieldmanager_Select("Blog Type", array(
+        'name' => 'blog_type',
+        'datasource' => new Fieldmanager_Datasource_Term( array(
+          'taxonomy' => 'mj_blog_type',
         ) )
       ) );
     }
