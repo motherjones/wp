@@ -143,7 +143,7 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
           ),
           'taxonomies' => array('category', 'mj_media_type', 'mj_primary_tag', 'mj_section'),
 
-          'rewrite' => array('slug' => '', 'with_front' => true),
+          'rewrite' => false,
           'public' => true,
           'supports' => array('title', 'zoninator_zones'),
           'has_archive' => true
@@ -160,14 +160,12 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
             'singular_name' => __( 'Article' )
           ),
           'taxonomies' => array('category', 'mj_media_type', 'mj_primary_tag', 'mj_section'),
-          'rewrite' => array('slug' => '', 'with_front' => true),
+          'rewrite' => false,
           'public' => true,
           'supports' => array('title', 'zoninator_zones'),
           'has_archive' => true
         )
       );
-      global $wp_rewrite;
-      $wp_rewrite->flush_rules();
     }
     public function article_fields() {
       MJ_Custom_Fields::dek()->add_meta_box( 'Dek', 'mj_article' );
@@ -193,7 +191,7 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
           ),
           'taxonomies' => array('category', 'mj_media_type', 'mj_primary_tag', 'mj_section'),
           'public' => true,
-          'rewrite' => array('slug' => '', 'with_front' => true),
+          'rewrite' => false,
           'supports' => array('title', 'zoninator_zones'),
           'has_archive' => true
         )
@@ -223,7 +221,7 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
             'singular_name' => __( 'Author' )
           ),
           'public' => true,
-          'rewrite' => array('slug' => 'author', 'with_front' => false),
+          'rewrite' => false,
           'supports' => array('title'),
           'has_archive' => true
         )
