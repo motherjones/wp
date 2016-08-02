@@ -88,7 +88,6 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
               'field' => 'slug',
               'terms' => $request['category_name'],
             ) );
-            print_r($request['category_name']);
             unset($request['category_name']);
         }
         return $request;
