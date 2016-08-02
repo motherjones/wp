@@ -6,7 +6,7 @@ if ( !class_exists( 'MJ_Images' ) ) {
     private static $instance;
     public static function instance() {
       if ( ! isset( self::$instance ) ) {
-        self::$instance = new MJ_Taxonomy;
+        self::$instance = new MJ_Images;
         self::$instance->setup();
       }
       return self::$instance;
