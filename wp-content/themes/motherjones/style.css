@@ -442,6 +442,9 @@ button.accent {
 .hide, .hidden {
   display: none;
 }
+.page-header {
+  text-align: center;
+}
 
 .promo {
   font-size: 18px;
