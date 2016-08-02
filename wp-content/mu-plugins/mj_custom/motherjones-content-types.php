@@ -143,6 +143,7 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
           ),
           'taxonomies' => array('category', 'mj_media_type', 'mj_primary_tag', 'mj_section'),
 
+          'rewrite' => array('slug' => '', 'with_front' => true),
           'public' => true,
           'supports' => array('title', 'zoninator_zones'),
           'has_archive' => true
@@ -159,6 +160,7 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
             'singular_name' => __( 'Article' )
           ),
           'taxonomies' => array('category', 'mj_media_type', 'mj_primary_tag', 'mj_section'),
+          'rewrite' => array('slug' => '', 'with_front' => true),
           'public' => true,
           'supports' => array('title', 'zoninator_zones'),
           'has_archive' => true
@@ -189,6 +191,7 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
           ),
           'taxonomies' => array('category', 'mj_media_type', 'mj_primary_tag', 'mj_section'),
           'public' => true,
+          'rewrite' => array('slug' => '', 'with_front' => true),
           'supports' => array('title', 'zoninator_zones'),
           'has_archive' => true
         )
@@ -218,6 +221,7 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
             'singular_name' => __( 'Author' )
           ),
           'public' => true,
+          'rewrite' => array('slug' => 'author', 'with_front' => false),
           'supports' => array('title'),
           'has_archive' => true
         )
