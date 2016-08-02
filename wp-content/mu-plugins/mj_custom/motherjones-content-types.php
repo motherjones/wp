@@ -171,7 +171,7 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
       );
 
 			global $wp_rewrite;
-      $article_url_structure = '/%category%/%year%/%monthnum%/%mj_article%';
+      $article_url_structure = '/article/%category%/%year%/%monthnum%/%mj_article%';
       $wp_rewrite->add_rewrite_tag("%mj_article%", '([^/]+)', "mj_article=");
       $wp_rewrite->add_permastruct('mj_article', $article_url_structure, false);
     }
