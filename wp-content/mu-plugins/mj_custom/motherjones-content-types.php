@@ -88,6 +88,7 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
       self::create_blog_post_type();
       self::create_author_type();
       add_filter('pre_get_posts', array($this, 'set_index_query') );
+			add_filter('post_type_link', array($this, 'permalink_rewrite'), 10, 3);   
     }
 
     public function create_full_width_type() {
@@ -144,6 +145,7 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
           'taxonomies' => array('category', 'mj_media_type', 'mj_primary_tag', 'mj_section'),
 
           'rewrite' => false,
+          'query_arg' => true,
           'public' => true,
           'supports' => array('title', 'zoninator_zones'),
           'has_archive' => true
@@ -161,11 +163,16 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
           ),
           'taxonomies' => array('category', 'mj_media_type', 'mj_primary_tag', 'mj_section'),
           'rewrite' => false,
+          'query_arg' => true,
           'public' => true,
           'supports' => array('title', 'zoninator_zones'),
           'has_archive' => true
         )
       );
+
+      $article_url_structure = '/%category%/%year%/%monthnum%/%mj_article%';
+      $wp_rewrite->add_rewrite_tag("%mj_article%", '([^/]+)', "mj_article=");
+      $wp_rewrite->add_permastruct('mj_article', $article_url_structure, false);
     }
     public function article_fields() {
       MJ_Custom_Fields::dek()->add_meta_box( 'Dek', 'mj_article' );
@@ -192,6 +199,7 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
           'taxonomies' => array('category', 'mj_media_type', 'mj_primary_tag', 'mj_section'),
           'public' => true,
           'rewrite' => false,
+          'query_arg' => true,
           'supports' => array('title', 'zoninator_zones'),
           'has_archive' => true
         )
@@ -222,6 +230,7 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
           ),
           'public' => true,
           'rewrite' => false,
+          'query_arg' => true,
           'supports' => array('title'),
           'has_archive' => true
         )
@@ -248,6 +257,70 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
         return $query;
       }
     }
+
+			// Adapted from get_permalink function in wp-includes/link-template.php
+    public function permalink_rewrite($permalink, $post_id, $leavename) {
+					$post = get_post($post_id);
+					$rewritecode = array(
+							'%year%',
+							'%monthnum%',
+							'%day%',
+							'%hour%',
+							'%minute%',
+							'%second%',
+							$leavename? '' : '%postname%',
+							'%post_id%',
+							'%category%',
+							'%author%',
+							$leavename? '' : '%pagename%',
+					);
+			 
+					if ( '' != $permalink && !in_array($post->post_status, array('draft', 'pending', 'auto-draft')) ) {
+							$unixtime = strtotime($post->post_date);
+					 
+							$category = '';
+							if ( strpos($permalink, '%category%') !== false ) {
+									$cats = get_the_category($post->ID);
+									if ( $cats ) {
+											usort($cats, '_usort_terms_by_ID'); // order by ID
+											$category = $cats[0]->slug;
+											if ( $parent = $cats[0]->parent )
+													$category = get_category_parents($parent, false, '/', true) . $category;
+									}
+									// show default category in permalinks, without
+									// having to assign it explicitly
+									if ( empty($category) ) {
+											$default_category = get_category( get_option( 'default_category' ) );
+											$category = is_wp_error( $default_category ) ? '' : $default_category->slug;
+									}
+							}
+					 
+							$author = '';
+							if ( strpos($permalink, '%author%') !== false ) {
+									$authordata = get_userdata($post->post_author);
+									$author = $authordata->user_nicename;
+							}
+					 
+							$date = explode(" ",date('Y m d H i s', $unixtime));
+							$rewritereplace =
+							array(
+									$date[0],
+									$date[1],
+									$date[2],
+									$date[3],
+									$date[4],
+									$date[5],
+									$post->post_name,
+									$post->ID,
+									$category,
+									$author,
+									$post->post_name,
+							);
+							$permalink = str_replace($rewritecode, $rewritereplace, $permalink);
+					} else { // if they're not using the fancy permalink option
+					}
+					return $permalink;
+			}
 
   }
 }
