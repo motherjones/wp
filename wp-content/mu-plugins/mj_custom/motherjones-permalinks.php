@@ -68,7 +68,12 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
 					}
 				}
         if (get_post_field( 'taxonomies', $post->ID )) {
-          $mj_blog_type = get_post_field( 'taxonomies', $post->ID )['blog_type'];
+          $blog_ID = get_post_field( 'taxonomies', $post->ID )['blog_type'];
+          print_r($blog_ID);
+          $mj_blog_tax = get_term( $blog_ID, 'mj_blog_type' );
+          print_r($mj_blog_tax);
+          $mj_blog_type = $mj_blog_tax['slug'];
+          print_r($mj_blog_type);
         }
 
 				$author = '';
