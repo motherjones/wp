@@ -88,7 +88,7 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
       self::create_blog_post_type();
       self::create_author_type();
       add_filter('pre_get_posts', array($this, 'set_index_query') );
-			//add_filter('post_type_link', array($this, 'permalink_rewrite'), 10, 3);   
+			add_filter('post_type_link', array($this, 'permalink_rewrite'), 10, 3);   
     }
 
     public function create_full_width_type() {
