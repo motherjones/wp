@@ -1077,6 +1077,17 @@ ul.social-tools.top li {
   width: 98px;
   padding: 0 10px;
 }
+.social-tools.blog {
+  list-style-type: none;
+  padding: 0;
+}
+.social-tools.blog li {
+  display: inline;
+  margin: 0 5px;
+}
+.social-tools.blog li a {
+  border: none;
+}
 .social-tools.blog .share-text,
 .social-tools.top .share-text {
   display: none;
