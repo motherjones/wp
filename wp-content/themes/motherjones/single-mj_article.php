@@ -38,18 +38,7 @@ get_header(); ?>
       <article class="article">
         <?php print get_post_field( 'css', get_the_ID() ); ?>
         
-        <div class="article-master-image group">
-          <?php print wp_get_attachment_image( 
-            get_post_field( 'master_image', get_the_ID() )['master_image'],
-            'article_top'
-          ); ?>
-          <p class="master-image-data">
-            <span class="master-image-caption">
-            </span>
-            <span class="photo-byline">
-            </span>
-          </p>
-        </div>
+        <?php get_template_part( 'template-parts/master-image-630' ); ?>
 
         <?php print get_post_field( 'body', get_the_ID() ); ?>
         <?php print get_post_field( 'js', get_the_ID() ); ?>

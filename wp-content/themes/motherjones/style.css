@@ -804,6 +804,9 @@ h1.hed {
 header.article  {
   text-align: center;
 }
+.blog.entry-header {
+  text-align: left;
+}
 /* end article */
 
 /* start within article body */
