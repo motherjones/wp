@@ -239,6 +239,10 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
           'has_archive' => true
         )
       );
+			global $wp_rewrite;
+      $author_url_structure = '/author/%mj_author%';
+      $wp_rewrite->add_rewrite_tag("%mj_author%", '([^/]+)', "mj_article=");
+      $wp_rewrite->add_permastruct('mj_author', $author_url_structure, false);
     }
     public function author_fields() {
       MJ_Custom_Fields::position()->add_meta_box( 'Position', 'mj_author' );
