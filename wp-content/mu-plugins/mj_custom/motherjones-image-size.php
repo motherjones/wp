@@ -59,7 +59,7 @@ if ( !class_exists( 'MJ_Images' ) ) {
       global $_wp_additional_image_sizes;
 
       foreach ($this->MJ_image_sizes as $image => $image_size) {
-        $_wp_additional_image_sizes[ $image ] = $image_size;
+        add_image_size($image, $image_size['width'], $image_size['height'], $image_size['crop']);
       }
     }
 
