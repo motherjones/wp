@@ -1077,6 +1077,7 @@ ul.social-tools.top li {
   width: 98px;
   padding: 0 10px;
 }
+.social-tools.blog .share-text,
 .social-tools.top .share-text {
   display: none;
 }

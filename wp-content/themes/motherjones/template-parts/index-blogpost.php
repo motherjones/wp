@@ -25,8 +25,8 @@
     <?php print get_post_field( 'js', get_the_ID() ); ?>
 
   <footer class="entry-footer">
-    <div class="social-container blog bottom">
-      <ul class="social-tools blog bottom">
+    <div class="social-container blog">
+      <ul class="social-tools blog">
         <li class="twitter">
           <?php print mj_flat_twitter_button( get_the_ID() ); ?>
         </li>
