@@ -61,6 +61,21 @@ if ( !class_exists( 'MJ_Taxonomy' ) ) {
       'Culture',
     );
 
+    private $blog_id = 'mj_blog_type';
+    private $blog_taxonomy = array(
+      'single' => 'Blog Type',
+      'plural' => 'Blog Types',
+      'capabilites' => array(
+        'assign_terms' => 'edit_posts',
+        'edit_terms' => 'update_core',
+        'delete_terms' => 'update_core',
+      ),
+      'types'  => array('post')
+    );
+    private $blog_terms = array(
+      'Kevin Drum',
+    );
+
     private $all_taxonomies = array();
 
     private static $instance;
@@ -81,10 +96,14 @@ if ( !class_exists( 'MJ_Taxonomy' ) ) {
     public function add_section_taxonomy ($post_type) {
       $this->section_taxonomy['types'][] = $post_type;
     }
+    public function add_blog_taxonomy ($post_type) {
+      $this->blog_taxonomy['types'][] = $post_type;
+    }
     public function add_mj_taxonomies ($post_type) {
       $this->media_taxonomy['types'][] = $post_type;
       $this->tag_taxonomy['types'][] = $post_type;
       $this->section_taxonomy['types'][] = $post_type;
+      $this->blog_taxonomy['types'][] = $post_type;
     }
 
 
@@ -93,6 +112,7 @@ if ( !class_exists( 'MJ_Taxonomy' ) ) {
       $this->all_taxonomies[$this->media_type_id] = $this->media_taxonomy;
       $this->all_taxonomies[$this->tag_id] = $this->tag_taxonomy;
       $this->all_taxonomies[$this->section_id] = $this->section_taxonomy;
+      $this->all_taxonomies[$this->blog_id] = $this->blog_taxonomy;
       add_action( 'created_mj_media_type', array($this, 'fill_media_type') );
       add_action( 'created_mj_section', array($this, 'fill_section') );
     }
@@ -105,6 +125,11 @@ if ( !class_exists( 'MJ_Taxonomy' ) ) {
     public function fill_section() {
       foreach ( $this->section_terms as $i => $term ) {
         wp_insert_term($term, $this->section_id);
+      }
+    }
+    public function fill_blog_type() {
+      foreach ( $this->blog_terms as $i => $term ) {
+        wp_insert_term($term, $this->blog_type_id);
       }
     }
 
