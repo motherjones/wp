@@ -39,7 +39,7 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
           }
         } elseif ( preg_match('/^author\//', $dummy_query->query['category_name']) ) {
           $request['post_type'] = 'mj_author';
-          $request['name'] = str_replace ('/^author\//', '', $dummy_query->query['category_name']);
+          $request['name'] = str_replace ('author/', '', $dummy_query->query['category_name']);
           unset($request['category_name']);
         } 
         print_r($request);
