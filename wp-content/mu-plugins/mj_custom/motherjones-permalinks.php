@@ -37,7 +37,9 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
             ) );
             unset($request['category_name']);
           }
-        }
+        } elseif ( preg_match('^author\/', $dummy_query->query['category_name']) ) {
+          print_r('<h1>is an author</h1>');
+        } 
         print_r($request);
         return $request;
     }
