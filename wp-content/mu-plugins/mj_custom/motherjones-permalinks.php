@@ -23,8 +23,8 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
         $dummy_query->parse_query( $request );
 
         // this is the actual manipulation; do whatever you need here
-        if ($dummy_query->query['category_name']) {
-          print_r($dummy_query);
+        print_r($dummy_query->query);
+        if ($dummy_query->query['category_name'] && $dummy_query->query['post_name']) {
           $request['post_type'] = array('mj_article', 'mj_fullwidth');
         }
 
