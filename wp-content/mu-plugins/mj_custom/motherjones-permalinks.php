@@ -45,14 +45,12 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
           print '<h1>is cat: ' ;
             print_r(get_terms( array(
             'taxonomy' => 'category', 
-            'field' => 'slug',
-            'terms' => $request['category_name']) ) );
+            'slug' => $request['category_name']) ) );
          print '</h1>';
           print '<h1>is prim tag: ';
           print_r(get_terms( array(
             'taxonomy' => 'mj_primary_tag', 
-            'field' => 'slug',
-            'terms' => $request['category_name']) ) );
+            'slug' => $request['category_name']) ) );
          print '</h1>';
           print_r($request);
         }
