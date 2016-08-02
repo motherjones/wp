@@ -24,12 +24,13 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
 
         // this is the actual manipulation; do whatever you need here
         if ($dummy_query->query['category_name'] && $dummy_query->query['name']) {
-          $request['post_type'] = array('mj_article', 'mj_fullwidth', 'mj_blogpost');
+          $request['post_type'] = array('mj_article', 'mj_fullwidth');
           if (get_terms( array(
               'slug' => $dummy_query->query['category_name'],
               'taxonomy' => 'mj_blog_type'
           ) ) ) {
             unset($request['category_name']);
+            $request['post_type'] = 'mj_blogpost';
           }
         }
         print_r($request);
