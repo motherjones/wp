@@ -15,7 +15,9 @@
     </h1>
     <h4 class="dek">
       <a href="<?php print esc_url( get_permalink() ); ?>">
-        <?php print get_post_field( 'dek', get_the_ID() ); ?>
+        <?php print get_post_field( 'alt_dek', get_the_ID() )
+                  ? get_post_field( 'alt_dek', get_the_ID() )
+                  : get_post_field( 'dek', get_the_ID() ); ?>
       </a>
     </h4>
     <p class="byline">
