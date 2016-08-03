@@ -68,7 +68,7 @@ get_header(); ?>
             </h2>
             <ul class="homepage-section-list">
               <?php $pol_query = new WP_Query(array(
-                'category' => 'politics',
+                'category_name' => 'politics',
                 'post_type' => array('mj_article', 'mj_fullwidth'),
                 'posts_per_page' => 2,
               ) ); 
@@ -85,7 +85,7 @@ get_header(); ?>
             </h2>
             <ul class="homepage-section-list">
               <?php $pol_query = new WP_Query(array(
-                'category' => 'environment',
+                'category_name' => 'environment',
                 'post_type' => array('mj_article', 'mj_fullwidth'),
                 'posts_per_page' => 2,
               ) ); 
@@ -102,7 +102,7 @@ get_header(); ?>
             </h2>
             <ul class="homepage-section-list">
               <?php $pol_query = new WP_Query(array(
-                'category' => 'media',
+                'category_name' => 'media',
                 'post_type' => array('mj_article', 'mj_fullwidth'),
                 'posts_per_page' => 2,
               ) ); 
@@ -119,7 +119,7 @@ get_header(); ?>
             </h2>
             <ul class="homepage-section-list">
               <?php $pol_query = new WP_Query(array(
-                'category' => 'food',
+                'category_name' => 'food',
                 'post_type' => array('mj_article', 'mj_fullwidth'),
                 'posts_per_page' => 2,
               ) ); 
@@ -136,7 +136,7 @@ get_header(); ?>
             </h2>
             <ul class="homepage-section-list">
               <?php $pol_query = new WP_Query(array(
-                'category' => 'crime_&_justice',
+                'category_name' => 'crime_&_justice',
                 'post_type' => array('mj_article', 'mj_fullwidth'),
                 'posts_per_page' => 2,
               ) ); 
