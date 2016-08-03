@@ -50,8 +50,8 @@ get_header(); ?>
         </div>
       </div>
 
-      <div id="homepage_featured" class="homepage-fullwidth group">
-        <?php $featured_story = z_get_zone_query('homepage-featured', array(
+      <div id="homepage-featured" class="homepage-fullwidth group">
+        <?php $featured_story = z_get_zone_query('homepage_featured', array(
           'posts_per_page' => 1,
         ) ); 
         $featured_story->the_post();
