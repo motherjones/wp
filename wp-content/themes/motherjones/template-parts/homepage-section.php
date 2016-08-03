@@ -1,4 +1,4 @@
-<li class="article-item homepage-section">
+<li class="article-item homepage-section-item">
   <div class="article-data">
     <h3 class="hed">
       <a href="<?php print esc_url( get_permalink() ); ?>">
