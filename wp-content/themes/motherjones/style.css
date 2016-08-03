@@ -1417,6 +1417,7 @@ h2.widget-title {
   margin-right: 15px;
   float: left;
   text-align: center;
+  margin-bottom: 50px;
 }
 #homepage-investigations-list img {
   width: 485px;
@@ -1425,8 +1426,8 @@ h2.widget-title {
 #homepage-investigations-list h3,
 #homepage-investigations-list .article-data,
 #homepage-investigations-list .byline {
-  width: 100%;
-  max-width: none;
+  width: 485px;
+  max-width: 485px;
 }
 
   /* end homepage investigations */
