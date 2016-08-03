@@ -57,7 +57,7 @@ get_header(); ?>
         $featured_story->the_post();
         $fullwidth_title = 'Featured';
         ?>
-        <?php include(get_template_part( 'template-parts/homepage-fullwidth')); ?>
+        <?php include(locate_template( 'template-parts/homepage-fullwidth.php')); ?>
       </div>
 
       <div id="homepage-sections" class="group">
