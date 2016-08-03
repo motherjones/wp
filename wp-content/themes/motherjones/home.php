@@ -17,7 +17,7 @@
 get_header(); ?>
 
 	<div id="primary" class="content-area">
-		<main id="main" class="site-main" role="main">
+		<main id="main" class="site-main homepage" role="main">
     
       <div id="homepage-top" class="group">
         <?php $top_stories = z_get_zone_query('top_stories', array(

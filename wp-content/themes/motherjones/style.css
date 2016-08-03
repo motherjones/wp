@@ -1283,6 +1283,9 @@ h2.widget-title {
 /* end sidebar items */
 
 /* homepage */
+.homepage {
+  text-align: center;
+}
 .homepage-art-byline {
   font-family: Mallory, sans-serif;
   font-weight: bold;
@@ -1328,9 +1331,14 @@ h2.widget-title {
   padding: 0 15px;
   margin: 0;
 }
+#homepage-top-story-side .article-data {
+  width: 100%;
+  float: none;
+}
 #homepage-top-story-side li {
-  margin-top: 16px;
+  margin-top: 0;
   padding-top: 30px;
+  padding-bottom: 0;
   background-image: url('/wp-content/themes/motherjones/img/grey_line.png');
   background-repeat: no-repeat;
   background-position: top;
