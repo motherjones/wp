@@ -15,6 +15,7 @@
  */
 
 get_header(); ?>
+<h1>we're using the homepage template now</h1>
 
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main" role="main">
