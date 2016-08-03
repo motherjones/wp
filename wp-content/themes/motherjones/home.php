@@ -200,7 +200,7 @@ get_header(); ?>
       <div id="homepage-investigations" class="group">
         <h2 class="promo">Investigations</h2>
         <ul id="homepage-investigations-list">
-          <?php $exposure_story = new WP_Query(array(
+          <?php $investigations = new WP_Query(array(
               'tax_query' => array( array(
                 'taxonomy' => 'mj_primary_tag',
                 'field' => 'slug',
