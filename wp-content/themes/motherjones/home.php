@@ -69,7 +69,7 @@ get_header(); ?>
             <ul class="homepage-section-list">
               <?php $pol_query = new WP_Query(array(
                 'category_name' => 'politics',
-                'post_type' => array('mj_article', 'mj_fullwidth'),
+                'post_type' => array('mj_article', 'mj_full_width'),
                 'posts_per_page' => 2,
               ) ); 
               $pol_query->the_post();
@@ -86,7 +86,7 @@ get_header(); ?>
             <ul class="homepage-section-list">
               <?php $env_query = new WP_Query(array(
                 'category_name' => 'environment',
-                'post_type' => array('mj_article', 'mj_fullwidth'),
+                'post_type' => array('mj_article', 'mj_full_width'),
                 'posts_per_page' => 2,
               ) ); 
               $env_query->the_post();
@@ -103,7 +103,7 @@ get_header(); ?>
             <ul class="homepage-section-list">
               <?php $media_query = new WP_Query(array(
                 'category_name' => 'media',
-                'post_type' => array('mj_article', 'mj_fullwidth'),
+                'post_type' => array('mj_article', 'mj_full_width'),
                 'posts_per_page' => 2,
               ) ); 
               $media_query->the_post();
@@ -120,7 +120,7 @@ get_header(); ?>
             <ul class="homepage-section-list">
               <?php $pol_query = new WP_Query(array(
                 'category_name' => 'food',
-                'post_type' => array('mj_article', 'mj_fullwidth'),
+                'post_type' => array('mj_article', 'mj_full_width'),
                 'posts_per_page' => 2,
               ) ); 
               $pol_query->the_post();
@@ -137,7 +137,7 @@ get_header(); ?>
             <ul class="homepage-section-list">
               <?php $pol_query = new WP_Query(array(
                 'category_name' => 'crime_&_justice',
-                'post_type' => array('mj_article', 'mj_fullwidth'),
+                'post_type' => array('mj_article', 'mj_full_width'),
                 'posts_per_page' => 2,
               ) ); 
               $pol_query->the_post();
@@ -184,7 +184,7 @@ get_header(); ?>
               'field' => 'slug',
               'terms' => 'photoessays',
             )  ), 
-            'post_type' => array('mj_article', 'mj_fullwidth'),
+            'post_type' => array('mj_article', 'mj_full_width'),
             'posts_per_page' => 1,
           ) ); 
           $exposure_story->the_post();
@@ -206,7 +206,7 @@ get_header(); ?>
                 'field' => 'slug',
                 'terms' => 'investigations',
               )  ), 
-              'post_type' => array('mj_article', 'mj_fullwidth'),
+              'post_type' => array('mj_article', 'mj_full_width'),
               'posts_per_page' => 4,
             ) ); 
             while ( $investigations->have_posts() ) {

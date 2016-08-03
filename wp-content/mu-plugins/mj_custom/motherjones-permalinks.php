@@ -24,7 +24,7 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
 
         // this is the actual manipulation; do whatever you need here
         if ($dummy_query->query['category_name'] && $dummy_query->query['name']) { //is article type
-          $request['post_type'] = array('mj_article', 'mj_fullwidth');
+          $request['post_type'] = array('mj_article', 'mj_full_width');
           if (get_terms( array( // is blog post
               'slug' => $dummy_query->query['category_name'],
               'taxonomy' => 'mj_blog_type'
@@ -50,7 +50,7 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
             'taxonomy' => 'mj_primary_tag', 
             'slug' => $request['category_name']) 
           ) ) {
-            $request['post_type'] = array('mj_article', 'mj_fullwidth', 'mj_blog_post');
+            $request['post_type'] = array('mj_article', 'mj_full_width', 'mj_blog_post');
             $request['tax_query'] = array( array(
               'taxonomy' => 'mj_primary_tag',
               'field' => 'slug',
@@ -66,7 +66,7 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
             'taxonomy' => 'mj_media_type', 
             'slug' => $request['category_name']) 
           ) ) {
-            $request['post_type'] = array('mj_article', 'mj_fullwidth', 'mj_blog_post');
+            $request['post_type'] = array('mj_article', 'mj_full_width', 'mj_blog_post');
             $request['tax_query'] = array( array(
               'taxonomy' => 'mj_media_type',
               'field' => 'slug',
