@@ -1422,6 +1422,11 @@ h2.widget-title {
   width: 485px;
 }
 
+#homepage-investigations-list .article-data,
+#homepage-investigations-list .byline {
+  width: 100%;
+  max-width: none;
+}
 
   /* end homepage investigations */
 /* end homepage */

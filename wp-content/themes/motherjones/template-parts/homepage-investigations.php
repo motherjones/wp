@@ -11,13 +11,13 @@
     <p class="homepage-art-byline">
       <?php print get_post_field( 'master_image', get_the_ID() )['master_image_byline']; ?>
     </p>
-    <h4 class="hed">
+    <h3 class="hed">
       <a href="<?php print esc_url( get_permalink() ); ?>">
         <?php print get_post_field( 'alt', get_the_ID() )['alt_title']
                   ? get_post_field( 'alt', get_the_ID() )['alt_title']
                   : get_the_title(); ?>
       </a>
-    </h4>
+    </h3>
     <p class="byline">
       <?php print mj_byline( get_the_ID() ); ?>
     </p>
