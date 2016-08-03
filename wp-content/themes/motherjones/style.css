@@ -1422,6 +1422,7 @@ h2.widget-title {
   width: 485px;
 }
 
+#homepage-investigations-list h3,
 #homepage-investigations-list .article-data,
 #homepage-investigations-list .byline {
   width: 100%;
