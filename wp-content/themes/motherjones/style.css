@@ -1480,4 +1480,21 @@ h2.widget-title {
 
   /* end homepage sections */
 
+  /* homepage kdrum */
+#homepage-kdrum-side {
+  max-width: 640px;
+  margin-right: 20px;
+  float: left;
+}
+#homepage-kdrum-side img {
+  max-width: 640px;
+  height: auto;
+}
+
+#homepage-kdrum-ad {
+  width: 300;
+  float: left;
+}
+  /* end homepage kdrum */
+
 /* end homepage */

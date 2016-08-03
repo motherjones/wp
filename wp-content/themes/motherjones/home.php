@@ -173,7 +173,7 @@ get_header(); ?>
                   'field' => 'slug',
                   'terms' => 'kevin-drum',
                 )  ), 
-                'post_type' => 'mj_blog_type',
+                'post_type' => array('mj_blog_post'),
                 'posts_per_page' => 4,
               ) ); 
               while ( $kdrum->have_posts() ) {
