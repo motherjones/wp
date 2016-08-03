@@ -1289,6 +1289,8 @@ h2.widget-title {
   font-size: 12px;
   font-style: italic;
   color: #ccc;
+  text-align: right;
+  line-height: 4px;
 }
 
   /* top story */
@@ -1300,6 +1302,11 @@ h2.widget-title {
 #homepage-top-story .article-data {
   position: absolute;
   bottom: 50px;
+  text-align: center;
+  background: linear-gradient(transparent,#000);
+}
+#homepage-top-story .article-data a {
+  text-shadow: none;
 }
 #homepage-top-story img {
   width: 800px;
@@ -1309,6 +1316,21 @@ h2.widget-title {
 #homepage-top-story-side {
   width: 190px;
   float: left;
+  padding: 0;
+  margin: 0;
+}
+#homepage-top-story-side li {
+  margin-top: 16px;
+  padding-top: 30px;
+  background-image: url('/wp-content/themes/motherjones/img/grey_line.png');
+  background-position: top;
+  text-align: center;
+  font-size: 16px;
+}
+#homepage-top-story-side li:first-of-type {
+  margin-top: 16px;
+  padding-top: 0;
+  background-image: none;
 }
   /* end top story */
 
