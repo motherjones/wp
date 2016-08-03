@@ -1391,4 +1391,17 @@ h2.widget-title {
 }
 
   /* end more top stories */
+  /* homepage fullwidths */
+
+.homepage-fullwidth {
+  position: relative;
+}
+
+.homepage-fullwidth-section-label {
+  position: absolute;
+  top: 535px;
+  padding: 5px 20px;
+}
+
+  /* end homepage fullwidths */
 /* end homepage */
