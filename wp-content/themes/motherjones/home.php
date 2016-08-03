@@ -28,7 +28,7 @@ get_header(); ?>
         <?php get_template_part( 'template-parts/homepage-top-story' ); ?>
 
         <ul id="homepage-top-story-side">
-          <?php for ($i = 0; $i < 4; $i++): $top_stories->the_post(); ?>
+          <?php for ($i = 0; $i < 3; $i++): $top_stories->the_post(); ?>
             <?php get_template_part( 'template-parts/homepage-top-story-side' ); ?>
           <?php endfor;?>
         </ul>
