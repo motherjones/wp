@@ -15,49 +15,209 @@
  */
 
 get_header(); ?>
-<h1>we're using the homepage template now</h1>
 
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main" role="main">
+    
+      <div id="homepage-top" class="group">
+        <?php $top_stories = z_get_zone_query('top_stories', array(
+          'posts_per_page' => 10,
+        ) ); ?>
 
-		<?php if ( have_posts() ) : ?>
+        <?php $top_stories->the_post(); ?>
+        <?php get_template_part( 'template-parts/homepage-top-story' ); ?>
 
-			<?php if ( is_home() && ! is_front_page() ) : ?>
-				<header>
-					<h1 class="page-title screen-reader-text"><?php single_post_title(); ?></h1>
-				</header>
-			<?php endif; ?>
+        <?php for ($i = 0; $i < 4; $i++): $top_stories->the_post(); ?>
+          <ul id="homepage-top-story-side">
+            <?php get_template_part( 'template-parts/homepage-top-story-side' ); ?>
+          </ul>
+        <?php endfor;?>
+      </div>
 
-			<?php
-			// Start the loop.
-			while ( have_posts() ) : the_post();
+      <p> place an ad here </p>
 
-				/*
-				 * Include the Post-Format-specific template for the content.
-				 * If you want to override this in a child theme, then include a file
-				 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
-				 */
-				get_template_part( 'template-parts/content', get_post_format() );
+      <div id="homepage-more-top-stories" class="group">
+        <div id="homepage-more-top-stories-main">
+          <h2 class="promo">More Top Stories</h2>
+          <ul id="homepage-more-top-stories">
+            <?php for ($i = 0; $i < 6; $i++): $top_stories->the_post(); ?>
+              <?php get_template_part( 'template-parts/homepage-top-story-side' ); ?>
+            <?php endfor; ?>
+          </ul>
+        </div>
+        <div id="homepage-more-stories-sidebar">
+          <p>put membership image here. Possibly a sidebar thing?</p>
+        </div>
+      </div>
 
-			// End the loop.
-			endwhile;
+      <div id="homepage-featured" class="homepage-fullwidth group">
+        <?php $featured_story = z_get_zone_query('homepage-featured', array(
+          'posts_per_page' => 1,
+        ) ); 
+        $featured_story->the_post();
+        $fullwidth_title = 'Featured';
+        ?>
+        <?php include(get_template_part( 'template-parts/homepage-fullwidth')); ?>
+      </div>
 
-			// Previous/next page navigation.
-			the_posts_pagination( array(
-				'prev_text'          => __( 'Previous page', 'twentysixteen' ),
-				'next_text'          => __( 'Next page', 'twentysixteen' ),
-				'before_page_number' => '<span class="meta-nav screen-reader-text">' . __( 'Page', 'twentysixteen' ) . ' </span>',
-			) );
+      <div id="homepage-sections" class="group">
+        <ul id="homepage-sections-list">
+          <li class="homepage-section">
+            <h2 class="promo">
+              Politics
+            </h2>
+            <ul class="homepage-section-list">
+              <?php $pol_query = new WP_Query(array(
+                'category' => 'politics',
+                'post_type' => array('mj_article', 'mj_fullwidth'),
+                'posts_per_page' => 2,
+              ) ); 
+              $pol_query->the_post();
+              get_template_part( 'template-parts/homepage-section-first');
+              $pol_query->the_post();
+              get_template_part( 'template-parts/homepage-section');
+              ?>
+            </ul>
+          </li> 
+          <li class="homepage-section">
+            <h2 class="promo">
+              Environment
+            </h2>
+            <ul class="homepage-section-list">
+              <?php $pol_query = new WP_Query(array(
+                'category' => 'environment',
+                'post_type' => array('mj_article', 'mj_fullwidth'),
+                'posts_per_page' => 2,
+              ) ); 
+              $pol_query->the_post();
+              get_template_part( 'template-parts/homepage-section-first');
+              $pol_query->the_post();
+              get_template_part( 'template-parts/homepage-section');
+              ?>
+            </ul>
+          </li> 
+          <li class="homepage-section">
+            <h2 class="promo">
+              Media
+            </h2>
+            <ul class="homepage-section-list">
+              <?php $pol_query = new WP_Query(array(
+                'category' => 'media',
+                'post_type' => array('mj_article', 'mj_fullwidth'),
+                'posts_per_page' => 2,
+              ) ); 
+              $pol_query->the_post();
+              get_template_part( 'template-parts/homepage-section-first');
+              $pol_query->the_post();
+              get_template_part( 'template-parts/homepage-section');
+              ?>
+            </ul>
+          </li> 
+          <li class="homepage-section">
+            <h2 class="promo">
+              Media FIXME!! is a category rn
+            </h2>
+            <ul class="homepage-section-list">
+              <?php $pol_query = new WP_Query(array(
+                'category' => 'food',
+                'post_type' => array('mj_article', 'mj_fullwidth'),
+                'posts_per_page' => 2,
+              ) ); 
+              $pol_query->the_post();
+              get_template_part( 'template-parts/homepage-section-first');
+              $pol_query->the_post();
+              get_template_part( 'template-parts/homepage-section');
+              ?>
+            </ul>
+          </li> 
+          <li class="homepage-section">
+            <h2 class="promo">
+              Crime & Justice FIXME!! is a category rn
+            </h2>
+            <ul class="homepage-section-list">
+              <?php $pol_query = new WP_Query(array(
+                'category' => 'crime_&_justice',
+                'post_type' => array('mj_article', 'mj_fullwidth'),
+                'posts_per_page' => 2,
+              ) ); 
+              $pol_query->the_post();
+              get_template_part( 'template-parts/homepage-section-first');
+              $pol_query->the_post();
+              get_template_part( 'template-parts/homepage-section');
+              ?>
+            </ul>
+          </li> 
+        </ul>
+      </div>
 
-		// If no content, include the "No posts found" template.
-		else :
-			get_template_part( 'template-parts/content', 'none' );
+      <div id="homepage-kdrum" class="group">
+        <div id="homepage-kdrum-side">
+          <h2 class="promo">
+            Kevin Drum
+          </h2>
+          <img src="/wp-content/themes/motherjones/img/KEVIN.png"></img>
+          <ul id="kdrum-post-list">
+            <?php $kdrum = new WP_Query(array( 
+                'tax_query' => array( array(
+                  'taxonomy' => 'mj_blog_type',
+                  'field' => 'slug',
+                  'terms' => 'kevin-drum',
+                )  ), 
+                'post_type' => 'mj_blog_type',
+                'posts_per_page' => 4,
+              ) ); 
+              while ( $kdrum->have_posts() ) {
+                $kdrum->the_post(); 
+                get_template_part( 'template-parts/homepage-kdrum-story' );
+              }
+            ?>
+        </div>
+        <div id="homepage-kdrum-ad">
+          <p>put an ad here</p>
+        </div>
+      </div>
 
-		endif;
-		?>
+      <div id="homepage-exposure" class="homepage-fullwidth group">
+        <?php $exposure_story = new WP_Query(array(
+            'tax_query' => array( array(
+              'taxonomy' => 'mj_media_type',
+              'field' => 'slug',
+              'terms' => 'photoessay',
+            )  ), 
+            'post_type' => array('mj_article', 'mj_fullwidth'),
+            'posts_per_page' => 1,
+          ) ); 
+          $exposure_story->the_post();
+          $fullwidth_title = 'Exposure';
+        ?>
+        <?php include(get_template_part( 'template-parts/homepage-fullwidth')); ?>
+      </div>
+
+      <div id="homepage-second-ad" class="group">
+        <p>FIXME put an ad here</p>
+      </div>
+
+      <div id="homepage-investigations" class="group">
+        <h2 class="promo">Investigations</h2>
+        <ul id="homepage-investigations-list">
+          <?php $exposure_story = new WP_Query(array(
+              'tax_query' => array( array(
+                'taxonomy' => 'mj_primary_tag',
+                'field' => 'slug',
+                'terms' => 'investigations',
+              )  ), 
+              'post_type' => array('mj_article', 'mj_fullwidth'),
+              'posts_per_page' => 4,
+            ) ); 
+            while ( $investigations->have_posts() ) {
+              $investigations->the_post(); 
+              get_template_part( 'template-parts/homepage-investigations');
+            }
+          ?>
+        </ul>
+      </div>
 
 		</main><!-- .site-main -->
 	</div><!-- .content-area -->
 
-<?php get_sidebar(); ?>
 <?php get_footer(); ?>
