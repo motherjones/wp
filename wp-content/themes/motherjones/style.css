@@ -1351,5 +1351,35 @@ h2.widget-title {
   background-image: none;
 }
   /* end top story */
+  /* more top stories */
+#homepage-more-top-stories-main {
+  width: 630px;
+  float: left;
+}
+#homepage-more-top-stories {
+  margin: 0;
+  padding: 0;
+}
+#homepage-more-top-stories li {
+  padding-top: 30px;
+  margin-top: 15px;
+  border-top: 1px solid #ccc;
+  text-align: center;
+  width: 100%;
+}
+#homepage-more-top-stories li:first-of-type {
+  padding-top: 0;
+  margin-top: 0;
+  border-top: 0;
+}
+#homepage-more-top-stories li .hed {
+  margin-bottom: 0;
+}
 
+#homepage-more-top-stories-side {
+  width: 360px;
+  float: left;
+}
+
+  /* end more top stories */
 /* end homepage */

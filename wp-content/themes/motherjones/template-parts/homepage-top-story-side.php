@@ -1,4 +1,4 @@
-<li class="article-item">
+<li class="article-item group">
   <div class="article-data">
     <h3 class="hed">
       <a href="<?php print esc_url( get_permalink() ); ?>">
