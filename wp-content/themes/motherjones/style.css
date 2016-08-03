@@ -1366,14 +1366,20 @@ h2.widget-title {
   border-top: 1px solid #ccc;
   text-align: center;
   width: 100%;
+  padding-bottom: 0;
 }
 #homepage-more-top-stories li:first-of-type {
-  padding-top: 0;
   margin-top: 0;
   border-top: 0;
 }
 #homepage-more-top-stories li .hed {
   margin-bottom: 0;
+}
+#homepage-more-top-stories li .article-data h3,
+#homepage-more-top-stories li .article-data .byline,
+#homepage-more-top-stories li .article-data {
+  width: 100%;
+  max-width: none;
 }
 
 #homepage-more-top-stories-side {
