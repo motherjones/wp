@@ -84,14 +84,14 @@ get_header(); ?>
               Environment
             </h2>
             <ul class="homepage-section-list">
-              <?php $pol_query = new WP_Query(array(
+              <?php $env_query = new WP_Query(array(
                 'category_name' => 'environment',
                 'post_type' => array('mj_article', 'mj_fullwidth'),
                 'posts_per_page' => 2,
               ) ); 
-              $pol_query->the_post();
+              $env_query->the_post();
               get_template_part( 'template-parts/homepage-section-first');
-              $pol_query->the_post();
+              $env_query->the_post();
               get_template_part( 'template-parts/homepage-section');
               ?>
             </ul>
@@ -101,14 +101,14 @@ get_header(); ?>
               Media
             </h2>
             <ul class="homepage-section-list">
-              <?php $pol_query = new WP_Query(array(
+              <?php $media_query = new WP_Query(array(
                 'category_name' => 'media',
                 'post_type' => array('mj_article', 'mj_fullwidth'),
                 'posts_per_page' => 2,
               ) ); 
-              $pol_query->the_post();
+              $media_query->the_post();
               get_template_part( 'template-parts/homepage-section-first');
-              $pol_query->the_post();
+              $media_query->the_post();
               get_template_part( 'template-parts/homepage-section');
               ?>
             </ul>
