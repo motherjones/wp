@@ -182,7 +182,7 @@ get_header(); ?>
             'tax_query' => array( array(
               'taxonomy' => 'mj_media_type',
               'field' => 'slug',
-              'terms' => 'photoessay',
+              'terms' => 'photoessays',
             )  ), 
             'post_type' => array('mj_article', 'mj_fullwidth'),
             'posts_per_page' => 1,

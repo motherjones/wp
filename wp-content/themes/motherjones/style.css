@@ -1399,8 +1399,10 @@ h2.widget-title {
 
 .homepage-fullwidth-section-label {
   position: absolute;
-  top: 535px;
+  top: 530px;
   padding: 5px 20px;
+  margin: auto;
+  transform: translateX(-50%);
 }
 
   /* end homepage fullwidths */
