@@ -1418,6 +1418,7 @@ h2.widget-title {
   float: left;
   text-align: center;
   margin-bottom: 50px;
+  clear: none;
 }
 #homepage-investigations-list img {
   width: 485px;
