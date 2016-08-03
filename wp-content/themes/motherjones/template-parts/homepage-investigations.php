@@ -1,4 +1,4 @@
-<li class="article-item">
+<li class="article-item group">
   <div class="article-image">
     <a href="<?php print esc_url( get_permalink() ); ?>">
       <?php print wp_get_attachment_image( 

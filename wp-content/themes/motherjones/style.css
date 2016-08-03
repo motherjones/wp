@@ -1406,4 +1406,22 @@ h2.widget-title {
 }
 
   /* end homepage fullwidths */
+
+  /*  homepage investigations */
+#homepage-investigations-list {
+  margin: 0;
+  padding: 0;
+}
+#homepage-investigations-list li {
+  width: 485px;
+  margin-right: 15px;
+  float: left;
+  text-align: center;
+}
+#homepage-investigations-list img {
+  width: 485px;
+}
+
+
+  /* end homepage investigations */
 /* end homepage */
