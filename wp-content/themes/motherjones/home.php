@@ -27,11 +27,11 @@ get_header(); ?>
         <?php $top_stories->the_post(); ?>
         <?php get_template_part( 'template-parts/homepage-top-story' ); ?>
 
-        <?php for ($i = 0; $i < 4; $i++): $top_stories->the_post(); ?>
-          <ul id="homepage-top-story-side">
+        <ul id="homepage-top-story-side">
+          <?php for ($i = 0; $i < 4; $i++): $top_stories->the_post(); ?>
             <?php get_template_part( 'template-parts/homepage-top-story-side' ); ?>
-          </ul>
-        <?php endfor;?>
+          <?php endfor;?>
+        </ul>
       </div>
 
       <p> place an ad here </p>

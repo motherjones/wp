@@ -1230,6 +1230,7 @@ li.article-item {
 
 #main li.photoessay-top a,
 #main li.top-article-item a,
+#main .article-item a,
 #main li.article-item a {
   background-image: none;
 }
@@ -1280,3 +1281,35 @@ h2.widget-title {
   padding-top: 0;
 }
 /* end sidebar items */
+
+/* homepage */
+.homepage-art-byline {
+  font-family: Mallory, sans-serif;
+  font-weight: bold;
+  font-size: 12px;
+  font-style: italic;
+  color: #ccc;
+}
+
+  /* top story */
+#homepage-top-story {
+  width: 800;
+  float: left;
+  position: relative;
+}
+#homepage-top-story .article-data {
+  position: absolute;
+  bottom: 50px;
+}
+#homepage-top-story img {
+  width: 800px;
+  height: 450px;
+}
+
+#homepage-top-story-side {
+  width: 190px;
+  float: left;
+}
+  /* end top story */
+
+/* end homepage */
