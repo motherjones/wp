@@ -1468,6 +1468,15 @@ h2.widget-title {
 #homepage-sections-list img {
   width: 161px;
 }
+#homepage-sections-list h3.hed {
+  font-size: 16px;
+  line-height: 18px;
+  margin-bottom: 4px;
+}
+#homepage-sections-list .byline {
+  font-size: 11px;
+  line-height: 12px;
+}
 
   /* end homepage sections */
 
