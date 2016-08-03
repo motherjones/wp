@@ -1442,11 +1442,10 @@ h2.widget-title {
 }
 
 #homepage-sections-list li {
-  width: 192px;
-  float: left;
   margin-bottom: 15px;
   text-align: center;
   clear: none;
+  float: none;
 }
 #homepage-sections-list .promo {
   font-size: 15px;
@@ -1458,6 +1457,9 @@ h2.widget-title {
 .homepage-section-list {
   padding: 0 15px;
   margin-top: 20px;
+  width: 192px;
+  float: left;
+  display: block;
 }
 
   /* end homepage sections */
