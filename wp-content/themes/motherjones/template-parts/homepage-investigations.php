@@ -22,5 +22,4 @@
       <?php print mj_byline( get_the_ID() ); ?>
     </p>
   </div>
-</div>
-
+</li>
