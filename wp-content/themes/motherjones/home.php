@@ -115,34 +115,44 @@ get_header(); ?>
           </li> 
           <li class="homepage-section">
             <h2 class="promo">
-              Media FIXME!! is a category rn
+              Food
             </h2>
             <ul class="homepage-section-list">
-              <?php $pol_query = new WP_Query(array(
-                'category_name' => 'food',
+              <?php $food_query = new WP_Query(array(
+                'tax_query' => array( array(
+                  'taxonomy' => 'mj_primary_tag',
+                  'field' => 'slug',
+                  'terms' => 'food',
+                )  ), 
                 'post_type' => array('mj_article', 'mj_full_width'),
                 'posts_per_page' => 2,
               ) ); 
-              $pol_query->the_post();
+              //FIXME if we want food to be a section the query needs to change
+              $food_query->the_post();
               get_template_part( 'template-parts/homepage-section-first');
-              $pol_query->the_post();
+              $food_query->the_post();
               get_template_part( 'template-parts/homepage-section');
               ?>
             </ul>
           </li> 
           <li class="homepage-section">
             <h2 class="promo">
-              Crime & Justice FIXME!! is a category rn
+              Crime & Justice
             </h2>
             <ul class="homepage-section-list">
-              <?php $pol_query = new WP_Query(array(
-                'category_name' => 'crime_&_justice',
+              <?php $cnj_query = new WP_Query(array(
+                'tax_query' => array( array(
+                  'taxonomy' => 'mj_primary_tag',
+                  'field' => 'slug',
+                  'terms' => 'crime_and_justice',
+                )  ), 
                 'post_type' => array('mj_article', 'mj_full_width'),
                 'posts_per_page' => 2,
               ) ); 
-              $pol_query->the_post();
+              //FIXME if we want C & J to be a section the query needs to change
+              $cnj_query->the_post();
               get_template_part( 'template-parts/homepage-section-first');
-              $pol_query->the_post();
+              $cnj_query->the_post();
               get_template_part( 'template-parts/homepage-section');
               ?>
             </ul>
