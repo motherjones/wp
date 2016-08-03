@@ -10,13 +10,15 @@
   <div class="article-data">
     <h1 class="hed">
       <a href="<?php print esc_url( get_permalink() ); ?>">
-        <?php the_title(); ?>
+        <?php print get_post_field( 'alt', get_the_ID() )['alt_title']
+                  ? get_post_field( 'alt', get_the_ID() )['alt_title']
+                  : get_the_title(); ?>
       </a>
     </h1>
     <h4 class="dek">
       <a href="<?php print esc_url( get_permalink() ); ?>">
-        <?php print get_post_field( 'alt_dek', get_the_ID() )
-                  ? get_post_field( 'alt_dek', get_the_ID() )
+        <?php print get_post_field( 'alt', get_the_ID() )['alt_dek']
+                  ? get_post_field( 'alt', get_the_ID() )['alt_dek']
                   : get_post_field( 'dek', get_the_ID() ); ?>
       </a>
     </h4>

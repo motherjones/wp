@@ -14,7 +14,9 @@
 </p>
 <div class="article-data">
     <a href="<?php print esc_url( get_permalink() ); ?>">
-      <?php the_title(); ?>
+        <?php print get_post_field( 'alt', get_the_ID() )['alt_title']
+                  ? get_post_field( 'alt', get_the_ID() )['alt_title']
+                  : get_the_title(); ?>
     </a>
   </h3>
   <p class="byline">
