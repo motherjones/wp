@@ -1447,12 +1447,19 @@ h2.widget-title {
   clear: none;
   float: none;
 }
+.homepage-section-list {
+  padding: 0;
+}
 #homepage-sections-list .homepage-section {
   padding: 0 15px;
   margin-top: 20px;
   width: 192px;
   float: left;
   display: block;
+}
+#homepage-sections-list .article-image,
+#homepage-sections-list .article-data {
+  float: none;
 }
 #homepage-sections-list .promo {
   font-size: 15px;
