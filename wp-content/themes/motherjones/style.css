@@ -1431,6 +1431,35 @@ h2.widget-title {
   width: 485px;
   max-width: 485px;
 }
-
   /* end homepage investigations */
+
+  /* homepage sections */
+
+#homepage-sections-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+#homepage-sections-list li {
+  width: 192px;
+  float: left;
+  margin-bottom: 15px;
+  text-align: center;
+  clear: none;
+}
+#homepage-sections-list .promo {
+  font-size: 15px;
+  letter-spacing: 2px;
+}
+#homepage-sections-list img {
+  width: 161px;
+}
+.homepage-section-list {
+  padding: 0 15px;
+  margin-top: 20px;
+}
+
+  /* end homepage sections */
+
 /* end homepage */
