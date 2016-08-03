@@ -1286,6 +1286,9 @@ h2.widget-title {
 .homepage {
   text-align: center;
 }
+#main.homepage a {
+  background-image: none;
+}
 .homepage-art-byline {
   font-family: Mallory, sans-serif;
   font-weight: bold;
