@@ -190,7 +190,7 @@ get_header(); ?>
           $exposure_story->the_post();
           $fullwidth_title = 'Exposure';
         ?>
-        <?php include(locate_template( 'template-parts/homepage-fullwidth')); ?>
+        <?php include(locate_template( 'template-parts/homepage-fullwidth.php')); ?>
       </div>
 
       <div id="homepage-second-ad" class="group">
