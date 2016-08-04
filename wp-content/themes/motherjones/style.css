@@ -1306,6 +1306,10 @@ li.article-item {
 .top-article-item p {
   margin: 0;
 }
+.top-article-item {
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 15px;
+}
 li.article-item img {
   height: auto;
   width: 208px; 
