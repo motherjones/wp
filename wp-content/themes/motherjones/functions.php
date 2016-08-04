@@ -129,30 +129,36 @@ if (!function_exists( 'mj_wysiwyg_config' ) ) {
 		$config['content_css'] = get_template_directory_uri() . "/editor-style.css";
 		$config['wpautop'] = true;
 		$config['apply_source_formatting'] = false;
-	$style_formats = array(  
-		// Each array child is a format with it's own settings
-		array(  
-			'title' => '.translation',  
-			'block' => 'blockquote',  
-			'classes' => 'translation',
-			'wrapper' => true,
-			
-		),  
-		array(  
-			'title' => '⇠.rtl',  
-			'block' => 'blockquote',  
-			'classes' => 'rtl',
-			'wrapper' => true,
-		),
-		array(  
-			'title' => '.ltr⇢',  
-			'block' => 'blockquote',  
-			'classes' => 'ltr',
-			'wrapper' => true,
-		),
-	);  
-	// Insert the array, JSON ENCODED, into 'style_formats'
-	$config['style_formats'] = json_encode( $style_formats );  
+
+		$style_formats = array(  
+			// Each array child is a format with it's own settings
+			array(  
+				'title' => 'Section Lead',  
+				'block' => 'span',  
+				'classes' => 'section-lead',
+				'wrapper' => false,
+			),  
+			array(  
+				'title' => 'Pullquote',  
+				'block' => 'blockquote',  
+				'classes' => 'pullquote-left',
+				'wrapper' => true,
+			),
+			array(  
+				'title' => 'paragraph',  
+				'block' => 'p',  
+				'classes' => '',
+				'wrapper' => true,
+			),
+			array(  
+				'title' => 'Subheader',  
+				'block' => 'h3',  
+				'classes' => '',
+				'wrapper' => true,
+			),
+		);  
+		// Insert the array, JSON ENCODED, into 'style_formats'
+		$config['style_formats'] = json_encode( $style_formats );  
 
 		$config['toolbar1'] = 'bold,italic,strikethrough,bullist,numlist,blockquote,hr,styleselect,link,unlink,wp_fullscreen,wp_adv ';
 		$config['toolbar2'] = 'spellchecker,underline,removeformat,charmap,outdent,indent,undo,redo,wp_help ';
