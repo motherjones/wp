@@ -54,22 +54,26 @@ get_header(); ?>
 
           <ul id="prev-next">
             <li class="previous">
-              <span class="label">Previous:</span>
-              <?php echo previous_post_link( 
+              <?php $prev = previous_post_link( 
                  '%link',
                  '%title',
                  TRUE,
                  ' ',
-                 'mj_blog_type'); ?> 
+                 'mj_blog_type'); 
+              if ($prev): ?>
+              <span class="label">Previous:</span>
+              <?php echo $prev; endif; ?> 
             </li>
             <li class="next">
-              <span class="label">Next:</span>
-               <?php echo next_post_link( 
+              <?php $next =  next_post_link( 
                  '%link',
                  '%title',
                  TRUE,
                  ' ',
-                 'mj_blog_type' ); ?> 
+                 'mj_blog_type' );
+              if ($next): ?> 
+                <span class="label">Next:</span>
+              <?php echo $next; endif; ?> 
             </li>
           </ul>
 
