@@ -52,16 +52,17 @@ get_header(); ?>
 
           <?php get_template_part( 'template-parts/members-like-you' ); ?>
 
-          <?php print previous_post_link(array(
+          <?php print_r(previous_post_link(array(
             'in_same_term' => true,
             'taxonomy' => 'mj_blog_type',
-          ) );
+          ) )
+);
           ?>
           <h1>get prev/next in here somehow</h1>
-          <?php print next_post_link(array(
+          <?php print_r( next_post_link(array(
             'in_same_term' => true,
             'taxonomy' => 'mj_blog_type',
-          ) );
+          ) ) );
           ?>
 
 
