@@ -1216,8 +1216,15 @@ ul.author-bios {
   float: left;
   max-width: 535px;
 }
+.full-width .author-bio {
+  max-width: 895px;
+}
+.full-width .members-like-you p,
 .full-width .author-data p {
   margin-right: 0;
+}
+.full-width #related-articles {
+  max-width: none;
 }
 .author-bio .byline {
   display: block;
@@ -1623,6 +1630,7 @@ article.full-width {
   background-image: url('/wp-content/themes/motherjones/img/border-black25.png');
   background-repeat: repeat-y;
   background-position: 660px;
+  margin-bottom: 45px;
 }
 
 /* end full width */
