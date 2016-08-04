@@ -130,18 +130,22 @@ if (!function_exists( 'mj_wysiwyg_config' ) ) {
 		$config['wpautop'] = true;
 		$config['apply_source_formatting'] = false;
 		$formats = array(
-      'paragraph' => array(
+      array(
+        'title' => '.paragraph', 
         'block' => 'p',
       ),
-      'pullquote' => array(
-        'block' => 'div',
+      array(
+        'title' => '.pullquote', 
+        'block' => 'blockquote',
         'classes' => 'pullquote-left',
       ),
-      'section-lead' => array(
+      array(
+        'title' => '.section-lead', 
         'inline' => 'span',
         'classes' => 'section-lead',
       ),
-      'subheader' => array(
+      array(
+        'title' => '.subheader', 
         'block' => 'h3',
       ),
 		);
