@@ -55,6 +55,14 @@ if ( !class_exists( 'MJ_Images' ) ) {
         'crop' => true,
         'name' => 'Homepage investigations thumbnail',
       ),
+
+      'full_width_title_image' => array(
+        'width' => 2400, 
+        'height' => 1350, 
+        'crop' => true,
+        'name' => 'Full Width Title Image'
+      ),
+
     );
 
     public function setup() {
