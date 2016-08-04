@@ -312,10 +312,6 @@ html {
   }
 }
 
-#full-width-header {
-  width: 100%;
-}
-
 /* fonts */
 @font-face {
   font-family: 'Mallory';
@@ -1544,3 +1540,20 @@ h2.widget-title {
   /* end homepage kdrum */
 
 /* end homepage */
+
+/* full width */
+
+#full-width-header {
+  width: 100%;
+  position: relative;
+}
+
+#full-width-header-image img {
+  width: 100%;
+  height: auto;
+}
+#full-width-header-data {
+  position: absolute;
+  bottom: 0px;
+}
+/* end full width */
