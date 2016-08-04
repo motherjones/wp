@@ -149,12 +149,6 @@ if (!function_exists( 'mj_wysiwyg_config' ) ) {
 				'classes' => 'pullquote-left',
 				'wrapper' => false,
 			),
-			array(  
-				'title' => 'paragraph',  
-				'block' => 'p',  
-				'classes' => '',
-				'wrapper' => true,
-			),
 		);  
 		// Insert the array, JSON ENCODED, into 'style_formats'
 		$config['style_formats'] = json_encode( $style_formats );  
