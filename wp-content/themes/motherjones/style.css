@@ -1167,6 +1167,11 @@ a.social {
   margin-right: 5px;
 }
 
+#main .social-tools.bottom .share-text {
+  vertical-align: top;
+  font-size: 14px;
+}
+
 #main .social-tools.bottom a {
   color: white;
   text-shadow: none;
