@@ -54,7 +54,9 @@ get_header(); ?>
             </ul>
           </div>
           
-          <?php print get_post_field( 'body', get_the_ID() ); ?>
+          <div id="fullwidth-body">
+            <?php print get_post_field( 'body', get_the_ID() ); ?>
+          </div>
 
           <footer class="entry-footer">
 

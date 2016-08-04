@@ -1216,10 +1216,8 @@ ul.author-bios {
   float: left;
   max-width: 535px;
 }
-.author-data {
-}
 .full-width .author-data p {
-  margin: 0;
+  margin-right: 0;
 }
 .author-bio .byline {
   display: block;
@@ -1619,6 +1617,12 @@ h2.widget-title {
 
 article.full-width {
   width: 100%;
+}
+
+#fullwidth-body {
+  background-image: url('/wp-content/themes/motherjones/img/border-black25.png')
+  background-repeat: repeat-y;
+  background-position: 660px;
 }
 
 /* end full width */
