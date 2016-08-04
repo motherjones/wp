@@ -71,7 +71,6 @@
       </div>
 
 		</footer><!-- .site-footer -->
-	</div><!-- .site-inner -->
 </div><!-- .site -->
 
 <?php wp_footer(); ?>

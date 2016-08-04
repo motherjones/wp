@@ -24,7 +24,6 @@
 <?php get_template_part( 'template-parts/floating-navbar'); ?>
 <?php dynamic_sidebar( 'page-top' ); ?>
 <div id="page" class="site">
-	<div class="site-inner">
 
 		<header id="masthead" class="site-header" role="banner">
 			<?php get_template_part( 'template-parts/static-navbar'); ?>
