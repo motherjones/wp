@@ -178,7 +178,6 @@ if (!function_exists( 'mj_wysiwyg_config' ) ) {
        */
 		);
     $config['style_formats'] = json_encode( $formats );
-    $config['style_formats_merge'] = false;
 		$config['toolbar1'] = 'bold,italic,strikethrough,bullist,numlist,blockquote,hr,styleselect,link,unlink,wp_fullscreen,wp_adv ';
 		$config['toolbar2'] = 'spellchecker,underline,removeformat,charmap,outdent,indent,undo,redo,wp_help ';
 
