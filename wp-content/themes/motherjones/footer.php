@@ -76,6 +76,7 @@
 <?php wp_footer(); ?>
 
 <script type="text/javascript" src="/wp-content/themes/motherjones/js/nav.js"></script>
+<script type="text/javascript" src="/wp-content/themes/motherjones/js/jquery-3.1.0.js"></script>
 
 <?php dynamic_sidebar( 'page-end' ); ?>
 </body>
