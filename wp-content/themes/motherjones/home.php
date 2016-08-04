@@ -139,14 +139,14 @@ get_header(); ?>
           </li> 
           <li class="homepage-section">
             <h2 class="promo">
-              <a href="/crime_and_justice">Crime & Justice</a>
+              <a href="/crime-and-justice">Crime & Justice</a>
             </h2>
             <ul class="homepage-section-list">
               <?php $cnj_query = new WP_Query(array(
                 'tax_query' => array( array(
                   'taxonomy' => 'mj_primary_tag',
                   'field' => 'slug',
-                  'terms' => 'crime_and_justice',
+                  'terms' => 'crime-and-justice',
                 )  ), 
                 'post_type' => array('mj_article', 'mj_full_width'),
                 'posts_per_page' => 2,
