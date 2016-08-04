@@ -52,7 +52,7 @@ get_header(); ?>
 
           <?php get_template_part( 'template-parts/members-like-you' ); ?>
 
- <?php previous_post_link( '%link', '%title', TRUE, ' ', 'mj_blog_type' ); ?> 
+ <?php echo previous_post_link( '%link', '%title', TRUE, ' ', 'mj_blog_type' ); ?> 
 
           <?php print_r(previous_post_link(array(
             'format' => 'prev %link -->',
