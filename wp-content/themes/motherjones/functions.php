@@ -130,6 +130,7 @@ if (!function_exists( 'mj_wysiwyg_config' ) ) {
 		$config['wpautop'] = true;
 		$config['apply_source_formatting'] = false;
 		$style_formats = array(
+      /*
       array(
         'title' => 'Blocks',
         'items' => array(
@@ -144,6 +145,7 @@ if (!function_exists( 'mj_wysiwyg_config' ) ) {
           ),
         ),
       ),
+       */
       array(
         'title' => 'Inline',
         'items' => array(
@@ -154,13 +156,16 @@ if (!function_exists( 'mj_wysiwyg_config' ) ) {
           array('title' => 'Superscript', 'icon' => 'superscript', 'format' => 'superscript'),
           array('title' => 'Subscript', 'icon' => 'subscript', 'format' => 'subscript'),
           array('title' => 'Code', 'icon' => 'code', 'format' => 'code'),
+          /*
           array(
             'title' => '.section-lead', 
             'format' => 'span',
             'classes' => 'section-lead',
           ),
+           */
         )
       ),
+      /*
       array(
         'title' => 'Headers',
         'items' => array(
@@ -170,13 +175,12 @@ if (!function_exists( 'mj_wysiwyg_config' ) ) {
           ),
         ),
       )
+       */
 		);
     $config['style_formats'] = json_encode( $formats );
     $config['style_formats_merge'] = false;
 		$config['toolbar1'] = 'bold,italic,strikethrough,bullist,numlist,blockquote,hr,styleselect,link,unlink,wp_fullscreen,wp_adv ';
 		$config['toolbar2'] = 'spellchecker,underline,removeformat,charmap,outdent,indent,undo,redo,wp_help ';
-		$config['toolbar3'] = '';
-		$config['toolbar4'] = '';
 
 		return $config;
   }
