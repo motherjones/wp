@@ -129,29 +129,50 @@ if (!function_exists( 'mj_wysiwyg_config' ) ) {
 		$config['content_css'] = get_template_directory_uri() . "/editor-style.css";
 		$config['wpautop'] = true;
 		$config['apply_source_formatting'] = false;
-		$formats = array(
+		$style_formats = array(
       array(
-        'title' => '.paragraph', 
-        'block' => 'p',
+        'title' => 'Blocks',
+        'items' => array(
+          array(
+            'title' => 'Paragraph', 
+            'format' => 'p',
+          ),
+          array(
+            'title' => '.pullquote', 
+            'format' => 'blockquote',
+            'classes' => 'pullquote-left',
+          ),
+        ),
       ),
       array(
-        'title' => '.pullquote', 
-        'block' => 'blockquote',
-        'classes' => 'pullquote-left',
+        'title' => 'Inline',
+        'items' => array(
+          array('title' => 'Bold', 'icon' => 'bold', 'format' => 'bold'),
+          array('title' => 'Italic', 'icon' => 'italic', 'format' => 'italic'),
+          array('title' => 'Underline', 'icon' => 'underline', 'format' => 'underline'),
+          array('title' => 'Strikethrough', 'icon' => 'strikethrough', 'format' => 'strikethrough'),
+          array('title' => 'Superscript', 'icon' => 'superscript', 'format' => 'superscript'),
+          array('title' => 'Subscript', 'icon' => 'subscript', 'format' => 'subscript'),
+          array('title' => 'Code', 'icon' => 'code', 'format' => 'code'),
+          array(
+            'title' => '.section-lead', 
+            'format' => 'span',
+            'classes' => 'section-lead',
+          ),
+        )
       ),
       array(
-        'title' => '.section-lead', 
-        'inline' => 'span',
-        'classes' => 'section-lead',
-      ),
-      array(
-        'title' => '.subheader', 
-        'block' => 'h3',
-      ),
+        'title' => 'Headers',
+        'items' => array(
+          array(
+            'title' => 'Subheader', 
+            'format' => 'h3',
+          ),
+        ),
+      )
 		);
-    $config['formats'] = json_encode( $formats );
-    $config['theme_advanced_styles'] = 'Paragraph=paragraph; Pullquote=pullquote; Section Lead=section-lead; Subheader=subheader';
-    //$config['block_formats'] = "Paragraph=p; Subheader=h3; Section Lead=section-lead; Pullquote:pullquote;";
+    $config['style_formats'] = json_encode( $formats );
+    $config['style_formats_merge'] = false;
 		$config['toolbar1'] = 'bold,italic,strikethrough,bullist,numlist,blockquote,hr,styleselect,link,unlink,wp_fullscreen,wp_adv ';
 		$config['toolbar2'] = 'spellchecker,underline,removeformat,charmap,outdent,indent,undo,redo,wp_help ';
 		$config['toolbar3'] = '';
