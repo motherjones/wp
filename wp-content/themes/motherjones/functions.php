@@ -129,7 +129,7 @@ if (!function_exists( 'mj_wysiwyg_config' ) ) {
 		$config['content_css'] = get_template_directory_uri() . "/editor-style.css";
 		$config['wpautop'] = true;
 		$config['apply_source_formatting'] = false;
-		$config['formats'] = array(
+		$formats = array(
       'paragraph' => array(
         'block' => 'p',
       ),
@@ -145,6 +145,7 @@ if (!function_exists( 'mj_wysiwyg_config' ) ) {
         'block' => 'h3',
       ),
 		);
+    $config['formats'] = json_encode( $formats );
 		$config['toolbar1'] = 'bold,italic,strikethrough,bullist,numlist,blockquote,hr,formatselect,link,unlink,wp_fullscreen,wp_adv ';
 		$config['toolbar2'] = 'spellchecker,underline,removeformat,charmap,outdent,indent,undo,redo,wp_help ';
 		$config['toolbar3'] = '';
