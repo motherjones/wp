@@ -86,7 +86,7 @@ a {
   -1px -1px 0 white, 1px 1px 0 white, 1px -1px 0 white, -1px 1px 0 white;
 }
 
-blockquote {
+.pullquote-left, blockquote {
   border-top: 10px solid black;
   font-size: 26px;
   position: relative;
@@ -97,17 +97,11 @@ blockquote {
   font-weight: bold;
   font-style: italic;
   font-family: Mallory, sans-serif;
-  left: -55px;
   margin-bottom: 30px;
   margin-top: 20px;
   float: left;
 }
 
-.pullquote-right {
-  right: -15px;
-  float: right;
-  margin: 20px 0 30px 40px;
-}
 .right-rail,
 .inline-right {
   float: right;

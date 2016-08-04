@@ -146,6 +146,7 @@ if (!function_exists( 'mj_wysiwyg_config' ) ) {
       ),
 		);
     $config['formats'] = json_encode( $formats );
+    $config['block_formats'] = "Paragraph=p; Subheader=h3; Section Lead=section-lead; Pullquote:pullquote;";
 		$config['toolbar1'] = 'bold,italic,strikethrough,bullist,numlist,blockquote,hr,formatselect,link,unlink,wp_fullscreen,wp_adv ';
 		$config['toolbar2'] = 'spellchecker,underline,removeformat,charmap,outdent,indent,undo,redo,wp_help ';
 		$config['toolbar3'] = '';
