@@ -822,15 +822,18 @@ ul#prev-next {
   padding: 0;
 }
 ul#prev-next li {
+  font-family: Mallory, sans-serif;
   width: 50%;
   float: left;
+  line-height: 16px;
 }
 ul#prev-next .next {
   text-align: right;
 }
 ul#prev-next .label {
   font-size: 12px;
-  font-family: Mallory, sans-serif;
+  font-weight: bold;
+  display: block;
   color: #ff6900;
   text-transform: uppercase;
   padding-bottom: 3px;
@@ -838,7 +841,6 @@ ul#prev-next .label {
 #main ul#prev-next a {
   background-image: none;
   font-size: 14px;
-  line-height: 16px;
   text-shadow: none;
 }
 /* end blogstuff */
