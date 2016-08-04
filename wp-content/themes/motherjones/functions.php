@@ -129,55 +129,31 @@ if (!function_exists( 'mj_wysiwyg_config' ) ) {
 		$config['content_css'] = get_template_directory_uri() . "/editor-style.css";
 		$config['wpautop'] = true;
 		$config['apply_source_formatting'] = false;
-		$style_formats = array(
-      /*
-      array(
-        'title' => 'Blocks',
-        'items' => array(
-          array(
-            'title' => 'Paragraph', 
-            'format' => 'p',
-          ),
-          array(
-            'title' => '.pullquote', 
-            'format' => 'blockquote',
-            'classes' => 'pullquote-left',
-          ),
-        ),
-      ),
-       */
-      array(
-        'title' => 'Inline',
-        'items' => array(
-          array('title' => 'Bold', 'icon' => 'bold', 'format' => 'bold'),
-          array('title' => 'Italic', 'icon' => 'italic', 'format' => 'italic'),
-          array('title' => 'Underline', 'icon' => 'underline', 'format' => 'underline'),
-          array('title' => 'Strikethrough', 'icon' => 'strikethrough', 'format' => 'strikethrough'),
-          array('title' => 'Superscript', 'icon' => 'superscript', 'format' => 'superscript'),
-          array('title' => 'Subscript', 'icon' => 'subscript', 'format' => 'subscript'),
-          array('title' => 'Code', 'icon' => 'code', 'format' => 'code'),
-          /*
-          array(
-            'title' => '.section-lead', 
-            'format' => 'span',
-            'classes' => 'section-lead',
-          ),
-           */
-        )
-      ),
-      /*
-      array(
-        'title' => 'Headers',
-        'items' => array(
-          array(
-            'title' => 'Subheader', 
-            'format' => 'h3',
-          ),
-        ),
-      )
-       */
-		);
-    $config['style_formats'] = json_encode( $formats );
+	$style_formats = array(  
+		// Each array child is a format with it's own settings
+		array(  
+			'title' => '.translation',  
+			'block' => 'blockquote',  
+			'classes' => 'translation',
+			'wrapper' => true,
+			
+		),  
+		array(  
+			'title' => '⇠.rtl',  
+			'block' => 'blockquote',  
+			'classes' => 'rtl',
+			'wrapper' => true,
+		),
+		array(  
+			'title' => '.ltr⇢',  
+			'block' => 'blockquote',  
+			'classes' => 'ltr',
+			'wrapper' => true,
+		),
+	);  
+	// Insert the array, JSON ENCODED, into 'style_formats'
+	$config['style_formats'] = json_encode( $style_formats );  
+
 		$config['toolbar1'] = 'bold,italic,strikethrough,bullist,numlist,blockquote,hr,styleselect,link,unlink,wp_fullscreen,wp_adv ';
 		$config['toolbar2'] = 'spellchecker,underline,removeformat,charmap,outdent,indent,undo,redo,wp_help ';
 
