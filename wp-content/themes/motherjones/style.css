@@ -803,7 +803,7 @@ h1.hed {
 }
 /* end static navbar styling */
 
-/* article */
+/* blogstuff */
 header.article  {
   text-align: center;
 }
@@ -816,7 +816,32 @@ header.article  {
 article.blog {
   text-align: left;
 }
-/* end article */
+
+ul.prev-next {
+  list-style-type: none;
+  padding: 0;
+}
+ul.prev-next li {
+  width: 50%;
+  float: left;
+}
+ul.prev-next .next {
+  text-align: right;
+}
+ul.prev-next .label {
+  font-size: 12px;
+  font-family: Mallory, sans-serif;
+  color: #ff6900;
+  text-transform: uppercase;
+  padding-bottom: 3px;
+}
+#main ul.prev-next a {
+  background-image: none;
+  font-size: 14px;
+  line-height: 16px;
+  text-shadow: none;
+}
+/* end blogstuff */
 
 /* start within article body */
 #mininav {
