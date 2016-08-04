@@ -13,7 +13,7 @@ get_header(); ?>
 	<main id="main" class="site-main group" role="main">
     <?php while ( have_posts() ) : the_post(); ?>
       <article class="blog-post">
-        <header class="entry-header blog-post">
+        <div class="entry-header blog-post">
           <?php the_title( '<h1 class="blog-post hed">', '</h1>' ); ?>
           <h3 class="dek">
             <?php print get_post_field( 'dek', get_the_ID() ); ?>
@@ -36,7 +36,7 @@ get_header(); ?>
               </li>
             </ul>
           </div>
-        </header><!-- .entry-header -->
+        </div><!-- .entry-header -->
         <?php print get_post_field( 'css', get_the_ID() ); ?>
         
         <?php print get_post_field( 'body', get_the_ID() ); ?>
