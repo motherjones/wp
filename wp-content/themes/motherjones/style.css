@@ -1556,6 +1556,9 @@ h2.widget-title {
   position: absolute;
   bottom: 0px;
   text-align: center;
+  width: 100%;
+  margin-bottom: 10px;
+  background: linear-gradient(transparent,#000);
 }
 #full-width-header-data h1,
 #full-width-header-data h3 {
