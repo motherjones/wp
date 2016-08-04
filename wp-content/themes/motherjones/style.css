@@ -825,6 +825,7 @@ ul#prev-next li {
   font-family: Mallory, sans-serif;
   width: 50%;
   float: left;
+  min-height: 40px;
   line-height: 16px;
 }
 ul#prev-next .next {
