@@ -1104,6 +1104,7 @@ ul.social-tools.top li {
   padding: 0 3px;
 }
 
+.blog-post .social-tools.top,
 .article .social-tools.top {
   width: 98px;
   padding: 0 10px;
@@ -1123,6 +1124,7 @@ ul.social-tools.top li {
 .social-tools.top .share-text {
   display: none;
 }
+.blog-post .social-container.top,
 .article .social-container.top {
   height: 17px;
   border-bottom: 1px solid #ccc;
