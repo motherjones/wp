@@ -56,7 +56,7 @@ if ( !class_exists( 'MJ_Images' ) ) {
         'name' => 'Homepage investigations thumbnail',
       ),
 
-      'full_width_title_image' => array(
+      'full_width_giant' => array(
         'width' => 2400, 
         'height' => 1350, 
         'crop' => true,

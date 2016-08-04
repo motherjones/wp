@@ -12,7 +12,7 @@ get_header(); ?>
   <div id="full-width-header-image">
     <?php print wp_get_attachment_image( 
       get_post_field( 'full_width_title_image', get_the_ID() )['title_image'],
-      'full_width_title_image'
+      'full_width_giant'
     ); ?>
   </div>
   <div id="full-width-header-data">
