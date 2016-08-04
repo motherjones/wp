@@ -13,25 +13,26 @@ get_header(); ?>
 	<main id="main" class="site-main author" role="main">
 		<?php
 		// Start the loop.
-		while ( have_posts() ) : $author = the_post();
+		while ( have_posts() ) : the_post();
+    $author_id = get_the_ID();
     ?>
 
       <div class="author-image">
         <?php
-          print wp_get_attachment_image( $author['image'][0], 
+          print wp_get_attachment_image( get_post_field('image')[0], 
             array('80', '80')
           );
         ?>
       </div>
       <div class="author-data">
         <p class="author-bio byline">
-          <?php print get_the_title( $author_id ); ?>
+          <?php print get_the_title( get_the_ID() ); ?>
           <span class="author-position">
-            <?php print $author['position']; ?>
+            <?php print get_post_field('position'); ?>
           </span>
         </p>
         <p class="author-bio-text">
-          <?php print $author['long_bio'][0] ?>
+          <?php print get_post_field('long_bio')[0] ?>
         </p>
       </div>
 
@@ -46,7 +47,8 @@ get_header(); ?>
           'post_type' => array('mj_full_width', 'mj_article', 'mj_blog_post'),
           'meta_query' => array(
             'key' => 'authors',
-            'value' => $author['slug'],
+            'value' => $author_id,
+            'compare' => 'LIKE',
           ),
         ) );
         print_r ($authors_articles);
