@@ -52,24 +52,26 @@ get_header(); ?>
 
           <?php get_template_part( 'template-parts/members-like-you' ); ?>
 
- <?php echo previous_post_link( '%link', '%title', TRUE, ' ', 'mj_blog_type' ); ?> 
-
-          <?php print_r(previous_post_link(array(
-            'format' => 'prev %link -->',
-            'link' => '%title',
-            'in_same_term' => true,
-            'taxonomy' => 'mj_blog_type',
-          ) )
-);
-          ?>
-          <h1>get prev/next in here somehow</h1>
-          <?php print_r( next_post_link(array(
-            'format' => 'next %link -->',
-            'link' => '%title',
-            'in_same_term' => true,
-            'taxonomy' => 'mj_blog_type',
-          ) ) );
-          ?>
+          <ul id="prev-next">
+            <li class="previous">
+              <span class="label">Previous:</span>
+              <?php echo previous_post_link( 
+                 '%link',
+                 '%title',
+                 TRUE,
+                 ' ',
+                 'mj_blog_type'); ?> 
+            </li>
+            <li class="next">
+              <span class="label">Next:</span>
+               <?php echo next_post_link( 
+                 '%link',
+                 '%title',
+                 TRUE,
+                 ' ',
+                 'mj_blog_type' ); ?> 
+            </li>
+          </ul>
 
 
         </footer><!-- .entry-footer -->
