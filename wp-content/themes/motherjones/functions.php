@@ -135,19 +135,19 @@ if (!function_exists( 'mj_wysiwyg_config' ) ) {
 				'title' => 'Subheader',  
 				'block' => 'h3',  
 				'classes' => 'subheader',
-				'wrapper' => true,
+				'wrapper' => false,
 			),
 			array(  
 				'title' => 'Section Lead',  
 				'inline' => 'span',  
 				'classes' => 'section-lead',
-				'wrapper' => true,
+				'wrapper' => false,
 			),  
 			array(  
 				'title' => 'Pullquote',  
 				'block' => 'blockquote',  
 				'classes' => 'pullquote-left',
-				'wrapper' => true,
+				'wrapper' => false,
 			),
 			array(  
 				'title' => 'paragraph',  
