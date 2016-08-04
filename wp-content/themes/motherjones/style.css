@@ -312,6 +312,10 @@ html {
   }
 }
 
+#full-width-header {
+  width: 100%;
+}
+
 /* fonts */
 @font-face {
   font-family: 'Mallory';
