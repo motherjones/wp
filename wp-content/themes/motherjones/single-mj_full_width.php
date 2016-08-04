@@ -8,7 +8,7 @@
 
 get_header(); ?>
 
-<header id="full-width-header">
+<header id="full-width-header" class="group">
   <div id="full-width-header-image">
   <?php print wp_get_attachment_image( 
     get_post_field( 'full_width_title_image', get_the_ID() )['title_image'],
@@ -35,44 +35,46 @@ get_header(); ?>
   <?php print get_post_field( 'full_width_title_image', get_the_ID() )['title_image_byline']; ?>
 </p>
 
-<div id="primary" class="content-area">
-	<main id="main" class="site-main" role="main">
-    <?php while ( have_posts() ) : the_post(); ?>
-      <article id="post-<?php get_the_ID(); ?>" class="article">
-        <?php print get_post_field( 'css', get_the_ID() ); ?>
-        <div class="social-container article top">
-          <ul class="social-tools article top">
-            <li class="twitter">
-              <?php print mj_flat_twitter_button( get_the_ID() ); ?>
-            </li>
-            <li class="facebook">
-              <?php print mj_flat_facebook_button( get_the_ID() ); ?>
-            </li>
-          </ul>
-        </div>
-        
-        <?php print get_post_field( 'body', get_the_ID() ); ?>
 
-        <footer class="entry-footer">
+<div id="content" class="site-content">
+  <div id="primary" class="content-area">
+    <main id="main" class="site-main" role="main">
+      <?php while ( have_posts() ) : the_post(); ?>
+        <article id="post-<?php get_the_ID(); ?>" class="article">
+          <?php print get_post_field( 'css', get_the_ID() ); ?>
+          <div class="social-container article top">
+            <ul class="social-tools article top">
+              <li class="twitter">
+                <?php print mj_flat_twitter_button( get_the_ID() ); ?>
+              </li>
+              <li class="facebook">
+                <?php print mj_flat_facebook_button( get_the_ID() ); ?>
+              </li>
+            </ul>
+          </div>
+          
+          <?php print get_post_field( 'body', get_the_ID() ); ?>
 
-          <?php dynamic_sidebar( 'article-end' ); ?>
+          <footer class="entry-footer">
 
-          <?php get_template_part( 'template-parts/end-article-sharing' ); ?>
+            <?php dynamic_sidebar( 'article-end' ); ?>
 
-          <?php get_template_part( 'template-parts/end-article-bio' ); ?>
+            <?php get_template_part( 'template-parts/end-article-sharing' ); ?>
 
-          <?php get_template_part( 'template-parts/members-like-you' ); ?>
+            <?php get_template_part( 'template-parts/end-article-bio' ); ?>
 
-          <?php get_template_part( 'template-parts/related-articles' ); ?>
+            <?php get_template_part( 'template-parts/members-like-you' ); ?>
 
-          <?php print get_discus_thread( get_the_ID() ); ?>
+            <?php get_template_part( 'template-parts/related-articles' ); ?>
 
-        </footer><!-- .entry-footer -->
-      </article><!-- #post-## -->
-      <?php print get_post_field( 'js', get_the_ID() ); ?>
-    <?php endwhile; ?>
+            <?php print get_discus_thread( get_the_ID() ); ?>
 
-	</main><!-- .site-main -->
+          </footer><!-- .entry-footer -->
+        </article><!-- #post-## -->
+        <?php print get_post_field( 'js', get_the_ID() ); ?>
+      <?php endwhile; ?>
+
+    </main><!-- .site-main -->
 
 
 </div><!-- .content-area -->

@@ -33,5 +33,3 @@
 		</header><!-- .site-header -->
 
     <?php dynamic_sidebar( 'ticker' ); ?>
-
-		<div id="content" class="site-content">
