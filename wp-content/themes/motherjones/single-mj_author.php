@@ -41,7 +41,7 @@ get_header(); ?>
 		?>
     <ul class="article-list">
       <?php
-        $authors_articles = get_posts( array(
+        $authors_articles = new WP_Query( array(
           'posts_per_page' => 20,
           'post_type' => array('mj_full_width', 'mj_article', 'mj_blog_post'),
           'meta_query' => array(
