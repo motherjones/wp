@@ -1128,6 +1128,7 @@ ul.social-tools.top li {
   display: none;
 }
 .blog-post .social-container.top,
+.full-width .social-container.top,
 .article .social-container.top {
   height: 17px;
   border-bottom: 1px solid #ccc;
