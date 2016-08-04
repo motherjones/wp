@@ -1270,6 +1270,9 @@ article.full-width p.members-like-you,
   max-width: 630px;
   padding: 0;
 }
+#related-articles ul {
+  padding: 0;
+}
 
 .articles-list .article-item {
   margin: 20px 0;
