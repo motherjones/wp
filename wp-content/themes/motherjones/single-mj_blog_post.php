@@ -53,6 +53,8 @@ get_header(); ?>
           <?php get_template_part( 'template-parts/members-like-you' ); ?>
 
           <?php print_r(previous_post_link(array(
+            'format' => 'prev %link -->',
+            'link' => '%title',
             'in_same_term' => true,
             'taxonomy' => 'mj_blog_type',
           ) )
@@ -60,6 +62,8 @@ get_header(); ?>
           ?>
           <h1>get prev/next in here somehow</h1>
           <?php print_r( next_post_link(array(
+            'format' => 'next %link -->',
+            'link' => '%title',
             'in_same_term' => true,
             'taxonomy' => 'mj_blog_type',
           ) ) );
