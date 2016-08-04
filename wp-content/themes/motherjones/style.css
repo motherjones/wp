@@ -475,7 +475,7 @@ h1.hed {
   font-family: calluna, serif;
 }
 
-.pullquote-left, .pullquote-right {
+blockquote, .pullquote-left, .pullquote-right {
   border-top: 10px solid black;
   font-size: 26px;
   position: relative;
@@ -487,7 +487,7 @@ h1.hed {
   font-style: italic;
   font-family: Mallory, sans-serif;
 }
-.pullquote-left {
+blockquote, .pullquote-left {
   left: -55px;
   margin-bottom: 30px;
   margin-top: 20px;

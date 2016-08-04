@@ -129,9 +129,24 @@ if (!function_exists( 'mj_wysiwyg_config' ) ) {
 		$config['content_css'] = get_template_directory_uri() . "/editor-style.css";
 		$config['wpautop'] = true;
 		$config['apply_source_formatting'] = false;
-		$config['block_formats'] = "Paragraph=p; Pullquote=div.pullquote-left; Section Lead=span.section-lead; Subheader=h3;";
+		$config['formats'] = array(
+      'paragraph' => array(
+        'block' => 'p',
+      ),
+      'pullquote' => array(
+        'block' => 'div',
+        'classes' => 'pullquote-left',
+      ),
+      'section-lead' => array(
+        'inline' => 'span',
+        'classes' => 'section-lead',
+      ),
+      'subheader' => array(
+        'block' => 'h3',
+      ),
+		);
 		$config['toolbar1'] = 'bold,italic,strikethrough,bullist,numlist,blockquote,hr,formatselect,link,unlink,wp_fullscreen,wp_adv ';
-		$config['toolbar2'] = 'spellchecker,underline,alignjustify,removeformat,charmap,outdent,indent,undo,redo,wp_help ';
+		$config['toolbar2'] = 'spellchecker,underline,removeformat,charmap,outdent,indent,undo,redo,wp_help ';
 		$config['toolbar3'] = '';
 		$config['toolbar4'] = '';
 
