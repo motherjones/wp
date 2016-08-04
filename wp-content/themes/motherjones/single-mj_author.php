@@ -44,6 +44,14 @@ get_header(); ?>
         $authors_articles = get_posts( array(
           'posts_per_page' => 20,
           'post_type' => array('mj_full_width', 'mj_article', 'mj_blog_post'),
+          'meta_query' => array(
+            'key' => 'byline',
+            'value' => 'authors',
+            'meta_query' => array(
+              'key' => 'slug',
+              'value' => $author['slug']
+            ),
+          ),
         ) );
         while ( $authors_articles->have_posts() ) : $authors_articles->the_post();
           get_template_part( 'template-parts/standard-article-li');
