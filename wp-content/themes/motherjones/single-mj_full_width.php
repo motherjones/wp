@@ -10,10 +10,11 @@ get_header(); ?>
 
 <header id="full-width-header" class="group">
   <div id="full-width-header-image">
-  <?php print wp_get_attachment_image( 
-    get_post_field( 'full_width_title_image', get_the_ID() )['title_image'],
-    'full_width_title_image'
-  ); ?>
+    <?php print wp_get_attachment_image( 
+      get_post_field( 'full_width_title_image', get_the_ID() )['title_image'],
+      'full_width_title_image'
+    ); ?>
+  </div>
   <div id="full-width-header-data">
     <?php the_title( '<h1 class="article hed">', '</h1>' ); ?>
     <?php if ( get_post_field( 'dek', get_the_ID() ) ): ?>

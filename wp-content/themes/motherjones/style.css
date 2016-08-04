@@ -1555,5 +1555,11 @@ h2.widget-title {
 #full-width-header-data {
   position: absolute;
   bottom: 0px;
+  text-align: center;
 }
+#full-width-header-data h1,
+#full-width-header-data h3 {
+  color: white;
+}
+
 /* end full width */
