@@ -8,25 +8,38 @@
 
 get_header(); ?>
 
+<header id="full-width-header">
+  <div id="full-width-header-image">
+  <?php print wp_get_attachment_image( 
+    get_post_field( 'full_width_title_image', get_the_ID() )['title_image'],
+    'full_width_title_image'
+  ); ?>
+  <div id="full-width-header-data">
+    <?php the_title( '<h1 class="article hed">', '</h1>' ); ?>
+    <?php if ( get_post_field( 'dek', get_the_ID() ) ): ?>
+      <h3 class="dek">
+        <?php print get_post_field( 'dek', get_the_ID() ); ?>
+      </h3>
+    <?php endif; ?>
+    <p class="byline-dateline">
+      <span class="byline">
+        <?php print mj_byline( get_the_ID() ); ?>
+      </span>
+      <span class="dateline">
+        <?php print mj_dateline( get_the_ID() ); ?>
+      </span>
+    </p>
+  </div>
+</header>
+<p class="homepage-art-byline">
+  <?php print get_post_field( 'full_width_title_image', get_the_ID() )['title_image_byline']; ?>
+</p>
+
 <div id="primary" class="content-area">
 	<main id="main" class="site-main" role="main">
     <?php while ( have_posts() ) : the_post(); ?>
       <article id="post-<?php get_the_ID(); ?>" class="article">
         <?php print get_post_field( 'css', get_the_ID() ); ?>
-        <header class="entry-header">
-          <?php the_title( '<h1 class="article hed">', '</h1>' ); ?>
-          <h3 class="dek">
-            <?php print get_post_field( 'dek', get_the_ID() ); ?>
-          </h3>
-          <p class="byline-dateline">
-            <span class="byline">
-              <?php print mj_byline( get_the_ID() ); ?>
-            </span>
-            <span class="dateline">
-              <?php print mj_dateline( get_the_ID() ); ?>
-            </span>
-          </p>
-        </header><!-- .entry-header -->
         <div class="social-container article top">
           <ul class="social-tools article top">
             <li class="twitter">
@@ -63,7 +76,5 @@ get_header(); ?>
 
 
 </div><!-- .content-area -->
-
-<?php dynamic_sidebar( 'sidebar-article' ); ?>
 
 <?php get_footer(); ?>
