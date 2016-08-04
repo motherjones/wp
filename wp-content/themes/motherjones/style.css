@@ -310,6 +310,9 @@ html {
     width: 630px;
     float: left;
   }
+  article.full-width p {
+    margin-right: 360px;
+  }
 }
 
 /* fonts */
@@ -1563,6 +1566,10 @@ h2.widget-title {
 #full-width-header-data h1,
 #full-width-header-data h3 {
   color: white;
+}
+
+article.full-width {
+  width: 100%;
 }
 
 /* end full width */

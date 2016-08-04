@@ -37,11 +37,11 @@ get_header(); ?>
 </p>
 
 
-<div id="content" class="site-content">
+<div id="content" class="site-content group">
   <div id="primary" class="content-area">
     <main id="main" class="site-main" role="main">
       <?php while ( have_posts() ) : the_post(); ?>
-        <article id="post-<?php get_the_ID(); ?>" class="article">
+        <article class="full-width">
           <?php print get_post_field( 'css', get_the_ID() ); ?>
           <div class="social-container article top">
             <ul class="social-tools article top">
