@@ -66,7 +66,7 @@ get_header(); ?>
         <ul id="homepage-sections-list">
           <li class="homepage-section">
             <h2 class="promo">
-              Politics
+              <a href="/politics">Politics</a>
             </h2>
             <ul class="homepage-section-list">
               <?php $pol_query = new WP_Query(array(
@@ -83,7 +83,7 @@ get_header(); ?>
           </li> 
           <li class="homepage-section">
             <h2 class="promo">
-              Environment
+              <a href="/environment">Environment</a>
             </h2>
             <ul class="homepage-section-list">
               <?php $env_query = new WP_Query(array(
@@ -100,7 +100,7 @@ get_header(); ?>
           </li> 
           <li class="homepage-section">
             <h2 class="promo">
-              Media
+              <a href="/media">Media</a>
             </h2>
             <ul class="homepage-section-list">
               <?php $media_query = new WP_Query(array(
@@ -117,7 +117,7 @@ get_header(); ?>
           </li> 
           <li class="homepage-section">
             <h2 class="promo">
-              Food
+              <a href="/food">Food</a>
             </h2>
             <ul class="homepage-section-list">
               <?php $food_query = new WP_Query(array(
@@ -139,7 +139,7 @@ get_header(); ?>
           </li> 
           <li class="homepage-section">
             <h2 class="promo">
-              Crime & Justice
+              <a href="/crime_and_justice">Crime & Justice</a>
             </h2>
             <ul class="homepage-section-list">
               <?php $cnj_query = new WP_Query(array(
@@ -165,7 +165,7 @@ get_header(); ?>
       <div id="homepage-kdrum" class="group">
         <div id="homepage-kdrum-side">
           <h2 class="promo">
-            Kevin Drum
+            <a href="/kevin-drum">Kevin Drum</a>
           </h2>
           <img src="/wp-content/themes/motherjones/img/KEVIN.png"></img>
           <ul id="kdrum-post-list">
@@ -210,7 +210,9 @@ get_header(); ?>
       </div>
 
       <div id="homepage-investigations" class="group">
-        <h2 class="promo">Investigations</h2>
+        <h2 class="promo">
+          <a href="/investigations">Investigations</a>
+        </h2>
         <ul id="homepage-investigations-list" class="group">
           <?php $investigations = new WP_Query(array(
               'tax_query' => array( array(

@@ -1521,6 +1521,10 @@ h2.widget-title {
   border-top: 0;
 }
 
+#kdrum-post-list .dateline {
+  margin-top: 4px;
+}
+
 #kdrum-post-list .hed,
 #kdrum-post-list .article-data {
   max-width: none;
