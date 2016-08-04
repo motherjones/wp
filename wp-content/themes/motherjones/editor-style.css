@@ -108,3 +108,11 @@ a {
   margin-left: 15px;
 }
 
+.section-lead {
+  font-size: 20px;
+  font-family: Mallory, sans-serif;
+  font-weight: bold;
+}
+.section-lead strong {
+  font-weight: normal;
+}

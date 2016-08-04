@@ -131,12 +131,17 @@ if (!function_exists( 'mj_wysiwyg_config' ) ) {
 		$config['apply_source_formatting'] = false;
 
 		$style_formats = array(  
-			// Each array child is a format with it's own settings
+			array(  
+				'title' => 'Subheader',  
+				'block' => 'h3',  
+				'classes' => 'subheader',
+				'wrapper' => true,
+			),
 			array(  
 				'title' => 'Section Lead',  
-				'block' => 'span',  
+				'inline' => 'span',  
 				'classes' => 'section-lead',
-				'wrapper' => false,
+				'wrapper' => true,
 			),  
 			array(  
 				'title' => 'Pullquote',  
@@ -147,12 +152,6 @@ if (!function_exists( 'mj_wysiwyg_config' ) ) {
 			array(  
 				'title' => 'paragraph',  
 				'block' => 'p',  
-				'classes' => '',
-				'wrapper' => true,
-			),
-			array(  
-				'title' => 'Subheader',  
-				'block' => 'h3',  
 				'classes' => '',
 				'wrapper' => true,
 			),
