@@ -1214,11 +1214,10 @@ ul.author-bios {
 }
 .author-data {
   float: left;
+  max-width: 535px;
 }
-.full-width .author-data {
-  max-width: 895px;
+.author-data {
 }
-article.full-width .members-like-you p,
 .full-width .author-data p {
   margin: 0;
 }
@@ -1259,7 +1258,7 @@ article.full-width .members-like-you p,
   padding: 0;
 }
 
-#related-articles h2 {
+#related-articles {
   max-width: 630px;
 }
 
