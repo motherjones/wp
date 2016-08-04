@@ -91,11 +91,7 @@ function twentysixteen_setup() {
 		'chat',
 	) );
 
-	/*
-	 * This theme styles the visual editor to resemble the theme style,
-	 * specifically font, colors, icons, and column width.
-	 */
-	add_editor_style( array( 'css/editor-style.css', twentysixteen_fonts_url() ) );
+  add_filter( 'tiny_mce_before_init', 'mj_wysiwyg_config' );
 }
 endif; // twentysixteen_setup
 add_action( 'after_setup_theme', 'twentysixteen_setup' );
@@ -114,6 +110,35 @@ function twentysixteen_content_width() {
 }
 add_action( 'after_setup_theme', 'twentysixteen_content_width', 0 );
 
+/**
+ * set wysiwyg config
+ */
+if (!function_exists( 'mj_wysiwyg_config' ) ) {
+  function mj_wysiwyg_config($config) {
+		$config['remove_linebreaks'] = false;
+		$config['gecko_spellcheck'] = true;
+		$config['keep_styles'] = true;
+		$config['accessibility_focus'] = true;
+		$config['tabfocus_elements'] = 'major-publishing-actions';
+		$config['media_strict'] = false;
+		$config['paste_remove_styles'] = true;
+		$config['paste_remove_spans'] = true;
+		$config['paste_strip_class_attributes'] = 'none';
+		$config['paste_text_use_dialog'] = true;
+		$config['wpeditimage_disable_captions'] = true;
+		$config['plugins'] = 'tabfocus,paste,media,fullscreen,wordpress,wpeditimage,wpgallery,wplink,wpdialogs,wpfullscreen';
+		$config['content_css'] = get_template_directory_uri() . "/editor-style.css";
+		$config['wpautop'] = true;
+		$config['apply_source_formatting'] = false;
+		$config['block_formats'] = "Paragraph=p; Pullquote=div.pullquote-left; Section Lead=span.section-lead; Subheader=h3;";
+		$config['toolbar1'] = 'bold,italic,strikethrough,bullist,numlist,blockquote,hr,formatselect,link,unlink,wp_fullscreen,wp_adv ';
+		$config['toolbar2'] = 'spellchecker,underline,alignjustify,removeformat,charmap,outdent,indent,undo,redo,wp_help ';
+		$config['toolbar3'] = '';
+		$config['toolbar4'] = '';
+
+		return $config;
+  }
+}
 /**
  * create our bylines
  */
