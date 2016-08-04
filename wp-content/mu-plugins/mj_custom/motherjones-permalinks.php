@@ -57,7 +57,6 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
               'terms' => $request['category_name'],
             ) );
             unset($request['category_name']);
-            print_r($request);
         }  elseif ( //is media type
           !get_terms( array(
             'taxonomy' => 'category', 
