@@ -1077,7 +1077,6 @@ footer#colophon #copyright a {
   font-size: 14px;
   clear: both;
   padding-top: 18px;
-  border-top: 1px solid #ccc;
 }
 .members-like-you em {
   font-style: normal;
@@ -1129,6 +1128,11 @@ ul.social-tools.top li {
   height: 17px;
   border-bottom: 1px solid #ccc;
   margin-bottom: 20px;
+}
+
+.social-container.bottom {
+  padding-bottom: 30px;
+  border-bottom: 1px solid #ccc
 }
 
 a.social {
@@ -1206,9 +1210,17 @@ a.social {
 ul.author-bios {
   list-style-type: none;
   padding: 0;
+  border-bottom: 1px solid #ccc;
 }
 .author-data {
   float: left;
+}
+.full-width .author-data {
+  max-width: 895px;
+}
+.full-width .members-like-you p,
+.full-width .author-data p {
+  margin: 0;
 }
 .author-bio .byline {
   display: block;
@@ -1245,6 +1257,10 @@ ul.author-bios {
 #related-articles-list {
   list-style-type: none;
   padding: 0;
+}
+
+#related-articles h1 {
+  max-width: 630px;
 }
 
 .articles-list .article-item {

@@ -1,4 +1,4 @@
-<ul class="author-bios article end">
+<ul class="author-bios article end group">
   <?php foreach (get_post_field( 'byline', get_the_ID() )['authors']  as $author_id):
     $author = get_post_custom( $author_id );
   ?>
