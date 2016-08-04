@@ -1268,6 +1268,7 @@ article.full-width .members-like-you p,
 
 #related-articles {
   max-width: 630px;
+  padding: 0;
 }
 
 .articles-list .article-item {
