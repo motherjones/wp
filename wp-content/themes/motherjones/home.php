@@ -34,7 +34,9 @@ get_header(); ?>
         </ul>
       </div>
 
-      <p> place an ad here </p>
+      <div id="homepage-first-ad">
+        <p> place an ad here </p>
+      </div>
 
       <div id="homepage-more-top-stories" class="group">
         <div id="homepage-more-top-stories-main">

@@ -1299,6 +1299,20 @@ h2.widget-title {
   line-height: 4px;
 }
 
+#homepage-first-ad,
+#homepage-second-ad,
+#homepage-investigations,
+#homepage-exposure,
+#homepage-kdrum,
+#homepage-sections,
+#homepage-featured,
+#homepage-more-top-stories,
+#homepage-top {
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #ccc;
+}
+
   /* top story */
 #homepage-top-story {
   width: 800;
