@@ -1620,7 +1620,7 @@ article.full-width {
 }
 
 #fullwidth-body {
-  background-image: url('/wp-content/themes/motherjones/img/border-black25.png')
+  background-image: url('/wp-content/themes/motherjones/img/border-black25.png');
   background-repeat: repeat-y;
   background-position: 660px;
 }
