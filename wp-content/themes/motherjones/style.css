@@ -1218,7 +1218,7 @@ ul.author-bios {
 .full-width .author-data {
   max-width: 895px;
 }
-.full-width .members-like-you p,
+article.full-width .members-like-you p,
 .full-width .author-data p {
   margin: 0;
 }
@@ -1259,7 +1259,7 @@ ul.author-bios {
   padding: 0;
 }
 
-#related-articles h1 {
+#related-articles h2 {
   max-width: 630px;
 }
 
