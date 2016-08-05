@@ -18,13 +18,13 @@ get_header(); ?>
         'search_columns' => array('user_nicename'),
       ) );
       $author = $author_query->get_results()[0];
-        print_r ($author);
      ?>
 
+    <div class="author-bio">
       <div class="author-image">
         <?php
           print wp_get_attachment_image( $author->image[0], 
-            array('80', '80')
+            array('100', '100')
           );
         ?>
       </div>
@@ -32,13 +32,14 @@ get_header(); ?>
         <p class="author-bio byline">
           <?php print $author->display_name; ?>
           <span class="author-position">
-            <?php print $author->postition; ?>
+            <?php print get_user_meta($author->id, 'postition', true); ?>
           </span>
         </p>
         <p class="author-bio-text">
-          <?php print $author->long_bio[0] ?>
+          <?php print get_user_meta($author->id, 'long_bio', true); ?>
         </p>
       </div>
+    </div>
 
     <ul class="article-list">
       <?php while ( have_posts() ) : the_post();
