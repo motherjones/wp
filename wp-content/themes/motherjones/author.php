@@ -15,7 +15,7 @@ get_header(); ?>
       $author_name = $wp_query->query['author_name'];
       $author = new WP_User_Query( array( 
         'search' => $author_name,
-        'search_columns' => 'user_nicename',
+        'search_columns' => array('user_nicename'),
       ) );
         print_r ($author);
  ?>
