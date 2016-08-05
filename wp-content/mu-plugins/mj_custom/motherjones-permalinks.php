@@ -38,13 +38,10 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
             unset($request['category_name']);
           }
         } elseif ( preg_match('/^author\//', $dummy_query->query['category_name']) ) { //is author
-          print_r($request);
           $request['post_type'] = array('mj_article', 'mj_full_width', 'mj_blog_post');
 
           $request['author_name'] = str_replace ('author/', '', $dummy_query->query['category_name']);
           unset($request['category_name']);
-          print_r('<p>wat come on now</p>');
-          print_r($request);
         }  elseif ( //is topic
           !get_terms( array(
             'taxonomy' => 'category', 
