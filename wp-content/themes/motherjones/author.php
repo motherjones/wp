@@ -11,9 +11,13 @@ get_header(); ?>
 <div id="content" class="site-content">
 <div id="primary" class="content-area">
 	<main id="main" class="site-main author" role="main">
-		<?php 
-            global $wp_query;
-print_r ($wp_query);
+		<?php global $wp_query;
+      $author_name = $wp_query->query['author_name'];
+      $author = new WP_User_Query( array( 
+        'search' => $author_name,
+        'search_columns' => 'user_nicename',
+      ) );
+        print_r ($author);
  ?>
 
       <div class="author-image">
