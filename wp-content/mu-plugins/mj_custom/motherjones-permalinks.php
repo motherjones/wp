@@ -37,10 +37,12 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
             ) );
             unset($request['category_name']);
           }
+          /* does coauthors do this for me?
         } elseif ( preg_match('/^author\//', $dummy_query->query['category_name']) ) { //is author
           $request['post_type'] = 'mj_author';
           $request['name'] = str_replace ('author/', '', $dummy_query->query['category_name']);
           unset($request['category_name']);
+           */
         }  elseif ( //is topic
           !get_terms( array(
             'taxonomy' => 'category', 
