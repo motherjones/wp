@@ -29,7 +29,7 @@ get_header(); ?>
         ?>
       </div>
       <div class="author-data">
-        <p class="author-bio byline">
+        <p class="author-bio-byline byline">
           <?php print $author->display_name; ?>
           <span class="author-position">
             <?php print get_user_meta($author->id, 'position', true); ?>
