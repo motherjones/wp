@@ -20,7 +20,7 @@ get_header(); ?>
       $author = $author_query->get_results()[0];
      ?>
 
-    <div class="author-bio">
+    <div class="author-bio group">
       <div class="author-image">
         <?php
           print wp_get_attachment_image( $author->image[0], 

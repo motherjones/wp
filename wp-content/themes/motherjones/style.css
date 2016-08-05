@@ -1225,6 +1225,14 @@ ul.author-bios {
 .author-position {
   color: #ccc;
 }
+#main.author .author-bio {
+  padding-bottom: 15px;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 15px;
+}
+#main.author ul {
+  padding: 0;
+}
 .full-width .author-bio {
   max-width: 895px;
 }
