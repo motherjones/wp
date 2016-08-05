@@ -4,7 +4,7 @@
       <li class="author-bio">
         <div class="author-image">
           <?php
-            print wp_get_attachment_image( $author['image'][0], 
+            print wp_get_attachment_image( $author->image[0], 
               array('100', '100')
             );
           ?>

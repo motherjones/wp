@@ -1222,6 +1222,9 @@ ul.author-bios {
   float: left;
   max-width: 535px;
 }
+.author-position {
+  color: #ccc;
+}
 .full-width .author-bio {
   max-width: 895px;
 }
