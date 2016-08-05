@@ -23,20 +23,20 @@ get_header(); ?>
 
       <div class="author-image">
         <?php
-          print wp_get_attachment_image( get_post_field('image')[0], 
+          print wp_get_attachment_image( $author->image[0], 
             array('80', '80')
           );
         ?>
       </div>
       <div class="author-data">
         <p class="author-bio byline">
-          <?php print get_the_title( get_the_ID() ); ?>
+          <?php print $author->display_name; ?>
           <span class="author-position">
-            <?php print get_post_field('position'); ?>
+            <?php print $author->postition; ?>
           </span>
         </p>
         <p class="author-bio-text">
-          <?php print get_post_field('long_bio')[0] ?>
+          <?php print $author->long_bio[0] ?>
         </p>
       </div>
 
