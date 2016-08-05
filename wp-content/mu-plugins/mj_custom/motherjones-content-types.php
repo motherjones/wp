@@ -115,9 +115,7 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
     }
 
     public function create_author_type() {
-      add_action( 'init', array( $this, 'author_type' ) );
-      add_action( 'fm_post_mj_author', array( $this, author_fields ) );
-      add_action( 'fm_user', array( $this, add_author_to_user ) );
+      add_action( 'fm_user', array( $this, author_fields ) );
     }
 
     public function full_width_fields() {
@@ -126,7 +124,7 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
       MJ_Custom_Fields::social()->add_meta_box( 'Social Titles', 'mj_full_width' );
       MJ_Custom_Fields::alt()->add_meta_box( 'Alt Titles', 'mj_full_width' );
       MJ_Custom_Fields::master_image()->add_meta_box( 'Master Image', 'mj_full_width' );
-      MJ_Custom_Fields::byline()->add_meta_box( 'Byline', 'mj_full_width' );
+      MJ_Custom_Fields::byline()->add_meta_box( 'Byline Override', 'mj_full_width' );
       MJ_Custom_Fields::taxonomies()->add_meta_box( 'Taxonomy', 'mj_full_width' );
       MJ_Custom_Fields::body()->add_meta_box( 'Article Body', 'mj_full_width' );
       MJ_Custom_Fields::related()->add_meta_box( 'Related Articles', 'mj_full_width' );
@@ -183,7 +181,7 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
       MJ_Custom_Fields::social()->add_meta_box( 'Social Titles', 'mj_article' );
       MJ_Custom_Fields::alt()->add_meta_box( 'Alt Titles', 'mj_article' );
       MJ_Custom_Fields::master_image()->add_meta_box( 'Master Image', 'mj_article' );
-      MJ_Custom_Fields::byline()->add_meta_box( 'Byline', 'mj_article' );
+      MJ_Custom_Fields::byline()->add_meta_box( 'Byline Override', 'mj_article' );
       MJ_Custom_Fields::taxonomies()->add_meta_box( 'Taxonomy', 'mj_article' );
       MJ_Custom_Fields::body()->add_meta_box( 'Article Body', 'mj_article' );
       MJ_Custom_Fields::related()->add_meta_box( 'Related Articles', 'mj_article' );
@@ -219,7 +217,7 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
       MJ_Custom_Fields::social()->add_meta_box( 'Social Titles', 'mj_blog_post' );
       MJ_Custom_Fields::alt()->add_meta_box( 'Alt Titles', 'mj_blog_post' );
       MJ_Custom_Fields::master_image()->add_meta_box( 'Master Image', 'mj_blog_post' );
-      MJ_Custom_Fields::byline()->add_meta_box( 'Byline', 'mj_blog_post' );
+      MJ_Custom_Fields::byline()->add_meta_box( 'Byline Override', 'mj_blog_post' );
       MJ_Custom_Fields::blog_taxonomies()->add_meta_box( 'Taxonomy', 'mj_blog_post' );
       MJ_Custom_Fields::body()->add_meta_box( 'Article Body', 'mj_blog_post' );
       MJ_Custom_Fields::css_js()->add_meta_box( 'Extra CSS & JS', 'mj_blog_post' );
@@ -227,36 +225,12 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
       MJ_Custom_Fields::dateline_override()->add_meta_box( 'Dateline Override', 'mj_blog_post' );
 
     }
-
-
-    public function author_type() {
-      register_post_type( 'mj_author',
-        array(
-          'labels' => array(
-            'name' => __( 'Authors' ),
-            'singular_name' => __( 'Author' )
-          ),
-          'public' => true,
-          'rewrite' => false,
-          'query_arg' => true,
-          'supports' => array('title'),
-          'has_archive' => true
-        )
-      );
-			global $wp_rewrite;
-      $author_url_structure = '/author/%mj_author%';
-      $wp_rewrite->add_rewrite_tag("%mj_author%", '([^/]+)', "mj_article=");
-      $wp_rewrite->add_permastruct('mj_author', $author_url_structure, false);
-    }
     public function author_fields() {
-      MJ_Custom_Fields::position()->add_meta_box( 'Position', 'mj_author' );
-      MJ_Custom_Fields::image()->add_meta_box( 'Author Photo', 'mj_author' );
-      MJ_Custom_Fields::long_bio()->add_meta_box( 'Long Bio', 'mj_author' );
-      MJ_Custom_Fields::short_bio()->add_meta_box( 'End of Article Bio', 'mj_author' );
-      MJ_Custom_Fields::twitter()->add_meta_box( 'Twitter User', 'mj_author' );
-    }
-    public function add_author_to_user() {
-      MJ_Custom_Fields::author()->add_user_form( 'Author Bio' );
+      MJ_Custom_Fields::position()->add_user_form( 'Position', 'mj_author' );
+      MJ_Custom_Fields::image()->add_user_form( 'Author Photo', 'mj_author' );
+      MJ_Custom_Fields::long_bio()->add_user_form( 'Long Bio', 'mj_author' );
+      MJ_Custom_Fields::short_bio()->add_user_form( 'End of Article Bio', 'mj_author' );
+      MJ_Custom_Fields::twitter()->add_user_form( 'Twitter User', 'mj_author' );
     }
 
 

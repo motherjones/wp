@@ -163,7 +163,7 @@ if (!function_exists( 'mj_wysiwyg_config' ) ) {
  * create our bylines
  */
 if ( ! function_exists( 'mj_byline' ) ) {
-  function mj_byline($id) {
+  function mj_byline() {
     return coauthors_posts_links($echo = false, $between = ', ');
   }
 }
