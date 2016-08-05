@@ -11,7 +11,9 @@
         </div>
         <div class="author-data">
           <span class="author-bio byline">
-            <?php print $author->display_name; ?>
+            <a href="/author/<?php print $author->user_nicename; ?>">
+              <?php print $author->display_name; ?>
+            </a>
             <a href="https://twitter.com/@<?php 
              print get_user_meta($author->id, 'twitter', true); ?>">
               <i class="fa fa-twitter fw"></i>

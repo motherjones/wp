@@ -1420,6 +1420,12 @@ h2.widget-title {
   text-shadow: none;
   color: white;
 }
+#homepage-top-story .article-data .byline a {
+  color: #ff6900;
+}
+#homepage-top-story .article-data .byline a:hover {
+  color: white;
+}
 #homepage-top-story .hed {
   margin: 15px 25px;
 }
