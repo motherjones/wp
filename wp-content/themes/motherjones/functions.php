@@ -164,6 +164,9 @@ if (!function_exists( 'mj_wysiwyg_config' ) ) {
  */
 if ( ! function_exists( 'mj_byline' ) ) {
   function mj_byline($id) {
+    return coauthors_posts_links();
+    return coauthors();
+    /*
     if (!$id) { $id = get_the_ID(); }
     $byline = get_post_field( 'byline', $id );
     if ( !$byline ) { return ''; };
@@ -177,6 +180,7 @@ if ( ! function_exists( 'mj_byline' ) ) {
       $authors[] = get_the_title( $author );
     }
     return join(', ', $authors );
+     */
   }
 }
 
