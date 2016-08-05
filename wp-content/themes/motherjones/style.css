@@ -558,6 +558,7 @@ blockquote, .pullquote-left {
 }
 #main .byline a {
   background-image: none;
+  color: #ff6900;
 }
 
 /* Begin navbar styling */
