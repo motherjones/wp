@@ -164,7 +164,7 @@ if (!function_exists( 'mj_wysiwyg_config' ) ) {
  */
 if ( ! function_exists( 'mj_byline' ) ) {
   function mj_byline($id) {
-    return coauthors_posts_links(array('echo' => false, 'between' => ', '));
+    return coauthors_posts_links($echo = false, $between = ', ');
   }
 }
 
