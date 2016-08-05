@@ -5,5 +5,5 @@
 
 require_once('responsive-images/responsive-images.php');
 require_once('zoninator/zoninator.php');
-require_once('Co-Authors-Plus/co-authors-plus.php');
+require_once('coauthors/co-authors-plus.php');
 ?>
