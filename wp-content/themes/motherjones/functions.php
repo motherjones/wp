@@ -164,7 +164,12 @@ if (!function_exists( 'mj_wysiwyg_config' ) ) {
  */
 if ( ! function_exists( 'mj_byline' ) ) {
   function mj_byline() {
-    return coauthors_posts_links($echo = false, $between = ', ');
+    $override = get_post_field( 'byline_override', $id)[0];
+    if (trim($override)) {
+      return $override;
+    } else {
+      return coauthors_posts_links(', ', null, null, null, false);
+    }
   }
 }
 
