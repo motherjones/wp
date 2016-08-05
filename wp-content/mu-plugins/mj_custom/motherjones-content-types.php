@@ -146,7 +146,7 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
           'rewrite' => false,
           'query_arg' => true,
           'public' => true,
-          'supports' => array('title', 'zoninator_zones'),
+          'supports' => array('title', 'zoninator_zones', 'author'),
           'has_archive' => true
         )
       );
@@ -168,7 +168,7 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
           'rewrite' => false,
           'query_arg' => true,
           'public' => true,
-          'supports' => array('title', 'zoninator_zones'),
+          'supports' => array('title', 'zoninator_zones', 'author'),
           'has_archive' => true
         )
       );
@@ -204,7 +204,7 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
           'public' => true,
           'rewrite' => false,
           'query_arg' => true,
-          'supports' => array('title', 'zoninator_zones'),
+          'supports' => array('title', 'zoninator_zones', 'author'),
           'has_archive' => true
         )
       );
