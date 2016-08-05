@@ -35,9 +35,9 @@ get_header(); ?>
             <?php print get_user_meta($author->id, 'position', true); ?>
           </span>
         </p>
-        <p class="author-bio-text">
+        <div class="author-bio-text">
           <?php print get_user_meta($author->id, 'long_bio', true); ?>
-        </p>
+        </div>
       </div>
     </div>
 
