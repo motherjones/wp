@@ -32,7 +32,7 @@ get_header(); ?>
         <p class="author-bio byline">
           <?php print $author->display_name; ?>
           <span class="author-position">
-            <?php print get_user_meta($author->id, 'postition', true); ?>
+            <?php print get_user_meta($author->id, 'position', true); ?>
           </span>
         </p>
         <p class="author-bio-text">

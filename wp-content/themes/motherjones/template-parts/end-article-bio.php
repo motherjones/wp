@@ -1,24 +1,24 @@
 <ul class="author-bios article end group">
-  <?php foreach (get_post_field( 'byline', get_the_ID() )['authors']  as $author_id):
-    $author = get_post_custom( $author_id );
-  ?>
+  <?php $authors = get_coauthors( get_the_ID() );
+  foreach ($authors  as $author): ?>
       <li class="author-bio">
         <div class="author-image">
           <?php
             print wp_get_attachment_image( $author['image'][0], 
-              array('80', '80')
+              array('100', '100')
             );
           ?>
         </div>
         <div class="author-data">
           <span class="author-bio byline">
-            <?php print get_the_title( $author_id ); ?>
-            <a href="https://twitter.com/@<?php print $author['twitter'][0] ?>">
+            <?php print $author->display_name; ?>
+            <a href="https://twitter.com/@<?php 
+             print get_user_meta($author->id, 'twitter', true); ?>">
               <i class="fa fa-twitter fw"></i>
             </a>
           </span>
           <p class="author-bio-text">
-            <?php print $author['short_bio'][0] ?>
+            <?php print get_user_meta($author->id, 'short_bio', true); ?>
           </p>
         </div>
       </li>
