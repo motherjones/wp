@@ -42,6 +42,8 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
 
           $request['author'] = str_replace ('author/', '', $dummy_query->query['category_name']);
           unset($request['category_name']);
+          print_r('wat come on now');
+          print_r($request);
         }  elseif ( //is topic
           !get_terms( array(
             'taxonomy' => 'category', 
