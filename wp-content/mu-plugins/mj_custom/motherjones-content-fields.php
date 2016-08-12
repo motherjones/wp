@@ -185,10 +185,9 @@ if ( !class_exists( 'MJ_Custom_Fields' ) ) {
     }
 
 
-    //dumb thing we have to do because autocompletes can't happen too early
     public function byline() {
       return new Fieldmanager_TextField( array( 
-        'name' => 'override',
+        'name' => 'byline_override',
       ) );
     }
 
