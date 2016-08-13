@@ -15,9 +15,9 @@ get_header(); ?>
       <?php while ( have_posts() ) : the_post(); ?>
         <header class="entry-header article">
           <?php the_title( '<h1 class="article hed">', '</h1>' ); ?>
-          <?php if ( get_post_field( 'dek', get_the_ID() ) ): ?>
+          <?php if ( get_post_meta( get_the_ID(), 'dek' ) ): ?>
             <h3 class="dek">
-              <?php print get_post_field( 'dek', get_the_ID() ); ?>
+              <?php print get_post_meta( get_the_ID(), 'dek' ); ?>
             </h3>
           <?php endif; ?>
           <p class="byline-dateline">
@@ -41,14 +41,14 @@ get_header(); ?>
         </header><!-- .entry-header -->
         <article class="article">
           <style>
-            <?php print get_post_field( 'css', get_the_ID() ); ?>
+            <?php print get_post_meta( get_the_ID(), 'css' ); ?>
           </style>
           
           <?php get_template_part( 'template-parts/master-image-630' ); ?>
 
-          <?php print get_post_field( 'body', get_the_ID() ); ?>
+          <?php print get_post_meta( get_the_ID(), 'body' ); ?>
           <script>
-            <?php print get_post_field( 'js', get_the_ID() ); ?>
+            <?php print get_post_meta( get_the_ID(), 'js' ); ?>
           </script>
 
           <footer class="entry-footer">

@@ -2,7 +2,7 @@
   <h2 class="promo">Related</h2>
     <ul class="related-articles-list">
       <?php 
-        $related = get_post_field( 'related_articles', get_the_ID() ); 
+        $related = get_post_meta( get_the_ID(), 'related_articles' ); 
         $related_query = new WP_Query(array(
           'post__in' => $related['relateds'],
           'post_type' => Array('mj_blog_post', 'mj_article', 'mj_full_width'),
