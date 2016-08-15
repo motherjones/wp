@@ -1,8 +1,10 @@
 <li class="top-article-item group">
   <div class="article-image">
     <a href="<?php the_permalink(); ?>">
-      <?php print wp_get_attachment_image( 
-        get_post_meta(get_the_ID(), 'master_image' )['master_image'],
+      <?php 
+      $master = unserialize(get_post_meta(get_the_ID(), 'master_image' ));
+      print wp_get_attachment_image( 
+        $master['master_image'],
         'article_top'
       ); ?>
     </a>
