@@ -17,7 +17,7 @@ get_header(); ?>
           <?php the_title( '<h1 class="article hed">', '</h1>' ); ?>
           <?php if ( get_post_meta( get_the_ID(), 'dek' ) ): ?>
             <h3 class="dek">
-              <?php print get_post_meta( get_the_ID(), 'dek' ); ?>
+              <?php print_r(get_post_meta( get_the_ID(), 'dek' )); ?>
             </h3>
           <?php endif; ?>
           <p class="byline-dateline">
