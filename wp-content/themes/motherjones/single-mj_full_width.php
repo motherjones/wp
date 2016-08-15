@@ -19,7 +19,7 @@ get_header(); ?>
     <?php the_title( '<h1 class="article hed">', '</h1>' ); ?>
     <?php if ( get_post_meta( get_the_ID(), 'dek' ) ): ?>
       <h3 class="dek">
-        <?php print get_post_meta( get_the_ID(), 'dek' ); ?>
+        <?php print get_post_meta( get_the_ID(), 'dek' )[0]; ?>
       </h3>
     <?php endif; ?>
     <p class="byline-dateline">
@@ -42,7 +42,7 @@ get_header(); ?>
     <main id="main" class="site-main" role="main">
       <?php while ( have_posts() ) : the_post(); ?>
         <article class="full-width">
-          <?php print get_post_meta( get_the_ID(), 'css' ); ?>
+          <?php print get_post_meta( get_the_ID(), 'css' )[0]; ?>
           <div class="social-container article top">
             <ul class="social-tools article top">
               <li class="twitter">
@@ -55,7 +55,7 @@ get_header(); ?>
           </div>
           
           <div id="fullwidth-body">
-            <?php print get_post_meta( get_the_ID(), 'body' ); ?>
+            <?php print get_post_meta( get_the_ID(), 'body' )[0]; ?>
           </div>
 
           <footer class="entry-footer">
@@ -74,7 +74,7 @@ get_header(); ?>
 
           </footer><!-- .entry-footer -->
         </article><!-- #post-## -->
-        <?php print get_post_meta( get_the_ID(), 'js' ); ?>
+        <?php print get_post_meta( get_the_ID(), 'js' )[0]; ?>
       <?php endwhile; ?>
 
     </main><!-- .site-main -->

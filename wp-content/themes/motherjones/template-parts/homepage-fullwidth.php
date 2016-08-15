@@ -24,7 +24,7 @@
     <a href="<?php print esc_url( get_permalink() ); ?>">
       <?php print get_post_meta( get_the_ID(), 'alt' )['alt_dek']
                 ? get_post_meta( get_the_ID(), 'alt' )['alt_dek']
-                : get_post_meta( get_the_ID(), 'dek' ); ?>
+                : get_post_meta( get_the_ID(), 'dek' )[0]; ?>
     </a>
   </h4>
   <p class="byline">

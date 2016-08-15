@@ -16,7 +16,7 @@ get_header(); ?>
         <div class="entry-header blog-post">
           <?php the_title( '<h1 class="blog-post hed">', '</h1>' ); ?>
           <h3 class="dek">
-            <?php print get_post_meta(get_the_ID(), 'dek' ); ?>
+            <?php print get_post_meta(get_the_ID(), 'dek' )[0]; ?>
           </h3>
           <p class="byline-dateline">
             <span class="byline">
@@ -37,10 +37,10 @@ get_header(); ?>
             </ul>
           </div>
         </div><!-- .entry-header -->
-        <?php print get_post_meta( get_the_ID(), 'css' ); ?>
+        <?php print get_post_meta( get_the_ID(), 'css' )[0]; ?>
         
-        <?php print get_post_meta( get_the_ID(), 'body' ); ?>
-        <?php print get_post_meta( get_the_ID(), 'js' ); ?>
+        <?php print get_post_meta( get_the_ID(), 'body' )[0]; ?>
+        <?php print get_post_meta( get_the_ID(), 'js' )[0]; ?>
 
         <footer class="entry-footer">
 
