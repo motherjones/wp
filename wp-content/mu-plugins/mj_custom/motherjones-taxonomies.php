@@ -44,23 +44,6 @@ if ( !class_exists( 'MJ_Taxonomy' ) ) {
       'types'  => array('post')
     );
 
-    private $section_id = 'mj_section';
-    private $section_taxonomy = array(
-      'single' => 'Section',
-      'plural' => 'Sections',
-      'capabilites' => array(
-        'assign_terms' => 'edit_posts',
-        'edit_terms' => 'update_core',
-        'delete_terms' => 'update_core',
-      ),
-      'types'  => array('post')
-    );
-    private $section_terms = array(
-      'Politics',
-      'Environment',
-      'Culture',
-    );
-
     private $blog_id = 'mj_blog_type';
     private $blog_taxonomy = array(
       'single' => 'Blog Type',
@@ -93,16 +76,12 @@ if ( !class_exists( 'MJ_Taxonomy' ) ) {
     public function add_tag_taxonomy ($post_type) {
       $this->tag_taxonomy['types'][] = $post_type;
     }
-    public function add_section_taxonomy ($post_type) {
-      $this->section_taxonomy['types'][] = $post_type;
-    }
     public function add_blog_taxonomy ($post_type) {
       $this->blog_taxonomy['types'][] = $post_type;
     }
     public function add_mj_taxonomies ($post_type) {
       $this->media_taxonomy['types'][] = $post_type;
       $this->tag_taxonomy['types'][] = $post_type;
-      $this->section_taxonomy['types'][] = $post_type;
       $this->blog_taxonomy['types'][] = $post_type;
     }
 
@@ -111,21 +90,14 @@ if ( !class_exists( 'MJ_Taxonomy' ) ) {
       add_action( 'init', array( $this, 'register' ) );
       $this->all_taxonomies[$this->media_type_id] = $this->media_taxonomy;
       $this->all_taxonomies[$this->tag_id] = $this->tag_taxonomy;
-      $this->all_taxonomies[$this->section_id] = $this->section_taxonomy;
       $this->all_taxonomies[$this->blog_id] = $this->blog_taxonomy;
       add_action( 'created_mj_media_type', array($this, 'fill_media_type') );
-      add_action( 'created_mj_section', array($this, 'fill_section') );
       add_action( 'created_mj_blog_type', array($this, 'fill_blog_type') );
     }
 
     public function fill_media_type() {
       foreach ( $this->media_type_terms as $i => $term ) {
         wp_insert_term($term, $this->media_type_id);
-      }
-    }
-    public function fill_section() {
-      foreach ( $this->section_terms as $i => $term ) {
-        wp_insert_term($term, $this->section_id);
       }
     }
     public function fill_blog_type() {
