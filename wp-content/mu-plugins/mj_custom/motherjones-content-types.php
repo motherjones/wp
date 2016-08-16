@@ -125,7 +125,6 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
       MJ_Custom_Fields::alt()->add_meta_box( 'Alt Titles', 'mj_full_width' );
       MJ_Custom_Fields::master_image()->add_meta_box( 'Master Image', 'mj_full_width' );
       MJ_Custom_Fields::byline()->add_meta_box( 'Byline Override', 'mj_full_width' );
-      MJ_Custom_Fields::taxonomies()->add_meta_box( 'Taxonomy', 'mj_full_width' );
       MJ_Custom_Fields::body()->add_meta_box( 'Article Body', 'mj_full_width' );
       MJ_Custom_Fields::related()->add_meta_box( 'Related Articles', 'mj_full_width' );
       MJ_Custom_Fields::css_js()->add_meta_box( 'Extra CSS & JS', 'mj_full_width' );
@@ -139,7 +138,7 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
             'name' => __( 'Full Widths' ),
             'singular_name' => __( 'Full Width' )
           ),
-          'taxonomies' => array('category', 'mj_media_type', 'mj_primary_tag', 'mj_section'),
+          'taxonomies' => array('category', 'mj_media_type', 'mj_primary_tag'),
 
           'rewrite' => false,
           'query_arg' => true,
@@ -162,7 +161,7 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
             'name' => __( 'Articles' ),
             'singular_name' => __( 'Article' )
           ),
-          'taxonomies' => array('category', 'mj_media_type', 'mj_primary_tag', 'mj_section'),
+          'taxonomies' => array('category', 'mj_media_type', 'mj_primary_tag'),
           'rewrite' => false,
           'query_arg' => true,
           'public' => true,
@@ -182,7 +181,6 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
       MJ_Custom_Fields::alt()->add_meta_box( 'Alt Titles', 'mj_article' );
       MJ_Custom_Fields::master_image()->add_meta_box( 'Master Image', 'mj_article' );
       MJ_Custom_Fields::byline()->add_meta_box( 'Byline Override', 'mj_article' );
-      MJ_Custom_Fields::taxonomies()->add_meta_box( 'Taxonomy', 'mj_article' );
       MJ_Custom_Fields::body()->add_meta_box( 'Article Body', 'mj_article' );
       MJ_Custom_Fields::related()->add_meta_box( 'Related Articles', 'mj_article' );
       MJ_Custom_Fields::css_js()->add_meta_box( 'Extra CSS & JS', 'mj_article' );
@@ -218,7 +216,6 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
       MJ_Custom_Fields::alt()->add_meta_box( 'Alt Titles', 'mj_blog_post' );
       MJ_Custom_Fields::master_image()->add_meta_box( 'Master Image', 'mj_blog_post' );
       MJ_Custom_Fields::byline()->add_meta_box( 'Byline Override', 'mj_blog_post' );
-      MJ_Custom_Fields::blog_taxonomies()->add_meta_box( 'Taxonomy', 'mj_blog_post' );
       MJ_Custom_Fields::body()->add_meta_box( 'Article Body', 'mj_blog_post' );
       MJ_Custom_Fields::css_js()->add_meta_box( 'Extra CSS & JS', 'mj_blog_post' );
       MJ_Custom_Fields::file_attachments()->add_meta_box( 'Extra File Attachments', 'mj_blog_post' );
