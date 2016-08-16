@@ -132,10 +132,11 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
 					}
 				}
         print_r($post->ID);
-        if (get_post_meta( 'taxonomies', $post->ID )) {
-          $blog_ID = get_post_field( 'taxonomies', $post->ID )['blog_type'];
-          print_r($blog_ID);
-          $mj_blog_type = get_term( $blog_ID[0], 'mj_blog_type' )->slug;
+        if (get_post_meta( $post->ID, 'taxonomies' )) {
+          $blog_ID = get_post_meta( $post->ID, 'taxonomies' )['blog_type'];
+          print_r(get_post_meta( $post->ID, 'taxonomies' ));
+          $mj_blog_type = get_term( $blog_ID, 'mj_blog_type' )->slug;
+          print_r($mj_blog_type);
         }
 
 				$author = '';
