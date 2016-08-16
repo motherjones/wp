@@ -1,3 +1,9 @@
+
+<?php print_r(get_post_meta( get_the_ID(), 'master_image' )); ?>
+<h2>MASTER GOES HERE?</h2>
+<?php print_r(get_post_meta( get_the_ID(), 'master_image' )['master_image']); ?>
+is suppressed below
+<?php print_r(get_post_meta( get_the_ID(), 'master_image' )['master_image_suppress']); ?>
 <?php if (get_post_meta( get_the_ID(), 'master_image' )['master_image']
       && !get_post_meta( get_the_ID(), 'master_image' )['master_image_suppress']
 ): ?>
