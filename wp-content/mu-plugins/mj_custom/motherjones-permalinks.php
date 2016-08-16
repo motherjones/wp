@@ -136,7 +136,7 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
         print_r(wp_get_post_terms( $post->ID, 'mj_blog_type' ));
         print_r("end type here\n");
         if (wp_get_post_terms( $post->ID, 'mj_blog_type' )) {
-          $mj_blog_type = wp_get_post_terms( $post->ID, 'mj_blog_type' )['slug'];
+          $mj_blog_type = wp_get_post_terms( $post->ID, 'mj_blog_type' )[0]->slug;
           print_r($mj_blog_type);
         }
 
