@@ -131,13 +131,8 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
 						$category = is_wp_error( $default_category ) ? '' : $default_category->slug;
 					}
 				}
-        print_r($post->ID);
-        print_r("type here\n");
-        print_r(wp_get_post_terms( $post->ID, 'mj_blog_type' ));
-        print_r("end type here\n");
         if (wp_get_post_terms( $post->ID, 'mj_blog_type' )) {
           $mj_blog_type = wp_get_post_terms( $post->ID, 'mj_blog_type' )[0]->slug;
-          print_r($mj_blog_type);
         }
 
 				$author = '';
