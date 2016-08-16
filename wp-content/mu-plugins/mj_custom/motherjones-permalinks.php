@@ -131,6 +131,7 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
 						$category = is_wp_error( $default_category ) ? '' : $default_category->slug;
 					}
 				}
+        print_r($post->ID);
         if (get_post_meta( 'taxonomies', $post->ID )) {
           $blog_ID = get_post_field( 'taxonomies', $post->ID )['blog_type'];
           print_r($blog_ID);
