@@ -131,9 +131,10 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
 						$category = is_wp_error( $default_category ) ? '' : $default_category->slug;
 					}
 				}
-        if (get_post_field( 'taxonomies', $post->ID )) {
+        if (get_post_meta( 'taxonomies', $post->ID )) {
           $blog_ID = get_post_field( 'taxonomies', $post->ID )['blog_type'];
-          $mj_blog_type = get_term( $blog_ID, 'mj_blog_type' )->slug;
+          print_r($blog_ID);
+          $mj_blog_type = get_term( $blog_ID[0], 'mj_blog_type' )->slug;
         }
 
 				$author = '';
