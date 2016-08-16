@@ -132,9 +132,10 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
 					}
 				}
         print_r($post->ID);
-        if (get_post_meta( $post->ID, 'taxonomies' )) {
-          $blog_ID = get_post_meta( $post->ID, 'taxonomies' )['blog_type'];
-          print_r(get_post_meta( $post->ID, 'taxonomies' ));
+        print_r("type here\n");
+        print_r(wp_get_post_terms( $post->ID, 'mj_blog_type' ));
+        print_r("end type here\n");
+        if (wp_get_post_terms( $post->ID, 'mj_blog_type' )) {
           $mj_blog_type = get_term( $blog_ID, 'mj_blog_type' )->slug;
           print_r($mj_blog_type);
         }
