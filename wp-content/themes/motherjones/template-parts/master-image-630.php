@@ -6,7 +6,7 @@
     $master = get_post_meta(get_the_ID(), 'master_image' )[0];
 print_r( $master['master_image'] );
 ?>
-<h5><?php print wp_get_attachment_image_src($master['master_image']);?> </h5>
+<h5><?php print_r(wp_get_attachment_image_src($master['master_image']));?> </h5>
 <?php
     print wp_get_attachment_image( 
       $master['master_image'],
