@@ -4,6 +4,7 @@
   <div class="article-master-image group">
     <?php 
     $master = get_post_meta(get_the_ID(), 'master_image' )[0];
+print_r( $master['master_image'] );
     print wp_get_attachment_image( 
       $master['master_image'],
       'article_top'
