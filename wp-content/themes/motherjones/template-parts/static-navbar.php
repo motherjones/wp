@@ -21,7 +21,7 @@
     <li class="menu-item-environment"><a href="/environment" title="Environment">Environment</a></li>
     <li class="menu-item-food"><a href="/food" title="">Food</a></li>
     <li class="menu-item-media"><a href="/media" title="Media">Media</a></li>
-    <li class="menu-item-crime-and-justice"><a href="/crime-and-justice" title="">Crime &amp; Justice</a></li>
+    <li class="menu-item-crime_and_justice"><a href="/crime_and_justice" title="">Crime &amp; Justice</a></li>
     <li class="menu-item-photos"><a href="/photoessays" title="Photos">Photos</a></li>
     <li class="menu-item-investigations"><a href="/investigations" title="">Investigations</a></li>
     <li class="menu-item-magazine"><a href="http://www.motherjones.com/magazine" title="">Magazine</a></li>
