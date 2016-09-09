@@ -2,7 +2,8 @@
   <div class="article-image">
     <a href="<?php the_permalink(); ?>">
       <?php 
-      $master = unserialize(get_post_meta(get_the_ID(), 'master_image' ));
+      $master = get_post_meta(get_the_ID(), 'master_image' );
+      print_r($master);
       print wp_get_attachment_image( 
         $master['master_image'],
         'article_top'
