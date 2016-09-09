@@ -51,6 +51,7 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
             'taxonomy' => 'mj_primary_tag', 
             'slug' => $request['category_name']) 
           ) ) {
+            print_r('is topic');
             $request['post_type'] = array('mj_article', 'mj_full_width', 'mj_blog_post');
             $request['tax_query'] = array( array(
               'taxonomy' => 'mj_primary_tag',
