@@ -21,6 +21,7 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
     public function alter_the_query( $request ) {
         $dummy_query = new WP_Query();  // the query isn't run if we don't pass any query vars
         $dummy_query->parse_query( $request );
+        print_r($dummy_query->query);
 
         // this is the actual manipulation; do whatever you need here
         if ($dummy_query->query['category_name'] && $dummy_query->query['name']) { //is article type
@@ -51,7 +52,6 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
             'taxonomy' => 'mj_primary_tag', 
             'slug' => $request['category_name']) 
           ) ) {
-            print_r('is topic');
             $request['post_type'] = array('mj_article', 'mj_full_width', 'mj_blog_post');
             $request['tax_query'] = array( array(
               'taxonomy' => 'mj_primary_tag',
