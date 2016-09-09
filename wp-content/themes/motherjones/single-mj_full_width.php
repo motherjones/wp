@@ -11,7 +11,7 @@ get_header(); ?>
 <header id="full-width-header" class="group">
   <div id="full-width-header-image">
     <?php print wp_get_attachment_image( 
-      get_post_meta( get_the_ID(), 'full_width_title_image' )['title_image'],
+      get_post_meta( get_the_ID(), 'full_width_title_image' )[0]['title_image'],
       'full_width_giant'
     ); ?>
   </div>
@@ -33,7 +33,7 @@ get_header(); ?>
   </div>
 </header>
 <p class="homepage-art-byline">
-  <?php print get_post_meta( get_the_ID(), 'full_width_title_image'  )['title_image_byline']; ?>
+  <?php print get_post_meta( get_the_ID(), 'full_width_title_image'  )[0]['title_image_byline']; ?>
 </p>
 
 
