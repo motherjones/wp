@@ -2,7 +2,7 @@
   <div class="article-image">
     <a href="<?php print esc_url( get_permalink() ); ?>">
       <?php print wp_get_attachment_image( 
-        get_post_meta( get_the_ID(), 'master_image' )['master_image'],
+        get_post_meta( get_the_ID(), 'master_image' )[0]['master_image'],
         'homepage_top_story'
       ); ?>
     </a>
@@ -27,6 +27,6 @@
     </p>
   </div>
   <p class="homepage-art-byline">
-    <?php print get_post_meta( get_the_ID(),'master_image'  )['master_image_byline']; ?>
+    <?php print get_post_meta( get_the_ID(), 'master_image' )[0]['master_image_byline']; ?>
   </p>
 </div>
