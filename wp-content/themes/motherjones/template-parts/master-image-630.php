@@ -1,3 +1,4 @@
+<?php print_r(get_post_meta( get_the_ID(), 'master_image' )[0]); ?>
 <?php if (get_post_meta( get_the_ID(), 'master_image' )[0]['master_image']
       && !get_post_meta( get_the_ID(), 'master_image' )[0]['master_image_suppress']
 ): ?>
