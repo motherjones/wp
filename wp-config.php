@@ -153,8 +153,9 @@ $request_parts = explode('/', $_SERVER['REQUEST_URI']);
 if ( isset($request_parts[1]) && $request_parts[1] === 'files' ) {
   $request_parts[1] = 'wp-content/uploads';
   $newurl = implode('/', $request_parts);
+  $http = $_SERVER['HTTPS'] ? 'https://' : 'http://';
   header('HTTP/1.0 301 Moved Permanently');
-  header("Location: /$newurl");
+  header("Location: " . $http . $_SERVER['HTTP_HOST'] . "/$newurl");
   exit();
 }
 
