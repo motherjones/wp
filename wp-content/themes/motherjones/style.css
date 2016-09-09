@@ -1660,7 +1660,7 @@ h2.widget-title {
   margin-bottom: 10px;
   background: linear-gradient(transparent,#000);
 }
-#full-width-header h1,
+#full-width-header-data h1,
 #full-width-header-data h3 {
   color: white;
 }
