@@ -155,7 +155,7 @@ if ( isset($request_parts[1]) && $request_parts[1] === 'files' ) {
   $newurl = implode('/', $request_parts);
   $http = $_SERVER['HTTPS'] ? 'https://' : 'http://';
   header('HTTP/1.0 301 Moved Permanently');
-  header("Location: " . $http . $_SERVER['HTTP_HOST'] . "/$newurl");
+  header("Location: " . $http . $_SERVER['HTTP_HOST'] . $newurl);
   exit();
 }
 
