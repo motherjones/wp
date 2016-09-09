@@ -148,6 +148,16 @@ if ( ! defined( 'WP_DEBUG' ) ) {
     define('WP_DEBUG', false);
 }
 
+/** Redirect from old drupal files location to new wp file location **/
+$request_parts = explode('/', $_SERVER['REQUEST_URI']);
+if ( isset($request_parts[1]) && $request_parts[1] === 'files' ) {
+  $request_parts[1] = 'wp-content/uploads';
+  $newurl = '/' . implode('/', $request_parts);
+  header('HTTP/1.0 301 Moved Permanently');
+  header("Location: $newurl");
+  exit();
+}
+
 /* That's all, stop editing! Happy Pressing. */
 
 
