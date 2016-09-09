@@ -556,9 +556,12 @@ blockquote, .pullquote-left {
   border-bottom: none;
   letter-spacing: 2px;
 }
-#main .byline a {
+.byline a {
   background-image: none;
   color: #ff6900;
+}
+.byline a:hover {
+  color: black;
 }
 
 /* Begin navbar styling */
@@ -1642,6 +1645,7 @@ h2.widget-title {
 #full-width-header {
   width: 100%;
   position: relative;
+  text-align: center;
 }
 
 #full-width-header-image img {
@@ -1656,7 +1660,7 @@ h2.widget-title {
   margin-bottom: 10px;
   background: linear-gradient(transparent,#000);
 }
-#full-width-header-data h1,
+#full-width-header h1,
 #full-width-header-data h3 {
   color: white;
 }
