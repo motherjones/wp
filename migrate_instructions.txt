@@ -1,0 +1,10 @@
+run 
+php migrate_tax.php
+php migrate_posts.php
+php migrate_authors.php
+php migrate_images.php
+
+open up the wp admin and start image regen plugin. This will take a while
+open up zones and create zones for :
+top_stories
+homepage_featured
