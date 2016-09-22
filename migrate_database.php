@@ -462,10 +462,9 @@ while ( $meta = $meta_data->fetch(PDO::FETCH_ASSOC)) {
 	$meta_insert->execute(array($meta['nid'], 'related_articles', $related_value) );
 }
 $wp->commit();
-//FIXME
-//# file_attachments: need to pull one in to see structure
 
 echo "posts done";
+
 
 $wp->beginTransaction();
 $wp->exec('
@@ -624,6 +623,7 @@ ON a.field_user_uid=u.uid
 ;
 ");
 $byline_data->execute();
+//THIS SEEMS TO GET THE RIGHT THING
 
 $byline_insert = $wp->prepare("
 INSERT IGNORE INTO pantheon_wp.wp_term_relationships 
@@ -767,8 +767,6 @@ foreach ( $master_meta_rows as $row ) {
     $row['value']
   ) );
 
-//FIXME ADD _wp_attached_file to posts_metadata w/ a key of something like
-//  2016/06/24m6dk0.jpg
   $master_meta_insert->execute(array(
     $row['image_id'],
     '_wp_attached_file',
@@ -892,4 +890,116 @@ foreach ( $title_meta_rows as $row ) {
 $wp->commit();
 
 echo "images done";
+
+$file_data = $d6->prepare('
+SELECT DISTINCT
+f.uid,
+u.nid,
+n.created,
+n.changed,
+n.status,
+f.filemime,
+f.filename,
+f.fid
+FROM mjd6.upload u
+INNER JOIN mjd6.files f
+USING(fid)
+INNER JOIN mjd6.node n
+ON(u.nid = n.nid)
+;
+');
+$file_data->execute();
+
+$file_insert = $wp->prepare('
+INSERT IGNORE INTO pantheon_wp.wp_posts
+(post_author, post_date, post_date_gmt, post_content, post_title, post_excerpt,
+post_name, to_ping, pinged, post_modified, post_modified_gmt, guid,
+post_content_filtered, post_type, `post_status`, post_parent, post_mime_type)
+VALUES (
+:post_author,
+FROM_UNIXTIME(:post_date),
+FROM_UNIXTIME(:post_date),
+"",
+:post_title,
+"",
+:post_name,
+"",
+"",
+FROM_UNIXTIME(:post_modified),
+FROM_UNIXTIME(:post_modified),
+:guid,
+"",
+"attachment",
+IF(:status = 1, "publish", "private"),
+:post_parent,
+:post_mime_type
+)
+;
+');
+
+$file_meta_rows = array();
+$node_file_rows = array();
+
+$wp->beginTransaction();
+while ( $file = $file_data->fetch(PDO::FETCH_ASSOC)) {
+
+  $guid = $FILEDIR . $file['filename'];
+  $post_name = preg_replace("/\.[^.]+$/", "", $file['filename'] );
+
+  $file_insert->execute(array(
+    ':post_author' => $file['uid'],
+    ':post_date' => $file['created'],
+    ':post_title' => $post_name,
+    ':post_name' => $post_name,
+    ':post_modified' => $file['changed'],
+    ':guid' => $guid,
+    ':status' => $file['status'],
+    ':post_parent' => $file['nid'],
+    ':post_mime_type' => $file['filemime'],
+  ) );
+
+
+  $file_meta_rows[] = array(
+    'nid' => $file['nid'],
+    'fid' => $wp->lastInsertId(),
+    'filename' => $file['filename']
+  );
+
+  $node_file_rows[$file]['nid'] 
+    ?  $node_file_rows[$file]['nid'] 
+    :  array();
+  $node_file_rows[$file]['nid'][] = $wp->lastInsertId(); 
+
+}
+$wp->commit();
+
+
+$file_meta_insert = $wp->prepare("
+INSERT IGNORE INTO pantheon_wp.wp_postmeta
+(post_id, meta_key, meta_value)
+VALUES (?, ?, ?)
+;
+");
+$wp->beginTransaction();
+foreach ( $file_meta_rows as $row ) {
+
+  $file_meta_insert->execute(array(
+    $row['fid'],
+    '_wp_attached_file',
+    $row['filename']
+  ) );
+}
+
+foreach ( $node_file_rows as $nid ) {
+  $file_meta_insert->execute(array(
+    $nid,
+    'file_attachments',
+    serialize($node_file_rows[$nid])
+  ) );
+}
+
+$wp->commit();
+
+echo "files done";
+
 ?>
