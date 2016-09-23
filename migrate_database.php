@@ -475,11 +475,16 @@ $wp->commit();
 
 $author_data = $d6->prepare('
 SELECT DISTINCT
-u.uid, u.mail, NULL, u.name, u.mail,
-FROM_UNIXTIME(created), "", 0, u.name
+u.uid,
+u.mail,
+NULL,
+u.name,
+u.mail,
+FROM_UNIXTIME(created),
+"",
+0,
+u.name
 FROM mjd6.users u
-INNER JOIN mjd6.users_roles r
-USING (uid)
 ;'
 );
 $author_data->execute();
@@ -507,10 +512,32 @@ while ( $author = $author_data->fetch(PDO::FETCH_NUM)) {
 }
 $wp->commit();
 
-//author roles
+//everybody is a contributor! fuck FIXME
+$user_data = $d6->prepare("
+SELECT DISTINCT
+u.uid, 'wp_capabilities', 'a:1:{s:13:\"former_author\";s:1:\"1\";}'
+FROM mjd6.users u
+;"
+);
+$author_data->execute();
+
+$user_insert = $wp->prepare("
+INSERT IGNORE INTO pantheon_wp.wp_usermeta (user_id, meta_key, meta_value)
+VALUES ( ?, ?, ? )
+;
+");
+
+$wp->beginTransaction();
+while ( $user = $user_data->fetch(PDO::FETCH_NUM)) {
+	$user_insert->execute($role);
+}
+$wp->commit();
+
+
+//author roles who are active users
 $roles_data = $d6->prepare("
 SELECT DISTINCT
-u.uid, 'wp_capabilities', 'a:1:{s:6:\"author\";s:1:\"1\";}'
+u.uid
 FROM mjd6.users u
 INNER JOIN mjd6.users_roles r
 USING (uid)
@@ -519,8 +546,10 @@ USING (uid)
 $roles_data->execute();
 
 $roles_insert = $wp->prepare("
-INSERT IGNORE INTO pantheon_wp.wp_usermeta (user_id, meta_key, meta_value)
-VALUES ( ?, ?, ? )
+UPDATE pantheon_wp.wp_usermeta 
+SET meta_value = 'a:1:{s:6:\"author\";s:1:\"1\";}'
+WHERE meta_key = 'wp_capabilities'
+AND user_id = ?
 ;
 ");
 $wp->beginTransaction();
@@ -627,9 +656,9 @@ $byline_data->execute();
 
 $byline_insert = $wp->prepare("
 INSERT IGNORE INTO pantheon_wp.wp_term_relationships 
-VALUES(?, ?)
+VALUES(?, ?, 0)
 ;
-");
+"); //node is 254151, uid is 83242
 $wp->beginTransaction();
 while ( $byline = $byline_data->fetch(PDO::FETCH_NUM)) {
 	$byline_insert->execute($byline);

@@ -20,4 +20,8 @@ MJ_Images();
 
 require_once('mj_custom/motherjones-permalinks.php');
 MJ_Permalinks();
+
+require_once('mj_custom/motherjones-user-types.php');
+MJ_Users();
+
 ?>
