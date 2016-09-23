@@ -27,10 +27,10 @@ if ( !class_exists( 'MJ_Users' ) ) {
         'edit_themes' => false, // false denies this capability. User can’t edit your theme
         'install_plugins' => false, // User cant add new plugins
         'update_plugin' => false, // User can’t update any plugins
-        'level_1' => true,
         'update_core' => false // user cant perform core updates
 
       ) );
+      $former_author->add_cap('level_1');
 
     }
 
