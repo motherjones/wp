@@ -62,75 +62,191 @@
  * 
  */
 
-add_action( 'init', 'create_full_width_type' );
-function create_full_width_type() {
-  register_post_type( 'mj_full_width',
-    array(
-      'labels' => array(
-        'name' => __( 'Full Widths' ),
-        'singular_name' => __( 'Full Width' )
-      ),
-      'public' => true,
-      'has_archive' => true,
-      'supports' => array('title'),
-    )
-  );
+if ( !class_exists( 'MJ_Custom_Types' ) ) {
+
+  require_once('motherjones-content-fields.php');
+  require_once('motherjones-taxonomies.php');
+
+  class MJ_Custom_Types {
+
+    private static $sectionable_types = []; 
+    private static $instance;
+    public static function instance() {
+      if ( ! isset( self::$instance ) ) {
+        self::$instance = new MJ_Custom_Types;
+        self::$instance->setup();
+      }
+      return self::$instance;
+    }
+
+
+    public function setup() {
+      $this->taxonomies = MJ_Taxonomy();
+      $this->fields = MJ_Custom_Fields();
+      self::create_full_width_type();
+      self::create_article_type();
+      self::create_blog_post_type();
+      self::create_author_type();
+      add_filter('pre_get_posts', array($this, 'set_index_query') );
+    }
+
+    public function create_full_width_type() {
+      $type = 'mj_full_width';
+      $this->taxonomies->add_mj_taxonomies($type);
+      add_action( 'init', array( $this, 'full_width_type' ) );
+      add_action( 'fm_post_'.$type, array( $this, full_width_fields)  );
+      $this->sectionable_types[] = $type;
+    }
+
+    public function create_article_type() {
+      $type = 'mj_article';
+      $this->taxonomies->add_mj_taxonomies($type);
+      add_action( 'init', array( $this, 'article_type' ) );
+      add_action( 'fm_post_'.$type, array( $this, article_fields ) );
+      $this->sectionable_types[] = $type;
+    }
+
+    public function create_blog_post_type() {
+      $type = 'mj_blog_post';
+      $this->taxonomies->add_mj_taxonomies($type);
+      add_action( 'init', array( $this, 'blog_post_type' ) );
+      add_action( 'fm_post_'.$type, array( $this, blog_post_fields ) );
+      //$this->sectionable_types[] = $type; No blog posts in sections/tags/etc
+    }
+
+    public function create_author_type() {
+      add_action( 'fm_user', array( $this, author_fields ) );
+    }
+
+    public function full_width_fields() {
+      MJ_Custom_Fields::title_image()->add_meta_box( 'Title Image', 'mj_full_width' );
+      MJ_Custom_Fields::dek()->add_meta_box( 'Dek', 'mj_full_width' );
+      MJ_Custom_Fields::social()->add_meta_box( 'Social Titles', 'mj_full_width' );
+      MJ_Custom_Fields::alt()->add_meta_box( 'Alt Titles', 'mj_full_width' );
+      MJ_Custom_Fields::master_image()->add_meta_box( 'Master Image', 'mj_full_width' );
+      MJ_Custom_Fields::byline()->add_meta_box( 'Byline Override', 'mj_full_width' );
+      MJ_Custom_Fields::body()->add_meta_box( 'Article Body', 'mj_full_width' );
+      MJ_Custom_Fields::related()->add_meta_box( 'Related Articles', 'mj_full_width' );
+      MJ_Custom_Fields::css_js()->add_meta_box( 'Extra CSS & JS', 'mj_full_width' );
+      MJ_Custom_Fields::file_attachments()->add_meta_box( 'Extra File Attachments', 'mj_full_width' );
+      MJ_Custom_Fields::dateline_override()->add_meta_box( 'Dateline Override', 'mj_full_width' );
+    }
+    public function full_width_type() {
+      register_post_type( 'mj_full_width',
+        array(
+          'labels' => array(
+            'name' => __( 'Full Widths' ),
+            'singular_name' => __( 'Full Width' )
+          ),
+          'taxonomies' => array('category', 'mj_media_type', 'mj_primary_tag'),
+
+          'rewrite' => false,
+          'query_arg' => true,
+          'public' => true,
+          'supports' => array('title', 'zoninator_zones', 'author'),
+          'has_archive' => true
+        )
+      );
+			global $wp_rewrite;
+      $article_url_structure = '/%category%/%year%/%monthnum%/%mj_full_width%';
+      $wp_rewrite->add_rewrite_tag("%mj_full_width%", '([^/]+)', "mj_full_width=");
+      $wp_rewrite->add_permastruct('mj_full_width', $article_url_structure, false);
+    }
+
+
+    public function article_type() {
+      register_post_type( 'mj_article',
+        array(
+          'labels' => array(
+            'name' => __( 'Articles' ),
+            'singular_name' => __( 'Article' )
+          ),
+          'taxonomies' => array('category', 'mj_media_type', 'mj_primary_tag'),
+          'rewrite' => false,
+          'query_arg' => true,
+          'public' => true,
+          'supports' => array('title', 'zoninator_zones', 'author'),
+          'has_archive' => true
+        )
+      );
+
+			global $wp_rewrite;
+      $article_url_structure = '/%category%/%year%/%monthnum%/%mj_article%';
+      $wp_rewrite->add_rewrite_tag("%mj_article%", '([^/]+)', "mj_article=");
+      $wp_rewrite->add_permastruct('mj_article', $article_url_structure, false);
+    }
+    public function article_fields() {
+      MJ_Custom_Fields::dek()->add_meta_box( 'Dek', 'mj_article' );
+      MJ_Custom_Fields::social()->add_meta_box( 'Social Titles', 'mj_article' );
+      MJ_Custom_Fields::alt()->add_meta_box( 'Alt Titles', 'mj_article' );
+      MJ_Custom_Fields::master_image()->add_meta_box( 'Master Image', 'mj_article' );
+      MJ_Custom_Fields::byline()->add_meta_box( 'Byline Override', 'mj_article' );
+      MJ_Custom_Fields::body()->add_meta_box( 'Article Body', 'mj_article' );
+      MJ_Custom_Fields::related()->add_meta_box( 'Related Articles', 'mj_article' );
+      MJ_Custom_Fields::css_js()->add_meta_box( 'Extra CSS & JS', 'mj_article' );
+      MJ_Custom_Fields::file_attachments()->add_meta_box( 'Extra File Attachments', 'mj_article' );
+      MJ_Custom_Fields::dateline_override()->add_meta_box( 'Dateline Override', 'mj_article' );
+    }
+
+
+    public function blog_post_type() {
+      register_post_type( 'mj_blog_post',
+        array(
+          'labels' => array(
+            'name' => __( 'Blog Posts' ),
+            'singular_name' => __( 'Blog Post' )
+          ),
+          'taxonomies' => array('mj_blog_type', 'mj_media_type', 'mj_primary_tag'),
+          'public' => true,
+          'rewrite' => false,
+          'query_arg' => true,
+          'supports' => array('title', 'zoninator_zones', 'author'),
+          'has_archive' => true
+        )
+      );
+
+			global $wp_rewrite;
+      $blog_url_structure = '/%mj_blog_type%/%year%/%monthnum%/%mj_blog_post%';
+      $wp_rewrite->add_rewrite_tag("%mj_blog_post%", '([^/]+)', "mj_blog_post=");
+      $wp_rewrite->add_permastruct('mj_blog_post', $blog_url_structure, false);
+    }
+    public function blog_post_fields() {
+      MJ_Custom_Fields::dek()->add_meta_box( 'Dek', 'mj_blog_post' );
+      MJ_Custom_Fields::social()->add_meta_box( 'Social Titles', 'mj_blog_post' );
+      MJ_Custom_Fields::alt()->add_meta_box( 'Alt Titles', 'mj_blog_post' );
+      MJ_Custom_Fields::master_image()->add_meta_box( 'Master Image', 'mj_blog_post' );
+      MJ_Custom_Fields::byline()->add_meta_box( 'Byline Override', 'mj_blog_post' );
+      MJ_Custom_Fields::body()->add_meta_box( 'Article Body', 'mj_blog_post' );
+      MJ_Custom_Fields::css_js()->add_meta_box( 'Extra CSS & JS', 'mj_blog_post' );
+      MJ_Custom_Fields::file_attachments()->add_meta_box( 'Extra File Attachments', 'mj_blog_post' );
+      MJ_Custom_Fields::dateline_override()->add_meta_box( 'Dateline Override', 'mj_blog_post' );
+
+    }
+    public function author_fields() {
+      MJ_Custom_Fields::position()->add_user_form( 'Position', 'mj_author' );
+      MJ_Custom_Fields::image()->add_user_form( 'Author Photo', 'mj_author' );
+      MJ_Custom_Fields::long_bio()->add_user_form( 'Long Bio', 'mj_author' );
+      MJ_Custom_Fields::short_bio()->add_user_form( 'End of Article Bio', 'mj_author' );
+      MJ_Custom_Fields::twitter()->add_user_form( 'Twitter User', 'mj_author' );
+    }
+
+
+    public function set_index_query( $query ) {
+      if(is_category() || is_tag() || is_tax()) {
+        $post_type = get_query_var('post_type');
+        if(!$post_type) { 
+          $query->set('post_type', $this->sectionable_types);
+        }
+        return $query;
+      }
+    }
+
+
+  }
 }
 
-add_action( 'init', 'create_article_type' );
-function create_article_type() {
-  register_post_type( 'mj_article',
-    array(
-      'labels' => array(
-        'name' => __( 'Articles' ),
-        'singular_name' => __( 'Article' )
-      ),
-      'public' => true,
-      'supports' => array('title'),
-      'has_archive' => true
-    )
-  );
-}
-
-add_action( 'init', 'create_blog_post_type' );
-function create_blog_post_type() {
-  register_post_type( 'mj_blog_post',
-    array(
-      'labels' => array(
-        'name' => __( 'Blog Posts' ),
-        'singular_name' => __( 'Blog Post' )
-      ),
-      'public' => true,
-      'supports' => array('title'),
-      'has_archive' => true
-    )
-  );
-}
-
-add_action( 'init', 'create_author_type' );
-function create_blog_post_type() {
-  register_post_type( 'mj_author',
-    array(
-      'labels' => array(
-        'name' => __( 'Authors' ),
-        'singular_name' => __( 'Author' )
-      ),
-      'public' => true,
-      'supports' => array('title'),
-      'has_archive' => true
-    )
-  );
-}
-
-// Show the motherjones custom types on home page
-//
-add_action( 'pre_get_posts', 'add_custom_types_to_query' );
-function add_custom_types_to_query( $query ) {
-  if ( is_home() && $query->is_main_query() )
-    $query->set( 'post_type', 
-      array( 'mj_article', 'mj_full_width', 'mj_blog_post' )
-    );
-  return $query;
+function MJ_Custom_Types() {
+  return MJ_Custom_Types::instance();
 }
 
 ?>
