@@ -41,6 +41,7 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
           $request['post_type'] = array('mj_article', 'mj_full_width', 'mj_blog_post');
 
           $request['author_name'] = str_replace ('author/', '', $dummy_query->query['category_name']);
+          $request['author_name'] = str_replace ('/page', '', $request['author_name']);
 
           $request['tax_query'] = array( array(
             'taxonomy' => 'mj_primary_tag',
@@ -48,6 +49,7 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
             'terms' => $request['author_name'],
           ) );
           print_r($request);
+          unset($request['category_name']);
         }  elseif ( //is topic
           !get_terms( array(
             'taxonomy' => 'category', 
