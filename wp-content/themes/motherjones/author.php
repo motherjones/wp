@@ -46,7 +46,7 @@ get_header(); ?>
         <?php $author_query = new WP_Query(array(
           'author'        =>  $author->id,
           'orderby'       =>  'post_date',
-          'order'         =>  'ASC',
+          'order'         =>  'DESC',
           'post_type' => array('mj_article', 'mj_full_width', 'mj_blog_post'),
           'posts_per_page' => 20,
         ) ); 
