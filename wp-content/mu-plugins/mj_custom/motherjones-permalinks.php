@@ -23,8 +23,9 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
         $dummy_query->parse_query( $request );
 
         // this is the actual manipulation; do whatever you need here
-        if ($dummy_query->query['category_name'] && $dummy_query->query['name']) { //is article type
+        if ($dummy_query->query['category_name'] && $dummy_query->query['name']) {
           $request['post_type'] = array('mj_article', 'mj_full_width');
+          print_r($request);
           if (get_terms( array( // is blog post
               'slug' => $dummy_query->query['category_name'],
               'taxonomy' => 'mj_blog_type'
@@ -43,6 +44,8 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
           $request['author_name'] = str_replace ('author/', '', $dummy_query->query['category_name']);
           $request['author_name'] = str_replace ('/page', '', $request['author_name']);
 
+          $request['page'] = $request['year'];
+
           $request['tax_query'] = array( array(
             'taxonomy' => 'mj_primary_tag',
             'field' => 'slug',
@@ -50,6 +53,7 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
           ) );
           print_r($request);
           unset($request['category_name']);
+          unset($request['year']);
         }  elseif ( //is topic
           !get_terms( array(
             'taxonomy' => 'category', 
