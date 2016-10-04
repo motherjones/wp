@@ -44,10 +44,10 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
           $request['author_name'] = str_replace ('author/', '', $dummy_query->query['category_name']);
           $request['author_name'] = str_replace ('/page', '', $request['author_name']);
 
-          $request['page'] = $request['year'];
+          $request['paged'] = $request['year'];
 
           $request['tax_query'] = array( array(
-            'taxonomy' => 'mj_primary_tag',
+            'taxonomy' => '6',
             'field' => 'slug',
             'terms' => $request['author_name'],
           ) );
