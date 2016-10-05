@@ -43,9 +43,16 @@ get_header(); ?>
       </div>
 
       <ul class="article-list">
-        <?php while ( have_posts() ) : the_post();
+        <?php $author_query = new WP_Query(array(
+          'author'        =>  $author->id,
+          'orderby'       =>  'post_date',
+          'order'         =>  'DESC',
+          'post_type' => array('mj_article', 'mj_full_width', 'mj_blog_post'),
+          'posts_per_page' => 20,
+        ) ); 
+        while ( $author_query->have_posts() ) : $author_query->the_post();
             get_template_part( 'template-parts/standard-article-li');
-          endwhile;
+        endwhile;
         ?>
       </ul>
     </div>
