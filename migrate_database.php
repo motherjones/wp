@@ -519,7 +519,7 @@ u.uid, 'wp_capabilities', 'a:1:{s:13:\"former_author\";s:1:\"1\";}'
 FROM mjd6.users u
 ;"
 );
-$author_data->execute();
+$user_data->execute();
 
 $user_insert = $wp->prepare("
 INSERT IGNORE INTO pantheon_wp.wp_usermeta (user_id, meta_key, meta_value)
@@ -529,7 +529,7 @@ VALUES ( ?, ?, ? )
 
 $wp->beginTransaction();
 while ( $user = $user_data->fetch(PDO::FETCH_NUM)) {
-	$user_insert->execute($role);
+	$user_insert->execute($user);
 }
 $wp->commit();
 
@@ -587,6 +587,7 @@ a.field_last_name_value,
 a.field_author_bio_short_value,
 a.field_author_title_value,
 a.field_author_bio_value,
+a.field_photo_fid,
 u.name
 FROM mjd6.node n
 INNER JOIN mjd6.node_revisions r
@@ -638,6 +639,98 @@ while ( $author_meta = $author_meta_data->fetch(PDO::FETCH_ASSOC)) {
 
 }
 $wp->commit();
+
+//author photo
+$author_image_data = $d6->prepare("
+SELECT DISTINCT
+n.nid,
+u.uid,
+u.created,
+a.field_user_uid, 
+f.status,
+f.filemime,
+f.filename,
+f.fid,
+a.field_photo_fid
+FROM mjd6.node n
+INNER JOIN mjd6.node_revisions r
+USING(vid)
+LEFT OUTER JOIN mjd6.content_type_author a 
+USING(vid)
+LEFT OUTER JOIN mjd6.users u
+ON u.uid=a.field_user_uid
+INNER JOIN mjd6.files f
+ON(a.field_photo_fid = f.fid)
+WHERE name IS NOT NULL
+;
+");
+$author_image_data->execute();
+
+$author_image_insert = $wp->prepare('
+INSERT IGNORE INTO pantheon_wp.wp_posts
+(post_author, post_date, post_date_gmt, post_content, post_title, post_excerpt,
+post_name, to_ping, pinged, post_modified, post_modified_gmt, guid,
+post_content_filtered, post_type, `post_status`, post_parent, post_mime_type)
+VALUES (
+:post_author,
+FROM_UNIXTIME(:post_date),
+FROM_UNIXTIME(:post_date),
+"",
+:post_title,
+"",
+:post_name,
+"",
+"",
+FROM_UNIXTIME(:post_modified),
+FROM_UNIXTIME(:post_modified),
+:guid,
+"",
+"attachment",
+IF(:status = 1, "publish", "private"),
+:post_parent,
+:post_mime_type
+)
+;
+');
+
+$author_fid = Array();
+$wp->beginTransaction();
+while ( $author_image = $author_image_data->fetch(PDO::FETCH_ASSOC) ) {
+
+  $guid = $FILEDIR . $author_image['filename'];
+  $post_name = preg_replace("/\.[^.]+$/", "", $author_image['filename'] );
+
+
+  $author_image_insert->execute(array(
+    ':post_author' => $author_image['uid'],
+    ':post_date' => $author_image['created'],
+    ':post_title' => $post_name,
+    ':post_name' => $post_name,
+    ':post_modified' => $author_image['created'],
+    ':guid' => $guid,
+    ':status' => $author_image['status'],
+    ':post_parent' => $author_image['uid'],
+    ':post_mime_type' => $author_image['filemime'],
+  ) );
+  $author_fid[] = Array(
+    $author_image['uid'],
+    'image',
+    $wp->lastInsertId()
+  );
+}
+$wp->commit();
+
+$author_image_insert = $wp->prepare("
+INSERT IGNORE INTO pantheon_wp.wp_usermeta (user_id, meta_key, meta_value)
+VALUES ( ?, ?, ? )
+;
+");
+$wp->beginTransaction();
+foreach ($author_fid as $fid ) {
+	$author_image_insert->execute($fid);
+}
+$wp->commit();
+
 
 //author byline
 $byline_data = $d6->prepare("
