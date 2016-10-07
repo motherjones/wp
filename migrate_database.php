@@ -478,13 +478,18 @@ SELECT DISTINCT
 u.uid,
 u.mail,
 NULL,
-u.name,
+n.title,
 u.mail,
-FROM_UNIXTIME(created),
+FROM_UNIXTIME(u.created),
 "",
 0,
-u.name
+n.title
 FROM mjd6.users u
+INNER JOIN
+content_type_author a
+ON (u.uid = a.field_user_uid)
+INNER JOIN node n
+ON (a.nid = n.nid)
 ;'
 );
 $author_data->execute();
@@ -506,11 +511,102 @@ REPLACE(LOWER(?), " ", "-"),
 )
 ;'
 );
+
+$author_hash = Array();
+
 $wp->beginTransaction();
 while ( $author = $author_data->fetch(PDO::FETCH_NUM)) {
 	$author_insert->execute($author);
+  // example:    description: ben   ben 1 bbreedlove@motherjones.com
+  $description = $author[3] . '   ' . $author[3]
+    . ' ' . $wp->lastInsertId() . ' ' . $author[1];
+  $author_hash[$author[3]] = Array(
+    'wp_user_id' => $wp->lastInsertId(),
+    'description' => $description
+  ); 
 }
 $wp->commit();
+
+//naming for co authors taxonomy is cap-username
+$byline_titles_data = $d6->prepare("
+SELECT DISTINCT
+n.title
+FROM mjd6.content_field_byline b
+INNER JOIN mjd6.node n
+ON (n.nid = b.field_byline_nid)
+;"
+);
+$byline_titles_data->execute();
+
+$byline_titles_insert = $wp->prepare('
+INSERT IGNORE INTO pantheon_wp.wp_terms
+(name, slug, term_group)
+VALUES (
+?,
+CONCAT( "cap-", REPLACE(LOWER(?), " ", "-") ),
+0
+)
+;'
+);
+
+$wp->beginTransaction();
+while ( $byline = $byline_titles_data->fetch(PDO::FETCH_ASSOC)) {
+  $byline_titles_insert->execute(Array(
+    $byline['title'],
+    $byline['title']
+  ));
+  $author_hash[$byline['title']]['term_id'] = $wp->lastInsertId();
+}
+$wp->commit();
+
+
+$byline_taxonomy_insert = $wp->prepare("
+INSERT IGNORE INTO pantheon_wp.wp_term_taxonomy
+(term_id, taxonomy, description)
+VALUES (
+?,
+'author',
+?)
+;
+");
+$wp->beginTransaction();
+foreach ( $author_hash as $author => $author_array ) {
+  $byline_taxonomy_insert->execute(Array(
+    $author_array['term_id'],
+    $author_array['description']
+  ));
+  $author_hash[$author]['tax_id'] = $wp->lastInsertId();
+}
+$wp->commit();
+
+$byline_term_data = $d6->prepare("
+SELECT DISTINCT
+n.nid,
+b.nid `node`,
+n.title `title`
+FROM mjd6.content_field_byline b
+INNER JOIN mjd6.node n
+ON (n.nid = b.field_byline_nid)
+;"
+);
+$byline_term_data->execute();
+
+$byline_term_insert = $wp->prepare("
+INSERT IGNORE INTO pantheon_wp.wp_term_relationships 
+(object_id, term_taxonomy_id)
+VALUES (?, ?)
+;
+");
+
+$wp->beginTransaction();
+while ( $term = $byline_term_data->fetch(PDO::FETCH_ASSOC)) {
+  $byline_term_insert->execute(Array(
+    $term['node'],
+    $author_hash[$term['title']]['tax_id']
+  ));
+}
+$wp->commit();
+
 
 //everybody is a contributor! fuck FIXME
 $user_data = $d6->prepare("
@@ -1087,10 +1183,11 @@ while ( $file = $file_data->fetch(PDO::FETCH_ASSOC)) {
     'filename' => $file['filename']
   );
 
-  $node_file_rows[$file]['nid'] 
-    ?  $node_file_rows[$file]['nid'] 
-    :  array();
-  $node_file_rows[$file]['nid'][] = $wp->lastInsertId(); 
+  $node_file_rows[$file['nid']] 
+    = in_array($file['nid'], $node_file_rows, TRUE)
+      ?  $node_file_rows[$file['nid']] 
+      :  Array();
+  $node_file_rows[$file['nid']][] = $wp->lastInsertId(); 
 
 }
 $wp->commit();
@@ -1112,11 +1209,11 @@ foreach ( $file_meta_rows as $row ) {
   ) );
 }
 
-foreach ( $node_file_rows as $nid ) {
+foreach ( $node_file_rows as $nid => $row ) {
   $file_meta_insert->execute(array(
     $nid,
     'file_attachments',
-    serialize($node_file_rows[$nid])
+    serialize($row)
   ) );
 }
 
