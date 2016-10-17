@@ -5469,7 +5469,6 @@ add_action('admin_head', 'content_textarea_height');
 function content_textarea_height() {
         echo'
         <style type="text/css">
-                #content{ height:300px !important;}
         			#fm-body-0_ifr {height:300px !important;}
         </style>
         ';
