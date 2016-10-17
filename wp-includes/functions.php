@@ -5464,3 +5464,12 @@ function wp_raise_memory_limit( $context = 'admin' ) {
 
 	return false;
 }
+//change default height of text editing area in wysiwyg
+add_action('admin_head', 'content_textarea_height');
+function content_textarea_height() {
+        echo'
+        <style type="text/css">
+                #content{ height:800px; !important }
+        </style>
+        ';
+}
