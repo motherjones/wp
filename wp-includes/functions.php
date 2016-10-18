@@ -5470,8 +5470,11 @@ function content_textarea_height() {
         echo'
         <style type="text/css">
         			.post-type-mj_blog_post #fm-body-0 {height:280px !important;}
+        			.post-type-mj_blog_post #fm-body-0_ifr {height:280px !important;}
  					.post-type-mj_article #fm-body-0 {height:560px !important;}
+ 					.post-type-mj_article #fm-body-0_ifr {height:560px !important;}
  					.post-type-mj_full_width #fm-body-0 {height:840px !important;}
+ 					.post-type-mj_full_width #fm-body-0_ifr {height:840px !important;}
         </style>
         ';
 }
