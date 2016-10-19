@@ -9,8 +9,16 @@
   This is the part where I define all the fields our custom parts need
 */
 
-define('__ROOT__', dirname(dirname(__FILE__))); 
+define('__ROOT__', dirname(dirname(__FILE__)));
 require_once(__ROOT__.'/fieldmanager/fieldmanager.php');
+
+add_action('save_post', 'custom_add_save');
+
+function custom_add_save($postID){
+    if (!defined('DOING_AUTOSAVE') && !DOING_AUTOSAVE) {
+        return $postID;
+    }
+}
 
 if ( !class_exists( 'MJ_Custom_Fields' ) ) {
 
@@ -25,7 +33,7 @@ if ( !class_exists( 'MJ_Custom_Fields' ) ) {
     }
 
     /* Article type fields (also blogposts, full widths) */
-    public function title_image() { 
+    public function title_image() {
       return new Fieldmanager_Group( array(
         'name' => 'full_width_title_image',
         'children' => array(
@@ -84,14 +92,14 @@ if ( !class_exists( 'MJ_Custom_Fields' ) ) {
       ) );
     }
 
-    public function body() { 
+    public function body() {
       return new Fieldmanager_RichTextArea( array(
         'name' => 'body'
       ) );
     }
 
     public function file_attachments() {
-      return new Fieldmanager_Group( array( 
+      return new Fieldmanager_Group( array(
         'name' => 'file_attachments',
         'children' => array(
           'files' => new Fieldmanager_Media( 'File Attachments', array(
@@ -121,13 +129,13 @@ if ( !class_exists( 'MJ_Custom_Fields' ) ) {
 
 
     public function byline() {
-      return new Fieldmanager_TextField( array( 
+      return new Fieldmanager_TextField( array(
         'name' => 'byline_override',
       ) );
     }
 
     public function related() {
-      return new Fieldmanager_Group( array( 
+      return new Fieldmanager_Group( array(
         'name' => 'related_articles',
         'children' => array(
           'relateds' => new Fieldmanager_Autocomplete( "Article", array(
@@ -135,7 +143,7 @@ if ( !class_exists( 'MJ_Custom_Fields' ) ) {
             'sortable'   => true,
             'add_more_label' => 'Add another article',
             'datasource' => new Fieldmanager_Datasource_Post( array(
-              'query_args' => array( 
+              'query_args' => array(
                 'post_type' => array('mj_blog_post', 'mj_article', 'mj_full_width'),
                 'post_status' => 'publish'
               )
@@ -156,7 +164,7 @@ if ( !class_exists( 'MJ_Custom_Fields' ) ) {
     }
 
     public function image() {
-      return new Fieldmanager_Media( array( 
+      return new Fieldmanager_Media( array(
         'name' => 'image'
       ) );
     }
