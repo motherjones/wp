@@ -4,7 +4,7 @@
  * @version 0.1
  */
 
-/** 
+/**
  * Example:
  *
  * function custom_post_type() {
@@ -50,7 +50,7 @@
  *     'show_in_admin_bar'     => true,
  *     'show_in_nav_menus'     => true,
  *     'can_export'            => true,
- *     'has_archive'           => true,    
+ *     'has_archive'           => true,
  *     'exclude_from_search'   => false,
  *     'publicly_queryable'    => true,
  *     'capability_type'       => 'page',
@@ -59,7 +59,7 @@
  *
  * }
  * add_action( 'init', 'custom_post_type', 0 );
- * 
+ *
  */
 
 if ( !class_exists( 'MJ_Custom_Types' ) ) {
@@ -69,7 +69,7 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
 
   class MJ_Custom_Types {
 
-    private static $sectionable_types = []; 
+    private static $sectionable_types = [];
     private static $instance;
     public static function instance() {
       if ( ! isset( self::$instance ) ) {
@@ -129,7 +129,7 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
       MJ_Custom_Fields::related()->add_meta_box( 'Related Articles', 'mj_full_width' );
       MJ_Custom_Fields::css_js()->add_meta_box( 'Extra CSS & JS', 'mj_full_width' );
       MJ_Custom_Fields::file_attachments()->add_meta_box( 'Extra File Attachments', 'mj_full_width' );
-      MJ_Custom_Fields::dateline_override()->add_meta_box( 'Dateline Override', 'mj_full_width' );
+      MJ_Custom_Fields::dateline_override()->add_meta_box( 'Issue Date', 'mj_full_width' );
     }
     public function full_width_type() {
       register_post_type( 'mj_full_width',
@@ -185,7 +185,7 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
       MJ_Custom_Fields::related()->add_meta_box( 'Related Articles', 'mj_article' );
       MJ_Custom_Fields::css_js()->add_meta_box( 'Extra CSS & JS', 'mj_article' );
       MJ_Custom_Fields::file_attachments()->add_meta_box( 'Extra File Attachments', 'mj_article' );
-      MJ_Custom_Fields::dateline_override()->add_meta_box( 'Dateline Override', 'mj_article' );
+      MJ_Custom_Fields::dateline_override()->add_meta_box( 'Issue Date', 'mj_article' );
     }
 
 
@@ -219,7 +219,7 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
       MJ_Custom_Fields::body()->add_meta_box( 'Article Body', 'mj_blog_post' );
       MJ_Custom_Fields::css_js()->add_meta_box( 'Extra CSS & JS', 'mj_blog_post' );
       MJ_Custom_Fields::file_attachments()->add_meta_box( 'Extra File Attachments', 'mj_blog_post' );
-      MJ_Custom_Fields::dateline_override()->add_meta_box( 'Dateline Override', 'mj_blog_post' );
+      MJ_Custom_Fields::dateline_override()->add_meta_box( 'Issue Date', 'mj_blog_post' );
 
     }
     public function author_fields() {
@@ -234,7 +234,7 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
     public function set_index_query( $query ) {
       if(is_category() || is_tag() || is_tax()) {
         $post_type = get_query_var('post_type');
-        if(!$post_type) { 
+        if(!$post_type) {
           $query->set('post_type', $this->sectionable_types);
         }
         return $query;
