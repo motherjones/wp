@@ -130,28 +130,28 @@ if (!function_exists( 'mj_wysiwyg_config' ) ) {
 		$config['wpautop'] = true;
 		$config['apply_source_formatting'] = false;
 
-		$style_formats = array(  
-			array(  
-				'title' => 'Subheader',  
-				'block' => 'h3',  
+		$style_formats = array(
+			array(
+				'title' => 'Subheader',
+				'block' => 'h3',
 				'classes' => 'subheader',
 				'wrapper' => false,
 			),
-			array(  
-				'title' => 'Section Lead',  
-				'inline' => 'span',  
+			array(
+				'title' => 'Section Lead',
+				'inline' => 'span',
 				'classes' => 'section-lead',
 				'wrapper' => false,
-			),  
-			array(  
-				'title' => 'Pullquote',  
-				'block' => 'blockquote',  
+			),
+			array(
+				'title' => 'Pullquote',
+				'block' => 'blockquote',
 				'classes' => 'pullquote-left',
 				'wrapper' => false,
 			),
-		);  
+		);
 		// Insert the array, JSON ENCODED, into 'style_formats'
-		$config['style_formats'] = json_encode( $style_formats );  
+		$config['style_formats'] = json_encode( $style_formats );
 
 		$config['toolbar1'] = 'bold,italic,strikethrough,bullist,numlist,blockquote,hr,styleselect,link,unlink,wp_fullscreen,wp_adv ';
 		$config['toolbar2'] = 'spellchecker,underline,removeformat,charmap,outdent,indent,undo,redo,wp_help ';
@@ -195,7 +195,7 @@ if ( ! function_exists( 'get_discus_thread' ) ) {
   }
 }
 
-/** 
+/**
  * create our social buttons
  */
 if ( ! function_exists( 'mj_flat_twitter_button' ) ) {
@@ -205,7 +205,7 @@ if ( ! function_exists( 'mj_flat_twitter_button' ) ) {
     $status = $social ? $social : get_the_title( $id );
     $href = 'http://twitter.com/home?status=' . $status . ' '
       . esc_url( get_permalink($id) ). ' via @MotherJones';
-    return sprintf( 
+    return sprintf(
         '<a class="social" href="%s" target="_blank">'
           . '<i class="fa fa-twitter fw"></i>'
           . '<span class="share-text">Share on Twitter</span>'
@@ -218,7 +218,7 @@ if ( ! function_exists( 'mj_flat_facebook_button' ) ) {
   function mj_flat_facebook_button($id) {
     $id = $id ? $id : get_the_ID();
     $href = 'http://facebook.com/sharer.php?u=' . esc_url( get_permalink($id) );
-    return sprintf( 
+    return sprintf(
       '<a class="social" href="%s" target="_blank">'
         . '<i class="fa fa-facebook fw"></i>'
           . '<span class="share-text">Share on Facebook</span>'
@@ -479,3 +479,18 @@ function twentysixteen_post_thumbnail_sizes_attr( $attr, $attachment, $size ) {
 	return $attr;
 }
 add_filter( 'wp_get_attachment_image_attributes', 'twentysixteen_post_thumbnail_sizes_attr', 10 , 3 );
+
+//change default height of text editing area in wysiwyg
+add_action('admin_head', 'content_textarea_height');
+function content_textarea_height() {
+        echo'
+        <style type="text/css">
+					.post-type-mj_blog_post .fm-body-0_ifr {height: 280px !important;}
+					.post-type-mj_blog_post .fm-body-0 {height: 280px !important;}
+					.post-type-mj_article .fm-body-0_ifr {height: 560px !important;}
+					.post-type-mj_article .fm-body-0 {height: 560px !important;}
+					.post-type-mj_full_width .fm-body-0_ifr {height: 840px !important;}
+					.post-type-mj_full_width .fm-body-0 {height: 840px !important;}
+        </style>
+        ';
+}
