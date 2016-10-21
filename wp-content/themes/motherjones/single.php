@@ -24,9 +24,12 @@ get_header(); ?>
 
 	</main><!-- .site-main -->
 
-  <?php dynamic_sidebar( 'article-end' ); ?>
+  <?php dynamic_sidebar( 'content-end' ); ?>
 
 </div><!-- .content-area -->
 
-<?php get_sidebar(); ?>
+<div id="sidebar-right">
+  <?php dynamic_sidebar( 'sidebar' ); ?>
+</div>
+
 <?php get_footer(); ?>

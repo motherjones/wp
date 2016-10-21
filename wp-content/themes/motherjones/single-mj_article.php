@@ -53,7 +53,7 @@ get_header(); ?>
 
           <footer class="entry-footer">
 
-            <?php dynamic_sidebar( 'article-end' ); ?>
+            <?php dynamic_sidebar( 'content-end' ); ?>
 
             <?php get_template_part( 'template-parts/end-article-sharing' ); ?>
 
@@ -69,7 +69,7 @@ get_header(); ?>
       <?php endwhile; ?>
 
       <div id="sidebar-right">
-        <?php dynamic_sidebar( 'sidebar-article' ); ?>
+        <?php dynamic_sidebar( 'sidebar' ); ?>
       </div>
 
     </main><!-- .site-main -->

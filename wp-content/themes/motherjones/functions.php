@@ -234,35 +234,14 @@ if ( ! function_exists( 'mj_flat_facebook_button' ) ) {
  */
 function mj_widgets_init() {
 	register_sidebar( array(
-		'name'          => __( 'Sidebar for Articles', 'motherjones' ),
-		'id'            => 'sidebar-article',
+		'name'          => __( 'Sidebar', 'motherjones' ),
+		'id'            => 'sidebar',
 		'description'   => __( 'Shows up on article pages', 'motherjones' ),
 		'before_widget' => '<section id="%1$s" class="widget %2$s">',
 		'after_widget'  => '</section>',
 		'before_title'  => '<h2 class="widget-title">',
 		'after_title'   => '</h2>',
 	) );
-
-	register_sidebar( array(
-		'name'          => __( 'Sidebar for Sections', 'motherjones' ),
-		'id'            => 'sidebar-section',
-		'description'   => __( 'Shows up on section and topic pages', 'motherjones' ),
-		'before_widget' => '<section id="%1$s" class="widget %2$s">',
-		'after_widget'  => '</section>',
-		'before_title'  => '<h2 class="widget-title">',
-		'after_title'   => '</h2>',
-	) );
-
-	register_sidebar( array(
-		'name'          => __( 'Sidebar for Blog posts', 'motherjones' ),
-		'id'            => 'sidebar-blog',
-		'description'   => __( 'Shows up on blog posts', 'motherjones' ),
-		'before_widget' => '<section id="%1$s" class="widget %2$s">',
-		'after_widget'  => '</section>',
-		'before_title'  => '<h2 class="widget-title">',
-		'after_title'   => '</h2>',
-	) );
-
 	register_sidebar( array(
 		'name'          => __( 'Ticker', 'motherjones' ),
 		'id'            => 'ticker',
@@ -274,8 +253,8 @@ function mj_widgets_init() {
 	) );
 
 	register_sidebar( array(
-		'name'          => __( 'End of article', 'motherjones' ),
-		'id'            => 'article-end',
+		'name'          => __( 'End of content', 'motherjones' ),
+		'id'            => 'content-end',
 		'description'   => __( 'Between the comments and the footer', 'motherjones' ),
 		'before_widget' => '<section id="%1$s" class="widget %2$s">',
 		'after_widget'  => '</section>',
