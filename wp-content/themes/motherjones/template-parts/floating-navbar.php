@@ -9,7 +9,7 @@
 		</li>
 		<?php if($wp_query->found_posts === 1 && $wp_query->query_vars['post_type'] !== 'mj_author'): //is an articlish thing ?>
       <li class="nav-title">
-        <?php print $wp_query->posts[0]->post_name; ?>
+        <?php print $wp_query->posts[0]->post_title; ?>
       </li>
       <li class="share-button facebook">
         <?php print mj_flat_facebook_button($wp_query->posts[0]->ID);?>
