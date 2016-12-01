@@ -12,8 +12,9 @@ require_once('coauthors/co-authors-plus.php');
 // docs say that things added are FIFO, also look into priority arg if not
 //
 // we want to mess with get_guest_author_fields to add our stuff
-add_action( 'init', 'rewrite_coauthors_guest_author_for_mojo', 12 );
+add_action( 'init', 'rewrite_coauthors_guest_author_for_mojo', 9 );
 function rewrite_coauthors_guest_author_for_mojo() {
+//priority note: this function does not exist at priority 12
   $coauthors_plus->guest_authors->get_guest_author_fields =
 	function ( $groups = 'all' ) {
 
