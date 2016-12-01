@@ -14,8 +14,6 @@ require_once('coauthors/co-authors-plus.php');
 // we want to mess with get_guest_author_fields to add our stuff
 add_action( 'init', 'rewrite_coauthors_guest_author_for_mojo' );
 function rewrite_coauthors_guest_author_for_mojo() {
-  print ('well we got here thats good');
-  die;
   $coauthors_plus->guest_authors->get_guest_author_fields =
 	function ( $groups = 'all' ) {
 
@@ -63,6 +61,7 @@ function rewrite_coauthors_guest_author_for_mojo() {
 						'label'    => __( 'Linked Account', 'co-authors-plus' ),
 						'group'    => 'slug',
 					),
+/*
 				array(
 						'key'      => 'website',
 						'label'    => __( 'Website', 'co-authors-plus' ),
@@ -84,9 +83,28 @@ function rewrite_coauthors_guest_author_for_mojo() {
 						'label'    => __( 'Jabber / Google Talk', 'co-authors-plus' ),
 						'group'    => 'contact-info',
 					),
+*/
 				array(
-						'key'      => 'description',
-						'label'    => __( 'Biographical Info', 'co-authors-plus' ),
+						'key'      => 'twitter',
+						'label'    => __( 'Twitter', 'co-authors-plus' ),
+						'group'    => 'contact-info',
+					),
+          //bio fields
+				array(
+						'key'      => 'position',
+						'label'    => __( 'Long Bio', 'co-authors-plus' ),
+						'group'    => 'about',
+						'sanitize_function' => 'wp_filter_post_kses',
+					),
+				array(
+						'key'      => 'long_bio',
+						'label'    => __( 'Long Bio', 'co-authors-plus' ),
+						'group'    => 'about',
+						'sanitize_function' => 'wp_filter_post_kses',
+					),
+				array(
+						'key'      => 'short bio',
+						'label'    => __( 'Short Bio', 'co-authors-plus' ),
 						'group'    => 'about',
 						'sanitize_function' => 'wp_filter_post_kses',
 					),
