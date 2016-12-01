@@ -44,6 +44,11 @@ function rewrite_coauthors_guest_author_for_mojo() {
               'group'    => 'name',
             ),
           array(
+              'key'      => 'position',
+              'label'    => __( 'Position', 'co-authors-plus' ),
+              'group'    => 'name',
+            ),
+          array(
               'key'      => 'user_login',
               'label'    => __( 'Slug', 'co-authors-plus' ),
               'group'    => 'slug',
@@ -90,12 +95,6 @@ function rewrite_coauthors_guest_author_for_mojo() {
               'group'    => 'contact-info',
             ),
             //bio fields
-          array(
-              'key'      => 'position',
-              'label'    => __( 'Long Bio', 'co-authors-plus' ),
-              'group'    => 'about',
-              'sanitize_function' => 'wp_filter_post_kses',
-            ),
           array(
               'key'      => 'long_bio',
               'label'    => __( 'Long Bio', 'co-authors-plus' ),
