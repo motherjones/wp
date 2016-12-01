@@ -474,7 +474,8 @@ DELETE FROM pantheon_wp.wp_usermeta WHERE user_id > 1;
 $wp->commit();
 
 $author_data = $d6->prepare('
-SELECT DISTINCT
+SELECT
+DISTINCT
 u.uid,
 u.mail,
 NULL,
@@ -484,12 +485,12 @@ FROM_UNIXTIME(u.created),
 "",
 0,
 n.title
-FROM mjd6.users u
-INNER JOIN
-content_type_author a
-ON (u.uid = a.field_user_uid)
-INNER JOIN node n
+FROM
+mjd6.content_type_author a
+INNER JOIN mjd6.node n
 ON (a.nid = n.nid)
+LEFT JOIN mjd6.users u
+ON (u.name = n.title)
 ;'
 );
 $author_data->execute();
@@ -513,6 +514,7 @@ REPLACE(LOWER(?), " ", "-"),
 );
 
 $author_hash = Array();
+$authors_wo_users = Array();
 
 $wp->beginTransaction();
 while ( $author = $author_data->fetch(PDO::FETCH_NUM)) {
@@ -555,9 +557,59 @@ while ( $byline = $byline_titles_data->fetch(PDO::FETCH_ASSOC)) {
     $byline['title'],
     $byline['title']
   ));
-  $author_hash[$byline['title']]['term_id'] = $wp->lastInsertId();
+  if (array_key_exists($byline['title'], $author_hash)) {
+    $author_hash[$byline['title']]['term_id'] = $wp->lastInsertId();
+  } else {
+    print $byline['title'];
+    $description = $byline['title'] . '   ' . $byline['title']
+      . ' ' . $wp->lastInsertId() . ' ';
+    $authors_wo_users[$byline['title']] = Array(
+      'term_id' => $wp->lastInsertId(),
+      'description' => $description
+    ); 
+  }
 }
 $wp->commit();
+
+
+/**** REDO USER CREATION W/ AUTHORS W/O USERS ****/
+
+$no_user_author_insert = $wp->prepare('
+INSERT IGNORE INTO pantheon_wp.wp_users
+(user_login, user_pass, user_nicename, user_email,
+user_registered, user_activation_key, user_status, display_name)
+VALUES (
+?,
+?,
+REPLACE(LOWER(?), " ", "-"),
+?,
+?,
+?,
+?,
+?
+)
+;'
+);
+
+$wp->beginTransaction();
+foreach ( $authors_wo_users as $author => $author_array ) {
+  $no_user_author_insert->execute(Array(
+    $author, //login
+    '', //pass
+    $author, //user nicename,
+    '', //user email
+    '1970-1-1 00:00:00', //registered
+    '', //user activation key
+    0, //user status
+    $author //display name
+  ));
+  $authors_wo_users[$author]['wp_user_id'] = $wp->lastInsertId();
+  $author_hash[$author] = $authors_wo_users[$author];
+}
+$wp->commit();
+
+
+/**** END REDO USER CREATION W/ AUTHORS W/O USERS ****/
 
 
 $byline_taxonomy_insert = $wp->prepare("
@@ -600,35 +652,27 @@ VALUES (?, ?)
 
 $wp->beginTransaction();
 while ( $term = $byline_term_data->fetch(PDO::FETCH_ASSOC)) {
-  $byline_term_insert->execute(Array(
-    $term['node'],
-    $author_hash[$term['title']]['tax_id']
-  ));
+  if (array_key_exists($term['title'], $author_hash)) {
+    $byline_term_insert->execute(Array(
+      $term['node'],
+      $author_hash[$term['title']]['tax_id']
+    ));
+  }
 }
 $wp->commit();
 
 
-//everybody is a contributor! fuck FIXME
-$user_data = $d6->prepare("
-SELECT DISTINCT
-u.uid, 'wp_capabilities', 'a:1:{s:13:\"former_author\";s:1:\"1\";}'
-FROM mjd6.users u
-;"
-);
-$user_data->execute();
-
-$user_insert = $wp->prepare("
+//everybody is a contributor! Later we can make active users active
+//
+$wp->beginTransaction();
+$user_insert = $wp->exec("
 INSERT IGNORE INTO pantheon_wp.wp_usermeta (user_id, meta_key, meta_value)
-VALUES ( ?, ?, ? )
+SELECT DISTINCT
+ID, 'wp_capabilities', 'a:1:{s:11:\"contributor\";s:1:\"1\";}'
+FROM pantheon_wp.wp_users
 ;
 ");
-
-$wp->beginTransaction();
-while ( $user = $user_data->fetch(PDO::FETCH_NUM)) {
-	$user_insert->execute($user);
-}
 $wp->commit();
-
 
 //author roles who are active users
 $roles_data = $d6->prepare("
@@ -686,11 +730,9 @@ a.field_author_bio_value,
 a.field_photo_fid,
 u.name
 FROM mjd6.node n
-INNER JOIN mjd6.node_revisions r
-USING(vid)
-LEFT OUTER JOIN mjd6.content_type_author a 
-USING(vid)
-LEFT OUTER JOIN mjd6.users u
+INNER JOIN mjd6.content_type_author a 
+ON a.nid = n.nid
+INNER JOIN mjd6.users u
 ON u.uid=a.field_user_uid
 WHERE name IS NOT NULL
 ;
