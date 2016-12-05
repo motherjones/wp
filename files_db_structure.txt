@@ -1,0 +1,15 @@
+in drupal files table
+fid (first is 4)
+uid (first is 1)
+filename
+filepath
+filemime
+filesize
+status
+timestamp
+
+
+in drupal  the upload table
+fid
+vid
+nid:

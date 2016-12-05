@@ -873,11 +873,18 @@ while ( $author_image = $author_image_data->fetch(PDO::FETCH_ASSOC) ) {
     ':post_parent' => $post_id,
     ':post_mime_type' => $author_image['filemime'],
   ) );
-  $author_fid[] = Array(
+  $author_fid[] = Array( // Set author to have the photo
     $post_id,
-    'image',
+    '_thumbnail_id',
     $wp->lastInsertId()
   );
+  $author_fid[] = Array( // Set photo to have a filepath
+    $wp->lastInsertId(),
+    '_wp_attached_file',
+    $guid
+  );
+  //FIXME we're not doing _wp_attachment_metadata
+  //god i hope we don't need it because jesus
 }
 $wp->commit();
 
@@ -893,34 +900,6 @@ foreach ($author_fid as $fid ) {
 $wp->commit();
 
 
-/* what
- * no
-//author byline
-$byline_data = $d6->prepare("
-SELECT DISTINCT n.nid, u.uid 
-FROM mjd6.term_node n
-INNER JOIN mjd6.content_field_byline b
-ON n.nid = b.nid
-INNER JOIN mjd6.content_type_author a
-ON b.field_byline_nid=a.nid
-INNER JOIN mjd6.users u
-ON a.field_user_uid=u.uid
-;
-");
-$byline_data->execute();
-//THIS SEEMS TO GET THE RIGHT THING
-
-$byline_insert = $wp->prepare("
-INSERT IGNORE INTO pantheon_wp.wp_term_relationships 
-VALUES(?, ?, 0)
-;
-"); //node is 254151, uid is 83242
-$wp->beginTransaction();
-while ( $byline = $byline_data->fetch(PDO::FETCH_NUM)) {
-	$byline_insert->execute($byline);
-}
-$wp->commit();
-*/
 
 echo "authors done";
 
