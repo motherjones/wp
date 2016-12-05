@@ -170,3 +170,8 @@ if ( !defined('ABSPATH') )
 
 /** Sets up WordPress vars and included files. */
 require_once(ABSPATH . 'wp-settings.php');
+
+/** CONTACT FORM 7 Workaround */
+$_SERVER['SERVER_NAME'] = $_SERVER['HTTP_HOST'];
+
+
