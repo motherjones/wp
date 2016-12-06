@@ -5,6 +5,5 @@
 
 require_once('responsive-images/responsive-images.php');
 require_once('zoninator/zoninator.php');
-require_once('wp-rss-aggregator/wp-rss-aggregator.php');
 
 ?>
