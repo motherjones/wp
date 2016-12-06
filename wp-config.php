@@ -165,7 +165,9 @@ if ( isset($request_parts[1]) && $request_parts[1] === 'files' ) {
 if (stripos($_SERVER['REQUEST_URI'], 'rss/sections') !== false
   && (php_sapi_name() != "cli")) {
     header('HTTP/1.0 301 Moved Permanently');
-    header('Location: ' . str_replace('rss/sections', 'category'));
+    $new_uri = str_replace('rss/sections', 'category', 
+      $_SERVER['REQUEST_URI']);
+    header('Location: ' . $new_uri );
     exit();
 }
 
