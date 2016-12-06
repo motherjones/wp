@@ -160,10 +160,12 @@ if ( isset($request_parts[1]) && $request_parts[1] === 'files' ) {
 }
 
 // 301 Redirect from /rss/sections to /category.
-if (($_SERVER['REQUEST_URI'] == '/rss/sections/Environment/feed') &&
-  (php_sapi_name() != "cli")) {
+// if (($_SERVER['REQUEST_URI'] == '/rss/sections/Environment/feed') &&
+//   (php_sapi_name() != "cli")) {
+if (stripos($_SERVER['REQUEST_URI'], 'rss/sections') !== false
+  && (php_sapi_name() != "cli")) {
     header('HTTP/1.0 301 Moved Permanently');
-    header('Location: /category/environment/feed');
+    header('Location: ' . str_replace('rss/sections', 'category'));
     exit();
 }
 
