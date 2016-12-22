@@ -584,7 +584,7 @@ VALUES (
   FROM_UNIXTIME(?), ##POST DATE GMT
   "", ##post content
   ?, ##post title is author name for display
-  "",  #post execerpt
+  "",  #post excerpt
   CONCAT( "cat-", REPLACE(LOWER(?), " ", "-") ),# post name is cap-first-last
   "", #to ping
   "", # pinged
@@ -790,7 +790,7 @@ while ( $author_meta = $author_meta_data->fetch(PDO::FETCH_ASSOC)) {
 	$author_meta_insert->execute();
 
   $key = "cap-user_login";
-  $value = str_replace(' ', '-', strtolower($author_meta['name']) );
+  $value = str_replace( ' ', '-', strtolower($author_meta['name']) );
 	$author_meta_insert->execute();
 
 }
@@ -803,25 +803,25 @@ $wp->commit();
 $author_image_data = $d6->prepare("
 SELECT DISTINCT
 n.nid,
-u.uid,
-u.created,
+#u.uid,
+#u.created,
 a.field_user_uid, 
 f.status,
 f.filemime,
-f.filename,
+f.filepath,
 f.fid,
-a.title,
+a.field_author_title_value,
 a.field_photo_fid
 FROM mjd6.node n
 INNER JOIN mjd6.node_revisions r
 USING(vid)
 LEFT OUTER JOIN mjd6.content_type_author a 
 USING(vid)
-LEFT OUTER JOIN mjd6.users u
-ON u.uid=a.field_user_uid
+#LEFT OUTER JOIN mjd6.users u
+#ON u.uid=a.field_user_uid
 INNER JOIN mjd6.files f
 ON(a.field_photo_fid = f.fid)
-WHERE name IS NOT NULL
+#WHERE name IS NOT NULL
 ;
 ");
 $author_image_data->execute();
@@ -857,17 +857,18 @@ $author_fid = Array();
 $wp->beginTransaction();
 while ( $author_image = $author_image_data->fetch(PDO::FETCH_ASSOC) ) {
 
-  $guid = $FILEDIR . $author_image['filename'];
-  $post_name = preg_replace("/\.[^.]+$/", "", $author_image['filename'] );
+  $guid = $FILEDIR . preg_replace('/files\//', '', $author_image['filepath']);
+  $post_name = preg_replace("/\.[^.]+$/", "", $author_image['filepath'] );
+  $post_name = preg_replace("/files\//", "", $author_image['filepath'] );
 
   $post_id = $author_hash[$author_image['title']]['post_id'];
 
   $author_image_insert->execute(array(
     ':post_author' => 1,
-    ':post_date' => $author_image['created'],
+    ':post_date' => '1970-1-1 00:00:00', //post date
     ':post_title' => $post_name,
     ':post_name' => $post_name,
-    ':post_modified' => $author_image['created'],
+    ':post_modified' => '1970-1-1 00:00:00', //post modified
     ':guid' => $guid,
     ':status' => $author_image['status'],
     ':post_parent' => $post_id,
