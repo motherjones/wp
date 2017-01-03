@@ -1217,6 +1217,10 @@ a.social {
   background-color: #304D8A;
 }
 
+a.social-icon {
+  background-image: none!important;
+}
+
 /* end social buttons */
 
 /* begin end of article author stuff */
