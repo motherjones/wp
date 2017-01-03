@@ -1257,6 +1257,7 @@ article.full-width p.members-like-you,
 }
 .author-bio .byline a {
   display: inline-block;
+  background-position: 0% 100%;
 }
 .author-bio-text {
   font-size: 12px;
