@@ -28,9 +28,12 @@
     var ad_group_id = <?php print $ad_group_id;?>;
     var ad_keywords = [];
 <?php 
-  if (get_the_ID()) :
+  if (get_the_ID() && false) :
     $keywords = get_the_terms(get_the_ID(), 'mj_primary_tag');
     $keywords[] = get_the_category();
+    print '<!-- ';
+    print_r($keywords);
+    print ' -->';
   ?>
     ad_keywords = [<?php print join('+', 
       str_replace('+', '_', $keywords) //haha omg does this actually work?
