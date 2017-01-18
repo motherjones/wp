@@ -30,7 +30,7 @@
 <?php 
   if (get_the_ID()) :
     $keywords = get_the_terms(get_the_ID(), 'mj_primary_tag');
-    $keywords[] = $get_the_category();
+    $keywords[] = get_the_category();
   ?>
     ad_keywords = [<?php print join('+', 
       str_replace('+', '_', $keywords) //haha omg does this actually work?
