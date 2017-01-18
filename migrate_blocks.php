@@ -35,11 +35,11 @@ $sidebars_widgets_options = Array(
 	'option_name' => 'sidebars_widgets',
 	'option_value' => Array(
 		'wp_inactive_widgets' => Array(),
-		'sidebar' => Array('text-4', 'text-5'),  //RHC membership for blog posts and not blog posts
-		'ticker' => Array('text-6'), //Membership ticker
+		'sidebar' => Array('text-5', 'text-6'),  //RHC membership for blog posts and not blog posts
+		'ticker' => Array('text-7'), //Membership ticker
 		'content-end' => Array(),
-		'page-top' => Array('text-1', 'text-2'),//Ad control, sitewrap
-		'page-end' => Array('text-3'), //bottom adblock ask
+		'page-top' => Array('text-2', 'text-3'),//Ad control, sitewrap
+		'page-end' => Array('text-4'), //bottom adblock ask
 		'array_version' => 3
 	),
 	'autoload' => 'yes'
@@ -135,9 +135,9 @@ a:7:{
  * THAT ROW REQUIRES THE ID TO BE THE POSITION IN THIS ARRAY
  * YEAH, I KNOW, FUCKED UP
  */
-$blocks = Array(
-	"_multiwidget", //below are the blocks
-	Array(
+$blocks = Array();
+$blocks[1] = "_multiwidget"; //below are the blocks
+$blocks[2] =	Array(
 		'title' => 'Ad Control',
 		'text' => <<<'HTML'
 <script>
@@ -149,8 +149,8 @@ HTML
 		'dw_include' => 0,
 		'dw_logged' => '',
 		'other_ids' => '',
-	), //END Ad Control
-	Array(
+	); //END Ad Control
+$blocks[3] = Array(
 		'title' => 'Site wrap',
 		'text' => <<<'HTML'
 <script language="javascript"> 
@@ -167,8 +167,8 @@ HTML
 		'dw_include' => 0,
 		'dw_logged' => '',
 		'other_ids' => '',
-	), //END site wrap
-	Array(
+	); //END site wrap
+$blocks[4] =	Array(
 		'title' => 'Bottom adblock bar',
 		'text' => <<<'HTML'
 <div id="bottom-donate" style="display:none">
@@ -186,8 +186,8 @@ HTML
 		'dw_include' => 0,
 		'dw_logged' => '',
 		'other_ids' => '',
-	), //END bottom adblock bar
-	Array(
+	); //END bottom adblock bar
+$blocks[5] =	Array(
 		'title' => 'RHC membership for blog posts',
 		'text' => <<<'HTML'
 <div id="interior-rhc-membership">
@@ -247,8 +247,8 @@ HTML
 		'dw_logged' => '',
 		'other_ids' => '',
 		'type-mj_blog_post' => 1
-	), //END membership for blog posts
-	Array(
+	); //END membership for blog posts
+$blocks[6] =	Array(
 		'title' => 'Membership RHC',
 		'text' => <<<'HTML'
 <style type="text/css">
@@ -366,8 +366,8 @@ HTML
 		'dw_logged' => '',
 		'other_ids' => '',
 		'type-mj_blog_post' => 1
-	), //END membership RHC
-	Array(
+	); //END membership RHC
+$blocks[7] = Array(
 		'title' => 'Membership ticker bar',
 		'text' => <<<'HTML'
 <style>
@@ -396,8 +396,7 @@ HTML
 		'dw_include' => 0,
 		'dw_logged' => '',
 		'other_ids' => '', //FIXME get a list of all the full width asks and put the node ids in here separated by commas
-	), //END membership ticker bar
-);
+	); //END membership ticker bar
 
 $wp->beginTransaction();
 $blocks_options = $wp->prepare('
