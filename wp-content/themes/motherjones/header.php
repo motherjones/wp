@@ -29,19 +29,15 @@
     var ad_keywords = [];
 <?php 
   if (get_the_ID()) :
-    $keywords = get_the_terms(get_the_ID(), 'mj_primary_tag');
-    $keywords[] = get_the_category();
-    print '<!-- ';
-    print_r($keywords);
-    print ' hey here ';
-    print_r($keywords[0]);
-    print ' -->';
-    /*
+    $keyword_term_objs = get_the_terms(get_the_ID(), 'mj_primary_tag');
+    $keyword_term_objs[] = get_the_category()[0];
+    $keyword_terms = [];
+    foreach ($keyword_term_objs as $obj) {
+      $keyword_terms[] = str_replace('+', '_', $obj->slug);
+    }
   ?>
-    ad_keywords = [<?php print join('+', 
-      str_replace('+', '_', $keywords) //haha omg does this actually work?
-    );?>];
-<?php */ endif; ?>
+    ad_keywords = [<?php print join('+', $keyword_terms);?>];
+<?php endif; ?>
 
 		var adtech_code = function(placement, height) {
 				var curDateTime = new Date(); 
