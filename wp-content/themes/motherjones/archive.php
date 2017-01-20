@@ -100,6 +100,13 @@ get_header(); ?>
     </div>
 
     <div id="sidebar-right">
+      <script language="javascript"> 
+          <!-- 
+          if (typeof MJ_HideRightColAds === 'undefined') {
+            ad_code('RightTopROS300x600',529);
+          }
+          //--> 
+      </script>
       <?php dynamic_sidebar( 'sidebar-section' ); ?>
     </div>
 

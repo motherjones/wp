@@ -238,7 +238,11 @@ $(document).ready(function() {
 <script language="javascript"> 
 <!-- 
 if ((typeof MJ_HideInContentAds === 'undefined') && (!($(".inline-right")[0])) && (!($(".inline-subnav")[0])))  {
-  ad_code('InContentAdUnit',16);
+  adtech_code('InContentAdUnit',16);
+}    
+ 
+if (typeof MJ_HideOverlayAds === 'undefined') {
+    adtech_code('overlay',67);
 }    
 //--> 
 </script> 

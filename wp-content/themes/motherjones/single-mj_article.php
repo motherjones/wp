@@ -69,6 +69,13 @@ get_header(); ?>
 
       <div id="sidebar-right">
         <?php dynamic_sidebar( 'sidebar' ); ?>
+        <script language="javascript"> 
+            <!-- 
+            if (typeof MJ_HideRightColAds === 'undefined') {
+              ad_code('RightTopROS300x600',529);
+            }
+            //--> 
+        </script>
       </div>
 
     </main><!-- .site-main -->
@@ -77,7 +84,7 @@ get_header(); ?>
     <script language="javascript"> 
 				<!-- 
 				if (typeof MJ_HideBottomROS970x250 === 'undefined') {
-					ad_code('BottomROS970x250',2473);
+            ad_code('BottomROS970x250',2473);
 				}
 				//--> 
 		</script>

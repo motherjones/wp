@@ -76,12 +76,29 @@ get_header(); ?>
     </article><!-- #post-## -->
 
     <div id="sidebar-right">
+
+      <script language="javascript"> 
+          <!-- 
+          if (typeof MJ_HideRightColAds === 'undefined') {
+            ad_code('RightTopROS300x600',529);
+          }
+          //--> 
+      </script>
+
       <?php dynamic_sidebar( 'sidebar' ); ?>
+
     </div>
 
 	</main><!-- .site-main -->
   <?php print get_discus_thread( get_the_ID() ); ?>
 
+  <script language="javascript"> 
+      <!-- 
+      if (typeof MJ_HideBottomROS970x250 === 'undefined') {
+          ad_code('BottomROS970x250',2473);
+      }
+      //--> 
+  </script>
 
 </div><!-- .content-area -->
 

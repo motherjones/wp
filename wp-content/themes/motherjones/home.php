@@ -36,7 +36,11 @@ get_header(); ?>
       </div>
 
       <div id="homepage-first-ad">
-        <p> place an ad here </p>
+        <script language="javascript"> 
+        <!-- 
+          ad_code('HomepageATF970x250',2473);
+        //--> 
+        //</script>
       </div>
 
       <div id="homepage-more-top-stories-section" class="group">
@@ -186,7 +190,9 @@ get_header(); ?>
             ?>
         </div>
         <div id="homepage-kdrum-ad">
-          <p>put an ad here</p>
+          <script>
+            ad_code('RightTopHP300x600',529);
+          </script>
         </div>
       </div>
 
@@ -207,7 +213,11 @@ get_header(); ?>
       </div>
 
       <div id="homepage-second-ad" class="group">
-        <p>FIXME put an ad here</p>
+          <script language="javascript"> 
+            <!-- 
+                ad_code('HomepageBTF970x250',2473);
+            //--> 
+          //</script>
       </div>
 
       <div id="homepage-investigations" class="group">
