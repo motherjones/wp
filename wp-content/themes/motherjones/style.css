@@ -293,6 +293,13 @@ html {
 #sidebar-right {
   display: none;
 }
+@media only screen and (max-width: 500px) {
+  #navbar .nav-title { display: none; }
+}
+
+article p {
+  margin: 0 10px;
+}
 
 @media only screen and (min-width: 990px) {
   header, #content {
@@ -312,6 +319,9 @@ html {
   }
   article.full-width p {
     margin-right: 360px;
+  }
+  article p {
+    margin: 0;
   }
 }
 
