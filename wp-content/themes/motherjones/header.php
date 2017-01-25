@@ -26,7 +26,7 @@
       //let's make these ad code variables available just in case
       //we have to place ads with js somewhere down the line;
     var ad_group_id = <?php print $ad_group_id;?>;
-    var ad_keywords = [];
+    var ad_keywords = '';
 <?php 
   if (get_the_ID()) :
     $keyword_term_objs = get_the_terms(get_the_ID(), 'mj_primary_tag');
@@ -36,7 +36,7 @@
       $keyword_terms[] = str_replace('+', '_', $obj->slug);
     }
   ?>
-    ad_keywords = [<?php print join('+', $keyword_terms);?>];
+    ad_keywords = '<?php print join('+', $keyword_terms);?>';
 <?php endif; ?>
 
 		var adtech_code = function(placement, height) {

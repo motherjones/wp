@@ -68,7 +68,7 @@ get_header(); ?>
       <script language="javascript"> 
           <!-- 
           if (typeof MJ_HideRightColAds === 'undefined') {
-            ad_code('RightTopROS300x600',529);
+            adtech_code('RightTopROS300x600',529);
           }
           //--> 
       </script>

@@ -80,7 +80,7 @@ get_header(); ?>
       <script language="javascript"> 
           <!-- 
           if (typeof MJ_HideRightColAds === 'undefined') {
-            ad_code('RightTopROS300x600',529);
+            adtech_code('RightTopROS300x600',529);
           }
           //--> 
       </script>
@@ -95,7 +95,7 @@ get_header(); ?>
   <script language="javascript"> 
       <!-- 
       if (typeof MJ_HideBottomROS970x250 === 'undefined') {
-          ad_code('BottomROS970x250',2473);
+          adtech_code('BottomROS970x250',2473);
       }
       //--> 
   </script>
