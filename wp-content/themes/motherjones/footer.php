@@ -75,8 +75,9 @@
 
 <?php wp_footer(); ?>
 
-<script type="text/javascript" src="/wp-content/themes/motherjones/js/nav.js"></script>
 <script type="text/javascript" src="/wp-content/themes/motherjones/js/jquery-3.1.0.min.js"></script>
+<script type="text/javascript" src="/wp-content/themes/motherjones/js/nav.js"></script>
+<script type="text/javascript" src="/wp-content/themes/motherjones/js/video-embed.js"></script>
 
 <!-- Quantcast Tag -->
 <script type="text/javascript">
