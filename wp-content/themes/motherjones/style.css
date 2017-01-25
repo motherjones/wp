@@ -525,6 +525,7 @@ blockquote {
   font-family: Mallory, sans-serif;
   text-transform: uppercase;
   font-weight: bold;
+  display: inline-block;
 }
 
 .byline {
@@ -664,6 +665,9 @@ blockquote {
   }
 }
 @media only screen and (max-width: 620px) {
+  .related-articles-list {
+    padding: 0 15px;
+  }
   #navbar .nav-title {
     display: none;
   }
