@@ -1697,3 +1697,17 @@ article.full-width {
 }
 
 /* end full width */
+
+/* begin responsive video styling */
+.responsive_video_embed_container {
+  height: 0;
+  overflow:hidden;
+  position: relative;
+}
+.responsive_video_embed_container iframe {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+}
+/* end  responsive video styling */

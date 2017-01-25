@@ -5,7 +5,7 @@ var mj_fix_embed = function(embed) {
     } else if (embed.attr('height').match('%')) {
       return;
     }
-    var div = jQuery('<div class="mobile_video_embed_container"></div>');
+    var div = jQuery('<div class="responsive_video_embed_container"></div>');
     var padding_bottom = parseInt(embed.attr('height')) 
         / parseInt(embed.attr('width')) 
         * 100;
