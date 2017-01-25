@@ -1158,6 +1158,9 @@ a.social {
   line-height: 30px;
 }
 
+ul.social-tools.bottom {
+  padding-left: 0px;
+}
 .social-tools.bottom li {
   display: inline;
   float: left;
