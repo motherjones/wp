@@ -654,38 +654,6 @@ blockquote {
 }
 
 
-@media only screen and (max-width: 1060px) {
-  .article-page.subscribe-link {
-    display:none!important;
-  }
-}
-@media only screen and (max-width: 780px) {
-  .article-page.donate-link {
-    display:none;
-  }
-}
-@media only screen and (max-width: 620px) {
-  .related-articles-list {
-    padding: 0 15px;
-  }
-  #navbar .nav-title {
-    display: none;
-  }
-  .article-page.donate-link {
-    display: block;
-  }
-  .pullquote-left, .pullquote-right {
-    margin: 25px;
-    float: none;
-    left: 0;
-    width: auto;
-  }
-}
-@media only screen and (max-width: 420px) {
-  .donate-link {
-    display:none!important;
-  }
-}
 
 /* end navbar styling */
 
@@ -1732,6 +1700,38 @@ ul.social-tools.top {
   }
   article p {
     margin: 0;
+  }
+}
+@media only screen and (max-width: 1060px) {
+  .article-page.subscribe-link {
+    display:none!important;
+  }
+}
+@media only screen and (max-width: 780px) {
+  .article-page.donate-link {
+    display:none;
+  }
+}
+@media only screen and (max-width: 620px) {
+  .related-articles-list {
+    padding: 0 15px;
+  }
+  #navbar .nav-title {
+    display: none;
+  }
+  .article-page.donate-link {
+    display: block;
+  }
+  .pullquote-left, .pullquote-right {
+    margin: 25px;
+    float: none;
+    left: 0;
+    width: auto;
+  }
+}
+@media only screen and (max-width: 420px) {
+  .donate-link {
+    display:none!important;
   }
 }
 /* end responsive stuff */
