@@ -670,6 +670,12 @@ blockquote {
   .article-page.donate-link {
     display: block;
   }
+  .pullquote-left, .pullquote-right {
+    margin: 25px;
+    float: none;
+    left: 0;
+    width: auto;
+  }
 }
 @media only screen and (max-width: 420px) {
   .donate-link {
