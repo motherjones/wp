@@ -17,7 +17,7 @@ var ad_code = function(config) {
     return false;
   } //do not do desktop ads if we're not on desktop, do not do mobile ads if we're not on mobile
   config.ad = create_ad(config);
-  place_ad_iframe(config, config)
+  place_ad(config.ad, config.element)
   if ( config.yieldmo || config.placement.match(/ym_/) ) {
     ym_script();
   } 
