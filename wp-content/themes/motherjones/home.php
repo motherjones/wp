@@ -38,7 +38,11 @@ get_header(); ?>
       <div id="homepage-first-ad">
         <script language="javascript"> 
         <!-- 
-          adtech_code('HomepageATF970x250',2473);
+        ad_code({
+          placement: 'HomepageATF970x250',
+          height: 2473,
+          doc_write: true,
+        });
         //--> 
         //</script>
       </div>
@@ -191,7 +195,11 @@ get_header(); ?>
         </div>
         <div id="homepage-kdrum-ad">
           <script>
-            adtech_code('RightTopHP300x600',529);
+            ad_code({
+              placement: 'RightTopHP300x600',
+              height: 529,
+              doc_write: true,
+            });
           </script>
         </div>
       </div>
@@ -215,7 +223,11 @@ get_header(); ?>
       <div id="homepage-second-ad" class="group">
           <script language="javascript"> 
             <!-- 
-                adtech_code('HomepageBTF970x250',2473);
+            ad_code({
+              placement: 'HomepageBTF970x250',
+              height: 2473,
+              doc_write: true,
+            });
             //--> 
           //</script>
       </div>

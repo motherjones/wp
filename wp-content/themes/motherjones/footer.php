@@ -75,7 +75,6 @@
 
 <?php wp_footer(); ?>
 
-<script type="text/javascript" src="/wp-content/themes/motherjones/js/jquery-3.1.0.min.js"></script>
 <script type="text/javascript" src="/wp-content/themes/motherjones/js/nav.js"></script>
 <script type="text/javascript" src="/wp-content/themes/motherjones/js/video-embed.js"></script>
 
@@ -237,13 +236,21 @@ $(document).ready(function() {
 
 <!--Ad code for in content ad unit.  Uses jquery to only load on pages that do not have divs with a class named inline or inline-nav -->
 <script language="javascript"> 
-<!-- 
+<!--  //FIXME make this check to see if it's an article or blogpost.
 if ((typeof MJ_HideInContentAds === 'undefined') && (!($(".inline-right")[0])) && (!($(".inline-subnav")[0])))  {
-  adtech_code('InContentAdUnit',16);
+  ad_code({
+    placement: 'InContentAdUnit',
+    height: 16,
+    doc_write: true,
+  });
 }    
  
 if (typeof MJ_HideOverlayAds === 'undefined') {
-    adtech_code('overlay',67);
+  ad_code({
+    placement: 'overlay',
+    height: 67,
+    doc_write: true,
+  });
 }    
 //--> 
 </script> 

@@ -7,7 +7,9 @@
  */
 
 while ( have_posts() ) : the_post();
-get_header(); ?>
+get_header(); 
+print_r(get_post_type());
+?>
 
 <header id="full-width-header" class="group">
   <?php if ( get_post_meta( get_the_ID(), 'full_width_title_image' )[0]['title_image'] ): ?>

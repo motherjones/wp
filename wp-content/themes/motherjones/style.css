@@ -1713,7 +1713,7 @@ ul.social-tools.top {
   }
 }
 @media only screen and (max-width: 620px) {
-  .related-articles-list {
+  .related-articles-list ul {
     padding: 0 15px;
   }
   #navbar .nav-title {
