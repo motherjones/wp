@@ -1026,7 +1026,7 @@ a#footer-logo {
 #copyright {
   font-family: Calluna, serif;
   font-size: 14px;
-  margin: 35px auto;
+  margin: 35px auto 0;
 }
 footer#colophon #copyright a {
   color: #ccc;
