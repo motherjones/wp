@@ -60,14 +60,14 @@ var adtech_script = function(config) {
   var curDateTime = new Date(); 
   var offset = -(curDateTime.getTimezoneOffset()); 
   if (offset > 0) { offset = "+" + offset; }
-  var script_tag = '<scr'+'ipt language="javascript1.1" src="http://adserver.adtechus.com/addyn/3.0/5443.1/0/0/' +
+  return '<script language="javascript1.1" src="http://adserver.adtechus.com/addyn/3.0/5443.1/0/0/' +
     escape(config.height)+'/ADTECH;loc=100;target=_blank' + 
     ';alias=' + escape(config.placement) +
     ';key=' + escape(window.ad_keywords) +
     ';grp=' + escape(window.groupid) +
     ';kvuri=' + escape(window.location.pathname) +
     ';misc=' + curDateTime.getTime() +
-    ';aduho=' + offset + '"></scri'+'pt>'
+    ';aduho=' + offset + '"></script>'
     ; 
 }
 
