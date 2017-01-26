@@ -70,11 +70,20 @@
           </p>
       </div>
 
+
+
+    <div id="bottom-donate" style="display:none">
+      <p>
+        We noticed you have an ad blocker on.
+        Support nonprofit investigative reporting by pitching in a few
+        bucks.
+        <a href="https://secure.motherjones.com/fnp/?action=SUBSCRIPTION&list_source=7HEGZS1A&extra_don=1&abver=A">DONATE</a>
+        <span onclick="$('#bottom-donate').remove();">X</span>
+      </p>
+    </div>
+    <?php dynamic_sidebar( 'page-end' ); ?>
 		</footer><!-- .site-footer -->
 </div><!-- .site -->
-
-<?php wp_footer(); ?>
-
 <script type="text/javascript" src="/wp-content/themes/motherjones/js/nav.js"></script>
 <script type="text/javascript" src="/wp-content/themes/motherjones/js/video-embed.js"></script>
 
@@ -255,16 +264,5 @@ if (typeof MJ_HideOverlayAds === 'undefined') {
 //--> 
 </script> 
 <!-- End of ad code for in content Tag -->
-
-<div id="bottom-donate" style="display:none">
-  <p>
-    We noticed you have an ad blocker on.
-    Support nonprofit investigative reporting by pitching in a few
-    bucks.
-    <a href="https://secure.motherjones.com/fnp/?action=SUBSCRIPTION&list_source=7HEGZS1A&extra_don=1&abver=A">DONATE</a>
-    <span onclick="$('#bottom-donate').remove();">X</span>
-  </p>
-</div>
-<?php dynamic_sidebar( 'page-end' ); ?>
 </body>
 </html>
