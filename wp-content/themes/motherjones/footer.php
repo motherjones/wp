@@ -74,6 +74,7 @@
       <!--  //FIXME make this check to see if it's an article or blogpost.
       if ((typeof MJ_HideInContentAds === 'undefined') && (!($(".inline-right")[0])) && (!($(".inline-subnav")[0])))  {
         ad_code({
+          desktop: true,
           placement: 'InContentAdUnit',
           height: 16,
           doc_write: true,
@@ -82,6 +83,7 @@
        
       if (typeof MJ_HideOverlayAds === 'undefined') {
         ad_code({
+          desktop: true,
           placement: 'overlay',
           height: 67,
           doc_write: true,

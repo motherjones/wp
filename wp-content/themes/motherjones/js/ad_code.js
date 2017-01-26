@@ -14,7 +14,7 @@ var ad_code = function(config) {
   if (   (!config.desktop && desktop_ads)
       || (config.desktop && !desktop_ads) 
     ) { 
-    return;
+    return false;
   } //do not do desktop ads if we're not on desktop, do not do mobile ads if we're not on mobile
   config.ad = create_ad(config);
   place_ad_iframe(config, config)

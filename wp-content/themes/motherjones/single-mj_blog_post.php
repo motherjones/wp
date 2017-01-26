@@ -81,6 +81,7 @@ get_header(); ?>
           <!-- 
           if (typeof MJ_HideRightColAds === 'undefined') {
             ad_code({
+              desktop: true,
               placement: 'RightTopROS300x600',
               height: 529,
               doc_write: true,
@@ -100,6 +101,7 @@ get_header(); ?>
       <!-- 
       if (typeof MJ_HideBottomROS970x250 === 'undefined') {
         ad_code({
+          desktop: true,
           placement: 'BottomROS970x250',
           height: 2473,
           doc_write: true,

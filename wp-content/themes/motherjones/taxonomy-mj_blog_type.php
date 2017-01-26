@@ -69,6 +69,7 @@ get_header(); ?>
           <!-- 
           if (typeof MJ_HideRightColAds === 'undefined') {
             ad_code({
+              desktop: true,
               placement: 'RightTopROS300x600',
               height: 529,
               doc_write: true,

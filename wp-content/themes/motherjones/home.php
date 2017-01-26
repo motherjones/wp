@@ -39,6 +39,7 @@ get_header(); ?>
         <script language="javascript"> 
         <!-- 
         ad_code({
+          desktop: true,
           placement: 'HomepageATF970x250',
           height: 2473,
           doc_write: true,
@@ -196,6 +197,7 @@ get_header(); ?>
         <div id="homepage-kdrum-ad">
           <script>
             ad_code({
+              desktop: true,
               placement: 'RightTopHP300x600',
               height: 529,
               doc_write: true,
@@ -224,6 +226,7 @@ get_header(); ?>
           <script language="javascript"> 
             <!-- 
             ad_code({
+              desktop: true,
               placement: 'HomepageBTF970x250',
               height: 2473,
               doc_write: true,
