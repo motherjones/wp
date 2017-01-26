@@ -38,8 +38,10 @@ var place_ad = function(config) {
     document.write(config.ad);
   } else if (element) { 
     config.element.after($(config.ad));
+    console.log('placed after', config.element);
   } else { 
     $('script').last().after($(config.ad));
+    console.log('placed after last script');
   }
 }
 
