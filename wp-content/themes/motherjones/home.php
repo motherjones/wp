@@ -262,8 +262,9 @@ get_header(); ?>
 
   <script>
     ad_code({
-      yieldmo: true,
-      desktop: false,
+        yieldmo: true,
+       docwrite: true,
+        desktop: false,
       placement: 'ym_869408549909503847',
     });
   </script>

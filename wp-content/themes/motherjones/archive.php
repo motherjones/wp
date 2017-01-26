@@ -84,8 +84,9 @@ get_header(); ?>
         if ($posts_shown === 5): ?>
           <script>
             ad_code({
-              yieldmo: true,
-              desktop: false,
+                yieldmo: true,
+               docwrite: true,
+                desktop: false,
               placement: 'ym_869408394552483686',
             });
           </script>
@@ -132,6 +133,7 @@ get_header(); ?>
   <script>
     ad_code({
       yieldmo: true,
+     docwrite: true,
       desktop: false,
       placement: 'ym_869408549909503847',
     });

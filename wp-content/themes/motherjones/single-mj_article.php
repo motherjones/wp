@@ -100,7 +100,8 @@ get_header(); ?>
           ad_code({
             placement: 'ym_869408549909503847',
               yieldmo: true,
-            doc_write: true,
+             docwrite: true,
+            desktop: false,
           });
 				}
 				//--> 

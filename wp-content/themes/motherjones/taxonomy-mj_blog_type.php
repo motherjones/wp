@@ -50,6 +50,7 @@ get_header(); ?>
           <script>
             ad_code({
               yieldmo: true,
+             docwrite: true,
               desktop: false,
               placement: 'ym_869408394552483686',
             });
@@ -96,6 +97,7 @@ get_header(); ?>
   <script>
     ad_code({
       yieldmo: true,
+     docwrite: true,
       desktop: false,
       placement: 'ym_869408549909503847',
     });
