@@ -29,7 +29,7 @@ var create_ad = function(config) {
   } else if (config.doc_write) { //doc write is only on adtech fyi
     return adtech_script(config);
   } else {
-    return adtech_code(config),
+    return adtech_code(config);
   }
 }
 
