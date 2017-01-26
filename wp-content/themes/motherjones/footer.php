@@ -70,6 +70,25 @@
           </p>
       </div>
 
+      <script language="javascript"> 
+      <!--  //FIXME make this check to see if it's an article or blogpost.
+      if ((typeof MJ_HideInContentAds === 'undefined') && (!($(".inline-right")[0])) && (!($(".inline-subnav")[0])))  {
+        ad_code({
+          placement: 'InContentAdUnit',
+          height: 16,
+          doc_write: true,
+        });
+      }    
+       
+      if (typeof MJ_HideOverlayAds === 'undefined') {
+        ad_code({
+          placement: 'overlay',
+          height: 67,
+          doc_write: true,
+        });
+      }    
+      //--> 
+      </script> 
 
 
     <div id="bottom-donate" style="display:none">
@@ -244,25 +263,6 @@ $(document).ready(function() {
 </script>
 
 <!--Ad code for in content ad unit.  Uses jquery to only load on pages that do not have divs with a class named inline or inline-nav -->
-<script language="javascript"> 
-<!--  //FIXME make this check to see if it's an article or blogpost.
-if ((typeof MJ_HideInContentAds === 'undefined') && (!($(".inline-right")[0])) && (!($(".inline-subnav")[0])))  {
-  ad_code({
-    placement: 'InContentAdUnit',
-    height: 16,
-    doc_write: true,
-  });
-}    
- 
-if (typeof MJ_HideOverlayAds === 'undefined') {
-  ad_code({
-    placement: 'overlay',
-    height: 67,
-    doc_write: true,
-  });
-}    
-//--> 
-</script> 
 <!-- End of ad code for in content Tag -->
 </body>
 </html>
