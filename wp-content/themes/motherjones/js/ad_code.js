@@ -17,7 +17,7 @@ var ad_code = function(config) {
     return false;
   } //do not do desktop ads if we're not on desktop, do not do mobile ads if we're not on mobile
   config.ad = create_ad(config);
-  place_ad(config.ad, config.element)
+  place_ad(config)
   if ( config.yieldmo || config.placement.match(/ym_/) ) {
     ym_script();
   } 
@@ -33,7 +33,7 @@ var create_ad = function(config) {
   }
 }
 
-var place_ad = function(ad, element) {
+var place_ad = function(config) {
   if (config.doc_write) {
     document.write(config.ad);
   } else if (element) { 
