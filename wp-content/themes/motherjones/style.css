@@ -1709,7 +1709,7 @@ ul.social-tools.top {
 }
 @media only screen and (max-width: 780px) {
   .article-page.donate-link {
-    display:none;
+    display:none!important;
   }
 }
 @media only screen and (max-width: 620px) {
@@ -1724,6 +1724,9 @@ ul.social-tools.top {
     float: none;
     left: 0;
     width: auto;
+  }
+  header.entry-header {
+    margin: 0 12px;
   }
 }
 /* end responsive stuff */
