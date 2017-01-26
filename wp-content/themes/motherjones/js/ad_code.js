@@ -26,7 +26,7 @@ var ad_code = function(config) {
 var create_ad = function(config) {
   if ( config.yieldmo || config.placement.match(/ym_/) ) {
     return yieldmo_code(config.placement);
-  } else if (config.doc_write) { //doc write is only on adtech fyi
+  } else if (config.doc_write) {
     return adtech_script(config);
   } else {
     return adtech_code(config);
@@ -37,14 +37,14 @@ var place_ad = function(config) {
   if (config.doc_write) {
     document.write(config.ad);
   } else if (element) { 
-    config.element.after(config.ad); 
+    config.element.after($(config.ad));
   } else { 
-    $('script').last().after(config.ad);
+    $('script').last().after($(config.ad));
   }
 }
 
 var yieldmo_code = function( placement ) {
-  return $('<div id="' + placement + '" class="ym"></div>');
+  return '<div id="' + placement + '" class="ym"></div>';
 }
 
 var ym_script = function() {
@@ -53,7 +53,7 @@ var ym_script = function() {
 
 var adtech_code = function(config) {
   var script_tag = adtech_script(config);
-  return $('<iframe>' + script_tag + '</iframe>');
+  return '<iframe>' + script_tag + '</iframe>';
 }
 
 var adtech_script = function(config) {
