@@ -91,7 +91,14 @@ get_header(); ?>
 				if (typeof MJ_HideBottomROS970x250 === 'undefined') {
           ad_code({
             placement: 'BottomROS970x250',
-            height: 2473,
+               height: 2473,
+            doc_write: true,
+          });
+				}
+				if (typeof MJ_HideBottomMobile === 'undefined') {
+          ad_code({
+            placement: 'ym_869408549909503847',
+              yieldmo: true,
             doc_write: true,
           });
 				}

@@ -107,6 +107,13 @@ get_header(); ?>
           doc_write: true,
         });
       }
+      if (typeof MJ_HideBottomMobile === 'undefined') {
+        ad_code({
+          placement: 'ym_869408549909503847',
+            yieldmo: true,
+          doc_write: true,
+        });
+      }
       //--> 
   </script>
 

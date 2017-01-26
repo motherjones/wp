@@ -40,10 +40,21 @@ get_header(); ?>
 
       <?php 
          
+      $posts_shown = 0;
 			// Start the Loop.
 			while ( $wp_query->have_posts() ) : $wp_query->the_post();
         get_template_part( 'template-parts/index-blogpost' );
 
+        $posts_shown++;
+        if ($posts_shown === 5): ?>
+          <script>
+            ad_code({
+              yieldmo: true,
+              desktop: false,
+              placement: 'ym_869408394552483686',
+            });
+          </script>
+        <?php endif;
 			// End the loop.
 			endwhile;
     ?>
@@ -82,5 +93,12 @@ get_header(); ?>
 
 		</main><!-- .site-main -->
 	</div><!-- .content-area -->
+  <script>
+    ad_code({
+      yieldmo: true,
+      desktop: false,
+      placement: 'ym_869408549909503847',
+    });
+  </script>
 <?php get_footer(); ?>
 

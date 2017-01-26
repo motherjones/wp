@@ -42,6 +42,7 @@ get_header(); ?>
       <?php 
       $curated_length = 0;
       $is_first_post = true;
+      $posts_shown = 0;
         // if it's the first page, set up the curated posts
       if (!$wp_query->get_query_var('offset')) {
         //get the curated posts (but only 4)
@@ -59,6 +60,7 @@ get_header(); ?>
           } else {
             get_template_part( 'template-parts/standard-article-li' );
           }
+          $posts_shown++;
         endwhile;
       } // end curation mess
          
@@ -78,6 +80,17 @@ get_header(); ?>
         } else {
           get_template_part( 'template-parts/standard-article-li' );
         }
+        $posts_shown++;
+
+        if ($posts_shown === 5): ?>
+          <script>
+            ad_code({
+              yieldmo: true,
+              desktop: false,
+              placement: 'ym_869408394552483686',
+            });
+          </script>
+        <?php endif;
 
 			// End the loop.
 			endwhile;
@@ -118,5 +131,12 @@ get_header(); ?>
 
 		</main><!-- .site-main -->
 	</div><!-- .content-area -->
+  <script>
+    ad_code({
+      yieldmo: true,
+      desktop: false,
+      placement: 'ym_869408549909503847',
+    });
+  </script>
 <?php get_footer(); ?>
 

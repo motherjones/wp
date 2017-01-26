@@ -260,4 +260,11 @@ get_header(); ?>
 		</main><!-- .site-main -->
 	</div><!-- .content-area -->
 
+  <script>
+    ad_code({
+      yieldmo: true,
+      desktop: false,
+      placement: 'ym_869408549909503847',
+    });
+  </script>
 <?php get_footer(); ?>

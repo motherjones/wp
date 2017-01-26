@@ -91,6 +91,18 @@ print_r(get_post_type());
 
           <?php print get_discus_thread( get_the_ID() ); ?>
 
+          <script>
+            //<!--
+            if (typeof MJ_HideBottomMobile === 'undefined') {
+              ad_code({
+                placement: 'ym_869408549909503847',
+                  yieldmo: true,
+                doc_write: true,
+              });
+            }
+            //--> 
+          </script>
+
         </footer><!-- .entry-footer -->
       </article><!-- #post-## -->
       <?php print get_post_meta( get_the_ID(), 'js' )[0]; ?>
