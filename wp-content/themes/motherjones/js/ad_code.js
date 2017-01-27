@@ -143,7 +143,7 @@ var is_fullwidth;
 		for (var i = (min_ps_for_ad - 1); i < (pgs - min_ps_before_end); i++ ) {
 		 if (count_till_ad < 1) {
 				ad_code({
-					element: $($("article > p")[placement]) ,
+					element: $($("article > p")[i]) ,
 					placement: ym_codes[ads_placed],
 					desktop: false, //yea mobile only 
 				});
