@@ -36,12 +36,10 @@ var create_ad = function(config) {
 var place_ad = function(config) {
   if (config.doc_write) {
     document.write(config.ad);
-  } else if (element) { 
+  } else if (config.element) { 
     config.element.after($(config.ad));
-    console.log('placed after', config.element);
   } else { 
     $('script').last().after($(config.ad));
-    console.log('placed after last script');
   }
 }
 
