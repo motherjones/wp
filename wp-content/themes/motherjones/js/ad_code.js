@@ -78,8 +78,8 @@ var is_fullwidth;
   $('document').ready(function() {
     console.log('in onready');
     if (   (!is_post) 
-        || (!desktop_ads && !is_fullwidth) 
-        || (typeof MJ_HideInContentAds === "undefined") ) {
+        || (desktop_ads && !is_fullwidth) 
+        || (typeof MJ_HideInContentAds !== "undefined") ) {
       console.log('not setting ads');
       return;
     }
