@@ -142,14 +142,16 @@ var is_fullwidth;
 		var count_till_ad = 0;
 		for (var i = (min_ps_for_ad - 1); i < (pgs - min_ps_before_end); i++ ) {
 		 if (count_till_ad < 1) {
+       console.log(i);
+       console.log($($("article > p")[i]));
 				ad_code({
-					element: $($("article > p")[i]) ,
+            element: $($("article > p")[i]) ,
 					placement: ym_codes[ads_placed],
-					desktop: false, //yea mobile only 
+            desktop: false, //yea mobile only 
 				});
-			 count_till_ad = separating_ps;
-			 ads_placed++;
-			 if ( ads_placed === max_ads || ads_placed === ym_codes.length ) { break; }
+        count_till_ad = separating_ps;
+        ads_placed++;
+        if ( ads_placed === max_ads || ads_placed === ym_codes.length ) { break; }
 		 }
 		 count_till_ad--;
 		}
