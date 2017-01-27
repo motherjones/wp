@@ -92,8 +92,7 @@ var is_fullwidth;
   var fullwidth_inline_ads = function() {
       var subhed_selector = 'h3.subhed';
       var section_lead_selector = 'span.section-lead';
-      var pgs = $('.node .node-content > p, .node .node-content > p,' 
-                + '.node .node-content > h3, .node .node-content > h3');
+      var pgs = $('article > p, article > h3');
       var wordcount = 0;
       var words_before_ad_can_be_placed = 650;
       var ads_placed = 0;
@@ -135,13 +134,13 @@ var is_fullwidth;
 		var separating_ps = 5;
 		var min_ps_before_end = 2;
 		var max_ads = 4;
-		var pgs = $(".node-content > p").length;
+		var pgs = $("article > p").length;
 
 		var count_till_ad = 0;
 		for (var i = (min_ps_for_ad - 1); i < (pgs - min_ps_before_end); i++ ) {
 		 if (count_till_ad < 1) {
 				ad_code({
-					element: $($(".node-content > p")[placement]) ,
+					element: $($("article > p")[placement]) ,
 					placement: ym_codes[ads_placed],
 					desktop: false, //yea mobile only 
 				});
