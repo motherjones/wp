@@ -28,12 +28,14 @@
     var ad_group_id = <?php print $ad_group_id;?>;
     var ad_keywords = '';
     var is_post = false;
+    var is_fullwidth = false;
 
 <?php 
   if (get_the_ID()) :
     $keyword_term_objs = get_the_terms(get_the_ID(), 'mj_primary_tag');
     $keyword_term_objs[] = get_the_category()[0];
     $keyword_terms = [];
+    $is_fullwidth = get_post_type() === 'mj_full_width';
     foreach ($keyword_term_objs as $obj) {
       $keyword_terms[] = str_replace('+', '_', $obj->slug);
     }

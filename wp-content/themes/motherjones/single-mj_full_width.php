@@ -8,7 +8,6 @@
 
 while ( have_posts() ) : the_post();
 get_header(); 
-print_r(get_post_type());
 ?>
 
 <header id="full-width-header" class="group">

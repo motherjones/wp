@@ -71,12 +71,8 @@ var adtech_script = function(config) {
     ; 
 }
 
-var is_fullwidth;
-
 (function($) {
-  console.log('setting up in content');
   $('document').ready(function() {
-    console.log('in onready');
     if (   (!is_post) 
         || (desktop_ads && !is_fullwidth) 
         || (typeof MJ_HideInContentAds !== "undefined") ) {
@@ -142,8 +138,6 @@ var is_fullwidth;
 		var count_till_ad = 0;
 		for (var i = (min_ps_for_ad - 1); i < (pgs - min_ps_before_end); i++ ) {
 		 if (count_till_ad < 1) {
-       console.log(i);
-       console.log($($("article > p")[i]));
 				ad_code({
             element: $($("article > p")[i]) ,
 					placement: ym_codes[ads_placed],
