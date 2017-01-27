@@ -71,7 +71,6 @@ var adtech_script = function(config) {
     ; 
 }
 
-(function($) {
   $('document').ready(function() {
     if (   (!is_post) 
         || (desktop_ads && !is_fullwidth) 
@@ -150,4 +149,3 @@ var adtech_script = function(config) {
 		 count_till_ad--;
 		}
   }
-})(jQuery);
