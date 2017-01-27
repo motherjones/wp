@@ -71,13 +71,16 @@ var adtech_script = function(config) {
     ; 
 }
 
-var is_post;
 var is_fullwidth;
+
 (function($) {
+  console.log('setting up in content');
   $('document').ready(function() {
+    console.log('in onready');
     if (   (!is_post) 
         || (!desktop_ads && !is_fullwidth) 
         || (typeof MJ_HideInContentAds === "undefined") ) {
+      console.log('not setting ads');
       return;
     }
 
