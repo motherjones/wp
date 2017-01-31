@@ -12,7 +12,6 @@ var desktop_ads = (screen.width > 630);
 var ad_class = desktop_ads ? 'ad_desktop' : 'ad_mobile';
 
 var ad_code = function(config) {
-  console.log(config);
   if (   (!config.desktop && desktop_ads)
       || (config.desktop && !desktop_ads) 
     ) { 
@@ -77,21 +76,16 @@ var adtech_script = function(config) {
     ; 
 }
 
-  console.log($);
   $('document').ready(function() {
-    console.log('in onready');
     if (   (!is_post) 
         || (desktop_ads && !is_fullwidth) 
         || (typeof MJ_HideInContentAds !== "undefined") ) {
-      console.log('not setting ads');
       return;
     }
 
     if (is_fullwidth) {
-      console.log('running fullwidth inline');
       fullwidth_inline_ads();
     } else {
-      console.log('running not fullwidth inline');
       inline_ads();
     }
    
@@ -108,7 +102,6 @@ var adtech_script = function(config) {
       var placement_prefix = 'InContentMob300x250_BB';
       var ad_height = 250;
 
-      console.log(pgs.length, 'pgs length');
 
       for (var i = 0; i < pgs.length; i++) {
         if (wordcount > words_before_ad_can_be_placed
@@ -118,7 +111,6 @@ var adtech_script = function(config) {
              )
           ) {
 
-            console.log(pgs[i], 'ad placing here');
             ads_placed++;
 						ad_code({
               element: $(pgs[i-1]),
