@@ -45,12 +45,15 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
     }
 
     public function alter_the_query( $request ) {
-        print_r(get_terms( array(
+        $terms = get_terms( array(
             'taxonomy' => 'mj_media_type', 
             'slug' => $request['category_name']
           ) 
-          ) );
-        die;
+           );
+        foreach ( $terms as $term ) {
+          print $term->name;
+          print "\n";
+        }
 
 
         $dummy_query = new WP_Query();  // the query isn't run if we don't pass any query vars
