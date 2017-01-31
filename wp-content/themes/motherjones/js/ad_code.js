@@ -9,6 +9,7 @@
  *   places after current script if not specified
  **/
 var desktop_ads = (screen.width > 630);
+var ad_class = desktop_ads ? 'ad_desktop' : 'ad_mobile';
 
 var ad_code = function(config) {
   console.log(config);
@@ -46,7 +47,8 @@ var place_ad = function(config) {
 }
 
 var yieldmo_code = function( placement ) {
-  return '<div id="' + placement + '" class="ym"></div>';
+  return '<div class="advertisement ' + ad_class + '">'
+    + '<div id="' + placement + '" class="ym"></div></div>';
 }
 
 var ym_script = function() {
@@ -55,7 +57,8 @@ var ym_script = function() {
 
 var adtech_code = function(config) {
   var script_tag = adtech_script(config);
-  return '<iframe>' + script_tag + '</iframe>';
+  return '<div class="advertisement ' + ad_class 
+    + '"><iframe>' + script_tag + '</iframe></div>';
 }
 
 var adtech_script = function(config) {

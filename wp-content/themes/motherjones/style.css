@@ -1731,3 +1731,18 @@ ul.social-tools.top {
   }
 }
 /* end responsive stuff */
+
+/* start ads */
+.ad-mobile { display:none; }
+@media only screen and (max-width: 630px) {
+  .ad_mobile { display: block; }
+  .ad_desktop { display: none; }
+}
+.advertisement { 
+  text-align: center;
+}
+.advertisement iframe { 
+  border-width: 0px;
+  text-align: center;
+}
+/* end ads */
