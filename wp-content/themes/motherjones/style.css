@@ -1729,6 +1729,17 @@ ul.social-tools.top {
     margin-left: 12px;
     margin-right: 12px;
   }
+
+  .articles-list .article-image {
+    width: 42%;
+  }
+  .articles-list .article-data {
+    padding-left: 3%;
+    width: 55%;
+  }
+  .articles-list .article-image img {
+    width: 100%;
+  }
 }
 /* end responsive stuff */
 
