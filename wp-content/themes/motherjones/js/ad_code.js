@@ -55,19 +55,28 @@ var ym_script = function() {
 }
 
 var adtech_code = function(config) {
-  var script_tag = adtech_script(config);
-  console.log(script_tag);
+  var width = desktop_ads ? '970' : '300';
   return '<div class="advertisement ' + ad_class 
-    + '"><iframe>' + script_tag + '</iframe></div>';
+    + '"><iframe height="250" width="' + width + '" src="'
+    + 'http://adserver.adtechus.com/adiframe/3.0/5443.1/4003031/0/170/ADTECH;target=_blank'
+    + adtech_url_params(config)
+    + '">' 
+    + script_tag + '</iframe></div>';
 }
 
 var adtech_script = function(config) {
+  return '<script language="javascript1.1" src="http://adserver.adtechus.com/addyn/3.0/5443.1/0/0/' +
+    escape(config.height)+'/ADTECH;loc=100;target=_blank' + 
+    adtech_url_params(config) +
+    '"></script>'
+    ; 
+}
+
+var adtech_url_params = function(config) {
   var curDateTime = new Date(); 
   var offset = -(curDateTime.getTimezoneOffset()); 
   if (offset > 0) { offset = "+" + offset; }
-  return '<script language="javascript1.1" src="http://adserver.adtechus.com/addyn/3.0/5443.1/0/0/' +
-    escape(config.height)+'/ADTECH;loc=100;target=_blank' + 
-    ';alias=' + escape(config.placement) +
+  return ';alias=' + escape(config.placement) +
     ';key=' + escape(window.ad_keywords) +
     ';grp=' + escape(window.groupid) +
     ';kvuri=' + escape(window.location.pathname) +
