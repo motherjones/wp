@@ -1712,7 +1712,7 @@ ul.social-tools.top {
     display:none!important;
   }
 }
-.articles-list .article-item .article-image {
+.articles-list .article-image {
   height: auto;
 }
 @media only screen and (max-width: 620px) {
