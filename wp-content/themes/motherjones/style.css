@@ -41,6 +41,7 @@ body {
   left: 0;
   width: 100%;
   background: white;
+  display: table;
 }
 
 article,
@@ -111,6 +112,7 @@ sub {
 
 img {
 	border: 0;
+  max-width: 100%;
 }
 
 svg:not(:root) {
