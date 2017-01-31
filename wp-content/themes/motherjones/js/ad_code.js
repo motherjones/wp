@@ -83,7 +83,6 @@ var adtech_script = function(config) {
 
     if (is_fullwidth) {
       console.log('running fullwidth inline');
-      return;
       fullwidth_inline_ads();
     } else {
       console.log('running not fullwidth inline');
