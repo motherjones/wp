@@ -71,7 +71,7 @@ var adtech_script = function(config) {
     ; 
 }
 
-(function($) {
+(function() {
   console.log($);
   $('document').ready(function() {
     console.log('in onready');
