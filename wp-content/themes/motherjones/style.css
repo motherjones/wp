@@ -1712,6 +1712,9 @@ ul.social-tools.top {
     display:none!important;
   }
 }
+.articles-list .article-item .article-image {
+  height: auto;
+}
 @media only screen and (max-width: 620px) {
   #related-articles ul.related-articles-list {
     padding: 0 15px;
