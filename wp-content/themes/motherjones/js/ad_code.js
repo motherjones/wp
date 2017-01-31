@@ -56,9 +56,13 @@ var ym_script = function() {
 
 var adtech_code = function(config) {
   var width = desktop_ads ? '970' : '300';
+  var loc = desktop_ads ? '2473' : '170';
   return '<div class="advertisement ' + ad_class 
-    + '"><iframe height="250" width="' + width + '" src="'
-    + 'http://adserver.adtechus.com/adiframe/3.0/5443.1/4003031/0/170/ADTECH;target=_blank'
+    + '"><iframe scrolling="no" frameborder="0" marginheight="0" marginwidth="0" '
+    + 'height="250" width="' 
+    + width + '" src="'
+    + 'http://adserver.adtechus.com/adiframe/3.0/5443.1/4003031/0/'+ loc 
+    + '/ADTECH;target=_blank'
     + adtech_url_params(config)
     + '">' 
     + '</iframe></div>';
@@ -78,7 +82,7 @@ var adtech_url_params = function(config) {
   if (offset > 0) { offset = "+" + offset; }
   return ';alias=' + escape(config.placement) +
     ';key=' + escape(window.ad_keywords) +
-    ';grp=' + escape(window.groupid) +
+    ';grp=' + escape(window.ad_group_id) +
     ';kvuri=' + escape(window.location.pathname) +
     ';misc=' + curDateTime.getTime() +
     ';aduho=' + offset + '"></script>'
