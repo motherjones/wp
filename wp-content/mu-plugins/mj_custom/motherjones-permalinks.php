@@ -21,9 +21,12 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
 		public function permalink_rewrite($rules) {
       $new_rules = Array();
 
-      $blog_slugs = implode( '|',
-        get_terms( array( 'taxonomy' => 'mj_blog_type') )
-      );
+      $blog_terms = [];
+      $terms = get_terms( array( 'taxonomy' => 'mj_blog_type') );
+      foreach ($terms as $term) {
+        $blog_terms[] = $term->name;
+      }
+      $blog_slugs = implode( '|', $blog_terms);
       $new_rules['^(' + $blog_slugs + ')/(.*)$'] = 
         '?taxonomy=mj_blog_type&slug=$matches[1]&post_type=mj_blog_post'; //blog index
       $new_rules['^(' + $blog_slugs + ')/(\d\d\d\d)/(\d\d)/(.*)$'] = ''; //blog post
