@@ -61,7 +61,7 @@ var adtech_code = function(config) {
     + 'http://adserver.adtechus.com/adiframe/3.0/5443.1/4003031/0/170/ADTECH;target=_blank'
     + adtech_url_params(config)
     + '">' 
-    + script_tag + '</iframe></div>';
+    + '</iframe></div>';
 }
 
 var adtech_script = function(config) {
