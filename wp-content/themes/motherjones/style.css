@@ -1715,6 +1715,9 @@ ul.social-tools.top {
 .articles-list .article-image img {
   height: auto;
 }
+.articles-list .top-article-item .article-image img {
+  width: 100%;
+}
 @media only screen and (max-width: 620px) {
   #related-articles ul.related-articles-list {
     padding: 0 15px;
