@@ -13,12 +13,46 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
     }
 
     public function setup() {
-			add_filter('post_type_link', array($this, 'permalink_rewrite'), 10, 3);   
-      add_filter( 'request', array($this, 'alter_the_query') );
+			add_filter('rewrite_rules_array', array($this, 'permalink_rewrite'));   
+      //add_filter( 'query_vars', array($this, 'insert_query_vars') );
+      add_action( 'wp_loaded', array($this, 'flush_rewrite_rules') );
     }
 
+		public function permalink_rewrite($rules) {
+      $new_rules = Array();
+
+      $blog_slugs = implode( '|',
+        get_terms( array( 'taxonomy' => 'mj_blog_type') )
+      );
+      $new_rules['^(' + $blog_slugs + ')/(.*)$'] = 
+        '?taxonomy=mj_blog_type&slug=$matches[1]&post_type=mj_blog_post'; //blog index
+      $new_rules['^(' + $blog_slugs + ')/(\d\d\d\d)/(\d\d)/(.*)$'] = ''; //blog post
+        '?taxonomy=mj_blog_type&slug=$matches[1]&post_type=mj_blog_post'
+        . '&year=$matches[2]&monthnum=$matches[3]&postname=$matches[4]'; //blog index
+      //lol okay let's try that
+      //
+      $new_rules['^author/(.*)$'] = 
+        '?post_type=guest_author&postname=$matches[1]'; //author page
+      return array_merge($new_rules, $rules);
+    }
+
+		public function flush_rewrite_rules() {
+      $rules = get_option ('rewrite_rules' );
+      if ( !isset( $rules['^author/(.*)$'] ) ) {
+        global $wp_rewrite;
+        $wp_rewrite->flush_rules();
+      }
+    }
 
     public function alter_the_query( $request ) {
+        print_r(get_terms( array(
+            'taxonomy' => 'mj_media_type', 
+            'slug' => $request['category_name']
+          ) 
+          ) );
+        die;
+
+
         $dummy_query = new WP_Query();  // the query isn't run if we don't pass any query vars
         $dummy_query->parse_query( $request );
 
@@ -107,7 +141,7 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
     }
 
 			// Adapted from get_permalink function in wp-includes/link-template.php
-		public function permalink_rewrite($permalink, $post_id, $leavename) {
+		public function old_permalink_rewrite($permalink, $post_id, $leavename) {
 			$post = get_post($post_id);
 			$rewritecode = array(
 				'%year%',
