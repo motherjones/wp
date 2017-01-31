@@ -85,7 +85,7 @@ var adtech_url_params = function(config) {
     ';grp=' + escape(window.ad_group_id) +
     ';kvuri=' + escape(window.location.pathname) +
     ';misc=' + curDateTime.getTime() +
-    ';aduho=' + offset + '"></script>'
+    ';aduho=' + offset
     ; 
 }
 
