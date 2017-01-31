@@ -21,14 +21,9 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
 		public function permalink_rewrite($rules) {
       $new_rules = Array();
 
-      $blog_terms = [];
-
-
-      $terms = get_terms( array( 'taxonomy' => 'mj_blog_type') );
-      foreach ($terms as $term) {
-        $blog_terms[] = $term->name;
-      }
-      $blog_slugs = implode( '|', $blog_terms);
+      $blog_slugs = implode( '|',
+        get_terms( array( 'taxonomy' => 'mj_blog_type') )
+      );
       $new_rules['^(' + $blog_slugs + ')/(.*)$'] = 
         '?taxonomy=mj_blog_type&slug=$matches[1]&post_type=mj_blog_post'; //blog index
       $new_rules['^(' + $blog_slugs + ')/(\d\d\d\d)/(\d\d)/(.*)$'] = ''; //blog post
@@ -50,18 +45,6 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
     }
 
     public function alter_the_query( $request ) {
-        $terms = get_terms( array(
-            'taxonomy' => 'mj_media_type', 
-            'slug' => $request['category_name']
-          ) 
-           );
-        foreach ( $terms as $term ) {
-          print $term->name;
-          print "\n";
-        }
-        die;
-
-
         $dummy_query = new WP_Query();  // the query isn't run if we don't pass any query vars
         $dummy_query->parse_query( $request );
 
