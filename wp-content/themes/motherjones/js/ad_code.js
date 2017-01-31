@@ -57,6 +57,7 @@ var ym_script = function() {
 
 var adtech_code = function(config) {
   var script_tag = adtech_script(config);
+  console.log(script_tag);
   return '<div class="advertisement ' + ad_class 
     + '"><iframe>' + script_tag + '</iframe></div>';
 }
