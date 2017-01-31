@@ -116,7 +116,6 @@ var adtech_script = function(config) {
 
             console.log(pgs[i], 'ad placing here');
             ads_placed++;
-            console.log(
 						ad_code({
               element: $(pgs[i-1]),
               placement: placement_prefix + ads_placed,
