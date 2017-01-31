@@ -11,12 +11,14 @@
 var desktop_ads = (screen.width > 630);
 
 var ad_code = function(config) {
+  console.log(config);
   if (   (!config.desktop && desktop_ads)
       || (config.desktop && !desktop_ads) 
     ) { 
     return false;
   } //do not do desktop ads if we're not on desktop, do not do mobile ads if we're not on mobile
   config.ad = create_ad(config);
+  console.log(config.ad);
   place_ad(config)
   if ( config.yieldmo || config.placement.match(/ym_/) ) {
     ym_script();
@@ -114,6 +116,7 @@ var adtech_script = function(config) {
 
             console.log(pgs[i], 'ad placing here');
             ads_placed++;
+            console.log(
 						ad_code({
               element: $(pgs[i-1]),
               placement: placement_prefix + ads_placed,
