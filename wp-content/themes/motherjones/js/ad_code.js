@@ -72,7 +72,9 @@ var adtech_script = function(config) {
 }
 
 (function($) {
+  console.log($);
   $('document').ready(function() {
+    console.log('in onready');
     if (   (!is_post) 
         || (desktop_ads && !is_fullwidth) 
         || (typeof MJ_HideInContentAds !== "undefined") ) {
@@ -81,8 +83,11 @@ var adtech_script = function(config) {
     }
 
     if (is_fullwidth) {
+      console.log('running fullwidth inline');
+      return;
       fullwidth_inline_ads();
     } else {
+      console.log('running not fullwidth inline');
       inline_ads();
     }
    
@@ -99,6 +104,7 @@ var adtech_script = function(config) {
       var placement_prefix = 'InContentMob300x250_BB';
       var ad_height = 250;
 
+      console.log(pgs.length, 'pgs length');
 
       for (var i = 0; i < pgs.length; i++) {
         if (wordcount > words_before_ad_can_be_placed
@@ -108,6 +114,7 @@ var adtech_script = function(config) {
              )
           ) {
 
+            console.log(pgs[i], 'ad placing here');
             ads_placed++;
 						ad_code({
               element: $(pgs[i-1]),
