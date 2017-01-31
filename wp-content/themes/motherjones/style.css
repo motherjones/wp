@@ -1730,10 +1730,10 @@ ul.social-tools.top {
     margin-right: 12px;
   }
 
-  .articles-list .article-image {
+  .articles-list .article-item .article-image {
     width: 42%;
   }
-  .articles-list .article-data {
+  .articles-list .article-item .article-data {
     padding-left: 3%;
     width: 55%;
   }
