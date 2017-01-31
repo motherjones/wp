@@ -157,4 +157,5 @@ var adtech_script = function(config) {
 		 count_till_ad--;
 		}
   }
-})(jQuery);
+
+})();
