@@ -54,6 +54,7 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
           print $term->name;
           print "\n";
         }
+        die;
 
 
         $dummy_query = new WP_Query();  // the query isn't run if we don't pass any query vars
