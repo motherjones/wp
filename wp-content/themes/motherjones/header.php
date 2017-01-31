@@ -42,6 +42,7 @@
   ?>
     ad_keywords = '<?php print join('+', $keyword_terms);?>';
     is_post = true;
+    is_fullwidth = <?php print $is_fullwidth; ?>;
 <?php endif; ?>
 </script>
 <script type="text/javascript" src="/wp-content/themes/motherjones/js/jquery-3.1.0.min.js"></script>
