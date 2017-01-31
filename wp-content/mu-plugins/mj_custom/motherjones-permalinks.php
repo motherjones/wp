@@ -14,6 +14,7 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
 
     public function setup() {
 			add_filter('rewrite_rules_array', array($this, 'permalink_rewrite'));   
+//      add_action( 'wp_loaded', array($this, 'flush_rewrite_rules') );
     }
 
 		public function broke_permalink_rewrite($rules) {
@@ -38,11 +39,7 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
     }
 
 		public function flush_rewrite_rules() {
-      $rules = get_option ('rewrite_rules' );
-      if ( !isset( $rules['^author/(.*)$'] ) ) {
-        global $wp_rewrite;
         $wp_rewrite->flush_rules();
-      }
     }
 
     public function alter_the_query( $request ) {
