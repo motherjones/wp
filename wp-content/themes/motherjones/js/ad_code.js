@@ -71,7 +71,6 @@ var adtech_script = function(config) {
     ; 
 }
 
-(function() {
   console.log($);
   $('document').ready(function() {
     console.log('in onready');
@@ -157,5 +156,3 @@ var adtech_script = function(config) {
 		 count_till_ad--;
 		}
   }
-
-})();
