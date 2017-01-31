@@ -1680,7 +1680,15 @@ ul.social-tools.top {
   display: none;
 }
 
+.page-header img {
+  max-width: 100%;
+  margin-top: 30px;
+}
+
 @media only screen and (min-width: 990px) {
+  .page-header img {
+    margin-top: 0;
+  }
   header, #content {
     width: 990px;
     margin-left: auto;
