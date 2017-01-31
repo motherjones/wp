@@ -14,7 +14,6 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
 
     public function setup() {
 			add_filter('rewrite_rules_array', array($this, 'permalink_rewrite'));   
-      add_action( 'wp_loaded', array($this, 'flush_rewrite_rules') );
     }
 
 		public function broke_permalink_rewrite($rules) {
@@ -148,6 +147,7 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
 				'%post_id%',
 				'%category%',
 				'%mj_blog_type%',
+				'%mj_media_type%',
 				'%author%',
 				$leavename? '' : '%pagename%',
 			);
@@ -175,6 +175,10 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
           $mj_blog_type = wp_get_post_terms( $post->ID, 'mj_blog_type' )[0]->slug;
         }
 
+        if (wp_get_post_terms( $post->ID, 'mj_media_type' )) {
+          $mj_media_type = wp_get_post_terms( $post->ID, 'mj_media_type' )[0]->slug;
+        }
+
 				$author = '';
 				if ( strpos($permalink, '%author%') !== false ) {
 					$authordata = get_userdata($post->post_author);
@@ -194,6 +198,7 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
 						$post->ID,
 						$category,
             $mj_blog_type,
+            $mj_media_type,
 						$author,
 						$post->post_name,
 					);
