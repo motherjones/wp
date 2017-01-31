@@ -14,16 +14,18 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
 
     public function setup() {
 			add_filter('rewrite_rules_array', array($this, 'permalink_rewrite'));   
-      //add_filter( 'query_vars', array($this, 'insert_query_vars') );
       add_action( 'wp_loaded', array($this, 'flush_rewrite_rules') );
     }
 
-		public function permalink_rewrite($rules) {
+		public function broke_permalink_rewrite($rules) {
       $new_rules = Array();
 
-      $blog_slugs = implode( '|',
-        get_terms( array( 'taxonomy' => 'mj_blog_type') )
-      );
+      $slugs = Array();
+      $blog_terms = get_terms( array( 'taxonomy' => 'mj_blog_type') );
+      foreach ($blog_terms as $term) {
+        $slugs[] = $term->slug;
+      }
+      $blog_slugs = implode( '|', $slugs);
       $new_rules['^(' + $blog_slugs + ')/(.*)$'] = 
         '?taxonomy=mj_blog_type&slug=$matches[1]&post_type=mj_blog_post'; //blog index
       $new_rules['^(' + $blog_slugs + ')/(\d\d\d\d)/(\d\d)/(.*)$'] = ''; //blog post
@@ -133,7 +135,7 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
     }
 
 			// Adapted from get_permalink function in wp-includes/link-template.php
-		public function old_permalink_rewrite($permalink, $post_id, $leavename) {
+		public function permalink_rewrite($permalink, $post_id, $leavename) {
 			$post = get_post($post_id);
 			$rewritecode = array(
 				'%year%',
