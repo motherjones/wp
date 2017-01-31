@@ -22,6 +22,8 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
       $new_rules = Array();
 
       $blog_terms = [];
+
+
       $terms = get_terms( array( 'taxonomy' => 'mj_blog_type') );
       foreach ($terms as $term) {
         $blog_terms[] = $term->name;
