@@ -108,7 +108,11 @@ var adtech_url_params = function(config) {
       var words_before_ad_can_be_placed = 650;
       var ads_placed = 0;
       var ads_desired = 10; 
-      var placement_prefix = 'InContentMob300x250_BB';
+      var mobile_placement_prefix = 'InContentMob300x250_BB';
+      var desktop_placement_prefix = 'InContent970_c';
+      var placement_prefix = desktop_ads 
+        ? desktop_placement_prefix 
+        : mobile_placement_prefix;
       var ad_height = 250;
 
 
