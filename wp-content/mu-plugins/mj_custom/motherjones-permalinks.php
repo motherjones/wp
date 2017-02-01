@@ -132,6 +132,8 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
 
 			// Adapted from get_permalink function in wp-includes/link-template.php
 		public function permalink_rewrite($permalink, $post_id, $leavename) {
+      print_r($permalink);
+      print_r($post_id);
 			$post = get_post($post_id);
 			$rewritecode = array(
 				'%year%',
