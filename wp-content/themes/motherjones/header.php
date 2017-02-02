@@ -52,7 +52,7 @@
 <body <?php body_class(); ?>>
 <?php
        $blogtypes = get_terms( array(
-         'taxonomy' => 'mj_blog_type',
+         'taxonomy' => 'mj_media_type',
          'hide_empty' => false,
        ) );
        foreach ($blogtypes as $blogtype) {
