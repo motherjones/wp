@@ -51,13 +51,7 @@
 
 <body <?php body_class(); ?>>
 <?php
-       $blogtypes = get_terms( array(
-         'taxonomy' => 'mj_media_type',
-         'hide_empty' => false,
-       ) );
-       foreach ($blogtypes as $blogtype) {
-				print_r( '^' . $blogtype->slug . '/([^/]*)$' );
-			}
+				print_r( $request );
 ?>
 <?php get_template_part( 'template-parts/floating-navbar'); ?>
 <?php dynamic_sidebar( 'page-top' ); ?>
