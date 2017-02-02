@@ -56,7 +56,9 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
     }
 
     public function alter_the_query( $request ) {
-        print_r($request);
+        $dummy_query = new WP_Query();  // the query isn't run if we don't pass any query vars
+        $dummy_query->parse_query( $request );
+        print_r($dummy_query);
 
         // this is the actual manipulation; do whatever you need here
         /*
