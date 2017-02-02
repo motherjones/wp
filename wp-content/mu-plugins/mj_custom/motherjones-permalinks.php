@@ -13,38 +13,53 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
     }
 
     public function setup() {
-			add_filter('rewrite_rules_array', array($this, 'permalink_rewrite'));   
+			add_filter('init', array($this, 'create_url_querystring'));   
+			add_filter('pre_get_posts', array($this, 'alter_the_query'));   
+//			add_filter('rewrite_rules_array', array($this, 'permalink_rewrite'));   
 //      add_action( 'wp_loaded', array($this, 'flush_rewrite_rules') );
-    }
-
-		public function broke_permalink_rewrite($rules) {
-      $new_rules = Array();
-
-      $slugs = Array();
-      $blog_terms = get_terms( array( 'taxonomy' => 'mj_blog_type') );
-      foreach ($blog_terms as $term) {
-        $slugs[] = $term->slug;
-      }
-      $blog_slugs = implode( '|', $slugs);
-      $new_rules['^(' + $blog_slugs + ')/(.*)$'] = 
-        '?taxonomy=mj_blog_type&slug=$matches[1]&post_type=mj_blog_post'; //blog index
-      $new_rules['^(' + $blog_slugs + ')/(\d\d\d\d)/(\d\d)/(.*)$'] = ''; //blog post
-        '?taxonomy=mj_blog_type&slug=$matches[1]&post_type=mj_blog_post'
-        . '&year=$matches[2]&monthnum=$matches[3]&postname=$matches[4]'; //blog index
-      //lol okay let's try that
-      //
-      $new_rules['^author/(.*)$'] = 
-        '?post_type=guest_author&postname=$matches[1]'; //author page
-      return array_merge($new_rules, $rules);
     }
 
 		public function flush_rewrite_rules() {
         $wp_rewrite->flush_rules();
     }
 
+    public function create_url_querystring() {
+      $blogtypes = get_terms( array(
+        'taxonomy' => 'mj_blog_type',
+        'hide_empty' => false,
+      ) );
+      foreach ($blogtypes as $blogtype) {
+        add_rewrite_rule(
+          '^' . $blogtype->slug . '/([^/]*)$',
+          'index.php?blog=' . $blogtype->slug . '&postname=[1]',
+          'top'
+        );
+        add_rewrite_rule(
+          '^' . $blogtype->slug . '/?$',
+          'index.php?blog=' . $blogtype->slug,
+          'top'
+        );
+      }
+
+      $mediatypes = get_terms( array(
+        'taxonomy' => 'mj_media_type',
+        'hide_empty' => false,
+      ) );
+      foreach ($mediatypes as $mediatype) {
+        add_rewrite_rule(
+          '^' . $mediatype->slug . '/',
+          'index.php?mediatype=' . $mediatype->slug,
+          'top'
+        );
+      }
+
+      $wp_rewrite->flush_rules();
+    }
+
     public function alter_the_query( $request ) {
         $dummy_query = new WP_Query();  // the query isn't run if we don't pass any query vars
         $dummy_query->parse_query( $request );
+        print_r($request);
 
         // this is the actual manipulation; do whatever you need here
         if ($dummy_query->query['category_name'] && $dummy_query->query['name']) {
@@ -132,8 +147,6 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
 
 			// Adapted from get_permalink function in wp-includes/link-template.php
 		public function permalink_rewrite($permalink, $post_id, $leavename) {
-      print_r($permalink);
-      print_r($post_id);
 			$post = get_post($post_id);
 			$rewritecode = array(
 				'%year%',
@@ -145,8 +158,6 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
 				$leavename? '' : '%postname%',
 				'%post_id%',
 				'%category%',
-				'%mj_blog_type%',
-				'%mj_media_type%',
 				'%author%',
 				$leavename? '' : '%pagename%',
 			);
@@ -170,14 +181,6 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
 						$category = is_wp_error( $default_category ) ? '' : $default_category->slug;
 					}
 				}
-        if (wp_get_post_terms( $post->ID, 'mj_blog_type' )) {
-          $mj_blog_type = wp_get_post_terms( $post->ID, 'mj_blog_type' )[0]->slug;
-        }
-
-        if (wp_get_post_terms( $post->ID, 'mj_media_type' )) {
-          $mj_media_type = wp_get_post_terms( $post->ID, 'mj_media_type' )[0]->slug;
-        }
-
 				$author = '';
 				if ( strpos($permalink, '%author%') !== false ) {
 					$authordata = get_userdata($post->post_author);
@@ -196,8 +199,6 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
 						$post->post_name,
 						$post->ID,
 						$category,
-            $mj_blog_type,
-            $mj_media_type,
 						$author,
 						$post->post_name,
 					);
