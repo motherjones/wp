@@ -50,9 +50,6 @@
 </head>
 
 <body <?php body_class(); ?>>
-<?php
-				print_r( $request );
-?>
 <?php get_template_part( 'template-parts/floating-navbar'); ?>
 <?php dynamic_sidebar( 'page-top' ); ?>
 <div id="page" class="site">
