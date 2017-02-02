@@ -13,9 +13,9 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
     }
 
     public function setup() {
-			add_filter('init', array($this, 'create_url_querystring'));   
+//			add_filter('init', array($this, 'create_url_querystring'));   
 //			add_filter('pre_get_posts', array($this, 'alter_the_query'));   
-			add_filter('rewrite_rules_array', array($this, 'permalink_rewrite'));   
+//			add_filter('rewrite_rules_array', array($this, 'permalink_rewrite'));   
     }
 
     public function create_url_querystring() {
@@ -142,8 +142,6 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
 
 			// Adapted from get_permalink function in wp-includes/link-template.php
 		public function permalink_rewrite($permalink, $post_id = 0, $leavename = false) {
-      print_r($permalink);
-      die;
 			$post = get_post($post_id);
 			$rewritecode = array(
 				'%year%',
