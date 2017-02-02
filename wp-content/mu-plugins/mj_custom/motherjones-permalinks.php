@@ -56,6 +56,7 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
     }
 
     public function alter_the_query( $request ) {
+        print_r($request);
 
         // this is the actual manipulation; do whatever you need here
         /*
