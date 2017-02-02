@@ -16,7 +16,7 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
 			add_filter('init', array($this, 'create_url_querystring'));   
 			add_filter('pre_get_posts', array($this, 'alter_the_query'));   
 //			add_filter('rewrite_rules_array', array($this, 'permalink_rewrite'));   
-      add_action( 'wp_loaded', array($this, 'flush_rewrite_rules') );
+//      add_action( 'wp_loaded', array($this, 'flush_rewrite_rules') );
     }
 
 		public function flush_rewrite_rules() {
