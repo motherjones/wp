@@ -13,51 +13,19 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
     }
 
     public function setup() {
-//			add_filter('init', array($this, 'create_url_querystring'));   
-//			add_filter('pre_get_posts', array($this, 'alter_the_query'));   
-//			add_filter('rewrite_rules_array', array($this, 'permalink_rewrite'));   
+			add_filter('post_type_link', array($this, 'permalink_rewrite'), 10, 3);   
+      add_filter( 'request', array($this, 'alter_the_query') );
     }
 
-    public function create_url_querystring() {
-      $blogtypes = get_terms( array(
-        'taxonomy' => 'mj_blog_type',
-        'hide_empty' => false,
-      ) );
-      foreach ($blogtypes as $blogtype) {
-        //must be in this order i fear
-        add_rewrite_rule(
-          '^' . $blogtype->slug . '/?$',
-          'index.php?blog=' . $blogtype->slug,
-          'top'
-        );
-
-        add_rewrite_rule(
-          '^' . $blogtype->slug . '/([^/]*)$',
-          'index.php?blog=' . $blogtype->slug . '&postname=[1]',
-          'top'
-        );
-      }
-
-      $mediatypes = get_terms( array(
-        'taxonomy' => 'mj_media_type',
-        'hide_empty' => false,
-      ) );
-      foreach ($mediatypes as $mediatype) {
-        add_rewrite_rule(
-          '^' . $mediatype->slug . '/',
-          'index.php?mediatype=' . $mediatype->slug,
-          'top'
-        );
-      }
-
-    }
 
     public function alter_the_query( $request ) {
-      /*
-        print_r($request);
+        $dummy_query = new WP_Query();  // the query isn't run if we don't pass any query vars
+        $dummy_query->parse_query( $request );
 
-        if ($query['category_name'] && $query['name']) {
-          $query['post_type'] = array('mj_article', 'mj_full_width');
+          print_r($request);
+        // this is the actual manipulation; do whatever you need here
+        if ($dummy_query->query['category_name'] && $dummy_query->query['name']) {
+          $request['post_type'] = array('mj_article', 'mj_full_width');
           if (get_terms( array( // is blog post
               'slug' => $dummy_query->query['category_name'],
               'taxonomy' => 'mj_blog_type'
@@ -69,6 +37,7 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
               'terms' => $request['category_name'],
             ) );
             unset($request['category_name']);
+            print_r($request);
           }
         } elseif ( preg_match('/^author\//', $dummy_query->query['category_name']) ) { //is author
           $request['post_type'] = array('mj_article', 'mj_full_width', 'mj_blog_post');
@@ -85,13 +54,14 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
             'field' => 'slug',
             'terms' => $request['author_name'],
           ) );
+          print_r($request);
           unset($request['category_name']);
           unset($request['year']);
         }  elseif ( //is topic
           !get_terms( array(
             'taxonomy' => 'category', 
-            'slug' => $request['category_name']
-          ) ) &&
+            'slug' => $request['category_name']) 
+          ) &&
           get_terms( array(
             'taxonomy' => 'mj_primary_tag', 
             'slug' => $request['category_name']) 
@@ -103,6 +73,7 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
               'terms' => $request['category_name'],
             ) );
             unset($request['category_name']);
+          print_r($request);
         }  elseif ( //is media type
           !get_terms( array(
             'taxonomy' => 'category', 
@@ -119,6 +90,7 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
               'terms' => $request['category_name'],
             ) );
             unset($request['category_name']);
+          print_r($request);
         }  elseif ( //is blog posts
           !get_terms( array(
             'taxonomy' => 'category', 
@@ -135,13 +107,13 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
               'terms' => $request['category_name'],
             ) );
             unset($request['category_name']);
+          print_r($request);
         }
-         */
         return $request;
     }
 
 			// Adapted from get_permalink function in wp-includes/link-template.php
-		public function permalink_rewrite($permalink, $post_id = 0, $leavename = false) {
+		public function permalink_rewrite($permalink, $post_id, $leavename) {
 			$post = get_post($post_id);
 			$rewritecode = array(
 				'%year%',
@@ -153,6 +125,7 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
 				$leavename? '' : '%postname%',
 				'%post_id%',
 				'%category%',
+				'%mj_blog_type%',
 				'%author%',
 				$leavename? '' : '%pagename%',
 			);
@@ -176,6 +149,10 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
 						$category = is_wp_error( $default_category ) ? '' : $default_category->slug;
 					}
 				}
+        if (wp_get_post_terms( $post->ID, 'mj_blog_type' )) {
+          $mj_blog_type = wp_get_post_terms( $post->ID, 'mj_blog_type' )[0]->slug;
+        }
+
 				$author = '';
 				if ( strpos($permalink, '%author%') !== false ) {
 					$authordata = get_userdata($post->post_author);
@@ -194,6 +171,7 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
 						$post->post_name,
 						$post->ID,
 						$category,
+            $mj_blog_type,
 						$author,
 						$post->post_name,
 					);
