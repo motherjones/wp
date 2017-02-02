@@ -14,13 +14,8 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
 
     public function setup() {
 			add_filter('init', array($this, 'create_url_querystring'));   
-			add_filter('pre_get_posts', array($this, 'alter_the_query'));   
-//			add_filter('rewrite_rules_array', array($this, 'permalink_rewrite'));   
-//      add_action( 'wp_loaded', array($this, 'flush_rewrite_rules') );
-    }
-
-		public function flush_rewrite_rules() {
-        $wp_rewrite->flush_rules();
+//			add_filter('pre_get_posts', array($this, 'alter_the_query'));   
+			add_filter('rewrite_rules_array', array($this, 'permalink_rewrite'));   
     }
 
     public function create_url_querystring() {
@@ -29,14 +24,16 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
         'hide_empty' => false,
       ) );
       foreach ($blogtypes as $blogtype) {
-        add_rewrite_rule(
-          '^' . $blogtype->slug . '/([^/]*)$',
-          'index.php?blog=' . $blogtype->slug . '&postname=[1]',
-          'top'
-        );
+        //must be in this order i fear
         add_rewrite_rule(
           '^' . $blogtype->slug . '/?$',
           'index.php?blog=' . $blogtype->slug,
+          'top'
+        );
+
+        add_rewrite_rule(
+          '^' . $blogtype->slug . '/([^/]*)$',
+          'index.php?blog=' . $blogtype->slug . '&postname=[1]',
           'top'
         );
       }
@@ -56,10 +53,9 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
     }
 
     public function alter_the_query( $request ) {
+      /*
         print_r($request);
 
-        // this is the actual manipulation; do whatever you need here
-        /*
         if ($query['category_name'] && $query['name']) {
           $query['post_type'] = array('mj_article', 'mj_full_width');
           if (get_terms( array( // is blog post
