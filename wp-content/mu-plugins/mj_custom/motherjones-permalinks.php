@@ -114,7 +114,7 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
       $matches = Array();
       print_r($request);
       print_r(preg_match("/^topic\/(.*)$/", $request));
-      if ( !(preg_match("/^topic\/(.*)$/", $request)) || !$matches[1] ) { 
+      if ( !(preg_match("/^topic\/(.*)$/", $request, $matches)) || !$matches[1] ) { 
         print_r('matches is empty');
         return; }
       print_r($matches);
