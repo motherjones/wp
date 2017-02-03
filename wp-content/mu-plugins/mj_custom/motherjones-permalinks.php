@@ -115,6 +115,7 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
       $matches = Array();
       if ( !(preg_match("/^topic\/(.*)$/", $request, $matches)) 
         || !$matches[1] ) { 
+        print_r('okay this shouldnt be');
         return; 
       }
       if ( get_terms( array(
@@ -122,6 +123,7 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
           'slug' => $matches[1]
         ) )
       ) { print_r($matches[1]); return $matches[1]; } 
+      print_r('wait how did we get here');
        
     }
 
