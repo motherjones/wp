@@ -62,10 +62,8 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
             'taxonomy' => 'category', 
             'slug' => $request['category_name']) 
           ) &&
-          get_terms( array(
-            'taxonomy' => 'mj_primary_tag', 
-            'slug' => $request['category_name']) 
-          ) ) {
+          $topic = find_topic($request['category_name'])
+          ) {
             $request['post_type'] = array('mj_article', 'mj_full_width', 'mj_blog_post');
             $request['tax_query'] = array( array(
               'taxonomy' => 'mj_primary_tag',
@@ -111,6 +109,16 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
         }
         return $request;
     }
+    public function find_topic($request) {
+      $matches = Array();
+      if ( !(preg_match("^topic/(.*)$", $request)) ) { return; }
+      if ( get_terms( array(
+          'taxonomy' => 'mj_primary_tag', 
+          'slug' => $matches[0]
+        ) )
+      ) { return $matches[0]; } 
+       
+    }
 
 			// Adapted from get_permalink function in wp-includes/link-template.php
 		public function permalink_rewrite($permalink, $post_id, $leavename) {
@@ -125,7 +133,6 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
 				$leavename? '' : '%postname%',
 				'%post_id%',
 				'%category%',
-				'topic/%topic%',
 				'%mj_blog_type%',
 				'%author%',
 				$leavename? '' : '%pagename%',
@@ -172,7 +179,6 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
 						$post->post_name,
 						$post->ID,
 						$category,
-            $topic,
             $mj_blog_type,
 						$author,
 						$post->post_name,
