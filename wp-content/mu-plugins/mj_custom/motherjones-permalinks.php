@@ -112,13 +112,16 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
 
     public function find_topic($request) {
       $matches = Array();
-      if ( !(preg_match("/^topic\/(.*)$/", $request)) ) { print_r('hahah died here'); return; }
+      if ( !(preg_match("/^topic\/(.*)$/", $request)) ) { return; }
       print_r($matches);
       if ( get_terms( array(
           'taxonomy' => 'mj_primary_tag', 
-          'slug' => $matches[0]
+          'slug' => $matches[1]
         ) )
-      ) { print_r('found it'); return $matches[0]; } 
+      ) { print_r(get_terms( array(
+          'taxonomy' => 'mj_primary_tag', 
+          'slug' => $matches[1]
+        ))); return $matches[1]; } 
        
     }
 
