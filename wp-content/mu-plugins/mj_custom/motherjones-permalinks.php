@@ -120,7 +120,7 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
       }
       if ( get_terms( array(
           'taxonomy' => 'mj_primary_tag', 
-          'slug' => $matches[1]
+          'slug' => str_replace('_', '-', $matches[1])
         ) )
       ) { print_r($matches[1]); return $matches[1]; } 
       print_r('wait how did we get here');
