@@ -22,6 +22,7 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
         $dummy_query = new WP_Query();  // the query isn't run if we don't pass any query vars
         $dummy_query->parse_query( $request );
 
+          print_r($request);
         // this is the actual manipulation; do whatever you need here
         if ($dummy_query->query['category_name'] && $dummy_query->query['name']) {
           $request['post_type'] = array('mj_article', 'mj_full_width');
@@ -36,6 +37,7 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
               'terms' => $request['category_name'],
             ) );
             unset($request['category_name']);
+            print_r($request);
           }
         } elseif ( preg_match('/^author\//', $dummy_query->query['category_name']) ) { //is author
           $request['post_type'] = array('mj_article', 'mj_full_width', 'mj_blog_post');
@@ -52,6 +54,7 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
             'field' => 'slug',
             'terms' => $request['author_name'],
           ) );
+          print_r($request);
           unset($request['category_name']);
           unset($request['year']);
         }  elseif ( //is topic
@@ -70,6 +73,7 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
               'terms' => $request['category_name'],
             ) );
             unset($request['category_name']);
+          print_r($request);
         }  elseif ( //is media type
           !get_terms( array(
             'taxonomy' => 'category', 
@@ -86,6 +90,7 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
               'terms' => $request['category_name'],
             ) );
             unset($request['category_name']);
+          print_r($request);
         }  elseif ( //is blog posts
           !get_terms( array(
             'taxonomy' => 'category', 
@@ -102,6 +107,7 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
               'terms' => $request['category_name'],
             ) );
             unset($request['category_name']);
+          print_r($request);
         }
         return $request;
     }
