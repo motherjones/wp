@@ -62,7 +62,7 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
             'taxonomy' => 'category', 
             'slug' => $request['category_name']) 
           ) &&
-          $topic = find_topic($request['category_name'])
+          $topic = self::find_topic($request['category_name'])
           ) {
             $request['post_type'] = array('mj_article', 'mj_full_width', 'mj_blog_post');
             $request['tax_query'] = array( array(
@@ -109,6 +109,7 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
         }
         return $request;
     }
+
     public function find_topic($request) {
       $matches = Array();
       if ( !(preg_match("^topic/(.*)$", $request)) ) { return; }
