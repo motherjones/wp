@@ -64,6 +64,7 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
           ) &&
           $topic = self::find_topic($request['category_name'])
           ) {
+            print_r('here we are');
             $request['post_type'] = array('mj_article', 'mj_full_width', 'mj_blog_post');
             $request['tax_query'] = array( array(
               'taxonomy' => 'mj_primary_tag',
@@ -120,7 +121,7 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
           'taxonomy' => 'mj_primary_tag', 
           'slug' => $matches[1]
         ) )
-      ) { return $matches[1]; } 
+      ) { print_r($matches[1]); return $matches[1]; } 
        
     }
 
