@@ -112,7 +112,9 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
 
     public function find_topic($request) {
       $matches = Array();
-      if ( !(preg_match("/^topic\/(.*)$/", $request)) ) { return; }
+      if ( !(preg_match("/^topic\/(.*)$/", $request)) || !$matches[1] ) { 
+        print_r('matches is empty');
+        return; }
       print_r($matches);
       if ( get_terms( array(
           'taxonomy' => 'mj_primary_tag', 
