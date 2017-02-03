@@ -122,7 +122,7 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
           'taxonomy' => 'mj_primary_tag', 
           'slug' => str_replace('_', '-', $matches[1])
         ) )
-      ) { print_r($matches[1]); return $matches[1]; } 
+      ) { print_r($matches[1]); return str_replace('_', '-', $matches[1]); } 
       print_r('wait how did we get here');
        
     }
