@@ -68,7 +68,7 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
             $request['tax_query'] = array( array(
               'taxonomy' => 'mj_primary_tag',
               'field' => 'slug',
-              'terms' => $request['category_name'],
+              'terms' => $topic,
             ) );
             unset($request['category_name']);
           print_r($request);
@@ -112,17 +112,15 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
 
     public function find_topic($request) {
       $matches = Array();
-      print_r($request);
-      print_r(preg_match("/^topic\/(.*)$/", $request));
-      if ( !(preg_match("/^topic\/(.*)$/", $request, $matches)) || !$matches[1] ) { 
-        print_r('matches is empty');
-        return; }
-      print_r($matches);
+      if ( !(preg_match("/^topic\/(.*)$/", $request, $matches)) 
+        || !$matches[1] ) { 
+        return; 
+      }
       if ( get_terms( array(
           'taxonomy' => 'mj_primary_tag', 
           'slug' => $matches[1]
         ) )
-      ) { print_r( $matches[1]); return $matches[1]; } 
+      ) { return $matches[1]; } 
        
     }
 
