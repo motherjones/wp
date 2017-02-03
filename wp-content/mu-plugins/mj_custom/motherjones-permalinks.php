@@ -118,10 +118,7 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
           'taxonomy' => 'mj_primary_tag', 
           'slug' => $matches[1]
         ) )
-      ) { print_r(get_terms( array(
-          'taxonomy' => 'mj_primary_tag', 
-          'slug' => $matches[1]
-        ))); return $matches[1]; } 
+      ) { print_r( $matches[1]); return $matches[1]; } 
        
     }
 
