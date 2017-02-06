@@ -237,7 +237,7 @@ get_header(); ?>
 
       <div id="homepage-investigations" class="group">
         <h2 class="promo">
-          <a href="/investigations">Investigations</a>
+          <a href="/topics/investigations">Investigations</a>
         </h2>
         <ul id="homepage-investigations-list" class="group">
           <?php $investigations = new WP_Query(array(

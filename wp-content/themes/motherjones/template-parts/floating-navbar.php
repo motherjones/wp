@@ -56,7 +56,7 @@
 					<li id="menu_guns_select"><a href="/guns">Guns</a></li>
 					<li id="menu_dark_money_select"><a href="/dark-money">Dark Money</a></li>
 					<li id="menu_photo_select"><a href="/photoessays">Photos</a></li>
-					<li id="menu_investigations_select"><a href="/investigations">Investigations</a></li>
+					<li id="menu_investigations_select"><a href="/topics/investigations">Investigations</a></li>
 					<li id="menu_podcast_select"><a href="/podcasts">Podcasts</a></li>
 					<li id="menu_drum_select"><a href="/kevin-drum">Kevin Drum</a></li>
 					<li id="menu_about_select"><a href="/about">About</a></li>

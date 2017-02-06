@@ -23,7 +23,7 @@
     <li class="menu-item-media"><a href="/media" title="Media">Media</a></li>
     <li class="menu-item-crime_and_justice"><a href="/crime_and_justice" title="">Crime &amp; Justice</a></li>
     <li class="menu-item-photos"><a href="/photoessays" title="Photos">Photos</a></li>
-    <li class="menu-item-investigations"><a href="/investigations" title="">Investigations</a></li>
+    <li class="menu-item-investigations"><a href="/topics/investigations" title="">Investigations</a></li>
     <li class="menu-item-magazine"><a href="http://www.motherjones.com/magazine" title="">Magazine</a></li>
     <li class="menu-item-subscribe"><a href="https://secure.motherjones.com/fnx/?action=SUBSCRIPTION&amp;pub_code=MJM&amp;term_pub=MJM&amp;list_source=SEGYN&amp;base_country=US" title="Subscribe">Subscribe</a></li>
     <li class="last menu-item-donate"><a href="https://secure.motherjones.com/fnp/?action=SUBSCRIPTION&amp;list_source=7HEGP001&amp;extra_don=1&amp;abver=A" title="Donate">Donate</a></li>

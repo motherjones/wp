@@ -121,7 +121,7 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
 
     public function find_topic($request) {
       $matches = Array();
-      if ( !(preg_match("/^topic\/(.*)$/", $request, $matches)) 
+      if ( !(preg_match("/^topics\/(.*)$/", $request, $matches)) 
         || !$matches[1] ) { 
         print_r('okay this shouldnt be');
         return; 
