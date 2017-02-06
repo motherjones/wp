@@ -33,6 +33,8 @@
 <?php 
   if (get_the_ID()) :
     $keyword_term_objs = get_the_terms(get_the_ID(), 'mj_primary_tag');
+    $media_types = get_the_terms(get_the_ID(), 'mj_media_type');
+    print_r($media_types);
     $keyword_term_objs[] = get_the_category()[0];
     $keyword_terms = [];
     $is_fullwidth = get_post_type() === 'mj_full_width';

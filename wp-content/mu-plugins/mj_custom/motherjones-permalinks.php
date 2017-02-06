@@ -107,6 +107,14 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
             ) );
             unset($request['category_name']);
           print_r($request);
+        } elseif ( $request['category_name'] === 'photoessays') { //is photoessays
+          print_r('is photoesssays hurrah');
+            $request['post_type'] = array('mj_article', 'mj_full_width');
+            $request['tax_query'] = array( array(
+              'taxonomy' => 'mj_media_type',
+              'field' => 'slug',
+              'terms' => $request['photoessays'],
+            ) );
         }
         return $request;
     }
