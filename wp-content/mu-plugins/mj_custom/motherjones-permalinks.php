@@ -13,8 +13,10 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
     }
 
     public function setup() {
+      /*
 			add_filter('post_type_link', array($this, 'permalink_rewrite'), 10, 3);   
       add_filter( 'request', array($this, 'alter_the_query') );
+       */
     }
 
 
