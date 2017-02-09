@@ -23,8 +23,9 @@ get_header(); ?>
     <main id="main" class="site-main group" role="main">
 
 		<?php
+    global $wp_query;
 		// Start the loop.
-    $page = wp_query(64);
+    $page = $wp_query(64);
 		while ( $page->have_posts() ) : $page->the_post();
 
 			// Include the single post content template.
