@@ -26,7 +26,7 @@ get_header(); ?>
     global $wp_query;
 		// Start the loop.
     $page = $wp_query->get_post(64);
-		while ( $page->have_posts() ) : $page->the_post();
+		while ( $wp_query->have_posts() ) : $wp_query->the_post();
 
 			// Include the single post content template.
 			get_template_part( 'template-parts/content', 'single' );
