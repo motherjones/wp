@@ -23,13 +23,7 @@ get_header(); ?>
     <main id="main" class="site-main group" role="main">
 
 		<?php
-    global $wp_query;
 		// Start the loop.
-    $page = get_post( 64);
-    if (!$page) { print "WHAT THE HELL COME ON NOW"; }
-    print " HERE: ";
-    print_r($page);
-    print " : END";
     $about_query = new WP_Query( Array( 'page_id' => 64 ) );
 		while ( $about_query->have_posts() ) : $about_query->the_post();
 
@@ -39,8 +33,17 @@ get_header(); ?>
 			// End of the loop.
 		endwhile;
 		?>
+    <script>
+      if (typeof MJ_HideBottomROS970x250 === 'undefined') {
+        ad_code({
+          desktop: true,
+          placement: 'BottomROS970x250',
+          height: 2473,
+          doc_write: true,
+        });
+      }
+    </script
 
 		</main><!-- .site-main -->
 	</div><!-- .content-area -->
-</div><!-- site-content -->
 <?php get_footer(); ?>
