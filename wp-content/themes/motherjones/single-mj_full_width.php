@@ -9,6 +9,18 @@
 while ( have_posts() ) : the_post();
 get_header(); 
 ?>
+      <script>
+          <!-- 
+          if (typeof MJ_HideTopROS970x250 === 'undefined') {
+            ad_code({
+              desktop: true,
+              placement: 'TopROS970x250',
+              height: 2473,
+              doc_write: true,
+            });
+          }
+          //--> 
+      </script>
 
 <header id="full-width-header" class="group">
   <?php if ( get_post_meta( get_the_ID(), 'full_width_title_image' )[0]['title_image'] ): ?>
