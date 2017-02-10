@@ -27,8 +27,8 @@ get_header(); ?>
 		// Start the loop.
 $page = $wp_query->get_post( 
   Array(
-    'p' => 64,
-    'post_type' => 'any'
+    'id' => 64,
+    'post_type' => 'page'
   ) 
 );
     if (!$page) { print "WHAT THE HELL COME ON NOW"; }
