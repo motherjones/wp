@@ -13,18 +13,6 @@ get_header(); ?>
 
   <div id="primary" class="content-area">
     <main id="main" class="site-main group" role="main">
-      <script>
-          <!-- 
-          if (typeof MJ_HideTopROS970x250 === 'undefined') {
-            ad_code({
-              desktop: true,
-              placement: 'TopROS970x250',
-              height: 2473,
-              doc_write: true,
-            });
-          }
-          //--> 
-      </script>
       <header class="entry-header article">
         <?php the_title( '<h1 class="article hed">', '</h1>' ); ?>
         <?php if ( get_post_meta( get_the_ID(), 'dek' ) ): ?>
