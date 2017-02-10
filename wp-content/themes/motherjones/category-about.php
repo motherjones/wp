@@ -30,7 +30,8 @@ get_header(); ?>
     print " HERE: ";
     print_r($page);
     print " : END";
-		while ( $wp_query->have_posts() ) : $wp_query->the_post();
+    $about_query = new WP_Query( Array( 'page_id' => 64 ) );
+		while ( $about_query->have_posts() ) : $about_query->the_post();
 
 			// Include the single post content template.
 			get_template_part( 'template-parts/content', 'single' );
