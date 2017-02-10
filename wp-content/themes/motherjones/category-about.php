@@ -25,9 +25,14 @@ get_header(); ?>
 		<?php
     global $wp_query;
 		// Start the loop.
-    $page = $wp_query->get_post(64);
+$page = $wp_query->get_post( 
+  Array(
+    'p' => 64,
+    'post_type' => 'any'
+  ) 
+);
     if (!$page) { print "WHAT THE HELL COME ON NOW"; }
-    print "HERE: ";
+    print " HERE: ";
     print_r($page);
     print " : END";
 		while ( $wp_query->have_posts() ) : $wp_query->the_post();
