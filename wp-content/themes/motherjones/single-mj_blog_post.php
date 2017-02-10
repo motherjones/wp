@@ -12,6 +12,18 @@ get_header(); ?>
 <div id="content" class="site-content">
 <div id="primary" class="content-area">
 	<main id="main" class="site-main group" role="main">
+      <script>
+          <!-- 
+          if (typeof MJ_HideTopROS970x250 === 'undefined') {
+            ad_code({
+              desktop: true,
+              placement: 'TopROS970x250',
+              height: 2473,
+              doc_write: true,
+            });
+          }
+          //--> 
+      </script>
     <article class="blog-post">
       <div class="entry-header blog-post">
         <?php the_title( '<h1 class="blog-post hed">', '</h1>' ); ?>
