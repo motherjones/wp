@@ -1799,4 +1799,8 @@ ul.social-tools.top {
   text-transform: uppercase;
   letter-spacing: 3px;
 }
+.page .entry-content {
+  line-height: 28px;
+  font-size: 18px;
+}
 /* end pages */
