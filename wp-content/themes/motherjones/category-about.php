@@ -26,6 +26,7 @@ get_header(); ?>
     global $wp_query;
 		// Start the loop.
     $page = $wp_query->get_post(64);
+    if (!$page) { print "WHAT THE HELL COME ON NOW"; }
     print "HERE: ";
     print_r($page);
     print " : END";
