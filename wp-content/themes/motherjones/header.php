@@ -17,15 +17,8 @@
 	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
 	<?php endif; ?>
   <link rel="stylesheet" href="/wp-content/themes/motherjones/css/font-awesome-4.6.3/css/font-awesome.min.css">
-	<?php wp_head(); ?>
-  <?php
-    GLOBAL $ad_group_id;
-    $ad_group_id = rand(0, 100000000)
-  ?>
   <script>
-      //let's make these ad code variables available just in case
-      //we have to place ads with js somewhere down the line;
-    var ad_group_id = <?php print $ad_group_id;?>;
+    var ad_group_id = Math.floor(Math.random() * 100000000);
     var ad_keywords = '';
     var is_post = false;
     var is_fullwidth = false;
@@ -49,6 +42,7 @@
 </script>
 <script type="text/javascript" src="/wp-content/themes/motherjones/js/jquery-3.1.0.min.js"></script>
 <script type="text/javascript" src="/wp-content/themes/motherjones/js/ad_code.js"></script>
+	<?php wp_head(); ?>
 </head>
 
 <body <?php body_class(); ?>>
