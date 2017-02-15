@@ -1815,6 +1815,7 @@ ul.social-tools.top {
   letter-spacing: 3px;
   font-family: Mallory, sans-serif;
   font-weight: bold;
+  background-image: none;
 }
 .pager_previous {
   float: left;
