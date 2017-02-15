@@ -1626,6 +1626,11 @@ h2.widget-title {
   position: relative;
   text-align: center;
 }
+#full-width-header .hed {
+  max-width: 990px;
+  text-transform: none;
+  margin: auto;
+}
 
 #full-width-header-image img {
   width: 100%;
