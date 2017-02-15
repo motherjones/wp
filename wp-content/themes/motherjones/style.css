@@ -1631,6 +1631,11 @@ h2.widget-title {
   text-transform: none;
   margin: auto;
 }
+#full-width-header .dek {
+  max-width: 700px;
+  margin: 28px auto 15px;
+  font-size: 20px;
+}
 
 #full-width-header-image img {
   width: 100%;
