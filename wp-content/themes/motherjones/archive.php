@@ -96,8 +96,12 @@ get_header(); ?>
     ?>
     </ul>
     <div id="pager">
-      <?php previous_posts_link( '<span class="pager_previous">Previous</span>'); ?>
-      <?php next_posts_link( '<span class="pager_next">Next</span>' ); ?>
+      <span class="pager_previous">
+        <?php previous_posts_link( 'Previous'); ?>
+      </span>
+      <span class="pager_next">
+        <?php next_posts_link( 'Next' ); ?>
+      </span>
     </div>
 
     <?php

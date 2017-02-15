@@ -1804,3 +1804,22 @@ ul.social-tools.top {
   font-size: 18px;
 }
 /* end pages */
+
+/* start pager */
+#pager { 
+  margin: 15px 0;
+  height: 34px;
+}
+#pager a {
+  font-size: 28px;
+  letter-spacing: 3px;
+  font-family: Mallory, sans-serif;
+  font-weight: bold;
+}
+.pager_previous {
+  float: left;
+}
+.pager_next {
+  float: right;
+}
+/* end pager */
