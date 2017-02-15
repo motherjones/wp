@@ -95,16 +95,12 @@ get_header(); ?>
 			endwhile;
     ?>
     </ul>
+    <div id="pager">
+      <?php previous_posts_link( '<span class="pager_previous">Previous</span>'); ?>
+      <?php next_posts_link( '<span class="pager_next">Next</span>' ); ?>
+    </div>
+
     <?php
-
-			// Previous/next page navigation.
-			the_posts_pagination( array(
-				'prev_text'          => 'Previous',
-				'next_text'          => 'Next',
-        'mid_size' => 0,
-        'screen_reader_text' => 'Article navigation'
-			) );
-
 		// If no content, include the "No posts found" template.
 		else :
 			get_template_part( 'template-parts/content', 'none' );
