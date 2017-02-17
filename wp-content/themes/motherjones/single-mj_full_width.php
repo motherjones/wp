@@ -71,6 +71,7 @@ get_header();
               </li>
             </ul>
           </div>
+        </div>
         
         <div id="fullwidth-body">
           <?php print get_post_meta( get_the_ID(), 'body' )[0]; ?>
