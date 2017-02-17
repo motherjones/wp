@@ -1106,9 +1106,11 @@ ul.social-tools.top li {
   margin-bottom: 20px;
 }
 .full-width-social-container {
-  margin: 20px auto;
-  height: 33px;
-  display: block;
+  max-width: 660px;
+  padding-bottom: 20px;
+}
+.full-width .social-container.top {
+  border-bottom: none;
 }
 
 .social-container.bottom {
