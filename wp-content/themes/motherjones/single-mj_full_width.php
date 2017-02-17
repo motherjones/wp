@@ -50,7 +50,7 @@ get_header();
       </p>
   <?php endif; ?>
 </header>
-<p class="homepage-art-byline">
+<p class="full-width-title-art-byline">
   <?php print get_post_meta( get_the_ID(), 'full_width_title_image'  )[0]['title_image_byline']; ?>
 </p>
 
@@ -60,16 +60,17 @@ get_header();
     <main id="main" class="site-main" role="main">
       <article class="full-width">
         <?php print get_post_meta( get_the_ID(), 'css' )[0]; ?>
-        <div class="social-container article top">
-          <ul class="social-tools article top">
-            <li class="twitter">
-              <?php print mj_flat_twitter_button( get_the_ID() ); ?>
-            </li>
-            <li class="facebook">
-              <?php print mj_flat_facebook_button( get_the_ID() ); ?>
-            </li>
-          </ul>
-        </div>
+        <div class="full-width-social-container">
+          <div class="social-container article top">
+            <ul class="social-tools article top">
+              <li class="twitter">
+                <?php print mj_flat_twitter_button( get_the_ID() ); ?>
+              </li>
+              <li class="facebook">
+                <?php print mj_flat_facebook_button( get_the_ID() ); ?>
+              </li>
+            </ul>
+          </div>
         
         <div id="fullwidth-body">
           <?php print get_post_meta( get_the_ID(), 'body' )[0]; ?>

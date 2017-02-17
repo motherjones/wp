@@ -883,7 +883,7 @@ ul#prev-next .label {
   padding-bottom: 12px;
   border-bottom: 1px solid #ccc;
 }
-.article-master-data {
+.article-master-image .master-image-data {
   line-height: 20px;
   margin: 10px 0 0 0;
 }
@@ -1104,6 +1104,12 @@ ul.social-tools.top li {
   height: 17px;
   border-bottom: 1px solid #ccc;
   margin-bottom: 20px;
+}
+.full-width-social-container {
+  margin: 20px auto;
+  height: 33px;
+  display: block;
+  max-width: 168px;
 }
 
 .social-container.bottom {
@@ -1646,8 +1652,16 @@ h2.widget-title {
   bottom: 0px;
   text-align: center;
   width: 100%;
-  margin-bottom: 10px;
   background: linear-gradient(transparent,#000);
+}
+.full-width-title-art-byline {
+  text-align: right;
+  color: #ccc;
+  margin: 3px 40px 0 0;
+  font-family: Mallory, sans-serif;
+  font-weight: bold;
+  font-style: italic;
+  font-size: 12px;
 }
 #full-width-header-data h1,
 #full-width-header-data h3 {
