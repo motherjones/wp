@@ -102,8 +102,6 @@
           <span onclick="$('#bottom-donate').remove();">X</span>
         </p>
       </div>
-      <script type="text/javascript" src="/wp-content/themes/motherjones/js/nav.js"></script>
-      <script type="text/javascript" src="/wp-content/themes/motherjones/js/video-embed.js"></script>
 
       <!-- Quantcast Tag -->
       <script type="text/javascript">
@@ -266,5 +264,6 @@
       <?php dynamic_sidebar( 'page-end' ); ?>
 		</footer><!-- .site-footer -->
 </div><!-- .site -->
+ <?php wp_footer(); ?>
 </body>
 </html>
