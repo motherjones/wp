@@ -19,10 +19,10 @@
  **/
 $hostname="localhost";  
 $username="root";   
-$password="p";  
+$password=$argv[1];
 $d6_db = "mjd6";  
 $wp_db = "pantheon_wp";  
-$FILEDIR = "http://dev-mjben.pantheonsite.io/wp-content/uploads/";
+$FILEDIR = "http://dev-mjwordpress.pantheonsite.io/wp-content/uploads/";
 
 
 $d6 = new PDO("mysql:host=$hostname;dbname=$d6_db", $username, $password);  
@@ -903,17 +903,6 @@ $wp->commit();
 
 
 echo "authors done";
-
-$hostname="localhost";  
-$username="root";   
-$password="p";  
-
-$d6_db = "mjd6";  
-$d6 = new PDO("mysql:host=$hostname;dbname=$d6_db", $username, $password);  
-
-$wp_db = "pantheon_wp";  
-$wp = new PDO("mysql:host=$hostname;dbname=$wp_db", $username, $password);  
-$wp->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING );
 
 //FIXME REPEAT FOR FULL WIDTH TITLES< content_field_top_of_content_image 
 //for master images
