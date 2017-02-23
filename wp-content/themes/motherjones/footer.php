@@ -5,8 +5,8 @@
  * Contains the closing of the #content div and all content after
  *
  * @package WordPress
- * @subpackage Twenty_Sixteen
- * @since Twenty Sixteen 1.0
+ * @subpackage Mother_Jones
+ * @since Mother Jones 1.0
  */
 ?>
 
@@ -15,7 +15,7 @@
 		<footer id="colophon" class="site-footer" role="contentinfo">
 
       <a href="/" id="footer-logo">
-          <img src="/wp-content/themes/motherjones/img/MJ_comp_grey.png" alt="Mother Jones" />
+          <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/MJ_comp_grey.png" alt="Mother Jones" />
       </a>
       <ul id="footer-social">
           <li class="circled-icon toolbar-btn fblike">
@@ -37,32 +37,32 @@
       <ul id="footer-list">
           <li>
               <a href="/about">
-                  About Us
+              	About Us
               </a>
           </li>
           <li>
               <a href="/about/support">
-                  Donate
+              	Donate
               </a>
-|                    <a href="https://secure.motherjones.com/fnx/?action=SUBSCRIPTION&pub_code=MJM&term_pub=MJM&list_source=SEGYN4&base_country=US">
-                  Subscribe
+|             <a href="https://secure.motherjones.com/fnx/?action=SUBSCRIPTION&pub_code=MJM&term_pub=MJM&list_source=SEGYN4&base_country=US">
+              	Subscribe
               </a>
           </li>
           <li>
-               <a href="/about/subscriptions/customer-service">
-                    Customer Service
+              <a href="/about/subscriptions/customer-service">
+              	Customer Service
               </a>
           </li>
           <li>
               <a href="/about/advertising/contact-form">
-                  Advertise
+              	Advertise
               </a>
           </li>
       </ul>
       <div id="copyright">
           <p>
-              Copyright &copy;2016 Mother Jones and the Foundation for National Progress. All Rights Reserved.
-         </p>
+          	Copyright &copy;2016 Mother Jones and the Foundation for National Progress. All Rights Reserved.
+         	</p>
           <p>
               <a href="/about/terms">Terms of Service</a>
               <a href="/about/privacy-policy">Privacy Policy</a>
@@ -70,7 +70,7 @@
           </p>
       </div>
 
-      <script language="javascript"> 
+      <script language="javascript">
       <!--  //FIXME make this check to see if it's an article or blogpost.
       if ((typeof MJ_HideInContentAds === 'undefined') && (!($(".inline-right")[0])) && (!($(".inline-subnav")[0])))  {
         ad_code({
@@ -79,8 +79,8 @@
           height: 16,
           doc_write: true,
         });
-      }    
-       
+      }
+
       if (typeof MJ_HideOverlayAds === 'undefined') {
         ad_code({
           desktop: true,
@@ -88,9 +88,9 @@
           height: 67,
           doc_write: true,
         });
-      }    
-      //--> 
-      </script> 
+      }
+      //-->
+      </script>
 
 
       <div id="bottom-donate" style="display:none">
@@ -152,10 +152,10 @@
         var bodyClasses = $('body').attr('class');
         var gaEventAction = 'LinkClick';
         var bodyClassesArray = bodyClasses.split(' ');
-        
+
         if (jQuery.inArray('front', bodyClassesArray) != -1) {
           gaEventCategory = 'areaTracking_front';
-          
+
           var areaSelectorArray = ['body.front .view-display-id-panel_pane_1 ',
           'body.front .center-wrapper-above .pane-frontpage-stories',
           'body.front .pane-views-photoessay-block-3 ',
@@ -175,7 +175,7 @@
           ];
         } else if (jQuery.inArray('node-type-article', bodyClassesArray) != -1) {
           gaEventCategory = 'areaTracking_article';
-          
+
           var areaSelectorArray = ['body.node-type-article #node-header',
           'body.node-type-article #node-body-top',
           'body.node-type-article #node-body-bottom',
@@ -194,7 +194,7 @@
         } else if (jQuery.inArray('node-type-blogpost', bodyClassesArray) != -1) {
 
           gaEventCategory = 'areaTracking_blogpost';
-          
+
           var areaSelectorArray = ['body.node-type-blogpost #node-header',
           'body.node-type-blogpost #blog-nav',
           'body.node-type-blogpost #node-body-top',
@@ -214,7 +214,7 @@
         } else if (jQuery.inArray('node-type-photoessay-image', bodyClassesArray) != -1) {
 
           gaEventCategory = 'areaTracking_photoessay-image';
-          
+
           var areaSelectorArray = ['body.node-type-photoessay-image .sidebar-right a.photoessay-forward',
           'body.node-type-photoessay-image .sidebar-right a.photoessay-back',
           'body.node-type-photoessay-image .sidebar-right a.photoessay-rewind',
@@ -239,7 +239,7 @@
           ];
         } else if (jQuery.inArray('page-politics', bodyClassesArray) != -1) {
           gaEventCategory = 'areaTracking_politics';
-          
+
           var areaSelectorArray = ['body.page-politics div.views-row-1',
           'body.page-politics div.view-section-page-articles',
           'body.page-politics #mymojo',
@@ -255,7 +255,7 @@
         if (gaEventCategory != null) {
           for (var selector in areaSelectorArray) {
             $(areaSelectorArray[selector] + ' a').click(function(selectorString) { return function(){ _gaq.push(['_trackEvent', gaEventCategory, gaEventAction, selectorString]); }}(areaSelectorArray[selector]));
-            
+
           }
         }
       });

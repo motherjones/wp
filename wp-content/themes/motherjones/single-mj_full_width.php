@@ -3,16 +3,17 @@
  * The template for displaying all single posts and attachments
  *
  * @package WordPress
- * @subpackage Mother Jones
+ * @subpackage Mother_Jones
+ * @since Mother Jones 1.0
  */
 
 while ( have_posts() ) : the_post();
-get_header(); 
+get_header();
 ?>
 <header id="full-width-header" class="group">
   <?php if ( get_post_meta( get_the_ID(), 'full_width_title_image' )[0]['title_image'] ): ?>
     <div id="full-width-header-image">
-      <?php print wp_get_attachment_image( 
+      <?php print wp_get_attachment_image(
         get_post_meta( get_the_ID(), 'full_width_title_image' )[0]['title_image'],
         'full_width_giant'
       ); ?>
@@ -53,7 +54,6 @@ get_header();
 <p class="full-width-title-art-byline">
   <?php print get_post_meta( get_the_ID(), 'full_width_title_image'  )[0]['title_image_byline']; ?>
 </p>
-
 
 <div id="content" class="site-content group">
   <div id="primary" class="content-area">
@@ -101,7 +101,7 @@ get_header();
                   desktop: false,
               });
             }
-            //--> 
+            //-->
           </script>
 
         </footer><!-- .entry-footer -->
@@ -113,6 +113,6 @@ get_header();
 
 </div><!-- .content-area -->
 
-<?php get_footer(); 
+<?php get_footer();
 endwhile;
 ?>

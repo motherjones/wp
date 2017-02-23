@@ -1,6 +1,6 @@
 <?php
 /**
- * Twenty Sixteen functions and definitions
+ * Mother Jones functions and definitions
  *
  * Set up the theme and provides some helper functions, which are used in the
  * theme as custom template tags. Others are attached to action and filter
@@ -21,11 +21,11 @@
  * {@link https://codex.wordpress.org/Plugin_API}
  *
  * @package WordPress
- * @subpackage Twenty_Sixteen
- * @since Twenty Sixteen 1.0
+ * @subpackage Mother_Jones
+ * @since Mother Jones 1.0
  */
 
-if ( ! function_exists( 'twentysixteen_setup' ) ) :
+if ( ! function_exists( 'mj_setup' ) ) :
 /**
  * Sets up theme defaults and registers support for various WordPress features.
  *
@@ -33,18 +33,18 @@ if ( ! function_exists( 'twentysixteen_setup' ) ) :
  * runs before the init hook. The init hook is too late for some features, such
  * as indicating support for post thumbnails.
  *
- * Create your own twentysixteen_setup() function to override in a child theme.
+ * Create your own mj_setup() function to override in a child theme.
  *
   */
 
-function twentysixteen_setup() {
+function mj_setup() {
 	/*
 	 * Make theme available for translation.
 	 * Translations can be filed in the /languages/ directory.
-	 * If you're building a theme based on Twenty Sixteen, use a find and replace
-	 * to change 'twentysixteen' to the name of your theme in all the template files
+	 * If you're building a theme based on Mother Jones, use a find and replace
+	 * to change 'mj' to the name of your theme in all the template files
 	 */
-	load_theme_textdomain( 'twentysixteen', get_template_directory() . '/languages' );
+	load_theme_textdomain( 'mj', get_template_directory() . '/languages' );
 
 	// Add default posts RSS feed links to head.
 	add_theme_support( 'automatic-feed-links' );
@@ -93,8 +93,8 @@ function twentysixteen_setup() {
 
   add_filter( 'tiny_mce_before_init', 'mj_wysiwyg_config' );
 }
-endif; // twentysixteen_setup
-add_action( 'after_setup_theme', 'twentysixteen_setup' );
+endif; // mj_setup
+add_action( 'after_setup_theme', 'mj_setup' );
 
 /**
  * Sets the content width in pixels, based on the theme's design and stylesheet.
@@ -103,17 +103,17 @@ add_action( 'after_setup_theme', 'twentysixteen_setup' );
  *
  * @global int $content_width
  *
- * @since Twenty Sixteen 1.0
+ * @since Mother Jones 1.0
  */
-function twentysixteen_content_width() {
-	$GLOBALS['content_width'] = apply_filters( 'twentysixteen_content_width', 840 );
+function mj_content_width() {
+	$GLOBALS['content_width'] = apply_filters( 'mj_content_width', 840 );
 }
-add_action( 'after_setup_theme', 'twentysixteen_content_width', 0 );
+add_action( 'after_setup_theme', 'mj_content_width', 0 );
 
 /**
  * set wysiwyg config
  */
-if (!function_exists( 'mj_wysiwyg_config' ) ) {
+if ( ! function_exists( 'mj_wysiwyg_config' ) ) {
   function mj_wysiwyg_config($config) {
 		$config['remove_linebreaks'] = false;
 		$config['gecko_spellcheck'] = true;
@@ -164,11 +164,11 @@ if (!function_exists( 'mj_wysiwyg_config' ) ) {
  */
 if ( ! function_exists( 'mj_byline' ) ) {
   function mj_byline() {
-    $override = get_post_meta($id, 'byline_override' )[0];
-    if (trim($override)) {
+    $override = get_post_meta( $id, 'byline_override' )[0];
+    if ( trim( $override ) ) {
       return $override;
     } else {
-      return coauthors_posts_links(', ', null, null, null, false);
+      return coauthors_posts_links( ', ', null, null, null, false );
     }
   }
 }
@@ -177,20 +177,22 @@ if ( ! function_exists( 'mj_byline' ) ) {
  * create our datelines
  */
 if ( ! function_exists( 'mj_dateline' ) ) {
-  function mj_dateline($id) {
+  function mj_dateline( $id ) {
     $mj_dateline_format = 'M\. j\, Y g\:i A';
 
-    if (!$id) { $id = get_the_ID(); }
-    $override = get_post_meta( $id, 'dateline_override')[0];
-    if ( trim($override) ) {
+    if ( ! $id ) {
+			$id = get_the_ID();
+		}
+    $override = get_post_meta( $id, 'dateline_override' )[0];
+    if ( trim( $override ) ) {
       return $override;
     }
     return get_post_time( $mj_dateline_format );
   }
 }
 
-if ( ! function_exists( 'get_discus_thread' ) ) {
-  function get_discus_thread($id) {
+if ( ! function_exists( 'get_disqus_thread' ) ) {
+  function get_disqus_thread( $id ) {
     return '<h1>fixme make me a disqus embed somehow</h1>';
   }
 }
@@ -199,12 +201,12 @@ if ( ! function_exists( 'get_discus_thread' ) ) {
  * create our social buttons
  */
 if ( ! function_exists( 'mj_flat_twitter_button' ) ) {
-  function mj_flat_twitter_button($id) {
+  function mj_flat_twitter_button( $id ) {
     $id = $id ? $id : get_the_ID();
-    $social = trim(get_post_meta( $id, 'social' )['social_title']);
+    $social = trim( get_post_meta( $id, 'social' )['social_title'] );
     $status = $social ? $social : get_the_title( $id );
     $href = 'http://twitter.com/home?status=' . $status . ' '
-      . esc_url( get_permalink($id) ). ' via @MotherJones';
+      . esc_url( get_permalink( $id ) ). ' via @MotherJones';
     return sprintf(
         '<a class="social" href="%s" target="_blank">'
           . '<i class="fa fa-twitter fw"></i>'
@@ -215,9 +217,9 @@ if ( ! function_exists( 'mj_flat_twitter_button' ) ) {
 }
 
 if ( ! function_exists( 'mj_flat_facebook_button' ) ) {
-  function mj_flat_facebook_button($id) {
+  function mj_flat_facebook_button( $id ) {
     $id = $id ? $id : get_the_ID();
-    $href = 'http://facebook.com/sharer.php?u=' . esc_url( get_permalink($id) );
+    $href = 'http://facebook.com/sharer.php?u=' . esc_url( get_permalink( $id ) );
     return sprintf(
       '<a class="social" href="%s" target="_blank">'
         . '<i class="fa fa-facebook fw"></i>'
@@ -284,33 +286,33 @@ function mj_widgets_init() {
 }
 add_action( 'widgets_init', 'mj_widgets_init' );
 
-if ( ! function_exists( 'twentysixteen_fonts_url' ) ) :
+if ( ! function_exists( 'mj_fonts_url' ) ) :
 /**
- * Register Google fonts for Twenty Sixteen.
+ * Register Google fonts for Mother Jones.
  *
- * Create your own twentysixteen_fonts_url() function to override in a child theme.
+ * Create your own mj_fonts_url() function to override in a child theme.
  *
- * @since Twenty Sixteen 1.0
+ * @since Mother Jones 1.0
  *
  * @return string Google fonts URL for the theme.
  */
-function twentysixteen_fonts_url() {
+function mj_fonts_url() {
 	$fonts_url = '';
 	$fonts     = array();
 	$subsets   = 'latin,latin-ext';
 
 	/* translators: If there are characters in your language that are not supported by Merriweather, translate this to 'off'. Do not translate into your own language. */
-	if ( 'off' !== _x( 'on', 'Merriweather font: on or off', 'twentysixteen' ) ) {
+	if ( 'off' !== _x( 'on', 'Merriweather font: on or off', 'mj' ) ) {
 		$fonts[] = 'Merriweather:400,700,900,400italic,700italic,900italic';
 	}
 
 	/* translators: If there are characters in your language that are not supported by Montserrat, translate this to 'off'. Do not translate into your own language. */
-	if ( 'off' !== _x( 'on', 'Montserrat font: on or off', 'twentysixteen' ) ) {
+	if ( 'off' !== _x( 'on', 'Montserrat font: on or off', 'mj' ) ) {
 		$fonts[] = 'Montserrat:400,700';
 	}
 
 	/* translators: If there are characters in your language that are not supported by Inconsolata, translate this to 'off'. Do not translate into your own language. */
-	if ( 'off' !== _x( 'on', 'Inconsolata font: on or off', 'twentysixteen' ) ) {
+	if ( 'off' !== _x( 'on', 'Inconsolata font: on or off', 'mj' ) ) {
 		$fonts[] = 'Inconsolata:400';
 	}
 
@@ -330,66 +332,66 @@ endif;
  *
  * Adds a `js` class to the root `<html>` element when JavaScript is detected.
  *
- * @since Twenty Sixteen 1.0
+ * @since Mother Jones 1.0
  */
-function twentysixteen_javascript_detection() {
+function mj_javascript_detection() {
 	echo "<script>(function(html){html.className = html.className.replace(/\bno-js\b/,'js')})(document.documentElement);</script>\n";
 }
-add_action( 'wp_head', 'twentysixteen_javascript_detection', 0 );
+add_action( 'wp_head', 'mj_javascript_detection', 0 );
 
 /**
  * Enqueues scripts and styles.
  *
- * @since Twenty Sixteen 1.0
+ * @since Mother Jones 1.0
  */
-function twentysixteen_scripts() {
+function mj_scripts() {
 	// Add custom fonts, used in the main stylesheet.
-	wp_enqueue_style( 'twentysixteen-fonts', twentysixteen_fonts_url(), array(), null );
+	wp_enqueue_style( 'mj-fonts', mj_fonts_url(), array(), null );
 
 	// Theme stylesheet.
-	wp_enqueue_style( 'twentysixteen-style', get_stylesheet_uri() );
+	wp_enqueue_style( 'mj-style', get_stylesheet_uri() );
 
 	// Load the Internet Explorer specific stylesheet.
-	wp_enqueue_style( 'twentysixteen-ie', get_template_directory_uri() . '/css/ie.css', array( 'twentysixteen-style' ), '20150825' );
-	wp_style_add_data( 'twentysixteen-ie', 'conditional', 'lt IE 10' );
+	wp_enqueue_style( 'mj-ie', get_template_directory_uri() . '/css/ie.css', array( 'mj-style' ), '20150825' );
+	wp_style_add_data( 'mj-ie', 'conditional', 'lt IE 10' );
 
 	// Load the Internet Explorer 8 specific stylesheet.
-	wp_enqueue_style( 'twentysixteen-ie8', get_template_directory_uri() . '/css/ie8.css', array( 'twentysixteen-style' ), '20150825' );
-	wp_style_add_data( 'twentysixteen-ie8', 'conditional', 'lt IE 9' );
+	wp_enqueue_style( 'mj-ie8', get_template_directory_uri() . '/css/ie8.css', array( 'mj-style' ), '20150825' );
+	wp_style_add_data( 'mj-ie8', 'conditional', 'lt IE 9' );
 
 	// Load the Internet Explorer 7 specific stylesheet.
-	wp_enqueue_style( 'twentysixteen-ie7', get_template_directory_uri() . '/css/ie7.css', array( 'twentysixteen-style' ), '20150825' );
-	wp_style_add_data( 'twentysixteen-ie7', 'conditional', 'lt IE 8' );
+	wp_enqueue_style( 'mj-ie7', get_template_directory_uri() . '/css/ie7.css', array( 'mj-style' ), '20150825' );
+	wp_style_add_data( 'mj-ie7', 'conditional', 'lt IE 8' );
 
 	// Load the html5 shiv.
-	wp_enqueue_script( 'twentysixteen-html5', get_template_directory_uri() . '/js/html5.js', array(), '3.7.3' );
-	wp_script_add_data( 'twentysixteen-html5', 'conditional', 'lt IE 9' );
+	wp_enqueue_script( 'mj-html5', get_template_directory_uri() . '/js/html5.js', array(), '3.7.3' );
+	wp_script_add_data( 'mj-html5', 'conditional', 'lt IE 9' );
 
-	wp_enqueue_script( 'twentysixteen-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20150825', true );
+	wp_enqueue_script( 'mj-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20150825', true );
 
 	if ( is_singular() && wp_attachment_is_image() ) {
-		wp_enqueue_script( 'twentysixteen-keyboard-image-navigation', get_template_directory_uri() . '/js/keyboard-image-navigation.js', array( 'jquery' ), '20150825' );
+		wp_enqueue_script( 'mj-keyboard-image-navigation', get_template_directory_uri() . '/js/keyboard-image-navigation.js', array( 'jquery' ), '20150825' );
 	}
 
-	wp_enqueue_script( 'twentysixteen-script', get_template_directory_uri() . '/js/functions.js', array( 'jquery' ), '20150825', true );
+	wp_enqueue_script( 'mj-script', get_template_directory_uri() . '/js/functions.js', array( 'jquery' ), '20150825', true );
 
-	wp_localize_script( 'twentysixteen-script', 'screenReaderText', array(
-		'expand'   => __( 'expand child menu', 'twentysixteen' ),
-		'collapse' => __( 'collapse child menu', 'twentysixteen' ),
+	wp_localize_script( 'mj-script', 'screenReaderText', array(
+		'expand'   => __( 'expand child menu', 'mj' ),
+		'collapse' => __( 'collapse child menu', 'mj' ),
 	) );
 }
-add_action( 'wp_enqueue_scripts', 'twentysixteen_scripts' );
+add_action( 'wp_enqueue_scripts', 'mj_scripts' );
 
 /**
  * Converts a HEX value to RGB.
  *
- * @since Twenty Sixteen 1.0
+ * @since Mother Jones 1.0
  *
  * @param string $color The original color, in 3- or 6-digit hexadecimal form.
  * @return array Array containing RGB (red, green, and blue) values for the given
  *               HEX code, empty array otherwise.
  */
-function twentysixteen_hex2rgb( $color ) {
+function mj_hex2rgb( $color ) {
 	$color = trim( $color, '#' );
 
 	if ( strlen( $color ) === 3 ) {
@@ -416,14 +418,14 @@ require get_template_directory() . '/inc/template-tags.php';
  * Add custom image sizes attribute to enhance responsive image functionality
  * for content images
  *
- * @since Twenty Sixteen 1.0
+ * @since Mother Jones 1.0
  *
  * @param string $sizes A source size value for use in a 'sizes' attribute.
  * @param array  $size  Image size. Accepts an array of width and height
  *                      values in pixels (in that order).
  * @return string A source size value for use in a content image 'sizes' attribute.
  */
-function twentysixteen_content_image_sizes_attr( $sizes, $size ) {
+function mj_content_image_sizes_attr( $sizes, $size ) {
 	$width = $size[0];
 
 	840 <= $width && $sizes = '(max-width: 709px) 85vw, (max-width: 909px) 67vw, (max-width: 1362px) 62vw, 840px';
@@ -437,27 +439,27 @@ function twentysixteen_content_image_sizes_attr( $sizes, $size ) {
 
 	return $sizes;
 }
-add_filter( 'wp_calculate_image_sizes', 'twentysixteen_content_image_sizes_attr', 10 , 2 );
+add_filter( 'wp_calculate_image_sizes', 'mj_content_image_sizes_attr', 10 , 2 );
 
 /**
  * Add custom image sizes attribute to enhance responsive image functionality
  * for post thumbnails
  *
- * @since Twenty Sixteen 1.0
+ * @since Mother Jones 1.0
  *
  * @param array $attr Attributes for the image markup.
  * @param int   $attachment Image attachment ID.
  * @param array $size Registered image size or flat array of height and width dimensions.
  * @return string A source size value for use in a post thumbnail 'sizes' attribute.
  */
-function twentysixteen_post_thumbnail_sizes_attr( $attr, $attachment, $size ) {
+function mj_post_thumbnail_sizes_attr( $attr, $attachment, $size ) {
 	if ( 'post-thumbnail' === $size ) {
 		is_active_sidebar( 'sidebar-1' ) && $attr['sizes'] = '(max-width: 709px) 85vw, (max-width: 909px) 67vw, (max-width: 984px) 60vw, (max-width: 1362px) 62vw, 840px';
 		! is_active_sidebar( 'sidebar-1' ) && $attr['sizes'] = '(max-width: 709px) 85vw, (max-width: 909px) 67vw, (max-width: 1362px) 88vw, 1200px';
 	}
 	return $attr;
 }
-add_filter( 'wp_get_attachment_image_attributes', 'twentysixteen_post_thumbnail_sizes_attr', 10 , 3 );
+add_filter( 'wp_get_attachment_image_attributes', 'mj_post_thumbnail_sizes_attr', 10 , 3 );
 
 //change default height of text editing area in wysiwyg
 add_action('admin_head', 'content_textarea_height');

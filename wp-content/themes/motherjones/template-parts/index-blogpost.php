@@ -22,7 +22,7 @@
   <style>
     <?php print get_post_meta( get_the_ID(), 'css' )[0]; ?>
   </style>
-  
+
   <?php get_template_part( 'template-parts/master-image-630' ); ?>
 
   <?php print get_post_meta( get_the_ID(), 'body' )[0]; ?>

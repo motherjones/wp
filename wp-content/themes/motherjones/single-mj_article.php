@@ -3,7 +3,8 @@
  * The template for displaying all single posts and attachments
  *
  * @package WordPress
- * @subpackage Mother Jones
+ * @subpackage Mother_Jones
+ * @since Mother Jones 1.0
  */
 
 while ( have_posts() ) : the_post();
@@ -43,7 +44,7 @@ get_header(); ?>
         <style>
           <?php print get_post_meta( get_the_ID(), 'css' )[0]; ?>
         </style>
-        
+
         <?php get_template_part( 'template-parts/master-image-630' ); ?>
 
         <?php print get_post_meta( get_the_ID(), 'body' )[0]; ?>
@@ -69,8 +70,8 @@ get_header(); ?>
 
       <div id="sidebar-right">
         <?php dynamic_sidebar( 'sidebar' ); ?>
-        <script language="javascript"> 
-            <!-- 
+        <script language="javascript">
+            <!--
             if (typeof MJ_HideRightColAds === 'undefined') {
               ad_code({
                 desktop: true,
@@ -79,15 +80,15 @@ get_header(); ?>
                 doc_write: true,
               });
             }
-            //--> 
+            //-->
         </script>
       </div>
 
     </main><!-- .site-main -->
     <?php print get_discus_thread( get_the_ID() ); ?>
 
-    <script language="javascript"> 
-				<!-- 
+    <script language="javascript">
+				<!--
 				if (typeof MJ_HideBottomROS970x250 === 'undefined') {
           ad_code({
               desktop: true,
@@ -104,11 +105,10 @@ get_header(); ?>
             desktop: false,
           });
 				}
-				//--> 
+				//-->
 		</script>
 
 </div><!-- .content-area -->
-
 
 <?php get_footer();
 endwhile; ?>

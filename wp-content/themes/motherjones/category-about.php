@@ -12,8 +12,8 @@
  * @link https://codex.wordpress.org/Template_Hierarchy
  *
  * @package WordPress
- * @subpackage Twenty_Sixteen
- * @since Twenty Sixteen 1.0
+ * @subpackage Mother_Jones
+ * @since Mother Jones 1.0
  */
 
 get_header(); ?>

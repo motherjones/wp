@@ -3,19 +3,19 @@
 	<ul>
 		<li class="logo">
 			<a href="/">
-				<img src="/wp-content/themes/motherjones/img/MJ_comp.png" 
+				<img src="<?php echo get_stylesheet_directory_uri(); ?>/img/MJ_comp.png"
 				alt="MotherJones" />
 			</a>
 		</li>
-		<?php if($wp_query->found_posts === 1 && $wp_query->query_vars['post_type'] !== 'mj_author'): //is an articlish thing ?>
+		<?php if( $wp_query->found_posts === 1 && $wp_query->query_vars['post_type'] !== 'mj_author' ): //is an articlish thing ?>
       <li class="nav-title">
         <?php print $wp_query->posts[0]->post_title; ?>
       </li>
       <li class="share-button facebook">
-        <?php print mj_flat_facebook_button($wp_query->posts[0]->ID);?>
+        <?php print mj_flat_facebook_button( $wp_query->posts[0]->ID );?>
       </li>
       <li class="share-button twitter">
-        <?php print mj_flat_twitter_button($wp_query->posts[0]->ID);?>
+        <?php print mj_flat_twitter_button( $wp_query->posts[0]->ID );?>
       </li>
 		<?php endif; ?>
 		<li class="menu-button">
