@@ -230,3 +230,73 @@ function mj_category_transient_flusher() {
 }
 add_action( 'edit_category', 'mj_category_transient_flusher' );
 add_action( 'save_post',     'mj_category_transient_flusher' );
+
+/**
+ * create our bylines
+ */
+if ( ! function_exists( 'mj_byline' ) ) {
+  function mj_byline() {
+    $override = get_post_meta( $id, 'byline_override' )[0];
+    if ( trim( $override ) ) {
+      return $override;
+    } else {
+      return coauthors_posts_links( ', ', null, null, null, false );
+    }
+  }
+}
+
+/**
+ * create our datelines
+ */
+if ( ! function_exists( 'mj_dateline' ) ) {
+  function mj_dateline( $id ) {
+    $mj_dateline_format = 'M\. j\, Y g\:i A';
+
+    if ( ! $id ) {
+			$id = get_the_ID();
+		}
+    $override = get_post_meta( $id, 'dateline_override' )[0];
+    if ( trim( $override ) ) {
+      return $override;
+    }
+    return get_post_time( $mj_dateline_format );
+  }
+}
+
+if ( ! function_exists( 'get_disqus_thread' ) ) {
+  function get_disqus_thread( $id ) {
+    return '<h1>fixme make me a disqus embed somehow</h1>';
+  }
+}
+
+/**
+ * create our social buttons
+ */
+if ( ! function_exists( 'mj_flat_twitter_button' ) ) {
+  function mj_flat_twitter_button( $id ) {
+    $id = $id ? $id : get_the_ID();
+    $social = trim( get_post_meta( $id, 'social' )['social_title'] );
+    $status = $social ? $social : get_the_title( $id );
+    $href = 'http://twitter.com/home?status=' . $status . ' '
+      . esc_url( get_permalink( $id ) ). ' via @MotherJones';
+    return sprintf(
+        '<a class="social" href="%s" target="_blank">'
+          . '<i class="fa fa-twitter fw"></i>'
+          . '<span class="share-text">Share on Twitter</span>'
+        . '</a>',
+      $href );
+  }
+}
+
+if ( ! function_exists( 'mj_flat_facebook_button' ) ) {
+  function mj_flat_facebook_button( $id ) {
+    $id = $id ? $id : get_the_ID();
+    $href = 'http://facebook.com/sharer.php?u=' . esc_url( get_permalink( $id ) );
+    return sprintf(
+      '<a class="social" href="%s" target="_blank">'
+        . '<i class="fa fa-facebook fw"></i>'
+          . '<span class="share-text">Share on Facebook</span>'
+        . '</a>',
+      $href );
+  }
+}
