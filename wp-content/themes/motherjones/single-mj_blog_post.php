@@ -3,7 +3,8 @@
  * The template for displaying all single posts and attachments
  *
  * @package WordPress
- * @subpackage Mother Jones
+ * @subpackage Mother_Jones
+ * @since Mother Jones 1.0
  */
 
 while ( have_posts() ) : the_post();
@@ -38,7 +39,7 @@ get_header(); ?>
         </div>
       </div><!-- .entry-header -->
       <?php print get_post_meta( get_the_ID(), 'css' )[0]; ?>
-      
+
       <?php print get_post_meta( get_the_ID(), 'body' )[0]; ?>
       <?php print get_post_meta( get_the_ID(), 'js' )[0]; ?>
 
@@ -54,7 +55,7 @@ get_header(); ?>
 
         <ul id="prev-next">
           <li class="previous">
-            <?php echo previous_post_link( 
+            <?php echo previous_post_link(
               ' <span class="label">Previous:</span> %link',
                '%title',
                TRUE,
@@ -62,7 +63,7 @@ get_header(); ?>
                'mj_blog_type' ); ?>
           </li>
           <li class="next">
-            <?php echo next_post_link( 
+            <?php echo next_post_link(
               ' <span class="label">Next:</span> %link',
                '%title',
                TRUE,
@@ -77,8 +78,8 @@ get_header(); ?>
 
     <div id="sidebar-right">
 
-      <script language="javascript"> 
-          <!-- 
+      <script language="javascript">
+          <!--
           if (typeof MJ_HideRightColAds === 'undefined') {
             ad_code({
               desktop: true,
@@ -87,7 +88,7 @@ get_header(); ?>
               doc_write: true,
             });
           }
-          //--> 
+          //-->
       </script>
 
       <?php dynamic_sidebar( 'sidebar' ); ?>
@@ -97,8 +98,8 @@ get_header(); ?>
 	</main><!-- .site-main -->
   <?php print get_discus_thread( get_the_ID() ); ?>
 
-  <script language="javascript"> 
-      <!-- 
+  <script language="javascript">
+      <!--
       if (typeof MJ_HideBottomROS970x250 === 'undefined') {
         ad_code({
           desktop: true,
@@ -115,7 +116,7 @@ get_header(); ?>
             desktop: false,
         });
       }
-      //--> 
+      //-->
   </script>
 
 </div><!-- .content-area -->

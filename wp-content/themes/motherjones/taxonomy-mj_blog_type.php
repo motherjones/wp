@@ -12,6 +12,8 @@
  * @link https://codex.wordpress.org/Template_Hierarchy
  *
  * @package WordPress
+ * @subpackage Mother_Jones
+ * @since Mother Jones 1.0
  */
 
 get_header(); ?>
@@ -24,8 +26,8 @@ get_header(); ?>
       <?php
         global $wp_query;
         $term = $wp_query->get_queried_object();
-        if ($term->name === "Kevin Drum") {
-          print '<img src="/wp-content/themes/motherjones/img/KEVIN.png"></img>';
+        if ( $term->name === "Kevin Drum" ) {
+          print '<img src="' . get_stylesheet_directory_uri() . '/img/KEVIN.png"></img>';
         } else {
           print '<h1 class="page-title promo">';
           print $term->name;
@@ -34,12 +36,9 @@ get_header(); ?>
       ?>
     </div><!-- .page-header -->
 
-    <div class="main-index"> 
-		<?php if ( have_posts() ) : ?>
+    <div class="main-index">
+		<?php if ( have_posts() ) :
 
-
-      <?php 
-         
       $posts_shown = 0;
 			// Start the Loop.
 			while ( $wp_query->have_posts() ) : $wp_query->the_post();
@@ -58,14 +57,12 @@ get_header(); ?>
         <?php endif;
 			// End the loop.
 			endwhile;
-    ?>
-    <?php
 
 			// Previous/next page navigation.
 			the_posts_pagination( array(
-				'prev_text'          => __( 'Previous page', 'twentysixteen' ),
-				'next_text'          => __( 'Next page', 'twentysixteen' ),
-				'before_page_number' => '<span class="meta-nav screen-reader-text">' . __( 'Page', 'twentysixteen' ) . ' </span>',
+				'prev_text'          => __( 'Previous page', 'mj' ),
+				'next_text'          => __( 'Next page', 'mj' ),
+				'before_page_number' => '<span class="meta-nav screen-reader-text">' . __( 'Page', 'mj' ) . ' </span>',
 			) );
 
 		// If no content, include the "No posts found" template.
@@ -77,8 +74,8 @@ get_header(); ?>
     </div>
 
     <div id="sidebar-right">
-      <script language="javascript"> 
-          <!-- 
+      <script language="javascript">
+          <!--
           if (typeof MJ_HideRightColAds === 'undefined') {
             ad_code({
               desktop: true,
@@ -87,7 +84,7 @@ get_header(); ?>
               doc_write: true,
             });
           }
-          //--> 
+          //-->
       </script>
       <?php dynamic_sidebar( 'sidebar-section' ); ?>
     </div>
@@ -97,10 +94,9 @@ get_header(); ?>
   <script>
     ad_code({
       yieldmo: true,
-     docwrite: true,
+    	docwrite: true,
       desktop: false,
       placement: 'ym_869408549909503847',
     });
   </script>
-<?php get_footer(); ?>
-
+	<?php get_footer(); ?>

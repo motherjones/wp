@@ -12,8 +12,8 @@
  * @link https://codex.wordpress.org/Template_Hierarchy
  *
  * @package WordPress
- * @subpackage Twenty_Sixteen
- * @since Twenty Sixteen 1.0
+ * @subpackage Mother_Jones
+ * @since Mother Jones 1.0
  */
 
 get_header(); ?>
@@ -27,7 +27,7 @@ get_header(); ?>
 			<div class="page-header">
         <h1 class="page-title promo">
           <?php
-            if (is_tax() || is_category()) {
+            if ( is_tax() || is_category() ) {
               global $wp_query;
               $term = $wp_query->get_queried_object();
               print $term->name;
@@ -39,12 +39,12 @@ get_header(); ?>
 			</div><!-- .page-header -->
 
       <ul class="articles-list">
-      <?php 
+      <?php
       $curated_length = 0;
       $is_first_post = true;
       $posts_shown = 0;
         // if it's the first page, set up the curated posts
-      if (!$wp_query->get_query_var('offset')) {
+      if ( ! $wp_query->get_query_var( 'offset' ) ) {
         //get the curated posts (but only 4)
         $curated = z_get_zone_query(
           $wp_query->get_queried_object()->slug, array(
@@ -52,7 +52,7 @@ get_header(); ?>
         ));
         $curated_length = $curated->post_count;
         while ( $curated->have_posts() ) : $curated->the_post();
-          if ($is_first_post) {
+          if ( $is_first_post ) {
             //do sometihng funky for first post?
             $is_first_post = false;
             get_template_part( 'template-parts/photoessay-top-article' );
@@ -63,16 +63,16 @@ get_header(); ?>
           $posts_shown++;
         endwhile;
       } // end curation mess
-         
+
 			// Start the Loop.
 			while ( $wp_query->have_posts() ) : $wp_query->the_post();
         //don't do it if it's in the curated bits
-        if ($curated_length && in_array(
+        if ( $curated_length && in_array(
           $post->ID,
-          array_map(function($p) { return $p->ID; }, $curated->posts)
+          array_map( function( $p ) { return $p->ID; }, $curated->posts )
         )) {
           continue;
-        } elseif ($is_first_post) {
+        } elseif ( $is_first_post ) {
           //do sometihng funky for first post?
           $is_first_post = false;
           get_template_part( 'template-parts/photoessay-top-article' );
@@ -82,7 +82,7 @@ get_header(); ?>
         }
         $posts_shown++;
 
-        if ($posts_shown === 5): ?>
+        if ( $posts_shown === 5 ): ?>
           <script>
             ad_code({
               yieldmo: true,
@@ -101,9 +101,9 @@ get_header(); ?>
 
 			// Previous/next page navigation.
 			the_posts_pagination( array(
-				'prev_text'          => __( 'Previous page', 'twentysixteen' ),
-				'next_text'          => __( 'Next page', 'twentysixteen' ),
-				'before_page_number' => '<span class="meta-nav screen-reader-text">' . __( 'Page', 'twentysixteen' ) . ' </span>',
+				'prev_text'          => __( 'Previous page', 'mj' ),
+				'next_text'          => __( 'Next page', 'mj' ),
+				'before_page_number' => '<span class="meta-nav screen-reader-text">' . __( 'Page', 'mj' ) . ' </span>',
 			) );
 
 		// If no content, include the "No posts found" template.
@@ -115,8 +115,8 @@ get_header(); ?>
     </div>
 
     <div id="sidebar-right">
-      <script language="javascript"> 
-          <!-- 
+      <script language="javascript">
+          <!--
           if (typeof MJ_HideRightColAds === 'undefined') {
             ad_code({
               desktop: true,
@@ -125,7 +125,7 @@ get_header(); ?>
               doc_write: true,
             });
           }
-          //--> 
+          //-->
       </script>
       <?php dynamic_sidebar( 'sidebar-section' ); ?>
     </div>
@@ -141,4 +141,3 @@ get_header(); ?>
     });
   </script>
 <?php get_footer(); ?>
-

@@ -1,8 +1,8 @@
 <li class="photoessay-top group">
   <div class="article-image">
     <a href="<?php the_permalink(); ?>">
-      <?php print wp_get_attachment_image( 
-        get_post_meta(get_the_ID(), 'master_image' )[0]['master_image'],
+      <?php print wp_get_attachment_image(
+        get_post_meta( get_the_ID(), 'master_image' )[0]['master_image'],
         'large_990'
       ); ?>
     </a>
@@ -20,5 +20,3 @@
     </p>
   </div>
 </li>
-
-

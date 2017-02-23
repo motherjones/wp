@@ -1,11 +1,11 @@
-<?php if (get_post_meta( get_the_ID(), 'master_image' )[0]['master_image']
+<?php if ( get_post_meta( get_the_ID(), 'master_image' )[0]['master_image']
       && get_post_meta( get_the_ID(), 'master_image' )[0]['master_image_suppress']
         !== "Hide Master Image"
 ): ?>
   <div class="article-master-image group">
-    <?php 
-    $master = get_post_meta(get_the_ID(), 'master_image' )[0];
-    print wp_get_attachment_image( 
+    <?php
+    $master = get_post_meta( get_the_ID(), 'master_image' )[0];
+    print wp_get_attachment_image(
       $master['master_image'],
       'article_top'
     ); ?>

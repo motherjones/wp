@@ -10,8 +10,8 @@
  * @link http://codex.wordpress.org/Template_Hierarchy
  *
  * @package WordPress
- * @subpackage Twenty_Sixteen
- * @since Twenty Sixteen 1.0
+ * @subpackage Mother_Jones
+ * @since Mother Jones 1.0
  */
 
 get_header(); ?>
@@ -19,7 +19,7 @@ get_header(); ?>
 <div id="content" class="site-content">
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main homepage" role="main">
-    
+
       <div id="homepage-top" class="group">
         <?php $top_stories = z_get_zone_query('top_stories', array(
           'posts_per_page' => 10,
@@ -36,15 +36,15 @@ get_header(); ?>
       </div>
 
       <div id="homepage-first-ad">
-        <script language="javascript"> 
-        <!-- 
+        <script language="javascript">
+        <!--
         ad_code({
           desktop: true,
           placement: 'HomepageATF970x250',
           height: 2473,
           doc_write: true,
         });
-        //--> 
+        //-->
         //</script>
       </div>
 
@@ -65,11 +65,11 @@ get_header(); ?>
       <div id="homepage-featured" class="homepage-fullwidth group">
         <?php $featured_story = z_get_zone_query('homepage_featured', array(
           'posts_per_page' => 1,
-        ) ); 
+        ) );
         $featured_story->the_post();
         $fullwidth_title = 'Featured';
         ?>
-        <?php include(locate_template( 'template-parts/homepage-fullwidth.php')); ?>
+        <?php include( locate_template( 'template-parts/homepage-fullwidth.php' ) ); ?>
       </div>
 
       <div id="homepage-sections" class="group">
@@ -81,94 +81,94 @@ get_header(); ?>
             <ul class="homepage-section-list">
               <?php $pol_query = new WP_Query(array(
                 'category_name' => 'politics',
-                'post_type' => array('mj_article', 'mj_full_width'),
+                'post_type' => array( 'mj_article', 'mj_full_width' ),
                 'posts_per_page' => 2,
-              ) ); 
+              ) );
               $pol_query->the_post();
-              get_template_part( 'template-parts/homepage-section-first');
+              get_template_part( 'template-parts/homepage-section-first' );
               $pol_query->the_post();
-              get_template_part( 'template-parts/homepage-section');
+              get_template_part( 'template-parts/homepage-section' );
               ?>
             </ul>
-          </li> 
+          </li>
           <li class="homepage-section">
             <h2 class="promo">
               <a href="/environment">Environment</a>
             </h2>
             <ul class="homepage-section-list">
-              <?php $env_query = new WP_Query(array(
+              <?php $env_query = new WP_Query( array(
                 'category_name' => 'environment',
-                'post_type' => array('mj_article', 'mj_full_width'),
+                'post_type' => array( 'mj_article', 'mj_full_width' ),
                 'posts_per_page' => 2,
-              ) ); 
+              ) );
               $env_query->the_post();
-              get_template_part( 'template-parts/homepage-section-first');
+              get_template_part( 'template-parts/homepage-section-first' );
               $env_query->the_post();
-              get_template_part( 'template-parts/homepage-section');
+              get_template_part( 'template-parts/homepage-section' );
               ?>
             </ul>
-          </li> 
+          </li>
           <li class="homepage-section">
             <h2 class="promo">
               <a href="/media">Media</a>
             </h2>
             <ul class="homepage-section-list">
-              <?php $media_query = new WP_Query(array(
+              <?php $media_query = new WP_Query( array(
                 'category_name' => 'media',
-                'post_type' => array('mj_article', 'mj_full_width'),
+                'post_type' => array( 'mj_article', 'mj_full_width' ),
                 'posts_per_page' => 2,
-              ) ); 
+              ) );
               $media_query->the_post();
-              get_template_part( 'template-parts/homepage-section-first');
+              get_template_part( 'template-parts/homepage-section-first' );
               $media_query->the_post();
-              get_template_part( 'template-parts/homepage-section');
+              get_template_part( 'template-parts/homepage-section' );
               ?>
             </ul>
-          </li> 
+          </li>
           <li class="homepage-section">
             <h2 class="promo">
               <a href="/food">Food</a>
             </h2>
             <ul class="homepage-section-list">
-              <?php $food_query = new WP_Query(array(
+              <?php $food_query = new WP_Query( array(
                 'tax_query' => array( array(
                   'taxonomy' => 'mj_primary_tag',
                   'field' => 'slug',
                   'terms' => 'food',
-                )  ), 
-                'post_type' => array('mj_article', 'mj_full_width'),
+                )  ),
+                'post_type' => array( 'mj_article', 'mj_full_width' ),
                 'posts_per_page' => 2,
-              ) ); 
+              ) );
               //FIXME if we want food to be a section the query needs to change
               $food_query->the_post();
-              get_template_part( 'template-parts/homepage-section-first');
+              get_template_part( 'template-parts/homepage-section-first' );
               $food_query->the_post();
-              get_template_part( 'template-parts/homepage-section');
+              get_template_part( 'template-parts/homepage-section' );
               ?>
             </ul>
-          </li> 
+          </li>
           <li class="homepage-section">
             <h2 class="promo">
               <a href="/crime_and_justice">Crime & Justice</a>
             </h2>
             <ul class="homepage-section-list">
-              <?php $cnj_query = new WP_Query(array(
+              <?php $cnj_query = new WP_Query( array(
                 'tax_query' => array( array(
                   'taxonomy' => 'mj_primary_tag',
                   'field' => 'slug',
                   'terms' => 'crime_and_justice',
-                )  ), 
+                )  ),
                 'post_type' => array('mj_article', 'mj_full_width'),
                 'posts_per_page' => 2,
-              ) ); 
+              ) );
               //FIXME if we want C & J to be a section the query needs to change
               $cnj_query->the_post();
-              get_template_part( 'template-parts/homepage-section-first');
+              get_template_part( 'template-parts/homepage-section-first' );
               $cnj_query->the_post();
-              get_template_part( 'template-parts/homepage-section');
+              get_template_part( 'template-parts/homepage-section' );
               ?>
             </ul>
-          </li> 
+          </li>
         </ul>
       </div>
 
@@ -177,19 +177,19 @@ get_header(); ?>
           <h2 class="promo">
             <a href="/kevin-drum">Kevin Drum</a>
           </h2>
-          <img src="/wp-content/themes/motherjones/img/KEVIN.png"></img>
+          <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/KEVIN.png"></img>
           <ul id="kdrum-post-list">
-            <?php $kdrum = new WP_Query(array( 
+            <?php $kdrum = new WP_Query( array(
                 'tax_query' => array( array(
                   'taxonomy' => 'mj_blog_type',
                   'field' => 'slug',
                   'terms' => 'kevin-drum',
-                )  ), 
-                'post_type' => array('mj_blog_post'),
+                )  ),
+                'post_type' => array( 'mj_blog_post'),
                 'posts_per_page' => 4,
-              ) ); 
+              ) );
               while ( $kdrum->have_posts() ) {
-                $kdrum->the_post(); 
+                $kdrum->the_post();
                 get_template_part( 'template-parts/homepage-kdrum-story' );
               }
             ?>
@@ -207,31 +207,31 @@ get_header(); ?>
       </div>
 
       <div id="homepage-exposure" class="homepage-fullwidth group">
-        <?php $exposure_story = new WP_Query(array(
+        <?php $exposure_story = new WP_Query( array(
             'tax_query' => array( array(
               'taxonomy' => 'mj_media_type',
               'field' => 'slug',
               'terms' => 'photoessays',
-            )  ), 
-            'post_type' => array('mj_article', 'mj_full_width'),
+            )  ),
+            'post_type' => array( 'mj_article', 'mj_full_width' ),
             'posts_per_page' => 1,
-          ) ); 
+          ) );
           $exposure_story->the_post();
           $fullwidth_title = 'Exposure';
         ?>
-        <?php include(locate_template( 'template-parts/homepage-fullwidth.php')); ?>
+        <?php include( locate_template( 'template-parts/homepage-fullwidth.php' ) ); ?>
       </div>
 
       <div id="homepage-second-ad" class="group">
-          <script language="javascript"> 
-            <!-- 
+          <script language="javascript">
+            <!--
             ad_code({
               desktop: true,
               placement: 'HomepageBTF970x250',
               height: 2473,
               doc_write: true,
             });
-            //--> 
+            //-->
           //</script>
       </div>
 
@@ -240,18 +240,18 @@ get_header(); ?>
           <a href="/topics/investigations">Investigations</a>
         </h2>
         <ul id="homepage-investigations-list" class="group">
-          <?php $investigations = new WP_Query(array(
+          <?php $investigations = new WP_Query( array(
               'tax_query' => array( array(
                 'taxonomy' => 'mj_primary_tag',
                 'field' => 'slug',
                 'terms' => 'investigations',
-              )  ), 
-              'post_type' => array('mj_article', 'mj_full_width'),
+              )  ),
+              'post_type' => array( 'mj_article', 'mj_full_width' ),
               'posts_per_page' => 4,
-            ) ); 
+            ) );
             while ( $investigations->have_posts() ) {
-              $investigations->the_post(); 
-              get_template_part( 'template-parts/homepage-investigations');
+              $investigations->the_post();
+              get_template_part( 'template-parts/homepage-investigations' );
             }
           ?>
         </ul>
