@@ -25,6 +25,21 @@
  * @since Mother Jones 1.0
  */
 
+/**
+  * MJ_DEBUG defines whether or not to use minified assets
+  *
+  * By default we use minified CSS and JS files.
+  * set MJ_DEBUG to TRUE to use unminified JavaScript files
+  * and unminified CSS files with sourcemaps for debugging purposes.
+  *
+  * @since 1.0
+  */
+if ( ! defined( 'MJ_DEBUG' ) ) {
+	define( 'MJ_DEBUG', FALSE );
+}
+
+
+
 if ( ! function_exists( 'mj_setup' ) ) :
 /**
  * Sets up theme defaults and registers support for various WordPress features.
