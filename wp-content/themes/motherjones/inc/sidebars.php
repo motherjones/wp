@@ -38,7 +38,7 @@ function mj_widgets_init() {
 	foreach ( $sidebars as $sidebar ) {
 		register_sidebar( array(
 			'name' 					=> $sidebar['name'],
-			'description' 	=> $sidebar['desc'],
+			'description' 	=> $sidebar['description'],
 			'id' 						=> $sidebar['id'],
 			'before_widget' => '<section id="%1$s" class="widget %2$s">',
 	 		'after_widget'  => '</section>',
