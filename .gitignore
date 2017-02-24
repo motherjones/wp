@@ -1,3 +1,8 @@
+local_fabfile.py
+.vagrant
+data/*
+wp-scripts/*
+
 # WordPress #
 ############
 wp-config-local.php
@@ -45,6 +50,12 @@ ehthumbs.db
 Icon?
 Thumbs.db
 ._*
+.svn
+.cvs
+*.bak
+*.swp
+*.pyc
+/config
 
 # Vim generated files #
 ######################
@@ -54,3 +65,36 @@ Thumbs.db
 ##########
 .sass-cache
 node_modules
+
+# WP Core 
+# Pantheon needs these to be included
+# so, commenting out for now
+###########
+#index.php
+#wp-activate.php
+#wp-admin/
+#wp-blog-header.php
+#wp-comments-post.php
+#wp-config-sample.php
+#wp-config.php
+#wp-cron.php
+#wp-includes/
+#wp-links-opml.php
+#wp-load.php
+#wp-login.php
+#wp-mail.php
+#wp-settings.php
+#wp-signup.php
+#wp-trackback.php
+
+# no plugins, mu plugins or themes
+#/wp-content/plugins/*
+#/wp-content/themes/*
+#/wp-content/mu-plugins/*
+
+# except ones we care about
+#!/wp-content/themes/motherjones
+#!/wp-content/mu-plugins/catchall.php
+#!/wp-content/mu-plugins/coauthors.php
+#!/wp-content/mu-plugins/mjcustom
+#!/wp-content/mu-plugins/mjcustom.php
