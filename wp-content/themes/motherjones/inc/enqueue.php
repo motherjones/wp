@@ -15,7 +15,7 @@ if ( ! function_exists( 'mj_enqueue' ) ) {
 		// Theme stylesheet.
 		wp_enqueue_style(
 			'mj-style',
-			get_template_directory_uri() . 'css/style' . $suffix . '.css',
+			get_template_directory_uri() . '/css/style' . $suffix . '.css',
 			null,
 			$version
 		);
@@ -111,7 +111,7 @@ if ( ! function_exists( 'mj_enqueue' ) ) {
 		) );
 	}
 }
-add_action( 'wp_enqueue_scripts', 'mj_scripts' );
+add_action( 'wp_enqueue_scripts', 'mj_enqueue' );
 
 /**
  * Handles JavaScript detection.
