@@ -2,17 +2,27 @@
 @import 'mixins';
 @import 'typography';
 
-body, caption, input, textarea, select, option, legend, fieldset {
+body,
+caption,
+input,
+textarea,
+select,
+option,
+legend,
+fieldset {
 	font-family: $calluna;
 	font-size: 18px;
 	line-height: 28px;
 }
-h1, h2 {
+h1,
+h2 {
   font-family: $mallory;
   font-weight: bold;
   text-transform: uppercase;
 }
-h3, h4, h5 {
+h3,
+h4,
+h5 {
   font-weight: normal;
   font-family: $mallory;
 }
@@ -38,7 +48,8 @@ a {
   -1px -1px 0 white, 1px 1px 0 white, 1px -1px 0 white, -1px 1px 0 white;
 }
 
-.pullquote-left, blockquote {
+.pullquote-left,
+blockquote {
   border-top: 10px solid black;
   font-size: 26px;
   position: relative;
@@ -64,7 +75,7 @@ a {
   font-size: 20px;
   font-family: $mallory;
   font-weight: bold;
-}
-.section-lead strong {
-  font-weight: normal;
+	strong {
+  	font-weight: normal;
+	}
 }
