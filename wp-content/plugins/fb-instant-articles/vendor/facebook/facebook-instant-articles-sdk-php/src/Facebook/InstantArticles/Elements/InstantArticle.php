@@ -34,7 +34,7 @@ use Facebook\InstantArticles\Validators\Type;
 
 class InstantArticle extends Element implements Container, InstantArticleInterface
 {
-    const CURRENT_VERSION = '1.5.0';
+    const CURRENT_VERSION = '1.5.5';
 
     /**
      * The meta properties that are used on <head>
@@ -80,6 +80,11 @@ class InstantArticle extends Element implements Container, InstantArticleInterfa
      * @var Element[] of all elements an article can have.
      */
     private $children = [];
+
+    /**
+     * @var boolean flag that indicates if this article is Right-to-left(RTL). Defaults to false.
+     */
+    private $isRTLEnabled = false;
 
     /**
      * Factory method
@@ -166,6 +171,24 @@ class InstantArticle extends Element implements Container, InstantArticleInterfa
     }
 
     /**
+     * Updates article to use RTL orientation.
+     */
+    public function enableRTL()
+    {
+        $this->isRTLEnabled = true;
+        return $this;
+    }
+
+    /**
+     * Updates article to use LTR orientation (default), disabling RTL.
+     */
+    public function disableRTL()
+    {
+        $this->isRTLEnabled = false;
+        return $this;
+    }
+
+    /**
      * Sets the header content to this InstantArticle
      *
      * @param Header $header to be added to this Article.
@@ -191,6 +214,64 @@ class InstantArticle extends Element implements Container, InstantArticleInterfa
     {
         Type::enforce($footer, Footer::getClassName());
         $this->footer = $footer;
+
+        return $this;
+    }
+
+    /**
+     * Replace all the children within this InstantArticle
+     *
+     * @param Element[] $children Array of elements replacing the original.
+     *
+     * @return $this
+     */
+    public function withChildren($children)
+    {
+        Type::enforceArrayOf(
+            $children,
+            [
+                Ad::getClassName(),
+                Analytics::getClassName(),
+                AnimatedGIF::getClassName(),
+                Audio::getClassName(),
+                Blockquote::getClassName(),
+                Image::getClassName(),
+                H1::getClassName(),
+                H2::getClassName(),
+                Interactive::getClassName(),
+                ListElement::getClassName(),
+                Map::getClassName(),
+                Paragraph::getClassName(),
+                Pullquote::getClassName(),
+                RelatedArticles::getClassName(),
+                Slideshow::getClassName(),
+                SocialEmbed::getClassName(),
+                Video::getClassName()
+            ]
+        );
+        $this->children = $children;
+
+        return $this;
+    }
+
+    /**
+     * Replace all the children within this InstantArticle
+     *
+     * @param Type::INTEGER $index The index of the element to be deleted
+     *                             in the array of children.
+     *
+     * @return $this
+     */
+    public function deleteChild($index)
+    {
+        Type::enforce($index, Type::INTEGER);
+        $children = [];
+        foreach ($this->children as $childIndex => $child) {
+            if ($childIndex != $index) {
+                $children[] = $child;
+            }
+        }
+        $this->children = $children;
 
         return $this;
     }
@@ -326,6 +407,9 @@ class InstantArticle extends Element implements Container, InstantArticleInterfa
 
         // Builds and appends head to the HTML document
         $html = $document->createElement('html');
+        if ($this->isRTLEnabled) {
+            $html->setAttribute('dir', 'rtl');
+        }
         $head = $document->createElement('head');
         $html->appendChild($head);
 

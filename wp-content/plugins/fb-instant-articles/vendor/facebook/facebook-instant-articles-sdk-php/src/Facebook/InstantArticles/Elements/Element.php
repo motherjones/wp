@@ -20,7 +20,7 @@ abstract class Element
 {
     private $empty_validation = true;
 
-    abstract public function toDOMElement();
+    abstract public function toDOMElement($document = null);
 
     /**
      * Renders the Element content

@@ -4,8 +4,8 @@ namespace xmlSitemapGenerator;
 
 include_once 'settingsModels.php';
 include_once 'upgrader.php';
- 
-	define ( "XSG_PLUGIN_VERSION" , "1.3.0");
+
+	define ( "XSG_PLUGIN_VERSION" , "1.3.3");
 	define ( "XSG_PLUGIN_NAME" , "www-xml-sitemap-generator-org"); 
 	define ( "XSG_RULES_VERSION" , "0003"); // increment this if the rewrite rules ever change.
 	define ( "XSG_RULES_OPTION_NAME" , "wpXSG_rewrite_done"); 
@@ -69,7 +69,10 @@ class core {
 			settings::addHooks();
 			categoryMetaData::addHooks();
 			postMetaData::addHooks();	
-	
+			
+			add_action('admin_notices', array(__CLASS__, 'showWarnings'));
+			
+ 
 		}
 
 	
@@ -87,6 +90,31 @@ class core {
 		if (get_option(XSG_RULES_OPTION_NAME, null) != XSG_RULES_VERSION) 
 		{
 			add_action('wp_loaded', array(__CLASS__, 'activateRewriteRules'), 99999, 1);
+		}
+		
+	}
+
+	static function showWarnings()
+	{
+		$screen = get_current_screen();
+		if ($screen->base == 'settings_page_www-xml-sitemap-generator-org')
+			{
+			$warnings = "";
+			$blog_public = get_option('blog_public');
+			if ($blog_public == "0") 
+			{
+				$warnings = '<p>Your website is hidden from search engines. Please check your <i>Search Engine Visibility in <a href="options-reading.php">Reading Settings</a></i>.</p>';
+			}
+
+			if (!get_option('permalink_structure'))
+			{
+				$warnings = $warnings . '<p>Permalinks are not enabled. Please check your <i><a href="options-permalink.php">Permalink Settings</a></i> are not set to <i>Plain</i>.</p>';
+			}
+			
+			if ($warnings)
+			{
+				echo '<div id="sitemap-warnings" class="error fade"><p><strong>Problems that will prevent your sitemap working correctly :</strong></p>' . $warnings . '</div>';
+			}
 		}
 		
 	}
@@ -240,9 +268,20 @@ class core {
 	
 	public static function getTimeBand($startTime)
 	{
-		$time = microtime(true) - $startTime;
-		$timeLabel =  round($time) . "s";	
-		return $timeLabel;
+		$time = round(microtime(true) - $startTime);
+		
+		if( $time = 0) {$timeBand = "0";}
+		else if( $time <= 10) {$timeBand = "1 to 10";}
+		else if( $time <= 30) {$timeBand = "11 to 30";}
+		else if ($time <= 60) {$timeBand = "31 to 60";}
+		else if ($time <= 180) {$timeBand = "61 to 180";}
+		else if ($time <= 300) {$timeBand = "181 to 300";}
+		else if ($time <= 600) {$timeBand = "301 to 600";}
+		else if ($time <= 1200) {$timeBand = "601 to 1200";}
+		else if ($time <= 1800) {$timeBand = "1201 to 1800";}
+		else {$timeBand = "> 1801";}
+		
+		return $timeBand;
 	}
 	public static function updateStatistics($eventCategory, $eventAction, $timeBand) {
 		
