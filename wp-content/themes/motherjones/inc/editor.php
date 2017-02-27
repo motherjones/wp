@@ -23,7 +23,6 @@ if ( ! function_exists( 'mj_wysiwyg_config' ) ) {
  		$config['paste_strip_class_attributes'] = 'none';
  		$config['paste_text_use_dialog'] = true;
  		$config['wpeditimage_disable_captions'] = true;
- 		$config['content_css'] = get_template_directory_uri() . "/editor-style.css";
  		$config['wpautop'] = true;
  		$config['apply_source_formatting'] = false;
 

@@ -133,7 +133,8 @@ if ( ! function_exists( 'mj_setup' ) ) {
 
 	  add_filter( 'tiny_mce_before_init', 'mj_wysiwyg_config' );
 
-		add_editor_style( '/css/editor-style.min.css' );
+		$suffix = (MJ_DEBUG) ? '' : '.min';
+		add_editor_style( 'css/editor-style' . $suffix . '.css' );
 
 	}
 } // mj_setup
