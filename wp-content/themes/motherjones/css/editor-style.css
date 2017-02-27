@@ -39,6 +39,28 @@
   src: url("/wp-content/themes/motherjones/font/Calluna-BoldIt.otf");
   font-weight: bold;
   font-style: italic; }
+body, caption, input, textarea, select, option, legend, fieldset {
+  font-family: Calluna, Georgia, "Times New Roman", "Bitstream Vera Serif", serif;
+  font-size: 18px;
+  line-height: 28px; }
+
+h1,
+h2 {
+  font-family: Mallory, sans-serif;
+  font-weight: bold;
+  text-transform: uppercase; }
+
+h3,
+h4,
+h5 {
+  font-weight: normal;
+  font-family: Mallory, sans-serif; }
+
+h5 {
+  text-transform: uppercase;
+  font-size: 12px;
+  background-position: 0% 100%; }
+
 body,
 caption,
 input,

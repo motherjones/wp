@@ -268,18 +268,6 @@ html {
   src: url("/wp-content/themes/motherjones/font/Calluna-BoldIt.otf");
   font-weight: bold;
   font-style: italic; }
-body {
-  padding-top: 0; }
-
-/* clearfix hack */
-.group:after {
-  display: table;
-  content: "";
-  clear: both; }
-
-::selection {
-  background-color: #ddd; }
-
 body, caption, input, textarea, select, option, legend, fieldset {
   font-family: Calluna, Georgia, "Times New Roman", "Bitstream Vera Serif", serif;
   font-size: 18px;
@@ -301,6 +289,18 @@ h5 {
   text-transform: uppercase;
   font-size: 12px;
   background-position: 0% 100%; }
+
+body {
+  padding-top: 0; }
+
+/* clearfix hack */
+.group:after {
+  display: table;
+  content: "";
+  clear: both; }
+
+::selection {
+  background-color: #ddd; }
 
 a {
   color: black;
@@ -1083,6 +1083,19 @@ li.article-item {
   list-style-type: none;
   padding-bottom: 10px;
   clear: both; }
+  li.article-item img {
+    height: auto;
+    width: 208px;
+    margin-right: 15px;
+    margin-top: 4px; }
+  li.article-item .byline,
+  li.article-item h3 {
+    max-width: 395px;
+    margin-top: 4px;
+    margin-bottom: 4px; }
+  li.article-item h3 {
+    font-size: 16px;
+    line-height: 24px; }
 
 #main li.photoessay-top a,
 #main li.top-article-item a,
@@ -1097,20 +1110,6 @@ li.article-item {
     margin: 15px 0 4px; }
   .top-article-item p {
     margin: 0; }
-
-li.article-item img {
-  height: auto;
-  width: 208px;
-  margin-right: 15px;
-  margin-top: 4px; }
-li.article-item .byline,
-li.article-item h3 {
-  max-width: 395px;
-  margin-top: 4px;
-  margin-bottom: 4px; }
-li.article-item h3 {
-  font-size: 18px;
-  line-height: 18px; }
 
 .article-item .article-image,
 .article-item .article-data {
@@ -1215,6 +1214,8 @@ h2.widget-title {
       margin-top: 16px;
       padding-top: 0;
       background-image: none; }
+    #homepage-top-story-side li.article-item h3 {
+      line-height: 18px; }
 
 /* end top story */
 /* more top stories */
@@ -1415,7 +1416,7 @@ article.full-width {
 /* end  responsive video styling */
 /* begin responsive stuff */
 article p {
-  margin: 0 10px; }
+  margin: 0 10px 1em; }
 
 @media only screen and (max-width: 500px) {
   #navbar {
@@ -1455,7 +1456,7 @@ ul.social-tools.top {
     margin-right: 360px; }
 
   article p {
-    margin: 0; } }
+    margin: 0 0 1em; } }
 @media only screen and (max-width: 1060px) {
   .article-page.subscribe-link {
     display: none !important; } }
