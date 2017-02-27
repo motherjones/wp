@@ -861,7 +861,7 @@ a#footer-logo {
 footer#colophon #copyright a {
   color: #ccc;
   margin: 0 5px;
-  text-shadow: -1px 0 0 black, 0 1px 0 black, 1px 0 0 black, 0 -1px 0 b -1px -1px 0 black, 1px 1px 0 black, 1px -1px 0 black, -1px 1px 0 blac; }
+  text-shadow: -1px 0 0 black, 0 1px 0 black, 1px 0 0 black, 0 -1px 0 b -1px -1px 0 black, 1px 1px 0 black, 1px -1px 0 black, -1px 1px 0 black; }
 
 /* end footer */
 /* readers like you */
