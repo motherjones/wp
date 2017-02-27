@@ -131,23 +131,6 @@ function mj_setup() {
 		'caption',
 	) );
 
-	/*
-	 * Enable support for Post Formats.
-	 *
-	 * See: https://codex.wordpress.org/Post_Formats
-	 */
-	add_theme_support( 'post-formats', array(
-		'aside',
-		'image',
-		'video',
-		'quote',
-		'link',
-		'gallery',
-		'status',
-		'audio',
-		'chat',
-	) );
-
   add_filter( 'tiny_mce_before_init', 'mj_wysiwyg_config' );
 
 	add_editor_style( '/css/editor-style.min.css' );
