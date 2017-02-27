@@ -268,6 +268,9 @@ html {
   src: url("/wp-content/themes/motherjones/font/Calluna-BoldIt.otf");
   font-weight: bold;
   font-style: italic; }
+body {
+  padding-top: 0; }
+
 /* clearfix hack */
 .group:after {
   display: table;
@@ -1544,5 +1547,7 @@ ul.social-tools.top {
   float: right; }
 
 /* end pager */
+#TopROS970x250 div div {
+  margin: 0 auto; }
 
 /*# sourceMappingURL=style.css.map */
