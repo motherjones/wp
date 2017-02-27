@@ -203,7 +203,7 @@ blockquote {
   height: 45px;
   padding: 5px 0 0 0; /* must be taller so the bounce doesn't have empty space on top */
   z-index: 5999999; /* ffs */
-  .lower {
+  &.lower {
     top: -5px;
   }
   ul {

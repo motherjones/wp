@@ -471,7 +471,7 @@ blockquote {
   /* must be taller so the bounce doesn't have empty space on top */
   z-index: 5999999;
   /* ffs */ }
-  #navbar .lower {
+  #navbar.lower {
     top: -5px; }
   #navbar ul {
     list-style-type: none;
