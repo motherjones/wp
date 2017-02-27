@@ -41,6 +41,13 @@ if ( ! function_exists( 'mj_enqueue' ) ) {
 			$version
 		);
 		wp_style_add_data( 'mj-ie7', 'conditional', 'lt IE 8' );
+		// icons
+		wp_enqueue_style(
+			'font-awesome',
+			get_template_directory_uri() . '/css/font-awesome-4.6.3/css/font-awesome' . $suffix . '.css',
+			null,
+			$version
+		);
 
 		// JavaScript
 

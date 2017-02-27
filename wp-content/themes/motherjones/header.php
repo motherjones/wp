@@ -8,8 +8,8 @@
  * @subpackage Mother_Jones
  * @since Mother Jones 1.0
  */
-
-?><!DOCTYPE html>
+?>
+<!DOCTYPE html>
 <html <?php language_attributes(); ?> class="no-js">
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
@@ -18,7 +18,6 @@
 	<?php if ( is_singular() && pings_open( get_queried_object() ) ) : ?>
 	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
 	<?php endif; ?>
-  <link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri(); ?>/css/font-awesome-4.6.3/css/font-awesome.min.css">
   <script>
     var ad_group_id = Math.floor(Math.random() * 100000000);
     var ad_keywords = '';
@@ -48,29 +47,32 @@
 
 <body <?php body_class(); ?>>
 <?php
-	//print_r( $request );
+	if ( MJ_DEBUG == true ) {
+		print_r( $request );
+	}
 ?>
 <?php get_template_part( 'template-parts/floating-navbar' ); ?>
 <?php dynamic_sidebar( 'page-top' ); ?>
 <div id="page" class="site">
-  <?php if (get_the_ID()) : ?>
-      <script>
-          <!--
-          if ( typeof MJ_HideTopROS970x250 === 'undefined' ) {
-            ad_code({
-              desktop: true,
-              placement: 'TopROS970x250',
-              height: 2473,
-              doc_write: true,
-            });
-          }
-          //-->
-      </script>
+  <?php if ( get_the_ID() ) : ?>
+		<div class="ad-unit" id="TopROS970x250">
+			<script>
+	    	<!--
+	      if ( typeof MJ_HideTopROS970x250 === 'undefined' ) {
+	        ad_code({
+	          desktop: true,
+	          placement: 'TopROS970x250',
+	          height: 2473,
+	          doc_write: true,
+	        });
+	      }
+	      //-->
+	    </script>
+		</div>
   <?php endif; ?>
 
-		<header id="masthead" class="site-header" role="banner">
-			<?php get_template_part( 'template-parts/static-navbar' ); ?>
+	<header id="masthead" class="site-header" role="banner">
+		<?php get_template_part( 'template-parts/static-navbar' ); ?>
+	</header><!-- .site-header -->
 
-		</header><!-- .site-header -->
-
-    <?php dynamic_sidebar( 'ticker' ); ?>
+  <?php dynamic_sidebar( 'ticker' ); ?>
