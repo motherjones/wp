@@ -310,14 +310,14 @@ a {
 /* set orange underline */
 footer#colophon #copyright a,
 footer#colophon #footer-list a,
-#main a {
+.single article a {
   background-image: url("/wp-content/themes/motherjones/img/orange-border.png");
   background-repeat: repeat-x;
   text-decoration: none;
   text-shadow: -1px 0 0 white, 0 1px 0 white, 1px 0 0 white, 0 -1px 0 white, -1px -1px 0 white, 1px 1px 0 white, 1px -1px 0 white, -1px 1px 0 white; }
   footer#colophon #copyright a:hover,
   footer#colophon #footer-list a:hover,
-  #main a:hover {
+  .single article a:hover {
     background-image: none;
     color: #FF6900;
     text-shadow: none; }
@@ -442,7 +442,6 @@ blockquote {
 .byline {
   color: #FF6900;
   font-size: 14px;
-  text-decoration: none;
   text-transform: uppercase;
   font-family: Mallory, sans-serif;
   font-weight: bold;
