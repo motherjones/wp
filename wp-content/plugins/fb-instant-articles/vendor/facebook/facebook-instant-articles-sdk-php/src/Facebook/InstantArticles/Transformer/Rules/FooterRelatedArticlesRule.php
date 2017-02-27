@@ -13,8 +13,6 @@ use Facebook\InstantArticles\Elements\Footer;
 
 class FooterRelatedArticlesRule extends ConfigurationSelectorRule
 {
-    const PROPERTY_TITLE = 'related.title';
-
     public function getContextClass()
     {
         return Footer::getClassName();
@@ -30,24 +28,13 @@ class FooterRelatedArticlesRule extends ConfigurationSelectorRule
         $related_articles_rule = self::create();
         $related_articles_rule->withSelector($configuration['selector']);
 
-        $related_articles_rule->withProperty(
-            self::PROPERTY_TITLE,
-            self::retrieveProperty($configuration, self::PROPERTY_TITLE)
-        );
-
         return $related_articles_rule;
     }
 
     public function apply($transformer, $footer, $node)
     {
         $related_articles = RelatedArticles::create();
-
-        // Builds the image
-        $title = $this->getProperty(self::PROPERTY_TITLE, $node);
-        if ($title) {
-            $related_articles->withTitle($title);
-            $footer->withRelatedArticles($related_articles);
-        }
+        $footer->withRelatedArticles($related_articles);
 
         $transformer->transform($related_articles, $node);
 

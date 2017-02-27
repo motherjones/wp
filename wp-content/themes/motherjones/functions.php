@@ -82,7 +82,7 @@ function MJ() {
 add_action( 'after_setup_theme', 'MJ' );
 
 
-if ( ! function_exists( 'mj_setup' ) ) :
+if ( ! function_exists( 'mj_setup' ) ) {
 /**
  * Sets up theme defaults and registers support for various WordPress features.
  *
@@ -94,66 +94,50 @@ if ( ! function_exists( 'mj_setup' ) ) :
  *
   */
 
-function mj_setup() {
-	/*
-	 * Make theme available for translation.
-	 * Translations can be filed in the /languages/ directory.
-	 * If you're building a theme based on Mother Jones, use a find and replace
-	 * to change 'mj' to the name of your theme in all the template files
-	 */
-	load_theme_textdomain( 'mj', get_template_directory() . '/languages' );
+	function mj_setup() {
+		/*
+		 * Make theme available for translation.
+		 * Translations can be filed in the /languages/ directory.
+		 * If you're building a theme based on Mother Jones, use a find and replace
+		 * to change 'mj' to the name of your theme in all the template files
+		 */
+		load_theme_textdomain( 'mj', get_template_directory() . '/languages' );
 
-	// Add default posts RSS feed links to head.
-	add_theme_support( 'automatic-feed-links' );
+		// Add default posts RSS feed links to head.
+		add_theme_support( 'automatic-feed-links' );
 
-	/*
-	 * Let WordPress manage the document title.
-	 * By adding theme support, we declare that this theme does not use a
-	 * hard-coded <title> tag in the document head, and expect WordPress to
-	 * provide it for us.
-	 */
-	add_theme_support( 'title-tag' );
+		/*
+		 * Let WordPress manage the document title.
+		 * By adding theme support, we declare that this theme does not use a
+		 * hard-coded <title> tag in the document head, and expect WordPress to
+		 * provide it for us.
+		 */
+		add_theme_support( 'title-tag' );
 
-	/*
-	 * Enable support for Post Thumbnails on posts and pages.
-	 *
-	 * @link http://codex.wordpress.org/Function_Reference/add_theme_support#Post_Thumbnails
-	 */
-	add_theme_support( 'post-thumbnails' );
+		/*
+		 * Enable support for Post Thumbnails on posts and pages.
+		 *
+		 * @link http://codex.wordpress.org/Function_Reference/add_theme_support#Post_Thumbnails
+		 */
+		add_theme_support( 'post-thumbnails' );
 
-	/*
-	 * Switch default core markup for search form
-	 * to output valid HTML5.
-	 */
-	add_theme_support( 'html5', array(
-		'search-form',
-		'gallery',
-		'caption',
-	) );
+		/*
+		 * Switch default core markup for search form
+		 * to output valid HTML5.
+		 */
+		add_theme_support( 'html5', array(
+			'search-form',
+			'gallery',
+			'caption',
+		) );
 
-	/*
-	 * Enable support for Post Formats.
-	 *
-	 * See: https://codex.wordpress.org/Post_Formats
-	 */
-	add_theme_support( 'post-formats', array(
-		'aside',
-		'image',
-		'video',
-		'quote',
-		'link',
-		'gallery',
-		'status',
-		'audio',
-		'chat',
-	) );
+	  add_filter( 'tiny_mce_before_init', 'mj_wysiwyg_config' );
 
-  add_filter( 'tiny_mce_before_init', 'mj_wysiwyg_config' );
+		$suffix = (MJ_DEBUG) ? '' : '.min';
+		add_editor_style( 'css/editor-style' . $suffix . '.css' );
 
-	add_editor_style( '/css/editor-style.min.css' );
-
-}
-endif; // mj_setup
+	}
+} // mj_setup
 add_action( 'after_setup_theme', 'mj_setup' );
 
 /**

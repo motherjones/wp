@@ -42,12 +42,11 @@ class RelatedArticlesRule extends ConfigurationSelectorRule
     {
         $related_articles = RelatedArticles::create();
 
-        // Builds the image
         $title = $this->getProperty(self::PROPERTY_TITLE, $node);
         if ($title) {
             $related_articles->withTitle($title);
-            $instant_article->addChild($related_articles);
         }
+        $instant_article->addChild($related_articles);
 
         $transformer->transform($related_articles, $node);
 

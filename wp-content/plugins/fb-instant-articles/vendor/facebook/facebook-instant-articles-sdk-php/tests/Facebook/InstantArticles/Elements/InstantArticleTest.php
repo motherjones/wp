@@ -414,4 +414,249 @@ class InstantArticleTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertInstanceOf('Facebook\InstantArticles\Elements\InstantArticleInterface', $this->article);
     }
+
+    public function testIsRTLEnabled()
+    {
+        $article =
+            InstantArticle::create()
+                ->withCanonicalURL('http://wp.localtest.me/2016/04/12/stress-on-earth/')
+                ->enableAutomaticAdPlacement()
+                ->enableRTL()
+                ->withHeader(
+                    Header::create()
+                        ->withTitle(
+                            H1::create()->appendText('Peace on <b>earth</b>')
+                        )
+                        ->addAuthor(
+                            Author::create()->withName('bill')
+                        )
+                        ->withPublishTime(
+                            Time::create(Time::PUBLISHED)
+                                ->withDatetime(
+                                    \DateTime::createFromFormat(
+                                        'j-M-Y G:i:s',
+                                        '14-Aug-1984 19:30:00'
+                                    )
+                                )
+                        )
+                )
+                ->addChild(
+                    Paragraph::create()
+                        ->appendText('Yes, peace is good for everybody!')
+                        ->appendText(LineBreak::create())
+                        ->appendText(' Man kind.')
+                );
+        $result = $article->render();
+        $expected =
+            '<!doctype html>'.
+            '<html dir="rtl">'.
+                '<head>'.
+                    '<link rel="canonical" href="http://wp.localtest.me/2016/04/12/stress-on-earth/"/>'.
+                    '<meta charset="utf-8"/>'.
+                    '<meta property="op:generator" content="facebook-instant-articles-sdk-php"/>'.
+                    '<meta property="op:generator:version" content="'.InstantArticle::CURRENT_VERSION.'"/>'.
+                    '<meta property="op:markup_version" content="v1.0"/>'.
+                '</head>'.
+                '<body>'.
+                    '<article>'.
+                        '<header>'.
+                            '<h1>Peace on &lt;b&gt;earth&lt;/b&gt;</h1>'.
+                            '<time class="op-published" datetime="1984-08-14T19:30:00+00:00">August 14th, 7:30pm</time>'.
+                            '<address>'.
+                                '<a>bill</a>'.
+                            '</address>'.
+                        '</header>'.
+                        '<p>Yes, peace is good for everybody!<br/> Man kind.</p>'.
+                    '</article>'.
+                '</body>'.
+            '</html>';
+
+        $this->assertEquals($expected, $result);
+    }
+
+    public function testDeleteChildren()
+    {
+        $article =
+            InstantArticle::create()
+                ->withCanonicalURL('http://www.facebook-IA-test.com/category/test')
+                ->enableAutomaticAdPlacement()
+                ->withHeader(
+                    Header::create()
+                        ->withTitle(
+                            H1::create()->appendText('A good test')
+                        )
+                        ->addAuthor(
+                            Author::create()->withName('Dan')
+                        )
+                        ->withPublishTime(
+                            Time::create(Time::PUBLISHED)
+                                ->withDatetime(
+                                    \DateTime::createFromFormat(
+                                        'j-M-Y G:i:s',
+                                        '09-Jan-2016 20:30:00'
+                                    )
+                                )
+                        )
+                )
+                ->addChild(
+                    Paragraph::create()
+                        ->appendText('Just testing a deletion.')
+                )
+                ->addChild(
+                    Paragraph::create()
+                        ->appendText('This should not render afterwards.')
+                );
+        $article->deleteChild(1);
+        $result = $article->render();
+
+        $expected =
+            '<!doctype html>'.
+            '<html>'.
+                '<head>'.
+                    '<link rel="canonical" href="http://www.facebook-IA-test.com/category/test"/>'.
+                    '<meta charset="utf-8"/>'.
+                    '<meta property="op:generator" content="facebook-instant-articles-sdk-php"/>'.
+                    '<meta property="op:generator:version" content="'.InstantArticle::CURRENT_VERSION.'"/>'.
+                    '<meta property="op:markup_version" content="v1.0"/>'.
+                '</head>'.
+                '<body>'.
+                    '<article>'.
+                        '<header>'.
+                            '<h1>A good test</h1>'.
+                            '<time class="op-published" datetime="2016-01-09T20:30:00+00:00">January 9th, 8:30pm</time>'.
+                            '<address>'.
+                                '<a>Dan</a>'.
+                            '</address>'.
+                        '</header>'.
+                        '<p>Just testing a deletion.</p>'.
+                    '</article>'.
+                '</body>'.
+            '</html>';
+
+        $this->assertEquals($expected, $result);
+    }
+    
+    public function testDeleteOnlyChild()
+    {
+        $article =
+            InstantArticle::create()
+                ->withCanonicalURL('http://www.facebook-IA-test.com/category/test')
+                ->enableAutomaticAdPlacement()
+                ->withHeader(
+                    Header::create()
+                        ->withTitle(
+                            H1::create()->appendText('A good test')
+                        )
+                        ->addAuthor(
+                            Author::create()->withName('Dan')
+                        )
+                        ->withPublishTime(
+                            Time::create(Time::PUBLISHED)
+                                ->withDatetime(
+                                    \DateTime::createFromFormat(
+                                        'j-M-Y G:i:s',
+                                        '09-Jan-2016 20:30:00'
+                                    )
+                                )
+                        )
+                )
+                ->addChild(
+                    Paragraph::create()
+                        ->appendText('Single paragraph to delete.')
+                );
+        $article->deleteChild(0);
+        $result = $article->render();
+
+        $expected =
+            '<!doctype html>'.
+            '<html>'.
+                '<head>'.
+                    '<link rel="canonical" href="http://www.facebook-IA-test.com/category/test"/>'.
+                    '<meta charset="utf-8"/>'.
+                    '<meta property="op:generator" content="facebook-instant-articles-sdk-php"/>'.
+                    '<meta property="op:generator:version" content="'.InstantArticle::CURRENT_VERSION.'"/>'.
+                    '<meta property="op:markup_version" content="v1.0"/>'.
+                '</head>'.
+                '<body>'.
+                    '<article>'.
+                        '<header>'.
+                            '<h1>A good test</h1>'.
+                            '<time class="op-published" datetime="2016-01-09T20:30:00+00:00">January 9th, 8:30pm</time>'.
+                            '<address>'.
+                                '<a>Dan</a>'.
+                            '</address>'.
+                        '</header>'.
+                    '</article>'.
+                '</body>'.
+            '</html>';
+
+        $this->assertEquals($expected, $result);
+    }
+
+    public function testReplaceChildren()
+    {
+        $article =
+            InstantArticle::create()
+                ->withCanonicalURL('http://www.facebook-IA-test.com/category/test')
+                ->enableAutomaticAdPlacement()
+                ->withHeader(
+                    Header::create()
+                        ->withTitle(
+                            H1::create()->appendText('A replacing test')
+                        )
+                        ->addAuthor(
+                            Author::create()->withName('Dan')
+                        )
+                        ->withPublishTime(
+                            Time::create(Time::PUBLISHED)
+                                ->withDatetime(
+                                    \DateTime::createFromFormat(
+                                        'j-M-Y G:i:s',
+                                        '09-Jan-2016 20:30:00'
+                                    )
+                                )
+                        )
+                )
+                ->addChild(
+                    Paragraph::create()
+                        ->appendText('Ye olde body')
+                );
+
+        $newBody = array(
+            Paragraph::create()
+                ->appendText('The new body.'),
+            Paragraph::create()
+                ->appendText('With two paragraphs!')
+            );
+
+        $article->withChildren($newBody);
+        $result = $article->render();
+
+        $expected =
+            '<!doctype html>'.
+            '<html>'.
+                '<head>'.
+                    '<link rel="canonical" href="http://www.facebook-IA-test.com/category/test"/>'.
+                    '<meta charset="utf-8"/>'.
+                    '<meta property="op:generator" content="facebook-instant-articles-sdk-php"/>'.
+                    '<meta property="op:generator:version" content="'.InstantArticle::CURRENT_VERSION.'"/>'.
+                    '<meta property="op:markup_version" content="v1.0"/>'.
+                '</head>'.
+                '<body>'.
+                    '<article>'.
+                        '<header>'.
+                            '<h1>A replacing test</h1>'.
+                            '<time class="op-published" datetime="2016-01-09T20:30:00+00:00">January 9th, 8:30pm</time>'.
+                            '<address>'.
+                                '<a>Dan</a>'.
+                            '</address>'.
+                        '</header>'.
+                        '<p>The new body.</p>'.
+                        '<p>With two paragraphs!</p>'.
+                    '</article>'.
+                '</body>'.
+            '</html>';
+
+        $this->assertEquals($expected, $result);
+    }
 }
