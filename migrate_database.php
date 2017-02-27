@@ -223,9 +223,11 @@ CONCAT( "cap-", REPLACE(LOWER(?), " ", "-") ),
 ;'
 );
 
+$article_types = Array('article', 'blogpost', 'full_width_article');
 $article_type_terms = Array();
-foreach (Array('article', 'blogpost', 'full_width_article') as $type) {
-  $article_term_insert->execute(Array($type, $type, $article_type_tax));
+$wp->beginTransaction();
+foreach ( $article_types as $type) {
+  $article_term_insert->execute(Array($type, $type));
   $article_type_terms[$type] = $wp->lastInsertId();
 }
 $wp->commit();
@@ -242,6 +244,7 @@ VALUES (
 ;'
 );
 $wp_tax_id = Array();
+$wp->beginTransaction();
 foreach ($article_type_terms as $type => $term_id) {
   $tax_insert->execute(Array($term_id));
   $wp_tax_id[$type] = $wp->lastInsertId();

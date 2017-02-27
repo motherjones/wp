@@ -163,9 +163,17 @@ class dataAccess {
 		return $results;				
 	}
 	
+	private static function getTaxonomyTypes()
+	{
+		$taxonomies =  get_taxonomies(array( "public" => "1",  "show_ui" =>"1" ), 'names' ,'and');	
+		$taxonomies = "'" . implode("','", $taxonomies) . "'";
+		return $taxonomies;
+	}
+
 	public static function  getTaxonomy($date = "updated"){
 
 		global $wpdb;
+		$taxonomies = self::getTaxonomyTypes();
 		$date = self::getDateField($date);
 		$tablemeta = $wpdb->prefix . 'xsg_sitemap_meta';
 		$cmd = "SELECT  terms.term_id, terms.name, terms.slug, terms.term_group,
@@ -178,16 +186,14 @@ class dataAccess {
 					INNER JOIN {$wpdb->posts} as posts ON Relationships.object_id = posts.Id
 							AND posts.post_status = 'publish' AND posts.post_password = ''
 					INNER JOIN {$wpdb->term_taxonomy} as tax ON terms.term_id = tax.term_id
-					LEFT JOIN {$tablemeta} as meta ON terms.term_Id = meta.ItemId AND meta.itemType = 'taxonomy' 
-				WHERE tax.taxonomy IN ('post_tag','category')
+					LEFT JOIN {$tablemeta} as meta ON terms.term_Id = meta.ItemId 
+				WHERE tax.taxonomy IN ({$taxonomies})
 				GROUP BY  terms.term_id, terms.name, terms.slug, terms.term_group, tax.description, tax.term_taxonomy_id,  tax.taxonomy, tax.description, meta.exclude, meta.priority, meta.frequency";
 			
 		$results = self::execute($cmd);
 		 
 		return $results;		
-		
-		
-		
+
 	}
  
 	public static function  getAuthors($date = "updated") {
@@ -258,7 +264,7 @@ class dataAccess {
 				FROM {$wpdb->posts} as posts
 				WHERE post_status = 'publish'";
 			
-		$postCount = $wpdb->get_var($cmd);
+		$postCount = (int)$wpdb->get_var($cmd);
 		 
 		if( $postCount = 0) {$postCountLabel = "0";}
 		else if( $postCount <= 10) {$postCountLabel = "1 to 10";}
