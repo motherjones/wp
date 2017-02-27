@@ -59,6 +59,24 @@ if ( !class_exists( 'MJ_Taxonomy' ) ) {
       'Kevin Drum',
     );
 
+    private $article_type_id = 'mj_article_type';
+    private $article_type_taxonomy = array(
+      'single' => 'Article Type',
+      'plural' => 'Article Types',
+      'capabilites' => array(
+        'assign_terms' => 'edit_posts',
+        'edit_terms' => 'update_core',
+        'delete_terms' => 'update_core',
+      ),
+      'types'  => array('post')
+    );
+    private $article_type_terms = array(
+      'full_width_article',
+      'article',
+      'blogpost',
+    );
+
+
     private $all_taxonomies = array();
 
     private static $instance;
@@ -79,10 +97,14 @@ if ( !class_exists( 'MJ_Taxonomy' ) ) {
     public function add_blog_taxonomy ($post_type) {
       $this->blog_taxonomy['types'][] = $post_type;
     }
+    public function add_article_type_taxonomy ($post_type) {
+      $this->article_type_taxonomy['types'][] = $post_type;
+    }
     public function add_mj_taxonomies ($post_type) {
       $this->media_taxonomy['types'][] = $post_type;
       $this->tag_taxonomy['types'][] = $post_type;
       $this->blog_taxonomy['types'][] = $post_type;
+      $this->article_type_taxonomy['types'][] = $post_type;
     }
 
 
@@ -91,6 +113,7 @@ if ( !class_exists( 'MJ_Taxonomy' ) ) {
       $this->all_taxonomies[$this->media_type_id] = $this->media_taxonomy;
       $this->all_taxonomies[$this->tag_id] = $this->tag_taxonomy;
       $this->all_taxonomies[$this->blog_id] = $this->blog_taxonomy;
+      $this->all_taxonomies[$this->article_type_id] = $this->article_type_taxonomy;
       add_action( 'created_mj_media_type', array($this, 'fill_media_type') );
       add_action( 'created_mj_blog_type', array($this, 'fill_blog_type') );
     }
