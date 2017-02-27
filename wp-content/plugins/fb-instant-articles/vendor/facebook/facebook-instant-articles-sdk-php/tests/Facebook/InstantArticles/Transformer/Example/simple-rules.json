@@ -85,6 +85,55 @@
                 }
             },
             {
+                "class": "ImageRule",
+                "selector" : "div.prefix",
+                "properties" : {
+                    "image.url" : {
+                        "type" : "string",
+                        "selector" : "img",
+                        "attribute": "src",
+                        "prefix": "http:"
+                    },
+                    "image.caption" : {
+                        "type" : "element",
+                        "selector" : "div.image-caption"
+                    }
+                }
+            },
+            {
+                "class": "ImageRule",
+                "selector" : "div.suffix",
+                "properties" : {
+                    "image.url" : {
+                        "type" : "string",
+                        "selector" : "img",
+                        "attribute": "src",
+                        "suffix": "?suffix=yes"
+                    },
+                    "image.caption" : {
+                        "type" : "element",
+                        "selector" : "div.image-caption"
+                    }
+                }
+            },
+            {
+                "class": "ImageRule",
+                "selector" : "div.prefixsuffix",
+                "properties" : {
+                    "image.url" : {
+                        "type" : "string",
+                        "selector" : "img",
+                        "attribute": "src",
+                        "prefix" : "http:",
+                        "suffix": "?suffix=yes"
+                    },
+                    "image.caption" : {
+                        "type" : "element",
+                        "selector" : "div.image-caption"
+                    }
+                }
+            },
+            {
                 "class": "HeaderImageRule",
                 "selector" : "div.hero-image",
                 "properties" : {
@@ -108,6 +157,42 @@
                         "selector" : "*"
                     }
                 }
-            }
+            },
+
+            {
+    "class" : "FooterRule",
+    "selector" : "footer"
+  },
+  {
+    "class" : "RelatedArticlesRule",
+    "selector" : "ul.op-related-articles",
+    "properties" : {
+      "related.title" : {
+        "type" : "exists",
+        "selector" : "ul.op-related-articles",
+        "attribute" : "title"
+      }
+    }
+  },
+  {
+    "class" : "FooterRelatedArticlesRule",
+    "selector" : "ul.op-related-articles"
+  },
+  {
+    "class" : "RelatedItemRule",
+    "selector" : "li",
+    "properties" : {
+      "related.sponsored" : {
+        "type" : "exists",
+        "selector" : "li",
+        "attribute": "data-sponsored"
+      },
+      "related.url" : {
+        "type" : "string",
+        "selector" : "a",
+        "attribute" : "href"
+      }
+    }
+  }
         ]
 }

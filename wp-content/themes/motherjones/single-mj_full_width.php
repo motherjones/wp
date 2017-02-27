@@ -72,7 +72,7 @@ get_header();
             </ul>
           </div>
         </div>
-        
+
         <div id="fullwidth-body">
           <?php print get_post_meta( get_the_ID(), 'body' )[0]; ?>
         </div>
@@ -89,7 +89,7 @@ get_header();
 
           <?php get_template_part( 'template-parts/related-articles' ); ?>
 
-          <?php print get_discus_thread( get_the_ID() ); ?>
+          <?php print get_disqus_thread( get_the_ID() ); ?>
 
           <script>
             //<!--

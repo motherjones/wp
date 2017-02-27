@@ -26,14 +26,14 @@ class ElementGetter extends AbstractGetter
 
     /**
      * @param \DOMNode $node
-     *
+     * @param string $selector
      * @return \DOMNodeList
      */
-    public function findAll($node)
+    public function findAll($node, $selector)
     {
         $domXPath = new \DOMXPath($node->ownerDocument);
         $converter = new CssSelectorConverter();
-        $xpath = $converter->toXPath($this->selector);
+        $xpath = $converter->toXPath($selector);
         return $domXPath->query($xpath, $node);
     }
 

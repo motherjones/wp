@@ -96,7 +96,7 @@ get_header(); ?>
     </div>
 
 	</main><!-- .site-main -->
-  <?php print get_discus_thread( get_the_ID() ); ?>
+  <?php print get_disqus_thread( get_the_ID() ); ?>
 
   <script language="javascript">
       <!--
