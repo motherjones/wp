@@ -364,7 +364,8 @@ h1.hed {
   margin-bottom: 0;
   color: black;
   text-decoration: none;
-  letter-spacing: -1px; }
+  letter-spacing: -1px;
+  text-transform: none; }
 
 .dek {
   font-family: Calluna, serif; }
