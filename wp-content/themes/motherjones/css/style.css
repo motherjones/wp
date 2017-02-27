@@ -955,10 +955,12 @@ ul.social-tools.bottom {
 
 .social-tools.bottom li {
   display: inline;
-  float: left;
+  float: right;
   overflow: hidden;
-  width: 45%;
-  margin: 0 2%; }
+  width: 48%; }
+  .social-tools.bottom li:first-child {
+    margin: 0;
+    float: left; }
 
 #main .social-tools.bottom .social i {
   display: inline;
