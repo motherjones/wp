@@ -264,8 +264,8 @@ if ( ! function_exists( 'mj_dateline' ) ) {
 }
 
 if ( ! function_exists( 'get_disqus_thread' ) ) {
-  function get_disqus_thread( $id ) {
-    return '<h1>fixme make me a disqus embed somehow</h1>';
+  function get_disqus_thread() {
+    comments_template( '', true );
   }
 }
 

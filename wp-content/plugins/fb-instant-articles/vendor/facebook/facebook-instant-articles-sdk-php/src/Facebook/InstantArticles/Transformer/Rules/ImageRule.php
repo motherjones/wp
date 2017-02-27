@@ -9,8 +9,10 @@
 namespace Facebook\InstantArticles\Transformer\Rules;
 
 use Facebook\InstantArticles\Elements\Image;
+use Facebook\InstantArticles\Elements\Paragraph;
 use Facebook\InstantArticles\Elements\InstantArticle;
 use Facebook\InstantArticles\Transformer\Warnings\InvalidSelector;
+use Facebook\InstantArticles\Validators\Type;
 
 class ImageRule extends ConfigurationSelectorRule
 {
@@ -25,17 +27,21 @@ class ImageRule extends ConfigurationSelectorRule
 
     public function getContextClass()
     {
-        return InstantArticle::getClassName();
+        return
+            [
+                InstantArticle::getClassName(),
+                Paragraph::getClassName()
+            ];
     }
 
     public static function create()
     {
-        return new ImageRule();
+        return new static();
     }
 
     public static function createFrom($configuration)
     {
-        $image_rule = self::create();
+        $image_rule = static::create();
         $image_rule->withSelector($configuration['selector']);
 
         $image_rule->withProperties(
@@ -54,15 +60,34 @@ class ImageRule extends ConfigurationSelectorRule
         return $image_rule;
     }
 
-    public function apply($transformer, $instant_article, $node)
+    public function apply($transformer, $context, $node)
     {
         $image = Image::create();
+
+        if (Type::is($context, InstantArticle::getClassName())) {
+            $instant_article = $context;
+        } elseif ($transformer->getInstantArticle()) {
+            $instant_article = $transformer->getInstantArticle();
+            $context->disableEmptyValidation();
+            $context = Paragraph::create();
+            $context->disableEmptyValidation();
+        } else {
+            $transformer->addWarning(
+                // This new error message should be something like:
+                // Could not transform Image, as no root InstantArticle was provided.
+                new NoRootInstantArticleFoundWarning(null, $node)
+            );
+            return $context;
+        }
 
         // Builds the image
         $url = $this->getProperty(self::PROPERTY_IMAGE_URL, $node);
         if ($url) {
             $image->withURL($url);
             $instant_article->addChild($image);
+            if ($instant_article !== $context) {
+                $instant_article->addChild($context);
+            }
         } else {
             $transformer->addWarning(
                 new InvalidSelector(
@@ -97,6 +122,6 @@ class ImageRule extends ConfigurationSelectorRule
         $transformer->transform($image, $node);
         $transformer->suppress_warnings = $suppress_warnings;
 
-        return $instant_article;
+        return $context;
     }
 }

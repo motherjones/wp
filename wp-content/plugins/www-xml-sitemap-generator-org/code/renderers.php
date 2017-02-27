@@ -35,9 +35,9 @@ namespace xmlSitemapGenerator;
 		{
 			
 			 echo '<item>'  ;
-				echo '<guid>'  . $url->location . '</guid>';
+				echo '<guid>'  . htmlspecialchars($url->location) . '</guid>';
 				echo '<title>'  . $url->title . '</title>';
-				echo '<link>'  . $url->location . '</link>';
+				echo '<link>'  . htmlspecialchars($url->location) . '</link>';
 				echo '<description>' . $url->description . '</description>';
 				echo '<pubDate>' . date(DATE_RSS, $url->modified) . '</pubDate>';
 			 echo "</item>\n" ;
@@ -175,7 +175,7 @@ namespace xmlSitemapGenerator;
 		{
 			
 			 echo '<url>'  ;
-				echo '<loc>'  . $url->location . '</loc>';
+				echo '<loc>'  . htmlspecialchars($url->location) . '</loc>';
 				 echo '<lastmod>' . date('Y-m-d\TH:i:s+00:00', $url->modified) . '</lastmod>';
 				 
 				 if (!$url->frequency==0) {
@@ -230,7 +230,7 @@ namespace xmlSitemapGenerator;
 		{
 			
 			 echo '<li>'  ;
-				echo '<a href="' . $url->location . '">';
+				echo '<a href="' . htmlspecialchars($url->location) . '">';
 				echo $url->title;
 				echo '</a>';
 			 echo "</li>\n" ;

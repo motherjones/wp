@@ -14,7 +14,8 @@ use Facebook\InstantArticles\Transformer\Warnings\InvalidSelector;
 
 class TimeRule extends ConfigurationSelectorRule
 {
-    const PROPERTY_TIME_TYPE = 'article.time_type';
+    const PROPERTY_TIME_TYPE_DEPRECATED = 'article.time_type';
+    const PROPERTY_DATETIME_TYPE = 'article.datetype';
     const PROPERTY_TIME = 'article.time';
 
     private $type = Time::PUBLISHED;
@@ -34,13 +35,17 @@ class TimeRule extends ConfigurationSelectorRule
         $time_rule = self::create();
         $time_rule->withSelector($configuration['selector']);
 
-        $time_rule->withProperty(
-            self::PROPERTY_TIME,
-            self::retrieveProperty($configuration, self::PROPERTY_TIME)
+        $time_rule->withProperties(
+            [
+                self::PROPERTY_TIME,
+                self::PROPERTY_DATETIME_TYPE
+            ],
+            $configuration
         );
 
-        if (isset($configuration[self::PROPERTY_TIME_TYPE])) {
-            $time_rule->type = $configuration[self::PROPERTY_TIME_TYPE];
+        // Just for retrocompatibility - issue #172
+        if (isset($configuration[self::PROPERTY_TIME_TYPE_DEPRECATED])) {
+            $time_rule->type = $configuration[self::PROPERTY_TIME_TYPE_DEPRECATED];
         }
 
         return $time_rule;
@@ -48,6 +53,11 @@ class TimeRule extends ConfigurationSelectorRule
 
     public function apply($transformer, $header, $node)
     {
+        $time_type = $this->getProperty(self::PROPERTY_DATETIME_TYPE, $node);
+        if ($time_type) {
+            $this->type = $time_type;
+        }
+
         // Builds the image
         $time_string = $this->getProperty(self::PROPERTY_TIME, $node);
         if ($time_string) {
@@ -64,6 +74,8 @@ class TimeRule extends ConfigurationSelectorRule
                 )
             );
         }
+
+
 
         return $header;
     }

@@ -4,9 +4,9 @@
  */
 $hostname="localhost";  
 $username="root";   
-$password="p";  
+$password=$argv[1];
 
-$wp_db = "widget";  
+$wp_db = "pantheon_wp";  
 $wp = new PDO("mysql:host=$hostname;dbname=$wp_db", $username, $password);  
 
 

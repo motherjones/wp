@@ -24,7 +24,7 @@ class top_stories_widget extends WP_Widget {
 		// This is where you run the code and display the output
 
 		print '<div class="top-stories">';
-		print '<h2 class="promo">Top Stories</h2>';
+		print '<h2 class="promo">Top News</h2>';
 		print '<ul class="article-list">';
     $posts = z_get_zone_query('top_stories', array(
 			'posts_per_page' => 3,
