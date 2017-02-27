@@ -213,19 +213,70 @@ while ( $post = $post_data->fetch(PDO::FETCH_NUM)) {
 }
 $wp->commit();
 
+$article_term_insert = $wp->prepare('
+INSERT IGNORE INTO pantheon_wp.wp_terms
+(name, slug)
+VALUES (
+?,
+CONCAT( "cap-", REPLACE(LOWER(?), " ", "-") ),
+)
+;'
+);
+
+$article_type_terms = Array();
+foreach (Array('article', 'blogpost', 'full_width_article') as $type) {
+  $article_term_insert->execute(Array($type, $type, $article_type_tax));
+  $article_type_terms[$type] = $wp->lastInsertId();
+}
+$wp->commit();
+
+$tax_insert = $wp->prepare('
+INSERT IGNORE INTO pantheon_wp.wp_term_taxonomy
+(term_id, taxonomy, description, parent)
+VALUES (
+?
+"mj_article_type",
+"",
+0
+)
+;'
+);
+$wp_tax_id = Array();
+foreach ($article_type_terms as $type => $term_id) {
+  $tax_insert->execute(Array($term_id));
+  $wp_tax_id[$type] = $wp->lastInsertId();
+}
+$wp->commit();
+
+
+$term_insert = $wp->prepare('
+INSERT IGNORE INTO pantheon_wp.wp_term_relationships 
+(object_id, term_taxonomy_id)
+VALUES (
+SELECT p.ID, tax.term_taxonomy_id
+FROM wp_posts p
+JOIN
+wp_terms term
+ON (p.post_type = term.slug)
+JOIN
+wp_term_taxonomy tax
+ON (tax.term_id = term.term_id)
+)
+;'
+);
 
 $wp->beginTransaction();
 $wp->exec('
 UPDATE pantheon_wp.wp_posts
-  SET post_type="mj_article"
+  SET post_type="post"
   WHERE post_type="article";
 
 UPDATE pantheon_wp.wp_posts
-  SET post_type="mj_full_width"
+  SET post_type="post"
   WHERE post_type="full_width_article";
 
 UPDATE pantheon_wp.wp_posts
-  SET post_type="mj_blog_post"
+  SET post_type="post"
   WHERE post_type="blogpost";
 
 UPDATE pantheon_wp.wp_posts
