@@ -1,6 +1,8 @@
 <?php
 /**
  * The template for displaying all single posts and attachments
+ * Post Template: Article
+ * Description: Default template for articles
  *
  * @package WordPress
  * @subpackage Mother_Jones
