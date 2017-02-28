@@ -141,18 +141,6 @@ while ( $term = $term_rel_data->fetch(PDO::FETCH_NUM)) {
 }
 $wp->commit();
 
-// Update tag counts.
-$wp->beginTransaction();
-$wp->exec('
-UPDATE pantheon_wp.wp_term_taxonomy tt
-SET `count` = (
-SELECT COUNT(tr.object_id)
-FROM pantheon_wp.wp_term_relationships tr
-WHERE tr.term_taxonomy_id = tt.term_taxonomy_id
-)
-;
-');
-$wp->commit();
 
 echo "taxonomy done";
 
@@ -253,7 +241,8 @@ foreach ($article_type_terms as $type => $term_id) {
 $wp->commit();
 
 
-$term_insert = $wp->prepare('
+$wp->beginTransaction();
+$wp->exec('
 INSERT IGNORE INTO pantheon_wp.wp_term_relationships 
 (object_id, term_taxonomy_id)
 SELECT p.ID, tax.term_taxonomy_id
@@ -266,27 +255,41 @@ wp_term_taxonomy tax
 ON (tax.term_id = term.term_id)
 ;'
 );
+$wp->commit();
 
+// Update tag counts.
 $wp->beginTransaction();
 $wp->exec('
-UPDATE pantheon_wp.wp_posts
-  SET post_type="post"
-  WHERE post_type="article";
-
-UPDATE pantheon_wp.wp_posts
-  SET post_type="post"
-  WHERE post_type="full_width_article";
-
-UPDATE pantheon_wp.wp_posts
-  SET post_type="post"
-  WHERE post_type="blogpost";
-
-UPDATE pantheon_wp.wp_posts
-  SET post_author IS NULL
-  WHERE post_author NOT IN (SELECT DISTINCT ID FROM pantheon_wp.wp_users) ;
-
+UPDATE pantheon_wp.wp_term_taxonomy tt
+SET `count` = (
+SELECT COUNT(tr.object_id)
+FROM pantheon_wp.wp_term_relationships tr
+WHERE tr.term_taxonomy_id = tt.term_taxonomy_id
+)
+;
 ');
 $wp->commit();
+
+#$wp->beginTransaction();
+#$wp->exec('
+#UPDATE pantheon_wp.wp_posts
+#  SET post_type="post"
+#  WHERE post_type="article";
+#
+#UPDATE pantheon_wp.wp_posts
+#  SET post_type="post"
+#  WHERE post_type="full_width_article";
+#
+#UPDATE pantheon_wp.wp_posts
+#  SET post_type="post"
+#  WHERE post_type="blogpost";
+#
+#UPDATE pantheon_wp.wp_posts
+#  SET post_author IS NULL
+#  WHERE post_author NOT IN (SELECT DISTINCT ID FROM pantheon_wp.wp_users) ;
+#
+#');
+#$wp->commit();
 
 
 //for blog body
