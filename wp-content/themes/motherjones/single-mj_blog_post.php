@@ -60,7 +60,7 @@ get_header(); ?>
 						the_content();
 					?>
 				</section>
-	    
+
 	      <footer class="entry-footer">
 					<?php
 						dynamic_sidebar( 'content-end' );
@@ -87,6 +87,9 @@ get_header(); ?>
 	               'mj_blog_type' ); ?>
 	          </li>
 	        </ul>
+					<?php
+						print get_disqus_thread( get_the_ID() );
+					?>
 	      </footer><!-- .entry-footer -->
 	    </article><!-- #post-## -->
 
@@ -111,7 +114,6 @@ get_header(); ?>
 
 		</main><!-- .site-main -->
 		<?php
-	    print get_disqus_thread( get_the_ID() );
 	    if ( $meta['js'][0] ) {
 	      printf(
 	        'script>%s</script>',
