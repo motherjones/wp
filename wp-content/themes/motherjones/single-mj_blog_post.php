@@ -1,6 +1,6 @@
 <?php
 /**
- * The template for displaying all single posts and attachments
+ * The template for displaying blog posts
  * Post Template: Blog Post
  *
  * @package WordPress

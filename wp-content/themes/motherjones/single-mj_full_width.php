@@ -1,6 +1,7 @@
 <?php
 /**
- * The template for displaying all single posts and attachments
+ * The template for displaying full-width articles
+ * Post Template: Full-Width Article
  *
  * @package WordPress
  * @subpackage Mother_Jones
