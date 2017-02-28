@@ -116,6 +116,7 @@ if ( !class_exists( 'MJ_Taxonomy' ) ) {
       $this->all_taxonomies[$this->article_type_id] = $this->article_type_taxonomy;
       add_action( 'created_mj_media_type', array($this, 'fill_media_type') );
       add_action( 'created_mj_blog_type', array($this, 'fill_blog_type') );
+      add_action( 'created_mj_article_type', array($this, 'fill_article_type') );
     }
 
     public function fill_media_type() {
@@ -126,6 +127,11 @@ if ( !class_exists( 'MJ_Taxonomy' ) ) {
     public function fill_blog_type() {
       foreach ( $this->blog_terms as $i => $term ) {
         wp_insert_term($term, $this->blog_type_id);
+      }
+    }
+    public function fill_article_type() {
+      foreach ( $this->article_type_terms as $i => $term ) {
+        wp_insert_term($term, $this->article_type_id);
       }
     }
 
