@@ -270,26 +270,26 @@ WHERE tr.term_taxonomy_id = tt.term_taxonomy_id
 ');
 $wp->commit();
 
-#$wp->beginTransaction();
-#$wp->exec('
-#UPDATE pantheon_wp.wp_posts
-#  SET post_type="post"
-#  WHERE post_type="article";
-#
-#UPDATE pantheon_wp.wp_posts
-#  SET post_type="post"
-#  WHERE post_type="full_width_article";
-#
-#UPDATE pantheon_wp.wp_posts
-#  SET post_type="post"
-#  WHERE post_type="blogpost";
-#
-#UPDATE pantheon_wp.wp_posts
-#  SET post_author IS NULL
-#  WHERE post_author NOT IN (SELECT DISTINCT ID FROM pantheon_wp.wp_users) ;
-#
-#');
-#$wp->commit();
+$wp->beginTransaction();
+$wp->exec('
+UPDATE pantheon_wp.wp_posts
+  SET post_type="post"
+  WHERE post_type="article";
+
+UPDATE pantheon_wp.wp_posts
+  SET post_type="post"
+  WHERE post_type="full_width_article";
+
+UPDATE pantheon_wp.wp_posts
+  SET post_type="post"
+  WHERE post_type="blogpost";
+
+UPDATE pantheon_wp.wp_posts
+  SET post_author IS NULL
+  WHERE post_author NOT IN (SELECT DISTINCT ID FROM pantheon_wp.wp_users) ;
+
+');
+$wp->commit();
 
 
 //for blog body
