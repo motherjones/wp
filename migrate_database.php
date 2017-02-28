@@ -215,10 +215,11 @@ $wp->commit();
 
 $article_term_insert = $wp->prepare('
 INSERT IGNORE INTO pantheon_wp.wp_terms
-(name, slug)
+(name, slug, term_group)
 VALUES (
 ?,
-CONCAT( "cap-", REPLACE(LOWER(?), " ", "-") ),
+?,
+0
 )
 ;'
 );
@@ -236,7 +237,7 @@ $tax_insert = $wp->prepare('
 INSERT IGNORE INTO pantheon_wp.wp_term_taxonomy
 (term_id, taxonomy, description, parent)
 VALUES (
-?
+?,
 "mj_article_type",
 "",
 0
