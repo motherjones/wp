@@ -688,7 +688,7 @@ footer#colophon #copyright a {
 /* end readers like you */
 
 /* social buttons */
-ul.social-tools.top {
+.top ul.social-tools {
   list-style-type: none;
   display: block;
   background: $white;
@@ -701,24 +701,13 @@ ul.social-tools.top {
   }
 }
 
-.blog-post .social-tools.top,
-.article .social-tools.top {
+.blog-post .social-container.top .social-tools,
+.article .social-container.top .social-tools {
   width: 98px;
   padding: 0 10px;
 }
-.social-tools.blog {
-  list-style-type: none;
-  padding: 0;
-  li {
-    display: inline;
-    margin: 0 5px;
-    a {
-      border: none;
-    }
-  }
-}
-.social-tools.blog .share-text,
-.social-tools.top .share-text {
+
+.top .social-tools .share-text {
   display: none;
 }
 .blog-post .social-container.top,
@@ -738,7 +727,6 @@ ul.social-tools.top {
   padding-bottom: 30px;
   border-bottom: 1px solid #ccc
 }
-
 a.social {
   text-decoration: none;
   text-align: center;
@@ -762,21 +750,38 @@ a.social {
   font-size: 20px;
   line-height: 30px;
 }
-
-ul.social-tools.bottom {
+.bottom .social-tools {
   padding-left: 0px;
-}
-.social-tools.bottom li {
-  display: inline;
-  float: right;
-  overflow: hidden;
-  width: 48%;
-  &:first-child {
-    margin: 0;
-    float: left;
+  li {
+    display: inline;
+    float: right;
+    overflow: hidden;
+    width: 48%;
+    &:first-child {
+      margin: 0;
+      float: left;
+    }
+  }
+  .facebook a {
+    background-color: #3c5a98;
+    border-color: #365391;
+    border-radius: 3px;
+    font-size: 16px;
+    &:hover {
+      background-color: #304D8A;
+    }
+  }
+  .twitter a {
+    background-color: #67add1;
+    border-color: #578dc1;
+    border-radius: 3px;
+    font-size: 16px;
+    &:hover {
+      background-color: #478db1;
+    }
   }
 }
-#main .social-tools.bottom {
+#main .bottom .social-tools {
   .social i {
     display: inline;
     margin-right: 5px;
@@ -792,24 +797,6 @@ ul.social-tools.bottom {
     font-family: "lucida grande",Helvetica,Arial,sans-serif;
     height: 35px;
     padding-top: 2px;
-  }
-}
-.social-tools.bottom .facebook a {
-  background-color: #3c5a98;
-  border-color: #365391;
-  border-radius: 3px;
-  font-size: 16px;
-  &:hover {
-    background-color: #304D8A;
-  }
-}
-.social-tools.bottom .twitter a {
-  background-color: #67add1;
-  border-color: #578dc1;
-  border-radius: 3px;
-  font-size: 16px;
-  &:hover {
-    background-color: #478db1;
   }
 }
 a.social-icon {
@@ -1325,11 +1312,13 @@ article p {
   margin: 0 10px 1em;
 }
 @media only screen and (max-width: 500px) {
-  #navbar { top: -5px; }
+  #navbar {
+    top: -5px;
+  }
 }
 
 #sidebar-right,
-ul.social-tools.top {
+.top ul.social-tools {
   display: none;
 }
 
@@ -1348,8 +1337,14 @@ ul.social-tools.top {
     margin-left: auto;
     margin-right: auto;
   }
-
-  ul.social-tools.top {
+  article.blog-post {
+    width: 660px;
+    float: left;
+    header {
+      width: 610px;
+    }
+  }
+  .top ul.social-tools {
     display: block;
   }
   #sidebar-right {

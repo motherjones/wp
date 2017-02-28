@@ -27,8 +27,8 @@
 				<?php print mj_dateline( get_the_ID() ); ?>
 			</span>
 		</p>
-		<div class="social-container article top">
-			<ul class="social-tools article top">
+		<div class="social-container top">
+			<ul class="social-tools">
 				<li class="twitter">
 					<?php print mj_flat_twitter_button( get_the_ID() ); ?>
 				</li>
