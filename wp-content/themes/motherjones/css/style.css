@@ -310,14 +310,14 @@ a {
 /* set orange underline */
 footer#colophon #copyright a,
 footer#colophon #footer-list a,
-.single article a {
+.entry-content a {
   background-image: url("/wp-content/themes/motherjones/img/orange-border.png");
   background-repeat: repeat-x;
   text-decoration: none;
   text-shadow: -1px 0 0 white, 0 1px 0 white, 1px 0 0 white, 0 -1px 0 white, -1px -1px 0 white, 1px 1px 0 white, 1px -1px 0 white, -1px 1px 0 white; }
   footer#colophon #copyright a:hover,
   footer#colophon #footer-list a:hover,
-  .single article a:hover {
+  .entry-content a:hover {
     background-image: none;
     color: #FF6900;
     text-shadow: none; }
@@ -640,7 +640,7 @@ blockquote {
 
 /* end static navbar styling */
 /* blogstuff */
-header.article {
+.entry-header {
   text-align: center; }
 
 .blog.entry-header {
@@ -1448,7 +1448,8 @@ ul.social-tools.top {
     width: 330px; }
 
   .main-index,
-  article {
+  .entry-content,
+  .entry-footer {
     width: 630px;
     float: left; }
 

@@ -26,7 +26,7 @@ a {
 /* set orange underline */
 footer#colophon #copyright a,
 footer#colophon #footer-list a,
-.single article a {
+.entry-content a {
   background-image: url('/wp-content/themes/motherjones/img/orange-border.png');
   background-repeat: repeat-x;
   text-decoration: none;
@@ -400,7 +400,7 @@ blockquote {
 /* end static navbar styling */
 
 /* blogstuff */
-header.article  {
+.entry-header  {
   text-align: center;
 }
 .blog.entry-header {
@@ -1348,6 +1348,7 @@ ul.social-tools.top {
     margin-left: auto;
     margin-right: auto;
   }
+
   ul.social-tools.top {
     display: block;
   }
@@ -1357,7 +1358,8 @@ ul.social-tools.top {
     width: 330px;
   }
   .main-index,
-  article {
+  .entry-content,
+  .entry-footer {
     width: 630px;
     float: left;
   }

@@ -9,7 +9,7 @@
  * @since Mother Jones 1.0
  */
 
-if ( ! function_exists( 'mj_entry_meta' ) ) :
+if ( ! function_exists( 'mj_entry_meta' ) ) {
 /**
  * Prints HTML with meta information for the categories, tags.
  *
@@ -17,38 +17,38 @@ if ( ! function_exists( 'mj_entry_meta' ) ) :
  *
  * @since Mother Jones 1.0
  */
-function mj_entry_meta() {
-	if ( 'post' === get_post_type() ) {
-		$author_avatar_size = apply_filters( 'mj_author_avatar_size', 49 );
-		printf( '<span class="byline"><span class="author vcard">%1$s<span class="screen-reader-text">%2$s </span> <a class="url fn n" href="%3$s">%4$s</a></span></span>',
-			get_avatar( get_the_author_meta( 'user_email' ), $author_avatar_size ),
-			_x( 'Author', 'Used before post author name.', 'mj' ),
-			esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ),
-			get_the_author()
-		);
-	}
+	function mj_entry_meta() {
+		if ( 'post' === get_post_type() ) {
+			$author_avatar_size = apply_filters( 'mj_author_avatar_size', 49 );
+			printf( '<span class="byline"><span class="author vcard">%1$s<span class="screen-reader-text">%2$s </span> <a class="url fn n" href="%3$s">%4$s</a></span></span>',
+				get_avatar( get_the_author_meta( 'user_email' ), $author_avatar_size ),
+				_x( 'Author', 'Used before post author name.', 'mj' ),
+				esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ),
+				get_the_author()
+			);
+		}
 
-	if ( in_array( get_post_type(), array( 'post', 'attachment' ) ) ) {
-		mj_entry_date();
-	}
+		if ( in_array( get_post_type(), array( 'post', 'attachment' ) ) ) {
+			mj_entry_date();
+		}
 
-	$format = get_post_format();
-	if ( current_theme_supports( 'post-formats', $format ) ) {
-		printf( '<span class="entry-format">%1$s<a href="%2$s">%3$s</a></span>',
-			sprintf( '<span class="screen-reader-text">%s </span>', _x( 'Format', 'Used before post format.', 'mj' ) ),
-			esc_url( get_post_format_link( $format ) ),
-			get_post_format_string( $format )
-		);
-	}
+		$format = get_post_format();
+		if ( current_theme_supports( 'post-formats', $format ) ) {
+			printf( '<span class="entry-format">%1$s<a href="%2$s">%3$s</a></span>',
+				sprintf( '<span class="screen-reader-text">%s </span>', _x( 'Format', 'Used before post format.', 'mj' ) ),
+				esc_url( get_post_format_link( $format ) ),
+				get_post_format_string( $format )
+			);
+		}
 
-	if ( 'post' === get_post_type() ) {
-		mj_entry_taxonomies();
-	}
+		if ( 'post' === get_post_type() ) {
+			mj_entry_taxonomies();
+		}
 
+	}
 }
-endif;
 
-if ( ! function_exists( 'mj_entry_date' ) ) :
+if ( ! function_exists( 'mj_entry_date' ) ) {
 /**
  * Prints HTML with date information for current post.
  *
@@ -56,29 +56,29 @@ if ( ! function_exists( 'mj_entry_date' ) ) :
  *
  * @since Mother Jones 1.0
  */
-function mj_entry_date() {
-	$time_string = '<time class="entry-date published updated" datetime="%1$s">%2$s</time>';
+	function mj_entry_date() {
+		$time_string = '<time class="entry-date published updated" datetime="%1$s">%2$s</time>';
 
-	if ( get_the_time( 'U' ) !== get_the_modified_time( 'U' ) ) {
-		$time_string = '<time class="entry-date published" datetime="%1$s">%2$s</time><time class="updated" datetime="%3$s">%4$s</time>';
+		if ( get_the_time( 'U' ) !== get_the_modified_time( 'U' ) ) {
+			$time_string = '<time class="entry-date published" datetime="%1$s">%2$s</time><time class="updated" datetime="%3$s">%4$s</time>';
+		}
+
+		$time_string = sprintf( $time_string,
+			esc_attr( get_the_date( 'c' ) ),
+			get_the_date(),
+			esc_attr( get_the_modified_date( 'c' ) ),
+			get_the_modified_date()
+		);
+
+		printf( '<span class="posted-on"><span class="screen-reader-text">%1$s </span><a href="%2$s" rel="bookmark">%3$s</a></span>',
+			_x( 'Posted on', 'Used before publish date.', 'mj' ),
+			esc_url( get_permalink() ),
+			$time_string
+		);
 	}
-
-	$time_string = sprintf( $time_string,
-		esc_attr( get_the_date( 'c' ) ),
-		get_the_date(),
-		esc_attr( get_the_modified_date( 'c' ) ),
-		get_the_modified_date()
-	);
-
-	printf( '<span class="posted-on"><span class="screen-reader-text">%1$s </span><a href="%2$s" rel="bookmark">%3$s</a></span>',
-		_x( 'Posted on', 'Used before publish date.', 'mj' ),
-		esc_url( get_permalink() ),
-		$time_string
-	);
 }
-endif;
 
-if ( ! function_exists( 'mj_entry_taxonomies' ) ) :
+if ( ! function_exists( 'mj_entry_taxonomies' ) ) {
 /**
  * Prints HTML with category and tags for current post.
  *
@@ -86,26 +86,26 @@ if ( ! function_exists( 'mj_entry_taxonomies' ) ) :
  *
  * @since Mother Jones 1.0
  */
-function mj_entry_taxonomies() {
-	$categories_list = get_the_category_list( _x( ', ', 'Used between list items, there is a space after the comma.', 'mj' ) );
-	if ( $categories_list && mj_categorized_blog() ) {
-		printf( '<span class="cat-links"><span class="screen-reader-text">%1$s </span>%2$s</span>',
-			_x( 'Categories', 'Used before category names.', 'mj' ),
-			$categories_list
-		);
-	}
+	function mj_entry_taxonomies() {
+		$categories_list = get_the_category_list( _x( ', ', 'Used between list items, there is a space after the comma.', 'mj' ) );
+		if ( $categories_list && mj_categorized_blog() ) {
+			printf( '<span class="cat-links"><span class="screen-reader-text">%1$s </span>%2$s</span>',
+				_x( 'Categories', 'Used before category names.', 'mj' ),
+				$categories_list
+			);
+		}
 
-	$tags_list = get_the_tag_list( '', _x( ', ', 'Used between list items, there is a space after the comma.', 'mj' ) );
-	if ( $tags_list ) {
-		printf( '<span class="tags-links"><span class="screen-reader-text">%1$s </span>%2$s</span>',
-			_x( 'Tags', 'Used before tag names.', 'mj' ),
-			$tags_list
-		);
+		$tags_list = get_the_tag_list( '', _x( ', ', 'Used between list items, there is a space after the comma.', 'mj' ) );
+		if ( $tags_list ) {
+			printf( '<span class="tags-links"><span class="screen-reader-text">%1$s </span>%2$s</span>',
+				_x( 'Tags', 'Used before tag names.', 'mj' ),
+				$tags_list
+			);
+		}
 	}
 }
-endif;
 
-if ( ! function_exists( 'mj_post_thumbnail' ) ) :
+if ( ! function_exists( 'mj_post_thumbnail' ) ) {
 /**
  * Displays an optional post thumbnail.
  *
@@ -116,29 +116,29 @@ if ( ! function_exists( 'mj_post_thumbnail' ) ) :
  *
  * @since Mother Jones 1.0
  */
-function mj_post_thumbnail() {
-	if ( post_password_required() || is_attachment() || ! has_post_thumbnail() ) {
-		return;
+	function mj_post_thumbnail() {
+		if ( post_password_required() || is_attachment() || ! has_post_thumbnail() ) {
+			return;
+		}
+
+		if ( is_singular() ) :
+		?>
+
+		<div class="post-thumbnail">
+			<?php the_post_thumbnail(); ?>
+		</div><!-- .post-thumbnail -->
+
+		<?php else : ?>
+
+		<a class="post-thumbnail" href="<?php the_permalink(); ?>" aria-hidden="true">
+			<?php the_post_thumbnail( 'post-thumbnail', array( 'alt' => the_title_attribute( 'echo=0' ) ) ); ?>
+		</a>
+
+		<?php endif; // End is_singular()
 	}
-
-	if ( is_singular() ) :
-	?>
-
-	<div class="post-thumbnail">
-		<?php the_post_thumbnail(); ?>
-	</div><!-- .post-thumbnail -->
-
-	<?php else : ?>
-
-	<a class="post-thumbnail" href="<?php the_permalink(); ?>" aria-hidden="true">
-		<?php the_post_thumbnail( 'post-thumbnail', array( 'alt' => the_title_attribute( 'echo=0' ) ) ); ?>
-	</a>
-
-	<?php endif; // End is_singular()
 }
-endif;
 
-if ( ! function_exists( 'mj_excerpt' ) ) :
+if ( ! function_exists( 'mj_excerpt' ) ) {
 	/**
 	 * Displays the optional excerpt.
 	 *
@@ -159,9 +159,9 @@ if ( ! function_exists( 'mj_excerpt' ) ) :
 			</div><!-- .<?php echo $class; ?> -->
 		<?php endif;
 	}
-endif;
+}
 
-if ( ! function_exists( 'mj_excerpt_more' ) && ! is_admin() ) :
+if ( ! function_exists( 'mj_excerpt_more' ) && ! is_admin() ) {
 /**
  * Replaces "[...]" (appended to automatically generated excerpts) with ... and
  * a 'Continue reading' link.
@@ -172,16 +172,17 @@ if ( ! function_exists( 'mj_excerpt_more' ) && ! is_admin() ) :
  *
  * @return string 'Continue reading' link prepended with an ellipsis.
  */
-function mj_excerpt_more() {
-	$link = sprintf( '<a href="%1$s" class="more-link">%2$s</a>',
-		esc_url( get_permalink( get_the_ID() ) ),
-		/* translators: %s: Name of current post */
-		sprintf( __( 'Continue reading<span class="screen-reader-text"> "%s"</span>', 'mj' ), get_the_title( get_the_ID() ) )
-	);
-	return ' &hellip; ' . $link;
+	function mj_excerpt_more() {
+		$link = sprintf( '<a href="%1$s" class="more-link">%2$s</a>',
+			esc_url( get_permalink( get_the_ID() ) ),
+			/* translators: %s: Name of current post */
+			sprintf( __( 'Continue reading<span class="screen-reader-text"> "%s"</span>', 'mj' ), get_the_title( get_the_ID() ) )
+		);
+		return ' &hellip; ' . $link;
+	}
+	add_filter( 'excerpt_more', 'mj_excerpt_more' );
 }
-add_filter( 'excerpt_more', 'mj_excerpt_more' );
-endif;
+
 
 /**
  * Determines whether blog/site has more than one category.
@@ -215,6 +216,30 @@ function mj_categorized_blog() {
 		return false;
 	}
 }
+
+
+/**
+ * Schema.org article metadata we include in the header of each single post
+ *
+ * @since 0.1
+ */
+if ( ! function_exists( 'mj_post_metadata' ) ) {
+	function mj_post_metadata( $post_id, $echo = TRUE ) {
+		$out = '<meta itemprop="description" content="' . strip_tags( get_the_excerpt() ) . '" />' . "\n";
+		$out .= '<meta itemprop="datePublished" content="' . get_the_date( 'c', $post_id ) . '" />' . "\n";
+		$out .= '<meta itemprop="dateModified" content="' . get_the_modified_date( 'c', $post_id ) . '" />' . "\n";
+		if ( has_post_thumbnail( $post_id ) ) {
+			$image = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'thumbnail' );
+			$out .= '<meta itemprop="image" content="' . $image[0] . '" />';
+		}
+		if ( $echo ) {
+			echo $out;
+		} else {
+			return $out;
+		}
+	}
+}
+
 
 /**
  * Flushes out the transients used in mj_categorized_blog().

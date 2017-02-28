@@ -42,6 +42,7 @@ function mj_get_post_template( $template ) {
   if ( is_object( $post ) ) {
     $custom_field = get_post_meta( $post->ID, '_wp_post_template', true );
   }
+  //if we have a custom field and it's not the default (article)
   if ( ! empty( $custom_field ) ) {
     if ( file_exists( get_stylesheet_directory() . "/{$custom_field}" ) ) {
       $template = get_stylesheet_directory() . "/{$custom_field}";
@@ -76,6 +77,7 @@ function mj_layout_meta_box_display() {
     echo '<p>' . __( 'Select the post template you wish this post to use.', 'mj-post-templates' ) . '</p>';
     echo '<label class="hidden" for="post_template">' . __( 'Post Template', 'mj-post-templates' ) . '</label>';
     echo '<select name="_wp_post_template" id="post_template" class="dropdown">';
+    echo '<option value="">' . __( 'Article', 'mj' ) . '</option>';
     mj_post_templates_dropdown(); //get the options
     echo '</select>';
   }

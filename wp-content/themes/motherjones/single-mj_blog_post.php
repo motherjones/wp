@@ -14,7 +14,7 @@ get_header(); ?>
 <div id="content" class="site-content">
 <div id="primary" class="content-area">
 	<main id="main" class="site-main group" role="main">
-    <article class="blog-post">
+    <article id="post-<?php the_ID(); ?>" <?php post_class( 'hnews blog-post' ); ?> itemscope itemtype="http://schema.org/Article">
       <div class="entry-header blog-post">
         <?php the_title( '<h1 class="blog-post hed">', '</h1>' ); ?>
         <h3 class="dek">
