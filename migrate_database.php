@@ -256,7 +256,6 @@ $wp->commit();
 $term_insert = $wp->prepare('
 INSERT IGNORE INTO pantheon_wp.wp_term_relationships 
 (object_id, term_taxonomy_id)
-VALUES (
 SELECT p.ID, tax.term_taxonomy_id
 FROM wp_posts p
 JOIN
@@ -265,7 +264,6 @@ ON (p.post_type = term.slug)
 JOIN
 wp_term_taxonomy tax
 ON (tax.term_id = term.term_id)
-)
 ;'
 );
 
