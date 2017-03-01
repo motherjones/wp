@@ -13,7 +13,6 @@ function mj_get_post_template( $template ) {
   } else {
     $template = get_stylesheet_directory() . "/single-{$custom_field}.php";
   }
-  echo $template;
   return $template;
 }
 
