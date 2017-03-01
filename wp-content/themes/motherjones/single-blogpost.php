@@ -1,7 +1,6 @@
 <?php
 /**
  * The template for displaying blog posts
- * Post Template: Blog Post
  *
  * @package WordPress
  * @subpackage Mother_Jones

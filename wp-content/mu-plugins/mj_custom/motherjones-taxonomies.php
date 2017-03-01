@@ -48,6 +48,7 @@ if ( !class_exists( 'MJ_Taxonomy' ) ) {
     private $blog_taxonomy = array(
       'single' => 'Blog Type',
       'plural' => 'Blog Types',
+      'hierarchical' => true,
       'capabilites' => array(
         'assign_terms' => 'edit_posts',
         'edit_terms' => 'update_core',
@@ -63,6 +64,9 @@ if ( !class_exists( 'MJ_Taxonomy' ) ) {
     private $article_type_taxonomy = array(
       'single' => 'Article Type',
       'plural' => 'Article Types',
+      'hierarchical' => false,
+      'show_admin_column' => true,
+      'meta_box_cb' => 'mj_article_type_meta_box',
       'capabilites' => array(
         'assign_terms' => 'edit_posts',
         'edit_terms' => 'update_core',
@@ -158,16 +162,20 @@ if ( !class_exists( 'MJ_Taxonomy' ) ) {
             'choose_from_most_used'      => "Choose from the most used {$plural}",
             'not_found'                  => "No {$plural} found.",
             'menu_name'                  => $plural
-          )
+          ),
+          'hierarchical' => $args['hierarchical'],
+          'show_ui' => $args['show_ui'],
+          'show_admin_column' => $args['show_admin_column'],
+          'meta_box_cb' => $args['meta_box_cb']
         ) );
       }
     }
-    
+
   }
 
   function MJ_Taxonomy() {
     return MJ_Taxonomy::instance();
   }
-} 
+}
 
 ?>

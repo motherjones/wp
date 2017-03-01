@@ -1,87 +1,70 @@
 <?php
 
-// Layout options for post templates
-largo_add_meta_box(
-  'mj_layout_meta',
-  __( 'Post Template', 'mj-post-templates' ),
-  mj_layout_meta_box_display,
-  array( 'post' ),
-  'side',
-  'core'
-);
-largo_register_meta_input( '_wp_post_template', 'sanitize_text_field' );
-
-//	Scan the template files of the active theme,
-//	returns an array of [Template Name => {file}.php]
-function mj_get_post_templates() {
-  $theme = wp_get_theme();
-  $templates = $theme->get_files( 'php', 1, true );
-  $post_templates = array();
-  $base = array( trailingslashit( get_template_directory() ), trailingslashit( get_stylesheet_directory() ) );
-  foreach ( (array) $templates as $template ) {
-    $template = WP_CONTENT_DIR . str_replace( WP_CONTENT_DIR, '', $template );
-    $basename = str_replace( $base, '', $template );
-    $template_data = implode( '', file( $template ) );
-    $name = '';
-    if ( preg_match( '|Post Template:(.*)$|mi', $template_data, $name ) ) {
-      $name = _cleanup_header_comment( $name[1] );
-    }
-    if ( ! empty( $name ) ) {
-      if( basename( $template ) != basename(__FILE__) ) {
-        $post_templates[trim($name)] = $basename;
-      }
-    }
-  }
-  return $post_templates;
-}
-
 // Filter the single template value, and replace it with the selected custom template
 add_filter( 'single_template', 'mj_get_post_template' );
 function mj_get_post_template( $template ) {
   global $post;
   if ( is_object( $post ) ) {
-    $custom_field = get_post_meta( $post->ID, '_wp_post_template', true );
+    $template = get_the_terms( $post->ID, 'mj_article_type' );
+    $custom_field = strtolower( $template[0]->slug );
   }
-  //if we have a custom field and it's not the default (article)
-  if ( ! empty( $custom_field ) ) {
-    if ( file_exists( get_stylesheet_directory() . "/{$custom_field}" ) ) {
-      $template = get_stylesheet_directory() . "/{$custom_field}";
-    } else if ( file_exists( get_template_directory() . "/{$custom_field}" ) ) {
-      $template = get_template_directory() . "/{$custom_field}";
-    }
+  if ( empty( $custom_field ) || $custom_field === 'article' ) {
+    $template = get_stylesheet_directory() . "/single.php";
+  } else {
+    $template = get_stylesheet_directory() . "/single-{$custom_field}.php";
   }
+  echo $template;
   return $template;
 }
 
-// Build the dropdown menu displayed in the post edit UI
-function mj_post_templates_dropdown() {
-  global $post;
-  $post_templates = mj_get_post_templates();
-  foreach ( $post_templates as $template_name => $template_file ) { //loop through templates, make them options
-    if ( $template_file == get_post_meta( $post->ID, '_wp_post_template', true ) ) {
+/**
+ * Display meta box
+ */
+function mj_article_type_meta_box( $post ) {
+  $terms = get_terms( 'mj_article_type', array( 'hide_empty' => false ) );
+	$post  = get_post();
+	$article_type = wp_get_object_terms( $post->ID, 'mj_article_type', array( 'orderby' => 'term_id', 'order' => 'ASC' ) );
+  print_r($article_type);
+  echo '<label class="hidden" for="mj_article_type">' . __( 'Article Type', 'mj' ) . '</label>';
+  echo '<select name="mj_article_type" id="mj_article_type" class="dropdown">';
+  foreach ( $terms as $term ) {
+    if ( isset( $article_type[0] ) && ( $article_type[0]->name === $term->name ) ) {
       $selected = ' selected="selected"';
     } else {
       $selected = '';
     }
-    $opt = '<option value="' . $template_file . '"' . $selected . '>' . $template_name . '</option>';
+    $opt = '<option value="' . $term->name . '"' . $selected . '>' . $term->name . '</option>';
     echo $opt;
   }
+  echo '</select>';
 }
 
-// Output the markup for the metabox
-function mj_layout_meta_box_display() {
-  global $post;
-  wp_nonce_field( 'largo_meta_box_nonce', 'meta_box_nonce' );
-  if ( $post->post_type != 'page' ) {
-    echo '<p><strong>' . __( 'Template', 'mj-post-templates' ) . '</strong></p>';
-    echo '<p>' . __( 'Select the post template you wish this post to use.', 'mj-post-templates' ) . '</p>';
-    echo '<label class="hidden" for="post_template">' . __( 'Post Template', 'mj-post-templates' ) . '</label>';
-    echo '<select name="_wp_post_template" id="post_template" class="dropdown">';
-    echo '<option value="">' . __( 'Article', 'mj' ) . '</option>';
-    mj_post_templates_dropdown(); //get the options
-    echo '</select>';
+/**
+ * Save the meta box.
+ *
+ * @param int $post_id The ID of the post that's being saved.
+ */
+function save_mj_article_type_meta_box( $post_id ) {
+	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+		return;
+	}
+	if ( ! isset( $_POST['mj_article_type'] ) ) {
+		return;
+	}
+	$article_type = sanitize_text_field( $_POST['mj_article_type'] );
+
+	// set a default, just in case
+	if ( empty( $article_type ) ) {
+    $term = get_term_by( 'slug', 'article', 'mj_article_type' );
+	} else {
+		$term = get_term_by( 'name', $article_type, 'mj_article_type' );
+	}
+  if ( ! is_wp_error( $term ) ) {
+    wp_set_object_terms( $post_id, $term->term_id, 'mj_article_type', false );
   }
 }
+add_action( 'save_post', 'save_mj_article_type_meta_box' );
+
 
 /**
  * Modelled on is_page_template, determine if we are in a single post template.

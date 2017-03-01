@@ -1,7 +1,6 @@
 <?php
 /**
  * The template for displaying full-width articles
- * Post Template: Full-Width Article
  *
  * @package WordPress
  * @subpackage Mother_Jones
