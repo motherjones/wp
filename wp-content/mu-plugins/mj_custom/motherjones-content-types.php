@@ -83,9 +83,9 @@ if ( !class_exists( 'MJ_Custom_Types' ) ) {
     public function setup() {
       $this->taxonomies = MJ_Taxonomy();
       $this->fields = MJ_Custom_Fields();
-      self::create_full_width_type();
-      self::create_article_type();
-      self::create_blog_post_type();
+      //self::create_full_width_type();
+      //self::create_article_type();
+      //self::create_blog_post_type();
       self::create_author_type();
       add_filter('pre_get_posts', array($this, 'set_index_query') );
     }
