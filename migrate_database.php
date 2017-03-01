@@ -141,18 +141,6 @@ while ( $term = $term_rel_data->fetch(PDO::FETCH_NUM)) {
 }
 $wp->commit();
 
-// Update tag counts.
-$wp->beginTransaction();
-$wp->exec('
-UPDATE pantheon_wp.wp_term_taxonomy tt
-SET `count` = (
-SELECT COUNT(tr.object_id)
-FROM pantheon_wp.wp_term_relationships tr
-WHERE tr.term_taxonomy_id = tt.term_taxonomy_id
-)
-;
-');
-$wp->commit();
 
 echo "taxonomy done";
 
@@ -253,7 +241,8 @@ foreach ($article_type_terms as $type => $term_id) {
 $wp->commit();
 
 
-$term_insert = $wp->prepare('
+$wp->beginTransaction();
+$wp->exec('
 INSERT IGNORE INTO pantheon_wp.wp_term_relationships 
 (object_id, term_taxonomy_id)
 SELECT p.ID, tax.term_taxonomy_id
@@ -266,6 +255,20 @@ wp_term_taxonomy tax
 ON (tax.term_id = term.term_id)
 ;'
 );
+$wp->commit();
+
+// Update tag counts.
+$wp->beginTransaction();
+$wp->exec('
+UPDATE pantheon_wp.wp_term_taxonomy tt
+SET `count` = (
+SELECT COUNT(tr.object_id)
+FROM pantheon_wp.wp_term_relationships tr
+WHERE tr.term_taxonomy_id = tt.term_taxonomy_id
+)
+;
+');
+$wp->commit();
 
 $wp->beginTransaction();
 $wp->exec('
@@ -290,9 +293,9 @@ $wp->commit();
 
 
 //for blog body
-$meta_data = $d6->prepare("
+$post_content = $d6->prepare("
 SELECT DISTINCT 
-n.nid, 'body',
+n.nid,
 IF( 
   e.field_extended_body_value IS NULL,
   b.field_short_body_value,
@@ -306,24 +309,26 @@ USING(vid)
 WHERE n.type='blogpost'
 ;
 ");
-$meta_data->execute();
+$post_content->execute();
 
-$meta_insert = $wp->prepare('
-INSERT IGNORE INTO pantheon_wp.wp_postmeta 
-(post_id, meta_key, meta_value)
-VALUES (?, ?, ?)
+$content_insert = $wp->prepare('
+UPDATE wp_posts
+SET post_content=?
+WHERE ID=?
 ;
 ');
+
 $wp->beginTransaction();
-while ( $meta = $meta_data->fetch(PDO::FETCH_NUM)) {
-	$meta_insert->execute($meta);
+while ( $content = $post_content->fetch(PDO::FETCH_NUM)) {
+	$content_insert->execute(Array($content[1], $content[0]));
 }
 $wp->commit();
 
+
 //for article bodys
-$meta_data = $d6->prepare('
+$post_content = $d6->prepare('
 SELECT DISTINCT 
-n.nid, "body", 
+n.nid,
 IF( 
   e.field_article_text_value IS NULL,
   b.field_short_body_value,
@@ -337,32 +342,40 @@ USING(vid)
 WHERE n.type="article"
 ;
 ');
-$meta_data->execute();
+$post_content->execute();
 
 $wp->beginTransaction();
-while ( $meta = $meta_data->fetch(PDO::FETCH_NUM)) {
-	$meta_insert->execute($meta);
+while ( $content = $post_content->fetch(PDO::FETCH_NUM)) {
+	$content_insert->execute(Array($content[1], $content[0]));
 }
 $wp->commit();
 
 
 //for full width bodys
-$meta_data = $d6->prepare('
+$post_content = $d6->prepare('
 SELECT DISTINCT 
-n.nid, "body", b.field_short_body_value
+n.nid, b.field_short_body_value
 FROM mjd6.node n
 INNER JOIN mjd6.content_field_short_body b
 USING(vid)
 WHERE n.type="full_width_article"
 ;
 ');
-$meta_data->execute();
+$post_content->execute();
 
 $wp->beginTransaction();
-while ( $meta = $meta_data->fetch(PDO::FETCH_NUM)) {
-	$meta_insert->execute($meta);
+while ( $content = $post_content->fetch(PDO::FETCH_NUM)) {
+	$content_insert->execute(Array($content[1], $content[0]));
 }
 $wp->commit();
+
+
+$meta_insert = $wp->prepare('
+INSERT IGNORE INTO pantheon_wp.wp_postmeta 
+(post_id, meta_key, meta_value)
+VALUES (?, ?, ?)
+;
+');
 
 //for dek
 $meta_data = $d6->prepare('
