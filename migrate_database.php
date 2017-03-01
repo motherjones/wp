@@ -1328,59 +1328,72 @@ echo "files done";
 
 // do zoninator
 
+$zones = Array(
+  'top_stories' => Array(
+    324446, 324431, 324441, 324436, 324531,
+    324576, 324296, 324626, 324616, 324426, 324586
+  ),
+  'homepage_featured' => Array(324801)
+);
+$zone_descriptions = Array(
+  'top_stories' => Array('description' => "For placement on the homepage, top story widget"),
+  'homepage_featured' => Array('description' => "Controls 'Featured' section on the homepage")
+);
 
-$zone_term_insert = $wp->prepare('
-INSERT IGNORE INTO wp_terms
-(name, slug)
-VALUES (?, ?)
-;
-');
-$wp->beginTransaction();
-$zone_term_insert->execute(array('top_stories', 'top_stories'));
+foreach ($zones as $zone => $queue) {
+  $zone_term_insert = $wp->prepare('
+  INSERT IGNORE INTO wp_terms
+  (name, slug)
+  VALUES (?, ?)
+  ;
+  ');
+  $wp->beginTransaction();
+  $zone_term_insert->execute(array($zone, $zone));
 
-$zone_term_id = $wp->lastInsertId();
-$wp->commit();
+  $zone_term_id = $wp->lastInsertId();
+  $wp->commit();
 
-$zone_tax_insert = $wp->prepare('
-INSERT IGNORE INTO wp_term_taxonomy
-(term_id, taxonomy, description)
-VALUES (?, "zoninator_zones", ?)
-;
-');
-
-
-$description = Array('description' => "For placement on the homepage, top story widget");
-
-$wp->beginTransaction();
-$zone_tax_insert->execute(array(
-  $zone_term_id, 
-  serialize($description)
-));
-$zone_tax_id = $wp->lastInsertId();
-$wp->commit();
+  $zone_tax_insert = $wp->prepare('
+  INSERT IGNORE INTO wp_term_taxonomy
+  (term_id, taxonomy, description)
+  VALUES (?, "zoninator_zones", ?)
+  ;
+  ');
 
 
+  $description = $zone_descriptions[$zone];
 
-$zone_meta_insert = $wp->prepare('
-INSERT IGNORE INTO wp_postmeta
-(post_id, meta_key, meta_value)
-VALUES (?, ?, ?)
-;
-');
-
-$top_stories_queue = Array(325726, 325721);
-$meta_key = '_zoninator_order_' . $zone_term_id;
-
-$wp->beginTransaction();
-for ($i = 0; $i < count($top_stories_queue); $i++) {
-  $zone_meta_insert->execute(Array(
-    $top_stories_queue[$i],
-    $meta_key,
-    ($i + 1)
+  $wp->beginTransaction();
+  $zone_tax_insert->execute(array(
+    $zone_term_id, 
+    serialize($description)
   ));
-}
-$wp->commit();
+  $zone_tax_id = $wp->lastInsertId();
+  $wp->commit();
 
+
+
+  $zone_meta_insert = $wp->prepare('
+  INSERT IGNORE INTO wp_postmeta
+  (post_id, meta_key, meta_value)
+  VALUES (?, ?, ?)
+  ;
+  ');
+
+  $top_stories_queue = Array(325726, 325721);
+  $meta_key = '_zoninator_order_' . $zone_term_id;
+
+  $wp->beginTransaction();
+  for ($i = 0; $i < count($queue); $i++) {
+    $zone_meta_insert->execute(Array(
+      $queue[$i],
+      $meta_key,
+      ($i + 1)
+    ));
+  }
+  $wp->commit();
+
+}
 echo "zoninator filled";
 
 
