@@ -38,6 +38,7 @@ TRUNCATE pantheon_wp.wp_term_relationships;
 ');
 $wp->commit();
 
+
 $term_insert_data = $d6->prepare('
 SELECT *
 FROM term_data
@@ -143,6 +144,7 @@ $wp->commit();
 
 
 echo "taxonomy done";
+
 
 $wp->beginTransaction();
 $wp->exec('
@@ -1323,5 +1325,63 @@ foreach ( $node_file_rows as $nid => $row ) {
 $wp->commit();
 
 echo "files done";
+
+// do zoninator
+
+
+$zone_term_insert = $wp->prepare('
+INSERT IGNORE INTO wp_terms
+(name, slug)
+VALUES (?, ?)
+;
+');
+$wp->beginTransaction();
+$zone_term_insert->execute(array('top_stories', 'top_stories'));
+
+$zone_term_id = $wp->lastInsertId();
+$wp->commit();
+
+$zone_tax_insert = $wp->prepare('
+INSERT IGNORE INTO wp_term_taxonomy
+(term_id, taxonomy, description)
+VALUES (?, "zoninator_zones", ?)
+;
+');
+
+
+$description = Array('description' => "For placement on the homepage, top story widget");
+
+$wp->beginTransaction();
+$zone_tax_insert->execute(array(
+  $zone_term_id, 
+  serialize($description)
+));
+$zone_tax_id = $wp->lastInsertId();
+$wp->commit();
+
+
+
+$zone_meta_insert = $wp->prepare('
+INSERT IGNORE INTO wp_postmeta
+(post_id, meta_key, meta_value)
+VALUES (?, ?, ?)
+;
+');
+
+$top_stories_queue = Array(325726, 325721);
+$meta_key = '_zoninator_order_' . $zone_tax_id;
+
+$wp->beginTransaction();
+for ($i = 0; $i < count($top_stories_queue); $i++) {
+  $zone_meta_insert->execute(Array(
+    $top_stories_queue[$i],
+    $meta_key,
+    ($i + 1)
+  ));
+}
+$wp->commit();
+
+echo "zoninator filled";
+
 
 ?>
