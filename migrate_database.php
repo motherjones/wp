@@ -1369,7 +1369,7 @@ VALUES (?, ?, ?)
 ');
 
 $top_stories_queue = Array(325726, 325721);
-$meta_key = '_zoninator_order_' . $zone_tax_id;
+$meta_key = '_zoninator_order_' . $zone_term_id;
 
 $wp->beginTransaction();
 for ($i = 0; $i < count($top_stories_queue); $i++) {
