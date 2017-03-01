@@ -23,7 +23,6 @@ function mj_article_type_meta_box( $post ) {
   $terms = get_terms( 'mj_article_type', array( 'hide_empty' => false ) );
 	$post  = get_post();
 	$article_type = wp_get_object_terms( $post->ID, 'mj_article_type', array( 'orderby' => 'term_id', 'order' => 'ASC' ) );
-  print_r($article_type);
   echo '<label class="hidden" for="mj_article_type">' . __( 'Article Type', 'mj' ) . '</label>';
   echo '<select name="mj_article_type" id="mj_article_type" class="dropdown">';
   foreach ( $terms as $term ) {
