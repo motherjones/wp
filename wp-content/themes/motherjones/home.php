@@ -21,17 +21,23 @@ get_header(); ?>
 		<main id="main" class="site-main homepage" role="main">
 
       <div id="homepage-top" class="group">
-        <?php $top_stories = z_get_zone_query('top_stories', array(
-          'posts_per_page' => 10,
-        ) ); ?>
-
-        <?php $top_stories->the_post(); ?>
-        <?php get_template_part( 'template-parts/homepage-top-story' ); ?>
-
+        <?php
+					$top_stories = z_get_zone_query(
+						'top_stories',
+						array(
+	          	'posts_per_page' => 10
+						)
+					);
+					$top_stories->the_post();
+					get_template_part( 'template-parts/homepage-top-story' );
+				?>
         <ul id="homepage-top-story-side">
-          <?php for ($i = 0; $i < 3; $i++): $top_stories->the_post(); ?>
-            <?php get_template_part( 'template-parts/homepage-top-story-side' ); ?>
-          <?php endfor;?>
+          <?php
+						for ( $i = 0; $i < 3; $i++ ) {
+							$top_stories->the_post();
+							get_template_part( 'template-parts/homepage-top-story-side' );
+	          }
+					?>
         </ul>
       </div>
 
@@ -52,9 +58,12 @@ get_header(); ?>
         <div id="homepage-more-top-stories-main">
           <h2 class="promo">More Top Stories</h2>
           <ul id="homepage-more-top-stories">
-            <?php for ($i = 0; $i < 6; $i++): $top_stories->the_post(); ?>
-              <?php get_template_part( 'template-parts/homepage-top-story-side' ); ?>
-            <?php endfor; ?>
+            <?php
+							for ( $i = 0; $i < 6; $i++ ) {
+								$top_stories->the_post();
+	              get_template_part( 'template-parts/homepage-top-story-side' );
+							}
+						?>
           </ul>
         </div>
         <div id="homepage-more-stories-sidebar">
@@ -63,34 +72,48 @@ get_header(); ?>
       </div>
 
       <div id="homepage-featured" class="homepage-fullwidth group">
-        <?php $featured_story = z_get_zone_query('homepage_featured', array(
-          'posts_per_page' => 1,
-        ) );
-        $featured_story->the_post();
-        $fullwidth_title = 'Featured';
-        ?>
-        <?php include( locate_template( 'template-parts/homepage-fullwidth.php' ) ); ?>
+        <?php
+					$featured_story = z_get_zone_query(
+						'homepage_featured',
+						array(
+		          'posts_per_page' => 1,
+		        )
+					);
+        	$featured_story->the_post();
+        	$fullwidth_title = 'Featured';
+					get_template_part( 'template-parts/homepage-fullwidth' );
+				?>
       </div>
 
       <div id="homepage-sections" class="group">
         <ul id="homepage-sections-list">
-          <li class="homepage-section">
+					<li class="homepage-section">
             <h2 class="promo">
               <a href="/politics">Politics</a>
             </h2>
             <ul class="homepage-section-list">
-              <?php $pol_query = new WP_Query(array(
+              <?php $pol_query = new WP_Query( array(
                 'category_name' => 'politics',
-                'post_type' => array( 'mj_article', 'mj_full_width' ),
+								'tax_query' => array(
+									array(
+                  	'taxonomy' => 'mj_article_type',
+                  	'field' => 'slug',
+                  	'terms' => 'blogpost',
+										'operator' => 'NOT IN'
+                	)
+								),
                 'posts_per_page' => 2,
               ) );
               $pol_query->the_post();
               get_template_part( 'template-parts/homepage-section-first' );
-              $pol_query->the_post();
-              get_template_part( 'template-parts/homepage-section' );
+							$pol_query->the_post();
+	            get_template_part( 'template-parts/homepage-section' );
+
               ?>
             </ul>
           </li>
+
+
           <li class="homepage-section">
             <h2 class="promo">
               <a href="/environment">Environment</a>
@@ -98,7 +121,14 @@ get_header(); ?>
             <ul class="homepage-section-list">
               <?php $env_query = new WP_Query( array(
                 'category_name' => 'environment',
-                'post_type' => array( 'mj_article', 'mj_full_width' ),
+								'tax_query' => array(
+									array(
+                  	'taxonomy' => 'mj_article_type',
+                  	'field' => 'slug',
+                  	'terms' => 'blogpost',
+										'operator' => 'NOT IN'
+                	)
+								),
                 'posts_per_page' => 2,
               ) );
               $env_query->the_post();
@@ -115,7 +145,14 @@ get_header(); ?>
             <ul class="homepage-section-list">
               <?php $media_query = new WP_Query( array(
                 'category_name' => 'media',
-                'post_type' => array( 'mj_article', 'mj_full_width' ),
+                'tax_query' => array(
+									array(
+                  	'taxonomy' => 'mj_article_type',
+                  	'field' => 'slug',
+                  	'terms' => 'blogpost',
+										'operator' => 'NOT IN'
+                	)
+								),
                 'posts_per_page' => 2,
               ) );
               $media_query->the_post();
@@ -131,12 +168,20 @@ get_header(); ?>
             </h2>
             <ul class="homepage-section-list">
               <?php $food_query = new WP_Query( array(
-                'tax_query' => array( array(
-                  'taxonomy' => 'mj_primary_tag',
-                  'field' => 'slug',
-                  'terms' => 'food',
-                )  ),
-                'post_type' => array( 'mj_article', 'mj_full_width' ),
+                'tax_query' => array(
+									'relation' => 'AND',
+									array(
+                  	'taxonomy' => 'mj_primary_tag',
+                  	'field' => 'slug',
+                  	'terms' => 'food',
+                	),
+									array(
+                  	'taxonomy' => 'mj_article_type',
+                  	'field' => 'slug',
+                  	'terms' => 'blogpost',
+										'operator' => 'NOT IN'
+                	)
+								),
                 'posts_per_page' => 2,
               ) );
               //FIXME if we want food to be a section the query needs to change
@@ -153,12 +198,20 @@ get_header(); ?>
             </h2>
             <ul class="homepage-section-list">
               <?php $cnj_query = new WP_Query( array(
-                'tax_query' => array( array(
-                  'taxonomy' => 'mj_primary_tag',
-                  'field' => 'slug',
-                  'terms' => 'crime_and_justice',
-                )  ),
-                'post_type' => array('mj_article', 'mj_full_width'),
+								'tax_query' => array(
+									'relation' => 'AND',
+									array(
+                  	'taxonomy' => 'mj_primary_tag',
+                  	'field' => 'slug',
+                  	'terms' => 'crime-and-justice',
+                	),
+									array(
+                  	'taxonomy' => 'mj_article_type',
+                  	'field' => 'slug',
+                  	'terms' => 'blogpost',
+										'operator' => 'NOT IN'
+                	)
+								),
                 'posts_per_page' => 2,
               ) );
               //FIXME if we want C & J to be a section the query needs to change
@@ -180,12 +233,18 @@ get_header(); ?>
           <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/KEVIN.png"></img>
           <ul id="kdrum-post-list">
             <?php $kdrum = new WP_Query( array(
-                'tax_query' => array( array(
-                  'taxonomy' => 'mj_blog_type',
-                  'field' => 'slug',
-                  'terms' => 'kevin-drum',
-                )  ),
-                'post_type' => array( 'mj_blog_post'),
+                'tax_query' => array(
+									array(
+	                  'taxonomy' => 'mj_blog_type',
+	                  'field' => 'slug',
+	                  'terms' => 'kevin-drum',
+	                ),
+									array(
+                  	'taxonomy' => 'mj_article_type',
+                  	'field' => 'slug',
+                  	'terms' => 'blogpost'
+                	)
+								),
                 'posts_per_page' => 4,
               ) );
               while ( $kdrum->have_posts() ) {
@@ -208,12 +267,19 @@ get_header(); ?>
 
       <div id="homepage-exposure" class="homepage-fullwidth group">
         <?php $exposure_story = new WP_Query( array(
-            'tax_query' => array( array(
-              'taxonomy' => 'mj_media_type',
-              'field' => 'slug',
-              'terms' => 'photoessays',
-            )  ),
-            'post_type' => array( 'mj_article', 'mj_full_width' ),
+            'tax_query' => array(
+							array(
+	              'taxonomy' => 'mj_media_type',
+	              'field' => 'slug',
+	              'terms' => 'photoessays',
+	            ),
+							array(
+								'taxonomy' => 'mj_article_type',
+								'field' => 'slug',
+								'terms' => 'blogpost',
+								'operator' => 'NOT IN'
+							)
+						),
             'posts_per_page' => 1,
           ) );
           $exposure_story->the_post();
@@ -241,12 +307,19 @@ get_header(); ?>
         </h2>
         <ul id="homepage-investigations-list" class="group">
           <?php $investigations = new WP_Query( array(
-              'tax_query' => array( array(
-                'taxonomy' => 'mj_primary_tag',
-                'field' => 'slug',
-                'terms' => 'investigations',
-              )  ),
-              'post_type' => array( 'mj_article', 'mj_full_width' ),
+              'tax_query' => array(
+								array(
+	                'taxonomy' => 'mj_primary_tag',
+	                'field' => 'slug',
+	                'terms' => 'investigations',
+	              ),
+								array(
+									'taxonomy' => 'mj_article_type',
+									'field' => 'slug',
+									'terms' => 'blogpost',
+									'operator' => 'NOT IN'
+								)
+							),
               'posts_per_page' => 4,
             ) );
             while ( $investigations->have_posts() ) {
