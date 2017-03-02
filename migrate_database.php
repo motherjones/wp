@@ -1396,5 +1396,23 @@ foreach ($zones as $zone => $queue) {
 }
 echo "zoninator filled";
 
+// Set default theme to motherjones
 
+$wp->beginTransaction();
+$wp->exec('
+UPDATE pantheon_wp.wp_options
+SET option_value = "motherjones"
+WHERE option_name = "template"
+;
+');
+$wp->commit();
+
+$wp->beginTransaction();
+$wp->exec('
+UPDATE pantheon_wp.wp_options
+SET option_value = "motherjones"
+WHERE option_name = "stylesheet"
+;
+');
+$wp->commit();
 ?>
