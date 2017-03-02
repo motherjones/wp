@@ -1,6 +1,6 @@
 <?php
 /**
- * The template for displaying all single posts and attachments
+ * The template for displaying full-width articles
  *
  * @package WordPress
  * @subpackage Mother_Jones
@@ -60,36 +60,23 @@ get_header();
     <main id="main" class="site-main" role="main">
       <article class="full-width">
         <?php print get_post_meta( get_the_ID(), 'css' )[0]; ?>
-        <div class="full-width-social-container">
-          <div class="social-container article top">
-            <ul class="social-tools article top">
-              <li class="twitter">
-                <?php print mj_flat_twitter_button( get_the_ID() ); ?>
-              </li>
-              <li class="facebook">
-                <?php print mj_flat_facebook_button( get_the_ID() ); ?>
-              </li>
-            </ul>
-          </div>
-        </div>
+
+        <?php mj_share_tools( 'top' ); ?>
 
         <div id="fullwidth-body">
-          <?php print get_post_meta( get_the_ID(), 'body' )[0]; ?>
+          <?php the_content(); ?>
         </div>
 
         <footer class="entry-footer">
 
-          <?php dynamic_sidebar( 'content-end' ); ?>
-
-          <?php get_template_part( 'template-parts/end-article-sharing' ); ?>
-
-          <?php get_template_part( 'template-parts/end-article-bio' ); ?>
-
-          <?php get_template_part( 'template-parts/members-like-you' ); ?>
-
-          <?php get_template_part( 'template-parts/related-articles' ); ?>
-
-          <?php print get_disqus_thread( get_the_ID() ); ?>
+          <?php
+            dynamic_sidebar( 'content-end' );
+            mj_share_tools( 'bottom' );
+            get_template_part( 'template-parts/end-article-bio' );
+            get_template_part( 'template-parts/members-like-you' );
+            get_template_part( 'template-parts/related-articles' );
+            print get_disqus_thread( get_the_ID() );
+          ?>
 
           <script>
             //<!--

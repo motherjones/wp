@@ -61,12 +61,14 @@ class MJ {
 	 */
 	private function require_files() {
 		$includes = array(
-		  '/inc/enqueue.php',
+			//'/inc/largo-metabox-api.php',
+			'/inc/enqueue.php',
 			'/inc/helpers.php',
 			'/inc/editor.php',
 			'/inc/images.php',
 			'/inc/sidebars.php',
-			'/inc/template-tags.php'
+			'/inc/template-tags.php',
+			'/inc/post-templates.php'
 		);
 		foreach ( $includes as $include ) {
 			require_once( get_template_directory() . $include );
