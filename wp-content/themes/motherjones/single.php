@@ -6,12 +6,12 @@
  * @subpackage Mother_Jones
  * @since Mother Jones 1.0
  */
-
 get_header(); ?>
 <div id="content" class="site-content">
 	<div id="primary" class="content-area">
 		<?php
 	    while ( have_posts() ) : the_post();
+				global $meta;
 	      $meta = get_post_meta( get_the_ID() );
 	  ?>
 		<main id="main" class="site-main group" role="main">

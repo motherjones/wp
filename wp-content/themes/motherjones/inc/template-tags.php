@@ -325,3 +325,22 @@ if ( ! function_exists( 'mj_flat_facebook_button' ) ) {
       $href );
   }
 }
+
+function mj_share_tools ( $context ) {
+	$classes = 'social-container group';
+	$id = get_the_ID();
+	if ( ! empty ( $context ) ) {
+	  $classes .= ' ' . $context;
+	}
+	printf(
+		'<div class="%s">
+			<ul>
+				<li class="facebook">%s</li>
+				<li class="twitter">%s</li>
+			</ul>
+		</div>',
+		$classes,
+		mj_flat_facebook_button( $id ),
+		mj_flat_twitter_button( $id )
+	);
+}

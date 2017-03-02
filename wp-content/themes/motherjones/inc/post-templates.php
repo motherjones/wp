@@ -66,12 +66,21 @@ add_action( 'save_post', 'save_mj_article_type_meta_box' );
 // Add a class to the body element for styling purposes
 function mj_article_type_class( $classes ) {
   if ( is_single() ) {
-    $post  = get_post();
+    $post  = get_queried_object();
     $template = get_the_terms( $post->ID, 'mj_article_type' );
     if ( ! empty( $template ) ) {
-      $classes[] = 'mj_article_type_' . $template[0]->slug;
+      $classes[] = 'mj_article_type-' . $template[0]->slug;
     }
   }
   return $classes;
 }
 add_filter( 'body_class', 'mj_article_type_class' );
+
+// utility function to see if we're looking at a given post type
+function mj_is_article_type( $slug, $post_id ) {
+  $article_type = get_the_terms( $post_id, 'mj_article_type' );
+  if ( $article_type[0]->slug === $slug ) {
+    return true;
+  }
+  return false;
+}

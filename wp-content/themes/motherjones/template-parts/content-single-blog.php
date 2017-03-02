@@ -6,11 +6,13 @@
  * @subpackage Mother_Jones
  * @since Mother Jones 1.0
  */
- global $meta;
+  global $meta;
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class( 'hnews' ); ?> itemscope itemtype="http://schema.org/Article">
+
 	<?php get_template_part( 'template-parts/single', 'entry-header' ); ?>
+
 	<section class="entry-content" itemprop="articleBody">
 		<?php
 			if ( $meta['css'][0] ) {
@@ -32,8 +34,25 @@
 			mj_share_tools( 'bottom' );
 			get_template_part( 'template-parts/end-article-bio' );
 			get_template_part( 'template-parts/members-like-you' );
-			get_template_part( 'template-parts/related-articles' );
 		?>
+		<ul id="prev-next">
+			<li class="previous">
+				<?php echo previous_post_link(
+					' <span class="label">Previous:</span> %link',
+					 '%title',
+					 TRUE,
+					 ' ',
+					 'mj_blog_type' ); ?>
+			</li>
+			<li class="next">
+				<?php echo next_post_link(
+					' <span class="label">Next:</span> %link',
+					 '%title',
+					 TRUE,
+					 ' ',
+					 'mj_blog_type' ); ?>
+			</li>
+		</ul>
 	</footer><!-- .entry-footer -->
 
 	<div id="sidebar-right">
