@@ -8,7 +8,7 @@ function mj_get_post_template( $template ) {
     $template = get_the_terms( $post->ID, 'mj_article_type' );
     $custom_field = strtolower( $template[0]->slug );
   }
-  if ( empty( $custom_field ) || $custom_field === 'article' ) {
+  if ( empty( $custom_field ) || in_array( $custom_field, array( 'article', 'blogpost' ) ) ) {
     $template = get_stylesheet_directory() . "/single.php";
   } else {
     $template = get_stylesheet_directory() . "/single-{$custom_field}.php";
