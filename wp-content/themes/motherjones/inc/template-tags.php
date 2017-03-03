@@ -260,8 +260,8 @@ add_action( 'save_post',     'mj_category_transient_flusher' );
  * create our bylines
  */
 if ( ! function_exists( 'mj_byline' ) ) {
-  function mj_byline() {
-    $override = get_post_meta( $id, 'byline_override' )[0];
+  function mj_byline( $id ) {
+    $override = get_post_meta( $id, 'byline_override', true );
     if ( trim( $override ) ) {
       return $override;
     } else {
@@ -280,7 +280,7 @@ if ( ! function_exists( 'mj_dateline' ) ) {
     if ( ! $id ) {
 			$id = get_the_ID();
 		}
-    $override = get_post_meta( $id, 'mj_dateline_override' )[0];
+    $override = get_post_meta( $id, 'mj_dateline_override', true );
     if ( trim( $override ) ) {
       return $override;
     }
@@ -300,7 +300,7 @@ if ( ! function_exists( 'get_disqus_thread' ) ) {
 if ( ! function_exists( 'mj_flat_twitter_button' ) ) {
   function mj_flat_twitter_button( $id ) {
     $id = $id ? $id : get_the_ID();
-    $social = trim( get_post_meta( $id, 'social' )['mj_social_hed'] );
+    $social = trim( get_post_meta( $id, 'mj_social_hed', true ) );
     $status = $social ? $social : get_the_title( $id );
     $href = 'http://twitter.com/home?status=' . $status . ' '
       . esc_url( get_permalink( $id ) ). ' via @MotherJones';
