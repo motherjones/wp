@@ -39,18 +39,19 @@ function mj_hex2rgb( $color ) {
  * @param array $context an array with the variables that should be made available in the template being loaded.
  * @since 0.4
  */
-function largo_render_template($slug, $name=null, $context=array()) {
+function largo_render_template( $slug, $name = null, $context = array() ) {
 	global $wp_query;
 
-	if (is_array($name) && empty($context))
+	if ( is_array( $name ) && empty( $context ) ) {
 		$context = $name;
+  }
 
-	if (!empty($context)) {
-		$context = apply_filters('largo_render_template_context', $context, $slug, $name);
-		$wp_query->query_vars = array_merge($wp_query->query_vars, $context);
+	if ( ! empty( $context ) ) {
+		$context = apply_filters( 'largo_render_template_context', $context, $slug, $name );
+		$wp_query->query_vars = array_merge( $wp_query->query_vars, $context );
 	}
 
-	get_template_part($slug, $name);
+	get_template_part( $slug, $name );
 }
 
 /**
@@ -59,11 +60,8 @@ function largo_render_template($slug, $name=null, $context=array()) {
  * @since 0.5
  */
 function largo_get_current_url() {
-	$is_ssl = is_ssl();
-	if (!empty($is_ssl))
-		return "https://" . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
-	else
-		return "http://" .$_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
+	$url = $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
+	return ( ! empty( is_ssl() ) ) ? 'https://' . $url : 'http://' . $url;
 }
 
 /**
@@ -74,20 +72,20 @@ function largo_get_current_url() {
  * @since   0.4
  */
 function largo_fb_url_to_username( $url )  {
-	$urlParts = explode("/", $url);
-	if ( end($urlParts) == '' ) {
+	$urlParts = explode( '/', $url );
+	if ( end( $urlParts ) == '' ) {
 		// URL has a trailing slash
-		$urlParts = array_slice($urlParts, 0 , -1);
+		$urlParts = array_slice( $urlParts, 0 , -1 );
 	}
-	$username = end($urlParts);
-	if ( preg_match( "/profile.php/", $username ) ) {
+	$username = end( $urlParts );
+	if ( preg_match( '/profile.php/', $username ) ) {
 		// a profile id
-		preg_match( "/id=([0-9]+)/", $username, $matches );
+		preg_match( '/id=([0-9]+)/', $username, $matches );
 		$username = $matches[1];
 	} else {
 		// hopefully there's a username
-		preg_match( "/[^\?&#]+/", $username, $matches);
-		if (isset($matches[0])){
+		preg_match( '/[^\?&#]+/', $username, $matches);
+		if ( isset( $matches[0] ) ){
 			$username = $matches[0];
 		}
 	}
@@ -108,10 +106,10 @@ function largo_fb_url_to_username( $url )  {
  */
 function largo_fb_user_is_followable( $username ) {
 	// syntax for this iframe taken from https://developers.facebook.com/docs/plugins/follow-button/
-	$get = wp_remote_get( "https://www.facebook.com/plugins/follow.php?href=https%3A%2F%2Fwww.facebook.com%2F" . $username . "&amp;width&amp;height=80&amp;colorscheme=light&amp;layout=button&amp;show_faces=true");
+	$get = wp_remote_get( 'https://www.facebook.com/plugins/follow.php?href=https%3A%2F%2Fwww.facebook.com%2F' . $username . '&amp;width&amp;height=80&amp;colorscheme=light&amp;layout=button&amp;show_faces=true' );
 	if (! is_wp_error( $get ) ) {
 		$response = $get['body'];
-		if ( strpos($response, 'table') !== false ) {
+		if ( strpos( $response, 'table' ) !== false ) {
 			// can follow
 			return true;
 		} else {
@@ -136,17 +134,16 @@ function largo_fb_user_is_followable( $username ) {
  * @link   http://codex.wordpress.org/Plugin_API/Action_Reference/edit_user_profile_update
  * @link   http://codex.wordpress.org/Plugin_API/Action_Reference/personal_options_update
  */
-function clean_user_fb_username($user_id) {
-
-	if ( current_user_can('edit_user', $user_id) ) {
+function clean_user_fb_username( $user_id ) {
+	if ( current_user_can( 'edit_user', $user_id ) ) {
 		$fb = largo_fb_url_to_username( $_POST['fb'] );
 		if ( preg_match( '/[^a-zA-Z0-9\.\-]/', $fb ) ) {
 			// it's not a valid Facebook username, because it uses an invalid character
 			$fb = "";
 		}
-		update_user_meta($user_id, 'fb', $fb);
-		if ( get_user_meta($user_id, 'fb', true) != $fb ) {
-			wp_die(__('An error occurred.'));
+		update_user_meta( $user_id, 'fb', $fb );
+		if ( get_user_meta( $user_id, 'fb', true ) != $fb ) {
+			wp_die( __( 'An error occurred.' ) );
 		}
 		$_POST['fb'] = $fb;
 	}
@@ -164,17 +161,16 @@ function clean_user_fb_username($user_id) {
  * @since   0.4
  */
 function validate_fb_username( $errors, $update, $user ) {
-
-	if ( isset( $_POST["fb"] ) ) {
-		$fb_suspect = trim( $_POST["fb"] );
+	if ( isset( $_POST['fb'] ) ) {
+		$fb_suspect = trim( $_POST['fb'] );
 		if( ! empty( $fb_suspect ) ) {
 			$fb_user = largo_fb_url_to_username( $fb_suspect );
 			if ( preg_match( '/[^a-zA-Z0-9\.\-]/', $fb_user ) ) {
 				// it's not a valid Facebook username, because it uses an invalid character
-				$errors->add('fb_username', '<b>' . $fb_suspect . '</b> ' . __('is an invalid Facebook username.') . '</p>' . '<p>' . __('Facebook usernames only use the uppercase and lowercase alphabet letters (a-z A-Z), the Arabic numbers (0-9), periods (.) and dashes (-)') );
+				$errors->add( 'fb_username', '<b>' . $fb_suspect . '</b> ' . __('is an invalid Facebook username.') . '</p>' . '<p>' . __('Facebook usernames only use the uppercase and lowercase alphabet letters (a-z A-Z), the Arabic numbers (0-9), periods (.) and dashes (-)' ) );
 			}
 			if ( ! largo_fb_user_is_followable( $fb_user ) ) {
-				$errors->add('fb_username',' <b>' . $fb_suspect . '</b> ' . __('does not allow followers on Facebook.') . '</p>' . '<p>' . __('<a href="https://www.facebook.com/help/201148673283205#How-can-I-let-people-follow-me?">Follow these instructions</a> to allow others to follow you.') );
+				$errors->add( 'fb_username',' <b>' . $fb_suspect . '</b> ' . __('does not allow followers on Facebook.') . '</p>' . '<p>' . __('<a href="https://www.facebook.com/help/201148673283205#How-can-I-let-people-follow-me?">Follow these instructions</a> to allow others to follow you.' ) );
 			}
 		}
 	}
@@ -188,16 +184,16 @@ function validate_fb_username( $errors, $update, $user ) {
  * @since 	0.3
  */
 function largo_twitter_url_to_username( $url ) {
-	$urlParts = explode("/", $url);
-	if ( end($urlParts) == '' ) {
+	$urlParts = explode( '/', $url );
+	if ( end( $urlParts ) == '' ) {
 		// URL has a trailing slash
-		$urlParts = array_slice($urlParts, 0 , -1);
+		$urlParts = array_slice( $urlParts, 0 , -1 );
 	}
-	$username = preg_replace( "/@/", '', end($urlParts) );
+	$username = preg_replace( '/@/', '', end( $urlParts ) );
 	// strip the ?&# URL parameters if they're present
 	// this will let through all other characters
-	preg_match( "/[^\?&#]+/", $username, $matches);
-	if (isset($matches[0])){
+	preg_match( "/[^\?&#]+/", $username, $matches );
+	if ( isset( $matches[0] ) ){
 		$username = $matches[0];
 	}
 	return $username;
@@ -218,17 +214,16 @@ function largo_twitter_url_to_username( $url ) {
  * @link   http://codex.wordpress.org/Plugin_API/Action_Reference/edit_user_profile_update
  * @link   http://codex.wordpress.org/Plugin_API/Action_Reference/personal_options_update
  */
-function clean_user_twitter_username($user_id) {
-
-	if ( current_user_can('edit_user', $user_id) ) {
+function clean_user_twitter_username( $user_id ) {
+	if ( current_user_can( 'edit_user', $user_id ) ) {
 		$twitter = largo_twitter_url_to_username( $_POST['twitter'] );
 		if ( preg_match( '/[^a-zA-Z0-9_]/', $twitter ) ) {
 			// it's not a valid twitter username, because it uses an invalid character
 			$twitter = "";
 		}
-		update_user_meta($user_id, 'twitter_link', $twitter);
-		if ( get_user_meta($user_id, 'twitter_link', true) != $twitter ) {
-			wp_die(__('An error occurred.'));
+		update_user_meta( $user_id, 'twitter_link', $twitter );
+		if ( get_user_meta( $user_id, 'twitter_link', true ) != $twitter ) {
+			wp_die( __( 'An error occurred.' ) );
 		}
 		$_POST['twitter'] = $twitter;
 	}
@@ -246,7 +241,6 @@ function clean_user_twitter_username($user_id) {
  * @since   0.4
  */
 function validate_twitter_username( $errors, $update, $user ) {
-
 	if ( isset( $_POST["twitter"] ) ) {
 		$tw_suspect = trim( $_POST["twitter"] );
 		if( ! empty( $tw_suspect ) ) {

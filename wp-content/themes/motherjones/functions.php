@@ -62,6 +62,7 @@ class MJ {
 	private function require_files() {
 		$includes = array(
 			'/vendor/largo/largo-metabox-api.php',
+			'/vendor/largo/featured-media.php',
 			'/inc/editor.php',
 			'/inc/enqueue.php',
 			'/inc/helpers.php',

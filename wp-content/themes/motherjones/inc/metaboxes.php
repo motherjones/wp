@@ -2,7 +2,7 @@
 /**
  * Hide and rearrange some of the default metaboxes
  */
- 
+
 // Hide trackbacks, revisions, comments and (sometimes) custom fields
 function mj_remove_metaboxes() {
   global $current_user;

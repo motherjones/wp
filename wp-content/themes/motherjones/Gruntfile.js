@@ -42,6 +42,7 @@ module.exports = function(grunt) {
             'nav.js',
             'skip-link-focus-fix.js',
             'video-embed.js',
+            'featured-media.js',
             '!*.min.js'
           ],
           dest: 'js',
