@@ -141,10 +141,10 @@ if ( !class_exists( 'MJ_Taxonomy' ) ) {
 
     public function register() {
       foreach ( $this->all_taxonomies as $taxonomy => $args ) {
-        $plural = $args['plural'];
-        $singular = $args['singular'];
-        register_taxonomy( $taxonomy, $args['types'], array(
-          'capabilites' => $args['capabilities'],
+        $plural = isset( $args['plural'] ) ? $args['plural'] : '';
+        $singular = isset( $args['singular'] ) ? $args['singular'] : '';
+        $types = isset( $args['types'] ) ? $args['types'] : null;
+        $tax_args = array(
           'labels' => array(
             'name'                       => $plural,
             'singular_name'              => $singular,
@@ -162,12 +162,24 @@ if ( !class_exists( 'MJ_Taxonomy' ) ) {
             'choose_from_most_used'      => "Choose from the most used {$plural}",
             'not_found'                  => "No {$plural} found.",
             'menu_name'                  => $plural
-          ),
-          'hierarchical' => $args['hierarchical'],
-          'show_ui' => $args['show_ui'],
-          'show_admin_column' => $args['show_admin_column'],
-          'meta_box_cb' => $args['meta_box_cb']
-        ) );
+          )
+        );
+        if ( isset( $args['capabilites'] ) ) {
+          $tax_args['capabilites'] = $args['capabilites'];
+        }
+        if ( isset( $args['hierarchical'] ) ) {
+          $tax_args['hierarchical'] = $args['hierarchical'];
+        }
+        if ( isset( $args['show_ui'] ) ) {
+          $tax_args['show_ui'] = $args['show_ui'];
+        }
+        if ( isset( $args['show_admin_column'] ) ) {
+          $tax_args['show_admin_column'] = $args['show_admin_column'];
+        }
+        if ( isset( $args['meta_box_cb'] ) ) {
+          $tax_args['meta_box_cb'] = $args['meta_box_cb'];
+        }
+        register_taxonomy( $taxonomy, $types, $tax_args );
       }
     }
 
