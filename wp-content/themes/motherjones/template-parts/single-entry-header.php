@@ -1,12 +1,11 @@
 <?php global $meta; ?>
 <header  class="entry-header">
-  <?php the_title( '<h1 class="blog-post hed">', '</h1>' ); ?>
+  <?php the_title( '<h1 class="hed">', '</h1>' ); ?>
   <?php
-    //mj_is_article_type( 'blogpost', $post->ID )
-    if ( $meta['dek'][0] && !mj_is_article_type( 'blogpost', $post->ID ) ) {
+    if ( $meta['mj_dek'][0] && ! mj_is_article_type( 'blogpost', $post->ID ) ) {
       printf(
         '<h3 class="dek">%s</h3>',
-        $meta['dek'][0]
+        $meta['mj_dek'][0]
       );
     }
   ?>

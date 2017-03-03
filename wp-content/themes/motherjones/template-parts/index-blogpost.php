@@ -5,9 +5,9 @@
         <?php the_title(); ?>
       </a>
     </h1>
-    <?php if ( get_post_meta(get_the_ID(), 'dek' )[0] ): ?>
+    <?php if ( get_post_meta( get_the_ID(), 'mj_dek' )[0] ): ?>
       <h3 class="dek">
-        <?php print get_post_meta( get_the_ID(), 'dek' )[0]; ?>
+        <?php print get_post_meta( get_the_ID(), 'mj_dek' )[0]; ?>
       </h3>
     <?php endif ?>
     <p class="byline-dateline">
