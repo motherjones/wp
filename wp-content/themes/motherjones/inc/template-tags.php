@@ -280,7 +280,7 @@ if ( ! function_exists( 'mj_dateline' ) ) {
     if ( ! $id ) {
 			$id = get_the_ID();
 		}
-    $override = get_post_meta( $id, 'dateline_override' )[0];
+    $override = get_post_meta( $id, 'mj_dateline_override' )[0];
     if ( trim( $override ) ) {
       return $override;
     }
@@ -300,7 +300,7 @@ if ( ! function_exists( 'get_disqus_thread' ) ) {
 if ( ! function_exists( 'mj_flat_twitter_button' ) ) {
   function mj_flat_twitter_button( $id ) {
     $id = $id ? $id : get_the_ID();
-    $social = trim( get_post_meta( $id, 'social' )['social_title'] );
+    $social = trim( get_post_meta( $id, 'social' )['mj_social_hed'] );
     $status = $social ? $social : get_the_title( $id );
     $href = 'http://twitter.com/home?status=' . $status . ' '
       . esc_url( get_permalink( $id ) ). ' via @MotherJones';

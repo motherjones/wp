@@ -2,14 +2,19 @@
 /**
  * Hide and rearrange some of the default metaboxes
  */
+ 
 // Hide trackbacks, revisions, comments and (sometimes) custom fields
 function mj_remove_metaboxes() {
   global $current_user;
   get_currentuserinfo();
-  // remove these for everyone
-  // @todo: maybe remove postexcerpt as well?
-  $remove = array( 'trackbacksdiv', 'revisionsdiv', 'commentsdiv' );
-  // remove custom fields for everyone except administrators
+  // remove for everyone
+  $remove = array( 'trackbacksdiv', 'revisionsdiv', 'commentstatusdiv' );
+  // show for editors and above
+  if ( ! current_user_can( 'edit_others_posts' ) ) {
+    $remove[] = 'postexcerpt';
+    $remove[] = 'slugdiv';
+  }
+  // show for admins only
   if ( ! current_user_can( 'manage_options' ) ) {
     $remove[] = 'postcustom';
   }
@@ -19,13 +24,17 @@ function mj_remove_metaboxes() {
 }
 add_action( 'admin_menu','mj_remove_metaboxes' );
 
-// Put the authors metabox in the right column and higher up
-function mj_move_coauthors_metabox_location(){
-    global $wp_meta_boxes;
-    unset( $wp_meta_boxes['post']['normal']['core']['coauthorsdiv'] );
-    add_meta_box( 'coauthorsdiv', 'Authors', 'coauthors_meta_box', 'post', 'side', 'high' );
+// Put the authors metabox in the right column
+function mj_coauthors_metabox_context( $context ) {
+    $context = 'side';
+    return $context;
 }
-add_action( 'add_meta_boxes', 'mj_move_coauthors_metabox_location', 0 );
+function mj_coauthors_metabox_priority( $priority ) {
+    $priority = 'high';
+    return $priority;
+}
+add_filter( 'coauthors_meta_box_context', 'mj_coauthors_metabox_context' );
+add_filter( 'coauthors_meta_box_priority', 'mj_coauthors_metabox_priority' );
 
 // Show all the other metaboxes by default
 function mj_change_default_hidden_metaboxes( $hidden, $screen ) {
