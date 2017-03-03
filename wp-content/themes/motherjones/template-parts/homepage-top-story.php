@@ -10,18 +10,22 @@
   <div class="article-data">
     <h1 class="hed">
       <a href="<?php print esc_url( get_permalink() ); ?>">
-        <?php print get_post_meta( get_the_ID(), 'alt' )['mj_promo_hed']
-                  ? get_post_meta( get_the_ID(), 'alt' )['mj_promo_hed']
-                  : get_the_title(); ?>
+        <?php
+          if ( $hed = get_post_meta( get_the_ID(), 'mj_promo_hed', true ) ) {
+            echo $hed;
+          } else {
+            the_title();
+          }
+        ?>
       </a>
     </h1>
-    <h4 class="dek">
-      <a href="<?php print esc_url( get_permalink() ); ?>">
-        <?php print get_post_meta( get_the_ID(), 'alt' )['mj_promo_dek']
-                  ? get_post_meta( get_the_ID(), 'alt' )['mj_promo_dek']
-                  : get_post_meta( get_the_ID(), 'dek' )[0]; ?>
-      </a>
-    </h4>
+    <?php
+      if ( $dek = get_post_meta( get_the_ID(), 'mj_promo_dek', true ) ) {
+        echo '<h4 class="dek"><a href="' . esc_url( get_permalink() ) . '">' . $dek . '</a></h4>';
+      } else if ( $dek = get_post_meta( get_the_ID(), 'mj_dek', true ) ) {
+        echo '<h4 class="dek"><a href="' . esc_url( get_permalink() ) . '">' . $dek . '</a></h4>';
+      }
+    ?>
     <p class="byline">
       <?php print mj_byline( get_the_ID() ); ?>
     </p>

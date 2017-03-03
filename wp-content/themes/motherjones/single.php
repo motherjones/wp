@@ -24,7 +24,7 @@ get_header(); ?>
 			if ( ! is_page() ) {
 	    	print get_disqus_thread( get_the_ID() );
 			}
-	    if ( $meta['js'][0] ) {
+	    if ( ! empty ( $meta['js'][0] ) ) {
 	      printf(
 	        'script>%s</script>',
 	        $meta['js'][0]

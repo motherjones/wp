@@ -13,7 +13,7 @@
 	<?php get_template_part( 'template-parts/single', 'entry-header' ); ?>
 	<section class="entry-content" itemprop="articleBody">
 		<?php
-			if ( $meta['css'][0] ) {
+			if ( isset( $meta['css'][0] ) ) {
 				printf(
 					'<style>%s</style>',
 					$meta['css'][0]

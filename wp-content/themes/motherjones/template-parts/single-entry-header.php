@@ -2,7 +2,7 @@
 <header  class="entry-header">
   <?php the_title( '<h1 class="hed">', '</h1>' ); ?>
   <?php
-    if ( $meta['mj_dek'][0] && ! mj_is_article_type( 'blogpost', $post->ID ) ) {
+    if ( ! empty ( $meta['mj_dek'][0] ) && ! mj_is_article_type( 'blogpost', $post->ID ) ) {
       printf(
         '<h3 class="dek">%s</h3>',
         $meta['mj_dek'][0]
