@@ -251,7 +251,7 @@ function largo_has_featured_media( $post = null ) {
  * Enqueue the featured media javascript
  *
  * @global $post
- * @global LARGO_DEBUG
+ * @global MJ_DEBUG
  * @param array $hook The page that this function is being run on.
  */
 function largo_enqueue_featured_media_js( $hook ) {
@@ -275,7 +275,7 @@ function largo_enqueue_featured_media_js( $hook ) {
 	// The scripts following depend upon the WordPress media APIs
 	wp_enqueue_media();
 
-	$suffix = ( LARGO_DEBUG ) ? '' : '.min';
+	$suffix = ( MJ_DEBUG ) ? '' : '.min';
 	wp_enqueue_script(
 		'largo_featured_media',
 		get_template_directory_uri() . '/js/featured-media' . $suffix . '.js',
