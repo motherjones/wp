@@ -269,10 +269,10 @@ function largo_youtube_url_to_ID( $url ) {
  */
 function largo_youtube_iframe_from_url( $url, $echo = TRUE ) {
 	$output = '<iframe  src="//www.youtube.com/embed/' . largo_youtube_url_to_ID( $url ) . '" frameborder="0" allowfullscreen></iframe>';
-	if ( $echo ) {
-		echo $output;
+  if ( ! $echo ) {
+    return $output;
 	}
-	return $output;
+  echo $output;
 }
 
 /**
@@ -304,8 +304,8 @@ function largo_youtube_image_from_url( $url, $size = large, $echo = TRUE ) {
 			break;
 	}
 
-	if ( $echo ) {
-		echo $output;
+	if ( ! $echo ) {
+    return $output;
 	}
-	return $output;
+  echo $output;
 }
