@@ -201,6 +201,10 @@ function largo_get_featured_media( $post = null ) {
 
 	$post = get_post( $post );
 
+	if( ! is_object( $post ) ) {
+		return;
+	}
+
 	$ret = get_post_meta( $post->ID, 'featured_media', true );
 
 	// Check if the post has a thumbnail/featured image set.
@@ -263,13 +267,16 @@ function largo_enqueue_featured_media_js( $hook ) {
 	// Run this action on term edit pages
 	// edit-tags.php for wordpress before 4.5
 	// term.php for 4.5 and after
-	if ( in_array( $hook, array( 'edit-tags.php', 'term.php' ) ) && is_numeric( $_GET['tag_ID'] ) ) {
+	if ( in_array( $hook, array( 'edit-tags.php', 'term.php' ) ) && isset( $_GET['tag_ID'] ) && is_numeric( $_GET['tag_ID'] ) ) {
 		// After WordPress 4.5, the taxonomy is no longer in the URL
 		// So to compensate, we get the taxonomy from the current screen
 		$screen = get_current_screen();
 		$post = get_post( largo_get_term_meta_post( $screen->taxonomy, $_GET['tag_ID'] ) );
 	}
 
+	if( ! is_object( $post ) ) {
+		return;
+	}
 	$featured_image_display = get_post_meta( $post->ID, 'featured-image-display', true );
 
 	// The scripts following depend upon the WordPress media APIs
@@ -664,5 +671,37 @@ if ( ! function_exists( 'largo_hero_class' ) ) {
 		} else {
 			return $hero_class;
 		}
+	}
+}
+
+/**
+ * Get the proxy post for a term (in largo this is in inc/term-meta)
+ *
+ * @param string $taxnomy The taxonomy of the term for which you want to retrieve a term meta post
+ * @param int $term_id The ID of the term
+ * @return int $post_id The ID of the term meta post
+ */
+function largo_get_term_meta_post( $taxonomy, $term_id ) {
+	$query = new WP_Query( array(
+		'post_type'      => '_term_meta',
+		'posts_per_page' => 1,
+		'post_status' => 'any',
+		'tax_query'      => array(
+			array(
+				'taxonomy'         => $taxonomy,
+				'field'            => 'id',
+				'terms'            => $term_id,
+				'include_children' => false
+			)
+		)
+	));
+
+	if ( $query->found_posts ) {
+		return $query->posts[0]->ID;
+	} else {
+		$tax_input = array();
+		$post_id = wp_insert_post( array( 'post_type' => '_term_meta', 'post_title' => "{$taxonomy}:${term_id}" ) );
+		wp_set_post_terms( $post_id, array( (int) $term_id ), $taxonomy );
+		return $post_id;
 	}
 }
