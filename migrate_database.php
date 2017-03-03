@@ -38,6 +38,7 @@ TRUNCATE pantheon_wp.wp_term_relationships;
 ');
 $wp->commit();
 
+
 $term_insert_data = $d6->prepare('
 SELECT *
 FROM term_data
@@ -143,6 +144,7 @@ $wp->commit();
 
 
 echo "taxonomy done";
+
 
 $wp->beginTransaction();
 $wp->exec('
@@ -293,9 +295,9 @@ $wp->commit();
 
 
 //for blog body
-$meta_data = $d6->prepare("
+$post_content = $d6->prepare("
 SELECT DISTINCT 
-n.nid, 'body',
+n.nid,
 IF( 
   e.field_extended_body_value IS NULL,
   b.field_short_body_value,
@@ -309,24 +311,26 @@ USING(vid)
 WHERE n.type='blogpost'
 ;
 ");
-$meta_data->execute();
+$post_content->execute();
 
-$meta_insert = $wp->prepare('
-INSERT IGNORE INTO pantheon_wp.wp_postmeta 
-(post_id, meta_key, meta_value)
-VALUES (?, ?, ?)
+$content_insert = $wp->prepare('
+UPDATE wp_posts
+SET post_content=?
+WHERE ID=?
 ;
 ');
+
 $wp->beginTransaction();
-while ( $meta = $meta_data->fetch(PDO::FETCH_NUM)) {
-	$meta_insert->execute($meta);
+while ( $content = $post_content->fetch(PDO::FETCH_NUM)) {
+	$content_insert->execute(Array($content[1], $content[0]));
 }
 $wp->commit();
 
+
 //for article bodys
-$meta_data = $d6->prepare('
+$post_content = $d6->prepare('
 SELECT DISTINCT 
-n.nid, "body", 
+n.nid,
 IF( 
   e.field_article_text_value IS NULL,
   b.field_short_body_value,
@@ -340,32 +344,40 @@ USING(vid)
 WHERE n.type="article"
 ;
 ');
-$meta_data->execute();
+$post_content->execute();
 
 $wp->beginTransaction();
-while ( $meta = $meta_data->fetch(PDO::FETCH_NUM)) {
-	$meta_insert->execute($meta);
+while ( $content = $post_content->fetch(PDO::FETCH_NUM)) {
+	$content_insert->execute(Array($content[1], $content[0]));
 }
 $wp->commit();
 
 
 //for full width bodys
-$meta_data = $d6->prepare('
+$post_content = $d6->prepare('
 SELECT DISTINCT 
-n.nid, "body", b.field_short_body_value
+n.nid, b.field_short_body_value
 FROM mjd6.node n
 INNER JOIN mjd6.content_field_short_body b
 USING(vid)
 WHERE n.type="full_width_article"
 ;
 ');
-$meta_data->execute();
+$post_content->execute();
 
 $wp->beginTransaction();
-while ( $meta = $meta_data->fetch(PDO::FETCH_NUM)) {
-	$meta_insert->execute($meta);
+while ( $content = $post_content->fetch(PDO::FETCH_NUM)) {
+	$content_insert->execute(Array($content[1], $content[0]));
 }
 $wp->commit();
+
+
+$meta_insert = $wp->prepare('
+INSERT IGNORE INTO pantheon_wp.wp_postmeta 
+(post_id, meta_key, meta_value)
+VALUES (?, ?, ?)
+;
+');
 
 //for dek
 $meta_data = $d6->prepare('
@@ -1314,4 +1326,93 @@ $wp->commit();
 
 echo "files done";
 
+// do zoninator
+
+$zones = Array(
+  'top_stories' => Array(
+    324446, 324431, 324441, 324436, 324531,
+    324576, 324296, 324626, 324616, 324426, 324586
+  ),
+  'homepage_featured' => Array(324801)
+);
+$zone_descriptions = Array(
+  'top_stories' => Array('description' => "For placement on the homepage, top story widget"),
+  'homepage_featured' => Array('description' => "Controls 'Featured' section on the homepage")
+);
+
+foreach ($zones as $zone => $queue) {
+  $zone_term_insert = $wp->prepare('
+  INSERT IGNORE INTO wp_terms
+  (name, slug)
+  VALUES (?, ?)
+  ;
+  ');
+  $wp->beginTransaction();
+  $zone_term_insert->execute(array($zone, $zone));
+
+  $zone_term_id = $wp->lastInsertId();
+  $wp->commit();
+
+  $zone_tax_insert = $wp->prepare('
+  INSERT IGNORE INTO wp_term_taxonomy
+  (term_id, taxonomy, description)
+  VALUES (?, "zoninator_zones", ?)
+  ;
+  ');
+
+
+  $description = $zone_descriptions[$zone];
+
+  $wp->beginTransaction();
+  $zone_tax_insert->execute(array(
+    $zone_term_id, 
+    serialize($description)
+  ));
+  $zone_tax_id = $wp->lastInsertId();
+  $wp->commit();
+
+
+
+  $zone_meta_insert = $wp->prepare('
+  INSERT IGNORE INTO wp_postmeta
+  (post_id, meta_key, meta_value)
+  VALUES (?, ?, ?)
+  ;
+  ');
+
+  $top_stories_queue = Array(325726, 325721);
+  $meta_key = '_zoninator_order_' . $zone_term_id;
+
+  $wp->beginTransaction();
+  for ($i = 0; $i < count($queue); $i++) {
+    $zone_meta_insert->execute(Array(
+      $queue[$i],
+      $meta_key,
+      ($i + 1)
+    ));
+  }
+  $wp->commit();
+
+}
+echo "zoninator filled";
+
+// Set default theme to motherjones
+
+$wp->beginTransaction();
+$wp->exec('
+UPDATE pantheon_wp.wp_options
+SET option_value = "motherjones"
+WHERE option_name = "template"
+;
+');
+$wp->commit();
+
+$wp->beginTransaction();
+$wp->exec('
+UPDATE pantheon_wp.wp_options
+SET option_value = "motherjones"
+WHERE option_name = "stylesheet"
+;
+');
+$wp->commit();
 ?>
