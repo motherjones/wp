@@ -1526,7 +1526,8 @@ article p {
   float: right; }
 
 /* end pager */
-#TopROS970x250 div div {
+#TopROS970x250 {
+  width: 990px;
   margin: 0 auto; }
 
 /*# sourceMappingURL=style.css.map */
