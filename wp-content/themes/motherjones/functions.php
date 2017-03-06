@@ -75,6 +75,14 @@ class MJ {
 		foreach ( $includes as $include ) {
 			require_once( get_template_directory() . $include );
 		}
+
+		// Media credit and slideshow plugins
+		if ( ! class_exists( 'Navis_Media_Credit' ) ) {
+			require_once dirname( __FILE__ ) . '/vendor/largo/media-credit/navis-media-credit.php';
+		}
+		if ( ! class_exists( 'Navis_Slideshows' ) ) {
+			require_once dirname( __FILE__ ) . '/vendor/largo/slideshows/navis-slideshows.php';
+		}
 	}
 }
 /**
