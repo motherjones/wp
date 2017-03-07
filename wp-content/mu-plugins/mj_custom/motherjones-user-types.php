@@ -6,7 +6,7 @@ if ( !class_exists( 'MJ_Users' ) ) {
     private static $instance;
     public static function instance() {
       if ( ! isset( self::$instance ) ) {
-        self::$instance = new MJ_Taxonomy;
+        self::$instance = new MJ_Users;
         self::$instance->setup();
       }
       return self::$instance;
@@ -30,7 +30,6 @@ if ( !class_exists( 'MJ_Users' ) ) {
         'update_core' => false // user cant perform core updates
 
       ) );
-      $former_author->add_cap('level_1');
 
     }
 
