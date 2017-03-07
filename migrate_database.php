@@ -761,7 +761,7 @@ $wp->beginTransaction();
 $user_insert = $wp->exec("
 INSERT IGNORE INTO pantheon_wp.wp_usermeta (user_id, meta_key, meta_value)
 SELECT DISTINCT
-ID, 'wp_capabilities', 'a:1:{s:11:\"contributor\";s:1:\"1\";}'
+ID, 'wp_capabilities', 'a:1:{s:13:\"former_author\";s:1:\"1\";}'
 FROM pantheon_wp.wp_users
 ;
 ");
@@ -781,7 +781,7 @@ $roles_data->execute();
 
 $roles_insert = $wp->prepare("
 UPDATE pantheon_wp.wp_usermeta 
-SET meta_value = 'a:1:{s:6:\"author\";s:1:\"1\";}'
+SET meta_value = 'a:1:{s:6:\"editor\";s:1:\"1\";}'
 WHERE meta_key = 'wp_capabilities'
 AND user_id = ?
 ;
