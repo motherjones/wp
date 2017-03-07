@@ -52,7 +52,6 @@ function largo_hero( $post = null, $classes = '' ) {
 function largo_get_hero( $post = null, $classes = '' ) {
 
 	$post = get_post( $post );
-	//print_r($post);
 	$hero_class = largo_hero_class( $post->ID, false );
 	$ret = '';
 	$values = get_post_custom( $post->ID );
