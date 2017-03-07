@@ -295,7 +295,7 @@ function largo_enqueue_featured_media_js( $hook ) {
 	);
 	wp_enqueue_style(
 		'largo_featured_media',
-		get_template_directory_uri(). '/css/featured-media' . $suffix . '.css'
+		get_template_directory_uri(). '/css/admin/featured-media' . $suffix . '.css'
 	);
 
 	wp_localize_script( 'largo_featured_media', 'LFM', array(

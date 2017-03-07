@@ -146,7 +146,7 @@ if ( ! function_exists( 'mj_setup' ) ) {
 	  add_filter( 'tiny_mce_before_init', 'mj_wysiwyg_config' );
 
 		$suffix = (MJ_DEBUG) ? '' : '.min';
-		add_editor_style( 'css/editor-style' . $suffix . '.css' );
+		add_editor_style( 'css/admin/editor-style' . $suffix . '.css' );
 
 	}
 } // mj_setup

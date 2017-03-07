@@ -19,7 +19,8 @@ module.exports = function(grunt) {
       dist: {
         files: {
           'css/style.css': 'scss/style.scss',
-          'css/editor-style.css': 'scss/editor-style.scss'
+          'css/admin/editor-style.css': 'scss/admin/editor-style.scss',
+          'css/admin/featured-media.css': 'scss/admin/featured-media.scss'
         }
       }
     },
@@ -65,14 +66,26 @@ module.exports = function(grunt) {
             ext: '.min.css'
           }
         ]
-      }
+      },
+      target: {
+        options: {
+          report: 'gzip'
+        },
+        files: [
+          {
+            'css/admin/featured-media.min.css': 'css/admin/featured-media.css',
+            'css/admin/editor-style.min.css': 'css/admin/editor-style.css'
+          }
+        ]
+      },
+
     },
 
     watch: {
       sass: {
         files: [
           'scss/*.scss',
-          //'scss/**/**/*.scss'
+          'scss/**/*.scss'
         ],
         tasks: [
           'sass',
