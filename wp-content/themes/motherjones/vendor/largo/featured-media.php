@@ -36,7 +36,6 @@ function largo_default_featured_media_types() {
  * @param String $classes Optional. Class string to apply to outer div.hero
  */
 function largo_hero( $post = null, $classes = '' ) {
-
 	echo largo_get_hero( $post, $classes );
 
 }
@@ -53,20 +52,20 @@ function largo_hero( $post = null, $classes = '' ) {
 function largo_get_hero( $post = null, $classes = '' ) {
 
 	$post = get_post( $post );
+	//print_r($post);
 	$hero_class = largo_hero_class( $post->ID, false );
 	$ret = '';
 	$values = get_post_custom( $post->ID );
 
 	// If the box is checked to override the featured image display, obey it.
-	// EXCEPT if a youtube_url is added in the old way for the post. This is to respect
-	// behavior before v0.4,
-	if ( isset( $values['featured-image-display'][0] ) && ! isset( $values['youtube_url'] ) ) {
+	if ( isset( $values['featured-image-display'][0] ) ) {
 		return $ret;
 	}
+
 	if ( largo_has_featured_media( $post->ID ) && $hero_class !== 'is-empty' ) {
 		$ret = largo_get_featured_hero( $post->ID, $classes );
 	}
-
+	echo largo_get_featured_hero( $post->ID, $classes );
 	/**
 	 * Filter the hero's DOM
 	 *
@@ -76,6 +75,7 @@ function largo_get_hero( $post = null, $classes = '' ) {
 	 * @param WP_Post $post  post object.
 	 */
 	$ret = apply_filters( 'largo_get_hero', $ret, $post, $classes );
+
 	return $ret;
 }
 
@@ -103,7 +103,6 @@ function largo_featured_image_hero( $post = null, $classes = '' ) {
 function largo_get_featured_hero( $post = null, $classes = '' ) {
 	$the_post = get_post( $post );
 	$featured_media = largo_get_featured_media( $the_post->ID );
-
 	$hero_class = largo_hero_class( $the_post->ID, false );
 	$classes = "hero $hero_class $classes";
 
@@ -151,7 +150,7 @@ function largo_get_featured_hero( $post = null, $classes = '' ) {
 	}
 
 	ob_start();
-	largo_render_template( 'partials/hero', 'featured-' . $template_slug, $context );
+	largo_render_template( 'template-parts/hero', 'featured-' . $template_slug, $context );
 	$ret = ob_get_clean();
 	return $ret;
 }
@@ -221,16 +220,6 @@ function largo_get_featured_media( $post = null ) {
 		$ret = array_merge( $ret, array( 'attachment_data' => $attachment ) );
 	}
 
-	// Backwards compatibility with posts that have a youtube_url set
-	$youtube_url = get_post_meta( $post->ID, 'youtube_url', true );
-	if ( empty( $ret ) && ! empty( $youtube_url ) ) {
-		$ret = array(
-			'id' => $post->ID,
-			'url' => $youtube_url,
-			'embed' => wp_oembed_get( $youtube_url ),
-			'type' => 'video'
-		);
-	}
 	return $ret;
 }
 
