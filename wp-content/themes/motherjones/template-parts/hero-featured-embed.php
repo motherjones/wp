@@ -5,10 +5,10 @@
 	<div class="embed-details wp-caption">
 	<?php
 		if ( ! empty( $featured_media['credit'] ) ) {
-			echo '<p class='wp-media-credit featured-credit'>' . $featured_media['credit'] . '</p>';
+			echo '<p class="wp-media-credit featured-credit">' . $featured_media['credit'] . '</p>';
 		}
 		if ( ! empty( $featured_media['caption'] ) ) {
-			echo '<p class='wp-caption-text featured-caption'>' . $featured_media['caption'] . '</p>';
+			echo '<p class="wp-caption-text featured-caption">' . $featured_media['caption'] . '</p>';
 		}
 	?>
 	</div>
