@@ -64,6 +64,10 @@ php migrate_blocks.php "$SQL_PASS"
 echo "blocks added to wp db"
 echo "\n"
 
+php migrate_links.php "$SQL_PASS"
+
+echo "redirects added to wp db"
+echo "\n"
 
 mysqldump -u root -p"$SQL_PASS" pantheon_wp > migrated-wp-db-$YYYY-$MM-$DD.sql
 
