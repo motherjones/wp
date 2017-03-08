@@ -334,7 +334,9 @@ n.nid,
 IF( 
   e.field_article_text_value IS NULL,
   b.field_short_body_value,
-  CONCAT(b.field_short_body_value, e.field_article_text_value)
+  CONCAT(b.field_short_body_value, 
+    e.field_article_text_value
+  )
 )
 FROM mjd6.node n
 INNER JOIN mjd6.content_field_short_body b
@@ -533,7 +535,7 @@ $wp->commit();
 
 echo "posts done";
 
-
+/*begin author migration */
 $wp->beginTransaction();
 $wp->exec('
 DELETE FROM pantheon_wp.wp_users WHERE ID > 1;
@@ -541,61 +543,120 @@ DELETE FROM pantheon_wp.wp_usermeta WHERE user_id > 1;
 ');
 $wp->commit();
 
-$user_data = $d6->prepare('
-SELECT
-DISTINCT
+
+
+//CREATE GUEST AUTHORS FOR ALL USERS
+
+$author_data = $d6->prepare("
+SELECT DISTINCT
+n.title,
 u.uid,
 u.mail,
-NULL,
-n.title,
-u.mail,
-FROM_UNIXTIME(u.created),
-"",
-0,
-n.title
-FROM
-mjd6.content_type_author a
+a.field_user_uid, 
+a.field_twitter_user_value,
+a.field_last_name_value,
+a.field_author_bio_short_value,
+a.field_author_title_value,
+a.field_author_bio_value,
+a.field_photo_fid,
+a.field_author_title_value
+FROM mjd6.content_field_byline b
 INNER JOIN mjd6.node n
-ON (a.nid = n.nid)
+ON (n.nid = b.field_byline_nid)
+INNER JOIN mjd6.content_type_author a 
+ON (a.vid = n.vid)
 LEFT JOIN mjd6.users u
-ON (u.name = n.title)
-;'
-);
-$user_data->execute();
+ON (u.uid=a.field_user_uid)
+WHERE n.title IS NOT NULL
+;
+");
+$author_data->execute();
 
-$user_insert = $wp->prepare('
+
+$author_insert = $wp->prepare('
 INSERT IGNORE INTO pantheon_wp.wp_users
-(ID, user_login, user_pass, user_nicename, user_email,
-user_registered, user_activation_key, user_status, display_name)
+(user_nicename, user_login, user_registered, display_name)
 VALUES (
-?,
-?,
-?,
-REPLACE(LOWER(?), " ", "-"),
-?,
-?,
-?,
-?,
-?
+  REPLACE(LOWER(?), " ", "-"), # NICENAME lowercase, - instead of space
+  REPLACE(LOWER(?), " ", ""), # login lowercase, no spaces
+  "0000-00-00 00:00:00", # registered date
+  ? # Display name
 )
-;'
-);
+');
 
-$author_hash = Array();
 
+$uid_to_author_meta = Array();
+$author_name_to_author_meta = Array();
 $wp->beginTransaction();
-while ( $user = $user_data->fetch(PDO::FETCH_NUM)) {
-	$user_insert->execute($user);
-  // example:    description: ben   ben 1 bbreedlove@motherjones.com
-  $description = $user[3] . '   ' . $user[3]
-    . ' ' . $wp->lastInsertId() . ' ' . $user[1];
-  $author_hash[$user[3]] = Array(
-    'wp_user_id' => $wp->lastInsertId(),
-    'description' => $description,
-    'email' => $user[1],
-  ); 
+while ( $author = $author_data->fetch(PDO::FETCH_ASSOC)) {
+  $author_insert->execute(Array(
+    $author['title'],
+    $author['title'],
+    $author['title']
+  ));
+  $uid_to_author_meta[$wp->lastInsertId()] = $author;
+  $author['wp_id'] = $wp->lastInsertId();
+  $author_name_to_author_meta[$author['title']] = $author;
 }
 $wp->commit();
+
+$roles_data = $d6->prepare("
+SELECT DISTINCT
+u.name
+FROM mjd6.users u
+INNER JOIN mjd6.users_roles r
+USING (uid)
+WHERE u.mail IS NOT NULL
+;
+");
+$roles_data->execute();
+
+$wp->beginTransaction();
+while ( $author = $author_data->fetch(PDO::FETCH_ASSOC)) {
+  if ( array_key_exists( $author['title'], $author_name_to_author_meta ) ) {
+    continue;
+  }
+  $author_insert->execute(Array(
+    $author['title'],
+    $author['title']
+  ));
+}
+$wp->commit();
+
+$author_meta_insert = $wp->prepare("
+INSERT IGNORE INTO pantheon_wp.wp_usermeta (user_id, meta_key, meta_value)
+VALUES ( ?, ?, ? )
+;
+");
+
+$author_meta_insert->bindParam(1, $uiid);
+$author_meta_insert->bindParam(2, $key);
+$author_meta_insert->bindParam(3, $value);
+$wp->beginTransaction();
+foreach ( $uid_to_author_meta as $uid => $author ) {
+  $uiid = $uid;
+
+  $key = "mj_user_twitter";
+  $value = $author['field_twitter_user_value'];
+	$author_meta_insert->execute();
+
+  $key = "mj_user_short_bio";
+  $value = $author['field_author_bio_short_value'];
+	$author_meta_insert->execute();
+
+  $key = "mj_user_bio";
+  $value = $author['field_author_bio_value'];
+	$author_meta_insert->execute();
+
+  $key = "mj_user_position";
+  $value = $author['field_author_title_value'];
+	$author_meta_insert->execute();
+
+}
+$wp->commit();
+
+
+//Create byline tags 
 
 //naming for co authors taxonomy is cap-username
 $byline_titles_data = $d6->prepare("
@@ -619,65 +680,16 @@ CONCAT( "cap-", REPLACE(LOWER(?), " ", "-") ),
 ;'
 );
 
+$term_id_to_name = array();
 $wp->beginTransaction();
 while ( $byline = $byline_titles_data->fetch(PDO::FETCH_ASSOC)) {
   $byline_titles_insert->execute(Array(
     $byline['title'],
     $byline['title']
   ));
-  if (array_key_exists($byline['title'], $author_hash)) {
-    $author_hash[$byline['title']]['term_id'] = $wp->lastInsertId();
-  } else {
-    $description = $byline['title'] . '   ' . $byline['title']
-      . ' ' . $wp->lastInsertId() . ' ';
-    $author_hash[$byline['title']] = Array(
-      'term_id' => $wp->lastInsertId(),
-      'description' => $description
-    ); 
-  }
+  $term_id_to_name[$wp->lastInsertId()] = $byline['title']; 
 }
 $wp->commit();
-
-
-//CREATE GUEST AUTHORS FOR ALL USERS
-
-$author_insert = $wp->prepare('
-INSERT IGNORE INTO pantheon_wp.wp_posts
-(post_author, post_date, post_date_gmt, post_content, post_title, post_excerpt,
-post_name, to_ping, pinged, post_modified, post_modified_gmt,
-post_content_filtered, post_type, `post_status`)
-VALUES (
-  1,
-  FROM_UNIXTIME(?), #POST DATE
-  FROM_UNIXTIME(?), ##POST DATE GMT
-  "", ##post content
-  ?, ##post title is author name for display
-  "",  #post excerpt
-  CONCAT( "cat-", REPLACE(LOWER(?), " ", "-") ),# post name is cap-first-last
-  "", #to ping
-  "", # pinged
-  FROM_UNIXTIME(?), #post_modified
-  FROM_UNIXTIME(?), #post_modified_GGMT
-  "", #post content filtered
-  "guest-author", #post type
-  "publish" # post status
-)
-');
-
-$wp->beginTransaction();
-foreach ( $author_hash as $author => $author_array ) {
-  $author_insert->execute(Array(
-    '1970-1-1 00:00:00', //post date
-    '1970-1-1 00:00:00', //post date gmt
-    $author, //title
-    $author, //name
-    '1970-1-1 00:00:00', //post modified
-    '1970-1-1 00:00:00', //post modified gmt
-  ));
-  $author_array['post_id'] = $wp->lastInsertId();
-}
-$wp->commit();
-
 
 $byline_taxonomy_insert = $wp->prepare("
 INSERT IGNORE INTO pantheon_wp.wp_term_taxonomy
@@ -688,13 +700,22 @@ VALUES (
 ?)
 ;
 ");
+
+$name_to_tax_id = array();
 $wp->beginTransaction();
-foreach ( $author_hash as $author => $author_array ) {
+foreach ( $term_id_to_name as $term_id => $name ) {
+  $author_meta = $author_name_to_author_meta[$name];
+  $description = $name 
+    . ' ' . $author_meta['field_last_name_value']
+    . ' ' . $name
+    . ' ' . $author_meta['wp_id']
+    . ' ' . $author_meta['mail']
+  ;
   $byline_taxonomy_insert->execute(Array(
-    $author_array['term_id'],
-    $author_array['description']
+    $term_id,
+    $description
   ));
-  $author_hash[$author]['tax_id'] = $wp->lastInsertId();
+  $name_to_tax_id[$name] = $wp->lastInsertId();
 }
 $wp->commit();
 
@@ -706,6 +727,8 @@ n.title `title`
 FROM mjd6.content_field_byline b
 INNER JOIN mjd6.node n
 ON (n.nid = b.field_byline_nid)
+INNER JOIN mjd6.node a
+ON (b.vid = a.vid)
 ;"
 );
 $byline_term_data->execute();
@@ -719,14 +742,17 @@ VALUES (?, ?)
 
 $wp->beginTransaction();
 while ( $term = $byline_term_data->fetch(PDO::FETCH_ASSOC)) {
-  if (array_key_exists($term['title'], $author_hash)) {
+  if (array_key_exists($term['title'], $author_name_to_author_meta)) {
     $byline_term_insert->execute(Array(
       $term['node'],
-      $author_hash[$term['title']]['tax_id']
+      $name_to_tax_id[$term['title']]
     ));
   }
 }
 $wp->commit();
+
+// end create byline taxonomy terms
+
 
 
 //everybody is a contributor! Later we can make active users active
@@ -735,7 +761,7 @@ $wp->beginTransaction();
 $user_insert = $wp->exec("
 INSERT IGNORE INTO pantheon_wp.wp_usermeta (user_id, meta_key, meta_value)
 SELECT DISTINCT
-ID, 'wp_capabilities', 'a:1:{s:11:\"contributor\";s:1:\"1\";}'
+ID, 'wp_capabilities', 'a:1:{s:13:\"former_author\";s:1:\"1\";}'
 FROM pantheon_wp.wp_users
 ;
 ");
@@ -744,17 +770,18 @@ $wp->commit();
 //author roles who are active users
 $roles_data = $d6->prepare("
 SELECT DISTINCT
-u.uid
+u.name
 FROM mjd6.users u
 INNER JOIN mjd6.users_roles r
 USING (uid)
+WHERE u.mail IS NOT NULL
 ;
 ");
 $roles_data->execute();
 
 $roles_insert = $wp->prepare("
 UPDATE pantheon_wp.wp_usermeta 
-SET meta_value = 'a:1:{s:6:\"author\";s:1:\"1\";}'
+SET meta_value = 'a:1:{s:6:\"editor\";s:1:\"1\";}'
 WHERE meta_key = 'wp_capabilities'
 AND user_id = ?
 ;
@@ -783,96 +810,13 @@ WHERE post_author NOT IN (SELECT DISTINCT ID FROM pantheon_wp.wp_users)
 ");
 $wp->commit();
 
-
-$author_meta_data = $d6->prepare("
-SELECT DISTINCT
-n.nid,
-u.uid,
-a.field_user_uid, 
-a.field_twitter_user_value,
-a.field_last_name_value,
-a.field_author_bio_short_value,
-a.field_author_title_value,
-a.field_author_bio_value,
-a.field_photo_fid,
-a.title,
-u.name
-FROM mjd6.node n
-INNER JOIN mjd6.content_type_author a 
-ON a.nid = n.nid
-LEFT JOIN mjd6.users u
-ON u.uid=a.field_user_uid
-WHERE name IS NOT NULL
-;
-");
-$author_meta_data->execute();
-
-$author_meta_insert = $wp->prepare("
-INSERT IGNORE INTO pantheon_wp.wp_postmeta (post_id, meta_key, meta_value)
-VALUES ( ?, ?, ? )
-;
-");
-$author_meta_insert->bindParam(1, $pud);
-$author_meta_insert->bindParam(2, $key);
-$author_meta_insert->bindParam(3, $value);
-$wp->beginTransaction();
-while ( $author_meta = $author_meta_data->fetch(PDO::FETCH_ASSOC)) {
-  $author_array = $author_hash[$author_meta['name']];
-
-  if (!$author_array) { next; }
-  $pid = $author_array['post_id'];
-
-  if ($author_array['wp_user_id']) {
-    //Yeah. We saved this from all the way up there. Jesus
-    $key = "cap-linked_account";
-    $value = str_replace(' ', '-', strtolower($author_meta['title']) );
-    $author_meta_insert->execute();
-
-    $key = "cap-user_email";
-    $value = $author_array['email'];
-    $author_meta_insert->execute();
-  }
-
-  $key = "cap-twitter";
-  $value = $author_meta['field_twitter_user_value'];
-	$author_meta_insert->execute();
-
-  $key = "cap-last_name";
-  $value = $author_meta['field_last_name_value'];
-	$author_meta_insert->execute();
-
-  $key = "cap-long_bio";
-  $value = $author_meta['field_author_bio_value'];
-	$author_meta_insert->execute();
-
-  $key = "cap-position";
-  $value = $author_meta['field_author_title_value'];
-	$author_meta_insert->execute();
-
-  $key = "cap-short_bio";
-  $value = $author_meta['field_author_bio_short_value'];
-	$author_meta_insert->execute();
-
-  $key = "cap-display_name";
-  $value = $author_meta['title'];
-	$author_meta_insert->execute();
-
-  $key = "cap-user_login";
-  $value = str_replace( ' ', '-', strtolower($author_meta['name']) );
-	$author_meta_insert->execute();
-
-}
-$wp->commit();
-
 /*** FIXXXMEEE
- * now authors are posts so follow master image attachement style
+ * fuck authors are not posts again what do i do jeez
  */
 //author photo
 $author_image_data = $d6->prepare("
 SELECT DISTINCT
 n.nid,
-#u.uid,
-#u.created,
 a.field_user_uid, 
 f.status,
 f.filemime,
@@ -885,8 +829,6 @@ INNER JOIN mjd6.node_revisions r
 USING(vid)
 LEFT OUTER JOIN mjd6.content_type_author a 
 USING(vid)
-#LEFT OUTER JOIN mjd6.users u
-#ON u.uid=a.field_user_uid
 INNER JOIN mjd6.files f
 ON(a.field_photo_fid = f.fid)
 #WHERE name IS NOT NULL
@@ -894,83 +836,11 @@ ON(a.field_photo_fid = f.fid)
 ");
 $author_image_data->execute();
 
-$author_image_insert = $wp->prepare('
-INSERT IGNORE INTO pantheon_wp.wp_posts
-(post_author, post_date, post_date_gmt, post_content, post_title, post_excerpt,
-post_name, to_ping, pinged, post_modified, post_modified_gmt, guid,
-post_content_filtered, post_type, `post_status`, post_parent, post_mime_type)
-VALUES (
-:post_author,
-FROM_UNIXTIME(:post_date),
-FROM_UNIXTIME(:post_date),
-"",
-:post_title,
-"",
-:post_name,
-"",
-"",
-FROM_UNIXTIME(:post_modified),
-FROM_UNIXTIME(:post_modified),
-:guid,
-"",
-"attachment",
-IF(:status = 1, "publish", "private"),
-:post_parent,
-:post_mime_type
-)
-;
-');
-
-$author_fid = Array();
-$wp->beginTransaction();
-while ( $author_image = $author_image_data->fetch(PDO::FETCH_ASSOC) ) {
-
-  $guid = $FILEDIR . preg_replace('/files\//', '', $author_image['filepath']);
-  $post_name = preg_replace("/\.[^.]+$/", "", $author_image['filepath'] );
-  $post_name = preg_replace("/files\//", "", $author_image['filepath'] );
-
-  $post_id = $author_hash[$author_image['title']]['post_id'];
-
-  $author_image_insert->execute(array(
-    ':post_author' => 1,
-    ':post_date' => '1970-1-1 00:00:00', //post date
-    ':post_title' => $post_name,
-    ':post_name' => $post_name,
-    ':post_modified' => '1970-1-1 00:00:00', //post modified
-    ':guid' => $guid,
-    ':status' => $author_image['status'],
-    ':post_parent' => $post_id,
-    ':post_mime_type' => $author_image['filemime'],
-  ) );
-  $author_fid[] = Array( // Set author to have the photo
-    $post_id,
-    '_thumbnail_id',
-    $wp->lastInsertId()
-  );
-  $author_fid[] = Array( // Set photo to have a filepath
-    $wp->lastInsertId(),
-    '_wp_attached_file',
-    $guid
-  );
-  //FIXME we're not doing _wp_attachment_metadata
-  //god i hope we don't need it because jesus
-}
-$wp->commit();
-
-$author_image_insert = $wp->prepare("
-INSERT IGNORE INTO pantheon_wp.wp_postmeta (post_id, meta_key, meta_value)
-VALUES ( ?, ?, ? )
-;
-");
-$wp->beginTransaction();
-foreach ($author_fid as $fid ) {
-	$author_image_insert->execute($fid);
-}
-$wp->commit();
-
-
-
 echo "authors done";
+
+
+/* end author data */
+
 
 //FIXME REPEAT FOR FULL WIDTH TITLES< content_field_top_of_content_image 
 //for master images
