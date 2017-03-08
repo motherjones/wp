@@ -1,0 +1,13 @@
+div#mj_dek {
+  margin: 1em 0 0
+}
+div#mj_dek input,
+div#mj_custom_fields input {
+  display: block;
+  padding: 8px;
+  font-size: 1.25em;
+  line-height: 100%;
+  height: 2em;
+  width: 100%;
+  outline: 0;
+}

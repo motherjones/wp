@@ -10,7 +10,7 @@
 if ( ! function_exists( 'mj_enqueue' ) ) {
 	function mj_enqueue() {
 		$suffix = (MJ_DEBUG) ? '' : '.min';
-		$version = '20150825';
+		$version = '1.0';
 
 		// Theme stylesheet.
 		wp_enqueue_style(
@@ -120,6 +120,23 @@ if ( ! function_exists( 'mj_enqueue' ) ) {
 }
 add_action( 'wp_enqueue_scripts', 'mj_enqueue' );
 
+
+
+
+function mj_admin_style( $hook ) {
+	$suffix = (MJ_DEBUG) ? '' : '.min';
+	$version = '1.0';
+
+	if ( ( $hook == 'post.php' ) || ( $hook == 'post-new.php' ) ) {
+		wp_enqueue_style(
+			'mj-post-admin-style', (
+				get_template_directory_uri() . '/css/admin/post-admin.css'),
+				false,
+				'1.0'
+			);
+    }
+}
+add_action( 'admin_enqueue_scripts', 'mj_admin_style' );
 /**
  * Handles JavaScript detection.
  *

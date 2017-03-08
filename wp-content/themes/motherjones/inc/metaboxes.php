@@ -2,7 +2,7 @@
 /**
  * Hide and rearrange some of the default metaboxes
  */
- 
+
 // Hide trackbacks, revisions, comments and (sometimes) custom fields
 function mj_remove_metaboxes() {
   global $current_user;
@@ -45,6 +45,54 @@ function mj_change_default_hidden_metaboxes( $hidden, $screen ) {
 }
 add_filter( 'default_hidden_meta_boxes', 'mj_change_default_hidden_metaboxes', 10, 2 );
 
+
+//edit_form_after_title
+//edit_form_after_editor
+//edit_form_advanced
+largo_add_meta_box(
+	'mj_dek',
+	__( 'Title Extra', 'mj' ),
+	'mj_title_extra_meta_box_display',
+	'post',
+	'after_title',
+	'high'
+);
+// usually the fifth argument in add_meta_box is side, core or advanced,
+// but apparently you can set it to something arbitrary and then call do_meta_boxes
+// with that as the context arg, hooked on the edit_form hook you want
+// (options: edit_form_after_title, edit_form_after_editor, edit_form_advanced)
+function mj_move_dek() {
+  global $post, $wp_meta_boxes;
+  do_meta_boxes( get_current_screen(), 'after_title', $post );
+  unset( $wp_meta_boxes['post']['test'] );
+}
+add_action('edit_form_after_title', 'mj_move_dek');
+
+function mj_title_extra_meta_box_display() {
+	global $post;
+	$values = get_post_custom( $post->ID );
+  $prefix = 'mj_';
+  $fields = array(
+    'dek' => 'Dek',
+    'social_hed' => 'Social Hed',
+    'social_dek' => 'Social Dek',
+  );
+  wp_nonce_field( 'largo_meta_box_nonce', 'meta_box_nonce' );
+  foreach ( $fields as $field => $title ) {
+    $field_name = $prefix . $field;
+    $field_value = isset( $values[$field_name] ) ? esc_attr( $values[$field_name][0] ) : '';
+    printf(
+      '<p>
+    		<label for="%1$s">%2$s</label>
+    		<input type="text" name="%1$s" id="%1$s" value="%3$s" />
+    	</p>',
+      $field_name,
+      $title,
+      $field_value
+    );
+  }
+}
+
 /**
  * Custom meta boxes, starting with our extra fields for every post
  */
@@ -63,9 +111,6 @@ function mj_custom_meta_box_display() {
 	$values = get_post_custom( $post->ID );
   $prefix = 'mj_';
   $fields = array(
-    'dek' => 'Dek',
-    'social_hed' => 'Social Hed',
-    'social_dek' => 'Social Dek',
     'promo_hed' => 'Promo (Homepage) Hed',
     'promo_dek' => 'Promo (Homepage) Dek',
     'byline_override' => 'Byline Override',
