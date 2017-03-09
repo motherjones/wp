@@ -125,11 +125,9 @@ INSERT INTO wp_redirection_groups
 ');
 $wp->commit();
 
-//ASSUME OPTIONS ALREADY TRUNCATED
-
 $wp->beginTransaction();
 $wp->exec('
-INSERT INTO wp_options
+REPLACE INTO wp_options
 (option_name, option_value, autoload)
 VALUES (
 "redirection_options",

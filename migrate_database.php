@@ -640,21 +640,29 @@ $wp->beginTransaction();
 foreach ( $uid_to_author_meta as $uid => $author ) {
   $uiid = $uid;
 
-  $key = "mj_user_twitter";
-  $value = $author['field_twitter_user_value'];
-	$author_meta_insert->execute();
+  if (array_key_exists('field_twitter_user_value', $author)) {
+    $key = "mj_user_twitter";
+    $value = $author['field_twitter_user_value'];
+    $author_meta_insert->execute();
+  }
 
-  $key = "mj_user_short_bio";
-  $value = $author['field_author_bio_short_value'];
-	$author_meta_insert->execute();
+  if (array_key_exists('mj_user_short_bio', $author)) {
+    $key = "mj_user_short_bio";
+    $value = $author['field_author_bio_short_value'];
+    $author_meta_insert->execute();
+  }
 
-  $key = "mj_user_bio";
-  $value = $author['field_author_bio_value'];
-	$author_meta_insert->execute();
+  if (array_key_exists('field_author_bio_value', $author)) {
+    $key = "mj_user_bio";
+    $value = $author['field_author_bio_value'];
+    $author_meta_insert->execute();
+  }
 
-  $key = "mj_user_position";
-  $value = $author['field_author_title_value'];
-	$author_meta_insert->execute();
+  if (array_key_exists('field_author_title_value', $author)) {
+    $key = "mj_user_position";
+    $value = $author['field_author_title_value'];
+    $author_meta_insert->execute();
+  }
 
 }
 $wp->commit();
