@@ -20,7 +20,8 @@ module.exports = function(grunt) {
         files: {
           'css/style.css': 'scss/style.scss',
           'css/admin/editor-style.css': 'scss/admin/editor-style.scss',
-          'css/admin/featured-media.css': 'scss/admin/featured-media.scss'
+          'css/admin/featured-media.css': 'scss/admin/featured-media.scss',
+          'css/admin/post-admin.css': 'scss/admin/post-admin.scss',
         }
       }
     },
@@ -53,32 +54,20 @@ module.exports = function(grunt) {
     },
 
     cssmin: {
+      // front-end styles
       target: {
         options: {
           report: 'gzip'
         },
         files: [
           {
-            expand: true,
-            cwd: 'css',
-            src: ['*.css', '!*.min.css'],
-            dest: 'css',
-            ext: '.min.css'
-          }
-        ]
-      },
-      target: {
-        options: {
-          report: 'gzip'
-        },
-        files: [
-          {
-            'css/admin/featured-media.min.css': 'css/admin/featured-media.css',
+            'css/style.min.css': 'css/style.css',
+            // combine styles to be loaded on the post edit screen
+            'css/admin/post-admin.min.css': ['css/admin/post-admin.css', 'css/admin/featured-media.css'],
             'css/admin/editor-style.min.css': 'css/admin/editor-style.css'
           }
         ]
-      },
-
+      }
     },
 
     watch: {

@@ -247,20 +247,10 @@ function largo_has_featured_media( $post = null ) {
  * @param array $hook The page that this function is being run on.
  */
 function largo_enqueue_featured_media_js( $hook ) {
-	if ( ! in_array( $hook, array( 'edit.php', 'edit-tags.php', 'post-new.php', 'post.php', 'term.php' ) ) ) {
+	if ( ! in_array( $hook, array( 'edit.php', 'post-new.php', 'post.php' ) ) ) {
 		return;
 	}
 	global $post, $wp_query;
-
-	// Run this action on term edit pages
-	// edit-tags.php for wordpress before 4.5
-	// term.php for 4.5 and after
-	if ( in_array( $hook, array( 'edit-tags.php', 'term.php' ) ) && isset( $_GET['tag_ID'] ) && is_numeric( $_GET['tag_ID'] ) ) {
-		// After WordPress 4.5, the taxonomy is no longer in the URL
-		// So to compensate, we get the taxonomy from the current screen
-		$screen = get_current_screen();
-		$post = get_post( largo_get_term_meta_post( $screen->taxonomy, $_GET['tag_ID'] ) );
-	}
 
 	if( ! is_object( $post ) ) {
 		return;
@@ -292,10 +282,6 @@ function largo_enqueue_featured_media_js( $hook ) {
 			'confirm_remove_featured' => __( 'Yes, remove featured media', 'largo' ),
 			'remove_featured_title' => __( 'Remove featured', 'largo' )
 		)
-	);
-	wp_enqueue_style(
-		'largo_featured_media',
-		get_template_directory_uri(). '/css/admin/featured-media' . $suffix . '.css'
 	);
 
 	wp_localize_script( 'largo_featured_media', 'LFM', array(
@@ -426,7 +412,7 @@ function largo_add_featured_image_meta_box() {
         __( 'Featured Media', 'largo' ),
         'largo_featured_image_metabox_callback',
         array( 'post' ),
-        'side',
+        'after_title',
         'core'
     );
 }
