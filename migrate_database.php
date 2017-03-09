@@ -1,22 +1,5 @@
 <?php
-/**
-  * Start files migrating
-  * if we're using pantheon, I have a nice rsync bash script at pantheon_rsync.sh
-  *
-  * Set hostname, username, password for your local mysql install
-  * Set drupal database name
-  * set wp database name
-  * Run this file: php migrate_database.php
-  * this will take a while
-  * Upload the database to wherever
-  *
-  * Once all the files are moved and the database is imported
-  * open up the wp admin and start image regen plugin. 
-  * This will take a while
-  * open up zones and create zones for :
-  *   top_stories
-  *   homepage_featured
- **/
+
 $hostname="localhost";  
 $username="root";   
 $password=$argv[1];
@@ -1324,7 +1307,6 @@ foreach ($zones as $zone => $queue) {
   ;
   ');
 
-  $top_stories_queue = Array(325726, 325721);
   $meta_key = '_zoninator_order_' . $zone_term_id;
 
   $wp->beginTransaction();
