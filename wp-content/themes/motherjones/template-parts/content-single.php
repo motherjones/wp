@@ -11,6 +11,7 @@
 
 <article id="post-<?php the_ID(); ?>" <?php post_class( 'hnews' ); ?> itemscope itemtype="http://schema.org/Article">
 	<?php get_template_part( 'template-parts/single', 'entry-header' ); ?>
+
 	<section class="entry-content" itemprop="articleBody">
 		<?php
 			if ( isset( $meta['css'][0] ) ) {
@@ -19,8 +20,8 @@
 					$meta['css'][0]
 				);
 			}
-
-			get_template_part( 'template-parts/master-image-630' );
+      largo_hero();
+			//get_template_part( 'template-parts/master-image-630' );
 
 			the_content();
 		?>

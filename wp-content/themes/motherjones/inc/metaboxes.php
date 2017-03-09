@@ -6,7 +6,7 @@
 // Hide trackbacks, revisions, comments and (sometimes) custom fields
 function mj_remove_metaboxes() {
   global $current_user;
-  get_currentuserinfo();
+  wp_get_current_user();
   // remove for everyone
   $remove = array( 'trackbacksdiv', 'revisionsdiv', 'commentstatusdiv' );
   // show for editors and above
@@ -50,7 +50,7 @@ add_filter( 'default_hidden_meta_boxes', 'mj_change_default_hidden_metaboxes', 1
 //edit_form_after_editor
 //edit_form_advanced
 largo_add_meta_box(
-	'mj_dek',
+	'mj_title_extra',
 	__( 'Title Extra', 'mj' ),
 	'mj_title_extra_meta_box_display',
 	'post',

@@ -1,10 +1,6 @@
 <li class="article-item">
   <div class="article-image">
-    <a href="<?php print esc_url( get_permalink() ); ?>">
-      <?php print wp_get_attachment_image(
-        get_post_meta( get_the_ID(), 'master_image' )[0]['master_image'],
-        'homepage_investigations'
-      ); ?>
+    <a href="<?php the_permalink(); ?>"><?php the_post_thumbnail( 'homepage_investigations' ); ?></a>
     </a>
   </div>
   <div class="article-data">

@@ -62,6 +62,7 @@ class MJ {
 	private function require_files() {
 		$includes = array(
 			'/vendor/largo/largo-metabox-api.php',
+			'/vendor/largo/featured-media.php',
 			'/inc/editor.php',
 			'/inc/enqueue.php',
 			'/inc/helpers.php',
@@ -73,6 +74,14 @@ class MJ {
 		);
 		foreach ( $includes as $include ) {
 			require_once( get_template_directory() . $include );
+		}
+
+		// Media credit and slideshow plugins
+		if ( ! class_exists( 'Navis_Media_Credit' ) ) {
+			require_once dirname( __FILE__ ) . '/vendor/largo/media-credit/navis-media-credit.php';
+		}
+		if ( ! class_exists( 'Navis_Slideshows' ) ) {
+			require_once dirname( __FILE__ ) . '/vendor/largo/slideshows/navis-slideshows.php';
 		}
 	}
 }
@@ -137,7 +146,7 @@ if ( ! function_exists( 'mj_setup' ) ) {
 	  add_filter( 'tiny_mce_before_init', 'mj_wysiwyg_config' );
 
 		$suffix = (MJ_DEBUG) ? '' : '.min';
-		add_editor_style( 'css/editor-style' . $suffix . '.css' );
+		add_editor_style( 'css/admin/editor-style' . $suffix . '.css' );
 
 	}
 } // mj_setup

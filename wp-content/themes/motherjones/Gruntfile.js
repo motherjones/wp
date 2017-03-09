@@ -19,7 +19,9 @@ module.exports = function(grunt) {
       dist: {
         files: {
           'css/style.css': 'scss/style.scss',
-          'css/editor-style.css': 'scss/editor-style.scss'
+          'css/admin/editor-style.css': 'scss/admin/editor-style.scss',
+          'css/admin/featured-media.css': 'scss/admin/featured-media.scss',
+          'css/admin/post-admin.css': 'scss/admin/post-admin.scss',
         }
       }
     },
@@ -42,6 +44,7 @@ module.exports = function(grunt) {
             'nav.js',
             'skip-link-focus-fix.js',
             'video-embed.js',
+            'featured-media.js',
             '!*.min.js'
           ],
           dest: 'js',
@@ -51,17 +54,17 @@ module.exports = function(grunt) {
     },
 
     cssmin: {
+      // front-end styles
       target: {
         options: {
           report: 'gzip'
         },
         files: [
           {
-            expand: true,
-            cwd: 'css',
-            src: ['*.css', '!*.min.css'],
-            dest: 'css',
-            ext: '.min.css'
+            'css/style.min.css': 'css/style.css',
+            // combine styles to be loaded on the post edit screen
+            'css/admin/post-admin.min.css': ['css/admin/post-admin.css', 'css/admin/featured-media.css'],
+            'css/admin/editor-style.min.css': 'css/admin/editor-style.css'
           }
         ]
       }
@@ -71,7 +74,7 @@ module.exports = function(grunt) {
       sass: {
         files: [
           'scss/*.scss',
-          //'scss/**/**/*.scss'
+          'scss/**/*.scss'
         ],
         tasks: [
           'sass',

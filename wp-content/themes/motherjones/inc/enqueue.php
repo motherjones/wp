@@ -116,12 +116,25 @@ if ( ! function_exists( 'mj_enqueue' ) ) {
 			'expand'   => __( 'expand child menu', 'mj' ),
 			'collapse' => __( 'collapse child menu', 'mj' ),
 		) );
+
+		// slideshows on single posts only
+		if ( is_single() ) {
+			$slick_css = get_template_directory_uri() . '/vendor/largo/slideshows/vendor/slick/slick.css';
+			wp_enqueue_style( 'mj_slick', $slick_css, array(), '1.0' );
+
+			$slides_src = get_template_directory_uri() . '/vendor/largo/slideshows/vendor/slick/slick.min.js';
+			wp_enqueue_script( 'mj_jquery-slick', $slides_src, array( 'jquery' ), '3.0', true );
+
+			$slides_css = get_template_directory_uri() . '/vendor/largo/slideshows/css/slides.css';
+			wp_enqueue_style( 'mj_slides', $slides_css, array(), '1.0' );
+
+			$show_src = get_template_directory_uri() . '/vendor/largo/slideshows/js/navis-slideshows.js';
+			wp_enqueue_script( 'mj_slideshows', $show_src, array( 'jquery-slick' ), '0.11', true );
+		}
+
 	}
 }
 add_action( 'wp_enqueue_scripts', 'mj_enqueue' );
-
-
-
 
 function mj_admin_style( $hook ) {
 	$suffix = (MJ_DEBUG) ? '' : '.min';
@@ -130,7 +143,7 @@ function mj_admin_style( $hook ) {
 	if ( ( $hook == 'post.php' ) || ( $hook == 'post-new.php' ) ) {
 		wp_enqueue_style(
 			'mj-post-admin-style', (
-				get_template_directory_uri() . '/css/admin/post-admin.css'),
+				get_template_directory_uri() . '/css/admin/post-admin' . $suffix . '.css'),
 				false,
 				'1.0'
 			);
