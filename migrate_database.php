@@ -606,20 +606,24 @@ u.name
 FROM mjd6.users u
 INNER JOIN mjd6.users_roles r
 USING (uid)
-WHERE u.mail IS NOT NULL
 ;
 ");
 $roles_data->execute();
 
 $wp->beginTransaction();
-while ( $author = $author_data->fetch(PDO::FETCH_ASSOC)) {
-  if ( array_key_exists( $author['title'], $author_name_to_author_meta ) ) {
+while ( $author = $roles_data->fetch(PDO::FETCH_ASSOC)) {
+  if ( array_key_exists( $author['name'], $author_name_to_author_meta ) ) {
     continue;
   }
   $author_insert->execute(Array(
-    $author['title'],
-    $author['title']
+    $author['name'],
+    $author['name'],
+    $author['name']
   ));
+  $author['wp_id'] = $wp->lastInsertId();
+  $author_name_to_author_meta[$author['name']] = $author;
+  $uid_to_author_meta[$wp->lastInsertId()] = $author;
+
 }
 $wp->commit();
 
@@ -818,24 +822,86 @@ $author_image_data = $d6->prepare("
 SELECT DISTINCT
 n.nid,
 a.field_user_uid, 
-f.status,
 f.filemime,
 f.filepath,
-f.fid,
-a.field_author_title_value,
+f.filename,
+n.title,
 a.field_photo_fid
 FROM mjd6.node n
-INNER JOIN mjd6.node_revisions r
-USING(vid)
-LEFT OUTER JOIN mjd6.content_type_author a 
+INNER JOIN mjd6.content_type_author a 
 USING(vid)
 INNER JOIN mjd6.files f
 ON(a.field_photo_fid = f.fid)
-#WHERE name IS NOT NULL
 ;
 ");
 $author_image_data->execute();
 
+$author_image_insert = $wp->prepare('
+INSERT IGNORE INTO pantheon_wp.wp_posts
+(post_author, post_date, post_date_gmt, post_content, post_title, post_excerpt,
+post_name, to_ping, pinged, post_modified, post_modified_gmt, guid,
+post_content_filtered, post_type, `post_status`, post_parent, post_mime_type)
+VALUES (
+:post_author,
+FROM_UNIXTIME("1970-1-1 00:00:00"),
+FROM_UNIXTIME("1970-1-1 00:00:00"),
+"",
+:post_title,
+"",
+:post_name,
+"",
+"",
+FROM_UNIXTIME("1970-1-1 00:00:00"),
+FROM_UNIXTIME("1970-1-1 00:00:00"),
+:guid,
+"",
+"attachment",
+"publish",
+NULL,
+:post_mime_type
+)
+;
+');
+
+
+$wp->beginTransaction();
+while ( $image = $author_image_data->fetch(PDO::FETCH_ASSOC)) {
+  $uid  = $author_name_to_author_meta[$image['title']]['wp_id'];
+  $guid = $FILEDIR . str_replace('files/photo/', '', $image['filepath']);
+  $author_image_insert->execute(array(
+    ':post_author' => $uid,
+    ':post_title' => $image['filename'],
+    ':post_name' => $image['filename'],
+    ':guid' => $guid,
+    ':post_mime_type' => $image['filemime'],
+  ));
+  $author_name_to_author_meta[$image['title']]['image_location'] = $guid;
+  $author_name_to_author_meta[$image['title']]['image_id'] = $wp->lastInsertId();
+}
+$wp->commit();
+
+$author_meta_insert = $wp->prepare("
+INSERT IGNORE INTO pantheon_wp.wp_usermeta (user_id, meta_key, meta_value)
+VALUES ( ?, ?, ? )
+;
+");
+
+$wp->beginTransaction();
+foreach ( $author_name_to_author_meta as $author ) {
+  if ( array_key_exists('image_id', $author) ) {
+    $author_meta_insert->execute(array(
+      $author['wp_id'],
+      "author_image_id",
+      $author['image_id']
+    ));
+    $author_meta_insert->execute(array(
+      $author['wp_id'],
+      "author_image_url",
+      $author['image_location']
+    ));
+  }
+}
+$wp->commit();
 echo "authors done";
 
 
