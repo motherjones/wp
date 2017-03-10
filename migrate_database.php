@@ -257,7 +257,7 @@ AND n.nid IS NOT 64
 $page_data->execute();
 
 $wp->beginTransaction();
-while ( $post = $post_data->fetch(PDO::FETCH_NUM)) {
+while ( $post = $page_data->fetch(PDO::FETCH_NUM)) {
 	$post_insert->execute($post);
 }
 $wp->commit();
@@ -272,8 +272,12 @@ FROM_UNIXTIME(n.created),
 r.body,
 n.title,
 r.teaser,
-SUBSTR(a.dst, 
-  CHAR_LENGTH(a.dst) - LOCATE('about/', REVERSE(a.dst)) + 2 
+REPLACE(
+  SUBSTR(a.dst, 
+    LOCATE('/', a.dst) + 1
+  ), 
+  "/",
+  "-"
 )
 ,
 '',
@@ -291,12 +295,13 @@ LEFT OUTER JOIN mjd6.url_alias a
 ON a.src = CONCAT('node/', n.nid)
 WHERE n.type = 'page'
 AND a.dst NOT LIKE '%about%'
+AND a.dst NOT LIKE '%toc%'
 ;
 ");
 $page_data->execute();
 
 $wp->beginTransaction();
-while ( $post = $post_data->fetch(PDO::FETCH_NUM)) {
+while ( $post = $page_data->fetch(PDO::FETCH_NUM)) {
 	$post_insert->execute($post);
 }
 $wp->commit();

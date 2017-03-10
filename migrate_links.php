@@ -208,3 +208,33 @@ while ( $redirect = $update_redirects->fetch(PDO::FETCH_NUM)) {
 }
 $wp->commit();
 
+//UPDATE PAGES WITH SLASHES IN THEM
+
+$page_redirects = $d6->prepare('
+SELECT DISTINCT
+a.dst,
+REPLACE(
+  SUBSTR(a.dst, 
+    LOCATE("/", a.dst) + 1
+  ), 
+  "/",
+  "-"
+)
+FROM mjd6.node n
+INNER JOIN mjd6.node_revisions r
+USING(vid)
+LEFT OUTER JOIN mjd6.url_alias a
+ON a.src = CONCAT("node/", n.nid)
+WHERE n.type = "page"
+AND a.dst NOT LIKE "%about%"
+AND a.dst NOT LIKE "%toc%"
+AND a.dst LIKE "%/%"
+AND n.status = 1
+;
+');
+
+$wp->beginTransaction();
+while ( $redirect = $page_redirects->fetch(PDO::FETCH_NUM)) {
+	$redirect_update_insert->execute($redirect);
+}
+$wp->commit();
