@@ -158,13 +158,14 @@ FROM_UNIXTIME(n.changed),
 FROM_UNIXTIME(n.changed),
 '',
 n.type,
-IF(n.status = 1, 'publish', 'private')
+IF(n.status = 1, 'publish', 'private'),
+0
 FROM mjd6.node n
 INNER JOIN mjd6.node_revisions r
 USING(vid)
 LEFT OUTER JOIN mjd6.url_alias a
 ON a.src = CONCAT('node/', n.nid)
-WHERE n.type IN ('article', 'blogpost', 'page', 'full_width_article')
+WHERE n.type IN ('article', 'blogpost', 'full_width_article')
 ;
 ");
 $post_data->execute();
@@ -174,11 +175,125 @@ $post_insert = $wp->prepare('
 INSERT IGNORE INTO pantheon_wp.wp_posts
 (ID, post_author, post_date, post_date_gmt, post_content, post_title, post_excerpt,
 post_name, to_ping, pinged, post_modified, post_modified_gmt,
-post_content_filtered, post_type, `post_status`)
+post_content_filtered, post_type, `post_status`, `post_parent`)
 VALUES (?, ?, ?, ?, ?, ?, ?,
 ?, ?, ?, ?, ?,
-?, ?, ?)
+?, ?, ?, ?)
 ');
+
+$wp->beginTransaction();
+while ( $post = $post_data->fetch(PDO::FETCH_NUM)) {
+	$post_insert->execute($post);
+}
+$wp->commit();
+
+
+$about_data = $d6->prepare("
+SELECT DISTINCT
+n.nid,
+n.uid,
+FROM_UNIXTIME(n.created),
+FROM_UNIXTIME(n.created),
+r.body,
+n.title,
+r.teaser,
+'about'
+,
+'',
+'',
+FROM_UNIXTIME(n.changed),
+FROM_UNIXTIME(n.changed),
+'',
+n.type,
+IF(n.status = 1, 'publish', 'private'),
+0
+FROM mjd6.node n
+INNER JOIN mjd6.node_revisions r
+USING(vid)
+LEFT OUTER JOIN mjd6.url_alias a
+ON a.src = CONCAT('node/', n.nid)
+WHERE n.nid = 64
+;
+");
+$about_data->execute();
+
+$wp->beginTransaction();
+while ( $post = $about_data->fetch(PDO::FETCH_NUM)) {
+	$post_insert->execute($post);
+}
+$wp->commit();
+
+$page_data = $d6->prepare("
+SELECT DISTINCT
+n.nid,
+n.uid,
+FROM_UNIXTIME(n.created),
+FROM_UNIXTIME(n.created),
+r.body,
+n.title,
+r.teaser,
+SUBSTR(a.dst, 
+  CHAR_LENGTH(a.dst) - LOCATE('about/', REVERSE(a.dst)) + 2 
+)
+,
+'',
+'',
+FROM_UNIXTIME(n.changed),
+FROM_UNIXTIME(n.changed),
+'',
+n.type,
+IF(n.status = 1, 'publish', 'private'),
+64
+FROM mjd6.node n
+INNER JOIN mjd6.node_revisions r
+USING(vid)
+LEFT OUTER JOIN mjd6.url_alias a
+ON a.src = CONCAT('node/', n.nid)
+WHERE n.type = 'page'
+AND a.dst LIKE '%about%'
+AND n.nid IS NOT 64
+;
+");
+$page_data->execute();
+
+$wp->beginTransaction();
+while ( $post = $post_data->fetch(PDO::FETCH_NUM)) {
+	$post_insert->execute($post);
+}
+$wp->commit();
+
+
+$page_data = $d6->prepare("
+SELECT DISTINCT
+n.nid,
+n.uid,
+FROM_UNIXTIME(n.created),
+FROM_UNIXTIME(n.created),
+r.body,
+n.title,
+r.teaser,
+SUBSTR(a.dst, 
+  CHAR_LENGTH(a.dst) - LOCATE('about/', REVERSE(a.dst)) + 2 
+)
+,
+'',
+'',
+FROM_UNIXTIME(n.changed),
+FROM_UNIXTIME(n.changed),
+'',
+n.type,
+IF(n.status = 1, 'publish', 'private'),
+0
+FROM mjd6.node n
+INNER JOIN mjd6.node_revisions r
+USING(vid)
+LEFT OUTER JOIN mjd6.url_alias a
+ON a.src = CONCAT('node/', n.nid)
+WHERE n.type = 'page'
+AND a.dst NOT LIKE '%about%'
+;
+");
+$page_data->execute();
 
 $wp->beginTransaction();
 while ( $post = $post_data->fetch(PDO::FETCH_NUM)) {
@@ -782,8 +897,9 @@ AND user_id = ?
 ;
 ");
 $wp->beginTransaction();
-while ( $role = $roles_data->fetch(PDO::FETCH_NUM)) {
-	$roles_insert->execute($role);
+while ( $role = $roles_data->fetch(PDO::FETCH_ASSOC)) {
+  $user_id = $author_name_to_author_meta[$role['name']]['wp_id'];
+	$roles_insert->execute(Array($user_id));
 }
 $wp->commit();
 
@@ -805,9 +921,6 @@ WHERE post_author NOT IN (SELECT DISTINCT ID FROM pantheon_wp.wp_users)
 ");
 $wp->commit();
 
-/*** FIXXXMEEE
- * fuck authors are not posts again what do i do jeez
- */
 //author photo
 $author_image_data = $d6->prepare("
 SELECT DISTINCT
