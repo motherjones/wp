@@ -25,7 +25,7 @@ get_header(); ?>
 						'top_stories',
 						array(
 							'posts_per_page' => 10,
-						),
+						)
 					);
 					$top_stories->the_post();
 					get_template_part( 'template-parts/homepage-top-story' );
@@ -344,7 +344,7 @@ get_header(); ?>
 	<script>
 		ad_code({
 				yieldmo: true,
-			 docwrite: true,
+			  docwrite: true,
 				desktop: false,
 			placement: 'ym_869408549909503847',
 		});
