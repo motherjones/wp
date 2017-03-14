@@ -28,27 +28,6 @@ function mj_remove_metaboxes() {
 add_action( 'admin_menu','mj_remove_metaboxes' );
 
 /**
- * Put the authors metabox in the right column.
- *
- * @param string $context the original coauthors metabox context.
- */
-function mj_coauthors_metabox_context( $context ) {
-		$context = 'side';
-		return $context;
-}
-/**
- * And set the priority to high.
- *
- * @param string $priority the original coauthors metabox priority.
- */
-function mj_coauthors_metabox_priority( $priority ) {
-		$priority = 'high';
-		return $priority;
-}
-add_filter( 'coauthors_meta_box_context', 'mj_coauthors_metabox_context' );
-add_filter( 'coauthors_meta_box_priority', 'mj_coauthors_metabox_priority' );
-
-/**
  * Show all the other metaboxes by default.
  *
  * @param array  $hidden The array of metaboxes that are already hidden.
