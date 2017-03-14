@@ -359,10 +359,10 @@ VALUES (?,
 FROM_UNIXTIME(?),
 FROM_UNIXTIME(?),
  ?, ?, ?,
-?, ?, ?, ?,
+?, ?, ?,
 FROM_UNIXTIME(?),
 FROM_UNIXTIME(?),
-?, ?, ?)
+?, ?, ?, ?)
 ');
 
 //insert toc parent page
@@ -372,9 +372,9 @@ $page_insert->execute(Array(
   "1970-1-1 00:00:00", //posted
   "1970-1-1 00:00:00", //posted in gmt
   '', //body
-  'toc', //title
+  'Magazine', //title
   '', //post_excerpt
-  'toc', //slug
+  'mag', //slug
   '', //to ping
   '', //pinged
   "1970-1-1 00:00:00", //changed
@@ -386,7 +386,7 @@ $page_insert->execute(Array(
 ));
 $toc_parent_id = $wp->lastInsertId();
 $wp->commit();
-$redirects_needed []= 'toc';
+$redirects_needed []= 'mag';
 
 //insert year parents
 $wp->beginTransaction();
@@ -409,49 +409,25 @@ foreach ($toc_year_pages as $year => $boolean) {
     $toc_parent_id //parent
   ));
   $toc_year_pages[$year] = $wp->lastInsertId();
-  $redirects_needed []= 'toc/' . $year;
-}
-$wp->commit();
-
-//insert magazine pages
-$wp->beginTransaction();
-foreach ($toc_magazine_pages as $date => $page) { 
-  // form is toc/YYYY/MM/slug
-  $page_insert->execute(Array(
-    $page['uid'], #post author
-    $page['FROM_UNIXTIME(n.created)'], //posted
-    $page['FROM_UNIXTIME(n.created)'], //posted
-    $page['body'], //body
-    $page['title'], //title
-    $page['teaser'], //post_excerpt
-    $page['url_split'][2], //slug
-    '', //to ping
-    '', //pinged
-    $page['FROM_UNIXTIME(n.changed)'], //posted
-    $page['FROM_UNIXTIME(n.changed)'], //posted
-    '', //post content filtered
-    'page', //type
-    $page["IF(n.status = 1, 'publish', 'draft')"], //pub status
-    $toc_year_pages[$page['url_split'][1]] //parent
-  ));
-  $toc_month_pages[$date] = $wp->lastInsertId();
+  $redirects_needed []= 'mag/' . $year;
 }
 $wp->commit();
 
 $months_to_create = Array();
 //find months to create
 foreach ($toc_sub_pages as $page) { 
-  // form is toc/YYYY/MM/slug
   $date = $page['url_split'][1] . $page['url_split'][2];
-  if (!array_key_exists($date, $toc_month_pages)) {
-    $months_to_create[$date] = Array($page['url_split'][1], $page['url_split'][2]);
-  }
+  $months_to_create[$date] = Array($page['url_split'][1],$page['url_split'][2]);
+}
+foreach ($toc_magazine_pages as $page) {
+  $date = $page['url_split'][1] . $page['url_split'][2];
+  $months_to_create[$date] = Array($page['url_split'][1], $page['url_split'][2]);
 }
 $wp->beginTransaction();
 foreach ($months_to_create as $date) { 
   $year = $date[0];
   $month = $date[1];
-  $redirects_needed []= 'toc/' . $year . '/' . $month;
+  $redirects_needed []= 'mag/' . $year . '/' . $month;
 
   $page_insert->execute(Array(
     '', #post author
@@ -473,6 +449,31 @@ foreach ($months_to_create as $date) {
   $toc_month_pages[$year . $month] = $wp->lastInsertId();
 }
 $wp->commit();
+
+//insert magazine pages
+$wp->beginTransaction();
+foreach ($toc_magazine_pages as $date => $page) { 
+  // form is toc/YYYY/MM/slug
+  $page_insert->execute(Array(
+    $page['uid'], #post author
+    $page['FROM_UNIXTIME(n.created)'], //posted
+    $page['FROM_UNIXTIME(n.created)'], //posted
+    $page['body'], //body
+    $page['title'], //title
+    $page['teaser'], //post_excerpt
+    'toc', //slug
+    '', //to ping
+    '', //pinged
+    $page['FROM_UNIXTIME(n.changed)'], //posted
+    $page['FROM_UNIXTIME(n.changed)'], //posted
+    '', //post content filtered
+    'page', //type
+    $page["IF(n.status = 1, 'publish', 'draft')"], //pub status
+    $toc_month_pages[$date] //parent
+  ));
+}
+$wp->commit();
+
 
 $wp->beginTransaction();
 foreach ($toc_sub_pages as $page) { 
@@ -497,8 +498,6 @@ foreach ($toc_sub_pages as $page) {
   ));
 }
 $wp->commit();
-
-print_r($redirects_needed);
 
 $redirect_item_insert = $wp->prepare('
 INSERT INTO wp_redirection_items
