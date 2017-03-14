@@ -386,7 +386,7 @@ $page_insert->execute(Array(
 ));
 $toc_parent_id = $wp->lastInsertId();
 $wp->commit();
-$redirects_needed []= 'mag';
+$redirects_needed []= '/mag/';
 
 //insert year parents
 $wp->beginTransaction();
@@ -409,7 +409,7 @@ foreach ($toc_year_pages as $year => $boolean) {
     $toc_parent_id //parent
   ));
   $toc_year_pages[$year] = $wp->lastInsertId();
-  $redirects_needed []= 'mag/' . $year;
+  $redirects_needed []= '/mag/' . $year;
 }
 $wp->commit();
 
@@ -427,7 +427,7 @@ $wp->beginTransaction();
 foreach ($months_to_create as $date) { 
   $year = $date[0];
   $month = $date[1];
-  $redirects_needed []= 'mag/' . $year . '/' . $month;
+  $redirects_needed []= '/mag/' . $year . '/' . $month;
 
   $page_insert->execute(Array(
     '', #post author

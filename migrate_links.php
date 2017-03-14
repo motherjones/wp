@@ -142,7 +142,7 @@ $redirect_item_insert = $wp->prepare('
 INSERT INTO wp_redirection_items
 (url, last_access, group_id, action_type, action_code, action_data, match_type)
 VALUES (
-?, # source
+CONCAT("/", ?), # source
 FROM_UNIXTIME("1970-1-1 00:00:00"), #last access
 1,
 "url", #action type
@@ -187,7 +187,7 @@ $redirect_update_insert = $wp->prepare('
 INSERT INTO wp_redirection_items
 (url, last_access, group_id, action_type, action_code, action_data, match_type)
 VALUES (
-?, # source
+CONCAT("/", ?), # source
 FROM_UNIXTIME("1970-1-1 00:00:00"), #last access
 2, #yep this is the only difference from the one above
 "url", #action type
