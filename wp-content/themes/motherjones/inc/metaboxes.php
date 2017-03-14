@@ -17,10 +17,6 @@ function mj_remove_metaboxes() {
 	wp_get_current_user();
 	// Remove these for everyone.
 	$remove = array( 'trackbacksdiv', 'revisionsdiv', 'commentstatusdiv', 'postexcerpt', 'slugdiv' );
-	// Show these for editors and above.
-	if ( ! current_user_can( 'edit_others_posts' ) ) {
-		// nothing, for now.
-	}
 	// Show these for admins only.
 	if ( ! current_user_can( 'manage_options' ) ) {
 		$remove[] = 'postcustom';
@@ -105,7 +101,7 @@ function mj_headline_extra_meta_box_display() {
 	$prefix = 'mj_';
 	$fields = array(
 		'dek' => 'Dek',
-		'social_hed' => 'Social Hed',
+		'social_hed' => 'Social Headline',
 		'social_dek' => 'Social Dek',
 	);
 	wp_nonce_field( 'largo_meta_box_nonce', 'meta_box_nonce' );
@@ -144,8 +140,8 @@ function mj_custom_meta_box_display() {
 	$values = get_post_custom( $post->ID );
 	$prefix = 'mj_';
 	$fields = array(
-		'promo_hed' => 'Promo (Homepage) Hed',
-		'promo_dek' => 'Promo (Homepage) Dek',
+		'promo_hed' => 'Homepage Headline',
+		'promo_dek' => 'Homepage Dek',
 		'byline_override' => 'Byline Override',
 		'dateline_override' => 'Dateline Override',
 	);

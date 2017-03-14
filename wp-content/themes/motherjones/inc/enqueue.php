@@ -115,7 +115,6 @@ add_action( 'wp_enqueue_scripts', 'mj_enqueue' );
 function mj_admin_style( $hook ) {
 	$suffix = (MJ_DEBUG) ? '' : '.min';
 	$version = '1.0';
-
 	if ( ( 'post.php' === $hook ) || ( 'post-new.php' === $hook ) ) {
 		wp_enqueue_style(
 			'mj-post-admin-style',
