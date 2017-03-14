@@ -47,6 +47,11 @@ echo "Prod db unzipped"
 echo "\n"
 
 
+php migrate_links.php "$SQL_PASS" #redirects must be in place for toc pages in migrate, below
+
+echo "redirects added to wp db"
+echo "\n"
+
 mysql -u root -p"$SQL_PASS" mjd6 < prod-motherjones_d6-motherjones_d6-$YYYY-$MM-$DD.sql
 
 echo "prod db pushed into database"
@@ -62,11 +67,6 @@ echo "\n"
 php migrate_blocks.php "$SQL_PASS"
 
 echo "blocks added to wp db"
-echo "\n"
-
-php migrate_links.php "$SQL_PASS"
-
-echo "redirects added to wp db"
 echo "\n"
 
 mysqldump -u root -p"$SQL_PASS" pantheon_wp > migrated-wp-db-$YYYY-$MM-$DD.sql

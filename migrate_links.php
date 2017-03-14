@@ -182,6 +182,7 @@ while ( $redirect = $manual_redirects->fetch(PDO::FETCH_NUM)) {
 $wp->commit();
 
 // INSERT NODE CHANGE REDIRECTS
+// no, don't do that, we dont really want to direct to node/ anything ever
 $redirect_update_insert = $wp->prepare('
 INSERT INTO wp_redirection_items
 (url, last_access, group_id, action_type, action_code, action_data, match_type)
@@ -204,7 +205,7 @@ $update_redirects->execute();
 
 $wp->beginTransaction();
 while ( $redirect = $update_redirects->fetch(PDO::FETCH_NUM)) {
-	$redirect_update_insert->execute($redirect);
+//	$redirect_update_insert->execute($redirect);
 }
 $wp->commit();
 

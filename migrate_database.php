@@ -158,7 +158,7 @@ FROM_UNIXTIME(n.changed),
 FROM_UNIXTIME(n.changed),
 '',
 n.type,
-IF(n.status = 1, 'publish', 'private'),
+IF(n.status = 1, 'publish', 'draft'),
 0
 FROM mjd6.node n
 INNER JOIN mjd6.node_revisions r
@@ -205,7 +205,7 @@ FROM_UNIXTIME(n.changed),
 FROM_UNIXTIME(n.changed),
 '',
 n.type,
-IF(n.status = 1, 'publish', 'private'),
+IF(n.status = 1, 'publish', 'draft'),
 0
 FROM mjd6.node n
 INNER JOIN mjd6.node_revisions r
@@ -242,7 +242,7 @@ FROM_UNIXTIME(n.changed),
 FROM_UNIXTIME(n.changed),
 '',
 n.type,
-IF(n.status = 1, 'publish', 'private'),
+IF(n.status = 1, 'publish', 'draft'),
 64
 FROM mjd6.node n
 INNER JOIN mjd6.node_revisions r
@@ -276,8 +276,8 @@ REPLACE(
   SUBSTR(a.dst, 
     LOCATE('/', a.dst) + 1
   ), 
-  "/",
-  "-"
+  \"/\",
+  \"-\"
 )
 ,
 '',
@@ -286,7 +286,7 @@ FROM_UNIXTIME(n.changed),
 FROM_UNIXTIME(n.changed),
 '',
 n.type,
-IF(n.status = 1, 'publish', 'private'),
+IF(n.status = 1, 'publish', 'draft'),
 0
 FROM mjd6.node n
 INNER JOIN mjd6.node_revisions r
@@ -295,7 +295,7 @@ LEFT OUTER JOIN mjd6.url_alias a
 ON a.src = CONCAT('node/', n.nid)
 WHERE n.type = 'page'
 AND a.dst NOT LIKE '%about%'
-AND a.dst NOT LIKE '%toc%'
+AND a.dst NOT LIKE 'toc%'
 ;
 ");
 $page_data->execute();
@@ -305,6 +305,223 @@ while ( $post = $page_data->fetch(PDO::FETCH_NUM)) {
 	$post_insert->execute($post);
 }
 $wp->commit();
+
+// toc call
+$page_data = $d6->prepare("
+SELECT DISTINCT
+r.nid,
+r.uid,
+FROM_UNIXTIME(n.created),
+r.body,
+r.title,
+r.teaser,
+a.dst,
+FROM_UNIXTIME(n.changed),
+n.type,
+IF(n.status = 1, 'publish', 'draft')
+FROM mjd6.node n
+INNER JOIN mjd6.node_revisions r
+USING(vid)
+LEFT OUTER JOIN mjd6.url_alias a
+ON a.src = CONCAT('node/', n.nid)
+WHERE (n.type = 'page' OR n.type = 'toc')
+AND a.dst LIKE 'toc%'
+;
+");
+$page_data->execute();
+
+$toc_pages = Array();
+$toc_year_pages = Array();
+$toc_month_pages = Array();
+$toc_magazine_pages = Array();
+
+$redirects_needed = Array();
+
+while ( $page = $page_data->fetch(PDO::FETCH_ASSOC)) {
+  // form is toc/YYYY/MM/slug
+  $path = preg_split('/\//', $page['dst']);
+  $page['url_split'] = $path;
+  $toc_year_pages[$path[1]] = True;
+  if ( !array_key_exists(3, $path) ) {
+    $toc_magazine_pages[$path[1] . $path[2]] = $page;
+  } else {
+    $toc_sub_pages []= $page;
+  }
+}
+
+//same as post insert  but no id supplied
+$page_insert = $wp->prepare('
+INSERT IGNORE INTO pantheon_wp.wp_posts
+(post_author, post_date, post_date_gmt, post_content, post_title, post_excerpt,
+post_name, to_ping, pinged, post_modified, post_modified_gmt,
+post_content_filtered, post_type, `post_status`, `post_parent`)
+VALUES (?, 
+FROM_UNIXTIME(?),
+FROM_UNIXTIME(?),
+ ?, ?, ?,
+?, ?, ?, ?,
+FROM_UNIXTIME(?),
+FROM_UNIXTIME(?),
+?, ?, ?)
+');
+
+//insert toc parent page
+$wp->beginTransaction();
+$page_insert->execute(Array(
+  '', #post author
+  "1970-1-1 00:00:00", //posted
+  "1970-1-1 00:00:00", //posted in gmt
+  '', //body
+  'toc', //title
+  '', //post_excerpt
+  'toc', //slug
+  '', //to ping
+  '', //pinged
+  "1970-1-1 00:00:00", //changed
+  "1970-1-1 00:00:00", //changed in gmt
+  '', //post content filtered
+  'page', //type
+  'publish', //pub status
+  0 //parent
+));
+$toc_parent_id = $wp->lastInsertId();
+$wp->commit();
+$redirects_needed []= 'toc';
+
+//insert year parents
+$wp->beginTransaction();
+foreach ($toc_year_pages as $year => $boolean) { 
+  $page_insert->execute(Array(
+    '', #post author
+    "1970-1-1 00:00:00", //posted
+    "1970-1-1 00:00:00", //posted in gmt
+    '', //body
+    $year, //title
+    '', //post_excerpt
+    $year, //slug
+    '', //to ping
+    '', //pinged
+    "1970-1-1 00:00:00", //changed
+    "1970-1-1 00:00:00", //changed in gmt
+    '', //post content filtered
+    'page', //type
+    'publish', //pub status
+    $toc_parent_id //parent
+  ));
+  $toc_year_pages[$year] = $wp->lastInsertId();
+  $redirects_needed []= 'toc/' . $year;
+}
+$wp->commit();
+
+//insert magazine pages
+$wp->beginTransaction();
+foreach ($toc_magazine_pages as $date => $page) { 
+  // form is toc/YYYY/MM/slug
+  $page_insert->execute(Array(
+    $page['uid'], #post author
+    $page['FROM_UNIXTIME(n.created)'], //posted
+    $page['FROM_UNIXTIME(n.created)'], //posted
+    $page['body'], //body
+    $page['title'], //title
+    $page['teaser'], //post_excerpt
+    $page['url_split'][2], //slug
+    '', //to ping
+    '', //pinged
+    $page['FROM_UNIXTIME(n.changed)'], //posted
+    $page['FROM_UNIXTIME(n.changed)'], //posted
+    '', //post content filtered
+    'page', //type
+    $page["IF(n.status = 1, 'publish', 'draft')"], //pub status
+    $toc_year_pages[$page['url_split'][1]] //parent
+  ));
+  $toc_month_pages[$date] = $wp->lastInsertId();
+}
+$wp->commit();
+
+$months_to_create = Array();
+//find months to create
+foreach ($toc_sub_pages as $page) { 
+  // form is toc/YYYY/MM/slug
+  $date = $page['url_split'][1] . $page['url_split'][2];
+  if (!array_key_exists($date, $toc_month_pages)) {
+    $months_to_create[$date] = Array($page['url_split'][1], $page['url_split'][2]);
+  }
+}
+$wp->beginTransaction();
+foreach ($months_to_create as $date) { 
+  $year = $date[0];
+  $month = $date[1];
+  $redirects_needed []= 'toc/' . $year . '/' . $month;
+
+  $page_insert->execute(Array(
+    '', #post author
+    "1970-1-1 00:00:00", //posted
+    "1970-1-1 00:00:00", //posted in gmt
+    '', //body
+    $month,
+    '', //post_excerpt
+    $month,
+    '', //to ping
+    '', //pinged
+    "1970-1-1 00:00:00", //changed
+    "1970-1-1 00:00:00", //changed in gmt
+    '', //post content filtered
+    'page', //type
+    'publish', //pub status
+    $toc_year_pages[$year] //parent
+  ));
+  $toc_month_pages[$year . $month] = $wp->lastInsertId();
+}
+$wp->commit();
+
+$wp->beginTransaction();
+foreach ($toc_sub_pages as $page) { 
+  // form is toc/YYYY/MM/slug
+  $date = $page['url_split'][1] . $page['url_split'][2];
+  $page_insert->execute(Array(
+    $page['uid'], #post author
+    $page['FROM_UNIXTIME(n.created)'], //posted
+    $page['FROM_UNIXTIME(n.created)'], //posted
+    $page['body'], //body
+    $page['title'], //title
+    $page['teaser'], //post_excerpt
+    $page['url_split'][3], //slug
+    '', //to ping
+    '', //pinged
+    $page['FROM_UNIXTIME(n.changed)'], //posted
+    $page['FROM_UNIXTIME(n.changed)'], //posted
+    '', //post content filtered
+    'page', //type
+    $page["IF(n.status = 1, 'publish', 'draft')"], //pub status
+    $toc_month_pages[$page['url_split'][1] . $page['url_split'][2]] //parent
+  ));
+}
+$wp->commit();
+
+print_r($redirects_needed);
+
+$redirect_item_insert = $wp->prepare('
+INSERT INTO wp_redirection_items
+(url, last_access, group_id, action_type, action_code, action_data, match_type)
+VALUES (
+?, # source
+FROM_UNIXTIME("1970-1-1 00:00:00"), #last access
+1,
+"url", #action type
+301, # action code
+"/", #destination action data
+"url" #match type
+)
+;');
+
+$wp->beginTransaction();
+foreach ($redirects_needed as $dst) {
+  $redirect_item_insert->execute(Array(
+    $dst
+  ));
+}
+$wp->commit();
+
 
 $article_term_insert = $wp->prepare('
 INSERT IGNORE INTO pantheon_wp.wp_terms
@@ -1067,7 +1284,7 @@ FROM_UNIXTIME(:post_modified),
 :guid,
 "",
 "attachment",
-IF(:status = 1, "publish", "private"),
+IF(:status = 1, "publish", "draft"),
 :post_parent,
 :post_mime_type
 )
@@ -1184,7 +1401,7 @@ FROM_UNIXTIME(:post_modified),
 :guid,
 "",
 "attachment",
-IF(:status = 1, "publish", "private"),
+IF(:status = 1, "publish", "draft"),
 :post_parent,
 :post_mime_type
 )
@@ -1298,7 +1515,7 @@ FROM_UNIXTIME(:post_modified),
 :guid,
 "",
 "attachment",
-IF(:status = 1, "publish", "private"),
+IF(:status = 1, "publish", "draft"),
 :post_parent,
 :post_mime_type
 )
