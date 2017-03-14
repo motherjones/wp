@@ -1,17 +1,10 @@
 <li class="top-article-item group">
   <div class="article-image">
-    <a href="<?php the_permalink(); ?>">
-      <?php
-      $master = get_post_meta( get_the_ID(), 'master_image' )[0];
-      print wp_get_attachment_image(
-        $master['master_image'],
-        'article_top'
-      ); ?>
-    </a>
+      <a href="<?php the_permalink(); ?>"><?php the_post_thumbnail( 'article_top' ); ?></a>
   </div>
   <div class="article-data">
     <h3 class="hed">
-      <a href="<?php print esc_url( get_permalink() ); ?>">
+      <a href="<?php print the_permalink(); ?>">
         <?php
           if ( $hed = get_post_meta( get_the_ID(), 'mj_promo_hed', true ) ) {
             echo $hed;

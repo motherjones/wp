@@ -63,6 +63,7 @@ class MJ {
 		$includes = array(
 			'/vendor/largo/largo-metabox-api.php',
 			'/vendor/largo/featured-media.php',
+			'/inc/archive.php',
 			'/inc/editor.php',
 			'/inc/enqueue.php',
 			'/inc/helpers.php',

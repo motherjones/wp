@@ -103,6 +103,7 @@ get_header(); ?>
                 	)
 								),
                 'posts_per_page' => 2,
+								'post_status' => 'publish',
               ) );
               $pol_query->the_post();
               get_template_part( 'template-parts/homepage-section-first' );
@@ -130,6 +131,7 @@ get_header(); ?>
                 	)
 								),
                 'posts_per_page' => 2,
+								'post_status' => 'publish',
               ) );
               $env_query->the_post();
               get_template_part( 'template-parts/homepage-section-first' );
@@ -154,6 +156,7 @@ get_header(); ?>
                 	)
 								),
                 'posts_per_page' => 2,
+								'post_status' => 'publish',
               ) );
               $media_query->the_post();
               get_template_part( 'template-parts/homepage-section-first' );
@@ -183,6 +186,7 @@ get_header(); ?>
                 	)
 								),
                 'posts_per_page' => 2,
+								'post_status' => 'publish',
               ) );
               //FIXME if we want food to be a section the query needs to change
               $food_query->the_post();
@@ -213,6 +217,7 @@ get_header(); ?>
                 	)
 								),
                 'posts_per_page' => 2,
+								'post_status' => 'publish',
               ) );
               //FIXME if we want C & J to be a section the query needs to change
               $cnj_query->the_post();
@@ -246,6 +251,7 @@ get_header(); ?>
                 	)
 								),
                 'posts_per_page' => 4,
+								'post_status' => 'publish',
               ) );
               while ( $kdrum->have_posts() ) {
                 $kdrum->the_post();
@@ -281,6 +287,7 @@ get_header(); ?>
 							)
 						),
             'posts_per_page' => 1,
+						'post_status' => 'publish',
           ) );
           $exposure_story->the_post();
           $fullwidth_title = 'Exposure';
@@ -321,6 +328,7 @@ get_header(); ?>
 								)
 							),
               'posts_per_page' => 4,
+							'post_status' => 'publish',
             ) );
             while ( $investigations->have_posts() ) {
               $investigations->the_post();
