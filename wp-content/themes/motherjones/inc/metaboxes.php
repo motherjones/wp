@@ -91,15 +91,17 @@ function mj_headline_extra_meta_box_display() {
 	foreach ( $fields as $field => $attr ) {
 		$field_slug = $prefix . $field;
 		$field_title = isset( $attr['title'] ) ? esc_attr( $attr['title'] ) : '';
-		$field_desc = isset( $attr['desc'] ) ? esc_attr( $attr['desc'] ) : '';
+		$field_desc = isset( $attr['desc'] ) ? ' <span>' . esc_attr( $attr['desc'] ) . '</span>' : '';
+		$field_value = isset( $values[ $field_slug ] ) ? esc_attr( $values[ $field_slug ][0] ) : '';
 		printf(
 			'<p>
-				<label for="%1$s">%2$s <span>gooasdfhjaksdfklj</span> </label>
-				<input type="text" name="%1$s" id="%1$s" value="%3$s" />
+				<label for="%1$s">%2$s%3$s</label>
+				<input type="text" name="%1$s" id="%1$s" value="%4$s" />
 			</p>',
 			esc_html( $field_slug ),
 			esc_html( $field_title ),
-			esc_html( $field_desc )
+			$field_desc,
+			esc_html( $field_value )
 		);
 	}
 }
@@ -145,15 +147,17 @@ function mj_custom_meta_box_display() {
 	foreach ( $fields as $field => $attr ) {
 		$field_slug = $prefix . $field;
 		$field_title = isset( $attr['title'] ) ? esc_attr( $attr['title'] ) : '';
-		$field_desc = isset( $attr['desc'] ) ? esc_attr( $attr['desc'] ) : '';
+		$field_desc = isset( $attr['desc'] ) ? ' <span>' . esc_attr( $attr['desc'] ) . '</span>' : '';
+		$field_value = isset( $values[ $field_slug ] ) ? esc_attr( $values[ $field_slug ][0] ) : '';
 		printf(
 			'<p>
-				<label for="%1$s">%2$s <span>gooasdfhjaksdfklj</span> </label>
-				<input type="text" name="%1$s" id="%1$s" value="%3$s" />
+				<label for="%1$s">%2$s%3$s</label>
+				<input type="text" name="%1$s" id="%1$s" value="%4$s" />
 			</p>',
 			esc_html( $field_slug ),
 			esc_html( $field_title ),
-			esc_html( $field_desc )
+			$field_desc,
+			esc_html( $field_value )
 		);
 	}
 }
