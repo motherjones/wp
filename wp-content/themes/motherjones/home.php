@@ -111,8 +111,6 @@ get_header(); ?>
 							?>
 						</ul>
 					</li>
-
-
 					<li class="homepage-section">
 						<h2 class="promo">
 							<a href="/environment">Environment</a>
@@ -225,6 +223,118 @@ get_header(); ?>
 							?>
 						</ul>
 					</li>
+					<li class="homepage-section">
+						<h2 class="promo">
+							<a href="/environment">Environment</a>
+						</h2>
+						<ul class="homepage-section-list">
+							<?php $env_query = new WP_Query( array(
+								'category_name' => 'environment',
+								'tax_query' => array(
+									array(
+										'taxonomy' => 'mj_article_type',
+										'field' => 'slug',
+										'terms' => 'blogpost',
+										'operator' => 'NOT IN',
+									),
+								),
+								'posts_per_page' => 2,
+								'post_status' => 'publish',
+							) );
+							$env_query->the_post();
+							get_template_part( 'template-parts/homepage-section-first' );
+							$env_query->the_post();
+							get_template_part( 'template-parts/homepage-section' );
+							?>
+						</ul>
+					</li>
+					<li class="homepage-section">
+						<h2 class="promo">
+							<a href="/media">Media</a>
+						</h2>
+						<ul class="homepage-section-list">
+							<?php $media_query = new WP_Query( array(
+								'category_name' => 'media',
+								'tax_query' => array(
+									array(
+										'taxonomy' => 'mj_article_type',
+										'field' => 'slug',
+										'terms' => 'blogpost',
+										'operator' => 'NOT IN',
+									),
+								),
+								'posts_per_page' => 2,
+								'post_status' => 'publish',
+							) );
+							$media_query->the_post();
+							get_template_part( 'template-parts/homepage-section-first' );
+							$media_query->the_post();
+							get_template_part( 'template-parts/homepage-section' );
+							?>
+						</ul>
+					</li>
+					<li class="homepage-section">
+						<h2 class="promo">
+							<a href="/food">Food</a>
+						</h2>
+						<ul class="homepage-section-list">
+							<?php $food_query = new WP_Query( array(
+								'tax_query' => array(
+									'relation' => 'AND',
+									array(
+										'taxonomy' => 'mj_primary_tag',
+										'field' => 'slug',
+										'terms' => 'food',
+									),
+									array(
+										'taxonomy' => 'mj_article_type',
+										'field' => 'slug',
+										'terms' => 'blogpost',
+										'operator' => 'NOT IN',
+									),
+								),
+								'posts_per_page' => 2,
+								'post_status' => 'publish',
+							) );
+							// FIXME if we want food to be a section the query needs to change.
+							$food_query->the_post();
+							get_template_part( 'template-parts/homepage-section-first' );
+							$food_query->the_post();
+							get_template_part( 'template-parts/homepage-section' );
+							?>
+						</ul>
+					</li>
+					<li class="homepage-section">
+						<h2 class="promo">
+							<a href="/crime_and_justice">Crime & Justice</a>
+						</h2>
+						<ul class="homepage-section-list">
+							<?php $cnj_query = new WP_Query( array(
+								'tax_query' => array(
+									'relation' => 'AND',
+									array(
+										'taxonomy' => 'mj_primary_tag',
+										'field' => 'slug',
+										'terms' => 'crime-and-justice',
+									),
+									array(
+										'taxonomy' => 'mj_article_type',
+										'field' => 'slug',
+										'terms' => 'blogpost',
+										'operator' => 'NOT IN',
+									),
+								),
+								'posts_per_page' => 2,
+								'post_status' => 'publish',
+							) );
+							// FIXME if we want C & J to be a section the query needs to change.
+							$cnj_query->the_post();
+							get_template_part( 'template-parts/homepage-section-first' );
+							$cnj_query->the_post();
+							get_template_part( 'template-parts/homepage-section' );
+							?>
+						</ul>
+					</li>
 				</ul>
 			</div>
 
@@ -250,13 +360,13 @@ get_header(); ?>
 									),
 								),
 								'posts_per_page' => 4,
+								'post_status' => 'publish',
 							) );
 							while ( $kdrum->have_posts() ) {
 								$kdrum->the_post();
 								get_template_part( 'template-parts/homepage-kdrum-story' );
 							}
 						?>
-					</ul>
 				</div>
 				<div id="homepage-kdrum-ad">
 					<script>
@@ -287,6 +397,7 @@ get_header(); ?>
 							),
 						),
 						'posts_per_page' => 1,
+						'post_status' => 'publish',
 					) );
 					$exposure_story->the_post();
 					$fullwidth_title = 'Exposure';
@@ -329,6 +440,7 @@ get_header(); ?>
 								),
 							),
 							'posts_per_page' => 4,
+							'post_status' => 'publish',
 						) );
 						while ( $investigations->have_posts() ) {
 							$investigations->the_post();
@@ -337,14 +449,13 @@ get_header(); ?>
 					?>
 				</ul>
 			</div>
-
 		</main><!-- .site-main -->
 	</div><!-- .content-area -->
 
 	<script>
 		ad_code({
 				yieldmo: true,
-			  docwrite: true,
+				docwrite: true,
 				desktop: false,
 			placement: 'ym_869408549909503847',
 		});

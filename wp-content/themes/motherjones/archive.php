@@ -20,124 +20,95 @@ get_header(); ?>
 
 <div id="content" class="site-content">
 	<div id="primary" class="content-area">
-    <main id="main" class="site-main group" role="main">
+		<main id="main" class="site-main group" role="main">
 
-    <div class="main-index">
-		<?php if ( have_posts() ) : ?>
+			<div class="main-index">
+			<?php if ( have_posts() ) : ?>
 
-			<div class="page-header">
-        <h1 class="page-title promo">
-          <?php
-            if ( is_tax() || is_category() ) {
-              global $wp_query;
-              $term = $wp_query->get_queried_object();
-              print $term->name;
-            } else {
-              the_archive_title();
-            }
-          ?>
-        </h1>
-			</div><!-- .page-header -->
+				<div class="page-header">
+					<h1 class="page-title promo">
+					<?php
+						if ( is_tax() || is_category() ) {
+							global $wp_query;
+							$term = $wp_query->get_queried_object();
+							print esc_html( $term->name );
+						} else {
+							the_archive_title();
+						}
+					?>
+					</h1>
+				</div><!-- .page-header -->
 
-      <ul class="articles-list">
-      <?php
-      $curated_length = 0;
-      $is_first_post = true;
-      $posts_shown = 0;
-        // if it's the first page, set up the curated posts
-			if ( ! $wp_query->get_query_var( 'offset' ) ) {
-        //get the curated posts (but only 4)
-        $curated = z_get_zone_query(
-					$wp_query->get_queried_object()->slug, array(
-						'posts_per_page' => 4,
-        ));
-        $curated_length = $curated->post_count;
-        while ( $curated->have_posts() ) : $curated->the_post();
-          if ( $is_first_post ) {
-            //do sometihng funky for first post?
-            $is_first_post = false;
-            get_template_part( 'template-parts/top-index-article' );
-          } else {
-            get_template_part( 'template-parts/standard-article-li' );
-          }
-          $posts_shown++;
-        endwhile;
-      } // end curation mess
+				<ul class="articles-list">
+				<?php
+					$posts_shown = 0;
 
-			// Start the Loop.
-			while ( $wp_query->have_posts() ) : $wp_query->the_post();
-        //don't do it if it's in the curated bits
-				if ( $curated_length && in_array(
-          $post->ID,
-					array_map( function( $p ) { return $p->ID; }, $curated->posts ),
-					true
-        )) {
-          continue;
-        } elseif ( $is_first_post ) {
-          //do sometihng funky for first post?
-          $is_first_post = false;
-          get_template_part( 'template-parts/top-index-article' );
-        } else {
-          get_template_part( 'template-parts/standard-article-li' );
-        }
-        $posts_shown++;
+					// Start the Loop.
+					while ( $wp_query->have_posts() ) : $wp_query->the_post();
 
-        if ( $posts_shown === 5 ) : ?>
-          <script>
-            ad_code({
-                yieldmo: true,
-               docwrite: true,
-                desktop: false,
-              placement: 'ym_869408394552483686',
-            });
-          </script>
-        <?php endif;
-			// End the loop.
-			endwhile;
-    ?>
-    </ul>
-    <div id="pager">
-      <span class="pager_previous">
-        <?php previous_posts_link( 'Previous' ); ?>
-      </span>
-      <span class="pager_next">
-        <?php next_posts_link( 'Next' ); ?>
-      </span>
-    </div>
+					if ( 1 === $posts_shown ) {
+						get_template_part( 'template-parts/top-index-article' );
+					} else {
+						get_template_part( 'template-parts/standard-article-li' );
+					}
+					$posts_shown++;
 
-    <?php
-		// If no content, include the "No posts found" template.
-		else :
-			get_template_part( 'template-parts/content', 'none' );
+					if ( 5 === $posts_shown ) : ?>
+							<script>
+								ad_code({
+										yieldmo: true,
+									 docwrite: true,
+										desktop: false,
+									placement: 'ym_869408394552483686',
+								});
+							</script>
+					<?php endif;
+					// End the loop.
+					endwhile;
+				?>
+				</ul>
+				<div id="pager">
+					<span class="pager_previous">
+						<?php previous_posts_link( 'Previous' ); ?>
+					</span>
+					<span class="pager_next">
+						<?php next_posts_link( 'Next' ); ?>
+					</span>
+				</div>
 
-		endif;
-		?>
-    </div>
+				<?php
+				// If no content, include the "No posts found" template.
+				else :
+					get_template_part( 'template-parts/content', 'none' );
 
-    <div id="sidebar-right">
-      <script language="javascript">
-          <!--
-          if ( typeof MJ_HideRightColAds === 'undefined' ) {
-            ad_code({
-              desktop: true,
-              placement: 'RightTopROS300x600',
-              height: 529,
-              doc_write: true,
-            });
-          }
-          //-->
-      </script>
-      <?php dynamic_sidebar( 'sidebar-section' ); ?>
-    </div>
+				endif;
+				?>
+			</div> <!-- .main-index -->
+
+			<div id="sidebar-right">
+				<script language="javascript">
+						<!--
+						if ( typeof MJ_HideRightColAds === 'undefined' ) {
+							ad_code({
+								desktop: true,
+								placement: 'RightTopROS300x600',
+								height: 529,
+								doc_write: true,
+							});
+						}
+						//-->
+				</script>
+				<?php dynamic_sidebar( 'sidebar-section' ); ?>
+			</div>
 
 		</main><!-- .site-main -->
 	</div><!-- .content-area -->
-  <script>
-    ad_code({
-      yieldmo: true,
-     docwrite: true,
-      desktop: false,
-      placement: 'ym_869408549909503847',
-    });
-  </script>
-<?php get_footer(); ?>
+	<script>
+		ad_code({
+			yieldmo: true,
+		 	docwrite: true,
+			desktop: false,
+			placement: 'ym_869408549909503847',
+		});
+	</script>
+	<?php get_footer(); ?>

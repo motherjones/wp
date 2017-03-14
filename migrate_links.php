@@ -142,7 +142,7 @@ $redirect_item_insert = $wp->prepare('
 INSERT INTO wp_redirection_items
 (url, last_access, group_id, action_type, action_code, action_data, match_type)
 VALUES (
-?, # source
+CONCAT("/", ?), # source
 FROM_UNIXTIME("1970-1-1 00:00:00"), #last access
 1,
 "url", #action type
@@ -182,11 +182,12 @@ while ( $redirect = $manual_redirects->fetch(PDO::FETCH_NUM)) {
 $wp->commit();
 
 // INSERT NODE CHANGE REDIRECTS
+// no, don't do that, we dont really want to direct to node/ anything ever
 $redirect_update_insert = $wp->prepare('
 INSERT INTO wp_redirection_items
 (url, last_access, group_id, action_type, action_code, action_data, match_type)
 VALUES (
-?, # source
+CONCAT("/", ?), # source
 FROM_UNIXTIME("1970-1-1 00:00:00"), #last access
 2, #yep this is the only difference from the one above
 "url", #action type
@@ -204,7 +205,37 @@ $update_redirects->execute();
 
 $wp->beginTransaction();
 while ( $redirect = $update_redirects->fetch(PDO::FETCH_NUM)) {
-	$redirect_update_insert->execute($redirect);
+//	$redirect_update_insert->execute($redirect);
 }
 $wp->commit();
 
+//UPDATE PAGES WITH SLASHES IN THEM
+
+$page_redirects = $d6->prepare('
+SELECT DISTINCT
+a.dst,
+REPLACE(
+  SUBSTR(a.dst, 
+    LOCATE("/", a.dst) + 1
+  ), 
+  "/",
+  "-"
+)
+FROM mjd6.node n
+INNER JOIN mjd6.node_revisions r
+USING(vid)
+LEFT OUTER JOIN mjd6.url_alias a
+ON a.src = CONCAT("node/", n.nid)
+WHERE n.type = "page"
+AND a.dst NOT LIKE "%about%"
+AND a.dst NOT LIKE "%toc%"
+AND a.dst LIKE "%/%"
+AND n.status = 1
+;
+');
+
+$wp->beginTransaction();
+while ( $redirect = $page_redirects->fetch(PDO::FETCH_NUM)) {
+	$redirect_update_insert->execute($redirect);
+}
+$wp->commit();
