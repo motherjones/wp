@@ -13,10 +13,19 @@ $wp = new PDO("mysql:host=$hostname;dbname=$wp_db", $username, $password);
 $wp->beginTransaction();
 $wp->exec('
 UPDATE wp_options
-SET option_value = "a:1:{i:0;s:35:"display-widgets/display-widgets.php";}",
+SET option_value = "a:1:{i:0;s:35:\'display-widgets/display-widgets.php\';}"
 WHERE option_name = "active_plugins"
 ;
 ');
+$wp->commit();
+
+$wp->beginTransaction();
+$wp->exec("
+UPDATE wp_options
+SET option_value = 'a:2:{i:2;a:0:{}s:12:\"_multiwidget\";i:1;}'
+WHERE option_name = 'widget_top_stories_widget'
+;
+");
 $wp->commit();
 
 /* Desired result:
@@ -32,17 +41,13 @@ s:13:"array_version";i:3;}
 FUUUCCCCKKK!!!! THis isn't titles this is some weird interior naming fuck
  */
 $sidebars_widgets_options = Array(
-	'option_name' => 'sidebars_widgets',
-	'option_value' => Array(
 		'wp_inactive_widgets' => Array(),
-		'sidebar' => Array('text-5', 'text-6'),  //RHC membership for blog posts and not blog posts
+		'sidebar' => Array('text-5', 'text-6', 'top_stories_widget-2'),  //RHC membership for blog posts and not blog posts
 		'ticker' => Array('text-7'), //Membership ticker
 		'content-end' => Array(),
-		'page-top' => Array('text-2', 'text-3'),//Ad control, sitewrap
 		'page-end' => Array('text-4'), //bottom adblock ask
+		'page-top' => Array('text-2', 'text-3'),//Ad control, sitewrap
 		'array_version' => 3
-	),
-	'autoload' => 'yes'
 );
 $wp->beginTransaction();
 $sidebar_widgets = $wp->prepare('
@@ -136,7 +141,6 @@ a:7:{
  * YEAH, I KNOW, FUCKED UP
  */
 $blocks = Array();
-$blocks[1] = "_multiwidget"; //below are the blocks
 $blocks[2] =	Array(
 		'title' => 'Ad Control',
 		'text' => <<<'HTML'
@@ -397,6 +401,8 @@ HTML
 		'dw_logged' => '',
 		'other_ids' => '', //FIXME get a list of all the full width asks and put the node ids in here separated by commas
 	); //END membership ticker bar
+$blocks[12] = "_multiwidget"; //below are the blocks
+$blocks['_multiwidget'] = 1; //below are the blocks
 
 $wp->beginTransaction();
 $blocks_options = $wp->prepare('

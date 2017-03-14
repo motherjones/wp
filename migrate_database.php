@@ -1,22 +1,5 @@
 <?php
-/**
-  * Start files migrating
-  * if we're using pantheon, I have a nice rsync bash script at pantheon_rsync.sh
-  *
-  * Set hostname, username, password for your local mysql install
-  * Set drupal database name
-  * set wp database name
-  * Run this file: php migrate_database.php
-  * this will take a while
-  * Upload the database to wherever
-  *
-  * Once all the files are moved and the database is imported
-  * open up the wp admin and start image regen plugin. 
-  * This will take a while
-  * open up zones and create zones for :
-  *   top_stories
-  *   homepage_featured
- **/
+
 $hostname="localhost";  
 $username="root";   
 $password=$argv[1];
@@ -175,13 +158,14 @@ FROM_UNIXTIME(n.changed),
 FROM_UNIXTIME(n.changed),
 '',
 n.type,
-IF(n.status = 1, 'publish', 'private')
+IF(n.status = 1, 'publish', 'private'),
+0
 FROM mjd6.node n
 INNER JOIN mjd6.node_revisions r
 USING(vid)
 LEFT OUTER JOIN mjd6.url_alias a
 ON a.src = CONCAT('node/', n.nid)
-WHERE n.type IN ('article', 'blogpost', 'page', 'full_width_article')
+WHERE n.type IN ('article', 'blogpost', 'full_width_article')
 ;
 ");
 $post_data->execute();
@@ -191,11 +175,125 @@ $post_insert = $wp->prepare('
 INSERT IGNORE INTO pantheon_wp.wp_posts
 (ID, post_author, post_date, post_date_gmt, post_content, post_title, post_excerpt,
 post_name, to_ping, pinged, post_modified, post_modified_gmt,
-post_content_filtered, post_type, `post_status`)
+post_content_filtered, post_type, `post_status`, `post_parent`)
 VALUES (?, ?, ?, ?, ?, ?, ?,
 ?, ?, ?, ?, ?,
-?, ?, ?)
+?, ?, ?, ?)
 ');
+
+$wp->beginTransaction();
+while ( $post = $post_data->fetch(PDO::FETCH_NUM)) {
+	$post_insert->execute($post);
+}
+$wp->commit();
+
+
+$about_data = $d6->prepare("
+SELECT DISTINCT
+n.nid,
+n.uid,
+FROM_UNIXTIME(n.created),
+FROM_UNIXTIME(n.created),
+r.body,
+n.title,
+r.teaser,
+'about'
+,
+'',
+'',
+FROM_UNIXTIME(n.changed),
+FROM_UNIXTIME(n.changed),
+'',
+n.type,
+IF(n.status = 1, 'publish', 'private'),
+0
+FROM mjd6.node n
+INNER JOIN mjd6.node_revisions r
+USING(vid)
+LEFT OUTER JOIN mjd6.url_alias a
+ON a.src = CONCAT('node/', n.nid)
+WHERE n.nid = 64
+;
+");
+$about_data->execute();
+
+$wp->beginTransaction();
+while ( $post = $about_data->fetch(PDO::FETCH_NUM)) {
+	$post_insert->execute($post);
+}
+$wp->commit();
+
+$page_data = $d6->prepare("
+SELECT DISTINCT
+n.nid,
+n.uid,
+FROM_UNIXTIME(n.created),
+FROM_UNIXTIME(n.created),
+r.body,
+n.title,
+r.teaser,
+SUBSTR(a.dst, 
+  CHAR_LENGTH(a.dst) - LOCATE('about/', REVERSE(a.dst)) + 2 
+)
+,
+'',
+'',
+FROM_UNIXTIME(n.changed),
+FROM_UNIXTIME(n.changed),
+'',
+n.type,
+IF(n.status = 1, 'publish', 'private'),
+64
+FROM mjd6.node n
+INNER JOIN mjd6.node_revisions r
+USING(vid)
+LEFT OUTER JOIN mjd6.url_alias a
+ON a.src = CONCAT('node/', n.nid)
+WHERE n.type = 'page'
+AND a.dst LIKE '%about%'
+AND n.nid IS NOT 64
+;
+");
+$page_data->execute();
+
+$wp->beginTransaction();
+while ( $post = $post_data->fetch(PDO::FETCH_NUM)) {
+	$post_insert->execute($post);
+}
+$wp->commit();
+
+
+$page_data = $d6->prepare("
+SELECT DISTINCT
+n.nid,
+n.uid,
+FROM_UNIXTIME(n.created),
+FROM_UNIXTIME(n.created),
+r.body,
+n.title,
+r.teaser,
+SUBSTR(a.dst, 
+  CHAR_LENGTH(a.dst) - LOCATE('about/', REVERSE(a.dst)) + 2 
+)
+,
+'',
+'',
+FROM_UNIXTIME(n.changed),
+FROM_UNIXTIME(n.changed),
+'',
+n.type,
+IF(n.status = 1, 'publish', 'private'),
+0
+FROM mjd6.node n
+INNER JOIN mjd6.node_revisions r
+USING(vid)
+LEFT OUTER JOIN mjd6.url_alias a
+ON a.src = CONCAT('node/', n.nid)
+WHERE n.type = 'page'
+AND a.dst NOT LIKE '%about%'
+;
+");
+$page_data->execute();
 
 $wp->beginTransaction();
 while ( $post = $post_data->fetch(PDO::FETCH_NUM)) {
@@ -606,20 +704,24 @@ u.name
 FROM mjd6.users u
 INNER JOIN mjd6.users_roles r
 USING (uid)
-WHERE u.mail IS NOT NULL
 ;
 ");
 $roles_data->execute();
 
 $wp->beginTransaction();
-while ( $author = $author_data->fetch(PDO::FETCH_ASSOC)) {
-  if ( array_key_exists( $author['title'], $author_name_to_author_meta ) ) {
+while ( $author = $roles_data->fetch(PDO::FETCH_ASSOC)) {
+  if ( array_key_exists( $author['name'], $author_name_to_author_meta ) ) {
     continue;
   }
   $author_insert->execute(Array(
-    $author['title'],
-    $author['title']
+    $author['name'],
+    $author['name'],
+    $author['name']
   ));
+  $author['wp_id'] = $wp->lastInsertId();
+  $author_name_to_author_meta[$author['name']] = $author;
+  $uid_to_author_meta[$wp->lastInsertId()] = $author;
+
 }
 $wp->commit();
 
@@ -636,21 +738,29 @@ $wp->beginTransaction();
 foreach ( $uid_to_author_meta as $uid => $author ) {
   $uiid = $uid;
 
-  $key = "mj_user_twitter";
-  $value = $author['field_twitter_user_value'];
-	$author_meta_insert->execute();
+  if (array_key_exists('field_twitter_user_value', $author)) {
+    $key = "mj_user_twitter";
+    $value = $author['field_twitter_user_value'];
+    $author_meta_insert->execute();
+  }
 
-  $key = "mj_user_short_bio";
-  $value = $author['field_author_bio_short_value'];
-	$author_meta_insert->execute();
+  if (array_key_exists('mj_user_short_bio', $author)) {
+    $key = "mj_user_short_bio";
+    $value = $author['field_author_bio_short_value'];
+    $author_meta_insert->execute();
+  }
 
-  $key = "mj_user_bio";
-  $value = $author['field_author_bio_value'];
-	$author_meta_insert->execute();
+  if (array_key_exists('field_author_bio_value', $author)) {
+    $key = "mj_user_bio";
+    $value = $author['field_author_bio_value'];
+    $author_meta_insert->execute();
+  }
 
-  $key = "mj_user_position";
-  $value = $author['field_author_title_value'];
-	$author_meta_insert->execute();
+  if (array_key_exists('field_author_title_value', $author)) {
+    $key = "mj_user_position";
+    $value = $author['field_author_title_value'];
+    $author_meta_insert->execute();
+  }
 
 }
 $wp->commit();
@@ -787,8 +897,9 @@ AND user_id = ?
 ;
 ");
 $wp->beginTransaction();
-while ( $role = $roles_data->fetch(PDO::FETCH_NUM)) {
-	$roles_insert->execute($role);
+while ( $role = $roles_data->fetch(PDO::FETCH_ASSOC)) {
+  $user_id = $author_name_to_author_meta[$role['name']]['wp_id'];
+	$roles_insert->execute(Array($user_id));
 }
 $wp->commit();
 
@@ -810,32 +921,91 @@ WHERE post_author NOT IN (SELECT DISTINCT ID FROM pantheon_wp.wp_users)
 ");
 $wp->commit();
 
-/*** FIXXXMEEE
- * fuck authors are not posts again what do i do jeez
- */
 //author photo
 $author_image_data = $d6->prepare("
 SELECT DISTINCT
 n.nid,
 a.field_user_uid, 
-f.status,
 f.filemime,
 f.filepath,
-f.fid,
-a.field_author_title_value,
+f.filename,
+n.title,
 a.field_photo_fid
 FROM mjd6.node n
-INNER JOIN mjd6.node_revisions r
-USING(vid)
-LEFT OUTER JOIN mjd6.content_type_author a 
+INNER JOIN mjd6.content_type_author a 
 USING(vid)
 INNER JOIN mjd6.files f
 ON(a.field_photo_fid = f.fid)
-#WHERE name IS NOT NULL
 ;
 ");
 $author_image_data->execute();
 
+$author_image_insert = $wp->prepare('
+INSERT IGNORE INTO pantheon_wp.wp_posts
+(post_author, post_date, post_date_gmt, post_content, post_title, post_excerpt,
+post_name, to_ping, pinged, post_modified, post_modified_gmt, guid,
+post_content_filtered, post_type, `post_status`, post_parent, post_mime_type)
+VALUES (
+:post_author,
+FROM_UNIXTIME("1970-1-1 00:00:00"),
+FROM_UNIXTIME("1970-1-1 00:00:00"),
+"",
+:post_title,
+"",
+:post_name,
+"",
+"",
+FROM_UNIXTIME("1970-1-1 00:00:00"),
+FROM_UNIXTIME("1970-1-1 00:00:00"),
+:guid,
+"",
+"attachment",
+"publish",
+NULL,
+:post_mime_type
+)
+;
+');
+
+
+$wp->beginTransaction();
+while ( $image = $author_image_data->fetch(PDO::FETCH_ASSOC)) {
+  $uid  = $author_name_to_author_meta[$image['title']]['wp_id'];
+  $guid = $FILEDIR . str_replace('files/photo/', '', $image['filepath']);
+  $author_image_insert->execute(array(
+    ':post_author' => $uid,
+    ':post_title' => $image['filename'],
+    ':post_name' => $image['filename'],
+    ':guid' => $guid,
+    ':post_mime_type' => $image['filemime'],
+  ));
+  $author_name_to_author_meta[$image['title']]['image_location'] = $guid;
+  $author_name_to_author_meta[$image['title']]['image_id'] = $wp->lastInsertId();
+}
+$wp->commit();
+
+$author_meta_insert = $wp->prepare("
+INSERT IGNORE INTO pantheon_wp.wp_usermeta (user_id, meta_key, meta_value)
+VALUES ( ?, ?, ? )
+;
+");
+
+$wp->beginTransaction();
+foreach ( $author_name_to_author_meta as $author ) {
+  if ( array_key_exists('image_id', $author) ) {
+    $author_meta_insert->execute(array(
+      $author['wp_id'],
+      "author_image_id",
+      $author['image_id']
+    ));
+    $author_meta_insert->execute(array(
+      $author['wp_id'],
+      "author_image_url",
+      $author['image_location']
+    ));
+  }
+}
+$wp->commit();
 echo "authors done";
 
 
@@ -1250,7 +1420,6 @@ foreach ($zones as $zone => $queue) {
   ;
   ');
 
-  $top_stories_queue = Array(325726, 325721);
   $meta_key = '_zoninator_order_' . $zone_term_id;
 
   $wp->beginTransaction();
@@ -1268,11 +1437,6 @@ echo "zoninator filled";
 
 // Set default theme to motherjones
 //
-$wp->beginTransaction();
-$wp->exec('
-TRUNCATE TABLE pantheon_wp.wp_options ;
-');
-$wp->commit();
 
 $wp->beginTransaction();
 $wp->exec('
