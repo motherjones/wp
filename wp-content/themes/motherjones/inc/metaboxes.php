@@ -120,7 +120,7 @@ function mj_headline_extra_meta_box_display() {
 			</p>',
 			esc_html( $field_name ),
 			esc_html( $title ),
-			esc_html( $field_value ),
+			esc_html( $field_value )
 		);
 	}
 }
