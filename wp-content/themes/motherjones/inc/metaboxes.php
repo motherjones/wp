@@ -42,25 +42,6 @@ function mj_change_default_hidden_metaboxes( $hidden, $screen ) {
 add_filter( 'default_hidden_meta_boxes', 'mj_change_default_hidden_metaboxes', 10, 2 );
 
 /**
- * Move the dek to just below the title/headline.
- *
- * Usually the fifth argument in add_meta_box is side, core or advanced,
- * but apparently you can set it to something arbitrary and then call do_meta_boxes
- * with that as the context arg, hooked on the edit_form hook you want
- * (options: edit_form_after_title, edit_form_after_editor, edit_form_advanced)
- */
-function mj_move_dek() {
-	global $post, $wp_meta_boxes;
-	do_meta_boxes( get_current_screen(), 'after_title', $post );
-	unset( $wp_meta_boxes['post']['test'] );
-}
-add_action( 'edit_form_after_title', 'mj_move_dek' );
-
-/**
- * Custom meta boxes.
- */
-
-/**
  * Register the extra headline fields metabox
  */
 largo_add_meta_box(
@@ -71,6 +52,20 @@ largo_add_meta_box(
 	'after_title',
 	'high'
 );
+/**
+ * Move the mj_headline_extra metabox to just below the title/headline.
+ *
+ * Usually the fifth argument in add_meta_box is side, core or advanced,
+ * but apparently you can set it to something arbitrary and then call do_meta_boxes
+ * with that as the context arg, hooked on the edit_form hook you want
+ * (options: edit_form_after_title, edit_form_after_editor, edit_form_advanced)
+ */
+function mj_move_headline_extra() {
+	global $post, $wp_meta_boxes;
+	do_meta_boxes( get_current_screen(), 'after_title', $post );
+	unset( $wp_meta_boxes['post']['test'] );
+}
+add_action( 'edit_form_after_title', 'mj_move_headline_extra' );
 /**
  * And output the markup.
  */
