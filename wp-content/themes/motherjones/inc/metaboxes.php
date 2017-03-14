@@ -74,22 +74,32 @@ function mj_headline_extra_meta_box_display() {
 	$values = get_post_custom( $post->ID );
 	$prefix = 'mj_';
 	$fields = array(
-		'dek' => 'Dek',
-		'social_hed' => 'Social Headline',
-		'social_dek' => 'Social Dek',
+		'dek' => array(
+			'title' => 'Dek',
+			'desc' => 'Short subtitle for this post.',
+		),
+		'social_hed' => array(
+			'title' => 'Social Headline',
+			'desc' => 'The headline used when sharing on social.',
+		),
+		'social_dek' => array(
+			'title' => 'Social Dek',
+			'desc' => 'The subtitle used when sharing on social.',
+		),
 	);
 	wp_nonce_field( 'largo_meta_box_nonce', 'meta_box_nonce' );
-	foreach ( $fields as $field => $title ) {
-		$field_name = $prefix . $field;
-		$field_value = isset( $values[ $field_name ] ) ? esc_attr( $values[ $field_name ][0] ) : '';
+	foreach ( $fields as $field => $attr ) {
+		$field_slug = $prefix . $field;
+		$field_title = isset( $attr['title'] ) ? esc_attr( $attr['title'] ) : '';
+		$field_desc = isset( $attr['desc'] ) ? esc_attr( $attr['desc'] ) : '';
 		printf(
 			'<p>
-				<label for="%1$s">%2$s</label>
+				<label for="%1$s">%2$s <span>gooasdfhjaksdfklj</span> </label>
 				<input type="text" name="%1$s" id="%1$s" value="%3$s" />
 			</p>',
-			esc_html( $field_name ),
-			esc_html( $title ),
-			esc_html( $field_value )
+			esc_html( $field_slug ),
+			esc_html( $field_title ),
+			esc_html( $field_desc )
 		);
 	}
 }
@@ -114,23 +124,36 @@ function mj_custom_meta_box_display() {
 	$values = get_post_custom( $post->ID );
 	$prefix = 'mj_';
 	$fields = array(
-		'promo_hed' => 'Homepage Headline',
-		'promo_dek' => 'Homepage Dek',
-		'byline_override' => 'Byline Override',
-		'dateline_override' => 'Dateline Override',
+		'promo_hed' => array(
+			'title' => 'Homepage Headline',
+			'desc' => 'Headline used for this story on the homepage only.',
+		),
+		'promo_dek' => array(
+			'title' => 'Homepage Dek',
+			'desc' => 'Subtitle used for this story on the homepage only.',
+		),
+		'byline_override' => array(
+			'title' => 'Byline Override',
+			'desc' => 'Text to display instead of the default byline.',
+		),
+		'dateline_override' => array(
+			'title' => 'Dateline Override',
+			'desc' => 'Text (for example, issue number/date) to display instead of the default dateline.',
+		),
 	);
 	wp_nonce_field( 'largo_meta_box_nonce', 'meta_box_nonce' );
-	foreach ( $fields as $field => $title ) {
-		$field_name = $prefix . $field;
-		$field_value = isset( $values[ $field_name ] ) ? esc_attr( $values[ $field_name ][0] ) : '';
+	foreach ( $fields as $field => $attr ) {
+		$field_slug = $prefix . $field;
+		$field_title = isset( $attr['title'] ) ? esc_attr( $attr['title'] ) : '';
+		$field_desc = isset( $attr['desc'] ) ? esc_attr( $attr['desc'] ) : '';
 		printf(
 			'<p>
-				<label for="%1$s">%2$s</label>
+				<label for="%1$s">%2$s <span>gooasdfhjaksdfklj</span> </label>
 				<input type="text" name="%1$s" id="%1$s" value="%3$s" />
 			</p>',
-			esc_html( $field_name ),
-			esc_html( $title ),
-			esc_html( $field_value )
+			esc_html( $field_slug ),
+			esc_html( $field_title ),
+			esc_html( $field_desc )
 		);
 	}
 }
