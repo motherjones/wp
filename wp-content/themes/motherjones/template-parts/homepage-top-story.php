@@ -1,7 +1,6 @@
 <div id="homepage-top-story" class="article-item">
   <div class="article-image">
       <a href="<?php the_permalink(); ?>"><?php the_post_thumbnail( 'homepage_top_story' ); ?></a>
-    </a>
   </div>
   <div class="article-data">
     <h1 class="hed">
