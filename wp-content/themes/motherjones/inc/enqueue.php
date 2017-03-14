@@ -119,7 +119,7 @@ function mj_admin_style( $hook ) {
 	if ( ( 'post.php' === $hook ) || ( 'post-new.php' === $hook ) ) {
 		wp_enqueue_style(
 			'mj-post-admin-style',
-			get_template_directory_uri() . '/css/admin/post-admin' . $suffix . '.css'),
+			get_template_directory_uri() . '/css/admin/post-admin' . $suffix . '.css',
 			false,
 			'1.0'
 		);
