@@ -9,18 +9,17 @@
 
 /**
  * Hide and rearrange some of the default metaboxes.
- * Specifically, this removes trackbacks, revisions and comments.
- * Also removes custom fields for non-admins.
+ * Everyone loses slug, excerpt, trackbacks, revisions and comments.
+ * Admins get custom fields.
  */
 function mj_remove_metaboxes() {
 	global $current_user;
 	wp_get_current_user();
 	// Remove these for everyone.
-	$remove = array( 'trackbacksdiv', 'revisionsdiv', 'commentstatusdiv' );
+	$remove = array( 'trackbacksdiv', 'revisionsdiv', 'commentstatusdiv', 'postexcerpt', 'slugdiv' );
 	// Show these for editors and above.
 	if ( ! current_user_can( 'edit_others_posts' ) ) {
-		$remove[] = 'postexcerpt';
-		$remove[] = 'slugdiv';
+		// nothing, for now.
 	}
 	// Show these for admins only.
 	if ( ! current_user_can( 'manage_options' ) ) {
