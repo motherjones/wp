@@ -142,7 +142,7 @@ if ( ! function_exists( 'mj_setup' ) ) {
 		) );
 
 		add_theme_support( 'mfi-reloaded', array(
-			'title-image' => array(
+			'mj_title_image' => array(
 				'post_types' => array( 'post' ),
 				'labels' => array(
 					'name' => __( 'Title Image' ),

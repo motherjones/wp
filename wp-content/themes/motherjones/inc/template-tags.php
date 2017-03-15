@@ -263,7 +263,7 @@ if ( ! function_exists( 'mj_byline' ) ) {
   function mj_byline( $id ) {
     $override = get_post_meta( $id, 'byline_override', true );
     if ( trim( $override ) ) {
-      return $override;
+      return esc_html( $override );
     } else {
       return coauthors_posts_links( ', ', null, null, null, false );
     }
