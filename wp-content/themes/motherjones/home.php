@@ -171,7 +171,7 @@ get_header(); ?>
                 'tax_query' => array(
 									'relation' => 'AND',
 									array(
-                  	'taxonomy' => 'mj_primary_tag',
+                  	'taxonomy' => 'post_tag',
                   	'field' => 'slug',
                   	'terms' => 'food',
                 	),
@@ -201,7 +201,7 @@ get_header(); ?>
 								'tax_query' => array(
 									'relation' => 'AND',
 									array(
-                  	'taxonomy' => 'mj_primary_tag',
+                  	'taxonomy' => 'post_tag',
                   	'field' => 'slug',
                   	'terms' => 'crime-and-justice',
                 	),
@@ -269,7 +269,7 @@ get_header(); ?>
         <?php $exposure_story = new WP_Query( array(
             'tax_query' => array(
 							array(
-	              'taxonomy' => 'mj_media_type',
+	              'taxonomy' => 'post_tag',
 	              'field' => 'slug',
 	              'terms' => 'photoessays',
 	            ),
@@ -309,7 +309,7 @@ get_header(); ?>
           <?php $investigations = new WP_Query( array(
               'tax_query' => array(
 								array(
-	                'taxonomy' => 'mj_primary_tag',
+	                'taxonomy' => 'post_tag',
 	                'field' => 'slug',
 	                'terms' => 'investigations',
 	              ),

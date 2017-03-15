@@ -4,46 +4,6 @@ if ( !class_exists( 'MJ_Taxonomy' ) ) {
 
   class MJ_Taxonomy {
 
-    private $media_type_id = 'mj_media_type';
-    private $media_type_terms = array(
-      'Longreads',
-      'Interview',
-      'Interactives',
-      'Calculators',
-      'Cards',
-      'Full Width',
-      'Podcasts',
-      'Video',
-      'Quizzes',
-      'Maps',
-      'Photo Essays',
-      'Slideshows',
-      'Charts',
-      'Cartoon',
-    );
-    private $media_taxonomy = array(
-      'single' => 'Media Type',
-      'plural' => 'Media Types',
-      'capabilites' => array(
-        'assign_terms' => 'edit_posts',
-        'edit_terms' => 'update_core',
-        'delete_terms' => 'update_core',
-      ),
-      'types'  => array('post')
-    );
-
-    private $tag_id = 'mj_primary_tag';
-    private $tag_taxonomy = array(
-      'single' => 'Primary Tag',
-      'plural' => 'Primary Tags',
-      'capabilites' => array(
-        'assign_terms' => 'edit_posts',
-        'edit_terms' => 'update_core',
-        'delete_terms' => 'update_core',
-      ),
-      'types'  => array('post')
-    );
-
     private $blog_id = 'mj_blog_type';
     private $blog_taxonomy = array(
       'single' => 'Blog Type',
@@ -105,7 +65,6 @@ if ( !class_exists( 'MJ_Taxonomy' ) ) {
       $this->article_type_taxonomy['types'][] = $post_type;
     }
     public function add_mj_taxonomies ($post_type) {
-      $this->media_taxonomy['types'][] = $post_type;
       $this->tag_taxonomy['types'][] = $post_type;
       $this->blog_taxonomy['types'][] = $post_type;
       $this->article_type_taxonomy['types'][] = $post_type;
@@ -114,7 +73,6 @@ if ( !class_exists( 'MJ_Taxonomy' ) ) {
 
     public function setup() {
       add_action( 'init', array( $this, 'register' ) );
-      $this->all_taxonomies[$this->media_type_id] = $this->media_taxonomy;
       $this->all_taxonomies[$this->tag_id] = $this->tag_taxonomy;
       $this->all_taxonomies[$this->blog_id] = $this->blog_taxonomy;
       $this->all_taxonomies[$this->article_type_id] = $this->article_type_taxonomy;
@@ -123,11 +81,6 @@ if ( !class_exists( 'MJ_Taxonomy' ) ) {
       add_action( 'created_mj_article_type', array($this, 'fill_article_type') );
     }
 
-    public function fill_media_type() {
-      foreach ( $this->media_type_terms as $i => $term ) {
-        wp_insert_term($term, $this->media_type_id);
-      }
-    }
     public function fill_blog_type() {
       foreach ( $this->blog_terms as $i => $term ) {
         wp_insert_term($term, $this->blog_type_id);

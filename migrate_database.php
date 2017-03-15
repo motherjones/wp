@@ -25,7 +25,7 @@ $wp->commit();
 $term_insert_data = $d6->prepare('
 SELECT *
 FROM term_data
-WHERE (vid = 9 OR vid = 2 OR vid = 5 OR vid = 1 
+WHERE (vid = 9 OR vid = 2 OR vid = 1 
     OR tid = 22221 OR tid = 23631 OR tid = 22491) 
 ;'
 );
@@ -64,7 +64,7 @@ d.vid `taxonomy`
 FROM mjd6.term_data d
 INNER JOIN mjd6.term_node n
 USING(tid)
-WHERE (d.vid = 9 OR d.vid = 2 OR d.vid = 5 OR d.vid = 1 
+WHERE (d.vid = 9 OR d.vid = 2 OR d.vid = 1 
     OR d.tid = 22221 OR d.tid = 23631 OR d.tid = 22491) 
 ;
 '
@@ -92,14 +92,14 @@ while ( $row = $taxonomy_data->fetch(PDO::FETCH_ASSOC)) {
 	$tax = $row['taxonomy'];
 	switch ($tax) {
 		case "9":
-			$tax = "tag";
+			$tax = "post_tag";
 			break;
 		case "2":
 			$tax = "mj_blog_type";
 			break;
 		case "61": //media type
-      if ($tid === 22221) { //is photoessay
-        $tax = "tag";
+      if ($tid === "22221") { //is photoessay
+        $tax = "post_tag";
         break;
       }
       continue 2;
@@ -107,8 +107,8 @@ while ( $row = $taxonomy_data->fetch(PDO::FETCH_ASSOC)) {
 			$tax = "category";
 			break;
     case "5": //secondary tag
-      if ($tid === 23631 || $tid === 22491) { //bite or inquiring minds
-        $tax = "tag";
+      if ($tid === "23631" || $tid === "22491") { //bite or inquiring minds
+        $tax = "post_tag";
         break;
       }
       continue 2;
@@ -122,8 +122,9 @@ $wp->commit();
 
 // assign tags to articles
 $term_rel_data = $d6->prepare("
-SELECT DISTINCT n.nid, n.tid FROM mjd6.term_node n JOIN term_data d
-WHERE (d.vid = 9 OR d.vid = 2 OR d.vid = 5 OR d.vid = 1 
+SELECT DISTINCT n.nid, n.tid FROM mjd6.term_node n JOIN mjd6.term_data d
+ON n.tid = d.tid
+WHERE (d.vid = 9 OR d.vid = 2 OR d.vid = 1 
     OR d.tid = 22221 OR d.tid = 23631 OR d.tid = 22491) 
 ;
 ");
