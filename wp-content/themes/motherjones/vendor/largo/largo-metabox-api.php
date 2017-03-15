@@ -88,7 +88,7 @@ function largo_add_meta_content( $callback, $box_id ) {
  *
  * TODO: Include a validation parameter so meta fields can be validated easily.
  */
-function largo_register_meta_input( $input_names, $presave_fn = null, ) {
+function largo_register_meta_input( $input_names, $presave_fn = null ) {
 	global $largo;
 
 	if ( is_string( $input_names ) ) {
@@ -142,7 +142,6 @@ function _largo_metaboxes_content( $post, $callbacks = array() ) {
 	}
 }
 
-
 /**
  * Private function to handle saving inputs registered with largo_register_meta_input()
  *
@@ -153,25 +152,13 @@ function _largo_meta_box_save( $post_id ) {
 
 	global $post, $largo;
 
-	// Bail if we're doing an auto save.
-	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
-		return;
-	}
-
-	// if our nonce isn't there, or we can't verify it, bail.
-	if ( ! isset( $_POST['meta_box_nonce'] ) || ! wp_verify_nonce( $_POST['meta_box_nonce'], 'largo_meta_box_nonce' ) ) {
-		return;
-	}
-
-	// if our current user can't edit this post, bail.
-	if ( ! current_user_can( 'edit_post' ) ) {
+	if ( ! largo_metabox_can_save( $post ) ) {
 		return;
 	}
 
 	// set up our array of data.
 	$mydata = array();
 	foreach ( $largo['inputs'] as $input_name => $handlers ) {
-
 		if ( array_key_exists( $input_name, $_POST ) ) {
 			if ( function_exists( $handlers['presave_fn'] ) ) {
 				$mydata[ $input_name ] = call_user_func( $handlers['presave_fn'], $_POST[ $input_name ] );
@@ -194,3 +181,24 @@ function _largo_meta_box_save( $post_id ) {
 	}
 }
 add_action( 'save_post', '_largo_meta_box_save' );
+
+/**
+ * Make sure the conditions are right for saving meta values
+ *
+ * @param object $post the post object we're saving meta values for.
+ */
+function largo_metabox_can_save( $post ) {
+	// if we're autosaving, bail.
+	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+		return false;
+	}
+	// if our nonce isn't there, or we can't verify it, bail.
+	if ( ! isset( $_POST['meta_box_nonce'] ) || ! wp_verify_nonce( $_POST['meta_box_nonce'], 'largo_meta_box_nonce' ) ) {
+		return false;
+	}
+	// if our current user can't edit this post, bail.
+	if ( ! current_user_can( 'edit_post', $post->ID ) ) {
+		return false;
+	}
+	return true;
+}

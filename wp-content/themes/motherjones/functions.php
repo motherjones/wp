@@ -26,16 +26,16 @@
  */
 
 /**
-  * MJ_DEBUG defines whether or not to use minified assets
-  *
-  * By default we use minified CSS and JS files.
-  * set MJ_DEBUG to TRUE to use unminified JavaScript files
-  * and unminified CSS files with sourcemaps for debugging purposes.
-  *
-  * @since 1.0
-  */
+ * MJ_DEBUG defines whether or not to use minified assets
+ *
+ * By default we use minified CSS and JS files.
+ * set MJ_DEBUG to TRUE to use unminified JavaScript files
+ * and unminified CSS files with sourcemaps for debugging purposes.
+ *
+ * @since 1.0
+ */
 if ( ! defined( 'MJ_DEBUG' ) ) {
-	define( 'MJ_DEBUG', FALSE );
+	define( 'MJ_DEBUG', false );
 }
 
 /**
@@ -71,13 +71,13 @@ class MJ {
 			'/inc/metaboxes.php',
 			'/inc/post-templates.php',
 			'/inc/sidebars.php',
-			'/inc/template-tags.php'
+			'/inc/template-tags.php',
 		);
 		foreach ( $includes as $include ) {
 			require_once( get_template_directory() . $include );
 		}
 
-		// Media credit and slideshow plugins
+		// Media credit and slideshow plugins.
 		if ( ! class_exists( 'Navis_Media_Credit' ) ) {
 			require_once dirname( __FILE__ ) . '/vendor/largo/media-credit/navis-media-credit.php';
 		}
@@ -89,24 +89,21 @@ class MJ {
 /**
  * Load our MJ instance
  */
-function MJ() {
+function mj() {
 	return MJ::get_instance();
 }
-add_action( 'after_setup_theme', 'MJ' );
-
+add_action( 'after_setup_theme', 'mj' );
 
 if ( ! function_exists( 'mj_setup' ) ) {
-/**
- * Sets up theme defaults and registers support for various WordPress features.
- *
- * Note that this function is hooked into the after_setup_theme hook, which
- * runs before the init hook. The init hook is too late for some features, such
- * as indicating support for post thumbnails.
- *
- * Create your own mj_setup() function to override in a child theme.
- *
-  */
-
+	/**
+	 * Sets up theme defaults and registers support for various WordPress features.
+	 *
+	 * Note that this function is hooked into the after_setup_theme hook, which
+	 * runs before the init hook. The init hook is too late for some features, such
+	 * as indicating support for post thumbnails.
+	 *
+	 * Create your own mj_setup() function to override in a child theme.
+	 */
 	function mj_setup() {
 		/*
 		 * Make theme available for translation.
@@ -144,7 +141,20 @@ if ( ! function_exists( 'mj_setup' ) ) {
 			'caption',
 		) );
 
-	  add_filter( 'tiny_mce_before_init', 'mj_wysiwyg_config' );
+		add_theme_support( 'mfi-reloaded', array(
+			'title-image' => array(
+				'post_types' => array( 'post' ),
+				'labels' => array(
+					'name' => __( 'Title Image' ),
+					'set' => __( 'Set title image' ),
+					'remove' => __( 'Remove title image' ),
+					'popup_title' => __( 'Set Title Image' ),
+					'popup_select' => __( 'Set title image' ),
+				),
+			),
+		) );
+
+		add_filter( 'tiny_mce_before_init', 'mj_wysiwyg_config' );
 
 		$suffix = (MJ_DEBUG) ? '' : '.min';
 		add_editor_style( 'css/admin/editor-style' . $suffix . '.css' );

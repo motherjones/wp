@@ -106,7 +106,6 @@ function mj_headline_extra_meta_box_display() {
 	}
 }
 
-
 /**
  * Register the post custom fields metabox
  */
@@ -161,6 +160,7 @@ function mj_custom_meta_box_display() {
 		);
 	}
 }
+
 /**
  * Register and sanitize the input fields.
  */
