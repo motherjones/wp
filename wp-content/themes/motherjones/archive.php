@@ -45,11 +45,11 @@ get_header(); ?>
       $is_first_post = true;
       $posts_shown = 0;
         // if it's the first page, set up the curated posts
-      if ( ! $wp_query->get_query_var( 'offset' ) ) {
+			if ( ! $wp_query->get_query_var( 'offset' ) ) {
         //get the curated posts (but only 4)
         $curated = z_get_zone_query(
-          $wp_query->get_queried_object()->slug, array(
-            'posts_per_page' => 4,
+					$wp_query->get_queried_object()->slug, array(
+						'posts_per_page' => 4,
         ));
         $curated_length = $curated->post_count;
         while ( $curated->have_posts() ) : $curated->the_post();
@@ -67,9 +67,10 @@ get_header(); ?>
 			// Start the Loop.
 			while ( $wp_query->have_posts() ) : $wp_query->the_post();
         //don't do it if it's in the curated bits
-        if ( $curated_length && in_array(
+				if ( $curated_length && in_array(
           $post->ID,
-          array_map(function($p) { return $p->ID; }, $curated->posts)
+					array_map( function( $p ) { return $p->ID; }, $curated->posts ),
+					true
         )) {
           continue;
         } elseif ( $is_first_post ) {
@@ -115,7 +116,7 @@ get_header(); ?>
 
     <div id="sidebar-right">
       <script language="javascript">
-          <!-- 
+          <!--
           if ( typeof MJ_HideRightColAds === 'undefined' ) {
             ad_code({
               desktop: true,
