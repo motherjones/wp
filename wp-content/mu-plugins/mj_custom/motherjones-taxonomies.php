@@ -55,9 +55,6 @@ if ( !class_exists( 'MJ_Taxonomy' ) ) {
     public function add_media_taxonomy ($post_type) {
       $this->media_taxonomy['types'][] = $post_type;
     }
-    public function add_tag_taxonomy ($post_type) {
-      $this->tag_taxonomy['types'][] = $post_type;
-    }
     public function add_blog_taxonomy ($post_type) {
       $this->blog_taxonomy['types'][] = $post_type;
     }
@@ -65,7 +62,6 @@ if ( !class_exists( 'MJ_Taxonomy' ) ) {
       $this->article_type_taxonomy['types'][] = $post_type;
     }
     public function add_mj_taxonomies ($post_type) {
-      $this->tag_taxonomy['types'][] = $post_type;
       $this->blog_taxonomy['types'][] = $post_type;
       $this->article_type_taxonomy['types'][] = $post_type;
     }
@@ -73,7 +69,6 @@ if ( !class_exists( 'MJ_Taxonomy' ) ) {
 
     public function setup() {
       add_action( 'init', array( $this, 'register' ) );
-      $this->all_taxonomies[$this->tag_id] = $this->tag_taxonomy;
       $this->all_taxonomies[$this->blog_id] = $this->blog_taxonomy;
       $this->all_taxonomies[$this->article_type_id] = $this->article_type_taxonomy;
       add_action( 'created_mj_media_type', array($this, 'fill_media_type') );
