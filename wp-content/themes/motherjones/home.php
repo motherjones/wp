@@ -168,13 +168,8 @@ get_header(); ?>
 						<ul class="homepage-section-list">
 							<?php
 								$food_query = new WP_Query( array(
-									'tax_query' => array(
-										'relation' => 'AND',
-										array(
-											'taxonomy' => 'mj_primary_tag',
-											'field' => 'slug',
-											'terms' => 'food',
-										),
+									'tag' => 'food',
+                  'tax_query' => array(
 										array(
 											'taxonomy' => 'mj_article_type',
 											'field' => 'slug',
@@ -199,13 +194,8 @@ get_header(); ?>
 						<ul class="homepage-section-list">
 							<?php
 								$cnj_query = new WP_Query( array(
-									'tax_query' => array(
-										'relation' => 'AND',
-										array(
-											'taxonomy' => 'mj_primary_tag',
-											'field' => 'slug',
-											'terms' => 'crime-and-justice',
-										),
+									'tag' => 'crime-and-justice'
+                  'tax_query' => array(
 										array(
 											'taxonomy' => 'mj_article_type',
 											'field' => 'slug',
@@ -225,6 +215,7 @@ get_header(); ?>
 					</li>
 				</ul>
 			</div>
+
 
 			<div id="homepage-kdrum" class="group">
 				<div id="homepage-kdrum-side">
@@ -271,12 +262,8 @@ get_header(); ?>
 			<div id="homepage-exposure" class="homepage-fullwidth group">
 				<?php
 					$exposure_story = new WP_Query( array(
-						'tax_query' => array(
-							array(
-								'taxonomy' => 'mj_media_type',
-								'field' => 'slug',
-								'terms' => 'photoessays',
-							),
+						'tag' => 'photoessays',
+            'tax_query' => array(
 							array(
 								'taxonomy' => 'mj_article_type',
 								'field' => 'slug',
@@ -314,12 +301,8 @@ get_header(); ?>
 				<ul id="homepage-investigations-list" class="group">
 					<?php
 						$investigations = new WP_Query( array(
-							'tax_query' => array(
-								array(
-									'taxonomy' => 'mj_primary_tag',
-									'field' => 'slug',
-									'terms' => 'investigations',
-								),
+							'tag' => 'investigations',
+              'tax_query' => array(
 								array(
 									'taxonomy' => 'mj_article_type',
 									'field' => 'slug',
