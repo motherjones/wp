@@ -3,7 +3,16 @@
   #after_title-sortables #largo_featured_image_metabox {
     margin-bottom: 0; }
 
-div#mj_title_extra input,
+div#mj_headline_extra label,
+div#mj_custom_fields label {
+  font-size: 15px;
+  font-weight: bold;
+  line-height: 2em; }
+  div#mj_headline_extra label span,
+  div#mj_custom_fields label span {
+    font-size: 13px;
+    font-weight: normal; }
+div#mj_headline_extra input,
 div#mj_custom_fields input {
   display: block;
   padding: 8px;

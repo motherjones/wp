@@ -9,10 +9,6 @@ function largo_default_featured_media_types() {
 			'title' => __( 'Featured image', 'largo' ),
 			'id' => 'image'
 		),
-		'gallery' => array(
-			'title' => __( 'Featured photo gallery', 'largo' ),
-			'id' => 'gallery'
-		),
 		'video' => array(
 			'title' =>  __( 'Featured video', 'largo' ),
 			'id' => 'video'
@@ -129,10 +125,6 @@ function largo_get_featured_hero( $post = null, $classes = '' ) {
 
 	}
 
-	if ( 'gallery' == $featured_media['type'] ) {
-		$context['gallery_ids'] = implode(',', $featured_media['gallery']);
-	}
-
 	switch( $featured_media['type'] ) {
 		// video and embed code use the same partial;
 		// empty statement list for a case passes control to next case: https://secure.php.net/manual/en/control-structures.switch.php
@@ -142,9 +134,6 @@ function largo_get_featured_hero( $post = null, $classes = '' ) {
 			break;
 		case 'image':
 			$template_slug = 'image';
-			break;
-		case 'gallery':
-			$template_slug = 'gallery';
 			break;
 	}
 
@@ -164,19 +153,6 @@ function largo_get_featured_hero( $post = null, $classes = '' ) {
  * @param String $classes Optional. Class string to apply to outer div.hero
  */
 function largo_featured_embed_hero( $post = null, $classes = '' ) {
-	echo largo_get_featured_hero( $post, $classes );
-}
-
-/**
- * Prints DOM for a featured gallery hero.
- *
- * @since 0.5.1
- * @see largo_get_featured_hero()
- *
- * @param int|WP_Post $post Optional. Post ID or WP_Post object. Default is global $post.
- * @param String $classes Optional. Class string to apply to outer div.hero
- */
-function largo_featured_gallery_hero( $post = null, $classes = '' ) {
 	echo largo_get_featured_hero( $post, $classes );
 }
 
@@ -273,7 +249,6 @@ function largo_enqueue_featured_media_js( $hook ) {
 		'largo_featured_media_vars',
 		array(
 			'image_title' => __( 'Featured image', 'largo' ),
-			'gallery_title' => __( 'Featured gallery', 'largo' ),
 			'video_title' => __( 'Featured video', 'largo' ),
 			'embed_title' => __( 'Featured embed code', 'largo' ),
 			'error_invalid_url' => __( 'Error: please enter a valid URL.', 'largo' ),
@@ -436,7 +411,7 @@ function largo_featured_image_metabox_callback( $post, $metabox ) {
 	echo '<a href="#" class="set-featured-media">' . get_the_post_thumbnail() . '</a>';
 	echo '<a href="#" id="set-featured-media-button" class="button set-featured-media add_media" data-editor="content" title="' . __( $language . ' Featured Media', 'largo' ) . '"></span> ' . __( $language . ' Featured Media', 'largo' ) . '</a> <span class="spinner" style="display: none;"></span>';
 
-	echo '<p><label class="selectit"><input type="checkbox" value="true" name="featured-image-display"' . $checked .'> ' . __( 'Hide on Single Post display', 'largo' ) . '</label></p>';
+	echo '<p><label class="selectit"><input type="checkbox" value="true" name="featured-image-display"' . $checked .'> ' . __( 'Hide image at top of story.', 'largo' ) . '</label></p>';
 }
 
 /**
@@ -525,11 +500,6 @@ function largo_featured_media_save() {
 			$thumbnail_id = largo_media_sideload_image( $data['thumbnail_url'], null );
 		} else if ( isset( $data['attachment'] ) ) {
 			$thumbnail_id = $data['attachment'];
-		}
-
-		// If featured media is a gallery, use the first image as the representative thumbnail
-		if ( $data['type'] == 'gallery' ) {
-			$thumbnail_id = $data['gallery'][0];
 		}
 
 		if ( isset( $thumbnail_id ) ) {
@@ -628,8 +598,6 @@ if ( ! function_exists( 'largo_hero_class' ) ) {
 
 		if ( get_post_meta( $post_id, 'youtube_url', true ) || $type == 'video' ) {
 			$hero_class = 'is-video';
-		} else if ( $type == 'gallery' ) {
-			$hero_class = 'is-gallery';
 		} else if ( $type == 'embed-code' ) {
 			$hero_class = 'is-embed';
 		} else if ( has_post_thumbnail( $post_id ) || $type == 'image') {
@@ -643,39 +611,6 @@ if ( ! function_exists( 'largo_hero_class' ) ) {
 		}
 	}
 }
-
-/**
- * Get the proxy post for a term (in largo this is in inc/term-meta)
- *
- * @param string $taxnomy The taxonomy of the term for which you want to retrieve a term meta post
- * @param int $term_id The ID of the term
- * @return int $post_id The ID of the term meta post
- */
-function largo_get_term_meta_post( $taxonomy, $term_id ) {
-	$query = new WP_Query( array(
-		'post_type'      => '_term_meta',
-		'posts_per_page' => 1,
-		'post_status' => 'any',
-		'tax_query'      => array(
-			array(
-				'taxonomy'         => $taxonomy,
-				'field'            => 'id',
-				'terms'            => $term_id,
-				'include_children' => false
-			)
-		)
-	));
-
-	if ( $query->found_posts ) {
-		return $query->posts[0]->ID;
-	} else {
-		$tax_input = array();
-		$post_id = wp_insert_post( array( 'post_type' => '_term_meta', 'post_title' => "{$taxonomy}:${term_id}" ) );
-		wp_set_post_terms( $post_id, array( (int) $term_id ), $taxonomy );
-		return $post_id;
-	}
-}
-
 
 /**
  * Similar to `media_sideload_image` except that it simply returns the attachment's ID on success

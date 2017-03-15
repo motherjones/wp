@@ -8,6 +8,9 @@
  */
 
 if ( ! function_exists( 'mj_enqueue' ) ) {
+	/**
+	 * Front end styles.
+	 */
 	function mj_enqueue() {
 		$suffix = (MJ_DEBUG) ? '' : '.min';
 		$version = '1.0';
@@ -20,45 +23,13 @@ if ( ! function_exists( 'mj_enqueue' ) ) {
 			$version
 		);
 
-		// Load IE specific stylesheets.
-		wp_enqueue_style(
-			'mj-ie',
-			get_template_directory_uri() . '/css/ie' . $suffix . '.css',
-			array( 'mj-style' ),
-			$version
-		);
-		wp_enqueue_style(
-			'mj-ie8',
-			get_template_directory_uri() . '/css/ie8' . $suffix . '.css',
-			array( 'mj-style' ),
-			$version
-		);
-		wp_style_add_data( 'mj-ie8', 'conditional', 'lt IE 9' );
-		wp_enqueue_style(
-			'mj-ie7',
-			get_template_directory_uri() . '/css/ie7' . $suffix . '.css',
-			array( 'mj-style' ),
-			$version
-		);
-		wp_style_add_data( 'mj-ie7', 'conditional', 'lt IE 8' );
-		// icons
+		// Icons.
 		wp_enqueue_style(
 			'font-awesome',
 			get_template_directory_uri() . '/css/font-awesome-4.6.3/css/font-awesome' . $suffix . '.css',
 			null,
 			$version
 		);
-
-		// JavaScript
-
-		// maybe use our own version of jquery?
-		//wp_deregister_script('jquery');
-	  //wp_enqueue_script(
-		//	'jquery',
-		//	get_template_directory_uri() . 'jquery-3.1.0.min.js',
-		//	array(),
-		//	null
-		//);
 
 		wp_enqueue_script(
 			'mj-html5',
@@ -117,7 +88,7 @@ if ( ! function_exists( 'mj_enqueue' ) ) {
 			'collapse' => __( 'collapse child menu', 'mj' ),
 		) );
 
-		// slideshows on single posts only
+		// Slideshows on single posts only.
 		if ( is_single() ) {
 			$slick_css = get_template_directory_uri() . '/vendor/largo/slideshows/vendor/slick/slick.css';
 			wp_enqueue_style( 'mj_slick', $slick_css, array(), '1.0' );
@@ -136,18 +107,22 @@ if ( ! function_exists( 'mj_enqueue' ) ) {
 }
 add_action( 'wp_enqueue_scripts', 'mj_enqueue' );
 
+/**
+ * Enqueue admin JS and styles.
+ *
+ * @param string $hook the admin page we're viewing.
+ */
 function mj_admin_style( $hook ) {
 	$suffix = (MJ_DEBUG) ? '' : '.min';
 	$version = '1.0';
-
-	if ( ( $hook == 'post.php' ) || ( $hook == 'post-new.php' ) ) {
+	if ( ( 'post.php' === $hook ) || ( 'post-new.php' === $hook ) ) {
 		wp_enqueue_style(
-			'mj-post-admin-style', (
-				get_template_directory_uri() . '/css/admin/post-admin' . $suffix . '.css'),
-				false,
-				'1.0'
-			);
-    }
+			'mj-post-admin-style',
+			get_template_directory_uri() . '/css/admin/post-admin' . $suffix . '.css',
+			false,
+			'1.0'
+		);
+	}
 }
 add_action( 'admin_enqueue_scripts', 'mj_admin_style' );
 /**

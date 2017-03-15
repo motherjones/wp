@@ -218,13 +218,15 @@ function mj_categorized_blog() {
 }
 
 
-/**
- * Schema.org article metadata we include in the header of each single post
- *
- * @since 0.1
- */
+
 if ( ! function_exists( 'mj_post_metadata' ) ) {
-	function mj_post_metadata( $post_id, $echo = TRUE ) {
+	/**
+	 * Schema.org article metadata we include in the header of each single post
+	 *
+	 * @param int  $post_id the post ID.
+	 * @param bool $echo return the output or echo it.
+	 */
+	function mj_post_metadata( $post_id, $echo = true ) {
 		$out = '<meta itemprop="description" content="' . strip_tags( get_the_excerpt() ) . '" />' . "\n";
 		$out .= '<meta itemprop="datePublished" content="' . get_the_date( 'c', $post_id ) . '" />' . "\n";
 		$out .= '<meta itemprop="dateModified" content="' . get_the_modified_date( 'c', $post_id ) . '" />' . "\n";
@@ -256,81 +258,116 @@ function mj_category_transient_flusher() {
 add_action( 'edit_category', 'mj_category_transient_flusher' );
 add_action( 'save_post',     'mj_category_transient_flusher' );
 
-/**
- * create our bylines
- */
 if ( ! function_exists( 'mj_byline' ) ) {
-  function mj_byline( $id ) {
-    $override = get_post_meta( $id, 'byline_override', true );
-    if ( trim( $override ) ) {
-      return $override;
-    } else {
-      return coauthors_posts_links( ', ', null, null, null, false );
-    }
-  }
+	/**
+	 * Create our bylines.
+	 *
+	 * @param int $id the post ID.
+	 */
+	function mj_byline( $id ) {
+		$override = get_post_meta( $id, 'mj_byline_override', true );
+		if ( trim( $override ) ) {
+			$output = wp_kses(
+				$override,
+				array(
+					'a' => array(
+						'href' => array(),
+						'title' => array(),
+					),
+					'br' => array(),
+					'em' => array(),
+					'strong' => array(),
+				)
+			);
+			return $output;
+		} else {
+			return coauthors_posts_links( ', ', null, null, null, false );
+		}
+	}
 }
 
-/**
- * create our datelines
- */
-if ( ! function_exists( 'mj_dateline' ) ) {
-  function mj_dateline( $id ) {
-    $mj_dateline_format = 'M\. j\, Y g\:i A';
 
-    if ( ! $id ) {
+if ( ! function_exists( 'mj_dateline' ) ) {
+	/**
+	 * Create our datelines.
+	 *
+	 * @param int $id the post ID.
+	 */
+	function mj_dateline( $id ) {
+		$mj_dateline_format = 'M\. j\, Y g\:i A';
+
+		if ( ! $id ) {
 			$id = get_the_ID();
 		}
-    $override = get_post_meta( $id, 'mj_dateline_override', true );
-    if ( trim( $override ) ) {
-      return $override;
-    }
-    return get_post_time( $mj_dateline_format );
-  }
+		$override = get_post_meta( $id, 'mj_dateline_override', true );
+		if ( trim( $override ) ) {
+			return $override;
+		}
+		return get_post_time( $mj_dateline_format );
+	}
 }
 
 if ( ! function_exists( 'get_disqus_thread' ) ) {
-  function get_disqus_thread() {
-    comments_template( '', true );
-  }
+	/**
+	 * Output comments.
+	 */
+	function get_disqus_thread() {
+		comments_template( '', true );
+	}
 }
 
-/**
- * create our social buttons
- */
 if ( ! function_exists( 'mj_flat_twitter_button' ) ) {
-  function mj_flat_twitter_button( $id ) {
-    $id = $id ? $id : get_the_ID();
-    $social = trim( get_post_meta( $id, 'mj_social_hed', true ) );
-    $status = $social ? $social : get_the_title( $id );
-    $href = 'http://twitter.com/home?status=' . $status . ' '
-      . esc_url( get_permalink( $id ) ). ' via @MotherJones';
-    return sprintf(
-        '<a class="social" href="%s" target="_blank">'
-          . '<i class="fa fa-twitter fw"></i>'
-          . '<span class="share-text">Share on Twitter</span>'
-        . '</a>',
-      $href );
-  }
+	/**
+	 * Create a twitter button.
+	 *
+	 * @param int $id the post ID.
+	 */
+	function mj_flat_twitter_button( $id ) {
+		$id = $id ? $id : get_the_ID();
+		$social = trim( get_post_meta( $id, 'mj_social_hed', true ) );
+		$status = $social ? $social : get_the_title( $id );
+		$href = 'http://twitter.com/home?status=' . $status . ' '
+			. esc_url( get_permalink( $id ) ) . ' via @MotherJones';
+		return sprintf(
+			'<a class="social" href="%s" target="_blank">
+				<i class="fa fa-twitter fw"></i>
+				<span class="share-text">Share on Twitter</span>
+			</a>',
+			$href
+		);
+	}
 }
 
 if ( ! function_exists( 'mj_flat_facebook_button' ) ) {
-  function mj_flat_facebook_button( $id ) {
-    $id = $id ? $id : get_the_ID();
-    $href = 'http://facebook.com/sharer.php?u=' . esc_url( get_permalink( $id ) );
-    return sprintf(
-      '<a class="social" href="%s" target="_blank">'
-        . '<i class="fa fa-facebook fw"></i>'
-          . '<span class="share-text">Share on Facebook</span>'
-        . '</a>',
-      $href );
-  }
+	/**
+	 * Create a FB button.
+	 *
+	 * @param int $id the post ID.
+	 */
+	function mj_flat_facebook_button( $id ) {
+		$id = $id ? $id : get_the_ID();
+		$href = 'http://facebook.com/sharer.php?u=' . esc_url( get_permalink( $id ) );
+		return sprintf(
+			'<a class="social" href="%s" target="_blank">
+				<i class="fa fa-facebook fw"></i>
+				<span class="share-text">Share on Facebook</span>
+			</a>',
+			$href
+		);
+	}
 }
 
-function mj_share_tools ( $context ) {
+/**
+ * Output the share buttons
+ *
+ * @param string $context where we're outputting the buttons
+ * 	(e.g. - top or bottom for articles.
+ */
+function mj_share_tools( $context ) {
 	$classes = 'social-container group';
 	$id = get_the_ID();
-	if ( ! empty ( $context ) ) {
-	  $classes .= ' ' . $context;
+	if ( ! empty( $context ) ) {
+		$classes .= ' ' . $context;
 	}
 	printf(
 		'<div class="%s">
@@ -339,7 +376,7 @@ function mj_share_tools ( $context ) {
 				<li class="twitter">%s</li>
 			</ul>
 		</div>',
-		$classes,
+		esc_attr( $classes ),
 		mj_flat_facebook_button( $id ),
 		mj_flat_twitter_button( $id )
 	);

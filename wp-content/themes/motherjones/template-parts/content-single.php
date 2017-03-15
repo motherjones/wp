@@ -6,7 +6,8 @@
  * @subpackage Mother_Jones
  * @since Mother Jones 1.0
  */
- global $meta;
+
+global $meta;
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class( 'hnews' ); ?> itemscope itemtype="http://schema.org/Article">
@@ -17,12 +18,10 @@
 			if ( isset( $meta['css'][0] ) ) {
 				printf(
 					'<style>%s</style>',
-					$meta['css'][0]
+					esc_html( $meta['css'][0] )
 				);
 			}
-      largo_hero();
-			//get_template_part( 'template-parts/master-image-630' );
-
+			largo_hero();
 			the_content();
 		?>
 	</section>
