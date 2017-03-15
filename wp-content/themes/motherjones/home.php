@@ -14,7 +14,9 @@
  * @since Mother Jones 1.0
  */
 
-get_header(); ?>
+get_header();
+global $fullwidth_title;
+?>
 
 <div id="content" class="site-content">
 	<div id="primary" class="content-area">
@@ -27,14 +29,18 @@ get_header(); ?>
 							'posts_per_page' => 10,
 						)
 					);
-					$top_stories->the_post();
-					get_template_part( 'template-parts/homepage-top-story' );
+					if ( $top_stories->have_posts() ) {
+						$top_stories->the_post();
+						get_template_part( 'template-parts/homepage-top-story' );
+					}
 				?>
 				<ul id="homepage-top-story-side">
 					<?php
-						for ( $i = 0; $i < 3; $i++ ) {
-							$top_stories->the_post();
-							get_template_part( 'template-parts/homepage-top-story-side' );
+						if ( $top_stories->have_posts() ) {
+							for ( $i = 0; $i < 3; $i++ ) {
+								$top_stories->the_post();
+								get_template_part( 'template-parts/homepage-top-story-side' );
+							}
 						}
 					?>
 				</ul>
@@ -58,9 +64,11 @@ get_header(); ?>
 					<h2 class="promo">More Top Stories</h2>
 					<ul id="homepage-more-top-stories">
 						<?php
-							for ( $i = 0; $i < 6; $i++ ) {
-								$top_stories->the_post();
-								get_template_part( 'template-parts/homepage-top-story-side' );
+							if ( $top_stories->have_posts() ) {
+								for ( $i = 0; $i < 6; $i++ ) {
+									$top_stories->the_post();
+									get_template_part( 'template-parts/homepage-top-story-side' );
+								}
 							}
 						?>
 					</ul>
@@ -104,10 +112,12 @@ get_header(); ?>
 									),
 									'posts_per_page' => 2,
 								) );
-								$pol_query->the_post();
-								get_template_part( 'template-parts/homepage-section-first' );
-								$pol_query->the_post();
-								get_template_part( 'template-parts/homepage-section' );
+								if ( $pol_query->have_posts() ) {
+									$pol_query->the_post();
+									get_template_part( 'template-parts/homepage-section-first' );
+									$pol_query->the_post();
+									get_template_part( 'template-parts/homepage-section' );
+								}
 							?>
 						</ul>
 					</li>
@@ -129,10 +139,12 @@ get_header(); ?>
 									),
 									'posts_per_page' => 2,
 								) );
-								$env_query->the_post();
-								get_template_part( 'template-parts/homepage-section-first' );
-								$env_query->the_post();
-								get_template_part( 'template-parts/homepage-section' );
+								if ( $env_query->have_posts() ) {
+									$env_query->the_post();
+									get_template_part( 'template-parts/homepage-section-first' );
+									$env_query->the_post();
+									get_template_part( 'template-parts/homepage-section' );
+								}
 							?>
 						</ul>
 					</li>
@@ -154,10 +166,12 @@ get_header(); ?>
 									),
 									'posts_per_page' => 2,
 								) );
-								$media_query->the_post();
-								get_template_part( 'template-parts/homepage-section-first' );
-								$media_query->the_post();
-								get_template_part( 'template-parts/homepage-section' );
+								if ( $media_query->have_posts() ) {
+									$media_query->the_post();
+									get_template_part( 'template-parts/homepage-section-first' );
+									$media_query->the_post();
+									get_template_part( 'template-parts/homepage-section' );
+								}
 							?>
 						</ul>
 					</li>
@@ -179,11 +193,13 @@ get_header(); ?>
 									),
 									'posts_per_page' => 2,
 								) );
-								// FIXME if we want food to be a section the query needs to change.
-								$food_query->the_post();
-								get_template_part( 'template-parts/homepage-section-first' );
-								$food_query->the_post();
-								get_template_part( 'template-parts/homepage-section' );
+								if ( $food_query->have_posts() ) {
+									// FIXME if we want food to be a section the query needs to change.
+									$food_query->the_post();
+									get_template_part( 'template-parts/homepage-section-first' );
+									$food_query->the_post();
+									get_template_part( 'template-parts/homepage-section' );
+								}
 							?>
 						</ul>
 					</li>
@@ -205,11 +221,13 @@ get_header(); ?>
 									),
 									'posts_per_page' => 2,
 								) );
-								// FIXME If we want C & J to be a section the query needs to change.
-								$cnj_query->the_post();
-								get_template_part( 'template-parts/homepage-section-first' );
-								$cnj_query->the_post();
-								get_template_part( 'template-parts/homepage-section' );
+								if ( $cnj_query->have_posts() ) {
+									// FIXME If we want C & J to be a section the query needs to change.
+									$cnj_query->the_post();
+									get_template_part( 'template-parts/homepage-section-first' );
+									$cnj_query->the_post();
+									get_template_part( 'template-parts/homepage-section' );
+								}
 							?>
 						</ul>
 					</li>
@@ -274,10 +292,11 @@ get_header(); ?>
 						'posts_per_page' => 1,
 						'post_status' => 'publish',
 					) );
-					$exposure_story->the_post();
-					$fullwidth_title = 'Exposure';
-
-					include( locate_template( 'template-parts/homepage-fullwidth.php' ) );
+					if ( $exposure_story->have_posts() ) {
+						$exposure_story->the_post();
+						$fullwidth_title = 'Exposure';
+						include( locate_template( 'template-parts/homepage-fullwidth.php' ) );
+					}
 				?>
 			</div>
 

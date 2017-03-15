@@ -1,32 +1,54 @@
-<div class="article-image">
-  <a href="<?php the_permalink(); ?>"><?php the_post_thumbnail( 'large_990' ); ?></a>
-</div>
-<h2 class="homepage-fullwidth-section-label promo">
-    <?php print $fullwidth_title; ?>
-</h2>
-<p class="homepage-art-byline">
-  <?php print get_post_meta( get_the_ID(), 'master_image' )[0]['master_image_byline']; ?>
-</p>
+<?php
+/**
+ * Template partial for displaying full-width stories on the homepage.
+ *
+ * @package WordPress
+ * @subpackage Mother_Jones
+ * @since Mother Jones 1.0
+ */
+
+global $fullwidth_title, $post;
+
+$post_thumbnail_id = get_post_thumbnail_id( $post->ID );
+
+if ( $post_thumbnail_id ) {
+	echo '<div class="article-image"><a href="' . esc_url( get_permalink() ) . '">';
+	the_post_thumbnail( 'large_990' );
+	echo '</a></div>';
+}
+
+if ( ! empty( $fullwidth_title ) ) {
+	echo '<h2 class="homepage-fullwidth-section-label promo">' . esc_html( $fullwidth_title ) . '</h2>';
+}
+
+if ( ! empty( $post_thumbnail_id ) ) {
+	$thumb_meta = get_post_custom( $post_thumbnail_id );
+	if ( $thumb_meta['_media_credit'][0] && '' !== $thumb_meta['_media_credit'][0] ) {
+		echo '<p class="homepage-art-byline">' . esc_html( $thumb_meta['_media_credit'][0] ) . '</p>';
+	}
+}
+?>
+
 <div class="article-data">
-  <h1 class="hed">
-    <a href="<?php print esc_url( get_permalink() ); ?>">
-      <?php
-        if ( $hed = get_post_meta( get_the_ID(), 'mj_promo_hed', true ) ) {
-          echo $hed;
-        } else {
-          the_title();
-        }
-      ?>
-    </a>
-  </h1>
-  <?php
-    if ( $dek = get_post_meta( get_the_ID(), 'mj_promo_dek', true ) ) {
-      echo '<h4 class="dek"><a href="' . esc_url( get_permalink() ) . '">' . $dek . '</a></h4>';
-    } else if ( $dek = get_post_meta( get_the_ID(), 'mj_dek', true ) ) {
-      echo '<h4 class="dek"><a href="' . esc_url( get_permalink() ) . '">' . $dek . '</a></h4>';
-    }
-  ?>
-  <p class="byline">
-    <?php print mj_byline( get_the_ID() ); ?>
-  </p>
+	<h1 class="hed">
+		<a href="<?php the_permalink(); ?>">
+		<?php
+			if ( $hed = get_post_meta( get_the_ID(), 'mj_promo_hed', true ) ) {
+				echo esc_html( $hed );
+			} else {
+				the_title();
+			}
+		?>
+		</a>
+	</h1>
+	<?php
+		if ( $dek = get_post_meta( get_the_ID(), 'mj_promo_dek', true ) ) {
+			echo '<h4 class="dek"><a href="' . esc_url( get_permalink() ) . '">' . esc_html( $dek ) . '</a></h4>';
+		} elseif ( $dek = get_post_meta( get_the_ID(), 'mj_dek', true ) ) {
+			echo '<h4 class="dek"><a href="' . esc_url( get_permalink() ) . '">' . esc_html( $dek ) . '</a></h4>';
+		}
+	?>
+	<p class="byline">
+		<?php print mj_byline( get_the_ID() ); ?>
+	</p>
 </div>
