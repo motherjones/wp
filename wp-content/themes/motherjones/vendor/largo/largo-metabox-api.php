@@ -88,7 +88,7 @@ function largo_add_meta_content( $callback, $box_id ) {
  *
  * TODO: Include a validation parameter so meta fields can be validated easily.
  */
-function largo_register_meta_input( $input_names, $presave_fn = null ) {
+function largo_register_meta_input( $input_names, $presave_fn = null, ) {
 	global $largo;
 
 	if ( is_string( $input_names ) ) {
@@ -96,7 +96,7 @@ function largo_register_meta_input( $input_names, $presave_fn = null ) {
 	}
 
 	foreach ( $input_names as $name ) {
-		$largo['inputs'][ $name ] = array( 'name' => $name, 'presave_fn' => $presave_fn );
+		$largo['inputs'][ $name ] = array( 'name' => sanitize_key( $name ), 'presave_fn' => $presave_fn );
 	}
 
 }
