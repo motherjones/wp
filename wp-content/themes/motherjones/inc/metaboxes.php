@@ -90,18 +90,18 @@ function mj_headline_extra_meta_box_display() {
 	wp_nonce_field( 'largo_meta_box_nonce', 'meta_box_nonce' );
 	foreach ( $fields as $field => $attr ) {
 		$field_slug = $prefix . $field;
-		$field_title = isset( $attr['title'] ) ? esc_attr( $attr['title'] ) : '';
-		$field_desc = isset( $attr['desc'] ) ? ' <span>' . esc_attr( $attr['desc'] ) . '</span>' : '';
-		$field_value = isset( $values[ $field_slug ] ) ? esc_attr( $values[ $field_slug ][0] ) : '';
+		$field_title = isset( $attr['title'] ) ? $attr['title'] : '';
+		$field_desc = isset( $attr['desc'] ) ? ' <span>' . $attr['desc'] . '</span>' : '';
+		$field_value = isset( $values[ $field_slug ] ) ? $values[ $field_slug ][0] : '';
 		printf(
 			'<p>
 				<label for="%1$s">%2$s%3$s</label>
 				<input type="text" name="%1$s" id="%1$s" value="%4$s" />
 			</p>',
-			esc_html( $field_slug ),
+			esc_attr( $field_slug ),
 			esc_html( $field_title ),
-			$field_desc,
-			esc_html( $field_value )
+			wp_kses( $field_desc, array( 'span' => array() ) ),
+			esc_attr( $field_value )
 		);
 	}
 }
@@ -146,18 +146,18 @@ function mj_custom_meta_box_display() {
 	wp_nonce_field( 'largo_meta_box_nonce', 'meta_box_nonce' );
 	foreach ( $fields as $field => $attr ) {
 		$field_slug = $prefix . $field;
-		$field_title = isset( $attr['title'] ) ? esc_attr( $attr['title'] ) : '';
-		$field_desc = isset( $attr['desc'] ) ? ' <span>' . esc_attr( $attr['desc'] ) . '</span>' : '';
-		$field_value = isset( $values[ $field_slug ] ) ? esc_attr( $values[ $field_slug ][0] ) : '';
+		$field_title = isset( $attr['title'] ) ? $attr['title'] : '';
+		$field_desc = isset( $attr['desc'] ) ? ' <span>' . $attr['desc'] . '</span>' : '';
+		$field_value = isset( $values[ $field_slug ] ) ? $values[ $field_slug ][0] : '';
 		printf(
 			'<p>
 				<label for="%1$s">%2$s%3$s</label>
 				<input type="text" name="%1$s" id="%1$s" value="%4$s" />
 			</p>',
-			esc_html( $field_slug ),
+			esc_attr( $field_slug ),
 			esc_html( $field_title ),
-			$field_desc,
-			esc_html( $field_value )
+			wp_kses( $field_desc, array( 'span' => array() ) ),
+			esc_attr( $field_value )
 		);
 	}
 }
