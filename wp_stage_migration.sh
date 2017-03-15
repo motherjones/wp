@@ -8,9 +8,15 @@ YYYY=$(date +%Y -d "1 day ago")
 
 FILES_DIR='/mojo/www/bd6_files/' #point this at the most recent drupal files dir you got
 ENV='dev'
-SITE='9916792c-83ad-452c-a5ef-b260b8521faf'
+# Pantheon master stage
+#SITE='9916792c-83ad-452c-a5ef-b260b8521faf'
+#
+#PANT_SQL_PORT=13165
 
-PANT_SQL_PORT=13165
+# Pantheon dev-dev
+SITE='fe3de411-a1e8-4729-8882-fbb44bb58aa5'
+
+PANT_SQL_PORT=12318
 
 read -sp "Pastina's sql Password: " SQL_PASS
 if [[ -z "$SQL_PASS" ]]; then
