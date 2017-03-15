@@ -169,7 +169,7 @@ get_header(); ?>
 							<?php
 								$food_query = new WP_Query( array(
 									'tag' => 'food',
-                  'tax_query' => array(
+									'tax_query' => array(
 										array(
 											'taxonomy' => 'mj_article_type',
 											'field' => 'slug',
@@ -194,8 +194,8 @@ get_header(); ?>
 						<ul class="homepage-section-list">
 							<?php
 								$cnj_query = new WP_Query( array(
-									'tag' => 'crime-and-justice'
-                  'tax_query' => array(
+									'tag' => 'crime-and-justice',
+									'tax_query' => array(
 										array(
 											'taxonomy' => 'mj_article_type',
 											'field' => 'slug',
@@ -263,7 +263,7 @@ get_header(); ?>
 				<?php
 					$exposure_story = new WP_Query( array(
 						'tag' => 'photoessays',
-            'tax_query' => array(
+						'tax_query' => array(
 							array(
 								'taxonomy' => 'mj_article_type',
 								'field' => 'slug',
@@ -302,7 +302,7 @@ get_header(); ?>
 					<?php
 						$investigations = new WP_Query( array(
 							'tag' => 'investigations',
-              'tax_query' => array(
+							'tax_query' => array(
 								array(
 									'taxonomy' => 'mj_article_type',
 									'field' => 'slug',
