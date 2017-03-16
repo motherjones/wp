@@ -209,9 +209,6 @@ function mj_custom_css_js_meta_box_display() {
 	}
 }
 
-
-
-
 /**
  * Register and sanitize the input fields.
  */
