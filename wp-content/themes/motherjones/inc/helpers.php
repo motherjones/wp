@@ -68,7 +68,7 @@ function largo_get_current_url() {
  * @return  string  the Facebook username or id extracted from the input string
  * @since   0.4
  */
-function largo_fb_url_to_username( $url )  {
+function fb_url_to_username( $url )  {
 	$urlParts = explode( '/', $url );
 	if ( end( $urlParts ) == '' ) {
 		// URL has a trailing slash
@@ -100,7 +100,7 @@ function largo_fb_url_to_username( $url )  {
  * @uses    wp_remote_get
  * @return  bool    The user specified by the username or ID can be followed
  */
-function largo_fb_user_is_followable( $username ) {
+function fb_user_is_followable( $username ) {
  	// syntax for this iframe taken from https://developers.facebook.com/docs/plugins/follow-button/
  	$get = wp_remote_get( 'https://www.facebook.com/plugins/follow.php?href=https%3A%2F%2Fwww.facebook.com%2F' . $username . '&amp;width&amp;height=80&amp;colorscheme=light&amp;layout=button&amp;show_faces=true' );
  	if ( ! is_wp_error( $get ) ) {
@@ -123,13 +123,13 @@ function largo_fb_user_is_followable( $username ) {
  * @param  object  $user_id the WP_User object being edited
  * @param  array   $_POST
  * @since  0.4
- * @uses   largo_fb_url_to_username
+ * @uses   fb_url_to_username
  * @link   http://codex.wordpress.org/Plugin_API/Action_Reference/edit_user_profile_update
  * @link   http://codex.wordpress.org/Plugin_API/Action_Reference/personal_options_update
  */
 function clean_user_fb_username( $user_id ) {
 	if ( current_user_can( 'edit_user', $user_id ) ) {
-		$fb = largo_fb_url_to_username( $_POST['fb'] );
+		$fb = fb_url_to_username( $_POST['fb'] );
 		if ( preg_match( '/[^a-zA-Z0-9\.\-]/', $fb ) ) {
 			// it's not a valid Facebook username, because it uses an invalid character
 			$fb = "";
@@ -145,8 +145,8 @@ function clean_user_fb_username( $user_id ) {
 /**
  * Checks that the Facebook URL submitted is valid and the user is followable and causes an error if not
  *
- * @uses  largo_fb_url_to_username
- * @uses  largo_fb_user_is_followable
+ * @uses  fb_url_to_username
+ * @uses  fb_user_is_followable
  * @param   $errors the error object
  * @param   bool    $update whether this is a user update
  * @param   object  $user a WP_User object
@@ -176,7 +176,7 @@ function validate_fb_username( $errors, $update, $user ) {
  * @return 	string	the twitter username extracted from the input string
  * @since 	0.3
  */
-function largo_twitter_url_to_username( $url ) {
+function twitter_url_to_username( $url ) {
 	$urlParts = explode( '/', $url );
 	if ( end( $urlParts ) == '' ) {
 		// URL has a trailing slash
@@ -209,7 +209,7 @@ function largo_twitter_url_to_username( $url ) {
  */
 function clean_user_twitter_username( $user_id ) {
 	if ( current_user_can( 'edit_user', $user_id ) ) {
-		$twitter = largo_twitter_url_to_username( $_POST['twitter'] );
+		$twitter = twitter_url_to_username( $_POST['twitter'] );
 		if ( preg_match( '/[^a-zA-Z0-9_]/', $twitter ) ) {
 			// it's not a valid twitter username, because it uses an invalid character
 			$twitter = '';
@@ -237,7 +237,7 @@ function validate_twitter_username( $errors, $update, $user ) {
 	if ( isset( $_POST['twitter'] ) ) {
 		$tw_suspect = trim( $_POST['twitter'] );
 		if( ! empty( $tw_suspect ) ) {
-			if ( preg_match( '/[^a-zA-Z0-9_]/', largo_twitter_url_to_username( $tw_suspect ) ) ) {
+			if ( preg_match( '/[^a-zA-Z0-9_]/', twitter_url_to_username( $tw_suspect ) ) ) {
 				// it's not a valid twitter username, because it uses an invalid character
 				$errors->add( 'twitter_username', '<b>' . $tw_suspect . '</b>' . __( 'is an invalid Twitter username.', 'largo' ) . '</p>' . '<p>' . __( 'Twitter usernames only use the uppercase and lowercase alphabet letters (a-z A-Z), the Arabic numbers (0-9), and underscores (_).', 'largo' ) );
 			}
