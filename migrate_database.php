@@ -1221,7 +1221,7 @@ NULL,
 $wp->beginTransaction();
 while ( $image = $author_image_data->fetch(PDO::FETCH_ASSOC)) {
   $uid  = $author_name_to_author_meta[$image['title']]['wp_id'];
-  $guid = $FILEDIR_ABS . str_replace('files/photo/', '', $image['filepath']);
+  $guid = $FILEDIR_ABS . preg_replace('/files\//', '', $image['filepath']);
   $author_image_insert->execute(array(
     ':post_author' => $uid,
     ':post_title' => $image['filename'],
@@ -1229,7 +1229,8 @@ while ( $image = $author_image_data->fetch(PDO::FETCH_ASSOC)) {
     ':guid' => $guid,
     ':post_mime_type' => $image['filemime'],
   ));
-  $author_name_to_author_meta[$image['title']]['image_location'] = $guid;
+  $author_name_to_author_meta[$image['title']]['image_location'] = 
+     preg_replace('/files\//', $FILEDIR, $image['filepath']);
   $author_name_to_author_meta[$image['title']]['image_id'] = $wp->lastInsertId();
 }
 $wp->commit();
@@ -1248,11 +1249,12 @@ foreach ( $author_name_to_author_meta as $author ) {
       "author_image_id",
       $author['image_id']
     ));
+
     $author_meta_insert->execute(array(
-      $author['wp_id'],
-      "author_image_url",
+      $author['image_id'],
+      '_wp_attached_file',
       $author['image_location']
-    ));
+    ) );
   }
 }
 $wp->commit();
@@ -1411,6 +1413,7 @@ n.status,
 i.field_title_image_data,
 i.field_title_image_credit_value,
 f.filemime,
+f.filepath,
 f.filename
 FROM mjd6.node n
 INNER JOIN mjd6.content_type_full_width_article i
@@ -1456,7 +1459,7 @@ while ( $title = $title_data->fetch(PDO::FETCH_ASSOC)) {
 
   $title_data_array = unserialize($title['field_title_image_data']);
 
-  $guid = $FILEDIR_ABS . $title['filename'];
+  $guid = preg_replace('/files\//', $FILEDIR_ABS, $title['filepath']);
   $post_name = preg_replace("/\.[^.]+$/", "", $title['filename'] );
   $post_title = $title_data_array['title'] 
     ? $title_data_array['title']
@@ -1477,16 +1480,13 @@ while ( $title = $title_data->fetch(PDO::FETCH_ASSOC)) {
   ) );
 
 
-  $title_meta_value = serialize( array(
-    'title_image' => $wp->lastInsertId(),
-    'title_image_credit' => $title['field_title_image_credit_value'],
-  ) );
 
   $title_meta_rows[] = array(
     'nid' => $title['nid'],
     'image_id' => $wp->lastInsertId(),
-    'value' => $title_meta_value,
-    'filename' => $master['filename']
+    'filename' => $title['filename'],
+    'filepath' => preg_replace('/files\//', $FILEDIR, $title['filepath']),
+    'title_image_credit' => $title['field_title_image_credit_value'],
   );
 }
 $wp->commit();
@@ -1502,15 +1502,22 @@ $wp->beginTransaction();
 foreach ( $title_meta_rows as $row ) {
   $title_meta_insert->execute(array(
     $row['nid'],
-    'title_image',
-    $row['value']
+    'title_image_id',
+    $row['image_id']
   ) );
 
   $title_meta_insert->execute(array(
     $row['image_id'],
     '_wp_attached_file',
-    $row['filename']
+    $row['filepath']
   ) );
+
+  $master_meta_insert->execute(array(
+    $row['image_id'],
+    '_media_credit',
+    $row['title_image_credit']
+  ) );
+
 }
 $wp->commit();
 
@@ -1525,6 +1532,7 @@ n.changed,
 n.status,
 f.filemime,
 f.filename,
+f.filepath,
 f.fid
 FROM mjd6.upload u
 INNER JOIN mjd6.files f
@@ -1568,7 +1576,7 @@ $node_file_rows = array();
 $wp->beginTransaction();
 while ( $file = $file_data->fetch(PDO::FETCH_ASSOC)) {
 
-  $guid = $FILEDIR_ABS . $file['filename'];
+  $guid = preg_replace('/files\//', $FILEDIR_ABS, $file['filepath']);
   $post_name = preg_replace("/\.[^.]+$/", "", $file['filename'] );
 
   $file_insert->execute(array(
@@ -1587,14 +1595,9 @@ while ( $file = $file_data->fetch(PDO::FETCH_ASSOC)) {
   $file_meta_rows[] = array(
     'nid' => $file['nid'],
     'fid' => $wp->lastInsertId(),
+    'filepath' => preg_replace('/files\//', $FILEDIR, $title['filepath']),
     'filename' => $file['filename']
   );
-
-  $node_file_rows[$file['nid']] 
-    = in_array($file['nid'], $node_file_rows, TRUE)
-      ?  $node_file_rows[$file['nid']] 
-      :  Array();
-  $node_file_rows[$file['nid']][] = $wp->lastInsertId(); 
 
 }
 $wp->commit();
@@ -1614,16 +1617,13 @@ foreach ( $file_meta_rows as $row ) {
     '_wp_attached_file',
     $row['filename']
   ) );
-}
 
-foreach ( $node_file_rows as $nid => $row ) {
   $file_meta_insert->execute(array(
-    $nid,
-    'file_attachments',
-    serialize($row)
+    $row['nid'],
+    'file_attachment',
+    $row['fid']
   ) );
 }
-
 $wp->commit();
 
 echo "files done";
