@@ -199,7 +199,7 @@ function mj_custom_css_js_meta_box_display() {
 		printf(
 			'<p>
 				<label for="%1$s">%2$s%3$s</label>
-				<input type="textarea" name="%1$s" id="%1$s" value="%4$s" />
+				<textarea name="%1$s" id="%1$s">%4$s</textarea>
 			</p>',
 			esc_attr( $field_slug ),
 			esc_html( $field_title ),
@@ -224,10 +224,8 @@ largo_register_meta_input(
 		'mj_promo_dek',
 		'mj_byline_override',
 		'mj_dateline_override',
+		'mj_custom_css',
+		'mj_custom_js',
 	),
-	'sanitize_text_field'
-);
-largo_register_meta_input(
-	'mj_custom_css',
 	'sanitize_text_field'
 );
