@@ -545,7 +545,7 @@ function largo_save_featured_image_display() {
 		} else {
 			delete_post_meta( $post_id, 'featured-image-display' );
 		}
-		print json_encode( $data );
+		print wp_json_encode( $data );
 		wp_die();
 	}
 }
