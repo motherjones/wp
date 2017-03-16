@@ -1571,7 +1571,6 @@ IF(:status = 1, "publish", "draft"),
 ');
 
 $file_meta_rows = array();
-$node_file_rows = array();
 
 $wp->beginTransaction();
 while ( $file = $file_data->fetch(PDO::FETCH_ASSOC)) {
@@ -1595,7 +1594,7 @@ while ( $file = $file_data->fetch(PDO::FETCH_ASSOC)) {
   $file_meta_rows[] = array(
     'nid' => $file['nid'],
     'fid' => $wp->lastInsertId(),
-    'filepath' => preg_replace('/files\//', $FILEDIR, $title['filepath']),
+    'filepath' => preg_replace('/files\//', $FILEDIR, $file['filepath']),
     'filename' => $file['filename']
   );
 
@@ -1615,7 +1614,7 @@ foreach ( $file_meta_rows as $row ) {
   $file_meta_insert->execute(array(
     $row['fid'],
     '_wp_attached_file',
-    $row['filename']
+    $row['filepath']
   ) );
 
   $file_meta_insert->execute(array(
