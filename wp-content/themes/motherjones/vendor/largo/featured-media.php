@@ -192,6 +192,7 @@ function largo_get_featured_media( $post = null ) {
 		);
 	} else if ( ! empty( $ret ) && in_array( $ret['type'], array( 'embed', 'video' ) ) && ! empty( $post_thumbnail ) ) {
 		$attachment = wp_prepare_attachment_for_js( $post_thumbnail );
+		unset( $attachment['compat'] );
 		$ret = array_merge( $ret, array( 'attachment_data' => $attachment ) );
 	}
 
@@ -382,14 +383,14 @@ add_action( 'do_meta_boxes', 'largo_remove_featured_image_meta_box' );
  * Add new featured image meta box to post pages
  */
 function largo_add_featured_image_meta_box() {
-    add_meta_box(
-        'largo_featured_image_metabox',
-        __( 'Featured Media', 'largo' ),
-        'largo_featured_image_metabox_callback',
-        array( 'post' ),
-        'after_title',
-        'core'
-    );
+	add_meta_box(
+		'largo_featured_image_metabox',
+		__( 'Featured Media', 'largo' ),
+		'largo_featured_image_metabox_callback',
+		array( 'post' ),
+		'after_title',
+		'core'
+	);
 }
 add_action( 'add_meta_boxes', 'largo_add_featured_image_meta_box' );
 
@@ -505,6 +506,7 @@ function largo_featured_media_save() {
 		if ( isset( $thumbnail_id ) ) {
 			update_post_meta( $data['id'], '_thumbnail_id', $thumbnail_id );
 			$data['attachment_data'] = wp_prepare_attachment_for_js( $thumbnail_id );
+			unset( $data['attachment_data']['compat'] );
 		}
 
 		// Don't save the post ID in post meta
