@@ -4,16 +4,19 @@
     margin-bottom: 0; }
 
 div#mj_headline_extra label,
-div#mj_custom_fields label {
+div#mj_custom_fields label,
+div#mj_custom_css_js label {
   font-size: 15px;
   font-weight: bold;
   line-height: 2em; }
   div#mj_headline_extra label span,
-  div#mj_custom_fields label span {
+  div#mj_custom_fields label span,
+  div#mj_custom_css_js label span {
     font-size: 13px;
     font-weight: normal; }
 div#mj_headline_extra input,
-div#mj_custom_fields input {
+div#mj_custom_fields input,
+div#mj_custom_css_js input {
   display: block;
   padding: 8px;
   font-size: 1.25em;
@@ -21,5 +24,12 @@ div#mj_custom_fields input {
   height: 2em;
   width: 100%;
   outline: 0; }
+div#mj_headline_extra textarea,
+div#mj_custom_fields textarea,
+div#mj_custom_css_js textarea {
+  display: block;
+  margin-top: 0.5em;
+  width: 100%;
+  min-height: 8em; }
 
 /*# sourceMappingURL=post-admin.css.map */

@@ -20,12 +20,13 @@ function mj_remove_metaboxes() {
 	// Show these for admins only.
 	if ( ! current_user_can( 'manage_options' ) ) {
 		$remove[] = 'postcustom';
+		$remove[] = 'mj_custom_css_js';
 	}
 	foreach ( $remove as $box ) {
 		remove_meta_box( $box, 'post', 'normal' );
 	}
 }
-add_action( 'admin_menu','mj_remove_metaboxes' );
+add_action( 'do_meta_boxes','mj_remove_metaboxes' );
 
 /**
  * Show all the other metaboxes by default.
@@ -111,7 +112,7 @@ function mj_headline_extra_meta_box_display() {
  */
 largo_add_meta_box(
 	'mj_custom_fields',
-	__( 'Mother Jones Extra Fields', 'mj' ),
+	__( 'Extra Fields', 'mj' ),
 	'mj_custom_meta_box_display',
 	'post',
 	'normal',
@@ -162,6 +163,53 @@ function mj_custom_meta_box_display() {
 }
 
 /**
+ * Register the custom css/js metabox.
+ */
+largo_add_meta_box(
+	'mj_custom_css_js',
+	__( 'Custom CSS and JavaScript', 'mj' ),
+	'mj_custom_css_js_meta_box_display',
+	'post',
+	'normal',
+	'low'
+);
+/**
+ * And output the markup.
+ */
+function mj_custom_css_js_meta_box_display() {
+	global $post;
+	$values = get_post_custom( $post->ID );
+	$prefix = 'mj_';
+	$fields = array(
+		'custom_css' => array(
+			'title' => 'Custom CSS',
+			'desc' => 'Inline CSS to be applied to this post.',
+		),
+		'custom_js' => array(
+			'title' => 'Custom JavaScript',
+			'desc' => 'Inline javascript to be output for this post.',
+		),
+	);
+	wp_nonce_field( 'largo_meta_box_nonce', 'meta_box_nonce' );
+	foreach ( $fields as $field => $attr ) {
+		$field_slug = $prefix . $field;
+		$field_title = isset( $attr['title'] ) ? $attr['title'] : '';
+		$field_desc = isset( $attr['desc'] ) ? ' <span>' . $attr['desc'] . '</span>' : '';
+		$field_value = isset( $values[ $field_slug ] ) ? $values[ $field_slug ][0] : '';
+		printf(
+			'<p>
+				<label for="%1$s">%2$s%3$s</label>
+				<textarea name="%1$s" id="%1$s">%4$s</textarea>
+			</p>',
+			esc_attr( $field_slug ),
+			esc_html( $field_title ),
+			wp_kses( $field_desc, array( 'span' => array() ) ),
+			esc_attr( $field_value )
+		);
+	}
+}
+
+/**
  * Register and sanitize the input fields.
  */
 largo_register_meta_input(
@@ -173,6 +221,8 @@ largo_register_meta_input(
 		'mj_promo_dek',
 		'mj_byline_override',
 		'mj_dateline_override',
+		'mj_custom_css',
+		'mj_custom_js',
 	),
 	'sanitize_text_field'
 );
