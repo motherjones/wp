@@ -172,21 +172,21 @@ function validate_fb_username( $errors, $update, $user ) {
 /**
  * Returns a Twitter username (without the @ symbol)
  *
- * @param 	string 	$url a twitter url
- * @return 	string	the twitter username extracted from the input string
+ * @param 	string $url a twitter url.
+ * @return 	string the twitter username extracted from the input string
  * @since 	0.3
  */
 function twitter_url_to_username( $url ) {
-	$urlParts = explode( '/', $url );
-	if ( end( $urlParts ) == '' ) {
-		// URL has a trailing slash
-		$urlParts = array_slice( $urlParts, 0 , -1 );
+	$url_parts = explode( '/', $url );
+	if ( end( $url_parts ) === '' ) {
+		// URL has a trailing slash.
+		$url_parts = array_slice( $url_parts, 0 , -1 );
 	}
-	$username = preg_replace( '/@/', '', end( $urlParts ) );
+	$username = preg_replace( '/@/', '', end( $url_parts ) );
 	// strip the ?&# URL parameters if they're present
-	// this will let through all other characters
+	// this will let through all other characters.
 	preg_match( '/[^\?&#]+/', $username, $matches );
-	if ( isset( $matches[0] ) ){
+	if ( isset( $matches[0] ) ) {
 		$username = $matches[0];
 	}
 	return $username;
@@ -200,25 +200,23 @@ function twitter_url_to_username( $url ) {
  * wp-admin/user-edit.php, which overwrites the user's contact methods. edit_user
  * reads from $_POST.
  *
- * @param  object  $user_id the WP_User object being edited
- * @param  array   $_POST
- * @since  0.4
+ * @param  object $user_id the WP_User object being edited.
  * @uses   largo_twitter_url_to_username
  * @link   http://codex.wordpress.org/Plugin_API/Action_Reference/edit_user_profile_update
  * @link   http://codex.wordpress.org/Plugin_API/Action_Reference/personal_options_update
  */
 function clean_user_twitter_username( $user_id ) {
 	if ( current_user_can( 'edit_user', $user_id ) ) {
-		$twitter = twitter_url_to_username( $_POST['twitter'] );
+		$twitter = twitter_url_to_username( $_POST['mj_user_twitter'] );
 		if ( preg_match( '/[^a-zA-Z0-9_]/', $twitter ) ) {
-			// it's not a valid twitter username, because it uses an invalid character
+			// it's not a valid twitter username, because it uses an invalid character.
 			$twitter = '';
 		}
-		update_user_meta( $user_id, 'twitter_link', $twitter );
-		if ( get_user_meta( $user_id, 'twitter_link', true ) != $twitter ) {
-			wp_die( __( 'An error occurred.' ) );
+		update_user_meta( $user_id, 'mj_user_twitter', $twitter );
+		if ( get_user_meta( $user_id, 'mj_user_twitter', true ) !== $twitter ) {
+			wp_die( esc_html__( 'Invalid Twitter username. Please provide either a Twitter profile URL or username.', 'mj' ) );
 		}
-		$_POST['twitter'] = $twitter;
+		$_POST['mj_user_twitter'] = $twitter;
 	}
 }
 
@@ -226,20 +224,20 @@ function clean_user_twitter_username( $user_id ) {
  * Checks that the Twitter URL is composed of valid characters [a-zA-Z0-9_] and
  * causes an error if there is not.
  *
- * @param   $errors the error object
- * @param   bool    $update whether this is a user update
- * @param   object  $user a WP_User object
- * @uses    largo_twitter_url_to_username
+ * @param   object $errors the error object.
+ * @param   bool   $update whether this is a user update.
+ * @param   object $user a WP_User object.
+ * @uses    twitter_url_to_username
  * @link    http://codex.wordpress.org/Plugin_API/Action_Reference/user_profile_update_errors
  * @since   0.4
  */
 function validate_twitter_username( $errors, $update, $user ) {
-	if ( isset( $_POST['twitter'] ) ) {
-		$tw_suspect = trim( $_POST['twitter'] );
-		if( ! empty( $tw_suspect ) ) {
+	if ( isset( $_POST['mj_user_twitter'] ) ) {
+		$tw_suspect = trim( $_POST['mj_user_twitter'] );
+		if ( ! empty( $tw_suspect ) ) {
 			if ( preg_match( '/[^a-zA-Z0-9_]/', twitter_url_to_username( $tw_suspect ) ) ) {
-				// it's not a valid twitter username, because it uses an invalid character
-				$errors->add( 'twitter_username', '<b>' . $tw_suspect . '</b>' . __( 'is an invalid Twitter username.', 'largo' ) . '</p>' . '<p>' . __( 'Twitter usernames only use the uppercase and lowercase alphabet letters (a-z A-Z), the Arabic numbers (0-9), and underscores (_).', 'largo' ) );
+				// it's not a valid twitter username, because it uses an invalid character.
+				$errors->add( 'twitter_username', '<b>' . $tw_suspect . '</b>' . __( 'is an invalid Twitter username.', 'largo' ) . '</p><p>' . __( 'Twitter usernames only use the uppercase and lowercase alphabet letters (a-z A-Z), the Arabic numbers (0-9), and underscores (_).', 'mj' ) );
 			}
 		}
 	}
