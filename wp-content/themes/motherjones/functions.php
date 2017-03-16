@@ -72,6 +72,7 @@ class MJ {
 			'/inc/post-templates.php',
 			'/inc/sidebars.php',
 			'/inc/template-tags.php',
+			'/inc/users.php',
 		);
 		foreach ( $includes as $include ) {
 			require_once( get_template_directory() . $include );
