@@ -5,7 +5,8 @@
   }
 }
 div#mj_headline_extra,
-div#mj_custom_fields {
+div#mj_custom_fields,
+div#mj_custom_css_js {
   label {
     font-size: 15px;
     font-weight: bold;
@@ -23,5 +24,11 @@ div#mj_custom_fields {
     height: 2em;
     width: 100%;
     outline: 0;
+  }
+  textarea {
+    display: block;
+    margin-top: 0.5em;
+    width: 100%;
+    min-height: 8em;
   }
 }

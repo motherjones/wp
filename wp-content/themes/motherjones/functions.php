@@ -72,6 +72,7 @@ class MJ {
 			'/inc/post-templates.php',
 			'/inc/sidebars.php',
 			'/inc/template-tags.php',
+			'/inc/users.php',
 		);
 		foreach ( $includes as $include ) {
 			require_once( get_template_directory() . $include );
@@ -79,10 +80,7 @@ class MJ {
 
 		// Media credit and slideshow plugins.
 		if ( ! class_exists( 'Navis_Media_Credit' ) ) {
-			require_once dirname( __FILE__ ) . '/vendor/largo/media-credit/navis-media-credit.php';
-		}
-		if ( ! class_exists( 'Navis_Slideshows' ) ) {
-			require_once dirname( __FILE__ ) . '/vendor/largo/slideshows/navis-slideshows.php';
+			require_once dirname( __FILE__ ) . '/vendor/largo/media-credit.php';
 		}
 	}
 }
