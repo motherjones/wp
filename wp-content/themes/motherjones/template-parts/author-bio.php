@@ -28,7 +28,7 @@ if ( is_singular() || is_author() ) {
 
 			<li class="author-bio group vcard">
 				<?php
-					if ( wp_get_attachment_image( $author->mj_author_image_id ) ) {
+					if ( wp_get_attachment_image( $author->mj_author_image_id, 96 ) ) {
 						printf(
 							'<div class="author-image">%s</div>',
 							wp_get_attachment_image( $author->mj_author_image_id )
