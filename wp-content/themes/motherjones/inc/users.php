@@ -48,7 +48,7 @@ function mj_user_custom_fields( $user ) {
 		<tr>
 			<th><label for="mj_user_full_bio"><?php esc_html_e( 'Full Bio', 'mj' ); ?></label></th>
 			<td>
-				<textarea name="mj_user_full_bio" id="mj_user_full_bio" rows="5" cols="30"><?php echo esc_attr( get_the_author_meta( 'mj_user_full_bio', $user->ID ) ); ?></textarea>
+				<textarea name="mj_user_full_bio" id="mj_user_full_bio" rows="5" cols="30"><?php echo esc_textarea( get_the_author_meta( 'mj_user_full_bio', $user->ID ) ); ?></textarea>
 				<p class="description"><?php esc_html_e( 'Please enter a longer bio. This is used on your public author profile page.', 'mj' ); ?></p>
 			</td>
 		</tr>

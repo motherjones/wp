@@ -30,7 +30,7 @@ global $meta;
 		<?php
 			dynamic_sidebar( 'content-end' );
 			mj_share_tools( 'bottom' );
-			get_template_part( 'template-parts/end-article-bio' );
+			get_template_part( 'template-parts/author-bio' );
 			get_template_part( 'template-parts/members-like-you' );
 			if ( mj_is_article_type( 'blogpost', $post->ID ) ) {
 				get_template_part( 'template-parts/blog-pager' );
