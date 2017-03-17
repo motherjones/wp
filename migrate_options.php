@@ -54,6 +54,21 @@ WHERE option_name = "tag_base"
 ');
 $wp->commit();
 
+// redirect photoessay page
+$redirect_item_insert = $wp->prepare('
+INSERT INTO wp_redirection_items
+(url, last_access, group_id, action_type, action_code, action_data, match_type)
+VALUES (
+"/photoessays", # source
+FROM_UNIXTIME("1970-1-1 00:00:00"), #last access
+1,
+"url", #action type
+301, # action code
+"topics/photoessays", #destination action data
+"url" #match type
+)
+;');
+
 // Activate plugins
 $active_plugins = Array(
   'mfi-reloaded-master/mfi-reloaded.php',
