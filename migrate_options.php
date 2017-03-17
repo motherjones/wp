@@ -44,6 +44,16 @@ WHERE option_name = "permalink_structure"
 ');
 $wp->commit();
 
+// set topic page structure
+$wp->beginTransaction();
+$wp->exec('
+UPDATE pantheon_wp.wp_options
+SET option_value = "/topics"
+WHERE option_name = "tag_base"
+;
+');
+$wp->commit();
+
 // Activate plugins
 $active_plugins = Array(
   'mfi-reloaded-master/mfi-reloaded.php',
