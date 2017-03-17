@@ -1718,4 +1718,25 @@ WHERE option_name = "stylesheet"
 ;
 ');
 $wp->commit();
+
+// Activate plugins
+$active_plugins = Array(
+  'mfi-reloaded-master/mfi-reloaded.php',
+  'display-widgets/display-widgets.php',
+  'coauthors/co-authors-plus.php',
+  'redirection/redirection.php',
+  'zoninator/zoninator.php',
+  'mj_custom/mj_custom.php',
+);
+$wp->beginTransaction();
+$wp->prepare('
+UPDATE pantheon_wp.wp_options
+SET option_value = ?
+WHERE option_name = "active_plugins"
+;
+');
+$wp->execute(Array(
+  serialize($active_plugins)
+));
+$wp->commit();
 ?>
