@@ -29,14 +29,14 @@ get_header(); ?>
 						$term = $wp_query->get_queried_object();
 						echo '<h1 class="page-title promo">' . esc_html( $term->name ) . '</h1>';
 					} elseif ( is_author() ) {
-						get_template_part( 'template-parts/author-bio' )
+						get_template_part( 'template-parts/author-bio' );
 					} else {
 						the_archive_title( '<h1 class="page-title promo">', '</h1>' );
 					}
 					?>
 				</div><!-- .page-header -->
 
-				<?php if ( have_posts() ) : ?>
+				<?php if ( have_posts() ) { ?>
 					<ul class="articles-list">
 					<?php
 						$posts_shown = 0;
