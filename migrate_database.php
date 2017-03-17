@@ -1697,46 +1697,4 @@ foreach ($zones as $zone => $queue) {
 
 }
 echo "zoninator filled";
-
-// Set default theme to motherjones
-//
-
-$wp->beginTransaction();
-$wp->exec('
-UPDATE pantheon_wp.wp_options
-SET option_value = "motherjones"
-WHERE option_name = "template"
-;
-');
-$wp->commit();
-
-$wp->beginTransaction();
-$wp->exec('
-UPDATE pantheon_wp.wp_options
-SET option_value = "motherjones"
-WHERE option_name = "stylesheet"
-;
-');
-$wp->commit();
-
-// Activate plugins
-$active_plugins = Array(
-  'mfi-reloaded-master/mfi-reloaded.php',
-  'display-widgets/display-widgets.php',
-  'coauthors/co-authors-plus.php',
-  'redirection/redirection.php',
-  'zoninator/zoninator.php',
-  'mj_custom/mj_custom.php',
-);
-$active_plugin_update = $wp->prepare('
-UPDATE pantheon_wp.wp_options
-SET option_value = ?
-WHERE option_name = "active_plugins"
-;
-');
-$wp->beginTransaction();
-$active_plugin_update->execute(Array(
-  serialize($active_plugins)
-));
-$wp->commit();
 ?>
