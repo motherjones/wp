@@ -75,6 +75,11 @@ php migrate_blocks.php "$SQL_PASS"
 echo "blocks added to wp db"
 echo "\n"
 
+php migrate_options.php "$SQL_PASS"
+
+echo "options updated in wp db"
+echo "\n"
+
 mysqldump -u root -p"$SQL_PASS" pantheon_wp > migrated-wp-db-$YYYY-$MM-$DD.sql
 
 echo "wp db dumped to file at migrated-wp-db-$YYYY-$MM-$DD.sql"

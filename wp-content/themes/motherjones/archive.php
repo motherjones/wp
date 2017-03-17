@@ -42,36 +42,39 @@ get_header(); ?>
 						$posts_shown = 0;
 						// Start the Loop.
 						while ( $wp_query->have_posts() ) : $wp_query->the_post();
-							if ( 1 === $posts_shown ) {
+
+							if ( 0 === $posts_shown ) {
 								get_template_part( 'template-parts/top-index-article' );
 							} else {
 								get_template_part( 'template-parts/standard-article-li' );
 							}
-							$posts_shown++;
 
-							if ( 5 === $posts_shown ) { ?>
-									<script>
-										ad_code({
-												yieldmo: true,
-											 docwrite: true,
-												desktop: false,
-											placement: 'ym_869408394552483686',
-										});
-									</script>
-							<?php
-							}
-						// End the loop.
-						endwhile;
-					?>
-					</ul>
-					<div id="pager">
-						<span class="pager_previous">
-							<?php previous_posts_link( 'Previous' ); ?>
-						</span>
-						<span class="pager_next">
-							<?php next_posts_link( 'Next' ); ?>
-						</span>
-					</div>
+              if ( 5 === $posts_shown ) { ?>
+                  <script>
+                    ad_code({
+                        yieldmo: true,
+                       docwrite: true,
+                        desktop: false,
+                      placement: 'ym_869408394552483686',
+                    });
+                  </script>
+              <?php 
+              }
+
+              $posts_shown++;
+
+            // End the loop.
+            endwhile;
+          ?>
+				</ul>
+				<div id="pager">
+					<span class="pager_previous">
+						<?php previous_posts_link( 'Previous' ); ?>
+					</span>
+					<span class="pager_next">
+						<?php next_posts_link( 'Next' ); ?>
+					</span>
+				</div>
 				<?php
 				// If no content, include the "No posts found" template.
 				} else {

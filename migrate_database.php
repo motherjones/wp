@@ -5,7 +5,8 @@ $username="root";
 $password=$argv[1];
 $d6_db = "mjd6";  
 $wp_db = "pantheon_wp";  
-$FILEDIR = "http://dev-mjwordpress.pantheonsite.io/wp-content/uploads/";
+$FILEDIR_ABS = "http://dev-mjwordpress.pantheonsite.io/wp-content/uploads/";
+$FILEDIR = "wp-content/uploads/";
 
 
 $d6 = new PDO("mysql:host=$hostname;dbname=$d6_db", $username, $password);  
@@ -669,16 +670,21 @@ $post_content = $d6->prepare('
 SELECT DISTINCT 
 n.nid,
 IF( 
-  e.field_article_text_value IS NULL,
+  text.text IS NULL,
   b.field_short_body_value,
-  CONCAT(b.field_short_body_value, 
-    e.field_article_text_value
+  CONCAT(b.field_short_body_value,
+    text.text
   )
 )
 FROM mjd6.node n
 INNER JOIN mjd6.content_field_short_body b
 USING(vid)
-INNER JOIN mjd6.content_field_article_text e
+JOIN 
+( 
+  SELECT vid, GROUP_CONCAT(field_article_text_value SEPARATOR "</p>") AS text
+  FROM mjd6.content_field_article_text
+  GROUP BY vid
+) AS text
 USING(vid)
 WHERE n.type="article"
 ;
@@ -721,7 +727,7 @@ VALUES (?, ?, ?)
 //for dek
 $meta_data = $d6->prepare('
 SELECT DISTINCT 
-n.nid, "dek", d.field_dek_value
+n.nid, "mj_dek", d.field_dek_value
 FROM mjd6.node n
 INNER JOIN mjd6.content_field_dek d
 USING(vid)
@@ -737,7 +743,7 @@ $wp->commit();
 
 //for dateline override
 $meta_data = $d6->prepare('
-SELECT DISTINCT n.nid, "dateline_override", d.field_issue_date_value
+SELECT DISTINCT n.nid, "mj_dateline_override", d.field_issue_date_value
 FROM mjd6.node n
 INNER JOIN mjd6.content_field_issue_date d
 USING(vid)
@@ -754,7 +760,7 @@ $wp->commit();
 
 //for byline override
 $meta_data = $d6->prepare('
-SELECT DISTINCT n.nid, "byline_override", b.field_issue_date_value
+SELECT DISTINCT n.nid, "mj_byline_override", b.field_issue_date_value
 FROM mjd6.node n
 INNER JOIN mjd6.field_byline_override_value b
 USING(vid)
@@ -786,13 +792,18 @@ $meta_data->execute();
 
 $wp->beginTransaction();
 while ( $meta = $meta_data->fetch(PDO::FETCH_ASSOC)) {
-  $social_value = serialize( array(
-    'social_title' => $meta['field_social_title_value'],
-    'social_dek' => $meta['field_social_dek_value'],
-    'standout' => false,
-    'fb_instant_exclude' => false,
+  $meta_insert->execute( array(
+    $meta['nid'],
+    'mj_social_hed', 
+    $meta['field_social_title_value']
   ) );
-	$meta_insert->execute(array($meta['nid'], 'social', $social_value) );
+  $meta_insert->execute( array(
+    $meta['nid'],
+    'mj_social_dek', 
+    $meta['field_social_dek_value']
+  ) );
+  $meta_insert->execute( array($meta['nid'], 'mj_google_standout', false) );
+  $meta_insert->execute( array($meta['nid'], 'mj_fb_instant_exclude', true) );
 }
 $wp->commit();
 
@@ -813,11 +824,16 @@ $meta_data->execute();
 
 $wp->beginTransaction();
 while ( $meta = $meta_data->fetch(PDO::FETCH_ASSOC)) {
-  $alt_value = serialize( array(
-    'alt_title' => $meta['field_alternate_title_value'],
-    'alt_dek' => $meta['field_alternate_dek_value'],
+  $meta_insert->execute( array(
+    $meta['nid'],
+    'mj_promo_hed',
+    $meta['field_alternate_title_value']
   ) );
-	$meta_insert->execute(array($meta['nid'], 'alt', $alt_value) );
+  $meta_insert->execute( array(
+    $meta['nid'],
+    'mj_promo_dek',
+    $meta['field_alternate_dek_value']
+  ) );
 }
 $wp->commit();
 
@@ -1210,7 +1226,7 @@ NULL,
 $wp->beginTransaction();
 while ( $image = $author_image_data->fetch(PDO::FETCH_ASSOC)) {
   $uid  = $author_name_to_author_meta[$image['title']]['wp_id'];
-  $guid = $FILEDIR . str_replace('files/photo/', '', $image['filepath']);
+  $guid = $FILEDIR_ABS . preg_replace('/files\//', '', $image['filepath']);
   $author_image_insert->execute(array(
     ':post_author' => $uid,
     ':post_title' => $image['filename'],
@@ -1218,7 +1234,8 @@ while ( $image = $author_image_data->fetch(PDO::FETCH_ASSOC)) {
     ':guid' => $guid,
     ':post_mime_type' => $image['filemime'],
   ));
-  $author_name_to_author_meta[$image['title']]['image_location'] = $guid;
+  $author_name_to_author_meta[$image['title']]['image_location'] = 
+     preg_replace('/files\//', $FILEDIR, $image['filepath']);
   $author_name_to_author_meta[$image['title']]['image_id'] = $wp->lastInsertId();
 }
 $wp->commit();
@@ -1237,11 +1254,12 @@ foreach ( $author_name_to_author_meta as $author ) {
       "author_image_id",
       $author['image_id']
     ));
+
     $author_meta_insert->execute(array(
-      $author['wp_id'],
-      "author_image_url",
+      $author['image_id'],
+      '_wp_attached_file',
       $author['image_location']
-    ));
+    ) );
   }
 }
 $wp->commit();
@@ -1265,6 +1283,7 @@ c.field_master_image_caption_value,
 b.field_art_byline_value,
 s.field_suppress_master_image_value,
 f.filemime,
+f.filepath,
 f.filename
 FROM mjd6.node n
 INNER JOIN mjd6.content_field_master_image i
@@ -1288,11 +1307,11 @@ post_name, to_ping, pinged, post_modified, post_modified_gmt, guid,
 post_content_filtered, post_type, `post_status`, post_parent, post_mime_type)
 VALUES (
 :post_author,
+FROM_UNIXTIME(:post_date), #post date
 FROM_UNIXTIME(:post_date),
-FROM_UNIXTIME(:post_date),
-"",
+"", #post content (description)
 :post_title,
-"",
+:post_excerpt, 
 :post_name,
 "",
 "",
@@ -1316,7 +1335,7 @@ while ( $master = $master_data->fetch(PDO::FETCH_ASSOC)) {
 
   $master_data_array = unserialize($master['field_master_image_data']);
 
-  $guid = $FILEDIR . $master['filename'];
+  $guid = preg_replace('/files\//', $FILEDIR_ABS, $master['filepath']);
   $post_name = preg_replace("/\.[^.]+$/", "", $master['filename'] );
   $post_title = $master_data_array['title'] 
     ? $master_data_array['title']
@@ -1334,22 +1353,20 @@ while ( $master = $master_data->fetch(PDO::FETCH_ASSOC)) {
     ':status' => $master['status'],
     ':post_parent' => $master['nid'],
     ':post_mime_type' => $master['filemime'],
+    ':post_excerpt' => $master['field_master_image_caption_value'],
+
   ) );
 
-
-  $master_meta_value = serialize( array(
-    'master_image' => $wp->lastInsertId(),
-    'master_image_byline' => $master['field_art_byline_value'],
-    'master_image_caption' => $master['field_master_image_caption_value'],
-    'master_image_suppress' => $master['field_suppress_master_image_value']
-  ) );
 
   $master_meta_rows[] = array(
     'nid' => $master['nid'],
     'image_id' => $wp->lastInsertId(),
-    'value' => $master_meta_value,
-    'filename' => $master['filename']
+    'filepath' => preg_replace('/files\//', $FILEDIR, $master['filepath']),
+    'master_image' => $wp->lastInsertId(),
+    'master_image_byline' => $master['field_art_byline_value'],
+    'master_image_suppress' => $master['field_suppress_master_image_value'],
   );
+
 }
 $wp->commit();
 
@@ -1365,15 +1382,28 @@ $wp->beginTransaction();
 foreach ( $master_meta_rows as $row ) {
   $master_meta_insert->execute(array(
     $row['nid'],
-    'master_image',
-    $row['value']
+    'featured-image-display',
+    $row['master_image_suppress']
+  ) );
+
+  $master_meta_insert->execute(array(
+    $row['nid'],
+    '_thumbnail_id',
+    $row['image_id']
   ) );
 
   $master_meta_insert->execute(array(
     $row['image_id'],
     '_wp_attached_file',
-    $row['filename']
+    $row['filepath']
   ) );
+
+  $master_meta_insert->execute(array(
+    $row['image_id'],
+    '_media_credit',
+    $row['master_image_byline']
+  ) );
+
 }
 $wp->commit();
 
@@ -1388,6 +1418,7 @@ n.status,
 i.field_title_image_data,
 i.field_title_image_credit_value,
 f.filemime,
+f.filepath,
 f.filename
 FROM mjd6.node n
 INNER JOIN mjd6.content_type_full_width_article i
@@ -1433,7 +1464,7 @@ while ( $title = $title_data->fetch(PDO::FETCH_ASSOC)) {
 
   $title_data_array = unserialize($title['field_title_image_data']);
 
-  $guid = $FILEDIR . $title['filename'];
+  $guid = preg_replace('/files\//', $FILEDIR_ABS, $title['filepath']);
   $post_name = preg_replace("/\.[^.]+$/", "", $title['filename'] );
   $post_title = $title_data_array['title'] 
     ? $title_data_array['title']
@@ -1454,16 +1485,13 @@ while ( $title = $title_data->fetch(PDO::FETCH_ASSOC)) {
   ) );
 
 
-  $title_meta_value = serialize( array(
-    'title_image' => $wp->lastInsertId(),
-    'title_image_credit' => $title['field_title_image_credit_value'],
-  ) );
 
   $title_meta_rows[] = array(
     'nid' => $title['nid'],
     'image_id' => $wp->lastInsertId(),
-    'value' => $title_meta_value,
-    'filename' => $master['filename']
+    'filename' => $title['filename'],
+    'filepath' => preg_replace('/files\//', $FILEDIR, $title['filepath']),
+    'title_image_credit' => $title['field_title_image_credit_value'],
   );
 }
 $wp->commit();
@@ -1477,17 +1505,26 @@ VALUES (?, ?, ?)
 ");
 $wp->beginTransaction();
 foreach ( $title_meta_rows as $row ) {
+
+  $title_image_array = Array( 'mj_title_image' => $row['image_id'] );
   $title_meta_insert->execute(array(
     $row['nid'],
-    'title_image',
-    $row['value']
+    'mfi-reloaded-images',
+    serialize($title_image_array)
   ) );
 
   $title_meta_insert->execute(array(
     $row['image_id'],
     '_wp_attached_file',
-    $row['filename']
+    $row['filepath']
   ) );
+
+  $master_meta_insert->execute(array(
+    $row['image_id'],
+    '_media_credit',
+    $row['title_image_credit']
+  ) );
+
 }
 $wp->commit();
 
@@ -1502,6 +1539,7 @@ n.changed,
 n.status,
 f.filemime,
 f.filename,
+f.filepath,
 f.fid
 FROM mjd6.upload u
 INNER JOIN mjd6.files f
@@ -1540,12 +1578,11 @@ IF(:status = 1, "publish", "draft"),
 ');
 
 $file_meta_rows = array();
-$node_file_rows = array();
 
 $wp->beginTransaction();
 while ( $file = $file_data->fetch(PDO::FETCH_ASSOC)) {
 
-  $guid = $FILEDIR . $file['filename'];
+  $guid = preg_replace('/files\//', $FILEDIR_ABS, $file['filepath']);
   $post_name = preg_replace("/\.[^.]+$/", "", $file['filename'] );
 
   $file_insert->execute(array(
@@ -1564,14 +1601,9 @@ while ( $file = $file_data->fetch(PDO::FETCH_ASSOC)) {
   $file_meta_rows[] = array(
     'nid' => $file['nid'],
     'fid' => $wp->lastInsertId(),
+    'filepath' => preg_replace('/files\//', $FILEDIR, $file['filepath']),
     'filename' => $file['filename']
   );
-
-  $node_file_rows[$file['nid']] 
-    = in_array($file['nid'], $node_file_rows, TRUE)
-      ?  $node_file_rows[$file['nid']] 
-      :  Array();
-  $node_file_rows[$file['nid']][] = $wp->lastInsertId(); 
 
 }
 $wp->commit();
@@ -1589,18 +1621,15 @@ foreach ( $file_meta_rows as $row ) {
   $file_meta_insert->execute(array(
     $row['fid'],
     '_wp_attached_file',
-    $row['filename']
+    $row['filepath']
   ) );
-}
 
-foreach ( $node_file_rows as $nid => $row ) {
   $file_meta_insert->execute(array(
-    $nid,
-    'file_attachments',
-    serialize($row)
+    $row['nid'],
+    'file_attachment',
+    $row['fid']
   ) );
 }
-
 $wp->commit();
 
 echo "files done";
@@ -1673,25 +1702,4 @@ foreach ($zones as $zone => $queue) {
 
 }
 echo "zoninator filled";
-
-// Set default theme to motherjones
-//
-
-$wp->beginTransaction();
-$wp->exec('
-UPDATE pantheon_wp.wp_options
-SET option_value = "motherjones"
-WHERE option_name = "template"
-;
-');
-$wp->commit();
-
-$wp->beginTransaction();
-$wp->exec('
-UPDATE pantheon_wp.wp_options
-SET option_value = "motherjones"
-WHERE option_name = "stylesheet"
-;
-');
-$wp->commit();
 ?>
