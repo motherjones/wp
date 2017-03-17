@@ -1501,7 +1501,7 @@ VALUES (?, ?, ?)
 $wp->beginTransaction();
 foreach ( $title_meta_rows as $row ) {
 
-  $title_image_array = Array( mj_title_image => $row['image_id'] );
+  $title_image_array = Array( 'mj_title_image' => $row['image_id'] );
   $title_meta_insert->execute(array(
     $row['nid'],
     'mfi-reloaded-images',
@@ -1728,14 +1728,14 @@ $active_plugins = Array(
   'zoninator/zoninator.php',
   'mj_custom/mj_custom.php',
 );
-$wp->beginTransaction();
-$wp->prepare('
+$active_plugin_update = $wp->prepare('
 UPDATE pantheon_wp.wp_options
 SET option_value = ?
 WHERE option_name = "active_plugins"
 ;
 ');
-$wp->execute(Array(
+$wp->beginTransaction();
+$active_plugin_update->execute(Array(
   serialize($active_plugins)
 ));
 $wp->commit();
