@@ -21,51 +21,51 @@ get_header(); ?>
 <div id="content" class="site-content">
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main group" role="main">
-
 			<div class="main-index">
-			<?php if ( have_posts() ) : ?>
-
 				<div class="page-header">
-					<h1 class="page-title promo">
-					<?php
-						if ( is_tax() || is_category() ) {
-							global $wp_query;
-							$term = $wp_query->get_queried_object();
-							print esc_html( $term->name );
-						} else {
-							the_archive_title();
-						}
+				<?php
+					if ( is_tax() || is_category() ) {
+						global $wp_query;
+						$term = $wp_query->get_queried_object();
+						echo '<h1 class="page-title promo">' . esc_html( $term->name ) . '</h1>';
+					} elseif ( is_author() ) {
+						get_template_part( 'template-parts/author-bio' );
+					} else {
+						the_archive_title( '<h1 class="page-title promo">', '</h1>' );
+					}
 					?>
-					</h1>
 				</div><!-- .page-header -->
 
-				<ul class="articles-list">
-				<?php
-					$posts_shown = 0;
+				<?php if ( have_posts() ) { ?>
+					<ul class="articles-list">
+					<?php
+						$posts_shown = 0;
+						// Start the Loop.
+						while ( $wp_query->have_posts() ) : $wp_query->the_post();
 
-					// Start the Loop.
-					while ( $wp_query->have_posts() ) : $wp_query->the_post();
+							if ( 0 === $posts_shown ) {
+								get_template_part( 'template-parts/top-index-article' );
+							} else {
+								get_template_part( 'template-parts/standard-article-li' );
+							}
 
-					if ( 1 === $posts_shown ) {
-						get_template_part( 'template-parts/top-index-article' );
-					} else {
-						get_template_part( 'template-parts/standard-article-li' );
-					}
-					$posts_shown++;
+              if ( 5 === $posts_shown ) { ?>
+                  <script>
+                    ad_code({
+                        yieldmo: true,
+                       docwrite: true,
+                        desktop: false,
+                      placement: 'ym_869408394552483686',
+                    });
+                  </script>
+              <?php 
+              }
 
-					if ( 5 === $posts_shown ) : ?>
-							<script>
-								ad_code({
-										yieldmo: true,
-									 docwrite: true,
-										desktop: false,
-									placement: 'ym_869408394552483686',
-								});
-							</script>
-					<?php endif;
-					// End the loop.
-					endwhile;
-				?>
+              $posts_shown++;
+
+            // End the loop.
+            endwhile;
+          ?>
 				</ul>
 				<div id="pager">
 					<span class="pager_previous">
@@ -75,13 +75,11 @@ get_header(); ?>
 						<?php next_posts_link( 'Next' ); ?>
 					</span>
 				</div>
-
 				<?php
 				// If no content, include the "No posts found" template.
-				else :
+				} else {
 					get_template_part( 'template-parts/content', 'none' );
-
-				endif;
+				}
 				?>
 			</div> <!-- .main-index -->
 
@@ -100,7 +98,6 @@ get_header(); ?>
 				</script>
 				<?php dynamic_sidebar( 'sidebar-section' ); ?>
 			</div>
-
 		</main><!-- .site-main -->
 	</div><!-- .content-area -->
 	<script>

@@ -99,7 +99,7 @@ while ( have_posts() ) : the_post();
 					<?php
 						dynamic_sidebar( 'content-end' );
 						mj_share_tools( 'bottom' );
-						get_template_part( 'template-parts/end-article-bio' );
+						get_template_part( 'template-parts/author-bio' );
 						get_template_part( 'template-parts/members-like-you' );
 						get_template_part( 'template-parts/related-articles' );
 						print esc_html( get_disqus_thread( get_the_ID() ) );

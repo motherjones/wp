@@ -670,16 +670,21 @@ $post_content = $d6->prepare('
 SELECT DISTINCT 
 n.nid,
 IF( 
-  e.field_article_text_value IS NULL,
+  text.text IS NULL,
   b.field_short_body_value,
-  CONCAT(b.field_short_body_value, 
-    e.field_article_text_value
+  CONCAT(b.field_short_body_value,
+    text.text
   )
 )
 FROM mjd6.node n
 INNER JOIN mjd6.content_field_short_body b
 USING(vid)
-INNER JOIN mjd6.content_field_article_text e
+JOIN 
+( 
+  SELECT vid, GROUP_CONCAT(field_article_text_value SEPARATOR "</p>") AS text
+  FROM mjd6.content_field_article_text
+  GROUP BY vid
+) AS text
 USING(vid)
 WHERE n.type="article"
 ;
