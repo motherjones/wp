@@ -25,10 +25,16 @@ if ( is_singular() || is_author() ) {
 			echo '<ul class="author-bios article end group">';
 		}
 		foreach ( $authors as $author ) { ?>
+
 			<li class="author-bio group vcard">
-				<div class="author-image"></div>
-				<div class="author-data">
 				<?php
+					if ( wp_get_attachment_image( $author->mj_author_image_id ) ) {
+						printf(
+							'<div class="author-image">%s</div>',
+							wp_get_attachment_image( $author->mj_author_image_id )
+						);
+					}
+					echo '<div class="author-data">';
 					if ( is_author() ) {
 						echo '<span class="byline"><span class="fn n">' . esc_html( $author->display_name ) . '</span>';
 					} else {
@@ -50,8 +56,9 @@ if ( is_singular() || is_author() ) {
 					} else {
 						echo '<p class="author-bio-text">' . esc_html( $author->description ) . '</p>';
 					}
+					echo '</div>'; // author-data.
 				?>
-				</div>
+
 			</li>
 		<?php
 		}
