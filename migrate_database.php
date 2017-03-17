@@ -1500,10 +1500,12 @@ VALUES (?, ?, ?)
 ");
 $wp->beginTransaction();
 foreach ( $title_meta_rows as $row ) {
+
+  $title_image_array = Array( mj_title_image => $row['image_id'] );
   $title_meta_insert->execute(array(
     $row['nid'],
-    'title_image_id',
-    $row['image_id']
+    'mfi-reloaded-images',
+    serialize($title_image_array)
   ) );
 
   $title_meta_insert->execute(array(
