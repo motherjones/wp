@@ -46,24 +46,26 @@ get_header(); ?>
 					// Start the Loop.
 					while ( $wp_query->have_posts() ) : $wp_query->the_post();
 
-					if ( 1 === $posts_shown ) {
-						get_template_part( 'template-parts/top-index-article' );
-					} else {
-						get_template_part( 'template-parts/standard-article-li' );
-					}
-					$posts_shown++;
+            if ( 0 === $posts_shown ) {
+              get_template_part( 'template-parts/top-index-article' );
+            } else {
+              get_template_part( 'template-parts/standard-article-li' );
+            }
 
-					if ( 5 === $posts_shown ) : ?>
-							<script>
-								ad_code({
-										yieldmo: true,
-									 docwrite: true,
-										desktop: false,
-									placement: 'ym_869408394552483686',
-								});
-							</script>
-					<?php endif;
-					// End the loop.
+            if ( 5 === $posts_shown ) : ?>
+                <script>
+                  ad_code({
+                      yieldmo: true,
+                     docwrite: true,
+                      desktop: false,
+                    placement: 'ym_869408394552483686',
+                  });
+                </script>
+            <?php endif;
+
+            $posts_shown++;
+
+          // End the loop.
 					endwhile;
 				?>
 				</ul>
