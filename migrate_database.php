@@ -1505,10 +1505,12 @@ VALUES (?, ?, ?)
 ");
 $wp->beginTransaction();
 foreach ( $title_meta_rows as $row ) {
+
+  $title_image_array = Array( 'mj_title_image' => $row['image_id'] );
   $title_meta_insert->execute(array(
     $row['nid'],
-    'title_image_id',
-    $row['image_id']
+    'mfi-reloaded-images',
+    serialize($title_image_array)
   ) );
 
   $title_meta_insert->execute(array(
@@ -1700,25 +1702,4 @@ foreach ($zones as $zone => $queue) {
 
 }
 echo "zoninator filled";
-
-// Set default theme to motherjones
-//
-
-$wp->beginTransaction();
-$wp->exec('
-UPDATE pantheon_wp.wp_options
-SET option_value = "motherjones"
-WHERE option_name = "template"
-;
-');
-$wp->commit();
-
-$wp->beginTransaction();
-$wp->exec('
-UPDATE pantheon_wp.wp_options
-SET option_value = "motherjones"
-WHERE option_name = "stylesheet"
-;
-');
-$wp->commit();
 ?>

@@ -8,18 +8,18 @@
   Author URI: http://www.motherjones.com
 */
 
-require_once('mj_custom/top-stories-widget.php');
+require_once('top-stories-widget.php');
 
-require_once('mj_custom/motherjones-image-size.php');
+require_once('motherjones-image-size.php');
 MJ_Images();
 
-require_once('mj_custom/motherjones-taxonomies.php');
+require_once('motherjones-taxonomies.php');
 MJ_Taxonomy();
 
 //require_once('mj_custom/motherjones-permalinks.php');
 //MJ_Permalinks();
 
-require_once('mj_custom/motherjones-user-types.php');
+require_once('motherjones-user-types.php');
 MJ_Users();
 
 ?>
