@@ -1210,21 +1210,38 @@ article p {
   margin: 0 auto;
 }
 
+/* begin disqus */
 #disqus-container {
 	padding: 15px 0;
   border: solid #ccc;
   border-width: 1px 0;
   margin: 15px 0;
+
+  #disqus-noscript {
+    a {
+      font-variant: small-caps;
+      font-size: 32px;
+      margin-left: auto;
+      margin-right: auto;
+      display: block;
+      text-align: center;
+      font-family: Mallory,sans-serif;
+      font-weight: bold;
+      color: #ccc;
+      text-decoration: none;
+      &:hover {
+        color: #ff6900;
+      }
+    }
+    i {
+    margin-right: 10px;
+    position: relative;
+    font-size: 23px;
+    top: 1px;
+    }
+  }
 }
-#disqus-noscript a {
-	font-variant: small-caps;
-	font-size: 32px;
-	margin-left: auto;
-	margin-right: auto;
-	display: block;
-	text-align: center;
-	font-family: Mallory,sans-serif;
-	font-weight: bold;
-	color: #ccc;
-	text-decoration: none;
-}
+
+
+
+/* end disqus */

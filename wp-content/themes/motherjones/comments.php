@@ -23,7 +23,7 @@ $canonical_disqus_url = urlencode(
            get_site_url() . '/node/' . get_the_ID()
          ); 
       ?>">
-          <i class="icon-plus"></i>view comments
+          <i class="fa fa-plus"></i>view comments
       </a>
   </div>
 </div>
