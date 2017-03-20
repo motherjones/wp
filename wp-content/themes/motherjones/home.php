@@ -113,10 +113,15 @@ global $fullwidth_title;
 									'posts_per_page' => 2,
 								) );
 								if ( $pol_query->have_posts() ) {
-									$pol_query->the_post();
-									get_template_part( 'template-parts/homepage-section-first' );
-									$pol_query->the_post();
-									get_template_part( 'template-parts/homepage-section' );
+									$count = 1;
+									while ( $pol_query->have_posts() ) : $pol_query->the_post();
+										if ( $count === 1 ) {
+											get_template_part( 'template-parts/homepage-section-first' );
+											$count++;
+										} else {
+											get_template_part( 'template-parts/homepage-section' );
+										}
+									endwhile;
 								}
 							?>
 						</ul>
@@ -140,10 +145,15 @@ global $fullwidth_title;
 									'posts_per_page' => 2,
 								) );
 								if ( $env_query->have_posts() ) {
-									$env_query->the_post();
-									get_template_part( 'template-parts/homepage-section-first' );
-									$env_query->the_post();
-									get_template_part( 'template-parts/homepage-section' );
+									$count = 1;
+									while ( $env_query->have_posts() ) : $env_query->the_post();
+										if ( $count === 1 ) {
+											get_template_part( 'template-parts/homepage-section-first' );
+											$count++;
+										} else {
+											get_template_part( 'template-parts/homepage-section' );
+										}
+									endwhile;
 								}
 							?>
 						</ul>
@@ -167,10 +177,15 @@ global $fullwidth_title;
 									'posts_per_page' => 2,
 								) );
 								if ( $media_query->have_posts() ) {
-									$media_query->the_post();
-									get_template_part( 'template-parts/homepage-section-first' );
-									$media_query->the_post();
-									get_template_part( 'template-parts/homepage-section' );
+									$count = 1;
+									while ( $media_query->have_posts() ) : $media_query->the_post();
+										if ( $count === 1 ) {
+											get_template_part( 'template-parts/homepage-section-first' );
+											$count++;
+										} else {
+											get_template_part( 'template-parts/homepage-section' );
+										}
+									endwhile;
 								}
 							?>
 						</ul>
@@ -193,12 +208,17 @@ global $fullwidth_title;
 									),
 									'posts_per_page' => 2,
 								) );
+								// FIXME if we want food to be a section the query needs to change.
 								if ( $food_query->have_posts() ) {
-									// FIXME if we want food to be a section the query needs to change.
-									$food_query->the_post();
-									get_template_part( 'template-parts/homepage-section-first' );
-									$food_query->the_post();
-									get_template_part( 'template-parts/homepage-section' );
+									$count = 1;
+									while ( $food_query->have_posts() ) : $food_query->the_post();
+										if ( $count === 1 ) {
+											get_template_part( 'template-parts/homepage-section-first' );
+											$count++;
+										} else {
+											get_template_part( 'template-parts/homepage-section' );
+										}
+									endwhile;
 								}
 							?>
 						</ul>
@@ -222,11 +242,15 @@ global $fullwidth_title;
 									'posts_per_page' => 2,
 								) );
 								if ( $cnj_query->have_posts() ) {
-									// FIXME If we want C & J to be a section the query needs to change.
-									$cnj_query->the_post();
-									get_template_part( 'template-parts/homepage-section-first' );
-									$cnj_query->the_post();
-									get_template_part( 'template-parts/homepage-section' );
+									$count = 1;
+									while ( $cnj_query->have_posts() ) : $cnj_query->the_post();
+										if ( $count === 1 ) {
+											get_template_part( 'template-parts/homepage-section-first' );
+											$count++;
+										} else {
+											get_template_part( 'template-parts/homepage-section' );
+										}
+									endwhile;
 								}
 							?>
 						</ul>
