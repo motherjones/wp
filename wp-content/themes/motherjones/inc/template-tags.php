@@ -280,8 +280,10 @@ if ( ! function_exists( 'mj_byline' ) ) {
 				)
 			);
 			return $output;
-		} else {
+		} elseif ( function_exists( 'coauthors_posts_links' ) ) {
 			return coauthors_posts_links( ', ', null, null, null, false );
+		} else {
+			return the_author_posts_link();
 		}
 	}
 }

@@ -250,7 +250,7 @@ function validate_twitter_username( $errors, $update, $user ) {
  * @return 	string	just the video ID (e.g. - i5vfw5f1CZo)
  * @since 0.4
  */
-function largo_youtube_url_to_ID( $url ) {
+function youtube_url_to_ID( $url ) {
 	parse_str( parse_url( $url, PHP_URL_QUERY ), $var_array );
 	$youtubeID = $var_array['v'];
 	return $youtubeID;
@@ -265,8 +265,8 @@ function largo_youtube_url_to_ID( $url ) {
  * @uses 	largo_youtube_url_to_ID
  * @since 	0.4
  */
-function largo_youtube_iframe_from_url( $url, $echo = TRUE ) {
-	$output = '<iframe  src="//www.youtube.com/embed/' . largo_youtube_url_to_ID( $url ) . '" frameborder="0" allowfullscreen></iframe>';
+function youtube_iframe_from_url( $url, $echo = TRUE ) {
+	$output = '<iframe  src="//www.youtube.com/embed/' . youtube_url_to_ID( $url ) . '" frameborder="0" allowfullscreen></iframe>';
   if ( ! $echo ) {
     return $output;
 	}
@@ -283,8 +283,8 @@ function largo_youtube_iframe_from_url( $url, $echo = TRUE ) {
  * @uses 	largo_youtube_url_to_ID
  * @since 0.4
  */
-function largo_youtube_image_from_url( $url, $size = large, $echo = TRUE ) {
-	$id = largo_youtube_url_to_ID( $url );
+function youtube_image_from_url( $url, $size = large, $echo = TRUE ) {
+	$id = youtube_url_to_ID( $url );
 
 	$output = 'http://img.youtube.com/vi/' . $id;
 	switch( $size ) {
@@ -306,4 +306,148 @@ function largo_youtube_image_from_url( $url, $size = large, $echo = TRUE ) {
     return $output;
 	}
   echo $output;
+}
+
+/**
+ * Determine whether or not an author has a valid gravatar image
+ * see: http://codex.wordpress.org/Using_Gravatars
+ *
+ * @param string $email an author's email address.
+ * @return bool true if a gravatar is available for this user
+ */
+function has_gravatar( $email ) {
+	// Craft a potential url and test its headers.
+	$hash = md5( strtolower( trim( $email ) ) );
+
+	$cache_key = 'has_gravatar_' . $hash;
+	if ( false !== ( $cache_value = get_transient( $cache_key ) ) ) {
+		return (bool) $cache_value;
+	}
+
+	$uri = 'http://www.gravatar.com/avatar/' . $hash . '?d=404';
+	$response = wp_remote_head( $uri );
+	if ( 200 === wp_remote_retrieve_response_code( $response ) ) {
+		$cache_value = '1';
+	} else {
+		$cache_value = '0';
+	}
+	set_transient( $cache_key, $cache_value );
+	return (bool) $cache_value;
+}
+
+/**
+ * Determine whether or not a user has an avatar. Fallback checks if user has a gravatar.
+ *
+ * @param string $email an author's email address.
+ * @return bool true if an avatar is available for this user
+ */
+function has_avatar( $email ) {
+	$user = get_user_by( 'email', $email );
+	$result = get_user_meta( $user->ID, 'mj_author_image_id', true );
+	if ( ! empty( $result ) ) {
+		return true;
+	} else {
+		if ( has_gravatar( $email ) ) {
+			return true;
+		}
+	}
+	return false;
+}
+
+/**
+ * Get size information for all currently-registered image sizes.
+ *
+ * @global $_wp_additional_image_sizes
+ * @uses   get_intermediate_image_sizes()
+ * @return array $sizes Data for all currently-registered image sizes.
+ */
+function get_image_sizes() {
+	global $_wp_additional_image_sizes;
+
+	$sizes = array();
+
+	foreach ( get_intermediate_image_sizes() as $_size ) {
+		if ( in_array( $_size, array( 'thumbnail', 'medium', 'medium_large', 'large' ), true ) ) {
+			$sizes[ $_size ]['width']  = get_option( "{$_size}_size_w" );
+			$sizes[ $_size ]['height'] = get_option( "{$_size}_size_h" );
+			$sizes[ $_size ]['crop']   = (bool) get_option( "{$_size}_crop" );
+		} elseif ( isset( $_wp_additional_image_sizes[ $_size ] ) ) {
+			$sizes[ $_size ] = array(
+				'width'  => $_wp_additional_image_sizes[ $_size ]['width'],
+				'height' => $_wp_additional_image_sizes[ $_size ]['height'],
+				'crop'   => $_wp_additional_image_sizes[ $_size ]['crop'],
+			);
+		}
+	}
+
+	return $sizes;
+}
+
+/**
+ * Get size information for a specific image size.
+ *
+ * @uses   get_image_sizes()
+ * @param  string $size The image size for which to retrieve data.
+ * @return bool|array $size Size data about an image size or false if the size doesn't exist.
+ */
+function get_image_size( $size ) {
+	$sizes = get_image_sizes();
+
+	if ( isset( $sizes[ $size ] ) ) {
+		return $sizes[ $size ];
+	}
+
+	return false;
+}
+
+/**
+ * Get the width of a specific image size.
+ *
+ * @uses   get_image_size()
+ * @param  string $size The image size for which to retrieve data.
+ * @return bool|string $size Width of an image size or false if the size doesn't exist.
+ */
+function get_image_width( $size ) {
+	if ( ! $size = get_image_size( $size ) ) {
+		return false;
+	}
+
+	if ( isset( $size['width'] ) ) {
+		return $size['width'];
+	}
+
+	return false;
+}
+
+/**
+ * Get the height of a specific image size.
+ *
+ * @uses   get_image_size()
+ * @param  string $size The image size for which to retrieve data.
+ * @return bool|string $size Height of an image size or false if the size doesn't exist.
+ */
+function get_image_height( $size ) {
+	if ( ! $size = get_image_size( $size ) ) {
+		return false;
+	}
+
+	if ( isset( $size['height'] ) ) {
+		return $size['height'];
+	}
+
+	return false;
+}
+
+/**
+ * See if a given image is square.
+ *
+ * @param  array $arg an array of image sizes to check.
+ * @return bool true if it's square, false if it's not.
+ */
+function is_square( $arg ) {
+	if ( intval( $arg['height'] ) === 0 ) {
+		return 0;
+	} else {
+		return ( $arg['width'] / $arg['height'] ) === 1;
+	}
 }
