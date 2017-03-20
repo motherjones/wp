@@ -1209,3 +1209,22 @@ article p {
   width: 990px;
   margin: 0 auto;
 }
+
+#disqus-container {
+	padding: 15px 0;
+  border: solid #ccc;
+  border-width: 1px 0;
+  margin: 15px 0;
+}
+#disqus-noscript a {
+	font-variant: small-caps;
+	font-size: 32px;
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+	text-align: center;
+	font-family: Mallory,sans-serif;
+	font-weight: bold;
+	color: #ccc;
+	text-decoration: none;
+}
