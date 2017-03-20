@@ -794,7 +794,6 @@ footer#colophon #copyright a {
 
 /* begin end of article author stuff */
 ul.author-bios {
-  list-style-type: none;
   padding: 0;
   border-bottom: 1px solid #ccc;
 }
@@ -816,6 +815,7 @@ ul.author-bios {
   }
 }
 .author-bio {
+  list-style-type: none;
   .byline {
     display: block;
     line-height: 14px;
@@ -832,6 +832,10 @@ ul.author-bios {
     width: 80px;
     border-radius: 50px;
     overflow: hidden;
+    img {
+      max-width: 100%;
+      max-height: 100%;
+    }
   }
 }
 .author-bio-text {

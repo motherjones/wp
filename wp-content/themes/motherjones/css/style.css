@@ -1187,7 +1187,6 @@ footer#colophon #copyright a {
 /* end social buttons */
 /* begin end of article author stuff */
 ul.author-bios {
-  list-style-type: none;
   padding: 0;
   border-bottom: 1px solid #ccc; }
 
@@ -1205,20 +1204,25 @@ ul.author-bios {
 #main.author ul {
   padding: 0; }
 
-.author-bio .byline {
-  display: block;
-  line-height: 14px; }
-  .author-bio .byline a {
-    display: inline-block;
-    background-position: 0% 100%; }
-.author-bio .author-image {
-  float: left;
-  margin-right: 15px;
-  margin-bottom: 20px;
-  height: 80px;
-  width: 80px;
-  border-radius: 50px;
-  overflow: hidden; }
+.author-bio {
+  list-style-type: none; }
+  .author-bio .byline {
+    display: block;
+    line-height: 14px; }
+    .author-bio .byline a {
+      display: inline-block;
+      background-position: 0% 100%; }
+  .author-bio .author-image {
+    float: left;
+    margin-right: 15px;
+    margin-bottom: 20px;
+    height: 80px;
+    width: 80px;
+    border-radius: 50px;
+    overflow: hidden; }
+    .author-bio .author-image img {
+      max-width: 100%;
+      max-height: 100%; }
 
 .author-bio-text {
   font-size: 12px;
