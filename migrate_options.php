@@ -52,6 +52,7 @@ $active_plugins = Array(
   'redirection/redirection.php',
   'zoninator/zoninator.php',
   'mj_custom/mj_custom.php',
+  'fb-instant-articles/facebook-instant-articles.php',
 );
 $active_plugin_update = $wp->prepare('
 UPDATE pantheon_wp.wp_options
