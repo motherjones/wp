@@ -260,35 +260,9 @@ class MJ_Avatar {
 			return false;
 		}
 
-		global $_wp_additional_image_sizes;
+		$closest_square_size = $this->get_closest_square_image_size( $size );
 
-		$copy = $_wp_additional_image_sizes;
-		usort( $copy, function( $a, $b ) {
-			return $a['width'] - $b['width'];
-		});
-
-		$square_image_sizes = array_filter( $copy, function( $arg ) {
-			return ( $arg['width'] / $arg['height'] ) === 1;
-		} );
-
-		$requested_size = array( $size, $size );
-
-		foreach ( $square_image_sizes as $key => $val ) {
-			if ( round( (float) ( $val['width'] / $val['height'] ), 1, PHP_ROUND_HALF_DOWN ) ===
-				round( (float) ( $requested_size[0] / $requested_size[1]), 1, PHP_ROUND_HALF_DOWN ) ) {
-					// Try to find an image size equal to or just slightly larger than what was requested.
-				if ( $val['width'] >= $requested_size[0] ) {
-					$requested_size = array( $val['width'], $val['height'] );
-					break;
-				}
-				// If we can't find an image size, set the requested size to the largest of the
-				// square sizes available.
-				if ( end( $square_image_sizes ) === $square_image_sizes[ $key ] ) {
-					$requested_size = array( $val['width'], $val['height'] );
-				}
-			}
-		}
-		return wp_get_attachment_image_src( $avatar_id, $requested_size );
+		return wp_get_attachment_image_src( $avatar_id, $closest_square_size );
 	}
 
 	/**
@@ -332,6 +306,40 @@ class MJ_Avatar {
 		return update_user_meta( $user_id, self::META_FIELD, false );
 	}
 
+	/**
+	 * Get size information for a specific image size.
+	 *
+	 * @global $_wp_additional_image_sizes
+	 * @uses   get_image_sizes()
+	 * @param  string $size The requested image size.
+	 * @return array $closest_square the closest square image available to the size requested.
+	 */
+	function get_closest_square_image_size( $size ) {
+		global $_wp_additional_image_sizes;
+
+		$sizes = get_image_sizes();
+
+		$square_image_sizes = array_filter( $sizes, 'is_square' );
+
+		$requested_size = array( $size, $size );
+
+		foreach ( $square_image_sizes as $key => $val ) {
+			if ( round( (float) ( $val['width'] / $val['height'] ), 1, PHP_ROUND_HALF_DOWN ) ===
+				round( (float) ( $requested_size[0] / $requested_size[1]), 1, PHP_ROUND_HALF_DOWN ) ) {
+				// Try to find an image size equal to or just slightly larger than what was requested.
+				if ( $val['width'] >= $requested_size[0] ) {
+					$closest_square = array( $val['width'], $val['height'] );
+					break;
+				}
+				// If we can't find an image size, set the requested size to the largest of the
+				// square sizes available.
+				if ( end( $square_image_sizes ) === $square_image_sizes[ $key ] ) {
+					$closest_square = array( $val['width'], $val['height'] );
+				}
+			}
+		}
+		return $closest_square;
+	}
 	/**
 	 *  Hide the default profile image and show our custom version.
 	 */
