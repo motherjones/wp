@@ -4,7 +4,7 @@ namespace xmlSitemapGenerator;
 Plugin Name: Google XML Sitemap Generator
 Plugin URI: https://XmlSitemapGenerator.org
 Description: HTML, RSS and Google XML Sitemap generator compatible with Google, Bing, Baidu, Yandex and more.
-Version: 1.3.3
+Version: 1.3.4
 Author: XmlSitemapGenerator.org
 Author URI: https://XmlSitemapGenerator.org
 License: GPL2

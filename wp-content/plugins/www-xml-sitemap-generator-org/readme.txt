@@ -4,7 +4,7 @@ Tags: google, google sitemaps, seo, xml sitemap
 Donate link: https://XmlSitemapGenerator.org/donate.aspx
 Requires at least: 4.0
 Tested up to: 4.7
-Stable tag: 1.3.3
+Stable tag: 1.3.4
 
 Improve your websites SEO with a comprehensive, easy to use RSS and XML sitemap plugin. Compatible with Google, Bing, Baidu, Yandex and more.
  
@@ -115,6 +115,11 @@ You should now be up and running, but you may also want to :
 
 
 == Changelog ==
+
+= 1.3.4 =
+Release Date: February 28th, 2017
+
+* Fix : Archive reporting incorrect number of pages
 
 = 1.3.2 and 1.3.3 =
 Release Date: February 3rd, 2017

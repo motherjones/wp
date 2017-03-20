@@ -222,12 +222,12 @@ class dataAccess {
 		
 		$date = self::getDateField($date);
 		
-		$cmd = "SELECT DISTINCT YEAR({$date}) AS year,MONTH({$date}) AS month, 
+		$cmd = "SELECT DISTINCT YEAR(post_date) AS year,MONTH(post_date) AS month, 
 					UNIX_TIMESTAMP(MAX(posts.{$date})) AS sitemapDate, 	Count(posts.ID) as posts
 			FROM {$wpdb->posts} as posts
 			WHERE post_status = 'publish' AND post_type = 'post' AND posts.post_password = ''
-			GROUP BY YEAR({$date}), MONTH({$date})
-			ORDER BY {$date} DESC";
+			GROUP BY YEAR(post_date), MONTH(post_date)";
+
 
 		$results = self::execute($cmd);
 		 
