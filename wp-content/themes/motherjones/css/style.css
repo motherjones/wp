@@ -1534,4 +1534,31 @@ article p {
   width: 990px;
   margin: 0 auto; }
 
+/* begin disqus */
+#disqus-container {
+  padding: 15px 0;
+  border: solid #ccc;
+  border-width: 1px 0;
+  margin: 15px 0; }
+  #disqus-container #disqus-noscript a {
+    font-variant: small-caps;
+    font-size: 32px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    text-align: center;
+    font-family: Mallory,sans-serif;
+    font-weight: bold;
+    color: #ccc;
+    text-decoration: none; }
+    #disqus-container #disqus-noscript a:hover {
+      color: #ff6900; }
+  #disqus-container #disqus-noscript i {
+    margin-right: 10px;
+    position: relative;
+    font-size: 23px;
+    top: 1px; }
+
+/* end disqus */
+
 /*# sourceMappingURL=style.css.map */

@@ -28,7 +28,7 @@ $canonical_disqus_url = urlencode(
   </div>
 </div>
 <?php wp_enqueue_script(
-    'mj_disqus_js', get_template_directory_uri() . '/js/mj_disqus.js'
+    'mj_disqus_js', get_template_directory_uri() . '/js/mj-disqus.min.js'
 ); ?>
 <script>
   var disqus_config = function () {
