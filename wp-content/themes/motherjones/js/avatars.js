@@ -9,7 +9,7 @@
                 url: ajaxurl,
                 type: 'POST',
                 data: {
-                    action: 'MJ_Avatar::remove_avatar'
+                    action: 'remove_avatar'
                 },
                 dataType: 'json',
                 success: function(data) {
@@ -33,7 +33,7 @@
 
         avatar_input.find('input').change(function() {
             avatar_display.empty();
-            avatar_display.html('<p>' + MJ_Avatar::avatar_js_L10n.update_text + '</p>');
+            avatar_display.html('<p>Click "Update Profile" to save your avatar.</p>');
         });
     });
 }());

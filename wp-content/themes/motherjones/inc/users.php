@@ -134,11 +134,6 @@ class MJ_Avatar {
 				get_template_directory_uri() . '/js/avatars.js',
 				array( 'jquery' )
 			);
-			wp_localize_script(
-				'avatar_js',
-				'avatar_js_L10n',
-				array( 'update_text' => __( 'Click "Update Profile" to save your avatar.', 'mj' ) )
-			);
 		}
 	}
 
