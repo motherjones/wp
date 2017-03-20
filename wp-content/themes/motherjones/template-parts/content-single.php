@@ -40,20 +40,6 @@ global $meta;
 		?>
 	</footer><!-- .entry-footer -->
 
-	<div id="sidebar-right">
-		<?php dynamic_sidebar( 'sidebar' ); ?>
-		<script language="javascript">
-				<!--
-				if (typeof MJ_HideRightColAds === 'undefined') {
-					ad_code({
-						desktop: true,
-						placement: 'RightTopROS300x600',
-						height: 529,
-						doc_write: true,
-					});
-				}
-				//-->
-		</script>
-	</div>
+	<?php get_sidebar(); ?>
 
-</article><!-- #post-## -->
+</article> <!-- #post-## -->
