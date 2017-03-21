@@ -10,7 +10,7 @@
 ?>
 <li id="post-<?php echo get_the_ID(); ?>" <?php post_class( 'article-item group' ); ?>>
 	<div class="article-image">
-			<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail( 'index_thumb' ); ?></a>
+			<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail( 'thumbnail' ); ?></a>
 	</div>
 	<div class="article-data">
 		<h3 class="hed">

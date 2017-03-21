@@ -14,7 +14,7 @@ $post_thumbnail_id = get_post_thumbnail_id( $post->ID );
 	<?php
 		if ( $post_thumbnail_id ) {
 			echo '<div class="article-image"><a href="' . esc_url( get_permalink() ) . '">';
-			the_post_thumbnail( 'homepage_top_story' );
+			the_post_thumbnail( 'large' );
 			echo '</a></div>';
 		}
 	?>
