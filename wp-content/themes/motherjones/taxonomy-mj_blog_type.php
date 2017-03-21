@@ -20,83 +20,86 @@ get_header(); ?>
 <div id="content" class="site-content">
 
 	<div id="primary" class="content-area">
-    <main id="main" class="site-main group" role="main">
+		<main id="main" class="site-main group" role="main">
 
-    <div class="page-header">
-      <?php
-        global $wp_query;
-        $term = $wp_query->get_queried_object();
-        if ( $term->name === "Kevin Drum" ) {
-          print '<img src="' . get_stylesheet_directory_uri() . '/img/KEVIN.png"></img>';
-        } else {
-          print '<h1 class="page-title promo">';
-          print $term->name;
-          print '</h1>';
-        }
-      ?>
-    </div><!-- .page-header -->
+		<div class="page-header">
+			<?php
+				global $wp_query;
+				$term = $wp_query->get_queried_object();
+				if ( $term->name === "Kevin Drum" ) {
+					print '<img src="' . get_stylesheet_directory_uri() . '/img/KEVIN.png"></img>';
+				} else {
+					print '<h1 class="page-title promo">';
+					print $term->name;
+					print '</h1>';
+				}
+			?>
+		</div><!-- .page-header -->
 
-    <div class="main-index">
+		<div class="main-index">
 		<?php if ( have_posts() ) :
 
-      $posts_shown = 0;
+			$posts_shown = 0;
 			// Start the Loop.
 			while ( $wp_query->have_posts() ) : $wp_query->the_post();
-        get_template_part( 'template-parts/index-blogpost' );
+				get_template_part( 'template-parts/index-blogpost' );
 
-        $posts_shown++;
-        if ($posts_shown === 5): ?>
-          <script>
-            ad_code({
-              yieldmo: true,
-             docwrite: true,
-              desktop: false,
-              placement: 'ym_869408394552483686',
-            });
-          </script>
-        <?php endif;
+				$posts_shown++;
+				if ($posts_shown === 5): ?>
+					<script>
+						ad_code({
+							yieldmo: true,
+						 docwrite: true,
+							desktop: false,
+							placement: 'ym_869408394552483686',
+						});
+					</script>
+				<?php endif;
 			// End the loop.
 			endwhile;
+		?>
+		<div id="pager">
+			<span class="pager_previous">
+				<?php previous_posts_link( 'Previous' ); ?>
+			</span>
+			<span class="pager_next">
+				<?php next_posts_link( 'Next' ); ?>
+			</span>
+		</div>
 
-			// Previous/next page navigation.
-			the_posts_pagination( array(
-				'prev_text'          => __( 'Previous page', 'mj' ),
-				'next_text'          => __( 'Next page', 'mj' ),
-				'before_page_number' => '<span class="meta-nav screen-reader-text">' . __( 'Page', 'mj' ) . ' </span>',
-			) );
-
+		<?php
 		// If no content, include the "No posts found" template.
 		else :
 			get_template_part( 'template-parts/content', 'none' );
 
 		endif;
 		?>
-    </div>
+		</div>
 
-    <div id="sidebar-right">
-      <script language="javascript">
-          <!--
-          if (typeof MJ_HideRightColAds === 'undefined') {
-            ad_code({
-              desktop: true,
-              placement: 'RightTopROS300x600',
-              height: 529,
-              doc_write: true,
-            });
-          }
-          //-->
-      </script>
-      <?php dynamic_sidebar( 'sidebar-section' ); ?>
-    </div>
+		<div id="sidebar-right">
+			<script language="javascript">
+					<!--
+					if (typeof MJ_HideRightColAds === 'undefined') {
+						ad_code({
+							desktop: true,
+							placement: 'RightTopROS300x600',
+							height: 529,
+							doc_write: true,
+						});
+					}
+					//-->
+			</script>
+			<?php dynamic_sidebar( 'sidebar-section' ); ?>
+		</div>
 
 		</main><!-- .site-main -->
 	</div><!-- .content-area -->
-  <script>
-    ad_code({
-      yieldmo: true,
-    	docwrite: true,
-      desktop: false,
-      placement: 'ym_869408549909503847',
-    });
-  </script>
+	<script>
+		ad_code({
+			yieldmo: true,
+			docwrite: true,
+			desktop: false,
+			placement: 'ym_869408549909503847',
+		});
+	</script>
 	<?php get_footer(); ?>

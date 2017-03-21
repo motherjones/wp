@@ -33,7 +33,7 @@ get_header(); ?>
 							get_template_part( 'template-parts/photoessay-top-article' );
 							print '<div class="main-index">';
 						} else {
-							get_template_part( 'template-parts/standard-article-li' );
+							get_template_part( 'template-parts/content' );
 						}
 
 						if ( 5 === $posts_shown ) { ?>
@@ -53,15 +53,17 @@ get_header(); ?>
 					endwhile;
 					?>
 			</ul>
+
+			<div id="pager">
+				<span class="pager_previous">
+					<?php previous_posts_link( 'Previous' ); ?>
+				</span>
+				<span class="pager_next">
+					<?php next_posts_link( 'Next' ); ?>
+				</span>
+			</div>
+
 		<?php
-
-			// Previous/next page navigation.
-			the_posts_pagination( array(
-				'prev_text'          => __( 'Previous page', 'mj' ),
-				'next_text'          => __( 'Next page', 'mj' ),
-				'before_page_number' => '<span class="meta-nav screen-reader-text">' . __( 'Page', 'mj' ) . ' </span>',
-			) );
-
 		// If no content, include the "No posts found" template.
 		else :
 			get_template_part( 'template-parts/content', 'none' );
