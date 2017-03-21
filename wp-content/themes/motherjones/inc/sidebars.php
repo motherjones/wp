@@ -12,27 +12,27 @@ function mj_widgets_init() {
 		array (
 			'name'          => __( 'Sidebar', 'motherjones' ),
 	 		'id'            => 'sidebar',
-	 		'description'   => __( 'Shows up on article pages', 'motherjones' )
+	 		'description'   => __( 'Shows up on article pages', 'mj' )
 		),
 		array (
-			'name'          => __( 'Ticker', 'motherjones' ),
+			'name'          => __( 'Ticker', 'mj' ),
 	 		'id'            => 'ticker',
-	 		'description'   => __( 'Shows up right beneath the top menu', 'motherjones' )
+	 		'description'   => __( 'Shows up right beneath the top menu', 'mj' )
 		),
 		array (
-			'name'          => __( 'End of content', 'motherjones' ),
+			'name'          => __( 'End of content', 'mj' ),
 	 		'id'            => 'content-end',
-	 		'description'   => __( 'Between the comments and the footer', 'motherjones' )
+	 		'description'   => __( 'Between the comments and the footer', 'mj' )
 		),
 		array (
-			'name'          => __( 'End of page', 'motherjones' ),
+			'name'          => __( 'End of page', 'mj' ),
 	 		'id'            => 'page-end',
-	 		'description'   => __( 'after EVERYTHING else.', 'motherjones' )
+	 		'description'   => __( 'after EVERYTHING else.', 'mj' )
 		),
 		array (
-			'name'          => __( 'Top of page', 'motherjones' ),
+			'name'          => __( 'Top of page', 'mj' ),
 	 		'id'            => 'page-top',
-	 		'description'   => __( 'before EVERYTHING else.', 'motherjones' )
+	 		'description'   => __( 'before EVERYTHING else.', 'mj' )
 		)
 	);
 	foreach ( $sidebars as $sidebar ) {
@@ -48,3 +48,49 @@ function mj_widgets_init() {
 	}
 }
 add_action( 'widgets_init', 'mj_widgets_init' );
+
+/**
+ * Unregister unused default wp widgets.
+ * Register our custom widgets.
+ */
+function mj_widgets() {
+	$unregister = array(
+		'WP_Widget_Pages',
+		'WP_Widget_Calendar',
+		'WP_Widget_Links',
+		'WP_Widget_Tag_Cloud',
+		'WP_Widget_Meta',
+		'WP_Widget_Recent_Comments',
+		'WP_Widget_RSS',
+		'WP_Widget_Recent_Posts',
+	);
+	foreach ( $unregister as $widget ) {
+		unregister_widget( $widget );
+	}
+	$register = array(
+		//'largo_about_widget' => '/inc/widgets/largo-about.php',
+	);
+	foreach ( $register as $key => $val ) {
+		require_once( get_template_directory() . $val );
+		register_widget( $key );
+	}
+}
+add_action( 'widgets_init', 'mj_widgets', 1 );
+
+/*
+content-single
+get_template_part( 'template-parts/author-bio' );
+get_template_part( 'template-parts/members-like-you' );
+if ( mj_is_article_type( 'blogpost', $post->ID ) ) {
+	get_template_part( 'template-parts/blog-pager' );
+} else {
+	get_template_part( 'template-parts/related-articles' );
+}
+
+single-full_width_article
+get_template_part( 'template-parts/author-bio' );
+get_template_part( 'template-parts/members-like-you' );
+get_template_part( 'template-parts/related-articles' );
+print esc_html( get_disqus_thread( get_the_ID() ) );
+
+*/

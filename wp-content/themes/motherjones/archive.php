@@ -96,7 +96,7 @@ get_header(); ?>
 						}
 						//-->
 				</script>
-				<?php dynamic_sidebar( 'sidebar-section' ); ?>
+				<?php get_sidebar(); ?>
 			</div>
 		</main><!-- .site-main -->
 	</div><!-- .content-area -->
