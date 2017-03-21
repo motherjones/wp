@@ -14,48 +14,6 @@ if ( !class_exists( 'MJ_Images' ) ) {
 
     private $MJ_image_sizes = array(
 
-      'article_top' => array(
-        'width' => 630, 
-        'height' => 354, 
-        'crop' => true,
-        'name' => 'Article top 630 wide'
-      ),
-
-      'index_thumb' => array(
-        'width' => 208, 
-        'height' => 117, 
-        'name' => 'Index thumbnail',
-        'crop' => true
-      ),
-
-      'large_990' => array(
-        'width' => 990, 
-        'height' => 557, 
-        'crop' => true,
-        'name' => 'Large 990 wide'
-      ),
-
-      'homepage_top_story' => array(
-        'width' => 800, 
-        'height' => 450, 
-        'name' => 'Homepage top story',
-        'crop' => true,
-      ),
-
-      'homepage_section_thumb' => array(
-        'width' => 161, 
-        'height' => 91, 
-        'name' => 'Homepage section thumbnail',
-        'crop' => true
-      ),
-
-      'homepage_investigations' => array(
-        'width' => 485, 
-        'height' => 273, 
-        'crop' => true,
-        'name' => 'Homepage investigations thumbnail',
-      ),
-
       'full_width_giant' => array(
         'width' => 2400, 
         'height' => 1350, 

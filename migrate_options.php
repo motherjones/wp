@@ -19,9 +19,16 @@ REPLACE INTO pantheon_wp.wp_options
 VALUES ( ?, ?, "yes" )
 ');
 
-// Set default theme to motherjones
-//
+$wp->beginTransaction();
+$option_replace->execute(Array('blogname', 'Mother Jones Magazine'));
+$option_replace->execute(Array(
+  'blogdescription',
+  //'Mother Jones is a leading independent news organization, featuring investigative and breaking news reporting on politics, the environment, human rights, and culture. Winner of six National Magazine Awards and the Online News Association Award for Online Topical Reporting.'
+  'Smart, fearless journalism'
+));
+$wp->commit();
 
+// Set default theme to motherjones
 $wp->beginTransaction();
 $option_replace->execute(Array('template', 'motherjones'));
 $option_replace->execute(Array('stylesheet', 'motherjones'));
@@ -37,6 +44,28 @@ $option_replace->execute(Array( 'tag_base', '/topics' ));
 $wp->commit();
 
 
+//set image sizes
+$wp->beginTransaction();
+
+$option_replace->execute(Array( 'thumbnail_size_h', '117' ));
+$option_replace->execute(Array( 'thumbnail_size_w', '208' ));
+$option_replace->execute(Array( 'thumbnail_crop', '1' ));
+
+$option_replace->execute(Array( 'medium_size_h', '273' ));
+$option_replace->execute(Array( 'medium_size_w', '485' ));
+$option_replace->execute(Array( 'medium_size_crop', '1' ));
+
+$option_replace->execute(Array( 'medium_large_size_h', '354' ));
+$option_replace->execute(Array( 'medium_large_size_w', '630' ));
+$option_replace->execute(Array( 'medium_large_size_crop', '1' ));
+
+$option_replace->execute(Array( 'large_size_h', '557' ));
+$option_replace->execute(Array( 'large_size_w', '990' ));
+$option_replace->execute(Array( 'large_size_crop', '1' ));
+
+$wp->commit();
+
+
 // Activate plugins
 $active_plugins = Array(
   'mfi-reloaded-master/mfi-reloaded.php',
@@ -48,21 +77,17 @@ $active_plugins = Array(
   'disqus-conditional-load/disqus-conditional-load.php',
   'fb-instant-articles/facebook-instant-articles.php',
 );
-$active_plugin_update = $wp->prepare('
-UPDATE pantheon_wp.wp_options
-SET option_value = ?
-WHERE option_name = "active_plugins"
-;
-');
 $wp->beginTransaction();
 $option_replace->execute(Array(
   'active_plugins',
   serialize($active_plugins)
 ));
+$wp->commit();
 
 
 // redirect photoessay page
-$redirect_item_insert = $wp->prepare('
+$wp->beginTransaction();
+$redirect_item_insert = $wp->exec('
 INSERT INTO wp_redirection_items
 (url, last_access, group_id, action_type, action_code, action_data, match_type)
 VALUES (
@@ -75,6 +100,7 @@ FROM_UNIXTIME("1970-1-1 00:00:00"), #last access
 "url" #match type
 )
 ;');
+$wp->commit();
 
 
 ?>

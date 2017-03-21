@@ -1,6 +1,6 @@
 <li class="top-article-item group">
   <div class="article-image">
-      <a href="<?php the_permalink(); ?>"><?php the_post_thumbnail( 'article_top' ); ?></a>
+      <a href="<?php the_permalink(); ?>"><?php the_post_thumbnail( 'medium_large' ); ?></a>
   </div>
   <div class="article-data">
     <h3 class="hed">

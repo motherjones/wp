@@ -1,6 +1,6 @@
 <li class="article-item homepage-section-item">
   <div class="article-image">
-    <a href="<?php the_permalink(); ?>"><?php the_post_thumbnail( 'homepage_section_thumb' ); ?></a>
+    <a href="<?php the_permalink(); ?>"><?php the_post_thumbnail( 'thumbnail' ); ?></a>
   </div>
   <div class="article-data">
     <h3 class="hed">

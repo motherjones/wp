@@ -10,7 +10,7 @@
 ?>
 <li class="photoessay-top group">
 	<div class="article-image">
-		<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail( 'large_990' ); ?></a>
+		<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail( 'large' ); ?></a>
 	</div>
 	<div class="article-data">
 		<h3 class="hed">
