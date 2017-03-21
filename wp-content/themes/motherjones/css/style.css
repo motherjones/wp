@@ -1125,11 +1125,11 @@ footer#colophon #copyright a {
   line-height: 30px; }
   .social-container i:hover {
     color: #FF6900; }
-.social-container.top {
+.social-container.top, .social-container.blog {
   height: 17px;
   margin-bottom: 20px;
   border-bottom: 1px solid #ccc; }
-  .social-container.top ul {
+  .social-container.top ul, .social-container.blog ul {
     list-style-type: none;
     display: block;
     width: 98px;
@@ -1138,10 +1138,10 @@ footer#colophon #copyright a {
     margin: 0 auto 20px;
     height: 32px;
     float: none; }
-    .social-container.top ul li {
+    .social-container.top ul li, .social-container.blog ul li {
       display: inline-block;
       padding: 0 3px; }
-    .social-container.top ul .share-text {
+    .social-container.top ul .share-text, .social-container.blog ul .share-text {
       display: none; }
 .social-container.bottom {
   padding: 0 0 30px;
@@ -1183,6 +1183,16 @@ footer#colophon #copyright a {
     font-size: 16px; }
     .social-container.bottom .twitter a:hover {
       background-color: #478db1; }
+.social-container.blog {
+  border-bottom: none; }
+  .social-container.blog ul {
+    margin-left: 0;
+    padding-left: 0;
+    width: auto; }
+    .social-container.blog ul li:first-child {
+      padding-left: 0; }
+  .social-container.blog a {
+    border: none; }
 
 /* end social buttons */
 /* begin end of article author stuff */

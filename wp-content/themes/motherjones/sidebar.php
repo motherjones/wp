@@ -1,0 +1,28 @@
+<?php
+/**
+ * The sidebar containing the main widget area
+ *
+ * @package WordPress
+ * @subpackage Mother_Jones
+ * @since Mother Jones 1.0
+ */
+
+if ( ! is_active_sidebar( 'sidebar' ) ) {
+	return;
+}
+?>
+<div id="sidebar-right">
+	<?php dynamic_sidebar( 'sidebar' ); ?>
+	<script language="javascript">
+			<!--
+			if (typeof MJ_HideRightColAds === 'undefined') {
+				ad_code({
+					desktop: true,
+					placement: 'RightTopROS300x600',
+					height: 529,
+					doc_write: true,
+				});
+			}
+			//-->
+	</script>
+</div>
