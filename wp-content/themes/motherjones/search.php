@@ -20,7 +20,7 @@ get_header(); ?>
 						// Start the Loop.
 						while ( $wp_query->have_posts() ) : $wp_query->the_post();
 
-							get_template_part( 'template-parts/standard-article-li' );
+							get_template_part( 'template-parts/content' );
 
 							if ( 5 === $posts_shown ) { ?>
 									<script>
