@@ -46,26 +46,26 @@ get_header(); ?>
 							if ( 0 === $posts_shown ) {
 								get_template_part( 'template-parts/top-index-article' );
 							} else {
-								get_template_part( 'template-parts/standard-article-li' );
+								get_template_part( 'template-parts/content' );
 							}
 
-              if ( 5 === $posts_shown ) { ?>
-                  <script>
-                    ad_code({
-                        yieldmo: true,
-                       docwrite: true,
-                        desktop: false,
-                      placement: 'ym_869408394552483686',
-                    });
-                  </script>
-              <?php 
-              }
+							if ( 5 === $posts_shown ) { ?>
+									<script>
+										ad_code({
+												yieldmo: true,
+											 docwrite: true,
+												desktop: false,
+											placement: 'ym_869408394552483686',
+										});
+									</script>
+							<?php
+							}
 
-              $posts_shown++;
+							$posts_shown++;
 
-            // End the loop.
-            endwhile;
-          ?>
+						// End the loop.
+						endwhile;
+					?>
 				</ul>
 				<div id="pager">
 					<span class="pager_previous">
@@ -103,7 +103,7 @@ get_header(); ?>
 	<script>
 		ad_code({
 			yieldmo: true,
-		 	docwrite: true,
+			docwrite: true,
 			desktop: false,
 			placement: 'ym_869408549909503847',
 		});
