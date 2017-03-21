@@ -33,7 +33,7 @@ get_header(); ?>
 							get_template_part( 'template-parts/photoessay-top-article' );
 							print '<div class="main-index">';
 						} else {
-							get_template_part( 'template-parts/standard-article-li' );
+							get_template_part( 'template-parts/content' );
 						}
 
 						if ( 5 === $posts_shown ) { ?>
