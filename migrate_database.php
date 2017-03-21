@@ -159,8 +159,8 @@ $post_data = $d6->prepare("
 SELECT DISTINCT
 n.nid,
 n.uid,
-FROM_UNIXTIME(n.created),
-FROM_UNIXTIME(n.created),
+FROM_UNIXTIME(p.published_at),
+CONVERT_TZ(FROM_UNIXTIME(p.published_at), 'PST8PDT','UTC'),
 r.body,
 n.title,
 r.teaser,
@@ -174,7 +174,7 @@ IF(
 '',
 '',
 FROM_UNIXTIME(n.changed),
-FROM_UNIXTIME(n.changed),
+CONVERT_TZ(FROM_UNIXTIME(n.changed), 'PST8PDT','UTC'),
 '',
 n.type,
 IF(n.status = 1, 'publish', 'draft'),
@@ -184,6 +184,8 @@ INNER JOIN mjd6.node_revisions r
 USING(vid)
 LEFT OUTER JOIN mjd6.url_alias a
 ON a.src = CONCAT('node/', n.nid)
+JOIN mjd6.publication_date p
+ON n.nid = p.nid
 WHERE n.type IN ('article', 'blogpost', 'full_width_article')
 ;
 ");
@@ -211,8 +213,8 @@ $about_data = $d6->prepare("
 SELECT DISTINCT
 n.nid,
 n.uid,
-FROM_UNIXTIME(n.created),
-FROM_UNIXTIME(n.created),
+FROM_UNIXTIME(p.published_at),
+CONVERT_TZ(FROM_UNIXTIME(p.published_at), 'PST8PDT','UTC'),
 r.body,
 n.title,
 r.teaser,
@@ -221,7 +223,7 @@ r.teaser,
 '',
 '',
 FROM_UNIXTIME(n.changed),
-FROM_UNIXTIME(n.changed),
+CONVERT_TZ(FROM_UNIXTIME(n.changed), 'PST8PDT','UTC'),
 '',
 n.type,
 IF(n.status = 1, 'publish', 'draft'),
@@ -231,6 +233,8 @@ INNER JOIN mjd6.node_revisions r
 USING(vid)
 LEFT OUTER JOIN mjd6.url_alias a
 ON a.src = CONCAT('node/', n.nid)
+JOIN mjd6.publication_date p
+ON n.nid = p.nid
 WHERE n.nid = 64
 ;
 ");
@@ -246,8 +250,8 @@ $page_data = $d6->prepare("
 SELECT DISTINCT
 n.nid,
 n.uid,
-FROM_UNIXTIME(n.created),
-FROM_UNIXTIME(n.created),
+FROM_UNIXTIME(p.published_at),
+CONVERT_TZ(FROM_UNIXTIME(p.published_at), 'PST8PDT','UTC'),
 r.body,
 n.title,
 r.teaser,
@@ -258,7 +262,7 @@ SUBSTR(a.dst,
 '',
 '',
 FROM_UNIXTIME(n.changed),
-FROM_UNIXTIME(n.changed),
+CONVERT_TZ(FROM_UNIXTIME(n.changed), 'PST8PDT','UTC'),
 '',
 n.type,
 IF(n.status = 1, 'publish', 'draft'),
@@ -268,6 +272,8 @@ INNER JOIN mjd6.node_revisions r
 USING(vid)
 LEFT OUTER JOIN mjd6.url_alias a
 ON a.src = CONCAT('node/', n.nid)
+JOIN mjd6.publication_date p
+ON n.nid = p.nid
 WHERE n.type = 'page'
 AND a.dst LIKE '%about%'
 AND n.nid IS NOT 64
@@ -286,8 +292,8 @@ $page_data = $d6->prepare("
 SELECT DISTINCT
 n.nid,
 n.uid,
-FROM_UNIXTIME(n.created),
-FROM_UNIXTIME(n.created),
+FROM_UNIXTIME(p.published_at),
+CONVERT_TZ(FROM_UNIXTIME(p.published_at), 'PST8PDT','UTC'),
 r.body,
 n.title,
 r.teaser,
@@ -302,7 +308,7 @@ REPLACE(
 '',
 '',
 FROM_UNIXTIME(n.changed),
-FROM_UNIXTIME(n.changed),
+CONVERT_TZ(FROM_UNIXTIME(n.changed), 'PST8PDT','UTC'),
 '',
 n.type,
 IF(n.status = 1, 'publish', 'draft'),
@@ -312,6 +318,8 @@ INNER JOIN mjd6.node_revisions r
 USING(vid)
 LEFT OUTER JOIN mjd6.url_alias a
 ON a.src = CONCAT('node/', n.nid)
+JOIN mjd6.publication_date p
+ON n.nid = p.nid
 WHERE n.type = 'page'
 AND a.dst NOT LIKE '%about%'
 AND a.dst NOT LIKE 'toc%'
@@ -330,7 +338,7 @@ $page_data = $d6->prepare("
 SELECT DISTINCT
 r.nid,
 r.uid,
-FROM_UNIXTIME(n.created),
+FROM_UNIXTIME(p.published_at),
 r.body,
 r.title,
 r.teaser,
@@ -343,6 +351,8 @@ INNER JOIN mjd6.node_revisions r
 USING(vid)
 LEFT OUTER JOIN mjd6.url_alias a
 ON a.src = CONCAT('node/', n.nid)
+JOIN mjd6.publication_date p
+ON n.nid = p.nid
 WHERE (n.type = 'page' OR n.type = 'toc')
 AND a.dst LIKE 'toc%'
 ;
@@ -376,11 +386,11 @@ post_name, to_ping, pinged, post_modified, post_modified_gmt,
 post_content_filtered, post_type, `post_status`, `post_parent`)
 VALUES (?, 
 FROM_UNIXTIME(?),
-FROM_UNIXTIME(?),
+CONVERT_TZ(FROM_UNIXTIME(?), "PST8PDT","UTC"),
  ?, ?, ?,
 ?, ?, ?,
 FROM_UNIXTIME(?),
-FROM_UNIXTIME(?),
+CONVERT_TZ(FROM_UNIXTIME(?), "PST8PDT","UTC"),
 ?, ?, ?, ?)
 ');
 
@@ -475,8 +485,8 @@ foreach ($toc_magazine_pages as $date => $page) {
   // form is toc/YYYY/MM/slug
   $page_insert->execute(Array(
     $page['uid'], #post author
-    $page['FROM_UNIXTIME(n.created)'], //posted
-    $page['FROM_UNIXTIME(n.created)'], //posted
+    $page['FROM_UNIXTIME(p.published_at)'], //posted
+    'CONVERT_TZ(' . $page['FROM_UNIXTIME(p.published_at)'] . ', "PST8PDT","UTC")', //posted
     $page['body'], //body
     $page['title'], //title
     $page['teaser'], //post_excerpt
@@ -484,7 +494,7 @@ foreach ($toc_magazine_pages as $date => $page) {
     '', //to ping
     '', //pinged
     $page['FROM_UNIXTIME(n.changed)'], //posted
-    $page['FROM_UNIXTIME(n.changed)'], //posted
+    'CONVERT_TZ(' . $page['FROM_UNIXTIME(n.changed)'] . ', "PST8PDT","UTC")', //posted
     '', //post content filtered
     'page', //type
     $page["IF(n.status = 1, 'publish', 'draft')"], //pub status
@@ -500,8 +510,8 @@ foreach ($toc_sub_pages as $page) {
   $date = $page['url_split'][1] . $page['url_split'][2];
   $page_insert->execute(Array(
     $page['uid'], #post author
-    $page['FROM_UNIXTIME(n.created)'], //posted
-    $page['FROM_UNIXTIME(n.created)'], //posted
+    $page['FROM_UNIXTIME(p.published_at)'], //posted
+    'CONVERT_TZ(' . $page['FROM_UNIXTIME(p.published_at)'] . ', "PST8PDT","UTC")', //posted
     $page['body'], //body
     $page['title'], //title
     $page['teaser'], //post_excerpt
@@ -509,7 +519,7 @@ foreach ($toc_sub_pages as $page) {
     '', //to ping
     '', //pinged
     $page['FROM_UNIXTIME(n.changed)'], //posted
-    $page['FROM_UNIXTIME(n.changed)'], //posted
+    'CONVERT_TZ(' . $page['FROM_UNIXTIME(n.changed)'] . ', "PST8PDT","UTC")', //posted
     '', //post content filtered
     'page', //type
     $page["IF(n.status = 1, 'publish', 'draft')"], //pub status
@@ -1203,7 +1213,7 @@ post_content_filtered, post_type, `post_status`, post_parent, post_mime_type)
 VALUES (
 :post_author,
 FROM_UNIXTIME("1970-1-1 00:00:00"),
-FROM_UNIXTIME("1970-1-1 00:00:00"),
+CONVERT_TZ(FROM_UNIXTIME("1970-1-1 00:00:00"), "PST8PDT","UTC"),
 "",
 :post_title,
 "",
@@ -1211,7 +1221,7 @@ FROM_UNIXTIME("1970-1-1 00:00:00"),
 "",
 "",
 FROM_UNIXTIME("1970-1-1 00:00:00"),
-FROM_UNIXTIME("1970-1-1 00:00:00"),
+CONVERT_TZ(FROM_UNIXTIME("1970-1-1 00:00:00"), "PST8PDT","UTC"),
 :guid,
 "",
 "attachment",
@@ -1275,7 +1285,7 @@ $master_data = $d6->prepare('
 SELECT DISTINCT 
 n.nid,
 n.uid,
-n.created,
+p.published_at,
 n.changed,
 n.status,
 i.field_master_image_data,
@@ -1296,6 +1306,8 @@ INNER JOIN mjd6.content_field_suppress_master_image s
 USING(vid)
 INNER JOIN mjd6.files f
 ON(i.field_master_image_fid = f.fid)
+JOIN mjd6.publication_date p
+ON n.nid = p.nid
 ;
 ');
 $master_data->execute();
@@ -1308,7 +1320,7 @@ post_content_filtered, post_type, `post_status`, post_parent, post_mime_type)
 VALUES (
 :post_author,
 FROM_UNIXTIME(:post_date), #post date
-FROM_UNIXTIME(:post_date),
+CONVERT_TZ(FROM_UNIXTIME(:post_date), "PST8PDT","UTC"),
 "", #post content (description)
 :post_title,
 :post_excerpt, 
@@ -1316,7 +1328,7 @@ FROM_UNIXTIME(:post_date),
 "",
 "",
 FROM_UNIXTIME(:post_modified),
-FROM_UNIXTIME(:post_modified),
+CONVERT_TZ(FROM_UNIXTIME(:post_modified), "PST8PDT","UTC"),
 :guid,
 "",
 "attachment",
@@ -1345,7 +1357,7 @@ while ( $master = $master_data->fetch(PDO::FETCH_ASSOC)) {
 
   $master_insert->execute(array(
     ':post_author' => $master['uid'],
-    ':post_date' => $master['created'],
+    ':post_date' => $master['published_at'],
     ':post_title' => $post_title,
     ':post_name' => $post_name,
     ':post_modified' => $master['changed'],
@@ -1412,7 +1424,7 @@ $title_data = $d6->prepare('
 SELECT DISTINCT 
 n.nid,
 n.uid,
-n.created,
+p.publication_date,
 n.changed,
 n.status,
 i.field_title_image_data,
@@ -1425,6 +1437,8 @@ INNER JOIN mjd6.content_type_full_width_article i
 USING(vid)
 INNER JOIN mjd6.files f
 ON(i.field_title_image_fid = f.fid)
+JOIN mjd6.publication_date p
+ON n.nid = p.nid
 ;
 ');
 $title_data->execute();
@@ -1437,7 +1451,7 @@ post_content_filtered, post_type, `post_status`, post_parent, post_mime_type)
 VALUES (
 :post_author,
 FROM_UNIXTIME(:post_date),
-FROM_UNIXTIME(:post_date),
+CONVERT_TZ(FROM_UNIXTIME(:post_date), "PST8PDT","UTC"),
 "",
 :post_title,
 "",
@@ -1445,7 +1459,7 @@ FROM_UNIXTIME(:post_date),
 "",
 "",
 FROM_UNIXTIME(:post_modified),
-FROM_UNIXTIME(:post_modified),
+CONVERT_TZ(FROM_UNIXTIME(:post_modified), "PST8PDT","UTC"),
 :guid,
 "",
 "attachment",
@@ -1474,7 +1488,7 @@ while ( $title = $title_data->fetch(PDO::FETCH_ASSOC)) {
 
   $title_insert->execute(array(
     ':post_author' => $title['uid'],
-    ':post_date' => $title['created'],
+    ':post_date' => $title['published_at'],
     ':post_title' => $post_title,
     ':post_name' => $post_name,
     ':post_modified' => $title['changed'],
@@ -1534,7 +1548,7 @@ $file_data = $d6->prepare('
 SELECT DISTINCT
 f.uid,
 u.nid,
-n.created,
+p.publication_date,
 n.changed,
 n.status,
 f.filemime,
@@ -1546,6 +1560,8 @@ INNER JOIN mjd6.files f
 USING(fid)
 INNER JOIN mjd6.node n
 ON(u.nid = n.nid)
+JOIN mjd6.publication_date p
+ON n.nid = p.nid
 ;
 ');
 $file_data->execute();
@@ -1558,7 +1574,7 @@ post_content_filtered, post_type, `post_status`, post_parent, post_mime_type)
 VALUES (
 :post_author,
 FROM_UNIXTIME(:post_date),
-FROM_UNIXTIME(:post_date),
+CONVERT_TZ(FROM_UNIXTIME(:post_date), "PST8PDT","UTC"),
 "",
 :post_title,
 "",
@@ -1566,7 +1582,7 @@ FROM_UNIXTIME(:post_date),
 "",
 "",
 FROM_UNIXTIME(:post_modified),
-FROM_UNIXTIME(:post_modified),
+CONVERT_TZ(FROM_UNIXTIME(:post_modified), "PST8PDT","UTC"),
 :guid,
 "",
 "attachment",
@@ -1587,7 +1603,7 @@ while ( $file = $file_data->fetch(PDO::FETCH_ASSOC)) {
 
   $file_insert->execute(array(
     ':post_author' => $file['uid'],
-    ':post_date' => $file['created'],
+    ':post_date' => $file['published_at'],
     ':post_title' => $post_name,
     ':post_name' => $post_name,
     ':post_modified' => $file['changed'],
