@@ -38,7 +38,6 @@ module.exports = function(grunt) {
             'ad_code.js',
             'color-scheme-control.js',
             'customize-preview.js',
-            'mj-disqus.js',
             'functions.js',
             'html5.js',
             'keyboard-image-navigation.js',

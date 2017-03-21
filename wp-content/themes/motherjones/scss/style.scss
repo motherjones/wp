@@ -1226,34 +1226,38 @@ article p {
 }
 
 /* begin disqus */
-#disqus-container {
+#comments {
 	padding: 15px 0;
   border: solid #ccc;
   border-width: 1px 0;
   margin: 15px 0;
 
-  #disqus-noscript {
-    a {
-      font-variant: small-caps;
-      font-size: 32px;
-      margin-left: auto;
-      margin-right: auto;
-      display: block;
-      text-align: center;
-      font-family: Mallory,sans-serif;
-      font-weight: bold;
-      color: #ccc;
-      text-decoration: none;
-      &:hover {
-        color: #ff6900;
-      }
+  button#dcl_comment_btn {
+    font-variant: small-caps;
+    font-size: 32px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    text-align: center;
+    font-family: Mallory,sans-serif;
+    font-weight: bold;
+    color: #ccc;
+    text-decoration: none;
+    margin: 0!important;
+    padding: 15px 0;
+    width: 100%;
+    background: none;
+    border: none;
+    text-transform: lowercase;
+    &:hover {
+      color: #ff6900;
     }
-    i {
-    margin-right: 10px;
-    position: relative;
-    font-size: 23px;
-    top: 1px;
-    }
+  }
+  i {
+  margin-right: 10px;
+  position: relative;
+  font-size: 23px;
+  top: 1px;
   }
 }
 

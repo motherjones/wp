@@ -1545,12 +1545,12 @@ article p {
   margin: 0 auto; }
 
 /* begin disqus */
-#disqus-container {
+#comments {
   padding: 15px 0;
   border: solid #ccc;
   border-width: 1px 0;
   margin: 15px 0; }
-  #disqus-container #disqus-noscript a {
+  #comments button#dcl_comment_btn {
     font-variant: small-caps;
     font-size: 32px;
     margin-left: auto;
@@ -1560,10 +1560,16 @@ article p {
     font-family: Mallory,sans-serif;
     font-weight: bold;
     color: #ccc;
-    text-decoration: none; }
-    #disqus-container #disqus-noscript a:hover {
+    text-decoration: none;
+    margin: 0 !important;
+    padding: 15px 0;
+    width: 100%;
+    background: none;
+    border: none;
+    text-transform: lowercase; }
+    #comments button#dcl_comment_btn:hover {
       color: #ff6900; }
-  #disqus-container #disqus-noscript i {
+  #comments i {
     margin-right: 10px;
     position: relative;
     font-size: 23px;
