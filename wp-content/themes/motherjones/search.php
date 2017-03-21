@@ -8,47 +8,70 @@
  */
 
 get_header(); ?>
+
 <div id="content" class="site-content">
+	<div id="primary" class="content-area">
+		<main id="main" class="site-main group" role="main">
+			<div class="main-index">
+				<?php if ( have_posts() ) { ?>
+					<ul class="articles-list">
+					<?php
+						$posts_shown = 0;
+						// Start the Loop.
+						while ( $wp_query->have_posts() ) : $wp_query->the_post();
 
-	<section id="primary" class="content-area">
-		<main id="main" class="site-main" role="main">
+							get_template_part( 'template-parts/standard-article-li' );
 
-		<?php if ( have_posts() ) : ?>
+							if ( 5 === $posts_shown ) { ?>
+									<script>
+										ad_code({
+												yieldmo: true,
+											 docwrite: true,
+												desktop: false,
+											placement: 'ym_869408394552483686',
+										});
+									</script>
+							<?php
+							}
 
-			<header class="page-header">
-				<h1 class="page-title"><?php printf( __( 'Search Results for: %s', 'mj' ), '<span>' . esc_html( get_search_query() ) . '</span>' ); ?></h1>
-			</header><!-- .page-header -->
+							$posts_shown++;
 
-			<?php
-			// Start the loop.
-			while ( have_posts() ) : the_post();
+						// End the loop.
+						endwhile;
+					?>
+				</ul>
+				<div id="pager">
+					<span class="pager_previous">
+						<?php previous_posts_link( 'Previous' ); ?>
+					</span>
+					<span class="pager_next">
+						<?php next_posts_link( 'Next' ); ?>
+					</span>
+				</div>
+				<?php
+				// If no content, include the "No posts found" template.
+				} else {
+					get_template_part( 'template-parts/content', 'none' );
+				}
+				?>
+			</div>
 
-				/**
-				 * Run the loop for the search to output the results.
-				 * If you want to overload this in a child theme then include a file
-				 * called content-search.php and that will be used instead.
-				 */
-				get_template_part( 'template-parts/content', 'search' );
-
-			// End the loop.
-			endwhile;
-
-			// Previous/next page navigation.
-			the_posts_pagination( array(
-				'prev_text'          => __( 'Previous page', 'mj' ),
-				'next_text'          => __( 'Next page', 'mj' ),
-				'before_page_number' => '<span class="meta-nav screen-reader-text">' . __( 'Page', 'mj' ) . ' </span>',
-			) );
-
-		// If no content, include the "No posts found" template.
-		else :
-			get_template_part( 'template-parts/content', 'none' );
-
-		endif;
-		?>
-
+			<div id="sidebar-right">
+				<script language="javascript">
+						<!--
+						if ( typeof MJ_HideRightColAds === 'undefined' ) {
+							ad_code({
+								desktop: true,
+								placement: 'RightTopROS300x600',
+								height: 529,
+								doc_write: true,
+							});
+						}
+						//-->
+				</script>
+				<?php get_sidebar(); ?>
+			</div>
 		</main><!-- .site-main -->
-	</section><!-- .content-area -->
+	</div><!-- .content-area -->
 
-<?php get_sidebar(); ?>
 <?php get_footer(); ?>
