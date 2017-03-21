@@ -1576,5 +1576,7 @@ article p {
     top: 1px; }
 
 /* end disqus */
+.edit-link a {
+  color: red; }
 
 /*# sourceMappingURL=style.css.map */
