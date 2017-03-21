@@ -1544,4 +1544,7 @@ article p {
   width: 990px;
   margin: 0 auto; }
 
+.edit-link a {
+  color: red; }
+
 /*# sourceMappingURL=style.css.map */

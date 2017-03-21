@@ -26,9 +26,8 @@
 		</h3>
 		<p class="byline">
 			<?php
-				print mj_byline( get_the_ID() );
-
-				edit_post_link();
+				echo mj_byline( get_the_ID() );
+				edit_post_link( 'edit this post', '| <span class="edit-link">', '</span>' );
 			?>
 		</p>
 	</div>
