@@ -170,12 +170,12 @@ $wp->commit();
 
 // redirect photoessay page
 $wp->beginTransaction();
-$redirect_item_insert->execute(Array('/photoessays', 'topics/photoessays'));
+$redirect_item_insert->execute(Array('photoessays', 'topics/photoessays'));
 $wp->commit();
 
 // Add kdrum redirect
 $wp->beginTransaction();
-$redirect_item_insert->execute(Array('/kevin-drum', 'blog/kevin-drum'));
+$redirect_item_insert->execute(Array('kevin-drum', 'blog/kevin-drum'));
 $wp->commit();
 
 
