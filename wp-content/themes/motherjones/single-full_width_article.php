@@ -99,6 +99,7 @@ while ( have_posts() ) : the_post();
 					<?php
 						mj_share_tools( 'bottom' );
 						dynamic_sidebar( 'content-end' );
+						comments_template();
 					?>
 					<script>
 						//<!--
