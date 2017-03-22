@@ -196,4 +196,6 @@ require_once(ABSPATH . 'wp-settings.php');
 /** CONTACT FORM 7 Workaround */
 $_SERVER['SERVER_NAME'] = $_SERVER['HTTP_HOST'];
 
+/** allow wp to repair the db */
+define('WP_ALLOW_REPAIR', true);
 
