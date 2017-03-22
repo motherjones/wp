@@ -69,6 +69,8 @@ function mj_widgets() {
 	}
 	$register = array(
 		'mj_author_bio_widget' => '/inc/widgets/mj-author-bio.php',
+		'mj_related_articles' => '/inc/widgets/mj-related-articles.php',
+		'mj_blog_pager' => '/inc/widgets/mj-blog-pager.php',
 	);
 	foreach ( $register as $key => $val ) {
 		require_once( get_template_directory() . $val );
@@ -79,8 +81,6 @@ add_action( 'widgets_init', 'mj_widgets', 1 );
 
 /*
 content-single
-get_template_part( 'template-parts/author-bio' );
-get_template_part( 'template-parts/members-like-you' );
 if ( mj_is_article_type( 'blogpost', $post->ID ) ) {
 	get_template_part( 'template-parts/blog-pager' );
 } else {
@@ -88,9 +88,8 @@ if ( mj_is_article_type( 'blogpost', $post->ID ) ) {
 }
 
 single-full_width_article
-get_template_part( 'template-parts/author-bio' );
-get_template_part( 'template-parts/members-like-you' );
+
 get_template_part( 'template-parts/related-articles' );
-print esc_html( get_disqus_thread( get_the_ID() ) );
+
 
 */

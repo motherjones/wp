@@ -864,18 +864,18 @@ ul.author-bios {
 
 /* article list items */
 .photoessay-top,
-#related-articles,
+.mj-related-articles,
 .main-index {
   text-align: center;
 }
 
 .articles-list,
-#related-articles-list {
+.related-articles-list {
   list-style-type: none;
   padding: 0;
 }
 
-#related-articles {
+.mj-related-articles {
   max-width: 630px;
   padding: 0;
   ul {
@@ -977,7 +977,7 @@ h2.widget-title {
   .author-data p {
     margin-right: 0;
   }
-  #related-articles {
+  .mj-related-articles {
     max-width: none;
   }
 }
@@ -1128,7 +1128,7 @@ article p {
   width: 100%;
 }
 @media only screen and (max-width: 620px) {
-  #related-articles ul.related-articles-list {
+  .mj-related-articles ul.related-articles-list {
     padding: 0 15px;
   }
   #navbar .nav-title {

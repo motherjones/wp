@@ -10,10 +10,10 @@ get_header(); ?>
 <div id="content" class="site-content">
 	<div id="primary" class="content-area">
 		<?php
-	    while ( have_posts() ) : the_post();
+			while ( have_posts() ) : the_post();
 				global $meta;
-	      $meta = get_post_meta( get_the_ID() );
-	  ?>
+				$meta = get_post_meta( get_the_ID() );
+		?>
 		<main id="main" class="site-main group" role="main">
 			<?php
 				$template_part = ( is_page() ) ? 'page' : 'single';
@@ -22,32 +22,32 @@ get_header(); ?>
 		</main><!-- .site-main -->
 		<?php
 			if ( ! is_page() ) {
-	    	comments_template();
+				comments_template();
 			}
-	    if ( ! empty( $meta['js'][0] ) ) {
-	      printf(
-	        'script>%s</script>',
-	        $meta['js'][0]
-	      );
-	    }
-	  ?>
+			if ( ! empty( $meta['js'][0] ) ) {
+				printf(
+					'script>%s</script>',
+					$meta['js'][0]
+				);
+			}
+		?>
 		<script language="javascript">
 			<!--
 			if (typeof MJ_HideBottomROS970x250 === 'undefined') {
-	      ad_code({
-	        desktop: true,
-	        placement: 'BottomROS970x250',
-	        height: 2473,
-	        doc_write: true,
-	      });
+				ad_code({
+					desktop: true,
+					placement: 'BottomROS970x250',
+					height: 2473,
+					doc_write: true,
+				});
 			}
 			if (typeof MJ_HideBottomMobile === 'undefined') {
-	      ad_code({
-	        placement: 'ym_869408549909503847',
-	        yieldmo: true,
-	        docwrite: true,
-	        desktop: false,
-	      });
+				ad_code({
+					placement: 'ym_869408549909503847',
+					yieldmo: true,
+					docwrite: true,
+					desktop: false,
+				});
 			}
 			//-->
 		</script>

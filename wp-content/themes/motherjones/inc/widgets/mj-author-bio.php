@@ -19,7 +19,7 @@ class mj_author_bio_widget extends WP_Widget {
 		parent::__construct( 'mj-author-bio-widget', __( 'Author Bio', 'mj' ), $widget_ops );
 	}
 
-	/*
+	/**
 	 * Render the widget output
 	 */
 	function widget( $args, $instance ) {
