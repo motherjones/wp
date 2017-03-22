@@ -4,7 +4,7 @@ if ( !class_exists( 'MJ_Taxonomy' ) ) {
 
   class MJ_Taxonomy {
 
-    private $blog_id = 'mj_blog_type';
+    private $blog_id = 'blog';
     private $blog_taxonomy = array(
       'single' => 'Blog Type',
       'plural' => 'Blog Types',
@@ -72,7 +72,7 @@ if ( !class_exists( 'MJ_Taxonomy' ) ) {
       $this->all_taxonomies[$this->blog_id] = $this->blog_taxonomy;
       $this->all_taxonomies[$this->article_type_id] = $this->article_type_taxonomy;
       add_action( 'created_mj_media_type', array($this, 'fill_media_type') );
-      add_action( 'created_mj_blog_type', array($this, 'fill_blog_type') );
+      add_action( 'created_blog', array($this, 'fill_blog_type') );
       add_action( 'created_mj_article_type', array($this, 'fill_article_type') );
     }
 

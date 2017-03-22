@@ -148,7 +148,7 @@ $shown_ids = array();
 			<div id="homepage-kdrum" class="group">
 				<div id="homepage-kdrum-side">
 					<h2 class="promo">
-						<a href="/kevin-drum">Kevin Drum</a>
+						<a href="/blog/kevin-drum">Kevin Drum</a>
 					</h2>
 					<img src="<?php echo esc_url( get_stylesheet_directory_uri() ); ?>/img/KEVIN.png"></img>
 					<ul id="kdrum-post-list">
@@ -156,7 +156,7 @@ $shown_ids = array();
 							$kdrum = new WP_Query( array(
 								'tax_query' => array(
 									array(
-										'taxonomy' => 'mj_blog_type',
+										'taxonomy' => 'blog',
 										'field' => 'slug',
 										'terms' => 'kevin-drum',
 									),

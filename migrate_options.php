@@ -34,6 +34,12 @@ $option_replace->execute(Array('template', 'motherjones'));
 $option_replace->execute(Array('stylesheet', 'motherjones'));
 $wp->commit();
 
+// set posts per page
+$wp->beginTransaction();
+$option_replace->execute(Array('posts_per_page', 20));
+$wp->commit();
+
+
 // set permalink structure
 $wp->beginTransaction();
 $option_replace->execute(Array(
@@ -83,24 +89,6 @@ $option_replace->execute(Array(
   'active_plugins',
   serialize($active_plugins)
 ));
-$wp->commit();
-
-
-// redirect photoessay page
-$wp->beginTransaction();
-$redirect_item_insert = $wp->exec('
-INSERT INTO wp_redirection_items
-(url, last_access, group_id, action_type, action_code, action_data, match_type)
-VALUES (
-"/photoessays", # source
-FROM_UNIXTIME("1970-1-1 00:00:00"), #last access
-1,
-"url", #action type
-301, # action code
-"topics/photoessays", #destination action data
-"url" #match type
-)
-;');
 $wp->commit();
 
 

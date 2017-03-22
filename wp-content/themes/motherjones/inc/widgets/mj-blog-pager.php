@@ -37,7 +37,7 @@ class mj_blog_pager extends WP_Widget {
 					'%title',
 					true,
 					' ',
-					'mj_blog_type' );
+					'blog' );
 				?>
 			</li>
 			<li class="next">
@@ -46,7 +46,7 @@ class mj_blog_pager extends WP_Widget {
 					'%title',
 					true,
 					' ',
-					'mj_blog_type' );
+					'blog' );
 				?>
 			</li>
 		</ul>

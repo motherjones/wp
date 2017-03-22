@@ -168,6 +168,17 @@ while ( $redirect = $legacy_redirects->fetch(PDO::FETCH_NUM)) {
 }
 $wp->commit();
 
+// redirect photoessay page
+$wp->beginTransaction();
+$redirect_item_insert->execute(Array('/photoessays', 'topics/photoessays'));
+$wp->commit();
+
+// Add kdrum redirect
+$wp->beginTransaction();
+$redirect_item_insert->execute(Array('/kevin-drum', 'blog/kevin-drum'));
+$wp->commit();
+
+
 //GET MANUAL REDIRECTS
 $manual_redirects = $d6->prepare('
 SELECT source, redirect FROM path_redirect WHERE redirect NOT LIKE "node%"
@@ -178,34 +189,6 @@ $manual_redirects->execute();
 $wp->beginTransaction();
 while ( $redirect = $manual_redirects->fetch(PDO::FETCH_NUM)) {
 	$redirect_item_insert->execute($redirect);
-}
-$wp->commit();
-
-// INSERT NODE CHANGE REDIRECTS
-// no, don't do that, we dont really want to direct to node/ anything ever
-$redirect_update_insert = $wp->prepare('
-INSERT INTO wp_redirection_items
-(url, last_access, group_id, action_type, action_code, action_data, match_type)
-VALUES (
-CONCAT("/", ?), # source
-FROM_UNIXTIME("1970-1-1 00:00:00"), #last access
-2, #yep this is the only difference from the one above
-"url", #action type
-301, # action code
-?, #destination action data
-"url" #match type
-)
-;');
-//GET NODE UPDATE REDIRECTS
-$update_redirects = $d6->prepare('
-SELECT source, redirect FROM path_redirect WHERE redirect LIKE "node%"
-;'
-);
-$update_redirects->execute();
-
-$wp->beginTransaction();
-while ( $redirect = $update_redirects->fetch(PDO::FETCH_NUM)) {
-//	$redirect_update_insert->execute($redirect);
 }
 $wp->commit();
 
