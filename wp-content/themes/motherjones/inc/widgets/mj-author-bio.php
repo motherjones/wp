@@ -1,6 +1,6 @@
 <?php
 /**
- * Largo Follow Widget
+ * Author Bio Widget
  *
  * @package WordPress
  * @subpackage Mother_Jones

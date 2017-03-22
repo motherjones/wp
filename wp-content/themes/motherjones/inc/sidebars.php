@@ -68,9 +68,7 @@ function mj_widgets() {
 		unregister_widget( $widget );
 	}
 	$register = array(
-		//'largo_about_widget' => '/inc/widgets/largo-about.php',
 		'mj_author_bio_widget' => '/inc/widgets/mj-author-bio.php',
-
 	);
 	foreach ( $register as $key => $val ) {
 		require_once( get_template_directory() . $val );
