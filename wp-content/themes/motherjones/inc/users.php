@@ -15,6 +15,21 @@
  */
 
 /**
+ * Remove capabilities from editors.
+ */
+function mj_set_capabilities() {
+	if ( ! function_exists( 'populate_roles' ) ) {
+  	require_once( ABSPATH . 'wp-admin/includes/schema.php' );
+	}
+	populate_roles();
+
+	global $wp_roles;
+	//$wp_roles->remove_cap( 'editor', 'manage_categories' );
+}
+add_action( 'admin_init', 'mj_set_capabilities' );
+
+
+/**
  * Modify the user profile screen
  * Remove old contact methods (yahoo, aol and jabber)
  * Add new ones (twitter, facebook, linkedin)
@@ -346,7 +361,7 @@ class MJ_Avatar {
 	function print_avatar_admin_css() { ?>
 		<style type="text/css">
 			.user-profile-picture {
-			  display: none;
+				display: none;
 			}
 			#avatar-display img {
 				padding: 4px;
