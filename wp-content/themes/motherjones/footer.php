@@ -75,7 +75,7 @@
 
       <script language="javascript">
       <!--  //FIXME make this check to see if it's an article or blogpost.
-      if ((typeof MJ_HideInContentAds === 'undefined') && (!($(".inline-right")[0])) && (!($(".inline-subnav")[0])))  {
+      if ((typeof MJ_HideInContentAds === 'undefined') && (!(jQuery(".inline-right")[0])) && (!(jQuery(".inline-subnav")[0])))  {
         ad_code({
           desktop: true,
           placement: 'InContentAdUnit',
@@ -102,7 +102,7 @@
           Support nonprofit investigative reporting by pitching in a few
           bucks.
           <a href="https://secure.motherjones.com/fnp/?action=SUBSCRIPTION&list_source=7HEGZS1A&extra_don=1&abver=A">DONATE</a>
-          <span onclick="$('#bottom-donate').remove();">X</span>
+          <span onclick="jQuery('#bottom-donate').remove();">X</span>
         </p>
       </div>
 
@@ -148,9 +148,9 @@
 
       <script type="text/javascript">
 
-      $(document).ready(function() {
+      jQuery(document).ready(function() {
         var gaEventCategory = null;
-        var bodyClasses = $('body').attr('class');
+        var bodyClasses = jQuery('body').attr('class');
         var gaEventAction = 'LinkClick';
         var bodyClassesArray = bodyClasses.split(' ');
 
@@ -255,7 +255,7 @@
         }
         if (gaEventCategory != null) {
           for (var selector in areaSelectorArray) {
-            $(areaSelectorArray[selector] + ' a').click(function(selectorString) { return function(){ _gaq.push(['_trackEvent', gaEventCategory, gaEventAction, selectorString]); }}(areaSelectorArray[selector]));
+            jQuery(areaSelectorArray[selector] + ' a').click(function(selectorString) { return function(){ _gaq.push(['_trackEvent', gaEventCategory, gaEventAction, selectorString]); }}(areaSelectorArray[selector]));
 
           }
         }

@@ -38,12 +38,25 @@ get_header(); ?>
 
 						if ( 5 === $posts_shown ) { ?>
 							<script>
-								ad_code({
-									yieldmo: true,
-								  docwrite: true,
-									desktop: false,
-									placement: 'ym_869408394552483686',
-								});
+                    if (typeof MJ_HideSectionAdMobile === 'undefined') {
+                        ad_code({
+                          yieldmo: true,
+                          docwrite: true,
+                          desktop: false,
+                          placement: 'ym_869408394552483686',
+                        });
+                    }
+							</script>
+            <?php } elseif ( 9 === $posts_shown ) { ?>
+							<script>
+                    if (typeof MJ_HideSectionPage970x250BB1 === 'undefined') {
+                        ad_code({
+                          yieldmo: true,
+                          docwrite: true,
+                          desktop: true,
+                          placement: 'SectionPage970x250BB1',
+                        });
+                    }
 							</script>
 						<?php }
 

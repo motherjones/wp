@@ -51,15 +51,29 @@ get_header(); ?>
 
 							if ( 5 === $posts_shown ) { ?>
 									<script>
-										ad_code({
-												yieldmo: true,
-											 docwrite: true,
-												desktop: false,
-											placement: 'ym_869408394552483686',
-										});
+                    if (typeof MJ_HideSectionAdMobile === 'undefined') {
+                      ad_code({
+                          yieldmo: true,
+                         docwrite: true,
+                          desktop: false,
+                        placement: 'ym_869408394552483686',
+                      });
+                    }
 									</script>
 							<?php
-							}
+              } elseif ( 11 === $posts_shown ) { ?>
+									<script>
+                    if (typeof MJ_HideSectionPage970x250BB1 === 'undefined') {
+                      ad_code({
+                          yieldmo: true,
+                         docwrite: true,
+                          desktop: true,
+                        placement: 'SectionPage970x250BB1',
+                      });
+                    }
+									</script>
+							<?php
+              }
 
 							$posts_shown++;
 
@@ -84,28 +98,18 @@ get_header(); ?>
 			</div> <!-- .main-index -->
 
 			<div id="sidebar-right">
-				<script language="javascript">
-						<!--
-						if ( typeof MJ_HideRightColAds === 'undefined' ) {
-							ad_code({
-								desktop: true,
-								placement: 'RightTopROS300x600',
-								height: 529,
-								doc_write: true,
-							});
-						}
-						//-->
-				</script>
 				<?php get_sidebar(); ?>
 			</div>
 		</main><!-- .site-main -->
 	</div><!-- .content-area -->
 	<script>
-		ad_code({
-			yieldmo: true,
-			docwrite: true,
-			desktop: false,
-			placement: 'ym_869408549909503847',
-		});
+			if (typeof MJ_HideBottomMobile === 'undefined') {
+          ad_code({
+            yieldmo: true,
+            docwrite: true,
+            desktop: false,
+            placement: 'ym_869408549909503847',
+          });
+      }
 	</script>
 	<?php get_footer(); ?>
