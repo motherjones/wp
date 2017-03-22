@@ -78,18 +78,3 @@ function mj_widgets() {
 	}
 }
 add_action( 'widgets_init', 'mj_widgets', 1 );
-
-/*
-content-single
-if ( mj_is_article_type( 'blogpost', $post->ID ) ) {
-	get_template_part( 'template-parts/blog-pager' );
-} else {
-	get_template_part( 'template-parts/related-articles' );
-}
-
-single-full_width_article
-
-get_template_part( 'template-parts/related-articles' );
-
-
-*/
