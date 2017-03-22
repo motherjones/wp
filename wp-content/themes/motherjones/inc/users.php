@@ -15,15 +15,9 @@
  */
 
 /**
- * Remove capabilities from editors.
+ * Custom capabilities for authors and editors.
  */
 function mj_set_capabilities() {
-	//if ( ! function_exists( 'populate_roles' ) ) {
-  //	require_once( ABSPATH . 'wp-admin/includes/schema.php' );
-	//}
-	//populate_roles();
-	//$wp_roles->remove_cap( 'editor', 'manage_categories' );
-
 	global $wp_roles;
 	// Editors should be able to create/manage users.
 	$editor_add_caps = array(
@@ -35,8 +29,13 @@ function mj_set_capabilities() {
 		$wp_roles->add_cap( 'editor', $cap );
 	}
 
-	// Authors should be able to edit others posts.
-	$author_add_caps = array (
+	/*
+	 * Authors should be able to edit others posts.
+	 * Also give them some caps typically only for editors:
+	 * - unfiltered_html
+	 * - upload_files
+	 */
+	$author_add_caps = array(
 		'read_private_posts',
 		'edit_private_posts',
 		'edit_others_posts',
