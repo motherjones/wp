@@ -18,13 +18,34 @@
  * Remove capabilities from editors.
  */
 function mj_set_capabilities() {
-	if ( ! function_exists( 'populate_roles' ) ) {
-  	require_once( ABSPATH . 'wp-admin/includes/schema.php' );
-	}
-	populate_roles();
+	//if ( ! function_exists( 'populate_roles' ) ) {
+  //	require_once( ABSPATH . 'wp-admin/includes/schema.php' );
+	//}
+	//populate_roles();
+	//$wp_roles->remove_cap( 'editor', 'manage_categories' );
 
 	global $wp_roles;
-	//$wp_roles->remove_cap( 'editor', 'manage_categories' );
+	// Editors should be able to create/manage users.
+	$editor_add_caps = array(
+		'list_users',
+		'create_users',
+		'edit_users',
+	);
+	foreach ( $editor_add_caps as $cap ) {
+		$wp_roles->add_cap( 'editor', $cap );
+	}
+
+	// Authors should be able to edit others posts.
+	$author_add_caps = array (
+		'read_private_posts',
+		'edit_private_posts',
+		'edit_others_posts',
+		'unfiltered_html',
+		'upload_files',
+	);
+	foreach ( $author_add_caps as $cap ) {
+		$wp_roles->add_cap( 'author', $cap );
+	}
 }
 add_action( 'admin_init', 'mj_set_capabilities' );
 
