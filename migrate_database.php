@@ -42,16 +42,24 @@ VALUES (
 );
 $term_insert->bindParam(1, $tid);
 $term_insert->bindParam(2, $name);
-$term_insert->bindParam(3, $name);
+$term_insert->bindParam(3, $slug);
 $term_insert->bindParam(4, $vid);
 
 $wp->beginTransaction();
 while ( $term = $term_insert_data->fetch(PDO::FETCH_ASSOC)) {
-  if ($term['name'] === "photo_essays") {
-    $term['name'] = "photoessays";
+  if ($term['name'] === "Photo Essays") {
+    $term['name'] = "Photoessays";
+  } elseif ($term['name'] === "Crime and Justice") {
+    $tid = $term['tid'];
+    $name = $term['name'];
+    $slug = 'crime-justice';
+    $vid = $term['vid'];
+    $term_insert->execute();
+    continue;
   }
 	$tid = $term['tid'];
 	$name = $term['name'];
+	$slug = $term['name'];
 	$vid = $term['vid'];
 	$term_insert->execute();
 }
@@ -93,6 +101,10 @@ while ( $row = $taxonomy_data->fetch(PDO::FETCH_ASSOC)) {
 	$tax = $row['taxonomy'];
 	switch ($tax) {
 		case "9":
+      if ($tid === "16720" || $tid === "16734") { //is crime & justice or food
+        $tax = "category";
+        break;
+      }
 			$tax = "post_tag";
 			break;
 		case "2":
