@@ -49,7 +49,7 @@ get_header(); ?>
 					<script>
 						ad_code({
 							yieldmo: true,
-						 docwrite: true,
+						  docwrite: true,
 							desktop: false,
 							placement: 'ym_869408394552483686',
 						});
@@ -77,19 +77,7 @@ get_header(); ?>
 		</div>
 
 		<div id="sidebar-right">
-			<script language="javascript">
-					<!--
-					if (typeof MJ_HideRightColAds === 'undefined') {
-						ad_code({
-							desktop: true,
-							placement: 'RightTopROS300x600',
-							height: 529,
-							doc_write: true,
-						});
-					}
-					//-->
-			</script>
-			<?php dynamic_sidebar( 'sidebar-section' ); ?>
+			<?php get_sidebar(); ?>
 		</div>
 
 		</main><!-- .site-main -->

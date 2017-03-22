@@ -1243,19 +1243,19 @@ ul.author-bios {
 /* end end of article author stuff */
 /* article list items */
 .photoessay-top,
-#related-articles,
+.mj-related-articles,
 .main-index {
   text-align: center; }
 
 .articles-list,
-#related-articles-list {
+.related-articles-list {
   list-style-type: none;
   padding: 0; }
 
-#related-articles {
+.mj-related-articles {
   max-width: 630px;
   padding: 0; }
-  #related-articles ul {
+  .mj-related-articles ul {
     padding: 0; }
 
 .articles-list .article-item {
@@ -1332,7 +1332,7 @@ h2.widget-title {
 .mj_article_type-full_width_article p.members-like-you,
 .mj_article_type-full_width_article .author-data p {
   margin-right: 0; }
-.mj_article_type-full_width_article #related-articles {
+.mj_article_type-full_width_article .mj-related-articles {
   max-width: none; }
 
 #full-width-header {
@@ -1457,7 +1457,7 @@ article p {
   width: 100%; }
 
 @media only screen and (max-width: 620px) {
-  #related-articles ul.related-articles-list {
+  .mj-related-articles ul.related-articles-list {
     padding: 0 15px; }
 
   #navbar .nav-title {

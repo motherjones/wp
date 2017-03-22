@@ -84,15 +84,6 @@ if ( ! function_exists( 'mj_dateline' ) ) {
 	}
 }
 
-if ( ! function_exists( 'get_disqus_thread' ) ) {
-	/**
-	 * Output comments.
-	 */
-	function get_disqus_thread() {
-		comments_template( '', true );
-	}
-}
-
 if ( ! function_exists( 'mj_flat_twitter_button' ) ) {
 	/**
 	 * Create a twitter button.
