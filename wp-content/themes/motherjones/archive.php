@@ -29,7 +29,7 @@ get_header(); ?>
 						$term = $wp_query->get_queried_object();
 						echo '<h1 class="page-title promo">' . esc_html( $term->name ) . '</h1>';
 					} elseif ( is_author() ) {
-						get_template_part( 'template-parts/author-bio' );
+						the_widget( 'mj_author_bio_widget', array( 'title' => '' ) );
 					} else {
 						the_archive_title( '<h1 class="page-title promo">', '</h1>' );
 					}
@@ -96,7 +96,7 @@ get_header(); ?>
 						}
 						//-->
 				</script>
-				<?php dynamic_sidebar( 'sidebar-section' ); ?>
+				<?php get_sidebar(); ?>
 			</div>
 		</main><!-- .site-main -->
 	</div><!-- .content-area -->

@@ -30,16 +30,6 @@
 		?>
 	</div><!-- .entry-content -->
 
-	<?php
-		edit_post_link(
-			sprintf(
-				/* translators: %s: Name of current post */
-				__( 'Edit<span class="screen-reader-text"> "%s"</span>', 'mj' ),
-				get_the_title()
-			),
-			'<footer class="entry-footer"><span class="edit-link">',
-			'</span></footer><!-- .entry-footer -->'
-		);
-	?>
+	<?php edit_post_link( 'edit this post', '| <span class="edit-link">', '</span>' ); ?>
 
 </article><!-- #post-## -->

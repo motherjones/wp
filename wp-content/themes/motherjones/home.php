@@ -16,6 +16,8 @@
 
 get_header();
 global $fullwidth_title;
+
+$shown_ids = array();
 ?>
 
 <div id="content" class="site-content">
@@ -31,6 +33,7 @@ global $fullwidth_title;
 					);
 					if ( $top_stories->have_posts() ) {
 						$top_stories->the_post();
+						$shown_ids[] = get_the_ID();
 						get_template_part( 'template-parts/homepage-top-story' );
 					}
 				?>
@@ -39,6 +42,7 @@ global $fullwidth_title;
 						if ( $top_stories->have_posts() ) {
 							for ( $i = 0; $i < 3; $i++ ) {
 								$top_stories->the_post();
+								$shown_ids[] = get_the_ID();
 								get_template_part( 'template-parts/homepage-top-story-side' );
 							}
 						}
@@ -67,6 +71,7 @@ global $fullwidth_title;
 							if ( $top_stories->have_posts() ) {
 								for ( $i = 0; $i < 6; $i++ ) {
 									$top_stories->the_post();
+									$shown_ids[] = get_the_ID();
 									get_template_part( 'template-parts/homepage-top-story-side' );
 								}
 							}
@@ -87,6 +92,7 @@ global $fullwidth_title;
 						)
 					);
 					$featured_story->the_post();
+					$shown_ids[] = get_the_ID();
 					$fullwidth_title = 'Featured';
 					get_template_part( 'template-parts/homepage-fullwidth' );
 				?>
@@ -94,14 +100,19 @@ global $fullwidth_title;
 
 			<div id="homepage-sections" class="group">
 				<ul id="homepage-sections-list">
+				<?php
+					$sections = array( 'Politics', 'Environment', 'Media', 'Food', 'Crime & Justice' );
+					foreach ( $sections as $section ) :
+						$slug = ( 'Crime & Justice' === $section ) ? 'crime-justice' : strtolower( $section );
+				?>
 					<li class="homepage-section">
 						<h2 class="promo">
-							<a href="/politics">Politics</a>
+							<a href="/<?php echo esc_attr( $slug ); ?>"><?php echo esc_html( $section ); ?></a>
 						</h2>
 						<ul class="homepage-section-list">
 							<?php
-								$pol_query = new WP_Query( array(
-									'category_name' => 'politics',
+								$cat_query = new WP_Query( array(
+									'category_name' => $slug,
 									'tax_query' => array(
 										array(
 											'taxonomy' => 'mj_article_type',
@@ -111,10 +122,12 @@ global $fullwidth_title;
 										),
 									),
 									'posts_per_page' => 2,
+									'post__not_in' 	=> $shown_ids,
 								) );
-								if ( $pol_query->have_posts() ) {
+								if ( $cat_query->have_posts() ) {
 									$count = 1;
-									while ( $pol_query->have_posts() ) : $pol_query->the_post();
+									while ( $cat_query->have_posts() ) : $cat_query->the_post();
+										$shown_ids[] = get_the_ID();
 										if ( $count === 1 ) {
 											get_template_part( 'template-parts/homepage-section-first' );
 											$count++;
@@ -126,138 +139,11 @@ global $fullwidth_title;
 							?>
 						</ul>
 					</li>
-					<li class="homepage-section">
-						<h2 class="promo">
-							<a href="/environment">Environment</a>
-						</h2>
-						<ul class="homepage-section-list">
-							<?php
-								$env_query = new WP_Query( array(
-									'category_name' => 'environment',
-									'tax_query' => array(
-										array(
-											'taxonomy' => 'mj_article_type',
-											'field' => 'slug',
-											'terms' => 'blogpost',
-											'operator' => 'NOT IN',
-										),
-									),
-									'posts_per_page' => 2,
-								) );
-								if ( $env_query->have_posts() ) {
-									$count = 1;
-									while ( $env_query->have_posts() ) : $env_query->the_post();
-										if ( $count === 1 ) {
-											get_template_part( 'template-parts/homepage-section-first' );
-											$count++;
-										} else {
-											get_template_part( 'template-parts/homepage-section' );
-										}
-									endwhile;
-								}
-							?>
-						</ul>
-					</li>
-					<li class="homepage-section">
-						<h2 class="promo">
-							<a href="/media">Media</a>
-						</h2>
-						<ul class="homepage-section-list">
-							<?php
-								$media_query = new WP_Query( array(
-									'category_name' => 'media',
-									'tax_query' => array(
-										array(
-											'taxonomy' => 'mj_article_type',
-											'field' => 'slug',
-											'terms' => 'blogpost',
-											'operator' => 'NOT IN',
-										),
-									),
-									'posts_per_page' => 2,
-								) );
-								if ( $media_query->have_posts() ) {
-									$count = 1;
-									while ( $media_query->have_posts() ) : $media_query->the_post();
-										if ( $count === 1 ) {
-											get_template_part( 'template-parts/homepage-section-first' );
-											$count++;
-										} else {
-											get_template_part( 'template-parts/homepage-section' );
-										}
-									endwhile;
-								}
-							?>
-						</ul>
-					</li>
-					<li class="homepage-section">
-						<h2 class="promo">
-							<a href="/food">Food</a>
-						</h2>
-						<ul class="homepage-section-list">
-							<?php
-								$food_query = new WP_Query( array(
-									'tag' => 'food',
-									'tax_query' => array(
-										array(
-											'taxonomy' => 'mj_article_type',
-											'field' => 'slug',
-											'terms' => 'blogpost',
-											'operator' => 'NOT IN',
-										),
-									),
-									'posts_per_page' => 2,
-								) );
-								// FIXME if we want food to be a section the query needs to change.
-								if ( $food_query->have_posts() ) {
-									$count = 1;
-									while ( $food_query->have_posts() ) : $food_query->the_post();
-										if ( $count === 1 ) {
-											get_template_part( 'template-parts/homepage-section-first' );
-											$count++;
-										} else {
-											get_template_part( 'template-parts/homepage-section' );
-										}
-									endwhile;
-								}
-							?>
-						</ul>
-					</li>
-					<li class="homepage-section">
-						<h2 class="promo">
-							<a href="/crime_and_justice">Crime & Justice</a>
-						</h2>
-						<ul class="homepage-section-list">
-							<?php
-								$cnj_query = new WP_Query( array(
-									'tag' => 'crime-and-justice',
-									'tax_query' => array(
-										array(
-											'taxonomy' => 'mj_article_type',
-											'field' => 'slug',
-											'terms' => 'blogpost',
-											'operator' => 'NOT IN',
-										),
-									),
-									'posts_per_page' => 2,
-								) );
-								if ( $cnj_query->have_posts() ) {
-									$count = 1;
-									while ( $cnj_query->have_posts() ) : $cnj_query->the_post();
-										if ( $count === 1 ) {
-											get_template_part( 'template-parts/homepage-section-first' );
-											$count++;
-										} else {
-											get_template_part( 'template-parts/homepage-section' );
-										}
-									endwhile;
-								}
-							?>
-						</ul>
-					</li>
+				<?php
+					endforeach;
+				?>
 				</ul>
 			</div>
-
 
 			<div id="homepage-kdrum" class="group">
 				<div id="homepage-kdrum-side">
@@ -282,9 +168,11 @@ global $fullwidth_title;
 								),
 								'posts_per_page' => 4,
 								'post_status' => 'publish',
+								'post__not_in' 	=> $shown_ids,
 							) );
 							while ( $kdrum->have_posts() ) {
 								$kdrum->the_post();
+								$shown_ids[] = get_the_ID();
 								get_template_part( 'template-parts/homepage-kdrum-story' );
 							}
 						?>
@@ -318,8 +206,9 @@ global $fullwidth_title;
 					) );
 					if ( $exposure_story->have_posts() ) {
 						$exposure_story->the_post();
+						$shown_ids[] = get_the_ID();
 						$fullwidth_title = 'Exposure';
-						include( locate_template( 'template-parts/homepage-fullwidth.php' ) );
+						get_template_part( 'template-parts/homepage-fullwidth' );
 					}
 				?>
 			</div>
@@ -355,9 +244,11 @@ global $fullwidth_title;
 							),
 							'posts_per_page' => 4,
 							'post_status' => 'publish',
+							'post__not_in' 	=> $shown_ids,
 						) );
 						while ( $investigations->have_posts() ) {
 							$investigations->the_post();
+							$shown_ids[] = get_the_ID();
 							get_template_part( 'template-parts/homepage-investigations' );
 						}
 					?>
