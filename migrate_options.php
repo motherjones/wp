@@ -78,6 +78,7 @@ $active_plugins = Array(
   'fb-instant-articles/facebook-instant-articles.php',
 );
 $wp->beginTransaction();
+
 $option_replace->execute(Array(
   'active_plugins',
   serialize($active_plugins)

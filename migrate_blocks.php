@@ -10,22 +10,18 @@ $wp_db = "pantheon_wp";
 $wp = new PDO("mysql:host=$hostname;dbname=$wp_db", $username, $password);  
 
 
-$wp->beginTransaction();
-$wp->exec('
-UPDATE wp_options
-SET option_value = "a:1:{i:0;s:35:\'display-widgets/display-widgets.php\';}"
-WHERE option_name = "active_plugins"
-;
-');
-$wp->commit();
-
-$wp->beginTransaction();
-$wp->exec("
+$widgets = Array('top_stories_widget', 'mj_author_bio_widget', 
+								'mj_related_articles', 'mj_blog_pager');
+$widget_options = $wp->prepare("
 UPDATE wp_options
 SET option_value = 'a:2:{i:2;a:0:{}s:12:\"_multiwidget\";i:1;}'
-WHERE option_name = 'widget_top_stories_widget'
+WHERE option_name = CONCAT('widget_', ?)
 ;
 ");
+$wp->beginTransaction();
+foreach ($widgets as $widget) {
+	$widget_options->execute(Array($widget));
+}
 $wp->commit();
 
 /* Desired result:
@@ -42,9 +38,9 @@ FUUUCCCCKKK!!!! THis isn't titles this is some weird interior naming fuck
  */
 $sidebars_widgets_options = Array(
 		'wp_inactive_widgets' => Array(),
-		'sidebar' => Array('text-5', 'text-6', 'top_stories_widget-2'),  //RHC membership for blog posts and not blog posts
+		'sidebar' => Array('text-9', 'text-5', 'text-6', 'top_stories_widget-2'),  //RHC ad, RHC membership for blog posts and not blog posts
 		'ticker' => Array('text-7'), //Membership ticker
-		'content-end' => Array(),
+		'content-end' => Array('mj_author_bio_widget-1', 'text-8', 'mj_related_articles-1', 'mj_blog_pager-1'), //FIXME needs to contain author bio, text block for members like you text-8, related articles, and blog pager
 		'page-end' => Array('text-4'), //bottom adblock ask
 		'page-top' => Array('text-2', 'text-3'),//Ad control, sitewrap
 		'array_version' => 3
@@ -401,6 +397,45 @@ HTML
 		'dw_logged' => '',
 		'other_ids' => '', //FIXME get a list of all the full width asks and put the node ids in here separated by commas
 	); //END membership ticker bar
+$blocks[8] =	Array( //BEGIN members like you block
+		'title' => 'Members like you',
+		'text' => <<<'HTML'
+<p class="members-like-you">
+  <em>Mother Jones</em> is a nonprofit, and stories like this are
+   made possible by readers like you. 
+  <a class="donate" href="https://secure.motherjones.com/fnp/?action=SUBSCRIPTION&amp;list_source=7HEGP004&amp;extra_don=1&amp;abver=A">Donate</a>
+   or <a class="subscribe" href="https://secure.motherjones.com/fnx/?action=SUBSCRIPTION&amp;pub_code=MJM&amp;term_pub=MJM&amp;list_source=SEGYN4&amp;base_country=US">subscribe</a>
+   to help fund independent journalism.
+</p>
+HTML
+		,
+		'filter' => False,
+		'dw_include' => 0,
+		'dw_logged' => '',
+		'other_ids' => '',
+	); //END members like you block
+$blocks[9] =	Array( //BEGIN members like you block
+		'title' => 'RHC ad',
+		'text' => <<<'HTML'
+<script language="javascript">
+		<!--
+		if (typeof MJ_HideRightColAds === 'undefined') {
+			ad_code({
+				desktop: true,
+				placement: 'RightTopROS300x600',
+				height: 529,
+				doc_write: true,
+			});
+		}
+		//-->
+</script>
+HTML
+		,
+		'filter' => False,
+		'dw_include' => 0,
+		'dw_logged' => '',
+		'other_ids' => '',
+	); //END members like you block
 $blocks[12] = "_multiwidget"; //below are the blocks
 $blocks['_multiwidget'] = 1; //below are the blocks
 
