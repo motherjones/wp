@@ -65,7 +65,7 @@ get_header(); ?>
 									<script>
                     if (typeof MJ_HideSectionPage970x250BB1 === 'undefined') {
                       ad_code({
-                          yieldmo: true,
+                          yieldmo: false,
                          docwrite: true,
                           desktop: true,
                         placement: 'SectionPage970x250BB1',

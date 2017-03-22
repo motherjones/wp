@@ -45,7 +45,7 @@ get_header(); ?>
 				get_template_part( 'template-parts/index-blogpost' );
 
 				$posts_shown++;
-				if ($posts_shown === 5): ?>
+				if ($posts_shown === 4): ?>
 					<script>
             if (typeof MJ_HideSectionAdMobile === 'undefined') {
               ad_code({
@@ -56,22 +56,22 @@ get_header(); ?>
               });
             }
 					</script>
-      <?php elseif ($posts_shown === 4): ?>
+      <?php elseif ($posts_shown === 3): ?>
 					<script>
             if (typeof MJ_HideSectionPage970x250BB1 === 'undefined') {
               ad_code({
-                yieldmo: true,
+                yieldmo: false,
                 docwrite: true,
                 desktop: true,
                 placement: 'SectionPage970x250BB1',
               });
             }
 					</script>
-      <?php elseif ($posts_shown === 7): ?>
+      <?php elseif ($posts_shown === 6): ?>
 					<script>
             if (typeof MJ_HideSectionPage970x250BB2 === 'undefined') {
               ad_code({
-                yieldmo: true,
+                yieldmo: false,
                 docwrite: true,
                 desktop: true,
                 placement: 'SectionPage970x250BB2',
