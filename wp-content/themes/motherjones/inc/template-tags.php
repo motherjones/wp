@@ -125,6 +125,25 @@ if ( ! function_exists( 'mj_flat_facebook_button' ) ) {
 	}
 }
 
+function mj_flat_email_button( $id ) {
+	return sprintf(
+		'<a href="mailto:?subject=%1$s&body=%2$s%0D%0A%3$s" target="_blank">
+			<i class="fa fa-envelope-o"></i>
+			<span class="share-text">Email</span>
+		</a>',
+		rawurlencode( html_entity_decode( get_the_title( $id ), ENT_QUOTES, 'UTF-8' ) ), // subject.
+		rawurlencode( html_entity_decode( strip_tags( get_the_excerpt( $id ) ), ENT_QUOTES, 'UTF-8' ) ), // description.
+		rawurlencode( html_entity_decode( get_the_permalink( $id ) ) ) // url.
+	);
+}
+
+function mj_flat_print_button() {
+	return
+		'<a href="#" onclick="window.print()" title="' . esc_attr( __( 'Print this article', 'mj' ) ) . '" rel="nofollow">
+	 		<i class="fa fa-print"></i>
+			<span class="share-text">' . esc_attr( __( 'Print', 'mj' ) ) . '</span>
+		</a>';
+}
 /**
  * Output the share buttons
  *
@@ -141,11 +160,22 @@ function mj_share_tools( $context ) {
 		'<div class="%s">
 			<ul>
 				<li class="facebook">%s</li>
-				<li class="twitter">%s</li>
-			</ul>
-		</div>',
+				<li class="twitter">%s</li>',
 		esc_attr( $classes ),
 		mj_flat_facebook_button( $id ),
 		mj_flat_twitter_button( $id )
 	);
+	if ( 'bottom' !== $context ) {
+		printf(
+			'<li class="email">%s</li>',
+			mj_flat_email_button( $id )
+		);
+	}
+	if ( 'top' === $context ) {
+		printf(
+			'<li class="print">%s</li>',
+			mj_flat_print_button()
+		);
+	}
+	echo '</ul></div>';
 }
