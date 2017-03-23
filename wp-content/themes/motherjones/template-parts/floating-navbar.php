@@ -51,14 +51,14 @@
 					<li id="menu_politics_select"><a href="/politics">Politics</a></li>
 					<li id="menu_environment_select"><a href="/environment">Environment</a></li>
 					<li id="menu_culture_select"><a href="/media">Media</a></li>
-					<li id="menu_justice_select"><a href="/crime_and_justice">Crime and Justice</a></li>
+					<li id="menu_justice_select"><a href="/crime-justice">Crime and Justice</a></li>
 					<li id="menu_food_select"><a href="/food">Food</a></li>
 					<li id="menu_guns_select"><a href="/guns">Guns</a></li>
 					<li id="menu_dark_money_select"><a href="/dark-money">Dark Money</a></li>
 					<li id="menu_photo_select"><a href="/photoessays">Photos</a></li>
 					<li id="menu_investigations_select"><a href="/topics/investigations">Investigations</a></li>
 					<li id="menu_podcast_select"><a href="/podcasts">Podcasts</a></li>
-					<li id="menu_drum_select"><a href="/kevin-drum">Kevin Drum</a></li>
+					<li id="menu_drum_select"><a href="/blog/kevin-drum">Kevin Drum</a></li>
 					<li id="menu_about_select"><a href="/about">About</a></li>
 					<li id="menu_subscribe_select"><a target="_blank" href="https://secure.motherjones.com/fnx/?action=SUBSCRIPTION&pub_code=MJM&term_pub=MJM&list_source=SEGYN1A&base_country=US">Subscribe</a></li>
 					<li id="menu_donate_select"><a target="_blank" href="https://secure.motherjones.com/fnp/?action=SUBSCRIPTION&list_source=7HEGP003&extra_don=1&abver=A">Donate</a></li>

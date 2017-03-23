@@ -13,81 +13,82 @@ $d6 = new PDO("mysql:host=$hostname;dbname=$d6_db", $username, $password);
 
 $wp = new PDO("mysql:host=$hostname;dbname=$wp_db", $username, $password);  
 
+$option_replace = $wp->prepare('
+REPLACE INTO pantheon_wp.wp_options
+(option_name, option_value, autoload)
+VALUES ( ?, ?, "yes" )
+');
+
+$wp->beginTransaction();
+$option_replace->execute(Array('blogname', 'Mother Jones Magazine'));
+$option_replace->execute(Array(
+  'blogdescription',
+  //'Mother Jones is a leading independent news organization, featuring investigative and breaking news reporting on politics, the environment, human rights, and culture. Winner of six National Magazine Awards and the Online News Association Award for Online Topical Reporting.'
+  'Smart, fearless journalism'
+));
+$wp->commit();
+
 // Set default theme to motherjones
-//
-
 $wp->beginTransaction();
-$wp->exec('
-UPDATE pantheon_wp.wp_options
-SET option_value = "motherjones"
-WHERE option_name = "template"
-;
-');
+$option_replace->execute(Array('template', 'motherjones'));
+$option_replace->execute(Array('stylesheet', 'motherjones'));
 $wp->commit();
 
+// set posts per page
 $wp->beginTransaction();
-$wp->exec('
-UPDATE pantheon_wp.wp_options
-SET option_value = "motherjones"
-WHERE option_name = "stylesheet"
-;
-');
+$option_replace->execute(Array('posts_per_page', 20));
 $wp->commit();
+
 
 // set permalink structure
 $wp->beginTransaction();
-$wp->exec('
-UPDATE pantheon_wp.wp_options
-SET option_value = "/%category%/%year%/%monthnum%/%postname%/"
-WHERE option_name = "permalink_structure"
-;
-');
+$option_replace->execute(Array(
+  'permalink_structure',
+  '/%category%/%year%/%monthnum%/%postname%/'
+));
+$option_replace->execute(Array( 'tag_base', '/topics' ));
 $wp->commit();
 
-// set topic page structure
+
+//set image sizes
 $wp->beginTransaction();
-$wp->exec('
-UPDATE pantheon_wp.wp_options
-SET option_value = "/topics"
-WHERE option_name = "tag_base"
-;
-');
+
+$option_replace->execute(Array( 'thumbnail_size_h', '117' ));
+$option_replace->execute(Array( 'thumbnail_size_w', '208' ));
+$option_replace->execute(Array( 'thumbnail_crop', '1' ));
+
+$option_replace->execute(Array( 'medium_size_h', '273' ));
+$option_replace->execute(Array( 'medium_size_w', '485' ));
+$option_replace->execute(Array( 'medium_size_crop', '1' ));
+
+$option_replace->execute(Array( 'medium_large_size_h', '354' ));
+$option_replace->execute(Array( 'medium_large_size_w', '630' ));
+$option_replace->execute(Array( 'medium_large_size_crop', '1' ));
+
+$option_replace->execute(Array( 'large_size_h', '557' ));
+$option_replace->execute(Array( 'large_size_w', '990' ));
+$option_replace->execute(Array( 'large_size_crop', '1' ));
+
 $wp->commit();
 
-// redirect photoessay page
-$redirect_item_insert = $wp->prepare('
-INSERT INTO wp_redirection_items
-(url, last_access, group_id, action_type, action_code, action_data, match_type)
-VALUES (
-"/photoessays", # source
-FROM_UNIXTIME("1970-1-1 00:00:00"), #last access
-1,
-"url", #action type
-301, # action code
-"topics/photoessays", #destination action data
-"url" #match type
-)
-;');
 
 // Activate plugins
 $active_plugins = Array(
   'mfi-reloaded-master/mfi-reloaded.php',
-  'display-widgets/display-widgets.php',
   'coauthors/co-authors-plus.php',
   'redirection/redirection.php',
   'zoninator/zoninator.php',
   'mj_custom/mj_custom.php',
+  'disqus-conditional-load/disqus-conditional-load.php',
+  'fb-instant-articles/facebook-instant-articles.php',
 );
-$active_plugin_update = $wp->prepare('
-UPDATE pantheon_wp.wp_options
-SET option_value = ?
-WHERE option_name = "active_plugins"
-;
-');
 $wp->beginTransaction();
-$active_plugin_update->execute(Array(
+
+$option_replace->execute(Array(
+  'active_plugins',
   serialize($active_plugins)
 ));
 $wp->commit();
+
 
 ?>

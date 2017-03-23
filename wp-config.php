@@ -171,6 +171,16 @@ if (stripos($_SERVER['REQUEST_URI'], 'rss/sections') !== false
     exit();
 }
 
+// 301 Redirect from /node/$ID to /?p=$ID.
+if ( isset($request_parts[1]) && $request_parts[1] === 'node'
+  && (php_sapi_name() != "cli")) {
+    header('HTTP/1.0 301 Moved Permanently');
+    $new_uri = str_replace('node/', '?p=', 
+      $_SERVER['REQUEST_URI']);
+    header('Location: ' . $new_uri );
+    exit();
+}
+
 /* That's all, stop editing! Happy Pressing. */
 
 
@@ -186,4 +196,6 @@ require_once(ABSPATH . 'wp-settings.php');
 /** CONTACT FORM 7 Workaround */
 $_SERVER['SERVER_NAME'] = $_SERVER['HTTP_HOST'];
 
+/** allow wp to repair the db */
+define('WP_ALLOW_REPAIR', true);
 

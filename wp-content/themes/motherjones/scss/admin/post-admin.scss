@@ -32,3 +32,7 @@ div#mj_custom_css_js {
     min-height: 8em;
   }
 }
+div#taxonomy-post_tag {
+  max-height: 200px;
+  overflow: auto;
+}

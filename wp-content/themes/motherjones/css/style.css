@@ -293,7 +293,7 @@ h5 {
 /* homepage */
 .homepage {
   text-align: center; }
-  .homepage img.size-large_990 {
+  .homepage img.size-large {
     height: auto;
     width: 100%; }
 
@@ -1125,23 +1125,23 @@ footer#colophon #copyright a {
   line-height: 30px; }
   .social-container i:hover {
     color: #FF6900; }
-.social-container.top {
+.social-container.top, .social-container.blog {
   height: 17px;
   margin-bottom: 20px;
   border-bottom: 1px solid #ccc; }
-  .social-container.top ul {
+  .social-container.top ul, .social-container.blog ul {
     list-style-type: none;
     display: block;
-    width: 98px;
+    width: 196px;
     padding: 0 10px;
     background: white;
     margin: 0 auto 20px;
     height: 32px;
     float: none; }
-    .social-container.top ul li {
+    .social-container.top ul li, .social-container.blog ul li {
       display: inline-block;
       padding: 0 3px; }
-    .social-container.top ul .share-text {
+    .social-container.top ul .share-text, .social-container.blog ul .share-text {
       display: none; }
 .social-container.bottom {
   padding: 0 0 30px;
@@ -1183,11 +1183,20 @@ footer#colophon #copyright a {
     font-size: 16px; }
     .social-container.bottom .twitter a:hover {
       background-color: #478db1; }
+.social-container.blog {
+  border-bottom: none; }
+  .social-container.blog ul {
+    margin-left: 0;
+    padding-left: 0;
+    width: auto; }
+    .social-container.blog ul li:first-child {
+      padding-left: 0; }
+  .social-container.blog a {
+    border: none; }
 
 /* end social buttons */
 /* begin end of article author stuff */
 ul.author-bios {
-  list-style-type: none;
   padding: 0;
   border-bottom: 1px solid #ccc; }
 
@@ -1205,20 +1214,25 @@ ul.author-bios {
 #main.author ul {
   padding: 0; }
 
-.author-bio .byline {
-  display: block;
-  line-height: 14px; }
-  .author-bio .byline a {
-    display: inline-block;
-    background-position: 0% 100%; }
-.author-bio .author-image {
-  float: left;
-  margin-right: 15px;
-  margin-bottom: 20px;
-  height: 80px;
-  width: 80px;
-  border-radius: 50px;
-  overflow: hidden; }
+.author-bio {
+  list-style-type: none; }
+  .author-bio .byline {
+    display: block;
+    line-height: 14px; }
+    .author-bio .byline a {
+      display: inline-block;
+      background-position: 0% 100%; }
+  .author-bio .author-image {
+    float: left;
+    margin-right: 15px;
+    margin-bottom: 20px;
+    height: 80px;
+    width: 80px;
+    border-radius: 50px;
+    overflow: hidden; }
+    .author-bio .author-image img {
+      max-width: 100%;
+      max-height: 100%; }
 
 .author-bio-text {
   font-size: 12px;
@@ -1229,19 +1243,19 @@ ul.author-bios {
 /* end end of article author stuff */
 /* article list items */
 .photoessay-top,
-#related-articles,
+.mj-related-articles,
 .main-index {
   text-align: center; }
 
 .articles-list,
-#related-articles-list {
+.related-articles-list {
   list-style-type: none;
   padding: 0; }
 
-#related-articles {
+.mj-related-articles {
   max-width: 630px;
   padding: 0; }
-  #related-articles ul {
+  .mj-related-articles ul {
     padding: 0; }
 
 .articles-list .article-item {
@@ -1318,7 +1332,7 @@ h2.widget-title {
 .mj_article_type-full_width_article p.members-like-you,
 .mj_article_type-full_width_article .author-data p {
   margin-right: 0; }
-.mj_article_type-full_width_article #related-articles {
+.mj_article_type-full_width_article .mj-related-articles {
   max-width: none; }
 
 #full-width-header {
@@ -1443,7 +1457,7 @@ article p {
   width: 100%; }
 
 @media only screen and (max-width: 620px) {
-  #related-articles ul.related-articles-list {
+  .mj-related-articles ul.related-articles-list {
     padding: 0 15px; }
 
   #navbar .nav-title {
@@ -1529,5 +1543,40 @@ article p {
 #TopROS970x250 {
   width: 990px;
   margin: 0 auto; }
+
+/* begin disqus */
+#comments {
+  padding: 15px 0;
+  border: solid #ccc;
+  border-width: 1px 0;
+  margin: 15px 0; }
+  #comments button#dcl_comment_btn {
+    font-variant: small-caps;
+    font-size: 32px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    text-align: center;
+    font-family: Mallory,sans-serif;
+    font-weight: bold;
+    color: #ccc;
+    text-decoration: none;
+    margin: 0 !important;
+    padding: 15px 0;
+    width: 100%;
+    background: none;
+    border: none;
+    text-transform: lowercase; }
+    #comments button#dcl_comment_btn:hover {
+      color: #ff6900; }
+  #comments i {
+    margin-right: 10px;
+    position: relative;
+    font-size: 23px;
+    top: 1px; }
+
+/* end disqus */
+.edit-link a {
+  color: red; }
 
 /*# sourceMappingURL=style.css.map */

@@ -32,4 +32,8 @@ div#mj_custom_css_js textarea {
   width: 100%;
   min-height: 8em; }
 
+div#taxonomy-post_tag {
+  max-height: 200px;
+  overflow: auto; }
+
 /*# sourceMappingURL=post-admin.css.map */

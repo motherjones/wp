@@ -53,20 +53,20 @@ echo "Prod db unzipped"
 echo "\n"
 
 
-php migrate_links.php "$SQL_PASS" #redirects must be in place for toc pages in migrate, below
-
-echo "redirects added to wp db"
-echo "\n"
-
 mysql -u root -p"$SQL_PASS" mjd6 < prod-motherjones_d6-motherjones_d6-$YYYY-$MM-$DD.sql
 
 echo "prod db pushed into database"
 echo "\n"
 
+php migrate_links.php "$SQL_PASS" #redirects must be in place for toc pages in migrate, below
+
+echo "redirects added to wp db"
+echo "\n"
+
 
 php migrate_database.php "$SQL_PASS"
 
-echo "prod db moved to wp db"
+echo "most stuff addded to wp db"
 echo "\n"
 
 

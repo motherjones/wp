@@ -378,7 +378,7 @@ namespace xmlSitemapGenerator;
     <div id="header">
       <p>
         This is an XML Sitemap comaptible with major search engines such as Google, Bing, Baidu and Yandex.<br />
-        For more information and support go to <a href="https://xmlsitemapgenerator.org/sitemap-generator.aspx">Wordpress Sitemap Generator Plugin</a> homepage. <br />
+        For more information and support go to <a href="https://xmlsitemapgenerator.org/wordpress-sitemap-generator-plugin.aspx">Wordpress Sitemap Generator Plugin</a> homepage. <br />
         You can find more information about XML sitemaps on <a href="http://sitemaps.org">sitemaps.org</a>
       </p>
     </div>

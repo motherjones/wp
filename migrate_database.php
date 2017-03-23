@@ -1,17 +1,17 @@
 <?php
 
-$hostname="localhost";  
-$username="root";   
+$hostname="localhost";
+$username="root";
 $password=$argv[1];
-$d6_db = "mjd6";  
-$wp_db = "pantheon_wp";  
+$d6_db = "mjd6";
+$wp_db = "pantheon_wp";
 $FILEDIR_ABS = "http://dev-mjwordpress.pantheonsite.io/wp-content/uploads/";
 $FILEDIR = "wp-content/uploads/";
 
 
-$d6 = new PDO("mysql:host=$hostname;dbname=$d6_db", $username, $password);  
+$d6 = new PDO("mysql:host=$hostname;dbname=$d6_db", $username, $password);
 
-$wp = new PDO("mysql:host=$hostname;dbname=$wp_db", $username, $password);  
+$wp = new PDO("mysql:host=$hostname;dbname=$wp_db", $username, $password);
 
 //truncate term tables
 $wp->beginTransaction();
@@ -26,8 +26,8 @@ $wp->commit();
 $term_insert_data = $d6->prepare('
 SELECT *
 FROM term_data
-WHERE (vid = 9 OR vid = 2 OR vid = 1 
-    OR tid = 22221 OR tid = 23631 OR tid = 22491) 
+WHERE (vid = 9 OR vid = 2 OR vid = 1
+    OR tid = 22221 OR tid = 23631 OR tid = 22491)
 ;'
 );
 $term_insert_data->execute();
@@ -42,16 +42,24 @@ VALUES (
 );
 $term_insert->bindParam(1, $tid);
 $term_insert->bindParam(2, $name);
-$term_insert->bindParam(3, $name);
+$term_insert->bindParam(3, $slug);
 $term_insert->bindParam(4, $vid);
 
 $wp->beginTransaction();
 while ( $term = $term_insert_data->fetch(PDO::FETCH_ASSOC)) {
-  if ($term['name'] === "photo_essays") {
-    $term['name'] = "photoessays";
+  if ($term['name'] === "Photo Essays") {
+    $term['name'] = "Photoessays";
+  } elseif ($term['name'] === "Crime and Justice") {
+    $tid = $term['tid'];
+    $name = $term['name'];
+    $slug = 'crime-justice';
+    $vid = $term['vid'];
+    $term_insert->execute();
+    continue;
   }
 	$tid = $term['tid'];
 	$name = $term['name'];
+	$slug = $term['name'];
 	$vid = $term['vid'];
 	$term_insert->execute();
 }
@@ -65,8 +73,8 @@ d.vid `taxonomy`
 FROM mjd6.term_data d
 INNER JOIN mjd6.term_node n
 USING(tid)
-WHERE (d.vid = 9 OR d.vid = 2 OR d.vid = 1 
-    OR d.tid = 22221 OR d.tid = 23631 OR d.tid = 22491) 
+WHERE (d.vid = 9 OR d.vid = 2 OR d.vid = 1
+    OR d.tid = 22221 OR d.tid = 23631 OR d.tid = 22491)
 ;
 '
 );
@@ -93,10 +101,14 @@ while ( $row = $taxonomy_data->fetch(PDO::FETCH_ASSOC)) {
 	$tax = $row['taxonomy'];
 	switch ($tax) {
 		case "9":
+      if ($tid === "16720" || $tid === "16734") { //is crime & justice or food
+        $tax = "category";
+        break;
+      }
 			$tax = "post_tag";
 			break;
 		case "2":
-			$tax = "mj_blog_type";
+			$tax = "blog";
 			break;
 		case "61": //media type
       if ($tid === "22221") { //is photoessay
@@ -125,14 +137,14 @@ $wp->commit();
 $term_rel_data = $d6->prepare("
 SELECT DISTINCT n.nid, n.tid FROM mjd6.term_node n JOIN mjd6.term_data d
 ON n.tid = d.tid
-WHERE (d.vid = 9 OR d.vid = 2 OR d.vid = 1 
-    OR d.tid = 22221 OR d.tid = 23631 OR d.tid = 22491) 
+WHERE (d.vid = 9 OR d.vid = 2 OR d.vid = 1
+    OR d.tid = 22221 OR d.tid = 23631 OR d.tid = 22491)
 ;
 ");
 $term_rel_data->execute();
 
 $term_rel_insert = $wp->prepare('
-INSERT IGNORE INTO pantheon_wp.wp_term_relationships 
+INSERT IGNORE INTO pantheon_wp.wp_term_relationships
 (object_id, term_taxonomy_id)
 VALUES (?, ?)
 ');
@@ -159,22 +171,22 @@ $post_data = $d6->prepare("
 SELECT DISTINCT
 n.nid,
 n.uid,
-FROM_UNIXTIME(n.created),
-FROM_UNIXTIME(n.created),
+FROM_UNIXTIME(p.published_at),
+CONVERT_TZ(FROM_UNIXTIME(p.published_at), 'PST8PDT','UTC'),
 r.body,
 n.title,
 r.teaser,
-IF( 
+IF(
 	LOCATE('/', a.dst),
-	SUBSTR(a.dst, 
-		CHAR_LENGTH(a.dst) - LOCATE('/', REVERSE(a.dst)) + 2 
+	SUBSTR(a.dst,
+		CHAR_LENGTH(a.dst) - LOCATE('/', REVERSE(a.dst)) + 2
 	),
 	a.dst
 ),
 '',
 '',
 FROM_UNIXTIME(n.changed),
-FROM_UNIXTIME(n.changed),
+CONVERT_TZ(FROM_UNIXTIME(n.changed), 'PST8PDT','UTC'),
 '',
 n.type,
 IF(n.status = 1, 'publish', 'draft'),
@@ -184,6 +196,8 @@ INNER JOIN mjd6.node_revisions r
 USING(vid)
 LEFT OUTER JOIN mjd6.url_alias a
 ON a.src = CONCAT('node/', n.nid)
+JOIN mjd6.publication_date p
+ON n.nid = p.nid
 WHERE n.type IN ('article', 'blogpost', 'full_width_article')
 ;
 ");
@@ -211,8 +225,8 @@ $about_data = $d6->prepare("
 SELECT DISTINCT
 n.nid,
 n.uid,
-FROM_UNIXTIME(n.created),
-FROM_UNIXTIME(n.created),
+FROM_UNIXTIME(p.published_at),
+CONVERT_TZ(FROM_UNIXTIME(p.published_at), 'PST8PDT','UTC'),
 r.body,
 n.title,
 r.teaser,
@@ -221,7 +235,7 @@ r.teaser,
 '',
 '',
 FROM_UNIXTIME(n.changed),
-FROM_UNIXTIME(n.changed),
+CONVERT_TZ(FROM_UNIXTIME(n.changed), 'PST8PDT','UTC'),
 '',
 n.type,
 IF(n.status = 1, 'publish', 'draft'),
@@ -231,6 +245,8 @@ INNER JOIN mjd6.node_revisions r
 USING(vid)
 LEFT OUTER JOIN mjd6.url_alias a
 ON a.src = CONCAT('node/', n.nid)
+JOIN mjd6.publication_date p
+ON n.nid = p.nid
 WHERE n.nid = 64
 ;
 ");
@@ -246,19 +262,19 @@ $page_data = $d6->prepare("
 SELECT DISTINCT
 n.nid,
 n.uid,
-FROM_UNIXTIME(n.created),
-FROM_UNIXTIME(n.created),
+FROM_UNIXTIME(p.published_at),
+CONVERT_TZ(FROM_UNIXTIME(p.published_at), 'PST8PDT','UTC'),
 r.body,
 n.title,
 r.teaser,
-SUBSTR(a.dst, 
-  CHAR_LENGTH(a.dst) - LOCATE('about/', REVERSE(a.dst)) + 2 
+SUBSTR(a.dst,
+  CHAR_LENGTH(a.dst) - LOCATE('about/', REVERSE(a.dst)) + 2
 )
 ,
 '',
 '',
 FROM_UNIXTIME(n.changed),
-FROM_UNIXTIME(n.changed),
+CONVERT_TZ(FROM_UNIXTIME(n.changed), 'PST8PDT','UTC'),
 '',
 n.type,
 IF(n.status = 1, 'publish', 'draft'),
@@ -268,6 +284,8 @@ INNER JOIN mjd6.node_revisions r
 USING(vid)
 LEFT OUTER JOIN mjd6.url_alias a
 ON a.src = CONCAT('node/', n.nid)
+JOIN mjd6.publication_date p
+ON n.nid = p.nid
 WHERE n.type = 'page'
 AND a.dst LIKE '%about%'
 AND n.nid IS NOT 64
@@ -286,15 +304,15 @@ $page_data = $d6->prepare("
 SELECT DISTINCT
 n.nid,
 n.uid,
-FROM_UNIXTIME(n.created),
-FROM_UNIXTIME(n.created),
+FROM_UNIXTIME(p.published_at),
+CONVERT_TZ(FROM_UNIXTIME(p.published_at), 'PST8PDT','UTC'),
 r.body,
 n.title,
 r.teaser,
 REPLACE(
-  SUBSTR(a.dst, 
+  SUBSTR(a.dst,
     LOCATE('/', a.dst) + 1
-  ), 
+  ),
   \"/\",
   \"-\"
 )
@@ -302,7 +320,7 @@ REPLACE(
 '',
 '',
 FROM_UNIXTIME(n.changed),
-FROM_UNIXTIME(n.changed),
+CONVERT_TZ(FROM_UNIXTIME(n.changed), 'PST8PDT','UTC'),
 '',
 n.type,
 IF(n.status = 1, 'publish', 'draft'),
@@ -312,6 +330,8 @@ INNER JOIN mjd6.node_revisions r
 USING(vid)
 LEFT OUTER JOIN mjd6.url_alias a
 ON a.src = CONCAT('node/', n.nid)
+JOIN mjd6.publication_date p
+ON n.nid = p.nid
 WHERE n.type = 'page'
 AND a.dst NOT LIKE '%about%'
 AND a.dst NOT LIKE 'toc%'
@@ -330,7 +350,7 @@ $page_data = $d6->prepare("
 SELECT DISTINCT
 r.nid,
 r.uid,
-FROM_UNIXTIME(n.created),
+FROM_UNIXTIME(p.published_at),
 r.body,
 r.title,
 r.teaser,
@@ -343,6 +363,8 @@ INNER JOIN mjd6.node_revisions r
 USING(vid)
 LEFT OUTER JOIN mjd6.url_alias a
 ON a.src = CONCAT('node/', n.nid)
+JOIN mjd6.publication_date p
+ON n.nid = p.nid
 WHERE (n.type = 'page' OR n.type = 'toc')
 AND a.dst LIKE 'toc%'
 ;
@@ -374,13 +396,13 @@ INSERT IGNORE INTO pantheon_wp.wp_posts
 (post_author, post_date, post_date_gmt, post_content, post_title, post_excerpt,
 post_name, to_ping, pinged, post_modified, post_modified_gmt,
 post_content_filtered, post_type, `post_status`, `post_parent`)
-VALUES (?, 
+VALUES (?,
 FROM_UNIXTIME(?),
-FROM_UNIXTIME(?),
+CONVERT_TZ(FROM_UNIXTIME(?), "PST8PDT","UTC"),
  ?, ?, ?,
 ?, ?, ?,
 FROM_UNIXTIME(?),
-FROM_UNIXTIME(?),
+CONVERT_TZ(FROM_UNIXTIME(?), "PST8PDT","UTC"),
 ?, ?, ?, ?)
 ');
 
@@ -409,7 +431,7 @@ $redirects_needed []= '/mag/';
 
 //insert year parents
 $wp->beginTransaction();
-foreach ($toc_year_pages as $year => $boolean) { 
+foreach ($toc_year_pages as $year => $boolean) {
   $page_insert->execute(Array(
     '', #post author
     "1970-1-1 00:00:00", //posted
@@ -434,7 +456,7 @@ $wp->commit();
 
 $months_to_create = Array();
 //find months to create
-foreach ($toc_sub_pages as $page) { 
+foreach ($toc_sub_pages as $page) {
   $date = $page['url_split'][1] . $page['url_split'][2];
   $months_to_create[$date] = Array($page['url_split'][1],$page['url_split'][2]);
 }
@@ -443,7 +465,7 @@ foreach ($toc_magazine_pages as $page) {
   $months_to_create[$date] = Array($page['url_split'][1], $page['url_split'][2]);
 }
 $wp->beginTransaction();
-foreach ($months_to_create as $date) { 
+foreach ($months_to_create as $date) {
   $year = $date[0];
   $month = $date[1];
   $redirects_needed []= '/mag/' . $year . '/' . $month;
@@ -471,12 +493,12 @@ $wp->commit();
 
 //insert magazine pages
 $wp->beginTransaction();
-foreach ($toc_magazine_pages as $date => $page) { 
+foreach ($toc_magazine_pages as $date => $page) {
   // form is toc/YYYY/MM/slug
   $page_insert->execute(Array(
     $page['uid'], #post author
-    $page['FROM_UNIXTIME(n.created)'], //posted
-    $page['FROM_UNIXTIME(n.created)'], //posted
+    $page['FROM_UNIXTIME(p.published_at)'], //posted
+    'CONVERT_TZ(' . $page['FROM_UNIXTIME(p.published_at)'] . ', "PST8PDT","UTC")', //posted
     $page['body'], //body
     $page['title'], //title
     $page['teaser'], //post_excerpt
@@ -484,7 +506,7 @@ foreach ($toc_magazine_pages as $date => $page) {
     '', //to ping
     '', //pinged
     $page['FROM_UNIXTIME(n.changed)'], //posted
-    $page['FROM_UNIXTIME(n.changed)'], //posted
+    'CONVERT_TZ(' . $page['FROM_UNIXTIME(n.changed)'] . ', "PST8PDT","UTC")', //posted
     '', //post content filtered
     'page', //type
     $page["IF(n.status = 1, 'publish', 'draft')"], //pub status
@@ -495,13 +517,13 @@ $wp->commit();
 
 
 $wp->beginTransaction();
-foreach ($toc_sub_pages as $page) { 
+foreach ($toc_sub_pages as $page) {
   // form is toc/YYYY/MM/slug
   $date = $page['url_split'][1] . $page['url_split'][2];
   $page_insert->execute(Array(
     $page['uid'], #post author
-    $page['FROM_UNIXTIME(n.created)'], //posted
-    $page['FROM_UNIXTIME(n.created)'], //posted
+    $page['FROM_UNIXTIME(p.published_at)'], //posted
+    'CONVERT_TZ(' . $page['FROM_UNIXTIME(p.published_at)'] . ', "PST8PDT","UTC")', //posted
     $page['body'], //body
     $page['title'], //title
     $page['teaser'], //post_excerpt
@@ -509,7 +531,7 @@ foreach ($toc_sub_pages as $page) {
     '', //to ping
     '', //pinged
     $page['FROM_UNIXTIME(n.changed)'], //posted
-    $page['FROM_UNIXTIME(n.changed)'], //posted
+    'CONVERT_TZ(' . $page['FROM_UNIXTIME(n.changed)'] . ', "PST8PDT","UTC")', //posted
     '', //post content filtered
     'page', //type
     $page["IF(n.status = 1, 'publish', 'draft')"], //pub status
@@ -583,7 +605,7 @@ $wp->commit();
 
 $wp->beginTransaction();
 $wp->exec('
-INSERT IGNORE INTO pantheon_wp.wp_term_relationships 
+INSERT IGNORE INTO pantheon_wp.wp_term_relationships
 (object_id, term_taxonomy_id)
 SELECT p.ID, tax.term_taxonomy_id
 FROM wp_posts p
@@ -634,9 +656,9 @@ $wp->commit();
 
 //for blog body
 $post_content = $d6->prepare("
-SELECT DISTINCT 
+SELECT DISTINCT
 n.nid,
-IF( 
+IF(
   e.field_extended_body_value IS NULL,
   b.field_short_body_value,
   CONCAT(b.field_short_body_value, e.field_extended_body_value)
@@ -667,9 +689,9 @@ $wp->commit();
 
 //for article bodys
 $post_content = $d6->prepare('
-SELECT DISTINCT 
+SELECT DISTINCT
 n.nid,
-IF( 
+IF(
   text.text IS NULL,
   b.field_short_body_value,
   CONCAT(b.field_short_body_value,
@@ -679,8 +701,8 @@ IF(
 FROM mjd6.node n
 INNER JOIN mjd6.content_field_short_body b
 USING(vid)
-JOIN 
-( 
+JOIN
+(
   SELECT vid, GROUP_CONCAT(field_article_text_value SEPARATOR "</p>") AS text
   FROM mjd6.content_field_article_text
   GROUP BY vid
@@ -700,7 +722,7 @@ $wp->commit();
 
 //for full width bodys
 $post_content = $d6->prepare('
-SELECT DISTINCT 
+SELECT DISTINCT
 n.nid, b.field_short_body_value
 FROM mjd6.node n
 INNER JOIN mjd6.content_field_short_body b
@@ -718,7 +740,7 @@ $wp->commit();
 
 
 $meta_insert = $wp->prepare('
-INSERT IGNORE INTO pantheon_wp.wp_postmeta 
+INSERT IGNORE INTO pantheon_wp.wp_postmeta
 (post_id, meta_key, meta_value)
 VALUES (?, ?, ?)
 ;
@@ -726,7 +748,7 @@ VALUES (?, ?, ?)
 
 //for dek
 $meta_data = $d6->prepare('
-SELECT DISTINCT 
+SELECT DISTINCT
 n.nid, "mj_dek", d.field_dek_value
 FROM mjd6.node n
 INNER JOIN mjd6.content_field_dek d
@@ -777,7 +799,7 @@ $wp->commit();
 
 //for social
 $meta_data = $d6->prepare('
-SELECT DISTINCT 
+SELECT DISTINCT
 n.nid,
 t.field_social_title_value,
 d.field_social_dek_value
@@ -794,12 +816,12 @@ $wp->beginTransaction();
 while ( $meta = $meta_data->fetch(PDO::FETCH_ASSOC)) {
   $meta_insert->execute( array(
     $meta['nid'],
-    'mj_social_hed', 
+    'mj_social_hed',
     $meta['field_social_title_value']
   ) );
   $meta_insert->execute( array(
     $meta['nid'],
-    'mj_social_dek', 
+    'mj_social_dek',
     $meta['field_social_dek_value']
   ) );
   $meta_insert->execute( array($meta['nid'], 'mj_google_standout', false) );
@@ -866,7 +888,7 @@ $wp->commit();
 $meta_data = $d6->prepare('
 SELECT DISTINCT n.nid,
 GROUP_CONCAT(
-  DISTINCT r.field_related_articles_nid 
+  DISTINCT r.field_related_articles_nid
   SEPARATOR ","
 ) `relateds`
 FROM mjd6.node n
@@ -881,8 +903,8 @@ while ( $meta = $meta_data->fetch(PDO::FETCH_ASSOC)) {
   $related_value = serialize( array(
     'relateds' => explode(',', $meta['relateds'])
   ) );
-  
-	$meta_insert->execute(array($meta['nid'], 'related_articles', $related_value) );
+
+	$meta_insert->execute(array($meta['nid'], 'mj_related_articles', $related_value) );
 }
 $wp->commit();
 
@@ -905,7 +927,7 @@ SELECT DISTINCT
 n.title,
 u.uid,
 u.mail,
-a.field_user_uid, 
+a.field_user_uid,
 a.field_twitter_user_value,
 a.field_last_name_value,
 a.field_author_bio_short_value,
@@ -916,7 +938,7 @@ a.field_author_title_value
 FROM mjd6.content_field_byline b
 INNER JOIN mjd6.node n
 ON (n.nid = b.field_byline_nid)
-INNER JOIN mjd6.content_type_author a 
+INNER JOIN mjd6.content_type_author a
 ON (a.vid = n.vid)
 LEFT JOIN mjd6.users u
 ON (u.uid=a.field_user_uid)
@@ -1021,7 +1043,7 @@ foreach ( $uid_to_author_meta as $uid => $author ) {
 $wp->commit();
 
 
-//Create byline tags 
+//Create byline tags
 
 //naming for co authors taxonomy is cap-username
 $byline_titles_data = $d6->prepare("
@@ -1052,7 +1074,7 @@ while ( $byline = $byline_titles_data->fetch(PDO::FETCH_ASSOC)) {
     $byline['title'],
     $byline['title']
   ));
-  $term_id_to_name[$wp->lastInsertId()] = $byline['title']; 
+  $term_id_to_name[$wp->lastInsertId()] = $byline['title'];
 }
 $wp->commit();
 
@@ -1070,7 +1092,7 @@ $name_to_tax_id = array();
 $wp->beginTransaction();
 foreach ( $term_id_to_name as $term_id => $name ) {
   $author_meta = $author_name_to_author_meta[$name];
-  $description = $name 
+  $description = $name
     . ' ' . $author_meta['field_last_name_value']
     . ' ' . $name
     . ' ' . $author_meta['wp_id']
@@ -1099,7 +1121,7 @@ ON (b.vid = a.vid)
 $byline_term_data->execute();
 
 $byline_term_insert = $wp->prepare("
-INSERT IGNORE INTO pantheon_wp.wp_term_relationships 
+INSERT IGNORE INTO pantheon_wp.wp_term_relationships
 (object_id, term_taxonomy_id)
 VALUES (?, ?)
 ;
@@ -1145,8 +1167,8 @@ WHERE u.mail IS NOT NULL
 $roles_data->execute();
 
 $roles_insert = $wp->prepare("
-UPDATE pantheon_wp.wp_usermeta 
-SET meta_value = 'a:1:{s:6:\"editor\";s:1:\"1\";}'
+UPDATE pantheon_wp.wp_usermeta
+SET meta_value = 'a:1:{s:6:\"author\";s:1:\"1\";}'
 WHERE meta_key = 'wp_capabilities'
 AND user_id = ?
 ;
@@ -1180,14 +1202,14 @@ $wp->commit();
 $author_image_data = $d6->prepare("
 SELECT DISTINCT
 n.nid,
-a.field_user_uid, 
+a.field_user_uid,
 f.filemime,
 f.filepath,
 f.filename,
 n.title,
 a.field_photo_fid
 FROM mjd6.node n
-INNER JOIN mjd6.content_type_author a 
+INNER JOIN mjd6.content_type_author a
 USING(vid)
 INNER JOIN mjd6.files f
 ON(a.field_photo_fid = f.fid)
@@ -1203,7 +1225,7 @@ post_content_filtered, post_type, `post_status`, post_parent, post_mime_type)
 VALUES (
 :post_author,
 FROM_UNIXTIME("1970-1-1 00:00:00"),
-FROM_UNIXTIME("1970-1-1 00:00:00"),
+CONVERT_TZ(FROM_UNIXTIME("1970-1-1 00:00:00"), "PST8PDT","UTC"),
 "",
 :post_title,
 "",
@@ -1211,7 +1233,7 @@ FROM_UNIXTIME("1970-1-1 00:00:00"),
 "",
 "",
 FROM_UNIXTIME("1970-1-1 00:00:00"),
-FROM_UNIXTIME("1970-1-1 00:00:00"),
+CONVERT_TZ(FROM_UNIXTIME("1970-1-1 00:00:00"), "PST8PDT","UTC"),
 :guid,
 "",
 "attachment",
@@ -1234,7 +1256,7 @@ while ( $image = $author_image_data->fetch(PDO::FETCH_ASSOC)) {
     ':guid' => $guid,
     ':post_mime_type' => $image['filemime'],
   ));
-  $author_name_to_author_meta[$image['title']]['image_location'] = 
+  $author_name_to_author_meta[$image['title']]['image_location'] =
      preg_replace('/files\//', $FILEDIR, $image['filepath']);
   $author_name_to_author_meta[$image['title']]['image_id'] = $wp->lastInsertId();
 }
@@ -1269,13 +1291,13 @@ echo "authors done";
 /* end author data */
 
 
-//FIXME REPEAT FOR FULL WIDTH TITLES< content_field_top_of_content_image 
+//FIXME REPEAT FOR FULL WIDTH TITLES< content_field_top_of_content_image
 //for master images
 $master_data = $d6->prepare('
-SELECT DISTINCT 
+SELECT DISTINCT
 n.nid,
 n.uid,
-n.created,
+p.published_at,
 n.changed,
 n.status,
 i.field_master_image_data,
@@ -1296,6 +1318,8 @@ INNER JOIN mjd6.content_field_suppress_master_image s
 USING(vid)
 INNER JOIN mjd6.files f
 ON(i.field_master_image_fid = f.fid)
+JOIN mjd6.publication_date p
+ON n.nid = p.nid
 ;
 ');
 $master_data->execute();
@@ -1308,15 +1332,15 @@ post_content_filtered, post_type, `post_status`, post_parent, post_mime_type)
 VALUES (
 :post_author,
 FROM_UNIXTIME(:post_date), #post date
-FROM_UNIXTIME(:post_date),
+CONVERT_TZ(FROM_UNIXTIME(:post_date), "PST8PDT","UTC"),
 "", #post content (description)
 :post_title,
-:post_excerpt, 
+:post_excerpt,
 :post_name,
 "",
 "",
 FROM_UNIXTIME(:post_modified),
-FROM_UNIXTIME(:post_modified),
+CONVERT_TZ(FROM_UNIXTIME(:post_modified), "PST8PDT","UTC"),
 :guid,
 "",
 "attachment",
@@ -1337,7 +1361,7 @@ while ( $master = $master_data->fetch(PDO::FETCH_ASSOC)) {
 
   $guid = preg_replace('/files\//', $FILEDIR_ABS, $master['filepath']);
   $post_name = preg_replace("/\.[^.]+$/", "", $master['filename'] );
-  $post_title = $master_data_array['title'] 
+  $post_title = $master_data_array['title']
     ? $master_data_array['title']
     : $post_name
   ;
@@ -1345,7 +1369,7 @@ while ( $master = $master_data->fetch(PDO::FETCH_ASSOC)) {
 
   $master_insert->execute(array(
     ':post_author' => $master['uid'],
-    ':post_date' => $master['created'],
+    ':post_date' => $master['published_at'],
     ':post_title' => $post_title,
     ':post_name' => $post_name,
     ':post_modified' => $master['changed'],
@@ -1409,10 +1433,10 @@ $wp->commit();
 
 //TITLE IMAGES HERE
 $title_data = $d6->prepare('
-SELECT DISTINCT 
+SELECT DISTINCT
 n.nid,
 n.uid,
-n.created,
+p.publication_date,
 n.changed,
 n.status,
 i.field_title_image_data,
@@ -1425,6 +1449,8 @@ INNER JOIN mjd6.content_type_full_width_article i
 USING(vid)
 INNER JOIN mjd6.files f
 ON(i.field_title_image_fid = f.fid)
+JOIN mjd6.publication_date p
+ON n.nid = p.nid
 ;
 ');
 $title_data->execute();
@@ -1437,7 +1463,7 @@ post_content_filtered, post_type, `post_status`, post_parent, post_mime_type)
 VALUES (
 :post_author,
 FROM_UNIXTIME(:post_date),
-FROM_UNIXTIME(:post_date),
+CONVERT_TZ(FROM_UNIXTIME(:post_date), "PST8PDT","UTC"),
 "",
 :post_title,
 "",
@@ -1445,7 +1471,7 @@ FROM_UNIXTIME(:post_date),
 "",
 "",
 FROM_UNIXTIME(:post_modified),
-FROM_UNIXTIME(:post_modified),
+CONVERT_TZ(FROM_UNIXTIME(:post_modified), "PST8PDT","UTC"),
 :guid,
 "",
 "attachment",
@@ -1466,7 +1492,7 @@ while ( $title = $title_data->fetch(PDO::FETCH_ASSOC)) {
 
   $guid = preg_replace('/files\//', $FILEDIR_ABS, $title['filepath']);
   $post_name = preg_replace("/\.[^.]+$/", "", $title['filename'] );
-  $post_title = $title_data_array['title'] 
+  $post_title = $title_data_array['title']
     ? $title_data_array['title']
     : $post_name
   ;
@@ -1474,7 +1500,7 @@ while ( $title = $title_data->fetch(PDO::FETCH_ASSOC)) {
 
   $title_insert->execute(array(
     ':post_author' => $title['uid'],
-    ':post_date' => $title['created'],
+    ':post_date' => $title['published_at'],
     ':post_title' => $post_title,
     ':post_name' => $post_name,
     ':post_modified' => $title['changed'],
@@ -1534,7 +1560,7 @@ $file_data = $d6->prepare('
 SELECT DISTINCT
 f.uid,
 u.nid,
-n.created,
+p.publication_date,
 n.changed,
 n.status,
 f.filemime,
@@ -1546,6 +1572,8 @@ INNER JOIN mjd6.files f
 USING(fid)
 INNER JOIN mjd6.node n
 ON(u.nid = n.nid)
+JOIN mjd6.publication_date p
+ON n.nid = p.nid
 ;
 ');
 $file_data->execute();
@@ -1558,7 +1586,7 @@ post_content_filtered, post_type, `post_status`, post_parent, post_mime_type)
 VALUES (
 :post_author,
 FROM_UNIXTIME(:post_date),
-FROM_UNIXTIME(:post_date),
+CONVERT_TZ(FROM_UNIXTIME(:post_date), "PST8PDT","UTC"),
 "",
 :post_title,
 "",
@@ -1566,7 +1594,7 @@ FROM_UNIXTIME(:post_date),
 "",
 "",
 FROM_UNIXTIME(:post_modified),
-FROM_UNIXTIME(:post_modified),
+CONVERT_TZ(FROM_UNIXTIME(:post_modified), "PST8PDT","UTC"),
 :guid,
 "",
 "attachment",
@@ -1587,7 +1615,7 @@ while ( $file = $file_data->fetch(PDO::FETCH_ASSOC)) {
 
   $file_insert->execute(array(
     ':post_author' => $file['uid'],
-    ':post_date' => $file['created'],
+    ':post_date' => $file['published_at'],
     ':post_title' => $post_name,
     ':post_name' => $post_name,
     ':post_modified' => $file['changed'],
@@ -1673,7 +1701,7 @@ foreach ($zones as $zone => $queue) {
 
   $wp->beginTransaction();
   $zone_tax_insert->execute(array(
-    $zone_term_id, 
+    $zone_term_id,
     serialize($description)
   ));
   $zone_tax_id = $wp->lastInsertId();

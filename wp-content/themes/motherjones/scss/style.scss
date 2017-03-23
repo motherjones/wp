@@ -716,14 +716,15 @@ footer#colophon #copyright a {
       color: $orange;
     }
   }
-  &.top {
+  &.top,
+  &.blog {
     height: 17px;
     margin-bottom: 20px;
     border-bottom: 1px solid #ccc;
     ul {
       list-style-type: none;
       display: block;
-      width: 98px;
+      width: 196px;
       padding: 0 10px;
       background: $white;
       margin: 0 auto 20px;
@@ -789,12 +790,25 @@ footer#colophon #copyright a {
       }
     }
   }
+  &.blog {
+    border-bottom: none;
+    ul {
+      margin-left: 0;
+      padding-left: 0;
+      width: auto;
+      li:first-child {
+        padding-left: 0;
+      }
+    }
+    a {
+      border: none;
+    }
+  }
 }
 /* end social buttons */
 
 /* begin end of article author stuff */
 ul.author-bios {
-  list-style-type: none;
   padding: 0;
   border-bottom: 1px solid #ccc;
 }
@@ -816,6 +830,7 @@ ul.author-bios {
   }
 }
 .author-bio {
+  list-style-type: none;
   .byline {
     display: block;
     line-height: 14px;
@@ -832,6 +847,10 @@ ul.author-bios {
     width: 80px;
     border-radius: 50px;
     overflow: hidden;
+    img {
+      max-width: 100%;
+      max-height: 100%;
+    }
   }
 }
 .author-bio-text {
@@ -845,18 +864,18 @@ ul.author-bios {
 
 /* article list items */
 .photoessay-top,
-#related-articles,
+.mj-related-articles,
 .main-index {
   text-align: center;
 }
 
 .articles-list,
-#related-articles-list {
+.related-articles-list {
   list-style-type: none;
   padding: 0;
 }
 
-#related-articles {
+.mj-related-articles {
   max-width: 630px;
   padding: 0;
   ul {
@@ -958,7 +977,7 @@ h2.widget-title {
   .author-data p {
     margin-right: 0;
   }
-  #related-articles {
+  .mj-related-articles {
     max-width: none;
   }
 }
@@ -1109,7 +1128,7 @@ article p {
   width: 100%;
 }
 @media only screen and (max-width: 620px) {
-  #related-articles ul.related-articles-list {
+  .mj-related-articles ul.related-articles-list {
     padding: 0 15px;
   }
   #navbar .nav-title {
@@ -1204,4 +1223,46 @@ article p {
 #TopROS970x250 {
   width: 990px;
   margin: 0 auto;
+}
+
+/* begin disqus */
+#comments {
+	padding: 15px 0;
+  border: solid #ccc;
+  border-width: 1px 0;
+  margin: 15px 0;
+
+  button#dcl_comment_btn {
+    font-variant: small-caps;
+    font-size: 32px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    text-align: center;
+    font-family: Mallory,sans-serif;
+    font-weight: bold;
+    color: #ccc;
+    text-decoration: none;
+    margin: 0!important;
+    padding: 15px 0;
+    width: 100%;
+    background: none;
+    border: none;
+    text-transform: lowercase;
+    &:hover {
+      color: #ff6900;
+    }
+  }
+  i {
+  margin-right: 10px;
+  position: relative;
+  font-size: 23px;
+  top: 1px;
+  }
+}
+
+/* end disqus */
+
+.edit-link a {
+  color: red;
 }

@@ -24,12 +24,12 @@ get_header(); ?>
 			<div class="main-index">
 				<div class="page-header">
 				<?php
-					if ( is_tax() || is_category() ) {
+					if ( is_tag() || is_category() ) {
 						global $wp_query;
 						$term = $wp_query->get_queried_object();
 						echo '<h1 class="page-title promo">' . esc_html( $term->name ) . '</h1>';
 					} elseif ( is_author() ) {
-						get_template_part( 'template-parts/author-bio' );
+						the_widget( 'mj_author_bio_widget', array( 'title' => '' ) );
 					} else {
 						the_archive_title( '<h1 class="page-title promo">', '</h1>' );
 					}
@@ -46,26 +46,40 @@ get_header(); ?>
 							if ( 0 === $posts_shown ) {
 								get_template_part( 'template-parts/top-index-article' );
 							} else {
-								get_template_part( 'template-parts/standard-article-li' );
+								get_template_part( 'template-parts/content' );
 							}
 
-              if ( 5 === $posts_shown ) { ?>
-                  <script>
-                    ad_code({
-                        yieldmo: true,
-                       docwrite: true,
-                        desktop: false,
-                      placement: 'ym_869408394552483686',
-                    });
-                  </script>
-              <?php 
+							if ( 5 === $posts_shown ) { ?>
+									<script>
+                    if (typeof MJ_HideSectionAdMobile === 'undefined') {
+                      ad_code({
+                          yieldmo: true,
+                         docwrite: true,
+                          desktop: false,
+                        placement: 'ym_869408394552483686',
+                      });
+                    }
+									</script>
+							<?php
+              } elseif ( 11 === $posts_shown ) { ?>
+									<script>
+                    if (typeof MJ_HideSectionPage970x250BB1 === 'undefined') {
+                      ad_code({
+                          yieldmo: false,
+                         docwrite: true,
+                          desktop: true,
+                        placement: 'SectionPage970x250BB1',
+                      });
+                    }
+									</script>
+							<?php
               }
 
-              $posts_shown++;
+							$posts_shown++;
 
-            // End the loop.
-            endwhile;
-          ?>
+						// End the loop.
+						endwhile;
+					?>
 				</ul>
 				<div id="pager">
 					<span class="pager_previous">
@@ -84,28 +98,18 @@ get_header(); ?>
 			</div> <!-- .main-index -->
 
 			<div id="sidebar-right">
-				<script language="javascript">
-						<!--
-						if ( typeof MJ_HideRightColAds === 'undefined' ) {
-							ad_code({
-								desktop: true,
-								placement: 'RightTopROS300x600',
-								height: 529,
-								doc_write: true,
-							});
-						}
-						//-->
-				</script>
-				<?php dynamic_sidebar( 'sidebar-section' ); ?>
+				<?php get_sidebar(); ?>
 			</div>
 		</main><!-- .site-main -->
 	</div><!-- .content-area -->
 	<script>
-		ad_code({
-			yieldmo: true,
-		 	docwrite: true,
-			desktop: false,
-			placement: 'ym_869408549909503847',
-		});
+			if (typeof MJ_HideBottomMobile === 'undefined') {
+          ad_code({
+            yieldmo: true,
+            docwrite: true,
+            desktop: false,
+            placement: 'ym_869408549909503847',
+          });
+      }
 	</script>
 	<?php get_footer(); ?>

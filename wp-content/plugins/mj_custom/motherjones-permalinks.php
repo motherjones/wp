@@ -28,11 +28,11 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
           $request['post_type'] = array('mj_article', 'mj_full_width');
           if (get_terms( array( // is blog post
               'slug' => $dummy_query->query['category_name'],
-              'taxonomy' => 'mj_blog_type'
+              'taxonomy' => 'blog'
           ) ) ) {
             $request['post_type'] = 'mj_blog_post';
             $request['tax_query'] = array( array(
-              'taxonomy' => 'mj_blog_type',
+              'taxonomy' => 'blog',
               'field' => 'slug',
               'terms' => $request['category_name'],
             ) );
@@ -96,12 +96,12 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
             'slug' => $request['category_name']) 
           ) &&
           get_terms( array(
-            'taxonomy' => 'mj_blog_type', 
+            'taxonomy' => 'blog', 
             'slug' => $request['category_name']) 
           ) ) {
             $request['post_type'] = array('mj_blog_post');
             $request['tax_query'] = array( array(
-              'taxonomy' => 'mj_blog_type',
+              'taxonomy' => 'blog',
               'field' => 'slug',
               'terms' => $request['category_name'],
             ) );
@@ -148,7 +148,7 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
 				$leavename? '' : '%postname%',
 				'%post_id%',
 				'%category%',
-				'%mj_blog_type%',
+				'%blog%',
 				'%author%',
 				$leavename? '' : '%pagename%',
 			);
@@ -172,8 +172,8 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
 						$category = is_wp_error( $default_category ) ? '' : $default_category->slug;
 					}
 				}
-        if (wp_get_post_terms( $post->ID, 'mj_blog_type' )) {
-          $mj_blog_type = wp_get_post_terms( $post->ID, 'mj_blog_type' )[0]->slug;
+        if (wp_get_post_terms( $post->ID, 'blog' )) {
+          $blog = wp_get_post_terms( $post->ID, 'blog' )[0]->slug;
         }
 
 				$author = '';
@@ -194,7 +194,7 @@ if ( !class_exists( 'MJ_Permalinks' ) ) {
 						$post->post_name,
 						$post->ID,
 						$category,
-            $mj_blog_type,
+            $blog,
 						$author,
 						$post->post_name,
 					);
