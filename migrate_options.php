@@ -75,7 +75,6 @@ $wp->commit();
 // Activate plugins
 $active_plugins = Array(
   'mfi-reloaded-master/mfi-reloaded.php',
-  'display-widgets/display-widgets.php',
   'coauthors/co-authors-plus.php',
   'redirection/redirection.php',
   'zoninator/zoninator.php',
