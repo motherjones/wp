@@ -167,18 +167,15 @@ function mj_share_tools( $context ) {
 	);
 	if ( 'bottom' !== $context ) {
 		printf(
-			'	<li class="email">%s</li>',
+			'<li class="email">%s</li>',
 			mj_flat_email_button( $id )
 		);
 	}
 	if ( 'top' === $context ) {
 		printf(
-			' <li class="print">%s</li>',
+			'<li class="print">%s</li>',
 			mj_flat_print_button()
 		);
 	}
-	echo
-		'	</ul>
-		</div>'
-	;
+	echo '</ul></div>';
 }
