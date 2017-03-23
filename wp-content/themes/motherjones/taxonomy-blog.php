@@ -45,16 +45,40 @@ get_header(); ?>
 				get_template_part( 'template-parts/index-blogpost' );
 
 				$posts_shown++;
-				if ($posts_shown === 5): ?>
+				if ($posts_shown === 4): ?>
 					<script>
-						ad_code({
-							yieldmo: true,
-						  docwrite: true,
-							desktop: false,
-							placement: 'ym_869408394552483686',
-						});
+            if (typeof MJ_HideSectionAdMobile === 'undefined') {
+              ad_code({
+                yieldmo: true,
+                docwrite: true,
+                desktop: false,
+                placement: 'ym_869408394552483686',
+              });
+            }
 					</script>
-				<?php endif;
+      <?php elseif ($posts_shown === 3): ?>
+					<script>
+            if (typeof MJ_HideSectionPage970x250BB1 === 'undefined') {
+              ad_code({
+                yieldmo: false,
+                docwrite: true,
+                desktop: true,
+                placement: 'SectionPage970x250BB1',
+              });
+            }
+					</script>
+      <?php elseif ($posts_shown === 6): ?>
+					<script>
+            if (typeof MJ_HideSectionPage970x250BB2 === 'undefined') {
+              ad_code({
+                yieldmo: false,
+                docwrite: true,
+                desktop: true,
+                placement: 'SectionPage970x250BB2',
+              });
+            }
+					</script>
+      <?php endif;
 			// End the loop.
 			endwhile;
 		?>

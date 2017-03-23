@@ -14,15 +14,15 @@ var ad_class = desktop_ads ? 'ad_desktop' : 'ad_mobile';
 var ad_code = function(config) {
   if (   (!config.desktop && desktop_ads)
       || (config.desktop && !desktop_ads) 
-    ) { 
+     ) { 
     return false;
   } //do not do desktop ads if we're not on desktop, do not do mobile ads if we're not on mobile
   config.ad = create_ad(config);
   console.log(config.ad);
   place_ad(config)
-  if ( config.yieldmo || config.placement.match(/ym_/) ) {
-    ym_script();
-  } 
+    if ( config.yieldmo || config.placement.match(/ym_/) ) {
+      ym_script();
+    } 
 }
 
 var create_ad = function(config) {
@@ -39,9 +39,9 @@ var place_ad = function(config) {
   if (config.doc_write) {
     document.write(config.ad);
   } else if (config.element) { 
-    config.element.after($(config.ad));
+    config.element.after(jQuery(config.ad));
   } else { 
-    $('script').last().after($(config.ad));
+    jQuery('script').last().after(jQuery(config.ad));
   }
 }
 
@@ -89,84 +89,84 @@ var adtech_url_params = function(config) {
     ; 
 }
 
-  $('document').ready(function() {
-    if (   (!is_post) 
-        || (desktop_ads && !is_fullwidth) 
-        || (typeof MJ_HideInContentAds !== "undefined") ) {
-      return;
-    }
+jQuery('document').ready(function() {
+  if (   (!is_post) 
+      || (desktop_ads && !is_fullwidth) 
+      || (typeof MJ_HideInContentAds !== "undefined") ) {
+    return;
+  }
 
-    if (is_fullwidth) {
-      fullwidth_inline_ads();
-    } else {
-      inline_ads();
-    }
-   
-  });
+  if (is_fullwidth) {
+    fullwidth_inline_ads();
+  } else {
+    inline_ads();
+  }
 
-  var fullwidth_inline_ads = function() {
-      var subhed_selector = 'h3.subhed';
-      var section_lead_selector = 'span.section-lead';
-      var pgs = $('article > #fullwidth-body > p, article > #fullwidth-body > h3');
-      var wordcount = 0;
-      var words_before_ad_can_be_placed = 650;
-      var ads_placed = 0;
-      var ads_desired = 10; 
-      var mobile_placement_prefix = 'InContentMob300x250_BB';
-      var desktop_placement_prefix = 'InContent970_c';
-      var placement_prefix = desktop_ads 
-        ? desktop_placement_prefix 
-        : mobile_placement_prefix;
-      var ad_height = 250;
+});
+
+var fullwidth_inline_ads = function() {
+  var subhed_selector = 'h3.subhed';
+  var section_lead_selector = 'span.section-lead';
+  var pgs = jQuery('article > #fullwidth-body > p, article > #fullwidth-body > h3');
+  var wordcount = 0;
+  var words_before_ad_can_be_placed = 650;
+  var ads_placed = 0;
+  var ads_desired = 10; 
+  var mobile_placement_prefix = 'InContentMob300x250_BB';
+  var desktop_placement_prefix = 'InContent970_c';
+  var placement_prefix = desktop_ads 
+    ? desktop_placement_prefix 
+    : mobile_placement_prefix;
+  var ad_height = 250;
 
 
-      for (var i = 0; i < pgs.length; i++) {
-        if (wordcount > words_before_ad_can_be_placed
-          && (
-                $(pgs[i]).is(subhed_selector)
-             || $(pgs[i]).find(section_lead_selector).length
-             )
-          ) {
+  for (var i = 0; i < pgs.length; i++) {
+    if (wordcount > words_before_ad_can_be_placed
+        && (
+          jQuery(pgs[i]).is(subhed_selector)
+          || jQuery(pgs[i]).find(section_lead_selector).length
+          )
+       ) {
 
-            ads_placed++;
-						ad_code({
-              element: $(pgs[i-1]),
-              placement: placement_prefix + ads_placed,
-              height: ad_height,
-              desktop: desktop_ads,
-						});
-            if (ads_placed >= ads_desired) {
-              break;
-            }
-          } else {
-            var words = $(pgs[i]).text().split(' ').length;
-            wordcount += words;
-          }
+      ads_placed++;
+      ad_code({
+        element: jQuery(pgs[i-1]),
+        placement: placement_prefix + ads_placed,
+        height: ad_height,
+        desktop: desktop_ads,
+      });
+      if (ads_placed >= ads_desired) {
+        break;
       }
-
+    } else {
+      var words = jQuery(pgs[i]).text().split(' ').length;
+      wordcount += words;
+    }
   }
 
-  var inline_ads = function() {
-		var ads_placed = 0;
-		var ym_codes = ["ym_1210153280377042966","ym_1368917604586339309","ym_1368918492646325230","ym_1368918756996529135"];
-		var min_ps_for_ad = 3;
-		var separating_ps = 5;
-		var min_ps_before_end = 2;
-		var max_ads = 4;
-		var pgs = $("article > p").length;
+}
 
-		var count_till_ad = 0;
-		for (var i = (min_ps_for_ad - 1); i < (pgs - min_ps_before_end); i++ ) {
-		 if (count_till_ad < 1) {
-				ad_code({
-            element: $($("article > p")[i]) ,
-					placement: ym_codes[ads_placed],
-            desktop: false, //yea mobile only 
-				});
-        count_till_ad = separating_ps;
-        ads_placed++;
-        if ( ads_placed === max_ads || ads_placed === ym_codes.length ) { break; }
-		 }
-		 count_till_ad--;
-		}
+var inline_ads = function() {
+  var ads_placed = 0;
+  var ym_codes = ["ym_1210153280377042966","ym_1368917604586339309","ym_1368918492646325230","ym_1368918756996529135"];
+  var min_ps_for_ad = 3;
+  var separating_ps = 5;
+  var min_ps_before_end = 2;
+  var max_ads = 4;
+  var pgs = jQuery("article > p").length;
+
+  var count_till_ad = 0;
+  for (var i = (min_ps_for_ad - 1); i < (pgs - min_ps_before_end); i++ ) {
+    if (count_till_ad < 1) {
+      ad_code({
+        element: jQuery(jQuery("article > p")[i]) ,
+        placement: ym_codes[ads_placed],
+        desktop: false, //yea mobile only 
+      });
+      count_till_ad = separating_ps;
+      ads_placed++;
+      if ( ads_placed === max_ads || ads_placed === ym_codes.length ) { break; }
+    }
+    count_till_ad--;
   }
+}

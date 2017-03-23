@@ -58,7 +58,7 @@
 					<li id="menu_photo_select"><a href="/photoessays">Photos</a></li>
 					<li id="menu_investigations_select"><a href="/topics/investigations">Investigations</a></li>
 					<li id="menu_podcast_select"><a href="/podcasts">Podcasts</a></li>
-					<li id="menu_drum_select"><a href="/kevin-drum">Kevin Drum</a></li>
+					<li id="menu_drum_select"><a href="/blog/kevin-drum">Kevin Drum</a></li>
 					<li id="menu_about_select"><a href="/about">About</a></li>
 					<li id="menu_subscribe_select"><a target="_blank" href="https://secure.motherjones.com/fnx/?action=SUBSCRIPTION&pub_code=MJM&term_pub=MJM&list_source=SEGYN1A&base_country=US">Subscribe</a></li>
 					<li id="menu_donate_select"><a target="_blank" href="https://secure.motherjones.com/fnp/?action=SUBSCRIPTION&list_source=7HEGP003&extra_don=1&abver=A">Donate</a></li>

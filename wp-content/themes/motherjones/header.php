@@ -25,7 +25,7 @@
     var is_fullwidth = false;
 
 	<?php
-	  if ( get_the_ID() ) :
+	  if ( is_singular() ) {
 	    $keyword_term_objs = get_the_terms();
 	    $keyword_term_objs[] = get_the_category()[0];
 	    $keyword_terms = [];
@@ -37,7 +37,11 @@
 	    ad_keywords = '<?php print join( '+', $keyword_terms );?>';
 	    is_post = true;
 	    <?php if ( $is_fullwidth ) { print 'is_fullwidth = true;'; } ?>
-	<?php endif; ?>
+    <?php 
+    } elseif (is_archive()) { ?> 
+      ad_keywords = '<?php print get_queried_object()->slug; ?>';
+    <?php
+    } ?>
 	</script>
 
 	<?php wp_head(); ?>
