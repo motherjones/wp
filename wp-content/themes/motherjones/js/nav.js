@@ -1,14 +1,14 @@
 var expandMenu = function() {
-  $('#mj_menu_select').toggleClass('open');
-  $('#navbar .menu-button').toggleClass('open');
+  jQuery('#mj_menu_select').toggleClass('open');
+  jQuery('#navbar .menu-button').toggleClass('open');
 };
 
 var expandSearch = function(inputContainer) {
-  $('#' + inputContainer).toggleClass('open');
+  jQuery('#' + inputContainer).toggleClass('open');
 };
 
 var hideSearch = function(inputContainer) {
-  $('#' + inputContainer).removeClass('open');
+  jQuery('#' + inputContainer).removeClass('open');
 };
 
 (function($) {
