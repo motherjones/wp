@@ -24,7 +24,7 @@ get_header(); ?>
 			<div class="main-index">
 				<div class="page-header">
 				<?php
-					if ( is_tax() || is_category() ) {
+					if ( is_tag() || is_category() ) {
 						global $wp_query;
 						$term = $wp_query->get_queried_object();
 						echo '<h1 class="page-title promo">' . esc_html( $term->name ) . '</h1>';
