@@ -12,7 +12,13 @@ if ( ! is_active_sidebar( 'sidebar' ) ) {
 }
 ?>
 <div id="sidebar-right">
-	<?php dynamic_sidebar( 'sidebar' ); ?>
+	<?php
+		if ( mj_is_article_type( 'blogpost', get_the_ID() ) ){
+			dynamic_sidebar( 'sidebar-blog' );
+		} else {
+			dynamic_sidebar( 'sidebar' );
+		}
+	?>
 	<script language="javascript">
 			<!--
 			if (typeof MJ_HideRightColAds === 'undefined') {

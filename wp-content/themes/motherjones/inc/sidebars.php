@@ -10,9 +10,14 @@ function mj_widgets_init() {
 	$sidebars = array (
 		// the default widget areas
 		array (
-			'name'          => __( 'Sidebar', 'motherjones' ),
+			'name'          => __( 'Sidebar', 'mj' ),
 	 		'id'            => 'sidebar',
 	 		'description'   => __( 'Shows up on article pages', 'mj' )
+		),
+		array (
+			'name'          => __( 'Blog Sidebar', 'mj' ),
+	 		'id'            => 'sidebar-blog',
+	 		'description'   => __( 'Shows up instead of the main sidebar on blog posts', 'mj' )
 		),
 		array (
 			'name'          => __( 'Ticker', 'mj' ),
