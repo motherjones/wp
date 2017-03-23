@@ -15,6 +15,41 @@
  */
 
 /**
+ * Custom capabilities for authors and editors.
+ */
+function mj_set_capabilities() {
+	global $wp_roles;
+	// Editors should be able to create/manage users.
+	$editor_add_caps = array(
+		'list_users',
+		'create_users',
+		'edit_users',
+	);
+	foreach ( $editor_add_caps as $cap ) {
+		$wp_roles->add_cap( 'editor', $cap );
+	}
+
+	/*
+	 * Authors should be able to edit others posts.
+	 * Also give them some caps typically only for editors:
+	 * - unfiltered_html
+	 * - upload_files
+	 */
+	$author_add_caps = array(
+		'read_private_posts',
+		'edit_private_posts',
+		'edit_others_posts',
+		'unfiltered_html',
+		'upload_files',
+	);
+	foreach ( $author_add_caps as $cap ) {
+		$wp_roles->add_cap( 'author', $cap );
+	}
+}
+add_action( 'admin_init', 'mj_set_capabilities' );
+
+
+/**
  * Modify the user profile screen
  * Remove old contact methods (yahoo, aol and jabber)
  * Add new ones (twitter, facebook, linkedin)
@@ -346,7 +381,7 @@ class MJ_Avatar {
 	function print_avatar_admin_css() { ?>
 		<style type="text/css">
 			.user-profile-picture {
-			  display: none;
+				display: none;
 			}
 			#avatar-display img {
 				padding: 4px;

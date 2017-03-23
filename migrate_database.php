@@ -1168,7 +1168,7 @@ $roles_data->execute();
 
 $roles_insert = $wp->prepare("
 UPDATE pantheon_wp.wp_usermeta
-SET meta_value = 'a:1:{s:6:\"editor\";s:1:\"1\";}'
+SET meta_value = 'a:1:{s:6:\"author\";s:1:\"1\";}'
 WHERE meta_key = 'wp_capabilities'
 AND user_id = ?
 ;
