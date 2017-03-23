@@ -71,6 +71,7 @@ function mj_widgets() {
 		'mj_author_bio_widget' => '/inc/widgets/mj-author-bio.php',
 		'mj_related_articles' => '/inc/widgets/mj-related-articles.php',
 		'mj_blog_pager' => '/inc/widgets/mj-blog-pager.php',
+		'mj_top_stories_widget' => '/inc/widgets/mj-top-stories.php',
 	);
 	foreach ( $register as $key => $val ) {
 		require_once( get_template_directory() . $val );

@@ -8,8 +8,6 @@
   Author URI: http://www.motherjones.com
 */
 
-require_once('top-stories-widget.php');
-
 require_once('motherjones-image-size.php');
 MJ_Images();
 
