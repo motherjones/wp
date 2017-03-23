@@ -25,6 +25,7 @@ jQuery(document).ready(function() {
             || url.match(/vimeo/)
             || url.match(/msnbc/)
             || url.match(/livestream/)
+            || url.match(/datawrapper/)
             || url.match(/facebook.com\/plugins\/video.php/)
         ) {
             mj_fix_embed($this);

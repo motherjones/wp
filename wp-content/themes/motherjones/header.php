@@ -26,8 +26,8 @@
 
 	<?php
 	  if ( is_singular() ) {
-	    $keyword_term_objs = get_the_terms();
-	    $keyword_term_objs[] = get_the_category()[0];
+	    $keyword_term_objs = get_the_tags(get_the_ID());
+	    $keyword_term_objs[] = get_the_category(get_the_ID())[0];
 	    $keyword_terms = [];
 	    $is_fullwidth = get_post_type() === 'mj_full_width';
 	    foreach ( $keyword_term_objs as $obj ) {
