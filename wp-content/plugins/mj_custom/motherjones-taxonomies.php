@@ -13,6 +13,7 @@ if ( !class_exists( 'MJ_Taxonomy' ) ) {
         'assign_terms' => 'edit_posts',
         'edit_terms' => 'update_core',
         'delete_terms' => 'update_core',
+        'manage_terms' => 'update_core',
       ),
       'types'  => array('post')
     );
