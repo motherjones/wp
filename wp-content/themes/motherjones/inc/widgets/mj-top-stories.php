@@ -5,11 +5,11 @@ class mj_top_stories_widget extends WP_Widget {
 		/* Widget settings. */
 		$widget_ops = array(
 			'classname' 	=> 'mj_top_stories_widget',
-			'description' 	=> __( 'Display bio and contact info for author(s) on a single post.', 'mj' ),
+			'description' 	=> __( 'Display the top stories set in zoninator.', 'mj' ),
 		);
 
 		/* Create the widget. */
-		parent::__construct( 'mj_top_stories_widget', __( 'Display the top stories set in zoninator', 'mj' ), $widget_ops );
+		parent::__construct( 'mj_top_stories_widget', __( 'Top Stories', 'mj' ), $widget_ops );
 	}
 
 	// Creating widget front-end
