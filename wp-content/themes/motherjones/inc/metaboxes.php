@@ -238,8 +238,6 @@ largo_add_meta_box(
 	'default'
 );
 function mj_tags_meta_box_display( $post ) {
-	//global $post;
-	//print_r( $post );
 	$all_tags = get_terms( array( 'taxonomy' => 'post_tag', 'hide_empty' => 0 ) );
 
 	// Tags on this post already.
