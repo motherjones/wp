@@ -64,15 +64,8 @@ get_header(); ?>
 
 					<footer class="entry-footer">
 						<?php
-							dynamic_sidebar( 'content-end' );
 							mj_share_tools( 'bottom' );
-							get_template_part( 'template-parts/author-bio' );
-							get_template_part( 'template-parts/members-like-you' );
-							if ( mj_is_article_type( 'blogpost', $post->ID ) ) {
-								get_template_part( 'template-parts/blog-pager' );
-							} else {
-								get_template_part( 'template-parts/related-articles' );
-							}
+							dynamic_sidebar( 'content-end' );
 						?>
 					</footer><!-- .entry-footer -->
 
@@ -82,7 +75,7 @@ get_header(); ?>
 			</main><!-- .site-main -->
 			<?php
 				if ( ! is_page() ) {
-					print get_disqus_thread( get_the_ID() );
+					comments_template();
 				}
 				if ( ! empty( $meta['js'][0] ) ) {
 					printf(

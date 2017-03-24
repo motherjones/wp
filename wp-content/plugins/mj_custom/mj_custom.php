@@ -8,16 +8,10 @@
   Author URI: http://www.motherjones.com
 */
 
-require_once('motherjones-image-size.php');
-MJ_Images();
-
 require_once('motherjones-taxonomies.php');
 MJ_Taxonomy();
 
 //require_once('mj_custom/motherjones-permalinks.php');
 //MJ_Permalinks();
-
-require_once('motherjones-user-types.php');
-MJ_Users();
 
 ?>
