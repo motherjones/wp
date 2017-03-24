@@ -82,7 +82,7 @@ get_header(); ?>
 			</main><!-- .site-main -->
 			<?php
 				if ( ! is_page() ) {
-					print get_disqus_thread( get_the_ID() );
+					comments_template();
 				}
 				if ( ! empty( $meta['js'][0] ) ) {
 					printf(
