@@ -118,12 +118,6 @@ class MJ {
 			1350,
 			true
 		);
-		add_image_size(
-			'medium_large',
-			MEDIUM_LARGE_WIDTH,
-			MEDIUM_LARGE_HEIGHT,
-			true
-		);
 
 		add_filter( 'pre_option_thumbnail_size_w', function(){
 			return 208;
