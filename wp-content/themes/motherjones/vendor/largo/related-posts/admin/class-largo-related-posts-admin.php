@@ -208,12 +208,13 @@ class Largo_Related_Posts_Admin {
 				continue;
 			} else {
 				// post_id as key, post title as value
-				$data[$item[0]] = esc_html( $item[1] );
+				//$data[$item[0]] = esc_html( $item[1] );
+				$data[] = $item[0];
 			}
 
 		}
 
-		update_post_meta( $_POST['post_id'], 'manual_related_posts', $data );
+		update_post_meta( $_POST['post_id'], 'mj_related_articles', $data );
 		die();
 	}
 
@@ -247,17 +248,17 @@ class Largo_Related_Posts_Admin {
 
 		$value = get_post_meta( $post->ID, 'largo_custom_related_posts', true );
 
-		echo '<p><strong>' . __('Related Posts', 'largo') . '</strong><br />';
-		echo __('To override the default related posts functionality,  enter post titles to manually select below.') . '</p>';
+		echo __( 'Start typing to search by post title.', 'mj' ) . '</p>';
 		echo '<input type="text" id="se_search_element_id" name="se_search_element_id" value="" />';
 
 		echo '<div id="related-posts-saved">';
 			echo '<ul>';
-				$manual_related_posts = get_post_meta( $post->ID, 'manual_related_posts', true );
+				$related_posts = get_post_meta( $post->ID, 'mj_related_articles', true );
 
-				if ( $manual_related_posts ) {
-					foreach ( $manual_related_posts as $key => $title ) {
-						echo '<li data-id="' . $key . '" data-title="' . $title . '">' . $title . ' | <a class="remove-related">Remove</a></li>';
+				if ( $related_posts ) {
+					foreach ( $related_posts as $related_post ) {
+						$title = get_the_title( $related_post );
+						echo '<li data-id="' . esc_attr( $related_post ) . '" data-title="' . esc_html( $title ) . '">' . esc_html( $title ) . ' | <a class="remove-related">Remove</a></li>';
 					}
 				}
 			echo '</ul>';
