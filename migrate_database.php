@@ -900,9 +900,7 @@ $meta_data->execute();
 
 $wp->beginTransaction();
 while ( $meta = $meta_data->fetch(PDO::FETCH_ASSOC)) {
-  $related_value = serialize( array(
-    'relateds' => explode(',', $meta['relateds'])
-  ) );
+  $related_value = serialize( explode(',', $meta['relateds']) );
 
 	$meta_insert->execute(array($meta['nid'], 'mj_related_articles', $related_value) );
 }
