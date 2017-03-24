@@ -1235,7 +1235,7 @@ CONVERT_TZ(FROM_UNIXTIME("1970-1-1 00:00:00"), "PST8PDT","UTC"),
 :guid,
 "",
 "attachment",
-"publish",
+"inherit",
 NULL,
 :post_mime_type
 )
@@ -1342,7 +1342,7 @@ CONVERT_TZ(FROM_UNIXTIME(:post_modified), "PST8PDT","UTC"),
 :guid,
 "",
 "attachment",
-IF(:status = 1, "publish", "draft"),
+"inherit",
 :post_parent,
 :post_mime_type
 )
@@ -1473,7 +1473,7 @@ CONVERT_TZ(FROM_UNIXTIME(:post_modified), "PST8PDT","UTC"),
 :guid,
 "",
 "attachment",
-IF(:status = 1, "publish", "draft"),
+"inherit",
 :post_parent,
 :post_mime_type
 )
@@ -1596,7 +1596,7 @@ CONVERT_TZ(FROM_UNIXTIME(:post_modified), "PST8PDT","UTC"),
 :guid,
 "",
 "attachment",
-IF(:status = 1, "publish", "draft"),
+"inherit",
 :post_parent,
 :post_mime_type
 )
