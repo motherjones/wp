@@ -31,11 +31,31 @@
  * By default we use minified CSS and JS files.
  * set MJ_DEBUG to TRUE to use unminified JavaScript files
  * and unminified CSS files with sourcemaps for debugging purposes.
- *
- * @since 1.0
  */
 if ( ! defined( 'MJ_DEBUG' ) ) {
 	define( 'MJ_DEBUG', false );
+}
+
+/**
+ * Image size constants.
+ */
+if ( ! defined( 'LARGE_WIDTH' ) ) {
+	define( 'LARGE_WIDTH', 990 );
+}
+if ( ! defined( 'LARGE_HEIGHT' ) ) {
+	define( 'LARGE_HEIGHT', 557 );
+}
+if ( ! defined( 'MEDIUM_LARGE_WIDTH' ) ) {
+	define( 'MEDIUM_LARGE_WIDTH', 630 );
+}
+if ( ! defined( 'MEDIUM_LARGE_HEIGHT' ) ) {
+	define( 'MEDIUM_LARGE_HEIGHT', 354 );
+}
+if ( ! defined( 'MEDIUM_WIDTH' ) ) {
+	define( 'MEDIUM_WIDTH', 485 );
+}
+if ( ! defined( 'MEDIUM_HEIGHT' ) ) {
+	define( 'MEDIUM_HEIGHT', 273 );
 }
 
 /**
@@ -55,6 +75,7 @@ class MJ {
 	 */
 	private function load() {
 		$this->require_files();
+		$this->register_media_sizes();
 	}
 	/**
 	 * Load required files
@@ -83,6 +104,57 @@ class MJ {
 			require_once dirname( __FILE__ ) . '/vendor/largo/media-credit.php';
 		}
 	}
+	/**
+	 * Register image and media sizes associated with the theme
+	 */
+	private function register_media_sizes() {
+
+		add_theme_support( 'post-thumbnails' );
+		set_post_thumbnail_size( 117, 208, true );
+
+		add_image_size(
+			'full_width_giant',
+			2400,
+			1350,
+			true
+		);
+		add_image_size(
+			'medium_large',
+			MEDIUM_LARGE_WIDTH,
+			MEDIUM_LARGE_HEIGHT,
+			true
+		);
+
+		add_filter( 'pre_option_thumbnail_size_w', function(){
+			return 208;
+		});
+		add_filter( 'pre_option_thumbnail_size_h', function(){
+			return 117;
+		});
+		add_filter( 'pre_option_thumbnail_crop', '__return_true' );
+		add_filter( 'pre_option_medium_size_w', function(){
+			return MEDIUM_WIDTH;
+		});
+		add_filter( 'pre_option_medium_size_h', function(){
+			return MEDIUM_HEIGHT;
+		});
+		add_filter( 'pre_option_large_size_w', function(){
+			return LARGE_WIDTH;
+		});
+		add_filter( 'pre_option_large_size_h', function(){
+			return LARGE_HEIGHT;
+		});
+		add_filter( 'pre_option_embed_autourls', '__return_true' );
+		add_filter( 'pre_option_embed_size_w', function(){
+			return LARGE_WIDTH;
+		});
+		add_filter( 'pre_option_embed_size_h', function(){
+			return LARGE_HEIGHT;
+		});
+
+	}
+
+
 }
 /**
  * Load our MJ instance
