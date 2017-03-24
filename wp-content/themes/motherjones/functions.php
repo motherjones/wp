@@ -239,10 +239,3 @@ function mj_content_width() {
 	$GLOBALS['content_width'] = apply_filters( 'mj_content_width', 840 );
 }
 add_action( 'after_setup_theme', 'mj_content_width', 0 );
-
-function mj_set_posts_per_page($query) {
-	if ( array_key_exists('blog', $query->query) ) {
-    $query->set( 'posts_per_page', '10' );
-	}
-}
-add_action( 'pre_get_posts', 'mj_set_posts_per_page' );
