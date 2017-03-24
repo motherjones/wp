@@ -109,7 +109,6 @@ class MJ {
 	 */
 	private function register_media_sizes() {
 
-		add_theme_support( 'post-thumbnails' );
 		set_post_thumbnail_size( 117, 208, true );
 
 		add_image_size(
