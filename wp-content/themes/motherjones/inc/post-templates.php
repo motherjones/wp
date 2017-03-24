@@ -79,7 +79,7 @@ add_filter( 'body_class', 'mj_article_type_class' );
 // utility function to see if we're looking at a given post type
 function mj_is_article_type( $slug, $post_id ) {
   $article_type = get_the_terms( $post_id, 'mj_article_type' );
-  if ( $article_type[0]->slug === $slug ) {
+  if ( $article_type && $article_type[0]->slug === $slug ) {
     return true;
   }
   return false;
