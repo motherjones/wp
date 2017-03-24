@@ -387,7 +387,7 @@ function largo_add_featured_image_meta_box() {
 		'largo_featured_image_metabox',
 		__( 'Featured Media', 'largo' ),
 		'largo_featured_image_metabox_callback',
-		array( 'post' ),
+		array( 'post', 'page' ),
 		'after_title',
 		'core'
 	);
