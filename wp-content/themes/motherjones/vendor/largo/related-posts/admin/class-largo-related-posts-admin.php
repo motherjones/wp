@@ -96,13 +96,12 @@ class Largo_Related_Posts_Admin {
 		 * class.
 		 */
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/largo-related-posts-admin.js', array( 'jquery' ), $this->version, false );
-		wp_enqueue_script('jquery-ui-autocomplete', '', array('jquery-ui-widget', 'jquery-ui-position'), '1.8.6');
+		wp_enqueue_script( 'jquery-ui-autocomplete', '', array( 'jquery-ui-widget', 'jquery-ui-position' ), '1.8.6' );
 
 	}
 
 	/**
-	 * Add javascript to trigger ajax search for manual related posts 
+	 * Add javascript to trigger ajax search for manual related posts
 	 *
 	 * @since    1.0.0
 	 */
@@ -112,7 +111,7 @@ class Largo_Related_Posts_Admin {
 			var se_ajax_url = '<?php echo admin_url('admin-ajax.php'); ?>';
 
 			jQuery(document).ready(function($) {
-			
+
 				$('input#se_search_element_id').autocomplete({
 					source: se_ajax_url + '?action=related_posts_ajax_search',
 					select: function (event, ui) {
@@ -130,7 +129,7 @@ class Largo_Related_Posts_Admin {
 						// Save the list in it's current state
 						jQuery.post( ajaxurl, {
 							action: 'related_posts_ajax_save',
-							data: optionTexts, 
+							data: optionTexts,
 							post_id: $('#post_ID').val(),
 							largo_related_posts_nonce:  $('#largo_related_posts_nonce').attr('value'),
 						});
@@ -147,21 +146,21 @@ class Largo_Related_Posts_Admin {
 						// Save the list without the new item
 					$.post(ajaxurl, {
 						action: 'related_posts_ajax_save',
-						data:  optionTexts, 
+						data:  optionTexts,
 						post_id: $('#post_ID').val(),
 						remove: jQuery(this).parent().attr("data-id"),
 						largo_related_posts_nonce:  $('#largo_related_posts_nonce').attr('value'),
 					});
 					$(this).parent().remove();
 				});
- 
+
 			});
 		</script>
 		<?php
 	}
 
 	/**
-	 * Perform ajax search using jQuery Autocomplete 
+	 * Perform ajax search using jQuery Autocomplete
 	 *
 	 * @since    1.0.0
 	 */
@@ -180,7 +179,7 @@ class Largo_Related_Posts_Admin {
 		foreach ($wpdb->get_results($query) as $row) {
 			$suggestion['value'] = $row->ID;
 			$suggestion['label'] = $row->post_title;
-			
+
 			$suggestions[] = $suggestion;
 		}
 
@@ -190,7 +189,7 @@ class Largo_Related_Posts_Admin {
 	}
 
 	/**
-	 * Perform ajax save 
+	 * Perform ajax save
 	 *
 	 * @since    1.0.0
 	 */
@@ -219,7 +218,7 @@ class Largo_Related_Posts_Admin {
 	}
 
 	/**
-	 * Register the related posts metabox 
+	 * Register the related posts metabox
 	 *
 	 * @since    1.0.0
 	 */
@@ -227,7 +226,7 @@ class Largo_Related_Posts_Admin {
 		add_meta_box(
 			'largo_related_posts',
 			__( 'Related Posts', 'largo' ),
-			array( $this, 'largo_related_posts_meta_box_display' ), 
+			array( $this, 'largo_related_posts_meta_box_display' ),
 			'post',
 			'side',
 			'core'
@@ -235,7 +234,7 @@ class Largo_Related_Posts_Admin {
 	}
 
 	/**
-	 * Related posts metabox callback 
+	 * Related posts metabox callback
 	 *
 	 * Allows the user to set custom related posts for a post.
 	 *
@@ -260,7 +259,7 @@ class Largo_Related_Posts_Admin {
 					foreach ( $manual_related_posts as $key => $title ) {
 						echo '<li data-id="' . $key . '" data-title="' . $title . '">' . $title . ' | <a class="remove-related">Remove</a></li>';
 					}
-				}	
+				}
 			echo '</ul>';
 		echo '</div>';
 
