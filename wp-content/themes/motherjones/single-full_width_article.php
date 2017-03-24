@@ -48,7 +48,7 @@ while ( have_posts() ) : the_post();
 			?>
 			<p class="byline-dateline">
 				<span class="byline">
-					<?php print esc_html( mj_byline( get_the_ID() ) ); ?>
+					<?php print mj_byline( get_the_ID() ); ?>
 				</span>
 				<span class="dateline">
 					<?php print esc_html( mj_dateline( get_the_ID() ) ); ?>
