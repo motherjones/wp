@@ -6,7 +6,7 @@ $password=$argv[1];
 $d6_db = "mjd6";
 $wp_db = "pantheon_wp";
 $FILEDIR_ABS = "http://dev-mjwordpress.pantheonsite.io/wp-content/uploads/";
-$FILEDIR = "wp-content/uploads/";
+$FILEDIR = "";
 
 
 $d6 = new PDO("mysql:host=$hostname;dbname=$d6_db", $username, $password);
