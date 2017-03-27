@@ -6,14 +6,12 @@
  * @subpackage Mother_Jones
  * @since Mother Jones 1.0
  */
-
-
 class MJ_social_tags {
   /**
    * Places an action to print meta tags at head creation time
    */
 	function __construct() {
-		add_action( 'wp_head', array( &$this, 'place_social_meta_tags'  ) );
+		add_action( 'wp_head', array( &$this, 'place_social_meta_tags' ) );
 	}
 
   CONST FB_SOCIAL_FIELDS = Array(
