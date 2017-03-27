@@ -121,7 +121,9 @@ class MJ_social_tags {
 
 	private function write_facebook_tags() {
 		foreach ( $this->social_information as $property => $value ) {
-			if ( ! array_key_exists( $property, self::FB_SOCIAL_FIELDS ) ) { continue; }
+			if ( ! array_key_exists( $property, self::FB_SOCIAL_FIELDS ) ) {
+				continue;
+			}
 			printf( "<meta property='%s' content='%s'/>\n",
 				self::FB_SOCIAL_FIELDS[ $property ], esc_attr( $value ) );
 		}
