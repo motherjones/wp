@@ -9,6 +9,9 @@
 
 
 class MJ_social_tags {
+  /**
+   * Places an action to print meta tags at head creation time
+   */
 	function __construct() {
 		add_action( 'wp_head', array( &$this, 'place_social_meta_tags'  ) );
 	}
@@ -44,58 +47,70 @@ class MJ_social_tags {
     'card' => 'summary_large_image',
   );
 
-  private $social_information = Array();
-
+  /**
+   * Determine which function to use to get the social data,
+   * then write the facebook and twitter tags with it
+   */
   public function place_social_meta_tags() {
     if ( is_author() ) {
-      $this->set_social_data_for_authors();
+      $social_information = $this->get_social_data_for_authors();
     } elseif ( is_single() ) {
-      $this->set_social_data_for_stories();
+      $social_information = $this->get_social_data_for_stories();
     } elseif ( is_archive() ) {
-      $this->set_social_data_for_indexes();
+      $social_information = $this->get_social_data_for_indexes();
     } elseif ( is_home() ) {     
-      $this->set_social_data_for_the_homepage();
+      $social_information = $this->get_social_data_for_the_homepage();
     } else {
       return;
     }
-    $this->write_facebook_tags();
-    $this->write_twitter_tags();
+    $this->write_facebook_tags($social_information);
+    $this->write_twitter_tags($social_information);
   }
 
-  private function set_social_data_for_authors() {
+  /**
+   * Get the information that will be used to create the social meta tags
+   * on author pages
+   */
+  private function get_social_data_for_authors() {
     $author = get_queried_object();
-    $this->social_information []= Array('url', largo_get_current_url());
-    $this->social_information []= Array('content_type', 'profile');
-    $this->social_information []= Array('title', $author->display_name); 
-    $this->social_information []= Array('first_name', $author->user_firstname);
-    $this->social_information []= Array('last_name', $author->user_lastname);
-    $this->social_information []= Array('user_name', $author->display_name);
-    $this->social_information []= Array('image',
+    $author_social_data = Array();
+    $author_social_data []= Array('url', largo_get_current_url());
+    $author_social_data []= Array('content_type', 'profile');
+    $author_social_data []= Array('title', $author->display_name); 
+    $author_social_data []= Array('first_name', $author->user_firstname);
+    $author_social_data []= Array('last_name', $author->user_lastname);
+    $author_social_data []= Array('user_name', $author->display_name);
+    $author_social_data []= Array('image',
       wp_get_attachment_image_src( $author->mj_author_image_id )[0]);
-
+    return $author_social_data;
   }
 
-  private function set_social_data_for_stories() {
-    $this->social_information []= Array('url', largo_get_current_url());
-    $this->social_information []= Array('content_type', 'article');
-    $this->social_information []= Array('title', $meta['mj_social_hed'][0] 
+  /**
+   * Get the information that will be used to create the social meta tags
+   * for posts and pages
+   */
+  private function get_social_data_for_stories() {
+    $story_social_data = Array();
+    $story_social_data []= Array('url', largo_get_current_url());
+    $story_social_data []= Array('content_type', 'article');
+    $story_social_data []= Array('title', $meta['mj_social_hed'][0] 
       ?: get_the_title());
-    $this->social_information []= Array('dek', $meta['mj_social_dek'][0] 
+    $story_social_data []= Array('dek', $meta['mj_social_dek'][0] 
       ?: $meta['mj_dek'][0]);
-    $this->social_information []= Array('image', 
+    $story_social_data []= Array('image', 
       get_the_post_thumbnail_url(null, 'social_card') 
       ?: (has_term('kevin-drum', 'blog') 
-        ? get_site_url() .'/themes/motherjones/img/drum_1024.jpg'
-        : get_site_url() .'/themes/motherjones/img/mojo_nomaster.jpg')
+        ? get_site_url() . '/themes/motherjones/img/drum_1024.jpg'
+        : get_site_url() . '/themes/motherjones/img/mojo_nomaster.jpg')
     );
 
-    $this->social_information []= Array('published', get_the_date('c')); //should be ISO 8601
-    $this->social_information []= Array('modified', get_the_modified_date('c'));
-    $this->social_information []= Array('category', get_the_category()[0]->name);
+    $story_social_data []= Array('published', get_the_date('c')); //should be ISO 8601
+    $story_social_data []= Array('modified', get_the_modified_date('c'));
+    $story_social_data []= Array('category', get_the_category()[0]->name);
 
-    $terms = get_the_terms(get_the_ID(), 'post_tag');
+    $terms = get_the_terms(get_the_ID(), 'post_tag') ?: Array();
     foreach ($terms as $term) {
-      $this->social_information []= Array('tag', $term->name);
+      $story_social_data []= Array('tag', $term->name);
     }
 
     if ( function_exists( 'get_coauthors' ) ) {
@@ -104,26 +119,45 @@ class MJ_social_tags {
       $authors = array( get_user_by( 'id', get_queried_object()->post_author ) );
     }
     foreach ($authors as $author) {
-      $this->social_information []= Array('author', $author->display_name);
+      $story_social_data []= Array('author', $author->display_name);
     }
+    return $story_social_data;
   }
 
-  private function set_social_data_for_indexes() {
-    $this->social_information []= Array('url', largo_get_current_url());
-    $this->social_information []= Array('title', 'Mother Jones: ' . get_queried_object()->name);
-    $this->social_information []= Array('content_type', 'webpage');
-    $this->social_information []= Array('image', get_site_url() .'/themes/motherjones/img/mojo_nomaster.jpg');
+  /**
+   * Get the information that will be used to create the social meta tags
+   * for index pages, which includes tag pages, category pages, and blog indexes
+   */
+  private function get_social_data_for_indexes() {
+    $index_social_data = Array();
+    $index_social_data []= Array('url', largo_get_current_url());
+    $index_social_data []= Array('title', 'Mother Jones: ' . get_queried_object()->name);
+    $index_social_data []= Array('content_type', 'webpage');
+    $index_social_data []= Array('image', 
+      get_site_url() . '/themes/motherjones/img/mojo_nomaster.jpg');
+    return $index_social_data;
   }
 
-  private function set_social_data_for_the_homepage() {
-    $this->social_information []= Array('url', largo_get_current_url());
-    $this->social_information []= Array('title', "Mother Jones Magazine");
-    $this->social_information []= Array('content_type', 'webpage');
-    $this->social_information []= Array('image', get_site_url() .'/themes/motherjones/img/mojo_nomaster.jpg');
+  /**
+   * Get the information that will be used to create the social meta tags
+   * for the homepage
+   */
+  private function get_social_data_for_the_homepage() {
+    $homepage_social_data = Array();
+    $homepage_social_data []= Array('url', largo_get_current_url());
+    $homepage_social_data []= Array('title', "Mother Jones Magazine");
+    $homepage_social_data []= Array('content_type', 'webpage');
+    $homepage_social_data []= Array('image', 
+      get_site_url() . '/themes/motherjones/img/mojo_nomaster.jpg');
+    return $homepage_social_data;
   }
 
-  private function write_facebook_tags() {
-    foreach ( $this->social_information as $value ) {
+  /**
+   * writes the meta tags for facebook from the data collected earlier and 
+   * the constants
+   */
+  private function write_facebook_tags($social_data) {
+    foreach ( $social_data as $value ) {
       if (!array_key_exists($value[0], self::FB_SOCIAL_FIELDS)) { continue; }
       printf("<meta property='%s' content='%s'/>\n", 
         self::FB_SOCIAL_FIELDS[$value[0]], $value[1]);
@@ -133,8 +167,12 @@ class MJ_social_tags {
     }
   }
 
-  private function write_twitter_tags() {
-    foreach ( $this->social_information as $value) {
+  /**
+   * writes the meta tags for twitter from the collected data and 
+   * the constants
+   */
+  private function write_twitter_tags($social_data) {
+    foreach ( $social_data as $value) {
       if (!array_key_exists($value[0], self::TWITTER_SOCIAL_FIELDS)) { continue; }
       printf("<meta property='twitter:%s' content='%s'/>\n", 
         self::TWITTER_SOCIAL_FIELDS[$value[0]], $value[1]);
