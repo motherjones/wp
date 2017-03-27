@@ -15,7 +15,7 @@ $reflex-prefix: null !default;
 // -------------------------
 // Reflex adds a lot of css propertie to support older browsers that don't support flexbox layout.
 // If you prefer to use this as a purely flexbox grid without legacy support then set this to false
-$legacy-support: true !default;
+$legacy-support: false !default;
 
 // Responsive visibility helpers
 // -------------------------
