@@ -111,7 +111,6 @@ class MJ {
 	 */
 	private function register_media_sizes() {
 
-		add_theme_support( 'post-thumbnails' );
 		set_post_thumbnail_size( 117, 208, true );
 
 		add_image_size(
@@ -249,10 +248,3 @@ function mj_content_width() {
 	$GLOBALS['content_width'] = apply_filters( 'mj_content_width', 840 );
 }
 add_action( 'after_setup_theme', 'mj_content_width', 0 );
-
-function mj_set_posts_per_page($query) {
-	if ( array_key_exists('blog', $query->query) ) {
-    $query->set( 'posts_per_page', '10' );
-	}
-}
-add_action( 'pre_get_posts', 'mj_set_posts_per_page' );
