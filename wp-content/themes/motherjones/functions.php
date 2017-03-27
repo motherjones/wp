@@ -93,6 +93,7 @@ class MJ {
 			'/inc/metaboxes.php',
 			'/inc/post-templates.php',
 			'/inc/sidebars.php',
+      '/inc/social-tags.php',
 			'/inc/template-tags.php',
 			'/inc/users.php',
 		);
@@ -117,6 +118,13 @@ class MJ {
 			'full_width_giant',
 			2400,
 			1350,
+			true
+		);
+
+		add_image_size(
+			'social_card',
+			1200,
+			630,
 			true
 		);
 
