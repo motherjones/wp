@@ -83,8 +83,8 @@ class MJ_social_tags {
 		$this->social_information['image'] =
 			get_the_post_thumbnail_url( null, 'social_card' )
 			?: ( has_term( 'kevin-drum', 'blog' )
-				? get_template_directory() . '/img/drum_1024.jpg'
-				: get_template_directory() . '/img/mojo_nomaster.jpg' );
+				? get_template_directory_uri() . '/img/drum_1024.jpg'
+				: get_template_directory_uri() . '/img/mojo_nomaster.jpg' );
 
 		$this->social_information['published'] = get_the_date( 'c' ); // should be ISO 8601.
 		$this->social_information['modified'] = get_the_modified_date( 'c' );
@@ -109,14 +109,14 @@ class MJ_social_tags {
 		$this->social_information['url'] = largo_get_current_url();
 		$this->social_information['title'] = 'Mother Jones: ' . get_queried_object()->name;
 		$this->social_information['content_type'] = 'webpage';
-		$this->social_information['image'] = get_template_directory() . '/img/mojo_nomaster.jpg';
+		$this->social_information['image'] = get_template_directory_uri() . '/img/mojo_nomaster.jpg';
 	}
 
 	private function set_social_data_for_the_homepage() {
 		$this->social_information['url'] = largo_get_current_url();
 		$this->social_information['title'] = 'Mother Jones Magazine';
 		$this->social_information['content_type'] = 'webpage';
-		$this->social_information['image'] = get_template_directory() . '/img/mojo_nomaster.jpg';
+		$this->social_information['image'] = get_template_directory_uri() . '/img/mojo_nomaster.jpg';
 	}
 
 	private function write_facebook_tags() {
