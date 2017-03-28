@@ -6,32 +6,31 @@
  * @subpackage Mother_Jones
  * @since Mother Jones 1.0
  */
+
 global $meta;
 $meta = get_post_meta( get_the_ID() );
-get_header(); ?>
-<div id="content" class="site-content">
-	<div id="primary" class="content-area">
-		<?php
-			while ( have_posts() ) : the_post();
-		?>
-		<main id="main" class="site-main group" role="main">
-			<?php
-				$template_part = ( is_page() ) ? 'page' : 'single';
-				get_template_part( 'template-parts/content', $template_part );
-			?>
-		</main><!-- .site-main -->
-		<?php
+get_header();
+?>
+
+<main id="content" class="site-main group grid" role="main">
+	<?php while ( have_posts() ) : the_post();
+
+			$template_part = ( is_page() ) ? 'page' : 'single';
+			get_template_part( 'template-parts/content', $template_part );
+
 			if ( ! is_page() ) {
+				get_sidebar();
 				comments_template();
 			}
+
 			if ( ! empty( $meta['js'][0] ) ) {
 				printf(
 					'script>%s</script>',
 					$meta['js'][0]
 				);
 			}
-		?>
-		<script language="javascript">
+	?>
+	<script language="javascript">
 			<!--
 			if (typeof MJ_HideBottomROS970x250 === 'undefined') {
 				ad_code({
@@ -51,6 +50,5 @@ get_header(); ?>
 			}
 			//-->
 		</script>
-		<?php endwhile; ?>
-	</div><!-- .content-area -->
+	<?php endwhile; ?>
 <?php get_footer(); ?>
