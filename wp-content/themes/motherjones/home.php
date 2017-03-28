@@ -19,49 +19,46 @@ global $fullwidth_title;
 
 $shown_ids = array();
 ?>
+<main id="main" class="site-main homepage grid" role="main">
+	<div id="homepage-top" class="group grid">
+		<?php
+			$top_stories = z_get_zone_query(
+				'top_stories',
+				array(
+					'posts_per_page' => 10,
+				)
+			);
+			if ( $top_stories->have_posts() ) {
+				$top_stories->the_post();
+				$shown_ids[] = get_the_ID();
+				get_template_part( 'template-parts/homepage-top-story' );
+			}
+		?>
+		<ul id="homepage-top-story-side" class="grid__col-md-3 grid__col-sm-4 grid__col-xs-12">
+		<?php
+			if ( $top_stories->have_posts() ) {
+				for ( $i = 0; $i < 3; $i++ ) {
+					$top_stories->the_post();
+					$shown_ids[] = get_the_ID();
+					get_template_part( 'template-parts/homepage-top-story-side' );
+				}
+			}
+		?>
+		</ul>
+	</div>
 
-<div id="content" class="site-content">
-	<div id="primary" class="content-area">
-		<main id="main" class="site-main homepage" role="main">
-			<div id="homepage-top" class="group">
-				<?php
-					$top_stories = z_get_zone_query(
-						'top_stories',
-						array(
-							'posts_per_page' => 10,
-						)
-					);
-					if ( $top_stories->have_posts() ) {
-						$top_stories->the_post();
-						$shown_ids[] = get_the_ID();
-						get_template_part( 'template-parts/homepage-top-story' );
-					}
-				?>
-				<ul id="homepage-top-story-side">
-					<?php
-						if ( $top_stories->have_posts() ) {
-							for ( $i = 0; $i < 3; $i++ ) {
-								$top_stories->the_post();
-								$shown_ids[] = get_the_ID();
-								get_template_part( 'template-parts/homepage-top-story-side' );
-							}
-						}
-					?>
-				</ul>
-			</div>
-
-			<div id="homepage-first-ad">
-				<script language="javascript">
-				<!--
-				ad_code({
-					desktop: true,
-					placement: 'HomepageATF970x250',
-					height: 2473,
-					doc_write: true,
-				});
-				//-->
-				//</script>
-			</div>
+	<div id="homepage-first-ad" class="homepage-ad grid__col-12 hidden-sm hidden-xs hidden-xxs">
+		<script language="javascript">
+			<!--
+			ad_code({
+				desktop: true,
+				placement: 'HomepageATF970x250',
+				height: 2473,
+				doc_write: true,
+			});
+			//-->
+		</script>
+	</div>
 
 			<div id="homepage-more-top-stories-section" class="group">
 				<div id="homepage-more-top-stories-main">
@@ -255,7 +252,6 @@ $shown_ids = array();
 				</ul>
 			</div>
 		</main><!-- .site-main -->
-	</div><!-- .content-area -->
 
 	<script>
 		ad_code({

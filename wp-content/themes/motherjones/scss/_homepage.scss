@@ -34,9 +34,7 @@
 
   /* top story */
 #homepage-top-story {
-  width: 800;
-  float: left;
-  position: relative;
+  padding-left: 0;
   .article-data {
     position: absolute;
     bottom: 26px;
@@ -54,27 +52,29 @@
       }
     }
   }
-  .hed {
-    margin: 15px 25px;
+  h1.hed {
+    margin: 0.5em 1.5em;
+    font-size: 30px;
+    line-height: 35px;
+    text-transform: none;
   }
   .dek {
-    margin: 15px 145px;
+    margin: 0 2em;
+    font-family: $mallory;
+    font-size: 16px;
+    line-height: 18px;
+  }
+  .byline {
+    font-size: 12px;
   }
   img {
-    width: 800px;
-    height: 450px;
+    width: 100%;
+    height: auto;
   }
 }
 
 #homepage-top-story-side {
-  width: 190px;
-  float: left;
-  padding: 0 15px;
-  margin: 0;
-  .article-data {
-    width: 100%;
-    float: none;
-  }
+  padding: 1em 0 1em 2em;
   li {
     margin-top: 0;
     padding-top: 30px;
@@ -89,9 +89,12 @@
       padding-top: 0;
       background-image: none;
     }
-    &.article-item h3 {
+    h3 {
       line-height: 18px;
     }
+  }
+  @media only screen and (max-width: 768px) {
+    padding: 1em;
   }
 }
   /* end top story */

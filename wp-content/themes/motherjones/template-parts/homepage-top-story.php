@@ -10,7 +10,7 @@
 global $post;
 $post_thumbnail_id = get_post_thumbnail_id( $post->ID );
 ?>
-<div id="homepage-top-story" class="article-item">
+<div id="homepage-top-story" class="article-item grid__col-md-9 grid__col-sm-8 grid__col-xs-12">
 	<?php
 		if ( $post_thumbnail_id ) {
 			echo '<div class="article-image"><a href="' . esc_url( get_permalink() ) . '">';

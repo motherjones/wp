@@ -19,7 +19,7 @@
 get_header(); ?>
 
 <main id="main" class="grid site-main group" role="main">
-	<section class="main-index grid__col-md-8 grid__col-sm-12">
+	<section class="main-index grid__col-md-8 grid__col-sm-9 grid__col-xs-12">
 		<header class="page-header">
 		<?php
 			if ( is_tag() || is_category() ) {

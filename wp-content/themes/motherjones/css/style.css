@@ -1759,9 +1759,7 @@ ul.author-bios {
 
 /* top story */
 #homepage-top-story {
-  width: 800;
-  float: left;
-  position: relative; }
+  padding-left: 0; }
   #homepage-top-story .article-data {
     position: absolute;
     bottom: 26px;
@@ -1775,22 +1773,24 @@ ul.author-bios {
       color: #FF6900; }
       #homepage-top-story .article-data .byline a:hover {
         color: white; }
-  #homepage-top-story .hed {
-    margin: 15px 25px; }
+  #homepage-top-story h1.hed {
+    margin: 0.5em 1.5em;
+    font-size: 30px;
+    line-height: 35px;
+    text-transform: none; }
   #homepage-top-story .dek {
-    margin: 15px 145px; }
+    margin: 0 2em;
+    font-family: Mallory, sans-serif;
+    font-size: 16px;
+    line-height: 18px; }
+  #homepage-top-story .byline {
+    font-size: 12px; }
   #homepage-top-story img {
-    width: 800px;
-    height: 450px; }
+    width: 100%;
+    height: auto; }
 
 #homepage-top-story-side {
-  width: 190px;
-  float: left;
-  padding: 0 15px;
-  margin: 0; }
-  #homepage-top-story-side .article-data {
-    width: 100%;
-    float: none; }
+  padding: 1em 0 1em 2em; }
   #homepage-top-story-side li {
     margin-top: 0;
     padding-top: 30px;
@@ -1804,8 +1804,11 @@ ul.author-bios {
       margin-top: 16px;
       padding-top: 0;
       background-image: none; }
-    #homepage-top-story-side li.article-item h3 {
+    #homepage-top-story-side li h3 {
       line-height: 18px; }
+  @media only screen and (max-width: 768px) {
+    #homepage-top-story-side {
+      padding: 1em; } }
 
 /* end top story */
 /* more top stories */
@@ -2335,11 +2338,6 @@ li.article-item {
     width: 208px;
     margin-right: 15px;
     margin-top: 4px; }
-  li.article-item .byline,
-  li.article-item h3 {
-    max-width: 395px;
-    margin-top: 4px;
-    margin-bottom: 4px; }
   li.article-item h3 {
     font-size: 16px;
     line-height: 24px; }
@@ -2357,10 +2355,6 @@ li.article-item {
     margin: 15px 0 4px; }
   .top-article-item p {
     margin: 0; }
-
-.article-item .article-image,
-.article-item .article-data {
-  float: left; }
 
 /* end article list items */
 h2.widget-title {
