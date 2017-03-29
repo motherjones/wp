@@ -110,7 +110,6 @@
       <!-- Quantcast Tag -->
       <script type="text/javascript">
       var _qevents = _qevents || [];
-
       (function() {
       var elem = document.createElement('script');
       elem.src = (document.location.protocol == "https:" ? "https://secure" : "http://edge") + ".quantserve.com/quant.js";
@@ -119,12 +118,10 @@
       var scpt = document.getElementsByTagName('script')[0];
       scpt.parentNode.insertBefore(elem, scpt);
       })();
-
       _qevents.push({
       qacct:"p-Be0QSW1bbb6Qv"
       });
       </script>
-
       <noscript>
       <div style="display:none;">
       <img src="//pixel.quantserve.com/pixel/p-Be0QSW1bbb6Qv.gif" border="0" height="1" width="1" alt="Quantcast"/>
@@ -132,139 +129,75 @@
       </noscript>
       <!-- End Quantcast tag -->
 
-      <script type="text/javascript">
-      /* <![CDATA[ */
-      var google_conversion_id = 941756981;
-      var google_custom_params = window.google_tag_params;
-      var google_remarketing_only = true;
-      /* ]]> */
-      </script>
-      <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
-      </script>
-      <noscript>
-      <div style="display:inline;">
-      <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/941756981/?value=0&amp;guid=ON&amp;script=0"/>
-      </div>
-      </noscript>
+			<!-- Begin comScore Tag -->
+			<script>
+				var _comscore = _comscore || [];
+				_comscore.push({ c1: "2", c2: "8027488" });
+				(function() {
+					var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+					s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+					el.parentNode.insertBefore(s, el);
+				})();
+			</script>
+			<noscript>
+					<img src="http://b.scorecardresearch.com/p?c1=2&c2=8027488&cv=2.0&cj=1" />
+			</noscript>
+			<!-- End comScore Tag -->
 
-      <script type="text/javascript">
+			<!-- Begin Chartbeat Tag -->
+			<script type='text/javascript'>
+					var _sf_async_config={};
+					/** CONFIGURATION START **/
+					_sf_async_config.uid = 10683;
+					_sf_async_config.domain = 'motherjones.com';
+					<?php
+					if ( is_singular() ) {
+					?>
+						_sf_async_config.sections = '<?php print esc_html(get_the_category(get_the_ID())[0]->name); ?>';
+						<?php 
+						if ( function_exists( 'coauthors' ) ) {
+							$byline = coauthors( ', ', null, null, null, false );
+						} else {
+							$byline = get_the_author();
+						}
+						?>
+						_sf_async_config.authors = "<?php echo esc_html($byline); ?>";
+					<?php 
+					} ?>
+					/** CONFIGURATION END **/
+					(function(){
+						function loadChartbeat() {
+							window._sf_endpt=(new Date()).getTime();
+							var e = document.createElement('script');
+							e.setAttribute('language', 'javascript');
+							e.setAttribute('type', 'text/javascript');
+							e.setAttribute('src',
+								 (('https:' == document.location.protocol) 
+								? 'https://a248.e.akamai.net/chartbeat.download.akamai.com/102508/' 
+								: 'http://static.chartbeat.com/') +
+								 'js/chartbeat.js');
+							document.body.appendChild(e);
+						}
+						var oldonload = window.onload;
+						window.onload = (typeof window.onload != 'function') ?
+							 loadChartbeat : function() { oldonload(); loadChartbeat(); };
+					})();
+			</script>
+			<!-- End Chartbeat Tag -->
 
-      jQuery(document).ready(function() {
-        var gaEventCategory = null;
-        var bodyClasses = jQuery('body').attr('class');
-        var gaEventAction = 'LinkClick';
-        var bodyClassesArray = bodyClasses.split(' ');
+			<!-- Begin ga (Google Analytics) Tag -->
+			<script>
+				(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+				(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+				m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+					})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-        if (jQuery.inArray('front', bodyClassesArray) != -1) {
-          gaEventCategory = 'areaTracking_front';
+				ga('create', 'UA-2458520-1', 'auto');
+				ga('send', 'pageview');
+			</script>
+			<!-- End ga (Google Analytics) Tag -->
 
-          var areaSelectorArray = ['body.front .view-display-id-panel_pane_1 ',
-          'body.front .center-wrapper-above .pane-frontpage-stories',
-          'body.front .pane-views-photoessay-block-3 ',
-          'body.front .pane-motherjones-custom-7 ',
-          'body.front contributors: .pane-motherjones-custom-6 ',
-          'body.front .center-wrapper-below .pane-frontpage-stories',
-          'body.front .pane-views-feedback-block-1 ',
-          'body.front #mymojo ',
-          'body.front .view-most-must-read ',
-          'body.front #disqus-mostpopular ',
-          'body.front #block-block-4 ',
-          'body.front #block-motherjones_custom-8 ',
-          'body.front #block-views-alumni_love-block ',
-          'body.front #block-views-interns-block_1 ',
-          'body.front #front-page-article-lists ',
-          'body.front #footerlinks '
-          ];
-        } else if (jQuery.inArray('node-type-article', bodyClassesArray) != -1) {
-          gaEventCategory = 'areaTracking_article';
 
-          var areaSelectorArray = ['body.node-type-article #node-header',
-          'body.node-type-article #node-body-top',
-          'body.node-type-article #node-body-bottom',
-          'body.node-type-article #node-footer',
-          'body.node-type-article #related-articles',
-          'body.node-type-article #mymojo',
-          'body.node-type-article div.blockname-block-views-todays-top-stories',
-          'body.node-type-article div.view-most-must-read',
-          'body.node-type-article div.disqus-mostpopular',
-          'body.node-type-article div.blockname-block-block-intune--inprint-sidebar-block',
-          'body.node-type-article #ticker',
-          'body.node-type-article #primary',
-          'body.node-type-article #block-views-photoessay-block_1',
-          'body.node-type-article #footerlinks'
-          ];
-        } else if (jQuery.inArray('node-type-blogpost', bodyClassesArray) != -1) {
-
-          gaEventCategory = 'areaTracking_blogpost';
-
-          var areaSelectorArray = ['body.node-type-blogpost #node-header',
-          'body.node-type-blogpost #blog-nav',
-          'body.node-type-blogpost #node-body-top',
-          'body.node-type-blogpost #node-body-bottom',
-          'body.node-type-blogpost #node-footer',
-          'body.node-type-blogpost #related-articles',
-          'body.node-type-blogpost #mymojo',
-          'body.node-type-blogpost div.blockname-block-views-todays-top-stories',
-          'body.node-type-blogpost div.view-most-must-read',
-          'body.node-type-blogpost div.disqus-mostpopular',
-          'body.node-type-blogpost div.blockname-block-block-intune--inprint-sidebar-block',
-          'body.node-type-blogpost #ticker',
-          'body.node-type-blogpost #primary',
-          'body.node-type-blogpost #block-views-photoessay-block_1',
-          'body.node-type-blogpost #footerlinks'
-          ];
-        } else if (jQuery.inArray('node-type-photoessay-image', bodyClassesArray) != -1) {
-
-          gaEventCategory = 'areaTracking_photoessay-image';
-
-          var areaSelectorArray = ['body.node-type-photoessay-image .sidebar-right a.photoessay-forward',
-          'body.node-type-photoessay-image .sidebar-right a.photoessay-back',
-          'body.node-type-photoessay-image .sidebar-right a.photoessay-rewind',
-          'body.node-type-photoessay-image .photoessay-controls a.photoessay-forward',
-          'body.node-type-photoessay-image .photoessay-controls a.photoessay-back',
-          'body.node-type-photoessay-image .photoessay-controls a.photoessay-rewind',
-          'body.node-type-photoessay-image #related-articles',
-          'body.node-type-photoessay-image div.blockname-block-views-todays-top-stories',
-          'body.node-type-photoessay-image #primary',
-          'body.node-type-photoessay-image #footerlinks',
-          'body.node-type-photoessay-image a.colorbox-thumbs',
-          'body.node-type-photoessay-image a.larger-image-link',
-          'body.node-type-photoessay-image a.see-all',
-          'body.node-type-photoessay-image .photoessay-essay a',
-          'body.node-type-photoessay-image #node-footer',
-          'body.node-type-photoessay-image #node-footer div.fblike_btn',
-          'body.node-type-photoessay-image .photoessay-share-buttons',
-          'body.node-type-photoessay-image .photoessay-share-buttons div.fblike_btn',
-          'body.node-type-photoessay-image .sidebar-right .view-id-photoessay',
-          'body.node-type-photoessay-image #block-block-60',
-          'body.node-type-photoessay-image #block-block-396'
-          ];
-        } else if (jQuery.inArray('page-politics', bodyClassesArray) != -1) {
-          gaEventCategory = 'areaTracking_politics';
-
-          var areaSelectorArray = ['body.page-politics div.views-row-1',
-          'body.page-politics div.view-section-page-articles',
-          'body.page-politics #mymojo',
-          'body.page-politics div.blockname-block-views-todays-top-stories',
-          'body.page-politics div.view-most-must-read',
-          'body.page-politics div.disqus-mostpopular',
-          'body.page-politics div.blockname-block-block-intune--inprint-sidebar-block',
-          'body.page-politics #ticker',
-          'body.page-politics #primary',
-          'body.page-politics #footerlinks'
-          ];
-        }
-        if (gaEventCategory != null) {
-          for (var selector in areaSelectorArray) {
-            jQuery(areaSelectorArray[selector] + ' a').click(function(selectorString) { return function(){ _gaq.push(['_trackEvent', gaEventCategory, gaEventAction, selectorString]); }}(areaSelectorArray[selector]));
-
-          }
-        }
-      });
-      </script>
-
-      <!--Ad code for in content ad unit.  Uses jquery to only load on pages that do not have divs with a class named inline or inline-nav -->
-      <!-- End of ad code for in content Tag -->
       <?php dynamic_sidebar( 'page-end' ); ?>
 	</footer><!-- .site-footer -->
 	<?php wp_footer(); ?>
