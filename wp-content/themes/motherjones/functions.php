@@ -58,6 +58,7 @@ if ( ! defined( 'MEDIUM_HEIGHT' ) ) {
 	define( 'MEDIUM_HEIGHT', 273 );
 }
 
+
 /**
  * A class to represent the one true MJ theme instance
  */
@@ -93,6 +94,7 @@ class MJ {
 			'/inc/metaboxes.php',
 			'/inc/post-templates.php',
 			'/inc/sidebars.php',
+			'/inc/social-tags.php',
 			'/inc/template-tags.php',
 			'/inc/users.php',
 		);
@@ -110,12 +112,23 @@ class MJ {
 	 */
 	private function register_media_sizes() {
 
+		// set the WP defaults.
 		set_post_thumbnail_size( 117, 208, true );
+		add_image_size( 'medium', MEDIUM_WIDTH, MEDIUM_HEIGHT, true );
+		add_image_size( 'large', LARGE_WIDTH, LARGE_HEIGHT, true );
 
+		// custom image sizes/crops.
 		add_image_size(
 			'full_width_giant',
 			2400,
 			1350,
+			true
+		);
+
+		add_image_size(
+			'social_card',
+			1200,
+			630,
 			true
 		);
 
@@ -147,7 +160,6 @@ class MJ {
 		});
 
 	}
-
 
 }
 /**
@@ -237,6 +249,6 @@ add_action( 'after_setup_theme', 'mj_setup' );
  * @since Mother Jones 1.0
  */
 function mj_content_width() {
-	$GLOBALS['content_width'] = apply_filters( 'mj_content_width', 840 );
+	$GLOBALS['content_width'] = apply_filters( 'mj_content_width', 990 );
 }
 add_action( 'after_setup_theme', 'mj_content_width', 0 );

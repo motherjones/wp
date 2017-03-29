@@ -1,0 +1,89 @@
+/* footer */
+footer#colophon {
+  background-color: $black;
+  color: #ccc;
+  text-align: center;
+  padding-top: 32px;
+  ul {
+    padding: 0;
+    margin: 0 auto 15px;
+    width: 165px;
+    clear: both;
+    li {
+      list-style: none;
+      padding: 2px 0;
+      font-size: 12px;
+      background-position: 0% 100%;
+    }
+  }
+  #footer-list {
+    font-family: $mallory;
+    font-weight: bold;
+    text-transform: uppercase;
+    width: 200px;
+    color: $orange;
+    li {
+      font-size: 15px;
+    }
+    a {
+      color: $orange;
+      margin: 0 5px;
+    }
+  }
+}
+
+a#footer-logo {
+  background-image: none;
+}
+#footer-logo img{
+  width: 274px;
+  height: auto;
+  margin: 0 auto;
+  display: block;
+}
+#footer-social {
+  li {
+    display: block;
+    float: left;
+  }
+  .share-text {
+    display: none;
+  }
+  .toolbar-btn {
+    background-image: none;
+    margin: 20px 5px;
+    a {
+      color: #CCC;
+      text-decoration: none;
+      height: 0px;
+    }
+    i {
+      position: relative;
+    }
+  }
+  .circled-icon {
+    width: 40px;
+    i {
+      font-size: 26px;
+      padding: 4px;
+      position: relative;
+      top: -3px;
+      left: 0;
+    }
+    &.tweet i {
+      top: -2px;
+    }
+  }
+}
+#copyright {
+  font-family: $calluna;
+  font-size: 14px;
+  margin: 35px auto 0;
+}
+footer#colophon #copyright a {
+  color: #ccc;
+  margin: 0 5px;
+  text-shadow: -1px 0 0 $black, 0 1px 0 $black, 1px 0 0 $black, 0 -1px 0 b
+  -1px -1px 0 $black, 1px 1px 0 $black, 1px -1px 0 $black, -1px 1px 0 $black
+}
+/* end footer */

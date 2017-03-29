@@ -1,0 +1,74 @@
+/* Readers Like You */
+.members-like-you {
+  font-style: italic;
+  line-height: 17px;
+  font-size: 14px;
+  clear: both;
+  padding-top: 0;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 15px;
+  margin-top: 20px;
+  em {
+    font-style: normal;
+  }
+  a {
+    color: $orange;
+    &:hover {
+      opacity: .7;
+    }
+  }
+}
+
+/* Author Bios */
+ul.author-bios {
+  padding: 0;
+  border-bottom: 1px solid #ccc;
+}
+.author-data {
+  float: left;
+  max-width: 535px;
+}
+.author-position {
+  color: #ccc;
+}
+#main.author {
+  .author-bio {
+    padding-bottom: 15px;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 15px;
+  }
+  ul {
+    padding: 0;
+  }
+}
+.author-bio {
+  list-style-type: none;
+  .byline {
+    display: block;
+    line-height: 14px;
+    a {
+      display: inline-block;
+      background-position: 0% 100%;
+    }
+  }
+  .author-image {
+    float: left;
+    margin-right: 15px;
+    margin-bottom: 20px;
+    height: 80px;
+    width: 80px;
+    border-radius: 50px;
+    overflow: hidden;
+    img {
+      max-width: 100%;
+      max-height: 100%;
+    }
+  }
+}
+.author-bio-text {
+  font-size: 12px;
+  margin-top: 5px;
+  font-family: $mallory;
+  text-align: left;
+}

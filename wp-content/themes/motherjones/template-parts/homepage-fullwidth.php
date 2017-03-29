@@ -10,7 +10,6 @@
 global $fullwidth_title, $post;
 
 $post_thumbnail_id = get_post_thumbnail_id( $post->ID );
-
 if ( $post_thumbnail_id ) {
 	echo '<div class="article-image"><a href="' . esc_url( get_permalink() ) . '">';
 	the_post_thumbnail( 'large' );
@@ -18,19 +17,19 @@ if ( $post_thumbnail_id ) {
 }
 
 if ( ! empty( $fullwidth_title ) ) {
-	echo '<h2 class="homepage-fullwidth-section-label promo">' . esc_html( $fullwidth_title ) . '</h2>';
+	echo '<h2 class="section-label"><span class="promo">' . esc_html( $fullwidth_title ) . '<span></h2>';
 }
 
 if ( ! empty( $post_thumbnail_id ) ) {
 	$thumb_meta = get_post_custom( $post_thumbnail_id );
-	if ( $thumb_meta['_media_credit'][0] && '' !== $thumb_meta['_media_credit'][0] ) {
+	if ( isset( $thumb_meta['_media_credit'][0] ) && '' !== $thumb_meta['_media_credit'][0] ) {
 		echo '<p class="homepage-art-byline">' . esc_html( $thumb_meta['_media_credit'][0] ) . '</p>';
 	}
 }
 ?>
 
 <div class="article-data">
-	<h1 class="hed">
+	<h1 class="entry-title">
 		<a href="<?php the_permalink(); ?>">
 		<?php
 			if ( $hed = get_post_meta( get_the_ID(), 'mj_promo_hed', true ) ) {

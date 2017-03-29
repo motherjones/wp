@@ -12,7 +12,7 @@ global $post;
 $post_thumbnail_id = get_post_thumbnail_id( $post->ID );
 ?>
 
-<li class="article-item">
+<li class="article-item grid__col-md-6 grid__col-sm-12">
 	<?php
 		if ( $post_thumbnail_id ) {
 			echo '<div class="article-image"><a href="' . esc_url( get_permalink() ) . '">';

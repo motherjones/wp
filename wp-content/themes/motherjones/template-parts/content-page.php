@@ -8,14 +8,13 @@
  */
 ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-	<header class="entry-header">
-		<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
-	</header><!-- .entry-header -->
+<header class="entry-header grid__col-12">
+	<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
+</header><!-- .entry-header -->
 
-	<?php mj_post_thumbnail(); ?>
+<section id="post-<?php the_ID(); ?>" <?php post_class( 'item grid__col-12' ); ?>>
 
-	<div class="entry-content">
+	<article class="entry-content">
 		<?php
 		the_content();
 
@@ -28,8 +27,8 @@
 			'separator'   => '<span class="screen-reader-text">, </span>',
 		) );
 		?>
-	</div><!-- .entry-content -->
+	</article><!-- .entry-content -->
 
 	<?php edit_post_link( 'edit this post', '| <span class="edit-link">', '</span>' ); ?>
 
-</article><!-- #post-## -->
+</section><!-- #post-## -->

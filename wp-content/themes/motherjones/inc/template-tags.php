@@ -155,6 +155,9 @@ function mj_share_tools( $context ) {
 	$id = get_the_ID();
 	if ( ! empty( $context ) ) {
 		$classes .= ' ' . $context;
+		if ( 'top' === $context ) {
+			$classes .= ' hidden-xs hidden-xxs';
+		}
 	}
 	printf(
 		'<div class="%s">
