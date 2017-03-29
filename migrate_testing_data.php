@@ -34,8 +34,8 @@ $roles_insert = $wp->prepare("
 REPLACE INTO pantheon_wp.wp_usermeta
 (meta_key, meta_value, user_id)
 VALUES ( 
-'a:1:{s:6:\"author\";s:1:\"1\";}',
 'wp_capabilities',
+'a:1:{s:6:\"author\";s:1:\"1\";}',
 ?
 )
 ;
@@ -44,6 +44,21 @@ $wp->beginTransaction();
   $roles_insert->execute(Array($author_id));
   print($wp->lastInsertId());
   print "\n user meta ^^ \n";
+$wp->commit();
+
+$level_insert = $wp->prepare("
+REPLACE INTO pantheon_wp.wp_usermeta
+(meta_key, meta_value, user_id)
+VALUES ( 
+'wp_user_level',
+?,
+?
+)
+;
+");
+$wp->beginTransaction();
+  $level_insert->execute(Array(2, $author_id));
+  print($wp->lastInsertId());
 $wp->commit();
 
 $editor_insert = $wp->prepare('
@@ -69,8 +84,8 @@ $roles_insert = $wp->prepare("
 REPLACE INTO pantheon_wp.wp_usermeta
 (meta_key, meta_value, user_id)
 VALUES ( 
-'a:1:{s:6:\"editor\";s:1:\"1\";}',
 'wp_capabilities',
+'a:1:{s:6:\"editor\";s:1:\"1\";}',
 ?
 )
 ;
@@ -79,4 +94,9 @@ $wp->beginTransaction();
   $roles_insert->execute(Array($editor_id));
   print($wp->lastInsertId());
   print "\n user meta ^^ \n";
+$wp->commit();
+
+$wp->beginTransaction();
+  $level_insert->execute(Array(7, $editor_id));
+  print($wp->lastInsertId());
 $wp->commit();
