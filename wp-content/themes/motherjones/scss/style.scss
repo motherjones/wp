@@ -27,6 +27,10 @@ a {
   text-decoration: none;
   background-position: 0% 90%;
 }
+img {
+  max-width: 100%;
+  height: auto;
+}
 
 /* set orange underline */
 footer#colophon #copyright a,

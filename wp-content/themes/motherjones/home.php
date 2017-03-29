@@ -82,7 +82,8 @@ $shown_ids = array();
 			</div>
 		</section>
 
-			<div id="homepage-featured" class="homepage-fullwidth group">
+		<section id="homepage-featured" class="homepage-fullwidth grid grid--bleed">
+			<div class="homepage-featured-content grid__col-12 grid__col-12">
 				<?php
 					$featured_story = z_get_zone_query(
 						'homepage_featured',
@@ -96,6 +97,7 @@ $shown_ids = array();
 					get_template_part( 'template-parts/homepage-fullwidth' );
 				?>
 			</div>
+		</section>
 
 			<div id="homepage-sections" class="group">
 				<ul id="homepage-sections-list">
