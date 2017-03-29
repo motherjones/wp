@@ -1727,14 +1727,14 @@ ul.author-bios {
 
 /* end social buttons */
 /* homepage */
-.homepage {
+.home {
   text-align: center; }
-  .homepage img.size-large {
+  .home img.size-large {
     height: auto;
     width: 100%; }
-
-#main.homepage a {
-  background-image: none; }
+  .home #main section {
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 1em; }
 
 .homepage-art-byline {
   font-family: Mallory, sans-serif;
@@ -1744,18 +1744,6 @@ ul.author-bios {
   color: #ccc;
   text-align: right;
   line-height: 4px; }
-
-#homepage-first-ad,
-#homepage-second-ad,
-#homepage-exposure,
-#homepage-kdrum,
-#homepage-sections,
-#homepage-featured,
-#homepage-more-top-stories-section,
-#homepage-top {
-  padding-bottom: 15px;
-  margin-bottom: 30px;
-  border-bottom: 1px solid #ccc; }
 
 /* top story */
 #homepage-top-story {
@@ -1783,8 +1771,6 @@ ul.author-bios {
     font-family: Mallory, sans-serif;
     font-size: 16px;
     line-height: 18px; }
-  #homepage-top-story .byline {
-    font-size: 12px; }
   #homepage-top-story img {
     width: 100%;
     height: auto; }
@@ -1793,8 +1779,8 @@ ul.author-bios {
   padding: 1em 0 1em 2em; }
   #homepage-top-story-side li {
     margin-top: 0;
-    padding-top: 30px;
-    padding-bottom: 0;
+    padding-top: 1em;
+    padding-bottom: 0.25em;
     background-image: url("/wp-content/themes/motherjones/img/grey_line.png");
     background-repeat: no-repeat;
     background-position: top;
@@ -1805,48 +1791,42 @@ ul.author-bios {
       padding-top: 0;
       background-image: none; }
     #homepage-top-story-side li h3 {
-      line-height: 18px; }
+      line-height: 18px;
+      margin-bottom: 0; }
+    #homepage-top-story-side li .byline {
+      margin-top: 0.5em; }
   @media only screen and (max-width: 768px) {
     #homepage-top-story-side {
       padding: 1em; } }
-
-/* end top story */
-/* more top stories */
-#homepage-more-top-stories-main {
-  width: 630px;
-  float: left; }
 
 #homepage-investigations .promo,
 #homepage-more-top-stories-main .promo {
   margin-top: 0; }
 
+#homepage-more-top-stories-main {
+  padding-left: 0; }
+  #homepage-more-top-stories-main .promo {
+    margin: 0 auto; }
+  @media only screen and (max-width: 768px) {
+    #homepage-more-top-stories-main {
+      padding-left: 1em; } }
+
 #homepage-more-top-stories {
-  margin: 0;
-  padding: 0; }
+  padding-left: 0; }
   #homepage-more-top-stories li {
-    padding-top: 30px;
-    margin-top: 15px;
+    padding-top: 0.75em;
+    margin-top: 0.75em;
     border-top: 1px solid #ccc;
-    text-align: center;
-    width: 100%;
-    padding-bottom: 0; }
+    text-align: center; }
     #homepage-more-top-stories li:first-of-type {
       margin-top: 0;
       border-top: 0; }
     #homepage-more-top-stories li .hed {
-      margin-bottom: 0; }
-    #homepage-more-top-stories li .article-data,
-    #homepage-more-top-stories li .article-data h3,
-    #homepage-more-top-stories li .article-data .byline {
-      width: 100%;
-      max-width: none; }
+      margin-bottom: 0;
+      font-size: 18px; }
+    #homepage-more-top-stories li .byline {
+      margin-top: 0.5em; }
 
-#homepage-more-top-stories-side {
-  width: 360px;
-  float: left; }
-
-/* end more top stories */
-/* homepage fullwidths */
 .homepage-fullwidth {
   position: relative; }
 
@@ -2010,12 +1990,6 @@ body {
   width: 55em;
   margin: 0 auto; }
 
-/* clearfix hack */
-.group:after {
-  display: table;
-  content: "";
-  clear: both; }
-
 ::selection {
   background-color: #ddd; }
 
@@ -2175,7 +2149,8 @@ blockquote {
 
 .byline {
   color: #FF6900;
-  font-size: 14px;
+  font-size: 12px;
+  line-height: 14px;
   text-transform: uppercase;
   font-family: Mallory, sans-serif;
   font-weight: bold;
@@ -2186,6 +2161,10 @@ blockquote {
     color: #FF6900; }
     .byline a:hover {
       color: black; }
+
+.single .byline {
+  font-size: 14px;
+  line-height: 16px; }
 
 /* start within article body */
 #mininav {
@@ -2569,10 +2548,6 @@ ul#prev-next {
   text-shadow: none; }
 
 /* end pagers */
-#TopROS970x250 {
-  width: 990px;
-  margin: 0 auto; }
-
 /* begin disqus */
 #comments {
   padding: 15px 0;

@@ -1,13 +1,14 @@
 /* homepage */
-.homepage {
+.home {
   text-align: center;
   img.size-large {
     height: auto;
     width: 100%;
   }
-}
-#main.homepage a {
-  background-image: none;
+  #main section {
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 1em;
+  }
 }
 .homepage-art-byline {
   font-family: $mallory;
@@ -19,20 +20,7 @@
   line-height: 4px;
 }
 
-#homepage-first-ad,
-#homepage-second-ad,
-#homepage-exposure,
-#homepage-kdrum,
-#homepage-sections,
-#homepage-featured,
-#homepage-more-top-stories-section,
-#homepage-top {
-  padding-bottom: 15px;
-  margin-bottom: 30px;
-  border-bottom: 1px solid #ccc;
-}
-
-  /* top story */
+/* top story */
 #homepage-top-story {
   padding-left: 0;
   .article-data {
@@ -64,9 +52,6 @@
     font-size: 16px;
     line-height: 18px;
   }
-  .byline {
-    font-size: 12px;
-  }
   img {
     width: 100%;
     height: auto;
@@ -77,8 +62,8 @@
   padding: 1em 0 1em 2em;
   li {
     margin-top: 0;
-    padding-top: 30px;
-    padding-bottom: 0;
+    padding-top: 1em;
+    padding-bottom: 0.25em;
     background-image: url('/wp-content/themes/motherjones/img/grey_line.png');
     background-repeat: no-repeat;
     background-position: top;
@@ -91,55 +76,50 @@
     }
     h3 {
       line-height: 18px;
+      margin-bottom: 0;
+    }
+    .byline {
+      margin-top: 0.5em;
     }
   }
   @media only screen and (max-width: 768px) {
     padding: 1em;
   }
 }
-  /* end top story */
-  /* more top stories */
-#homepage-more-top-stories-main {
-  width: 630px;
-  float: left;
-}
+
 #homepage-investigations .promo,
 #homepage-more-top-stories-main .promo {
   margin-top: 0;
 }
+#homepage-more-top-stories-main {
+  padding-left: 0;
+  .promo {
+    margin: 0 auto;
+  }
+  @media only screen and (max-width: 768px) {
+    padding-left: 1em;
+  }
+}
 #homepage-more-top-stories {
-  margin: 0;
-  padding: 0;
+  padding-left: 0;
   li {
-    padding-top: 30px;
-    margin-top: 15px;
+    padding-top: 0.75em;
+    margin-top: 0.75em;
     border-top: 1px solid #ccc;
     text-align: center;
-    width: 100%;
-    padding-bottom: 0;
     &:first-of-type {
       margin-top: 0;
       border-top: 0;
     }
     .hed {
       margin-bottom: 0;
+      font-size: 18px;
     }
-    .article-data,
-    .article-data h3,
-    .article-data .byline {
-      width: 100%;
-      max-width: none;
+    .byline {
+      margin-top: 0.5em;
     }
   }
 }
-
-#homepage-more-top-stories-side {
-  width: 360px;
-  float: left;
-}
-
-  /* end more top stories */
-  /* homepage fullwidths */
 
 .homepage-fullwidth {
   position: relative;

@@ -17,12 +17,6 @@ body {
   width: 55em;
   margin: 0 auto;
 }
-/* clearfix hack */
-.group:after {
-  display: table;
-  content: "";
-  clear: both;
-}
 
 ::selection {
   background-color: #ddd;
@@ -200,7 +194,8 @@ blockquote {
 
 .byline {
   color: $orange;
-  font-size: 14px;
+  font-size: 12px;
+  line-height: 14px;
   text-transform: uppercase;
   font-family: $mallory;
   font-weight: bold;
@@ -213,6 +208,10 @@ blockquote {
       color: $black;
     }
   }
+}
+.single .byline {
+  font-size: 14px;
+  line-height: 16px;
 }
 
 
@@ -649,12 +648,6 @@ ul#prev-next {
 }
 /* end pagers */
 
-
-
-#TopROS970x250 {
-  width: 990px;
-  margin: 0 auto;
-}
 
 /* begin disqus */
 #comments {

@@ -52,7 +52,7 @@
 <?php dynamic_sidebar( 'page-top' ); ?>
 <div id="page" class="grid">
   <?php if ( get_the_ID() ) : ?>
-		<div class="ad-unit" id="TopROS970x250">
+		<div id="TopROS970x250" class="ad-unit grid__col-12" >
 			<script>
 	    	<!--
 	      if ( typeof MJ_HideTopROS970x250 === 'undefined' ) {
@@ -68,7 +68,7 @@
 		</div>
   <?php endif; ?>
 
-	<header id="masthead" class="site-header grid__col-12" role="banner">
+	<header id="masthead" class="site-header grid__col-12 grid__col--bleed" role="banner">
 		<?php get_template_part( 'template-parts/static-navbar' ); ?>
 	</header><!-- .site-header -->
 

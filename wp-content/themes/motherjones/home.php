@@ -19,8 +19,9 @@ global $fullwidth_title;
 
 $shown_ids = array();
 ?>
-<main id="main" class="site-main homepage grid" role="main">
-	<div id="homepage-top" class="group grid">
+<main id="main" class="site-main grid" role="main">
+	<section id="homepage-top" class="grid">
+		<div id="homepage-top-story" class="grid__col-md-9 grid__col-sm-8 grid__col-xs-12">
 		<?php
 			$top_stories = z_get_zone_query(
 				'top_stories',
@@ -34,6 +35,7 @@ $shown_ids = array();
 				get_template_part( 'template-parts/homepage-top-story' );
 			}
 		?>
+		</div>
 		<ul id="homepage-top-story-side" class="grid__col-md-3 grid__col-sm-4 grid__col-xs-12">
 		<?php
 			if ( $top_stories->have_posts() ) {
@@ -45,9 +47,9 @@ $shown_ids = array();
 			}
 		?>
 		</ul>
-	</div>
+	</section>
 
-	<div id="homepage-first-ad" class="homepage-ad grid__col-12 hidden-sm hidden-xs hidden-xxs">
+	<section id="homepage-first-ad" class="homepage-ad grid__col-12 hidden-sm hidden-xs hidden-xxs">
 		<script language="javascript">
 			<!--
 			ad_code({
@@ -58,27 +60,27 @@ $shown_ids = array();
 			});
 			//-->
 		</script>
-	</div>
+	</section>
 
-			<div id="homepage-more-top-stories-section" class="group">
-				<div id="homepage-more-top-stories-main">
-					<h2 class="promo">More Top Stories</h2>
-					<ul id="homepage-more-top-stories">
-						<?php
-							if ( $top_stories->have_posts() ) {
-								for ( $i = 0; $i < 6; $i++ ) {
-									$top_stories->the_post();
-									$shown_ids[] = get_the_ID();
-									get_template_part( 'template-parts/homepage-top-story-side' );
-								}
-							}
-						?>
-					</ul>
-				</div>
-				<div id="homepage-more-stories-sidebar">
-					<p>put membership image here. Possibly a sidebar thing?</p>
-				</div>
+	<section id="homepage-more-top-stories-section" class="grid">
+		<div id="homepage-more-top-stories-main" class="grid__col-md-8 grid__col-sm-12">
+			<h2 class="promo">More Top Stories</h2>
+			<ul id="homepage-more-top-stories">
+			<?php
+				if ( $top_stories->have_posts() ) {
+					for ( $i = 0; $i < 6; $i++ ) {
+						$top_stories->the_post();
+						$shown_ids[] = get_the_ID();
+						get_template_part( 'template-parts/homepage-top-story-side' );
+					}
+				}
+			?>
+			</ul>
 			</div>
+			<div id="homepage-more-stories-sidebar" class="grid__col-4 hidden-sm hidden-xs hidden-xxs">
+				<p>put membership image here. Possibly a sidebar thing?</p>
+			</div>
+		</section>
 
 			<div id="homepage-featured" class="homepage-fullwidth group">
 				<?php
