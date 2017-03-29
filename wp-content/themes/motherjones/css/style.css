@@ -2313,14 +2313,10 @@ li.article-item {
   list-style-type: none;
   padding-bottom: 10px;
   clear: both; }
-  li.article-item img {
-    height: auto;
-    width: 208px;
-    margin-right: 15px;
-    margin-top: 4px; }
   li.article-item h3 {
-    font-size: 16px;
-    line-height: 24px; }
+    font-size: 18px;
+    line-height: 24px;
+    margin: 0; }
 
 #main li.photoessay-top a,
 #main li.top-article-item a,
