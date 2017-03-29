@@ -37,8 +37,8 @@
 	    ad_keywords = '<?php print join( '+', $keyword_terms );?>';
 	    is_post = true;
 	    <?php if ( $is_fullwidth ) { print 'is_fullwidth = true;'; } ?>
-    <?php 
-    } elseif (is_archive()) { ?> 
+    <?php
+    } elseif (is_archive()) { ?>
       ad_keywords = '<?php print get_queried_object()->slug; ?>';
     <?php
     } ?>
@@ -48,16 +48,11 @@
 </head>
 
 <body <?php body_class(); ?>>
-<?php
-	if ( MJ_DEBUG == true ) {
-		print_r( $request );
-	}
-?>
 <?php get_template_part( 'template-parts/floating-navbar' ); ?>
 <?php dynamic_sidebar( 'page-top' ); ?>
-<div id="page" class="site">
+<div id="page" class="grid">
   <?php if ( get_the_ID() ) : ?>
-		<div class="ad-unit" id="TopROS970x250">
+		<div id="TopROS970x250" class="ad-unit grid__col-12" >
 			<script>
 	    	<!--
 	      if ( typeof MJ_HideTopROS970x250 === 'undefined' ) {
@@ -73,7 +68,7 @@
 		</div>
   <?php endif; ?>
 
-	<header id="masthead" class="site-header" role="banner">
+	<header id="masthead" class="site-header grid__col-12 grid__col--bleed" role="banner">
 		<?php get_template_part( 'template-parts/static-navbar' ); ?>
 	</header><!-- .site-header -->
 

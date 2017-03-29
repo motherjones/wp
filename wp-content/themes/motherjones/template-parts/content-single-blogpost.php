@@ -9,11 +9,11 @@
 
 global $meta;
 $article_classes = 'hnews hentry item grid__col-md-8 grid__col-sm-12';
+
 ?>
-
-<?php get_template_part( 'template-parts/single', 'entry-header' ); ?>
-
 <section id="post-<?php the_ID(); ?>" <?php post_class( $article_classes ); ?> itemscope itemtype="http://schema.org/Article">
+
+	<?php get_template_part( 'template-parts/single', 'entry-header' ); ?>
 
 	<article class="entry-content" itemprop="articleBody">
 		<?php

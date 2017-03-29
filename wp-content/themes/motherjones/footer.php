@@ -10,9 +10,10 @@
  */
 ?>
 
-		</div><!-- .site-content -->
+		</main>
+	</div><!-- #page -->
 
-		<footer id="colophon" class="site-footer" role="contentinfo">
+	<footer id="colophon" class="site-footer" role="contentinfo">
 
       <a href="/" id="footer-logo">
           <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/MJ_comp_grey.png" alt="Mother Jones" />
@@ -265,8 +266,7 @@
       <!--Ad code for in content ad unit.  Uses jquery to only load on pages that do not have divs with a class named inline or inline-nav -->
       <!-- End of ad code for in content Tag -->
       <?php dynamic_sidebar( 'page-end' ); ?>
-		</footer><!-- .site-footer -->
-</div><!-- .site -->
- <?php wp_footer(); ?>
+	</footer><!-- .site-footer -->
+	<?php wp_footer(); ?>
 </body>
 </html>

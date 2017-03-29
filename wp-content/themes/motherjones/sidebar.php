@@ -11,7 +11,7 @@ if ( ! is_active_sidebar( 'sidebar' ) ) {
 	return;
 }
 ?>
-<div id="sidebar-right">
+<aside id="sidebar-right" class="grid__col-4 hidden-sm hidden-xs hidden-xxs">
 	<?php
 		if ( mj_is_article_type( 'blogpost', get_the_ID() ) ){
 			dynamic_sidebar( 'sidebar-blog' );
@@ -31,4 +31,4 @@ if ( ! is_active_sidebar( 'sidebar' ) ) {
 			}
 			//-->
 	</script>
-</div>
+</aside>

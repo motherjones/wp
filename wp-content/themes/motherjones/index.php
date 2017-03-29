@@ -15,11 +15,9 @@
  */
 
 get_header(); ?>
-<div id="content" class="site-content">
 
-	<div id="primary" class="content-area">
-		<main id="main" class="site-main" role="main">
-
+<main id="main" class="site-main grid" role="main">
+	<section class="main-index grid__col-md-8 grid__col-sm-9 grid__col-xs-12">
 		<?php if ( have_posts() ) : ?>
 
 			<?php if ( is_home() && ! is_front_page() ) : ?>
@@ -55,9 +53,7 @@ get_header(); ?>
 
 		endif;
 		?>
-
-		</main><!-- .site-main -->
-	</div><!-- .content-area -->
-
-<?php get_sidebar(); ?>
+	</section>	
+	<?php get_sidebar(); ?>
+</main><!-- .site-main -->
 <?php get_footer(); ?>

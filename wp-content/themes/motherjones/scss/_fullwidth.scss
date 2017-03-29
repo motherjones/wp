@@ -1,0 +1,63 @@
+/* full width */
+.mj_article_type-full_width_article {
+  #page {
+    width: 100%;
+  }
+  #TopROS970x250,
+  #masthead,
+  #main {
+    width: 55em;
+    margin: 0 auto;
+  }
+  article.full-width {
+    margin-top: 2em;
+  }
+}
+#full-width-header {
+  width: 100%;
+  position: relative;
+  text-align: center;
+  .hed {
+    max-width: 990px;
+    text-transform: none;
+    margin: auto;
+  }
+  .dek {
+    max-width: 700px;
+    margin: 28px auto 15px;
+    font-size: 20px;
+  }
+}
+
+#full-width-header-data {
+  position: absolute;
+  bottom: 0px;
+  text-align: center;
+  width: 100%;
+  background: linear-gradient(transparent,#000);
+  h1,
+  h3 {
+    color: $white;
+  }
+  h1 {
+    line-height: 1.2em;
+  }
+}
+.full-width-title-art-byline {
+  text-align: right;
+  color: #ccc;
+  margin: 3px 40px 0 0;
+  font-family: $mallory;
+  font-weight: bold;
+  font-style: italic;
+  font-size: 12px;
+}
+
+#fullwidth-body {
+  background-image: url('/wp-content/themes/motherjones/img/border-$black25.png');
+  background-repeat: repeat-y;
+  background-position: 660px;
+  margin-bottom: 45px;
+}
+
+/* end full width */
