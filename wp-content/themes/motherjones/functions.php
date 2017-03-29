@@ -113,7 +113,7 @@ class MJ {
 	private function register_media_sizes() {
 
 		// set the WP defaults.
-		set_post_thumbnail_size( 117, 208, true );
+		set_post_thumbnail_size( 208, 117 , true );
 		add_image_size( 'medium', MEDIUM_WIDTH, MEDIUM_HEIGHT, true );
 		add_image_size( 'large', LARGE_WIDTH, LARGE_HEIGHT, true );
 
