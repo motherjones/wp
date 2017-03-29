@@ -32,17 +32,10 @@ ul.author-bios {
 .author-position {
   color: #ccc;
 }
-#main.author {
-  .author-bio {
-    padding-bottom: 15px;
-    border-bottom: 1px solid #ccc;
-    margin-bottom: 15px;
-  }
-  ul {
-    padding: 0;
-  }
-}
 .author-bio {
+  clear: both;
+  margin: 1em 0;
+  overflow: auto;
   list-style-type: none;
   .byline {
     display: block;
