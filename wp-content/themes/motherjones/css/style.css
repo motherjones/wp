@@ -1732,6 +1732,8 @@ ul.author-bios {
   .home #main section {
     border-bottom: 1px solid #ccc;
     margin-bottom: 1em; }
+  .home .promo {
+    margin: 0 auto; }
 
 .homepage-art-byline {
   font-family: Mallory, sans-serif;
@@ -1742,7 +1744,6 @@ ul.author-bios {
   text-align: right;
   line-height: 4px; }
 
-/* top story */
 #homepage-top-story {
   padding-left: 0; }
   #homepage-top-story .article-data {
@@ -1802,8 +1803,6 @@ ul.author-bios {
 
 #homepage-more-top-stories-main {
   padding-left: 0; }
-  #homepage-more-top-stories-main .promo {
-    margin: 0 auto; }
   @media only screen and (max-width: 768px) {
     #homepage-more-top-stories-main {
       padding-left: 1em; } }
@@ -1842,6 +1841,66 @@ ul.author-bios {
 .homepage-fullwidth h4.dek {
   margin: 1em 0; }
 
+#homepage-sections-list {
+  list-style-type: none; }
+  #homepage-sections-list .homepage-section .promo {
+    margin-bottom: 1em;
+    font-size: 15px;
+    letter-spacing: 2px; }
+  #homepage-sections-list .homepage-section li {
+    margin-top: 0;
+    padding-top: 1.25em;
+    padding-bottom: 0.5em;
+    background-image: url("/wp-content/themes/motherjones/img/grey_line.png");
+    background-repeat: no-repeat;
+    background-position: top;
+    text-align: center; }
+    #homepage-sections-list .homepage-section li:first-of-type {
+      padding-top: 0;
+      background-image: none; }
+  #homepage-sections-list .homepage-section img {
+    width: 100%;
+    margin: 0; }
+  #homepage-sections-list .homepage-section h3 {
+    margin: 0 0 4px;
+    font-size: 16px;
+    line-height: 18px; }
+  #homepage-sections-list .homepage-section .byline {
+    font-size: 11px;
+    line-height: 12px; }
+  #homepage-sections-list .homepage-section:first-child {
+    padding-left: 0; }
+    @media only screen and (max-width: 768px) {
+      #homepage-sections-list .homepage-section:first-child {
+        padding: 1em; } }
+  #homepage-sections-list .homepage-section:last-child {
+    padding-right: 0; }
+    @media only screen and (max-width: 768px) {
+      #homepage-sections-list .homepage-section:last-child {
+        padding: 1em; } }
+
+.homepage-section-list {
+  padding: 0; }
+
+#kdrum-post-list {
+  padding: 0; }
+  #kdrum-post-list li {
+    margin-top: 4px;
+    padding-top: 30px;
+    border-top: 1px solid #ccc; }
+    #kdrum-post-list li:first-of-type {
+      padding-top: 0;
+      border-top: 0; }
+  #kdrum-post-list .dateline {
+    margin-top: 4px; }
+  #kdrum-post-list .hed,
+  #kdrum-post-list .article-data {
+    max-width: none;
+    width: 100%;
+    text-align: center;
+    margin: 0; }
+
+/* end homepage kdrum */
 /*  homepage investigations */
 #homepage-investigations-list {
   margin: 0;
@@ -1863,75 +1922,6 @@ ul.author-bios {
     max-width: 485px; }
 
 /* end homepage investigations */
-/* homepage sections */
-#homepage-sections-list {
-  list-style-type: none;
-  margin: 0;
-  padding: 0; }
-  #homepage-sections-list .homepage-section {
-    padding: 0 15px;
-    width: 192px;
-    float: left;
-    display: block; }
-    #homepage-sections-list .homepage-section li {
-      margin-bottom: 15px;
-      text-align: center;
-      clear: none;
-      float: none; }
-  #homepage-sections-list .article-image,
-  #homepage-sections-list .article-data {
-    float: none; }
-  #homepage-sections-list .promo {
-    font-size: 15px;
-    letter-spacing: 2px;
-    margin-top: 0; }
-  #homepage-sections-list img {
-    width: 161px; }
-  #homepage-sections-list h3.hed {
-    font-size: 16px;
-    line-height: 18px;
-    margin-bottom: 4px; }
-  #homepage-sections-list .byline {
-    font-size: 11px;
-    line-height: 12px; }
-
-.homepage-section-list {
-  padding: 0; }
-
-/* end homepage sections */
-/* homepage kdrum */
-#homepage-kdrum-side {
-  max-width: 640px;
-  margin-right: 20px;
-  float: left; }
-  #homepage-kdrum-side img {
-    max-width: 640px;
-    height: auto; }
-
-#kdrum-post-list {
-  padding: 0; }
-  #kdrum-post-list li {
-    margin-top: 4px;
-    padding-top: 30px;
-    border-top: 1px solid #ccc; }
-    #kdrum-post-list li:first-of-type {
-      padding-top: 0;
-      border-top: 0; }
-  #kdrum-post-list .dateline {
-    margin-top: 4px; }
-  #kdrum-post-list .hed,
-  #kdrum-post-list .article-data {
-    max-width: none;
-    width: 100%;
-    text-align: center;
-    margin: 0; }
-
-#homepage-kdrum-ad {
-  width: 300;
-  float: left; }
-
-/* end homepage kdrum */
-/* end homepage */
 /* full width */
 .mj_article_type-full_width_article .author-bio {
   max-width: 895px; }

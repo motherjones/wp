@@ -99,14 +99,14 @@ $shown_ids = array();
 			</div>
 		</section>
 
-			<div id="homepage-sections" class="group">
-				<ul id="homepage-sections-list">
+		<section id="homepage-sections">
+			<ul id="homepage-sections-list" class="grid">
 				<?php
 					$sections = array( 'Politics', 'Environment', 'Media', 'Food', 'Crime & Justice' );
 					foreach ( $sections as $section ) :
 						$slug = ( 'Crime & Justice' === $section ) ? 'crime-justice' : strtolower( $section );
 				?>
-					<li class="homepage-section">
+					<li class="homepage-section grid__col-md-auto">
 						<h2 class="promo">
 							<a href="/<?php echo esc_attr( $slug ); ?>"><?php echo esc_html( $section ); ?></a>
 						</h2>
@@ -129,7 +129,7 @@ $shown_ids = array();
 									$count = 1;
 									while ( $cat_query->have_posts() ) : $cat_query->the_post();
 										$shown_ids[] = get_the_ID();
-										if ( $count === 1 ) {
+										if ( 1 === $count ) {
 											get_template_part( 'template-parts/homepage-section-first' );
 											$count++;
 										} else {
@@ -144,10 +144,10 @@ $shown_ids = array();
 					endforeach;
 				?>
 				</ul>
-			</div>
+			</section>
 
-			<div id="homepage-kdrum" class="group">
-				<div id="homepage-kdrum-side">
+			<section id="homepage-kdrum" class="grid">
+				<div id="homepage-kdrum-side" class="grid__col-md-8 grid__col-sm-12">
 					<h2 class="promo">
 						<a href="/blog/kevin-drum">Kevin Drum</a>
 					</h2>
@@ -178,7 +178,7 @@ $shown_ids = array();
 							}
 						?>
 				</div>
-				<div id="homepage-kdrum-ad">
+				<div id="homepage-kdrum-ad" class="grid__col-4 hidden-sm hidden-xs hidden-xxs">
 					<script>
 						ad_code({
 							desktop: true,
@@ -188,9 +188,9 @@ $shown_ids = array();
 						});
 					</script>
 				</div>
-			</div>
+			</section>
 
-			<div id="homepage-exposure" class="homepage-fullwidth group">
+			<section id="homepage-exposure" class="homepage-fullwidth group">
 				<?php
 					$exposure_story = new WP_Query( array(
 						'tag' => 'photoessays',
@@ -212,9 +212,9 @@ $shown_ids = array();
 						get_template_part( 'template-parts/homepage-fullwidth' );
 					}
 				?>
-			</div>
+			</section>
 
-			<div id="homepage-second-ad" class="group">
+			<div id="homepage-second-ad" class="homepage-ad grid__col-12 hidden-sm hidden-xs hidden-xxs">
 					<script language="javascript">
 						<!--
 						ad_code({
@@ -227,7 +227,7 @@ $shown_ids = array();
 					//</script>
 			</div>
 
-			<div id="homepage-investigations" class="group">
+			<section id="homepage-investigations" class="group">
 				<h2 class="promo">
 					<a href="/topics/investigations">Investigations</a>
 				</h2>
@@ -254,7 +254,7 @@ $shown_ids = array();
 						}
 					?>
 				</ul>
-			</div>
+			</section>
 		</main><!-- .site-main -->
 
 	<script>

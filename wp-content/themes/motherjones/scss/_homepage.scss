@@ -5,6 +5,9 @@
     border-bottom: 1px solid #ccc;
     margin-bottom: 1em;
   }
+  .promo {
+    margin: 0 auto;
+  }
 }
 .homepage-art-byline {
   font-family: $mallory;
@@ -16,7 +19,6 @@
   line-height: 4px;
 }
 
-/* top story */
 #homepage-top-story {
   padding-left: 0;
   .article-data {
@@ -89,9 +91,6 @@
 }
 #homepage-more-top-stories-main {
   padding-left: 0;
-  .promo {
-    margin: 0 auto;
-  }
   @media only screen and (max-width: 768px) {
     padding-left: 1em;
   }
@@ -142,86 +141,56 @@
   }
 }
 
-
-  /*  homepage investigations */
-#homepage-investigations-list {
-  margin: 0;
-  padding: 0;
-  li {
-    width: 485px;
-    margin-right: 10px;
-    float: left;
-    text-align: center;
-    margin-bottom: 50px;
-    clear: none;
-  }
-  img {
-    width: 485px;
-    margin: 0;
-  }
-  h3,
-  .article-data,
-  .byline {
-    width: 485px;
-    max-width: 485px;
-  }
-}
-  /* end homepage investigations */
-
-  /* homepage sections */
-
 #homepage-sections-list {
   list-style-type: none;
-  margin: 0;
-  padding: 0;
   .homepage-section {
-    padding: 0 15px;
-    width: 192px;
-    float: left;
-    display: block;
-    li {
-      margin-bottom: 15px;
-      text-align: center;
-      clear: none;
-      float: none;
+    .promo {
+      margin-bottom: 1em;
+      font-size: 15px;
+      letter-spacing: 2px;
     }
-  }
-  .article-image,
-  .article-data {
-    float: none;
-  }
-  .promo {
-    font-size: 15px;
-    letter-spacing: 2px;
-    margin-top: 0;
-  }
-  img {
-    width: 161px;
-  }
-  h3.hed {
-    font-size: 16px;
-    line-height: 18px;
-    margin-bottom: 4px;
-  }
-  .byline {
-    font-size: 11px;
-    line-height: 12px;
+    li {
+      margin-top: 0;
+      padding-top: 1.25em;
+      padding-bottom: 0.5em;
+      background-image: url('/wp-content/themes/motherjones/img/grey_line.png');
+      background-repeat: no-repeat;
+      background-position: top;
+      text-align: center;
+      &:first-of-type {
+        padding-top: 0;
+        background-image: none;
+      }
+    }
+    img {
+      width: 100%;
+      margin: 0;
+    }
+    h3 {
+      margin: 0 0 4px;
+      font-size: 16px;
+      line-height: 18px;
+    }
+    .byline {
+      font-size: 11px;
+      line-height: 12px;
+    }
+    &:first-child {
+      padding-left: 0;
+      @media only screen and (max-width: 768px) {
+        padding: 1em;
+      }
+    }
+    &:last-child {
+      padding-right: 0;
+      @media only screen and (max-width: 768px) {
+        padding: 1em;
+      }
+    }
   }
 }
 .homepage-section-list {
   padding: 0;
-}
-/* end homepage sections */
-
-/* homepage kdrum */
-#homepage-kdrum-side {
-  max-width: 640px;
-  margin-right: 20px;
-  float: left;
-  img {
-    max-width: 640px;
-    height: auto;
-  }
 }
 
 #kdrum-post-list {
@@ -246,10 +215,30 @@
     margin: 0;
   }
 }
-#homepage-kdrum-ad {
-  width: 300;
-  float: left;
-}
+
 /* end homepage kdrum */
 
-/* end homepage */
+/*  homepage investigations */
+#homepage-investigations-list {
+margin: 0;
+padding: 0;
+li {
+  width: 485px;
+  margin-right: 10px;
+  float: left;
+  text-align: center;
+  margin-bottom: 50px;
+  clear: none;
+}
+img {
+  width: 485px;
+  margin: 0;
+}
+h3,
+.article-data,
+.byline {
+  width: 485px;
+  max-width: 485px;
+}
+}
+/* end homepage investigations */
