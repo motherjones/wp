@@ -20,6 +20,11 @@ function mj_widgets_init() {
 	 		'description'   => __( 'Shows up instead of the main sidebar on blog posts', 'mj' )
 		),
 		array (
+			'name'          => __( 'Homepage Top Stories Sidebar', 'mj' ),
+	 		'id'            => 'homepage-more-top-stories',
+	 		'description'   => __( 'Appears next to the "More Top Stories" section on the homepage', 'mj' )
+		),
+		array (
 			'name'          => __( 'Ticker', 'mj' ),
 	 		'id'            => 'ticker',
 	 		'description'   => __( 'Shows up right beneath the top menu', 'mj' )

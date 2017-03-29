@@ -78,7 +78,7 @@ $shown_ids = array();
 			</ul>
 			</div>
 			<div id="homepage-more-stories-sidebar" class="grid__col-4 hidden-sm hidden-xs hidden-xxs">
-				<p>put membership image here. Possibly a sidebar thing?</p>
+        <?php dynamic_sidebar( 'homepage-more-top-stories' ); ?>
 			</div>
 		</section>
 
