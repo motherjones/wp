@@ -80,6 +80,11 @@ php migrate_options.php "$SQL_PASS"
 echo "options updated in wp db"
 echo "\n"
 
+php migrate_testing_data.php "$SQL_PASS"
+
+echo "test users added to wp db"
+echo "\n"
+
 mysqldump -u root -p"$SQL_PASS" pantheon_wp > migrated-wp-db-$YYYY-$MM-$DD.sql
 
 echo "wp db dumped to file at migrated-wp-db-$YYYY-$MM-$DD.sql"
