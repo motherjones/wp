@@ -952,7 +952,7 @@ INSERT IGNORE INTO pantheon_wp.wp_users
 VALUES (
   REPLACE(LOWER(?), " ", "-"), # NICENAME lowercase, - instead of space
   REPLACE(LOWER(?), " ", ""), # login lowercase, no spaces
-  "0000-00-00 00:00:00", # registered date
+  FROM_UNIXTIME("1970-1-1 00:00:00"),
   ? # Display name
 )
 ');
