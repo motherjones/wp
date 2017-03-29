@@ -1,14 +1,16 @@
 /* full width */
 .mj_article_type-full_width_article {
-  .author-bio {
-    max-width: 895px;
+  #page {
+    width: 100%;
   }
-  p.members-like-you,
-  .author-data p {
-    margin-right: 0;
+  #TopROS970x250,
+  #masthead,
+  #main {
+    width: 55em;
+    margin: 0 auto;
   }
-  .mj-related-articles {
-    max-width: none;
+  article.full-width {
+    margin-top: 2em;
   }
 }
 #full-width-header {
@@ -27,10 +29,6 @@
   }
 }
 
-#full-width-header-image img {
-  width: 100%;
-  height: auto;
-}
 #full-width-header-data {
   position: absolute;
   bottom: 0px;
@@ -41,6 +39,9 @@
   h3 {
     color: $white;
   }
+  h1 {
+    line-height: 1.2em;
+  }
 }
 .full-width-title-art-byline {
   text-align: right;
@@ -50,10 +51,6 @@
   font-weight: bold;
   font-style: italic;
   font-size: 12px;
-}
-
-article.full-width {
-  width: 100%;
 }
 
 #fullwidth-body {

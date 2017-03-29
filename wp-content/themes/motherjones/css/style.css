@@ -1924,13 +1924,15 @@ ul.author-bios {
     width: 100%; }
 
 /* full width */
-.mj_article_type-full_width_article .author-bio {
-  max-width: 895px; }
-.mj_article_type-full_width_article p.members-like-you,
-.mj_article_type-full_width_article .author-data p {
-  margin-right: 0; }
-.mj_article_type-full_width_article .mj-related-articles {
-  max-width: none; }
+.mj_article_type-full_width_article #page {
+  width: 100%; }
+.mj_article_type-full_width_article #TopROS970x250,
+.mj_article_type-full_width_article #masthead,
+.mj_article_type-full_width_article #main {
+  width: 55em;
+  margin: 0 auto; }
+.mj_article_type-full_width_article article.full-width {
+  margin-top: 2em; }
 
 #full-width-header {
   width: 100%;
@@ -1945,10 +1947,6 @@ ul.author-bios {
     margin: 28px auto 15px;
     font-size: 20px; }
 
-#full-width-header-image img {
-  width: 100%;
-  height: auto; }
-
 #full-width-header-data {
   position: absolute;
   bottom: 0px;
@@ -1958,6 +1956,8 @@ ul.author-bios {
   #full-width-header-data h1,
   #full-width-header-data h3 {
     color: white; }
+  #full-width-header-data h1 {
+    line-height: 1.2em; }
 
 .full-width-title-art-byline {
   text-align: right;
@@ -1967,9 +1967,6 @@ ul.author-bios {
   font-weight: bold;
   font-style: italic;
   font-size: 12px; }
-
-article.full-width {
-  width: 100%; }
 
 #fullwidth-body {
   background-image: url("/wp-content/themes/motherjones/img/border-$black25.png");
@@ -2308,12 +2305,6 @@ blockquote {
 .related-articles-list {
   list-style-type: none;
   padding: 0; }
-
-.mj-related-articles {
-  max-width: 630px;
-  padding: 0; }
-  .mj-related-articles ul {
-    padding: 0; }
 
 .articles-list .article-item {
   margin: 20px 0;

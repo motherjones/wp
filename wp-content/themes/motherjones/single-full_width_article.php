@@ -77,58 +77,50 @@ while ( have_posts() ) : the_post();
 	}
 ?>
 
-<div id="content" class="site-content group">
-	<div id="primary" class="content-area">
-		<main id="main" class="site-main" role="main">
-			<article class="full-width">
-				<?php
-					if ( isset( $meta['css'][0] ) ) {
-						printf(
-							'<style>%s</style>',
-							esc_html( $meta['css'][0] )
-						);
-					}
-					mj_share_tools( 'top' );
-				?>
 
-				<div id="fullwidth-body">
-					<?php the_content(); ?>
-				</div>
+<main id="main" class="site-main" role="main">
+	<article class="full-width">
+		<?php
+			if ( isset( $meta['css'][0] ) ) {
+				printf(
+					'<style>%s</style>',
+					esc_html( $meta['css'][0] )
+				);
+			}
+			mj_share_tools( 'top' );
+		?>
 
-				<footer class="entry-footer">
-					<?php
-						mj_share_tools( 'bottom' );
-						dynamic_sidebar( 'content-end' );
-						comments_template();
-					?>
-					<script>
-						//<!--
-						if (typeof MJ_HideBottomMobile === 'undefined') {
-							ad_code({
-								placement: 'ym_869408549909503847',
-									yieldmo: true,
-								 docwrite: true,
-									desktop: false,
-							});
-						}
-						//-->
-					</script>
-				</footer><!-- .entry-footer -->
-			</article><!-- #post-## -->
+		<div id="fullwidth-body">
+			<?php the_content(); ?>
+		</div>
+
+		<footer class="entry-footer">
 			<?php
-				if ( ! empty( $meta['js'][0] ) ) {
-					printf(
-						'script>%s</script>',
-						esc_js( $meta['js'][0] )
-					);
-				}
+				mj_share_tools( 'bottom' );
+				dynamic_sidebar( 'content-end' );
+				comments_template();
 			?>
-
-		</main><!-- .site-main -->
-
-
-</div><!-- .content-area -->
-
-<?php get_footer();
+			<script>
+				//<!--
+				if (typeof MJ_HideBottomMobile === 'undefined') {
+					ad_code({
+						placement: 'ym_869408549909503847',
+						yieldmo: true,
+						docwrite: true,
+						desktop: false,
+					});
+				}
+				//-->
+			</script>
+		</footer><!-- .entry-footer -->
+	</article><!-- #post-## -->
+	<?php
+	if ( ! empty( $meta['js'][0] ) ) {
+		printf(
+			'script>%s</script>',
+			esc_js( $meta['js'][0] )
+		);
+	}
 endwhile;
-?>
+
+get_footer();
