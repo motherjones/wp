@@ -38,13 +38,13 @@ $shown_ids = array();
 		</div>
 		<ul id="homepage-top-story-side" class="grid__col-md-3 grid__col-sm-4 grid__col-xs-12">
 		<?php
-			if ( $top_stories->have_posts() ) {
-				for ( $i = 0; $i < 3; $i++ ) {
-					$top_stories->the_post();
-					$shown_ids[] = get_the_ID();
-					get_template_part( 'template-parts/homepage-top-story-side' );
-				}
+		if ( $top_stories->have_posts() ) {
+			for ( $i = 0; $i < 3; $i++ ) {
+				$top_stories->the_post();
+				$shown_ids[] = get_the_ID();
+				get_template_part( 'template-parts/homepage-top-story-side' );
 			}
+		}
 		?>
 		</ul>
 	</section>
@@ -67,13 +67,13 @@ $shown_ids = array();
 			<h2 class="promo">More Top Stories</h2>
 			<ul id="homepage-more-top-stories">
 			<?php
-				if ( $top_stories->have_posts() ) {
-					for ( $i = 0; $i < 6; $i++ ) {
-						$top_stories->the_post();
-						$shown_ids[] = get_the_ID();
-						get_template_part( 'template-parts/homepage-top-story-side' );
-					}
+			if ( $top_stories->have_posts() ) {
+				for ( $i = 0; $i < 6; $i++ ) {
+					$top_stories->the_post();
+					$shown_ids[] = get_the_ID();
+					get_template_part( 'template-parts/homepage-top-story-side' );
 				}
+			}
 			?>
 			</ul>
 			</div>
@@ -83,7 +83,7 @@ $shown_ids = array();
 		</section>
 
 		<section id="homepage-featured" class="homepage-fullwidth grid grid--bleed">
-			<div class="homepage-featured-content grid__col-12 grid__col-12">
+			<div class="homepage-featured-content grid__col-12">
 				<?php
 					$featured_story = z_get_zone_query(
 						'homepage_featured',
@@ -102,9 +102,9 @@ $shown_ids = array();
 		<section id="homepage-sections">
 			<ul id="homepage-sections-list" class="grid">
 				<?php
-					$sections = array( 'Politics', 'Environment', 'Media', 'Food', 'Crime & Justice' );
-					foreach ( $sections as $section ) :
-						$slug = ( 'Crime & Justice' === $section ) ? 'crime-justice' : strtolower( $section );
+				$sections = array( 'Politics', 'Environment', 'Media', 'Food', 'Crime & Justice' );
+				foreach ( $sections as $section ) :
+					$slug = ( 'Crime & Justice' === $section ) ? 'crime-justice' : strtolower( $section );
 				?>
 					<li class="homepage-section grid__col-md-auto">
 						<h2 class="promo">
@@ -112,31 +112,31 @@ $shown_ids = array();
 						</h2>
 						<ul class="homepage-section-list">
 							<?php
-								$cat_query = new WP_Query( array(
-									'category_name' => $slug,
-									'tax_query' => array(
-										array(
-											'taxonomy' => 'mj_article_type',
-											'field' => 'slug',
-											'terms' => 'blogpost',
-											'operator' => 'NOT IN',
-										),
+							$cat_query = new WP_Query( array(
+								'category_name' => $slug,
+								'tax_query' => array(
+									array(
+										'taxonomy' => 'mj_article_type',
+										'field' => 'slug',
+										'terms' => 'blogpost',
+										'operator' => 'NOT IN',
 									),
-									'posts_per_page' => 2,
-									'post__not_in' 	=> $shown_ids,
-								) );
-								if ( $cat_query->have_posts() ) {
-									$count = 1;
-									while ( $cat_query->have_posts() ) : $cat_query->the_post();
-										$shown_ids[] = get_the_ID();
-										if ( 1 === $count ) {
-											get_template_part( 'template-parts/homepage-section-first' );
-											$count++;
-										} else {
-											get_template_part( 'template-parts/homepage-section' );
-										}
-									endwhile;
-								}
+								),
+								'posts_per_page' => 2,
+								'post__not_in' 	=> $shown_ids,
+							) );
+							if ( $cat_query->have_posts() ) {
+								$count = 1;
+								while ( $cat_query->have_posts() ) : $cat_query->the_post();
+									$shown_ids[] = get_the_ID();
+									if ( 1 === $count ) {
+										get_template_part( 'template-parts/homepage-section-first' );
+										$count++;
+									} else {
+										get_template_part( 'template-parts/homepage-section' );
+									}
+								endwhile;
+							}
 							?>
 						</ul>
 					</li>
@@ -190,7 +190,8 @@ $shown_ids = array();
 				</div>
 			</section>
 
-			<section id="homepage-exposure" class="homepage-fullwidth group">
+			<section id="homepage-exposure" class="homepage-fullwidth grid grid--bleed">
+				<div class="homepage-exposure-content grid__col-12">
 				<?php
 					$exposure_story = new WP_Query( array(
 						'tag' => 'photoessays',
@@ -212,9 +213,10 @@ $shown_ids = array();
 						get_template_part( 'template-parts/homepage-fullwidth' );
 					}
 				?>
+				</div>
 			</section>
 
-			<div id="homepage-second-ad" class="homepage-ad grid__col-12 hidden-sm hidden-xs hidden-xxs">
+			<section id="homepage-second-ad" class="homepage-ad grid__col-12 hidden-sm hidden-xs hidden-xxs">
 					<script language="javascript">
 						<!--
 						ad_code({
@@ -223,15 +225,15 @@ $shown_ids = array();
 							height: 2473,
 							doc_write: true,
 						});
-						//-->
-					//</script>
-			</div>
+						-->
+					</script>
+			</section>
 
-			<section id="homepage-investigations" class="group">
+			<section id="homepage-investigations">
 				<h2 class="promo">
 					<a href="/topics/investigations">Investigations</a>
 				</h2>
-				<ul id="homepage-investigations-list" class="group">
+				<ul id="homepage-investigations-list" class="grid">
 					<?php
 						$investigations = new WP_Query( array(
 							'tag' => 'investigations',

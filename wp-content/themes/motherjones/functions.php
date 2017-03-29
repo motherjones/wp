@@ -251,4 +251,4 @@ add_action( 'after_setup_theme', 'mj_setup' );
 function mj_content_width() {
 	$GLOBALS['content_width'] = apply_filters( 'mj_content_width', 990 );
 }
-add_action( 'init', 'mj_content_width', 0 );
+add_action( 'after_setup_theme', 'mj_content_width', 0 );
