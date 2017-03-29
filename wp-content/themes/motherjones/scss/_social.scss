@@ -47,8 +47,10 @@
     }
   }
   &.bottom {
+    clear: both;
     padding: 0 0 30px;
     border-bottom: 1px solid #ccc;
+    overflow: auto;
     ul {
       padding-left: 0;
     }
