@@ -92,4 +92,6 @@
 		<?php get_template_part( 'template-parts/static-navbar' ); ?>
 	</header><!-- .site-header -->
 
+	<div class="grid__col-12 grid__col--bleed">
   <?php dynamic_sidebar( 'ticker' ); ?>
+	</div>

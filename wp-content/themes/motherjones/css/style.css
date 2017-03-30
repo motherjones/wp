@@ -1631,6 +1631,107 @@ ul.author-bios {
   font-family: Mallory, sans-serif;
   text-align: left; }
 
+.interior-rhc-membership {
+  width: 300px;
+  display: block;
+  float: right;
+  height: 721px;
+  background-image: url("/wp-content/themes/motherjones/img/Membership_AD-421.jpg");
+  background-size: contain; }
+  .interior-rhc-membership .donation {
+    display: block;
+    height: 30px;
+    position: relative;
+    top: 180px; }
+    .interior-rhc-membership .donation:hover {
+      background: rgba(255, 255, 255, 0.5); }
+    .interior-rhc-membership .donation.onetime {
+      width: 118px;
+      left: 25px; }
+    .interior-rhc-membership .donation.monthly {
+      width: 118px;
+      top: 150px;
+      left: 155px; }
+  .interior-rhc-membership form {
+    position: relative;
+    top: 240px;
+    clear: both;
+    display: block;
+    margin: 0 auto;
+    width: 244px;
+    overflow: hidden;
+    border-radius: 5px;
+    height: 26px; }
+    .interior-rhc-membership form button {
+      border: transparent;
+      background: transparent;
+      width: 72px;
+      height: 29px;
+      font-size: 0px;
+      position: relative;
+      top: -4px; }
+      .interior-rhc-membership form button:hover {
+        background: rgba(255, 255, 255, 0.5); }
+    .interior-rhc-membership form input {
+      background: white;
+      border: transparent;
+      position: relative;
+      top: 2px;
+      left: -2px;
+      width: 160px;
+      height: 20px;
+      outline: none !important;
+      text-align: center;
+      font-family: Mallory, sans-serif;
+      font-weight: bold;
+      line-height: 24px;
+      font-size: 13px;
+      letter-spacing: -1px; }
+  .interior-rhc-membership .subscribe {
+    display: block;
+    position: relative;
+    top: 352px;
+    height: 30px;
+    left: 26px;
+    width: 127px; }
+    .interior-rhc-membership .subscribe:hover {
+      background: rgba(255, 255, 255, 0.5); }
+  .interior-rhc-membership .subscribe_cover {
+    display: block;
+    position: relative;
+    top: 320px;
+    height: 228px;
+    left: 20px;
+    width: 254px; }
+    .interior-rhc-membership .subscribe_cover :hover {
+      background: rgba(255, 255, 255, 0.5); }
+  .interior-rhc-membership.blog {
+    height: 298px;
+    background-image: url("/wp-content/themes/motherjones/img/Membership_ADSBasic_9_Short2_.png"); }
+    .interior-rhc-membership.blog .donation {
+      top: 132px; }
+      .interior-rhc-membership.blog .donation.monthly {
+        top: 102px; }
+    .interior-rhc-membership.blog .subscribe {
+      top: 185px;
+      left: 60px;
+      width: 175px; }
+
+.ticker-content {
+  background-image: url("/wp-content/themes/motherjones/img/membership-background-bar-lite-2.png");
+  padding: 2px 5px 4px;
+  width: 100%; }
+  .ticker-content a {
+    color: #FF6900;
+    font-weight: bold; }
+    .ticker-content a:hover {
+      opacity: 0.7; }
+  .ticker-content p {
+    text-align: center;
+    font-family: Mallory, sans-serif;
+    font-size: 16px;
+    font-weight: bold; }
+
 /* social buttons */
 .social-container a {
   text-decoration: none;
@@ -3166,27 +3267,27 @@ blockquote {
 
 .pullquote-left,
 .pullquote-right {
-  border-top: 10px solid black;
-  font-size: 26px;
   position: relative;
+  left: -55px;
   width: 45%;
-  padding: 15px 0 0 0;
+  margin: 1.5em 0;
+  padding-left: 0;
+  float: left;
+  border-top: 0.5em solid black;
+  font-size: 26px;
   letter-spacing: -1px;
   background: white;
   font-weight: bold;
   font-style: italic;
   font-family: Mallory, sans-serif; }
-
-.pullquote-left {
-  left: -55px;
-  margin-bottom: 30px;
-  margin-top: 20px;
-  float: left; }
-
-.pullquote-right {
-  right: -15px;
-  float: right;
-  margin: 20px 0 30px 40px; }
+  @media only screen and (max-width: 768px) {
+    .pullquote-left,
+    .pullquote-right {
+      left: 0;
+      float: none;
+      width: 100%;
+      margin: 0;
+      padding: 0; } }
 
 .right-rail,
 .inline-right {
@@ -3276,10 +3377,27 @@ blockquote {
       font-size: 12px;
       background-position: 0% 100%; }
 
+.alignleft {
+  float: left;
+  margin: 1em 1em 1em 0; }
+
+.alignright {
+  float: right;
+  margin: 1em 0 1em 1em; }
+
+.aligncenter {
+  float: none;
+  margin: 1em auto; }
+
+.wp-media-credit {
+  margin: 0;
+  text-align: right; }
+
 .caption,
 .caption a,
 .photo-byline,
-.photo-byline a {
+.photo-byline a,
+.wp-media-credit {
   background: white;
   color: #FF6900;
   font-weight: normal;
@@ -3295,7 +3413,8 @@ blockquote {
   margin: 5px 0; }
 
 .caption strong,
-.master-image-caption {
+.master-image-caption,
+.wp-caption-text {
   color: black;
   font-style: normal;
   text-transform: none;
@@ -3305,7 +3424,8 @@ blockquote {
   line-height: 17px;
   font-weight: normal; }
 
-.caption strong a {
+.caption strong a,
+.wp-caption-text a {
   color: black; }
 
 #content-area .inline a {
