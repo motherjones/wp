@@ -265,6 +265,7 @@ blockquote {
   }
 }
 
+// img styles
 .alignleft {
   float: left;
   margin: 1em 1em 1em 0;
@@ -277,13 +278,15 @@ blockquote {
   float: none;
   margin: 1em auto;
 }
-
+.wp-media-credit {
+  margin: 0;
+  text-align: right;
+}
 .caption,
 .caption a,
 .photo-byline,
 .photo-byline a,
-.wp-media-credit,
-.wp-caption-text {
+.wp-media-credit {
   background: $white;
   color: $orange;
   font-weight: normal;
@@ -295,13 +298,13 @@ blockquote {
   background-position: 0% 100%;
   letter-spacing: normal;
 }
-.photo-byline,
-.wp-media-credit {
+.photo-byline {
   margin: 5px 0;
 }
 
 .caption strong,
-.master-image-caption {
+.master-image-caption,
+.wp-caption-text  {
   color: $black;
   font-style: normal;
   text-transform: none;
@@ -311,7 +314,8 @@ blockquote {
   line-height: 17px;
   font-weight: normal;
 }
-.caption strong a {
+.caption strong a,
+.wp-caption-text a {
   color: $black;
 }
 #content-area {
