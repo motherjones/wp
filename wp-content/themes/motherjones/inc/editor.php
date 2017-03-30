@@ -77,4 +77,4 @@ add_filter( 'enter_title_here', 'mj_change_title_text' );
 /**
  * Stop the wysiwyg from stripping p tags when it displays code
  */
-remove_filter( 'the_content', 'wpautop' );
+//remove_filter( 'the_content', 'wpautop' );

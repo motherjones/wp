@@ -147,28 +147,28 @@ blockquote {
 
 .pullquote-left,
 .pullquote-right {
-  border-top: 10px solid $black;
-  font-size: 26px;
   position: relative;
+  left: -55px;
   width: 45%;
-  padding: 15px 0 0 0;
+  margin-bottom: 2em;
+  margin-top: 1.5em;
+  float: left;
+  border-top: 0.5em solid $black;
+  font-size: 26px;
   letter-spacing: -1px;
   background: $white;
   font-weight: bold;
   font-style: italic;
   font-family: $mallory;
+  @media only screen and (max-width:768px) {
+    left: 0;
+    float: none;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
 }
-.pullquote-left {
-  left: -55px;
-  margin-bottom: 30px;
-  margin-top: 20px;
-  float: left;
-}
-.pullquote-right {
-  right: -15px;
-  float: right;
-  margin: 20px 0 30px 40px;
-}
+
 .right-rail,
 .inline-right {
   float: right;
@@ -264,10 +264,29 @@ blockquote {
     }
   }
 }
+
+// img styles
+.alignleft {
+  float: left;
+  margin: 1em 1em 1em 0;
+}
+.alignright {
+  float: right;
+  margin: 1em 0 1em 1em;
+}
+.aligncenter {
+  float: none;
+  margin: 1em auto;
+}
+.wp-media-credit {
+  margin: 0;
+  text-align: right;
+}
 .caption,
 .caption a,
 .photo-byline,
-.photo-byline a {
+.photo-byline a,
+.wp-media-credit {
   background: $white;
   color: $orange;
   font-weight: normal;
@@ -284,7 +303,8 @@ blockquote {
 }
 
 .caption strong,
-.master-image-caption {
+.master-image-caption,
+.wp-caption-text  {
   color: $black;
   font-style: normal;
   text-transform: none;
@@ -294,7 +314,8 @@ blockquote {
   line-height: 17px;
   font-weight: normal;
 }
-.caption strong a {
+.caption strong a,
+.wp-caption-text a {
   color: $black;
 }
 #content-area {
