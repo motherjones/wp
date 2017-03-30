@@ -182,6 +182,15 @@ blockquote {
   text-align: center;
   margin: 15px auto;
 }
+@media (max-width: 1200px){
+    .pullquote-left,
+    .pullquote-right {
+      right: 0;
+      left: 0;
+      margin-right: 15px;
+      margin-left: 15px;
+    }
+}
 
 .inline {
   width: auto!important;

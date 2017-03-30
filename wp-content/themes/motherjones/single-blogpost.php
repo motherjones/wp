@@ -12,7 +12,7 @@ $meta = get_post_meta( get_the_ID() );
 get_header();
 ?>
 
-<main id="content" class="site-main group grid" role="main">
+<main id="main" class="site-main group grid" role="main">
 	<?php while ( have_posts() ) : the_post();
 
 			get_template_part( 'template-parts/content-single', 'blogpost' );
