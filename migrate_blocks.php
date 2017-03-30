@@ -2,15 +2,15 @@
 /**
  * this is for moving over our blocks programmatically
  */
-$hostname="localhost";  
-$username="root";   
+$hostname="localhost";
+$username="root";
 $password=$argv[1];
 
-$wp_db = "pantheon_wp";  
-$wp = new PDO("mysql:host=$hostname;dbname=$wp_db", $username, $password);  
+$wp_db = "pantheon_wp";
+$wp = new PDO("mysql:host=$hostname;dbname=$wp_db", $username, $password);
 
 
-$widgets = Array('mj_top_stories_widget', 'mj-author-bio-widget', 
+$widgets = Array('mj_top_stories_widget', 'mj-author-bio-widget',
 								'mj-related-articles-widget', 'mj-blog-pager-widget');
 $widget_options = $wp->prepare("
 REPLACE INTO wp_options
@@ -75,13 +75,13 @@ HTML
 $blocks[3] = Array(
 		'title' => 'Site wrap',
 		'text' => <<<'HTML'
-<script language="javascript"> 
-<!-- 
+<script language="javascript">
+<!--
 if (typeof(MJ_HideSiteWrap) === 'undefined') {
   jQuery('head').append('<link rel="stylesheet" href="http://assets.motherjones.com/advertising/2014/05/sierra_club_sitewrap.css" type="text/css" />');
   ad_code('siteskin',1559);
 }
-//--> 
+//-->
 </script>
 HTML
 		,
@@ -112,52 +112,7 @@ HTML
 $blocks[5] =	Array(
 		'title' => 'RHC membership for blog posts',
 		'text' => <<<'HTML'
-<div id="interior-rhc-membership">
-<style>
-#interior-rhc-membership {
-  width: 300px;
-  display: block;
-  margin: 0 auto;
-  height: 298px;
-  background-image: url('/wp-content/themes/motherjones/img/Membership_ADSBasic_9_Short2_.png');
-  background-size: contain;
-}
-
-#interior-rhc-membership .donation {
-  display: block;
-  height: 30px;
-  position: relative;
-  top: 132px;
-}
-#interior-rhc-membership .donation:hover {
-  background: rgba(255, 255, 255, .5)
-}
-#interior-rhc-membership .donation.onetime {
-  width: 118px;
-  left: 25px;
-}
-#interior-rhc-membership .donation.monthly {
-  top: 102px;
-  left: 155px;
-  width: 117px;
-}
-#interior-rhc-membership button:hover {
-  background: rgba(255, 255, 255, .5)
-}
-
-#interior-rhc-membership .subscribe {
-  display: block;
-  position: relative;
-  top: 185px;
-  height: 30px;
-  left: 60px;
-  width: 175px;
-}
-#interior-rhc-membership .subscribe:hover {
-  background: rgba(255, 255, 255, .5)
-}
-
-</style>
+<div class="interior-rhc-membership blog">
 <a class="onetime donation" target="_blank" href="https://secure.motherjones.com/fnp/?action=SUBSCRIPTION&list_source=7HEGPA03&extra_don=1&abver=A"></a>
 <a class="monthly donation" target="_blank" href="https://secure.motherjones.com/fnp/?action=SUBSCRIPTION&list_source=7HEGPAM3&extra_don=1&abver=B"></a>
 <a class="subscribe" target="_blank" href="https://secure.motherjones.com/fnx/?action=SUBSCRIPTION&pub_code=MJM&term_pub=MJM&list_source=SEGYN1B&base_country=US"></a>
@@ -173,100 +128,7 @@ HTML
 $blocks[6] =	Array(
 		'title' => 'Membership RHC',
 		'text' => <<<'HTML'
-<style type="text/css">
-#interior-rhc-membership {
-  width: 300px;
-  display: block;
-  float: right;
-  height: 721px;
-  background-image: url('/wp-content/themes/motherjones/img/Membership_AD-421.jpg');
-  background-size: contain;
-}
-
-#interior-rhc-membership .donation {
-  display: block;
-  height: 30px;
-  position: relative;
-  top: 180px;
-}
-#interior-rhc-membership .donation:hover {
-  background: rgba(255, 255, 255, .5)
-}
-#interior-rhc-membership .donation.onetime {
-  width: 118px;
-  left: 25px;
-}
-#interior-rhc-membership .donation.monthly {
-  width: 118px;
-  top: 150px;
-  left: 155px;
-}
-#interior-rhc-membership form {
-  position: relative;
-  top: 240px;
-  clear: both;
-  display: block;
-  margin: 0 auto;
-  width: 244px;
-  overflow: hidden;
-  border-radius: 5px;
-  height: 26px;
-}
-#interior-rhc-membership form button {
-  border: transparent;
-  background: transparent;
-  width: 72px;
-  height: 29px;
-  font-size: 0px;
-  position: relative;
-  top: -4px;
-}
-#interior-rhc-membership button:hover {
-  background: rgba(255, 255, 255, .5)
-}
-
-#interior-rhc-membership form input {
-  background: white;
-  border: transparent;
-  position: relative;
-  top: 2px;
-  left: -2px;
-  width: 160px;
-  height: 20px;
-  outline: none!important;
-}
-#interior-rhc-membership form input {
-  text-align: center;
-  font-family: Mallory, sans-serif;
-  font-weight: bold;
-  line-height: 24px;
-  font-size: 13px;
-  letter-spacing: -1px;
-}
-#interior-rhc-membership .subscribe {
-  display: block;
-  position: relative;
-  top: 352px;
-  height: 30px;
-  left: 26px;
-  width: 127px;
-}
-#interior-rhc-membership .subscribe:hover {
-  background: rgba(255, 255, 255, .5)
-}
-#interior-rhc-membership .subscribe_cover {
-  display: block;
-  position: relative;
-  top: 320px;
-  height: 228px;
-  left: 20px;
-  width: 254px;
-}
-#interior-rhc-membership .subscribe_cover:hover {
-  background: rgba(255, 255, 255, .5)
-}
-</style>
-<div id="interior-rhc-membership">
+<div class="interior-rhc-membership">
 <a class="onetime donation" target="_blank" href="https://secure.motherjones.com/fnp/?action=SUBSCRIPTION&list_source=7HEGPA01&extra_don=1&abver=A"></a>
 <a class="monthly donation" target="_blank" href="https://secure.motherjones.com/fnp/?action=SUBSCRIPTION&list_source=7HEGPAM1&extra_don=1&abver=B"></a>
 
@@ -291,25 +153,9 @@ HTML
 $blocks[7] = Array(
 		'title' => 'Membership ticker bar',
 		'text' => <<<'HTML'
-<style>
-  #main_bar_div {
-  background-image: url('/wp-content/themes/motherjones/img/membership-background-bar-lite-2.png');
-    padding: 2px 5px 4px 5px !important;
-    width: 960px !important;
-    margin: 5px auto 25px auto !important;
-  }
-  a.links_membership_bar {
-    color: #ff6900 !important;
-    font-weight: bold;
-  }
-  a:hover.links_membership_bar {
-    color: #ff9c33 !important;
-  }
-</style>
-
-<div id="main_bar_div">
-  <p style="text-align: center;font-family: Mallory,sans-serif;font-size: 16px;font-weight: bold;">It's going to take <a href="http://www.motherjones.com/media/2016/12/reporting-on-trumps-conflicts-of-interest" target="_blank" onclick="var url = jQuery(event.target).attr('href'); ga('send', 'event', 'MembershipBar', url, document.location);"class="links_membership_bar">everything we've got to cover the Trump administration</a>.<br />
-Help us do it with <a href="https://secure.motherjones.com/fnx/?action=SUBSCRIPTION&pub_code=DON&term_pub=DON&b_country=United+States&list_source=7H6CPOBD3&term=XX.1.50.00.DON.D.0.2246" target="_blank" onclick="var url = jQuery(event.target).attr('href'); ga('send', 'event', 'MembershipBar', url, document.location);"class="links_membership_bar">a tax-deductible, year-end donation today</a>.</p>
+<div class="ticker-content">
+  <p>It's going to take <a href="http://www.motherjones.com/media/2016/12/reporting-on-trumps-conflicts-of-interest" target="_blank" onclick="var url = jQuery(event.target).attr('href'); ga('send', 'event', 'MembershipBar', url, document.location);">everything we've got to cover the Trump administration</a>.<br />
+Help us do it with <a href="https://secure.motherjones.com/fnx/?action=SUBSCRIPTION&pub_code=DON&term_pub=DON&b_country=United+States&list_source=7H6CPOBD3&term=XX.1.50.00.DON.D.0.2246" target="_blank" onclick="var url = jQuery(event.target).attr('href'); ga('send', 'event', 'MembershipBar', url, document.location);">a tax-deductible, year-end donation today</a>.</p>
 </div>
 HTML
 		,
@@ -323,7 +169,7 @@ $blocks[8] =	Array( //BEGIN members like you block
 		'text' => <<<'HTML'
 <p class="members-like-you">
   <em>Mother Jones</em> is a nonprofit, and stories like this are
-   made possible by readers like you. 
+   made possible by readers like you.
   <a class="donate" href="https://secure.motherjones.com/fnp/?action=SUBSCRIPTION&amp;list_source=7HEGP004&amp;extra_don=1&amp;abver=A">Donate</a>
    or <a class="subscribe" href="https://secure.motherjones.com/fnx/?action=SUBSCRIPTION&amp;pub_code=MJM&amp;term_pub=MJM&amp;list_source=SEGYN4&amp;base_country=US">subscribe</a>
    to help fund independent journalism.
@@ -360,100 +206,7 @@ HTML
 $blocks[10] =	Array( //BEGIN homepage promo block
 		'title' => 'Homepage Promo',
 		'text' => <<<'HTML'
-<style type="text/css">
-#interior-rhc-membership {
-  width: 300px;
-  display: block;
-  float: right;
-  height: 721px;
-  background-image: url('/wp-content/themes/motherjones/img/Membership_AD-422.jpg');
-  background-size: contain;
-}
-
-#interior-rhc-membership .donation {
-  display: block;
-  height: 30px;
-  position: relative;
-  top: 180px;
-}
-#interior-rhc-membership .donation:hover {
-  background: rgba(255, 255, 255, .5)
-}
-#interior-rhc-membership .donation.onetime {
-  width: 118px;
-  left: 25px;
-}
-#interior-rhc-membership .donation.monthly {
-  width: 118px;
-  top: 150px;
-  left: 155px;
-}
-#interior-rhc-membership form {
-  position: relative;
-  top: 240px;
-  clear: both;
-  display: block;
-  margin: 0 auto;
-  width: 244px;
-  overflow: hidden;
-  border-radius: 5px;
-  height: 26px;
-}
-#interior-rhc-membership form button {
-  border: transparent;
-  background: transparent;
-  width: 72px;
-  height: 29px;
-  font-size: 0px;
-  position: relative;
-  top: -4px;
-}
-#interior-rhc-membership button:hover {
-  background: rgba(255, 255, 255, .5)
-}
-
-#interior-rhc-membership form input {
-  background: white;
-  border: transparent;
-  position: relative;
-  top: 2px;
-  left: 2px;
-  width: 160px;
-  height: 20px;
-  outline: none!important;
-}
-#interior-rhc-membership form input {
-  text-align: center;
-  font-family: Mallory, sans-serif;
-  font-weight: bold;
-  line-height: 24px;
-  font-size: 13px;
-  letter-spacing: -1px;
-}
-#interior-rhc-membership .subscribe {
-  display: block;
-  position: relative;
-  top: 352px;
-  height: 30px;
-  left: 26px;
-  width: 127px;
-}
-#interior-rhc-membership .subscribe:hover {
-  background: rgba(255, 255, 255, .5)
-}
-#interior-rhc-membership .subscribe_cover {
-  display: block;
-  position: relative;
-  top: 320px;
-  height: 228px;
-  left: 20px;
-  width: 254px;
-}
-#interior-rhc-membership .subscribe_cover:hover {
-  background: rgba(255, 255, 255, .5)
-}
-</style>
-<div id="interior-rhc-membership">
+<div class="interior-rhc-membership">
 <a class="onetime donation" target="_blank" href="https://secure.motherjones.com/fnp/?action=SUBSCRIPTION&amp;list_source=7HEGPA01&amp;extra_don=1&amp;abver=A"></a>
 <a class="monthly donation" target="_blank" href="https://secure.motherjones.com/fnp/?action=SUBSCRIPTION&amp;list_source=7HEGPAM1&amp;extra_don=1&amp;abver=B"></a>
 
@@ -518,7 +271,7 @@ jQuery(window).load(function() {
     }
     jQuery(window).scroll(fixDiv);
     fixDiv();
-  }  
+  }
 });
 </script>
 HTML
