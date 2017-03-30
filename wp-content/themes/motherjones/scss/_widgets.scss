@@ -65,3 +65,111 @@ ul.author-bios {
   font-family: $mallory;
   text-align: left;
 }
+
+
+#interior-rhc-membership {
+  width: 300px;
+  display: block;
+  float: right;
+  height: 721px;
+  background-image: url('/wp-content/themes/motherjones/img/Membership_AD-421.jpg');
+  background-size: contain;
+  .donation {
+    display: block;
+    height: 30px;
+    position: relative;
+    top: 180px;
+    &:hover {
+      background: rgba(255, 255, 255, .5)
+    }
+    &.onetime {
+      width: 118px;
+      left: 25px;
+    }
+    &.monthly {
+      width: 118px;
+      top: 150px;
+      left: 155px;
+    }
+  }
+  form {
+    position: relative;
+    top: 240px;
+    clear: both;
+    display: block;
+    margin: 0 auto;
+    width: 244px;
+    overflow: hidden;
+    border-radius: 5px;
+    height: 26px;
+    button {
+      border: transparent;
+      background: transparent;
+      width: 72px;
+      height: 29px;
+      font-size: 0px;
+      position: relative;
+      top: -4px;
+      &:hover {
+        background: rgba(255, 255, 255, .5)
+      }
+    }
+    input {
+      background: white;
+      border: transparent;
+      position: relative;
+      top: 2px;
+      left: -2px;
+      width: 160px;
+      height: 20px;
+      outline: none!important;
+      text-align: center;
+      font-family: Mallory, sans-serif;
+      font-weight: bold;
+      line-height: 24px;
+      font-size: 13px;
+      letter-spacing: -1px;
+    }
+  }
+  .subscribe {
+    display: block;
+    position: relative;
+    top: 352px;
+    height: 30px;
+    left: 26px;
+    width: 127px;
+    &:hover {
+      background: rgba(255, 255, 255, .5)
+    }
+  }
+  .subscribe_cover {
+    display: block;
+    position: relative;
+    top: 320px;
+    height: 228px;
+    left: 20px;
+    width: 254px;
+    :hover {
+      background: rgba(255, 255, 255, .5)
+    }
+  }
+}
+
+.ticker-content {
+  background-image: url('/wp-content/themes/motherjones/img/membership-background-bar-lite-2.png');
+  padding: 2px 5px 4px;
+  width: 100%;
+  a {
+    color: $orange;
+    font-weight: bold;
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+  p {
+    text-align: center;
+    font-family: $mallory;
+    font-size: 16px;
+    font-weight: bold;
+  }
+}
