@@ -67,7 +67,7 @@ ul.author-bios {
 }
 
 
-#interior-rhc-membership {
+.interior-rhc-membership {
   width: 300px;
   display: block;
   float: right;
@@ -151,6 +151,21 @@ ul.author-bios {
     width: 254px;
     :hover {
       background: rgba(255, 255, 255, .5)
+    }
+  }
+  &.blog {
+    height: 298px;
+    background-image: url('/wp-content/themes/motherjones/img/Membership_ADSBasic_9_Short2_.png');
+    .donation {
+      top: 132px;
+      &.monthly {
+        top: 102px;
+      }
+    }
+    .subscribe {
+      top: 185px;
+      left: 60px;
+      width: 175px;
     }
   }
 }

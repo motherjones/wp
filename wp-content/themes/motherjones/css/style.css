@@ -1631,28 +1631,28 @@ ul.author-bios {
   font-family: Mallory, sans-serif;
   text-align: left; }
 
-#interior-rhc-membership {
+.interior-rhc-membership {
   width: 300px;
   display: block;
   float: right;
   height: 721px;
   background-image: url("/wp-content/themes/motherjones/img/Membership_AD-421.jpg");
   background-size: contain; }
-  #interior-rhc-membership .donation {
+  .interior-rhc-membership .donation {
     display: block;
     height: 30px;
     position: relative;
     top: 180px; }
-    #interior-rhc-membership .donation:hover {
+    .interior-rhc-membership .donation:hover {
       background: rgba(255, 255, 255, 0.5); }
-    #interior-rhc-membership .donation.onetime {
+    .interior-rhc-membership .donation.onetime {
       width: 118px;
       left: 25px; }
-    #interior-rhc-membership .donation.monthly {
+    .interior-rhc-membership .donation.monthly {
       width: 118px;
       top: 150px;
       left: 155px; }
-  #interior-rhc-membership form {
+  .interior-rhc-membership form {
     position: relative;
     top: 240px;
     clear: both;
@@ -1662,7 +1662,7 @@ ul.author-bios {
     overflow: hidden;
     border-radius: 5px;
     height: 26px; }
-    #interior-rhc-membership form button {
+    .interior-rhc-membership form button {
       border: transparent;
       background: transparent;
       width: 72px;
@@ -1670,9 +1670,9 @@ ul.author-bios {
       font-size: 0px;
       position: relative;
       top: -4px; }
-      #interior-rhc-membership form button:hover {
+      .interior-rhc-membership form button:hover {
         background: rgba(255, 255, 255, 0.5); }
-    #interior-rhc-membership form input {
+    .interior-rhc-membership form input {
       background: white;
       border: transparent;
       position: relative;
@@ -1687,24 +1687,35 @@ ul.author-bios {
       line-height: 24px;
       font-size: 13px;
       letter-spacing: -1px; }
-  #interior-rhc-membership .subscribe {
+  .interior-rhc-membership .subscribe {
     display: block;
     position: relative;
     top: 352px;
     height: 30px;
     left: 26px;
     width: 127px; }
-    #interior-rhc-membership .subscribe:hover {
+    .interior-rhc-membership .subscribe:hover {
       background: rgba(255, 255, 255, 0.5); }
-  #interior-rhc-membership .subscribe_cover {
+  .interior-rhc-membership .subscribe_cover {
     display: block;
     position: relative;
     top: 320px;
     height: 228px;
     left: 20px;
     width: 254px; }
-    #interior-rhc-membership .subscribe_cover :hover {
+    .interior-rhc-membership .subscribe_cover :hover {
       background: rgba(255, 255, 255, 0.5); }
+  .interior-rhc-membership.blog {
+    height: 298px;
+    background-image: url("/wp-content/themes/motherjones/img/Membership_ADSBasic_9_Short2_.png"); }
+    .interior-rhc-membership.blog .donation {
+      top: 132px; }
+      .interior-rhc-membership.blog .donation.monthly {
+        top: 102px; }
+    .interior-rhc-membership.blog .subscribe {
+      top: 185px;
+      left: 60px;
+      width: 175px; }
 
 .ticker-content {
   background-image: url("/wp-content/themes/motherjones/img/membership-background-bar-lite-2.png");
