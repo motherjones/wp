@@ -2124,27 +2124,27 @@ blockquote {
 
 .pullquote-left,
 .pullquote-right {
-  border-top: 10px solid black;
-  font-size: 26px;
   position: relative;
+  left: -55px;
   width: 45%;
-  padding: 15px 0 0 0;
+  margin-bottom: 2em;
+  margin-top: 1.5em;
+  float: left;
+  border-top: 0.5em solid black;
+  font-size: 26px;
   letter-spacing: -1px;
   background: white;
   font-weight: bold;
   font-style: italic;
   font-family: Mallory, sans-serif; }
-
-.pullquote-left {
-  left: -55px;
-  margin-bottom: 30px;
-  margin-top: 20px;
-  float: left; }
-
-.pullquote-right {
-  right: -15px;
-  float: right;
-  margin: 20px 0 30px 40px; }
+  @media only screen and (max-width: 768px) {
+    .pullquote-left,
+    .pullquote-right {
+      left: 0;
+      float: none;
+      width: 100%;
+      margin: 0;
+      padding: 0; } }
 
 .right-rail,
 .inline-right {
