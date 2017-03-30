@@ -13,48 +13,37 @@ while ( have_posts() ) : the_post();
 	$meta = get_post_meta( get_the_ID() );
 ?>
 <header id="full-width-header" class="group">
-	<?php if ( mfi_reloaded_has_image( 'mj_title_image' ) ) { ?>
-		<div id="full-width-header-data">
-			<?php
-				the_title( '<h1 class="article hed">', '</h1>' );
-		    if ( ! empty( $meta['mj_dek'][0] ) ) {
-					printf(
-						'<h3 class="dek">%s</h3>',
-						esc_html( $meta['mj_dek'][0] )
-					);
-				}
-			?>
-			<p class="byline-dateline">
-				<span class="byline">
-					<?php print mj_byline( get_the_ID() ); ?>
-				</span>
-				<span class="dateline">
-					<?php print mj_dateline( get_the_ID() ); ?>
-				</span>
-			</p>
-		</div>
-		<div id="full-width-header-image">
-			<?php mfi_reloaded_the_image( 'mj_title_image', 'full_width_giant' ); ?>
-		</div>
-	<?php } else { ?>
-			<?php
-				the_title( '<h1 class="article hed">', '</h1>' );
-				if ( ! empty( $meta['mj_dek'][0] ) ) {
-					printf(
-						'<h3 class="dek">%s</h3>',
-						esc_html( $meta['mj_dek'][0] )
-					);
-				}
-			?>
-			<p class="byline-dateline">
-				<span class="byline">
-					<?php print mj_byline( get_the_ID() ); ?>
-				</span>
-				<span class="dateline">
-					<?php print esc_html( mj_dateline( get_the_ID() ) ); ?>
-				</span>
-			</p>
-	<?php } ?>
+  <?php
+  $has_image = mfi_reloaded_has_image( 'mj_title_image' );
+  if ( $has_image ) {
+    echo '<div id="full-width-header-data">';
+  }
+
+  the_title( '<h1 class="article hed">', '</h1>' );
+    if ( ! empty( $meta['mj_dek'][0] ) ) {
+      printf(
+        '<h3 class="dek">%s</h3>',
+        esc_html( $meta['mj_dek'][0] )
+      );
+    }
+  ?>
+  <p class="byline-dateline">
+    <span class="byline">
+      <?php print mj_byline( get_the_ID() ); ?>
+    </span>
+    <span class="dateline">
+      <?php print mj_dateline( get_the_ID() ); ?>
+    </span>
+  </p>
+  <?php
+  if ( $has_image ) { ?>
+    </div>
+    <div id="full-width-header-image">
+      <?php mfi_reloaded_the_image( 'mj_title_image', 'full_width_giant' ); ?>
+    </div>
+  <?php
+  }
+  ?>
 </header>
 
 <?php
