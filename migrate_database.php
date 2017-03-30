@@ -6,7 +6,7 @@ $password=$argv[1];
 $d6_db = "mjd6";
 $wp_db = "pantheon_wp";
 $FILEDIR_ABS = "http://dev-mjwordpress.pantheonsite.io/wp-content/uploads/";
-$FILEDIR = "wp-content/uploads/";
+$FILEDIR = "";
 
 
 $d6 = new PDO("mysql:host=$hostname;dbname=$d6_db", $username, $password);
@@ -900,9 +900,7 @@ $meta_data->execute();
 
 $wp->beginTransaction();
 while ( $meta = $meta_data->fetch(PDO::FETCH_ASSOC)) {
-  $related_value = serialize( array(
-    'relateds' => explode(',', $meta['relateds'])
-  ) );
+  $related_value = serialize( explode(',', $meta['relateds']) );
 
 	$meta_insert->execute(array($meta['nid'], 'mj_related_articles', $related_value) );
 }
@@ -920,7 +918,6 @@ $wp->commit();
 
 
 
-//CREATE GUEST AUTHORS FOR ALL USERS
 
 $author_data = $d6->prepare("
 SELECT DISTINCT
@@ -954,7 +951,7 @@ INSERT IGNORE INTO pantheon_wp.wp_users
 VALUES (
   REPLACE(LOWER(?), " ", "-"), # NICENAME lowercase, - instead of space
   REPLACE(LOWER(?), " ", ""), # login lowercase, no spaces
-  "0000-00-00 00:00:00", # registered date
+  FROM_UNIXTIME("1970-1-1 00:00:00"),
   ? # Display name
 )
 ');
@@ -1038,6 +1035,15 @@ foreach ( $uid_to_author_meta as $uid => $author ) {
     $value = $author['field_author_title_value'];
     $author_meta_insert->execute();
   }
+
+  //everybody is a former author! Later we can make active users active
+  $key = 'wp_capabilities';
+  $value = 'a:1:{s:13:"former_author";s:1:"1";}';
+  $author_meta_insert->execute();
+
+  $key = 'wp_user_level';
+  $value = 1;
+  $author_meta_insert->execute();
 
 }
 $wp->commit();
@@ -1142,18 +1148,6 @@ $wp->commit();
 
 
 
-//everybody is a contributor! Later we can make active users active
-//
-$wp->beginTransaction();
-$user_insert = $wp->exec("
-INSERT IGNORE INTO pantheon_wp.wp_usermeta (user_id, meta_key, meta_value)
-SELECT DISTINCT
-ID, 'wp_capabilities', 'a:1:{s:13:\"former_author\";s:1:\"1\";}'
-FROM pantheon_wp.wp_users
-;
-");
-$wp->commit();
-
 //author roles who are active users
 $roles_data = $d6->prepare("
 SELECT DISTINCT
@@ -1168,15 +1162,24 @@ $roles_data->execute();
 
 $roles_insert = $wp->prepare("
 UPDATE pantheon_wp.wp_usermeta
-SET meta_value = 'a:1:{s:6:\"author\";s:1:\"1\";}'
-WHERE meta_key = 'wp_capabilities'
+SET meta_value = ?
+WHERE meta_key = ?
 AND user_id = ?
 ;
 ");
 $wp->beginTransaction();
 while ( $role = $roles_data->fetch(PDO::FETCH_ASSOC)) {
   $user_id = $author_name_to_author_meta[$role['name']]['wp_id'];
-	$roles_insert->execute(Array($user_id));
+  $roles_insert->execute(Array(
+    'a:1:{s:6:"author";s:1:"1";}',
+    'wp_capabilities',
+    $user_id 
+  ));
+  $roles_insert->execute(Array(
+    2,
+    'wp_user_level',
+    $user_id 
+  ));
 }
 $wp->commit();
 
@@ -1237,7 +1240,7 @@ CONVERT_TZ(FROM_UNIXTIME("1970-1-1 00:00:00"), "PST8PDT","UTC"),
 :guid,
 "",
 "attachment",
-"publish",
+"inherit",
 NULL,
 :post_mime_type
 )
@@ -1344,7 +1347,7 @@ CONVERT_TZ(FROM_UNIXTIME(:post_modified), "PST8PDT","UTC"),
 :guid,
 "",
 "attachment",
-IF(:status = 1, "publish", "draft"),
+"inherit",
 :post_parent,
 :post_mime_type
 )
@@ -1475,7 +1478,7 @@ CONVERT_TZ(FROM_UNIXTIME(:post_modified), "PST8PDT","UTC"),
 :guid,
 "",
 "attachment",
-IF(:status = 1, "publish", "draft"),
+"inherit",
 :post_parent,
 :post_mime_type
 )
@@ -1598,7 +1601,7 @@ CONVERT_TZ(FROM_UNIXTIME(:post_modified), "PST8PDT","UTC"),
 :guid,
 "",
 "attachment",
-IF(:status = 1, "publish", "draft"),
+"inherit",
 :post_parent,
 :post_mime_type
 )

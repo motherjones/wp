@@ -10,7 +10,6 @@
 /**
  * Exclude blog posts from category page queries
  *
- * @since 1.0
  * @param array $query the original query to exclude blog posts from.
  */
 function mj_exclude_blogs( $query ) {
@@ -29,3 +28,15 @@ function mj_exclude_blogs( $query ) {
 	return $query;
 }
 add_action( 'pre_get_posts', 'mj_exclude_blogs' );
+
+/**
+ * Only show 10 posts on blog archive pages.
+ *
+ * @param array $query the original query to modify.
+ */
+function mj_set_posts_per_page( $query ) {
+	if ( array_key_exists( 'blog', $query->query ) ) {
+		$query->set( 'posts_per_page', '10' );
+	}
+}
+add_action( 'pre_get_posts', 'mj_set_posts_per_page' );

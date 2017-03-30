@@ -26,10 +26,10 @@ class mj_related_articles extends WP_Widget {
 		global $post;
 		extract( $args );
 
-		$related = get_post_meta( get_the_ID(), 'mj_related_articles' );
+		$related = get_post_meta( get_the_ID(), 'mj_related_articles', true );
 		if ( ! empty( $related ) ) {
 			$related_query = new WP_Query(array(
-				'post__in' => $related['relateds'],
+				'post__in' => $related,
 				'post_type' => array( 'post' ),
 				'post_status' => 'publish',
 				'posts_per_page' => 2,

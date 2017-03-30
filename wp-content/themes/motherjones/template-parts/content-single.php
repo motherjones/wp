@@ -8,12 +8,14 @@
  */
 
 global $meta;
+$article_classes = 'hnews hentry item grid__col-md-8 grid__col-sm-12';
 ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class( 'hnews' ); ?> itemscope itemtype="http://schema.org/Article">
-	<?php get_template_part( 'template-parts/single', 'entry-header' ); ?>
+<?php get_template_part( 'template-parts/single', 'entry-header' ); ?>
 
-	<section class="entry-content" itemprop="articleBody">
+<section id="post-<?php the_ID(); ?>" <?php post_class( $article_classes ); ?> itemscope itemtype="http://schema.org/Article">
+
+	<article class="entry-content" itemprop="articleBody">
 		<?php
 			if ( isset( $meta['css'][0] ) ) {
 				printf(
@@ -24,15 +26,13 @@ global $meta;
 			largo_hero();
 			the_content();
 		?>
-	</section>
+	</article>
 
 	<footer class="entry-footer">
 		<?php
 			mj_share_tools( 'bottom' );
 			dynamic_sidebar( 'content-end' );
 		?>
-	</footer><!-- .entry-footer -->
+	</footer>
 
-	<?php get_sidebar(); ?>
-
-</article> <!-- #post-## -->
+</section>

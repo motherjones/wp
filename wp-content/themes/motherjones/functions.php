@@ -31,12 +31,33 @@
  * By default we use minified CSS and JS files.
  * set MJ_DEBUG to TRUE to use unminified JavaScript files
  * and unminified CSS files with sourcemaps for debugging purposes.
- *
- * @since 1.0
  */
 if ( ! defined( 'MJ_DEBUG' ) ) {
 	define( 'MJ_DEBUG', false );
 }
+
+/**
+ * Image size constants.
+ */
+if ( ! defined( 'LARGE_WIDTH' ) ) {
+	define( 'LARGE_WIDTH', 990 );
+}
+if ( ! defined( 'LARGE_HEIGHT' ) ) {
+	define( 'LARGE_HEIGHT', 557 );
+}
+if ( ! defined( 'MEDIUM_LARGE_WIDTH' ) ) {
+	define( 'MEDIUM_LARGE_WIDTH', 630 );
+}
+if ( ! defined( 'MEDIUM_LARGE_HEIGHT' ) ) {
+	define( 'MEDIUM_LARGE_HEIGHT', 354 );
+}
+if ( ! defined( 'MEDIUM_WIDTH' ) ) {
+	define( 'MEDIUM_WIDTH', 485 );
+}
+if ( ! defined( 'MEDIUM_HEIGHT' ) ) {
+	define( 'MEDIUM_HEIGHT', 273 );
+}
+
 
 /**
  * A class to represent the one true MJ theme instance
@@ -55,6 +76,7 @@ class MJ {
 	 */
 	private function load() {
 		$this->require_files();
+		$this->register_media_sizes();
 	}
 	/**
 	 * Load required files
@@ -63,6 +85,7 @@ class MJ {
 		$includes = array(
 			'/vendor/largo/largo-metabox-api.php',
 			'/vendor/largo/featured-media.php',
+			'/vendor/largo/related-posts/largo-related-posts.php',
 			'/inc/archive.php',
 			'/inc/editor.php',
 			'/inc/enqueue.php',
@@ -71,6 +94,7 @@ class MJ {
 			'/inc/metaboxes.php',
 			'/inc/post-templates.php',
 			'/inc/sidebars.php',
+			'/inc/social-tags.php',
 			'/inc/template-tags.php',
 			'/inc/users.php',
 		);
@@ -83,6 +107,60 @@ class MJ {
 			require_once dirname( __FILE__ ) . '/vendor/largo/media-credit.php';
 		}
 	}
+	/**
+	 * Register image and media sizes associated with the theme
+	 */
+	private function register_media_sizes() {
+
+		// set the WP defaults.
+		set_post_thumbnail_size( 208, 117 , true );
+		add_image_size( 'medium', MEDIUM_WIDTH, MEDIUM_HEIGHT, true );
+		add_image_size( 'large', LARGE_WIDTH, LARGE_HEIGHT, true );
+
+		// custom image sizes/crops.
+		add_image_size(
+			'full_width_giant',
+			2400,
+			1350,
+			true
+		);
+
+		add_image_size(
+			'social_card',
+			1200,
+			630,
+			true
+		);
+
+		add_filter( 'pre_option_thumbnail_size_w', function(){
+			return 208;
+		});
+		add_filter( 'pre_option_thumbnail_size_h', function(){
+			return 117;
+		});
+		add_filter( 'pre_option_thumbnail_crop', '__return_true' );
+		add_filter( 'pre_option_medium_size_w', function(){
+			return MEDIUM_WIDTH;
+		});
+		add_filter( 'pre_option_medium_size_h', function(){
+			return MEDIUM_HEIGHT;
+		});
+		add_filter( 'pre_option_large_size_w', function(){
+			return LARGE_WIDTH;
+		});
+		add_filter( 'pre_option_large_size_h', function(){
+			return LARGE_HEIGHT;
+		});
+		add_filter( 'pre_option_embed_autourls', '__return_true' );
+		add_filter( 'pre_option_embed_size_w', function(){
+			return LARGE_WIDTH;
+		});
+		add_filter( 'pre_option_embed_size_h', function(){
+			return LARGE_HEIGHT;
+		});
+
+	}
+
 }
 /**
  * Load our MJ instance
@@ -171,13 +249,6 @@ add_action( 'after_setup_theme', 'mj_setup' );
  * @since Mother Jones 1.0
  */
 function mj_content_width() {
-	$GLOBALS['content_width'] = apply_filters( 'mj_content_width', 840 );
+	$GLOBALS['content_width'] = apply_filters( 'mj_content_width', 990 );
 }
 add_action( 'after_setup_theme', 'mj_content_width', 0 );
-
-function mj_set_posts_per_page($query) {
-	if ( array_key_exists('blog', $query->query) ) {
-    $query->set( 'posts_per_page', '10' );
-	}
-}
-add_action( 'pre_get_posts', 'mj_set_posts_per_page' );

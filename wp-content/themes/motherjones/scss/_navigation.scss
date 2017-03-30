@@ -1,0 +1,211 @@
+/* Begin navbar styling */
+#navbar {
+  position: fixed;
+  width: 100%;
+  background: $white;
+  color: $black;
+  top: -50px;
+  left: 0px;
+  transition: top .5s cubic-bezier(0.5, -0.5, 0.5, 1.5);
+  box-shadow: 0 5px 10px 0 rgba(0,0,0,0.15),0 -5px 3px -10px #fff;
+  height: 45px;
+  padding: 5px 0 0 0; /* must be taller so the bounce doesn't have empty space on top */
+  z-index: 5999999; /* ffs */
+  &.lower {
+    top: -5px;
+  }
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  li {
+    display: inline;
+    float: left;
+    overflow: hidden;
+  }
+  i {
+    line-height: 40px;
+  }
+  a {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    color: $black;
+    letter-spacing: -1px;
+    font-size: 20px;
+    font-family:  $mallory;
+    font-weight: bold;
+    line-height: 40px;
+    border: none;
+    text-shadow: none;
+  }
+  .share-button {
+    width: 40px;
+    transition: width .5s cubic-bezier(0.5, -0.5, 0.5, 1.5);
+    &.twitter i {
+      color: $twitter;
+    }
+    &.facebook i {
+      color: $facebook;
+    }
+    .share-text {
+      display: none;
+    }
+  }
+  .nav-title {
+    width: auto;
+    max-width: 45%;
+    height: 40px;
+    line-height: 40px;
+    font-size: 16px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-family: $mallory;
+    font-weight: bold;
+    padding: 0 10px;
+  }
+  li.donate-link,
+  li.subscribe-link {
+    float: right;
+    width: 95px;
+    a {
+      color: #ccc;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      &:hover {
+        color: $orange;
+      }
+    }
+  }
+  .menu-button {
+    width: 45px;
+    float: right;
+    margin-top: 4px;
+  }
+  .logo {
+    width: 175px;
+    a {
+      margin: 0;
+      padding: 0;
+      line-height: normal;
+    }
+    img {
+      max-width: 90%;
+      max-height: 28px;
+      margin: 5px 5px 0;
+    }
+  }
+}
+/* end navbar styling */
+
+/* menu styling */
+#mj_menu_select {
+  padding-left: 1px;
+  max-height: 0px;
+  overflow: hidden;
+  clear: left;
+  transition: max-height .5s cubic-bezier(0.5, -0.5, 0.5, 1.5);
+  width: 200px;
+  background: $white;
+  position: absolute;
+  right: 0;
+  top: 40px;
+  box-shadow: -3px 5px 5px #ccc;
+  #mj_menu_options li {
+    display: list-item;
+    float: none;
+    a {
+      line-height: 30px;
+      font-size: 16px;
+    }
+  }
+}
+#navbar .menu-button.open svg rect {
+  fill: $orange;
+}
+#navbar .menu-button.open {
+  box-shadow: -3px -4px 4px #ccc;
+}
+#navbar #mj_menu_select.open { /*only when nav is lowed, please */
+  max-height: 0px;
+}
+#navbar.lower #mj_menu_select.open { /*only when nav is lowed, please */
+  max-height: 600px;
+}
+/* end menu styling */
+
+/* static navbar styling */
+#static-navbar {
+  ul {
+    list-style-type: none;
+    position: relative;
+    padding: 0;
+    border-bottom: 1px solid #CCC;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    padding-bottom: 21px;
+  }
+  li {
+    display: inline-block;
+    padding: 0 45px 0 0;
+  }
+  a {
+    font-family: $mallory;
+    font-weight: bold;
+    text-decoration: none;
+    color: $black;
+    font-size: 10px;
+    text-transform: uppercase;
+    background-image: none;
+    letter-spacing: 2.5px;
+    padding-bottom: 3px;
+    border-bottom: 3px solid $white;
+    &:hover {
+      border-bottom: 3px solid $orange;
+    }
+  }
+  .menu-item-home {
+    width: 100%;
+    padding: 0 0 30px;
+    a:hover {
+      border-bottom: 3px solid $white;
+    }
+    img {
+      width: 420px;
+    }
+  }
+  .menu-item-magazine {
+    padding: 0;
+    position: absolute;
+    right: 0;
+    bottom: 22px;
+  }
+  .menu-item-subscribe,
+  .menu-item-donate {
+    position: absolute;
+    top: 7px;
+    right: 0;
+    padding: 0;
+    a {
+      padding: 6px;
+      color: #ccc;
+      border: 1px solid #ccc;
+      font-size: 16px;
+      letter-spacing: 0px;
+      &:hover {
+        color: $black !important;
+        border-color: $orange;
+      }
+    }
+  }
+  .menu-item-subscribe {
+    right: 100px;
+    margin-right: 10px;
+  }
+  @media only screen and (max-width: 990px) {
+    display: none;
+  }
+}
+/* end static navbar styling */

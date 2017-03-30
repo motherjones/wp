@@ -13,48 +13,37 @@ while ( have_posts() ) : the_post();
 	$meta = get_post_meta( get_the_ID() );
 ?>
 <header id="full-width-header" class="group">
-	<?php if ( mfi_reloaded_has_image( 'mj_title_image' ) ) { ?>
-		<div id="full-width-header-image">
-			<?php mfi_reloaded_the_image( 'mj_title_image', 'full_width_giant' ); ?>
-		</div>
-		<div id="full-width-header-data">
-			<?php
-				the_title( '<h1 class="article hed">', '</h1>' );
-		    if ( ! empty( $meta['mj_dek'][0] ) ) {
-					printf(
-						'<h3 class="dek">%s</h3>',
-						esc_html( $meta['mj_dek'][0] )
-					);
-				}
-			?>
-			<p class="byline-dateline">
-				<span class="byline">
-					<?php print mj_byline( get_the_ID() ); ?>
-				</span>
-				<span class="dateline">
-					<?php print mj_dateline( get_the_ID() ); ?>
-				</span>
-			</p>
-		</div>
-	<?php } else { ?>
-			<?php
-				the_title( '<h1 class="article hed">', '</h1>' );
-				if ( ! empty( $meta['mj_dek'][0] ) ) {
-					printf(
-						'<h3 class="dek">%s</h3>',
-						esc_html( $meta['mj_dek'][0] )
-					);
-				}
-			?>
-			<p class="byline-dateline">
-				<span class="byline">
-					<?php print esc_html( mj_byline( get_the_ID() ) ); ?>
-				</span>
-				<span class="dateline">
-					<?php print esc_html( mj_dateline( get_the_ID() ) ); ?>
-				</span>
-			</p>
-	<?php } ?>
+	<?php
+		$has_image = mfi_reloaded_has_image( 'mj_title_image' );
+		if ( $has_image ) { ?>
+			<div id="full-width-header-image">
+				<?php mfi_reloaded_the_image( 'mj_title_image', 'full_width_giant' ); ?>
+			</div>
+			<div id="full-width-header-data">
+		<?php
+		} // $has_image.
+
+		the_title( '<h1 class="article hed">', '</h1>' );
+			if ( ! empty( $meta['mj_dek'][0] ) ) {
+				printf(
+					'<h3 class="dek">%s</h3>',
+					esc_html( $meta['mj_dek'][0] )
+				);
+			}
+		?>
+		<p class="byline-dateline">
+			<span class="byline">
+				<?php print mj_byline( get_the_ID() ); ?>
+			</span>
+			<span class="dateline">
+				<?php print mj_dateline( get_the_ID() ); ?>
+			</span>
+		</p>
+		<?php
+		if ( $has_image ) {
+			echo '</div>';
+		}
+		?>
 </header>
 
 <?php
@@ -77,58 +66,50 @@ while ( have_posts() ) : the_post();
 	}
 ?>
 
-<div id="content" class="site-content group">
-	<div id="primary" class="content-area">
-		<main id="main" class="site-main" role="main">
-			<article class="full-width">
-				<?php
-					if ( isset( $meta['css'][0] ) ) {
-						printf(
-							'<style>%s</style>',
-							esc_html( $meta['css'][0] )
-						);
-					}
-					mj_share_tools( 'top' );
-				?>
 
-				<div id="fullwidth-body">
-					<?php the_content(); ?>
-				</div>
+<main id="main" class="site-main" role="main">
+	<article class="full-width">
+		<?php
+			if ( isset( $meta['css'][0] ) ) {
+				printf(
+					'<style>%s</style>',
+					esc_html( $meta['css'][0] )
+				);
+			}
+			mj_share_tools( 'top' );
+		?>
 
-				<footer class="entry-footer">
-					<?php
-						mj_share_tools( 'bottom' );
-						dynamic_sidebar( 'content-end' );
-						comments_template();
-					?>
-					<script>
-						//<!--
-						if (typeof MJ_HideBottomMobile === 'undefined') {
-							ad_code({
-								placement: 'ym_869408549909503847',
-									yieldmo: true,
-								 docwrite: true,
-									desktop: false,
-							});
-						}
-						//-->
-					</script>
-				</footer><!-- .entry-footer -->
-			</article><!-- #post-## -->
+		<div id="fullwidth-body">
+			<?php the_content(); ?>
+		</div>
+
+		<footer class="entry-footer">
 			<?php
-				if ( ! empty( $meta['js'][0] ) ) {
-					printf(
-						'script>%s</script>',
-						esc_js( $meta['js'][0] )
-					);
-				}
+				mj_share_tools( 'bottom' );
+				dynamic_sidebar( 'content-end' );
+				comments_template();
 			?>
-
-		</main><!-- .site-main -->
-
-
-</div><!-- .content-area -->
-
-<?php get_footer();
+			<script>
+				//<!--
+				if (typeof MJ_HideBottomMobile === 'undefined') {
+					ad_code({
+						placement: 'ym_869408549909503847',
+						yieldmo: true,
+						docwrite: true,
+						desktop: false,
+					});
+				}
+				//-->
+			</script>
+		</footer><!-- .entry-footer -->
+	</article><!-- #post-## -->
+	<?php
+	if ( ! empty( $meta['js'][0] ) ) {
+		printf(
+			'script>%s</script>',
+			esc_js( $meta['js'][0] )
+		);
+	}
 endwhile;
-?>
+
+get_footer();

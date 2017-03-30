@@ -1,0 +1,30 @@
+@media print {
+	// the basics (based on http://html5boilerplate.com/)
+	* {
+		background:transparent !important;
+		color:#000 !important;
+		box-shadow:none !important;
+		text-shadow:none !important;
+		filter:none !important;
+		-ms-filter:none !important
+	}
+  // hide a bunch of stuff
+  .ad-unit,
+  #navbar,
+  #static-navbar ul li,
+  .social-container,
+  .mj-related-articles,
+  #prev-next,
+  #footer-social,
+  #footer-list,
+  .DC-embed {
+    display: none;
+  }
+  #static-navbar li.menu-item-home {
+    display: block !important;
+    margin: 0 auto;
+    padding: 0;
+    max-width: 300px;
+  }
+
+}

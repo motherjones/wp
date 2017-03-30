@@ -1,0 +1,190 @@
+/* Readers Like You */
+.members-like-you {
+  font-style: italic;
+  line-height: 17px;
+  font-size: 14px;
+  clear: both;
+  padding-top: 0;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 15px;
+  margin-top: 20px;
+  em {
+    font-style: normal;
+  }
+  a {
+    color: $orange;
+    &:hover {
+      opacity: .7;
+    }
+  }
+}
+
+/* Author Bios */
+ul.author-bios {
+  padding: 0;
+  border-bottom: 1px solid #ccc;
+}
+.author-data {
+  float: left;
+  max-width: 535px;
+}
+.author-position {
+  color: #ccc;
+}
+.author-bio {
+  clear: both;
+  margin: 1em 0;
+  overflow: auto;
+  list-style-type: none;
+  .byline {
+    display: block;
+    line-height: 14px;
+    a {
+      display: inline-block;
+      background-position: 0% 100%;
+    }
+  }
+  .author-image {
+    float: left;
+    margin-right: 15px;
+    margin-bottom: 20px;
+    height: 80px;
+    width: 80px;
+    border-radius: 50px;
+    overflow: hidden;
+    img {
+      max-width: 100%;
+      max-height: 100%;
+    }
+  }
+}
+.author-bio-text {
+  font-size: 12px;
+  margin-top: 5px;
+  font-family: $mallory;
+  text-align: left;
+}
+
+
+.interior-rhc-membership {
+  width: 300px;
+  display: block;
+  float: right;
+  height: 721px;
+  background-image: url('/wp-content/themes/motherjones/img/Membership_AD-421.jpg');
+  background-size: contain;
+  .donation {
+    display: block;
+    height: 30px;
+    position: relative;
+    top: 180px;
+    &:hover {
+      background: rgba(255, 255, 255, .5)
+    }
+    &.onetime {
+      width: 118px;
+      left: 25px;
+    }
+    &.monthly {
+      width: 118px;
+      top: 150px;
+      left: 155px;
+    }
+  }
+  form {
+    position: relative;
+    top: 240px;
+    clear: both;
+    display: block;
+    margin: 0 auto;
+    width: 244px;
+    overflow: hidden;
+    border-radius: 5px;
+    height: 26px;
+    button {
+      border: transparent;
+      background: transparent;
+      width: 72px;
+      height: 29px;
+      font-size: 0px;
+      position: relative;
+      top: -4px;
+      &:hover {
+        background: rgba(255, 255, 255, .5)
+      }
+    }
+    input {
+      background: white;
+      border: transparent;
+      position: relative;
+      top: 2px;
+      left: -2px;
+      width: 160px;
+      height: 20px;
+      outline: none!important;
+      text-align: center;
+      font-family: Mallory, sans-serif;
+      font-weight: bold;
+      line-height: 24px;
+      font-size: 13px;
+      letter-spacing: -1px;
+    }
+  }
+  .subscribe {
+    display: block;
+    position: relative;
+    top: 352px;
+    height: 30px;
+    left: 26px;
+    width: 127px;
+    &:hover {
+      background: rgba(255, 255, 255, .5)
+    }
+  }
+  .subscribe_cover {
+    display: block;
+    position: relative;
+    top: 320px;
+    height: 228px;
+    left: 20px;
+    width: 254px;
+    :hover {
+      background: rgba(255, 255, 255, .5)
+    }
+  }
+  &.blog {
+    height: 298px;
+    background-image: url('/wp-content/themes/motherjones/img/Membership_ADSBasic_9_Short2_.png');
+    .donation {
+      top: 132px;
+      &.monthly {
+        top: 102px;
+      }
+    }
+    .subscribe {
+      top: 185px;
+      left: 60px;
+      width: 175px;
+    }
+  }
+}
+
+.ticker-content {
+  background-image: url('/wp-content/themes/motherjones/img/membership-background-bar-lite-2.png');
+  padding: 2px 5px 4px;
+  width: 100%;
+  a {
+    color: $orange;
+    font-weight: bold;
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+  p {
+    text-align: center;
+    font-family: $mallory;
+    font-size: 16px;
+    font-weight: bold;
+  }
+}
