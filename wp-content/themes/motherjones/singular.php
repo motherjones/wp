@@ -12,7 +12,7 @@ $meta = get_post_meta( get_the_ID() );
 get_header();
 ?>
 
-<main id="content" class="site-main grid" role="main">
+<main id="main" class="site-main grid" role="main">
 	<?php while ( have_posts() ) : the_post();
 
 			$template_part = ( is_page() ) ? 'page' : 'single';
