@@ -6,14 +6,8 @@
 @import "vendor/reflex/reflex/helpers";
 
 .mj_article_type-full_width_article {
-  #page {
-    width: 100%;
-  }
-  #TopROS970x250,
-  #masthead,
   #main {
-    width: 55em;
-    margin: 0 auto;
+    width: 100%;
   }
   article.full-width {
     margin-top: 2em;
@@ -24,31 +18,15 @@
   position: relative;
   text-align: center;
   .hed {
-    max-width: 990px;
     text-transform: none;
     margin: auto;
   }
   .dek {
-    max-width: 700px;
     margin: 28px auto 15px;
     font-size: 20px;
   }
 }
 
-#full-width-header-data {
-  position: absolute;
-  bottom: 0px;
-  text-align: center;
-  width: 100%;
-  background: linear-gradient(transparent,#000);
-  h1,
-  h3 {
-    color: $white;
-  }
-  h1 {
-    line-height: 1.2em;
-  }
-}
 .full-width-title-art-byline {
   text-align: right;
   color: #ccc;
@@ -58,12 +36,15 @@
   font-style: italic;
   font-size: 12px;
 }
+#full-width-header-image img {
+  min-width: 100%;
+}
 
 #fullwidth-body {
   background-image: url('/wp-content/themes/motherjones/img/border-$black25.png');
   background-repeat: repeat-y;
   background-position: 660px;
-  margin-bottom: 45px;
+  margin: 0 12px 45px;
   .right-rail, .inline-right, .inline-left {
     width: 100%!important;
     display: block;
@@ -75,34 +56,74 @@
   }
 
   .pullquote-left, .pullquote-right {
+    display: table-cell;
     width: 100%;
+  }
+  img {
+    max-width: 100%;
   }
 
 }
 
 @media (min-width: $reflex-sm) {
-    #fullwidth-body {
-        p {
-            width: percentage( 8 / 12);
-            @include setupAutoCols();
-        }
-        .right-rail, .inline-right {
-            float: right;
-            margin-left: 15px;
-            text-align: left;
-            @include setupAutoCols();
-            width: percentage( 4 / 12 )!important;
-            * {
-              text-align: left;
-            }
-        }
-        .inline-left {
-            width: auto!important;
-            * {
-              text-align: left;
-            }
-        }
+  #fullwidth-body {
+    p {
+      width: percentage( 8 / 12);
+      @include setupAutoCols();
     }
+    .right-rail, .inline-right {
+      float: right;
+      margin-left: 15px;
+      text-align: left;
+      @include setupAutoCols();
+      width: percentage( 4 / 12 )!important;
+        * {
+          text-align: left;
+        }
+      }
+      .inline-left {
+        width: auto!important;
+          * {
+            text-align: left;
+          }
+        }
+      }
+      #full-width-header-data {
+        padding-bottom: 20px;
+        * {
+          display: block;
+        }
+        .hed {
+          margin: 5px 40px;
+          font-size: 42px;
+        }
+        .dek {
+          margin: 28px 145px 0;
+        }
+        .byline-dateline {
+          margin: 16px;
+          * {
+            display:inline;
+          }
+        }
+      }
 }
 
-/* end full width */
+@media (min-width: $reflex-xs) {
+  #full-width-header-data {
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    background: linear-gradient(transparent,#000);
+    h1,
+    h3 {
+      color: $white;
+    }
+    h1.hed {
+      line-height: 1.2em;
+      text-transform: uppercase;
+    }
+  }
+}
+
+  /* end full width */

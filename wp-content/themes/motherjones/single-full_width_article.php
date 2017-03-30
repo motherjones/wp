@@ -14,9 +14,6 @@ while ( have_posts() ) : the_post();
 ?>
 <header id="full-width-header" class="group">
 	<?php if ( mfi_reloaded_has_image( 'mj_title_image' ) ) { ?>
-		<div id="full-width-header-image">
-			<?php mfi_reloaded_the_image( 'mj_title_image', 'full_width_giant' ); ?>
-		</div>
 		<div id="full-width-header-data">
 			<?php
 				the_title( '<h1 class="article hed">', '</h1>' );
@@ -35,6 +32,9 @@ while ( have_posts() ) : the_post();
 					<?php print mj_dateline( get_the_ID() ); ?>
 				</span>
 			</p>
+		</div>
+		<div id="full-width-header-image">
+			<?php mfi_reloaded_the_image( 'mj_title_image', 'full_width_giant' ); ?>
 		</div>
 	<?php } else { ?>
 			<?php
