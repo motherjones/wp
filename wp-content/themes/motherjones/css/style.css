@@ -2227,10 +2227,24 @@ blockquote {
       font-size: 12px;
       background-position: 0% 100%; }
 
+.alignleft {
+  float: left;
+  margin: 1em 1em 1em 0; }
+
+.alignright {
+  float: right;
+  margin: 1em 0 1em 1em; }
+
+.aligncenter {
+  float: none;
+  margin: 1em auto; }
+
 .caption,
 .caption a,
 .photo-byline,
-.photo-byline a {
+.photo-byline a,
+.wp-media-credit,
+.wp-caption-text {
   background: white;
   color: #FF6900;
   font-weight: normal;
@@ -2242,7 +2256,8 @@ blockquote {
   background-position: 0% 100%;
   letter-spacing: normal; }
 
-.photo-byline {
+.photo-byline,
+.wp-media-credit {
   margin: 5px 0; }
 
 .caption strong,
