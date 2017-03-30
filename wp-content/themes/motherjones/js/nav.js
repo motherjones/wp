@@ -14,7 +14,7 @@ var hideSearch = function(inputContainer) {
 (function($) {
   //Make the top nav bar drop on scroll
   var begin, navbar, navCheck, beginningOffset;
-  var BEGIN_SELECTOR = '#content';
+  var BEGIN_SELECTOR = 'main#main';
   var NAVBAR_SELECTOR = '#navbar';
   var LOWER_CLASS = 'lower';
 
