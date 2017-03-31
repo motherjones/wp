@@ -162,13 +162,7 @@
 	}
 	h4.dek {
 		margin: 1em 0;
-	}
-	@media only screen and (max-width: 768px) {
-		h1.entry-title {
-			font-size: 20px;
-			line-height: 24px;
-		}
-		.dek {
+		@media only screen and (max-width: 768px) {
 			display: none;
 		}
 	}
