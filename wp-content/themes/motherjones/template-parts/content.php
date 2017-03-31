@@ -9,10 +9,18 @@
 
 ?>
 <li id="post-<?php echo esc_attr( get_the_ID() ); ?>" <?php post_class( 'article-item grid' ); ?>>
+
+	<?php // the thumbnail image, if we have one.
+	$article_grid_class = 'grid__col-12';
+	if ( has_post_thumbnail() ) {
+		$article_grid_class = 'grid__col-8';
+	?>
 	<div class="article-image grid__col-4">
 			<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail( 'thumbnail' ); ?></a>
 	</div>
-	<div class="article-data grid__col-8">
+	<?php } ?>
+
+	<div class="article-data <?php echo esc_attr( $article_grid_class ); ?>">
 		<h3 class="hed">
 			<a href="<?php print the_permalink(); ?>">
 				<?php

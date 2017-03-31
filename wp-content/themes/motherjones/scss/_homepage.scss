@@ -21,7 +21,7 @@
 	text-align: right;
 	line-height: 4px;
 	margin: 0;
-	@media only screen and (max-width:768px) {
+	@media only screen and (max-width: $reflex-sm) {
 		display: none;
 	}
 }
@@ -32,7 +32,7 @@
 		position: absolute;
 		bottom: 26px;
 		width: 100%;
-		background: linear-gradient(transparent,#000);
+		background: linear-gradient(transparent,$black);
 		a {
 			text-shadow: none;
 			color: $white;
@@ -60,7 +60,7 @@
 		width: 100%;
 		height: auto;
 	}
-	@media only screen and (max-width:768px) {
+	@media only screen and (max-width: $reflex-sm) {
 		padding-bottom: 0;
 		.article-data {
 			position: relative;
@@ -88,7 +88,7 @@
 		margin-top: 0;
 		padding-top: 1.5em;
 		padding-bottom: 1em;
-		background-image: url('/wp-content/themes/motherjones/img/grey_line.png');
+		background-image: url('../img/grey_line.png');
 		background-repeat: no-repeat;
 		background-position: top;
 		text-align: center;
@@ -106,7 +106,7 @@
 			margin-top: 0.5em;
 		}
 	}
-	@media only screen and (max-width: 768px) {
+	@media only screen and (max-width: $reflex-sm) {
 		margin-top: 0;
 		padding: 0 1em 1em;
 	}
@@ -117,7 +117,7 @@
 	.promo {
 		margin-top: 0;
 	}
-	@media only screen and (max-width: 768px) {
+	@media only screen and (max-width: $reflex-sm) {
 		padding-left: 1em;
 	}
 }
@@ -141,12 +141,14 @@
 		}
 	}
 }
-
+#homepage-more-stories-sidebar {
+	padding-right: 0;
+}
 .homepage-fullwidth {
 	.section-label {
 		display: inline-block;
 		padding: 0 20px;
-		background-color: #fff;
+		background-color: $white;
 		margin: 0 auto 0.5em;
 	}
 	.article-data {
@@ -162,7 +164,7 @@
 	}
 	h4.dek {
 		margin: 1em 0;
-		@media only screen and (max-width: 768px) {
+		@media only screen and (max-width: $reflex-sm) {
 			display: none;
 		}
 	}
@@ -180,7 +182,7 @@
 			margin-top: 0;
 			padding-top: 1.25em;
 			padding-bottom: 0.5em;
-			background-image: url('/wp-content/themes/motherjones/img/grey_line.png');
+			background-image: url('../img/grey_line.png');
 			background-repeat: no-repeat;
 			background-position: top;
 			text-align: center;
@@ -204,13 +206,13 @@
 		}
 		&:first-child {
 			padding-left: 0;
-			@media only screen and (max-width: 768px) {
+			@media only screen and (max-width: $reflex-sm) {
 				padding: 1em;
 			}
 		}
 		&:last-child {
 			padding-right: 0;
-			@media only screen and (max-width: 768px) {
+			@media only screen and (max-width: $reflex-sm) {
 				padding: 1em;
 			}
 		}
@@ -225,7 +227,7 @@
 }
 #homepage-kdrum-side {
 	padding-left: 0;
-	@media only screen and (max-width: 768px) {
+	@media only screen and (max-width: $reflex-sm) {
 		padding: 1em;
 	}
 }

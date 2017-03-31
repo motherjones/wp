@@ -288,7 +288,7 @@ JOIN mjd6.publication_date p
 ON n.nid = p.nid
 WHERE n.type = 'page'
 AND a.dst LIKE '%about%'
-AND n.nid IS NOT 64
+AND n.nid != 64
 ;
 ");
 $page_data->execute();

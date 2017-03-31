@@ -1,7 +1,4 @@
 /* full width */
-
-
-@import "vendor/reflex/reflex/variables";
 @import "vendor/reflex/reflex/mixins";
 @import "vendor/reflex/reflex/helpers";
 
@@ -29,7 +26,7 @@
 
 .full-width-title-art-byline {
   text-align: right;
-  color: #ccc;
+  color: $neutral1;
   margin: 3px 40px 0 0;
   font-family: $mallory;
   font-weight: bold;
@@ -41,21 +38,24 @@
 }
 
 #fullwidth-body {
-  background-image: url('/wp-content/themes/motherjones/img/border-$black25.png');
+  background-image: url('../img/border-$black25.png');
   background-repeat: repeat-y;
   background-position: 660px;
   margin: 0 12px 45px;
-  .right-rail, .inline-right, .inline-left {
-    width: 100%!important;
+  .right-rail,
+  .inline-right,
+  .inline-left {
+    width: 100% !important;
     display: block;
     margin: 15px auto;
-    * { 
+    * {
       margin: auto;
       text-align: center;
     }
   }
 
-  .pullquote-left, .pullquote-right {
+  .pullquote-left,
+  .pullquote-right {
     display: table-cell;
     width: 100%;
   }
@@ -103,7 +103,7 @@
         .byline-dateline {
           margin: 16px;
           * {
-            display:inline;
+            display: inline;
           }
         }
       }
@@ -114,7 +114,7 @@
     position: absolute;
     bottom: 0px;
     width: 100%;
-    background: linear-gradient(transparent,#000);
+    background: linear-gradient(transparent,$black);
     h1,
     h3 {
       color: $white;
