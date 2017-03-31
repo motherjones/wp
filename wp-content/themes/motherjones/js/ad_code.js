@@ -1,3 +1,6 @@
+// This doesn't do anything except help us guess that an adblocker is on if it's undefined
+var noadblocking = true;
+
 /** spits out some ad code.
  * config accepts
  * desktop, boolean, if it shows up on desktop or not
