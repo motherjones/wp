@@ -13,11 +13,10 @@ class mj_top_stories_widget extends WP_Widget {
 	}
 
 	// Creating widget front-end
-	// This is where the action happens
+	// This is where the action happens.
 	public function widget( $args, $instance ) {
-		$title = apply_filters( 'widget_title', $instance['title'] );
-		// Before and after widget arguments are defined by themes.
-		echo $args['before_widget'];
+		global $post;
+		extract( $args );
 
 		// This is where you run the code and display the output.
 		print '<div class="top-stories">';
@@ -40,7 +39,7 @@ class mj_top_stories_widget extends WP_Widget {
 <?php
 		endwhile;
 		print '</ul></div>';
-		echo $args['after_widget'];
+		echo $after_widget;
 	}
 
 	/**
