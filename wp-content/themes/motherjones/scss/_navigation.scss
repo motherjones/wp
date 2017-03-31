@@ -97,6 +97,16 @@
       margin: 5px 5px 0;
     }
   }
+  @media (max-width: 560px) {
+    .nav-title {
+      display: none;
+    }
+  }
+  @media (max-width: 320px) {
+    .twitter {
+      display: none;
+    }
+  }
 }
 /* end navbar styling */
 

@@ -1400,6 +1400,12 @@ h5 {
       max-width: 90%;
       max-height: 28px;
       margin: 5px 5px 0; }
+  @media (max-width: 560px) {
+    #navbar .nav-title {
+      display: none; } }
+  @media (max-width: 320px) {
+    #navbar .twitter {
+      display: none; } }
 
 /* end navbar styling */
 /* menu styling */
@@ -1589,7 +1595,13 @@ footer#colophon #copyright a {
     text-transform: lowercase;
     cursor: pointer;
     font-family: Mallory, sans-serif;
-    font-weight: bold; }
+    font-weight: bold;
+    position: absolute;
+    top: 2px;
+    right: 0px; }
+  #bottom-donate p {
+    max-width: 90%;
+    margin-left: 15px; }
 
 /* end footer */
 /* Readers Like You */
@@ -2321,13 +2333,8 @@ ul.author-bios {
   .hidden-lg {
     display: none !important; } }
 
-.mj_article_type-full_width_article #page {
-  width: 100%; }
-.mj_article_type-full_width_article #TopROS970x250,
-.mj_article_type-full_width_article #masthead,
 .mj_article_type-full_width_article #main {
-  width: 55em;
-  margin: 0 auto; }
+  width: 100%; }
 .mj_article_type-full_width_article article.full-width {
   margin-top: 2em; }
 
@@ -2336,25 +2343,11 @@ ul.author-bios {
   position: relative;
   text-align: center; }
   #full-width-header .hed {
-    max-width: 990px;
     text-transform: none;
     margin: auto; }
   #full-width-header .dek {
-    max-width: 700px;
     margin: 28px auto 15px;
     font-size: 20px; }
-
-#full-width-header-data {
-  position: absolute;
-  bottom: 0px;
-  text-align: center;
-  width: 100%;
-  background: linear-gradient(transparent, #000); }
-  #full-width-header-data h1,
-  #full-width-header-data h3 {
-    color: white; }
-  #full-width-header-data h1 {
-    line-height: 1.2em; }
 
 .full-width-title-art-byline {
   text-align: right;
@@ -2365,11 +2358,14 @@ ul.author-bios {
   font-style: italic;
   font-size: 12px; }
 
+#full-width-header-image img {
+  min-width: 100%; }
+
 #fullwidth-body {
   background-image: url("/wp-content/themes/motherjones/img/border-$black25.png");
   background-repeat: repeat-y;
   background-position: 660px;
-  margin-bottom: 45px; }
+  margin: 0 12px 45px; }
   #fullwidth-body .right-rail, #fullwidth-body .inline-right, #fullwidth-body .inline-left {
     width: 100% !important;
     display: block;
@@ -2378,7 +2374,10 @@ ul.author-bios {
       margin: auto;
       text-align: center; }
   #fullwidth-body .pullquote-left, #fullwidth-body .pullquote-right {
+    display: table-cell;
     width: 100%; }
+  #fullwidth-body img {
+    max-width: 100%; }
 
 @media (min-width: 768px) {
   #fullwidth-body p {
@@ -2399,7 +2398,33 @@ ul.author-bios {
   #fullwidth-body .inline-left {
     width: auto !important; }
     #fullwidth-body .inline-left * {
-      text-align: left; } }
+      text-align: left; }
+
+  #full-width-header-data {
+    padding-bottom: 20px; }
+    #full-width-header-data * {
+      display: block; }
+    #full-width-header-data .hed {
+      margin: 5px 40px;
+      font-size: 42px; }
+    #full-width-header-data .dek {
+      margin: 28px 145px 0; }
+    #full-width-header-data .byline-dateline {
+      margin: 16px; }
+      #full-width-header-data .byline-dateline * {
+        display: inline; } }
+@media (min-width: 480px) {
+  #full-width-header-data {
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    background: linear-gradient(transparent, #000); }
+    #full-width-header-data h1,
+    #full-width-header-data h3 {
+      color: white; }
+    #full-width-header-data h1.hed {
+      line-height: 1.2em;
+      text-transform: uppercase; } }
 /* end full width */
 @media print {
   * {
