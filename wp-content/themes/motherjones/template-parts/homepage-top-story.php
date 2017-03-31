@@ -42,7 +42,7 @@ if ( $post_thumbnail_id ) {
 <?php
 if ( ! empty( $post_thumbnail_id ) ) {
 	$thumb_meta = get_post_custom( $post_thumbnail_id );
-	if ( $thumb_meta['_media_credit'][0] && '' !== $thumb_meta['_media_credit'][0] ) {
+	if ( isset( $thumb_meta['_media_credit'][0] ) && '' !== $thumb_meta['_media_credit'][0] ) {
 		echo '<p class="homepage-art-byline">' . esc_html( $thumb_meta['_media_credit'][0] ) . '</p>';
 	}
 }

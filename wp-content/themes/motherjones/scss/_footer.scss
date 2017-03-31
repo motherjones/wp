@@ -86,4 +86,27 @@ footer#colophon #copyright a {
   text-shadow: -1px 0 0 $black, 0 1px 0 $black, 1px 0 0 $black, 0 -1px 0 b
   -1px -1px 0 $black, 1px 1px 0 $black, 1px -1px 0 $black, -1px 1px 0 $black
 }
+
+#bottom-donate {
+  position: fixed;
+  bottom: 0px;
+  background: black;
+  width: 100%;
+  z-index: 5999999; // this is what ad providers really believe
+  text-align: center;
+  a {
+    color: $orange;
+    font-family: $mallory;
+    font-weight: bold;
+    margin-left: 5px;
+  }
+  span {
+    float: right;
+    margin-right: 30px;
+    text-transform: lowercase;
+    cursor: pointer;
+    font-family: $mallory;
+    font-weight: bold;
+  }
+}
 /* end footer */
