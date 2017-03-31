@@ -1974,6 +1974,9 @@ ul.author-bios {
     #homepage-more-top-stories li .byline {
       margin-top: 0.5em; }
 
+#homepage-more-stories-sidebar {
+  padding-right: 0; }
+
 .homepage-fullwidth .section-label {
   display: inline-block;
   padding: 0 20px;
