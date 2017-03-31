@@ -23,20 +23,20 @@ body {
 .archive {
   section.grid__col-md-8 {
     padding-left: 0;
-    @media only screen and (max-width: 768px) {
+    @media only screen and (max-width: $reflex-sm) {
   		padding-left: 1em;
   	}
   }
   #sidebar-right {
     padding-right: 0;
-    @media only screen and (max-width: 768px) {
+    @media only screen and (max-width: $reflex-sm) {
   		padding-right: 1em;
   	}
   }
 }
 
 ::selection {
-  background-color: #ddd;
+  background-color: $neutral1;
 }
 
 a {
@@ -53,7 +53,7 @@ img {
 footer#colophon #copyright a,
 footer#colophon #footer-list a,
 .entry-content a {
-  background-image: url('/wp-content/themes/motherjones/img/orange-border.png');
+  background-image: url('../img/orange-border.png');
   background-repeat: repeat-x;
   text-decoration: none;
   text-shadow: -1px 0 0 $white, 0 1px 0 $white, 1px 0 0 $white, 0 -1px 0 $white,
@@ -118,7 +118,7 @@ button.accent {
 .entry-header {
   text-align: center;
   padding: 0;
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: $reflex-sm) {
     padding: 0.5em 1em;
   }
 }
@@ -138,12 +138,12 @@ h1.entry-title {
 }
 .dek {
   font-family: $calluna;
-  @media only screen and (max-width:768px) {
+  @media only screen and (max-width: $reflex-sm) {
     font-size: 18px;
     margin: 0.5em;
   }
 }
-@media only screen and (max-width:768px) {
+@media only screen and (max-width: $reflex-sm) {
   h1.entry-title {
     font-size: 30px;
 		line-height: 35px;
@@ -177,7 +177,7 @@ blockquote {
   font-weight: bold;
   font-style: italic;
   font-family: $mallory;
-  @media only screen and (max-width:768px) {
+  @media only screen and (max-width: $reflex-sm) {
     left: 0;
     float: none;
     width: 100%;

@@ -153,7 +153,7 @@ input[type="search"]::-webkit-search-decoration {
   -webkit-appearance: none; }
 
 fieldset {
-  border: 1px solid #d1d1d1;
+  border: 1px solid #ccc;
   margin: 0 0 1.75em;
   padding: 0.875em; }
 
@@ -180,7 +180,7 @@ pre {
   font-family: Inconsolata, monospace; }
 
 pre {
-  border: 1px solid #d1d1d1;
+  border: 1px solid #ccc;
   font-size: 16px;
   font-size: 1rem;
   line-height: 1.3125;
@@ -193,18 +193,18 @@ pre {
   word-wrap: break-word; }
 
 code {
-  background-color: #d1d1d1;
+  background-color: #ccc;
   padding: 0.125em 0.25em; }
 
 abbr,
 acronym {
-  border-bottom: 1px dotted #d1d1d1;
+  border-bottom: 1px dotted #ccc;
   cursor: help; }
 
 mark,
 ins {
-  background: #007acc;
-  color: #fff;
+  background: #00B0EE;
+  color: white;
   padding: 0.125em 0.25em;
   text-decoration: none; }
 
@@ -1254,42 +1254,42 @@ html {
 /* fonts */
 @font-face {
   font-family: 'Mallory';
-  src: url("/wp-content/themes/motherjones/font/Mallory-Light.woff");
+  src: url("../font/Mallory-Light.woff");
   font-weight: normal;
   font-style: normal; }
 @font-face {
   font-family: 'Mallory';
-  src: url("/wp-content/themes/motherjones/font/Mallory-Bold.woff");
+  src: url("../font/Mallory-Bold.woff");
   font-weight: bold;
   font-style: normal; }
 @font-face {
   font-family: 'Mallory';
-  src: url("/wp-content/themes/motherjones/font/Mallory-LightItalic.woff");
+  src: url("../font/Mallory-LightItalic.woff");
   font-weight: normal;
   font-style: italic; }
 @font-face {
   font-family: 'Mallory';
-  src: url("/wp-content/themes/motherjones/font/Mallory-BoldItalic.woff");
+  src: url("../font/Mallory-BoldItalic.woff");
   font-weight: bold;
   font-style: italic; }
 @font-face {
   font-family: 'Calluna';
-  src: url("/wp-content/themes/motherjones/font/Calluna-Regular.otf");
+  src: url("../font/Calluna-Regular.otf");
   font-weight: normal;
   font-style: normal; }
 @font-face {
   font-family: 'Calluna';
-  src: url("/wp-content/themes/motherjones/font/Calluna-Black.otf");
+  src: url("../font/Calluna-Black.otf");
   font-weight: bold;
   font-style: normal; }
 @font-face {
   font-family: 'Calluna';
-  src: url("/wp-content/themes/motherjones/font/Calluna-It.otf");
+  src: url("../font/Calluna-It.otf");
   font-weight: normal;
   font-style: italic; }
 @font-face {
   font-family: 'Calluna';
-  src: url("/wp-content/themes/motherjones/font/Calluna-BoldIt.otf");
+  src: url("../font/Calluna-BoldIt.otf");
   font-weight: bold;
   font-style: italic; }
 body, caption, input, textarea, select, option, legend, fieldset {
@@ -1323,7 +1323,7 @@ h5 {
   top: -50px;
   left: 0px;
   transition: top 0.5s cubic-bezier(0.5, -0.5, 0.5, 1.5);
-  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.15), 0 -5px 3px -10px #fff;
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.15), 0 -5px 3px -10px white;
   height: 45px;
   padding: 5px 0 0 0;
   /* must be taller so the bounce doesn't have empty space on top */
@@ -1448,7 +1448,7 @@ h5 {
   list-style-type: none;
   position: relative;
   padding: 0;
-  border-bottom: 1px solid #CCC;
+  border-bottom: 1px solid #ccc;
   margin-bottom: 20px;
   margin-top: 20px;
   padding-bottom: 21px; }
@@ -1551,7 +1551,7 @@ a#footer-logo {
   background-image: none;
   margin: 20px 5px; }
   #footer-social .toolbar-btn a {
-    color: #CCC;
+    color: #ccc;
     text-decoration: none;
     height: 0px; }
   #footer-social .toolbar-btn i {
@@ -1668,7 +1668,7 @@ ul.author-bios {
   display: block;
   float: right;
   height: 721px;
-  background-image: url("/wp-content/themes/motherjones/img/Membership_AD-421.jpg");
+  background-image: url("../img/Membership_AD-421.jpg");
   background-size: contain; }
   .interior-rhc-membership .donation {
     display: block;
@@ -1739,7 +1739,7 @@ ul.author-bios {
       background: rgba(255, 255, 255, 0.5); }
   .interior-rhc-membership.blog {
     height: 298px;
-    background-image: url("/wp-content/themes/motherjones/img/Membership_ADSBasic_9_Short2_.png"); }
+    background-image: url("../img/Membership_ADSBasic_9_Short2_.png"); }
     .interior-rhc-membership.blog .donation {
       top: 132px; }
       .interior-rhc-membership.blog .donation.monthly {
@@ -1750,7 +1750,7 @@ ul.author-bios {
       width: 175px; }
 
 .ticker-content {
-  background-image: url("/wp-content/themes/motherjones/img/membership-background-bar-lite-2.png");
+  background-image: url("../img/membership-background-bar-lite-2.png");
   padding: 2px 5px 4px;
   width: 100%; }
   .ticker-content a {
@@ -1833,18 +1833,18 @@ ul.author-bios {
     padding-top: 2px; }
   .social-container.bottom .facebook a {
     background-color: #3A5795;
-    border-color: #365391;
+    border-color: #2c4270;
     border-radius: 3px;
     font-size: 16px; }
     .social-container.bottom .facebook a:hover {
-      background-color: #304D8A; }
+      background-color: #4a6db8; }
   .social-container.bottom .twitter a {
     background-color: #55ACEE;
-    border-color: #578dc1;
+    border-color: #2795e9;
     border-radius: 3px;
     font-size: 16px; }
     .social-container.bottom .twitter a:hover {
-      background-color: #478db1; }
+      background-color: #83c3f3; }
 .social-container.blog {
   border-bottom: none; }
   .social-container.blog ul {
@@ -1887,7 +1887,7 @@ ul.author-bios {
     position: absolute;
     bottom: 26px;
     width: 100%;
-    background: linear-gradient(transparent, #000); }
+    background: linear-gradient(transparent, black); }
     #homepage-top-story .article-data a {
       text-shadow: none;
       color: white; }
@@ -1931,7 +1931,7 @@ ul.author-bios {
     margin-top: 0;
     padding-top: 1.5em;
     padding-bottom: 1em;
-    background-image: url("/wp-content/themes/motherjones/img/grey_line.png");
+    background-image: url("../img/grey_line.png");
     background-repeat: no-repeat;
     background-position: top;
     text-align: center;
@@ -1980,7 +1980,7 @@ ul.author-bios {
 .homepage-fullwidth .section-label {
   display: inline-block;
   padding: 0 20px;
-  background-color: #fff;
+  background-color: white;
   margin: 0 auto 0.5em; }
 .homepage-fullwidth .article-data {
   position: relative;
@@ -2006,7 +2006,7 @@ ul.author-bios {
     margin-top: 0;
     padding-top: 1.25em;
     padding-bottom: 0.5em;
-    background-image: url("/wp-content/themes/motherjones/img/grey_line.png");
+    background-image: url("../img/grey_line.png");
     background-repeat: no-repeat;
     background-position: top;
     text-align: center; }
@@ -2365,18 +2365,23 @@ ul.author-bios {
   min-width: 100%; }
 
 #fullwidth-body {
-  background-image: url("/wp-content/themes/motherjones/img/border-$black25.png");
+  background-image: url("../img/border-$black25.png");
   background-repeat: repeat-y;
   background-position: 660px;
   margin: 0 12px 45px; }
-  #fullwidth-body .right-rail, #fullwidth-body .inline-right, #fullwidth-body .inline-left {
+  #fullwidth-body .right-rail,
+  #fullwidth-body .inline-right,
+  #fullwidth-body .inline-left {
     width: 100% !important;
     display: block;
     margin: 15px auto; }
-    #fullwidth-body .right-rail *, #fullwidth-body .inline-right *, #fullwidth-body .inline-left * {
+    #fullwidth-body .right-rail *,
+    #fullwidth-body .inline-right *,
+    #fullwidth-body .inline-left * {
       margin: auto;
       text-align: center; }
-  #fullwidth-body .pullquote-left, #fullwidth-body .pullquote-right {
+  #fullwidth-body .pullquote-left,
+  #fullwidth-body .pullquote-right {
     display: table-cell;
     width: 100%; }
   #fullwidth-body img {
@@ -2421,7 +2426,7 @@ ul.author-bios {
     position: absolute;
     bottom: 0px;
     width: 100%;
-    background: linear-gradient(transparent, #000); }
+    background: linear-gradient(transparent, black); }
     #full-width-header-data h1,
     #full-width-header-data h3 {
       color: white; }
@@ -2477,7 +2482,7 @@ body {
       padding-right: 1em; } }
 
 ::selection {
-  background-color: #ddd; }
+  background-color: #ccc; }
 
 a {
   color: black;
@@ -2492,7 +2497,7 @@ img {
 footer#colophon #copyright a,
 footer#colophon #footer-list a,
 .entry-content a {
-  background-image: url("/wp-content/themes/motherjones/img/orange-border.png");
+  background-image: url("../img/orange-border.png");
   background-repeat: repeat-x;
   text-decoration: none;
   text-shadow: -1px 0 0 white, 0 1px 0 white, 1px 0 0 white, 0 -1px 0 white, -1px -1px 0 white, 1px 1px 0 white, 1px -1px 0 white, -1px 1px 0 white; }

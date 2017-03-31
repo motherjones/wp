@@ -6,7 +6,7 @@
   clear: both;
   padding-top: 0;
   padding-bottom: 20px;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid $neutral1;
   margin-bottom: 15px;
   margin-top: 20px;
   em {
@@ -23,14 +23,14 @@
 /* Author Bios */
 ul.author-bios {
   padding: 0;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid $neutral1;
 }
 .author-data {
   float: left;
   max-width: 535px;
 }
 .author-position {
-  color: #ccc;
+  color: $neutral1;
 }
 .author-bio {
   clear: both;
@@ -72,7 +72,7 @@ ul.author-bios {
   display: block;
   float: right;
   height: 721px;
-  background-image: url('/wp-content/themes/motherjones/img/Membership_AD-421.jpg');
+  background-image: url('../img/Membership_AD-421.jpg');
   background-size: contain;
   .donation {
     display: block;
@@ -155,7 +155,7 @@ ul.author-bios {
   }
   &.blog {
     height: 298px;
-    background-image: url('/wp-content/themes/motherjones/img/Membership_ADSBasic_9_Short2_.png');
+    background-image: url('../img/Membership_ADSBasic_9_Short2_.png');
     .donation {
       top: 132px;
       &.monthly {
@@ -171,7 +171,7 @@ ul.author-bios {
 }
 
 .ticker-content {
-  background-image: url('/wp-content/themes/motherjones/img/membership-background-bar-lite-2.png');
+  background-image: url('../img/membership-background-bar-lite-2.png');
   padding: 2px 5px 4px;
   width: 100%;
   a {
