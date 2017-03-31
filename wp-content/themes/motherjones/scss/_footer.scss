@@ -1,7 +1,7 @@
 /* footer */
 footer#colophon {
   background-color: $black;
-  color: #ccc;
+  color: $neutral1;
   text-align: center;
   padding-top: 32px;
   ul {
@@ -53,7 +53,7 @@ a#footer-logo {
     background-image: none;
     margin: 20px 5px;
     a {
-      color: #CCC;
+      color: $neutral1;
       text-decoration: none;
       height: 0px;
     }
@@ -81,7 +81,7 @@ a#footer-logo {
   margin: 35px auto 0;
 }
 footer#colophon #copyright a {
-  color: #ccc;
+  color: $neutral1;
   margin: 0 5px;
   text-shadow: -1px 0 0 $black, 0 1px 0 $black, 1px 0 0 $black, 0 -1px 0 b
   -1px -1px 0 $black, 1px 1px 0 $black, 1px -1px 0 $black, -1px 1px 0 $black
@@ -90,7 +90,7 @@ footer#colophon #copyright a {
 #bottom-donate {
   position: fixed;
   bottom: 0px;
-  background: black;
+  background: $black;
   width: 100%;
   z-index: 5999999; // this is what ad providers really believe
   text-align: center;

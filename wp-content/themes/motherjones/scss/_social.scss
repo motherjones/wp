@@ -27,7 +27,7 @@
   &.blog {
     height: 17px;
     margin-bottom: 20px;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid $neutral1;
     ul {
       list-style-type: none;
       display: block;
@@ -49,7 +49,7 @@
   &.bottom {
     clear: both;
     padding: 0 0 30px;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid $neutral1;
     overflow: auto;
     ul {
       padding-left: 0;
@@ -82,20 +82,20 @@
     }
     .facebook a {
       background-color: $facebook;
-      border-color: #365391;
+      border-color: darken($facebook,10%);
       border-radius: 3px;
       font-size: 16px;
       &:hover {
-        background-color: #304D8A;
+        background-color: lighten($facebook,10%);
       }
     }
     .twitter a {
       background-color: $twitter;
-      border-color: #578dc1;
+      border-color: darken($twitter,10%);
       border-radius: 3px;
       font-size: 16px;
       &:hover {
-        background-color: #478db1;
+        background-color: lighten($twitter,10%);
       }
     }
   }
