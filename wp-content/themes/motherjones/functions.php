@@ -107,6 +107,46 @@ class MJ {
 			require_once dirname( __FILE__ ) . '/vendor/largo/media-credit.php';
 		}
 	}
+
+	/**
+	 * Register the nav menus for the theme
+	 */
+	private function register_nav_menus() {
+
+		$menus = array(
+			'static-navbar' => __( 'Static Navbar', 'mj' ),
+			'main-nav' => __( 'Floating Navbar', 'mj' ),
+			'footer-list' => __( 'Footer List', 'mj' ),
+			'copyright' => __( 'Copyright', 'mj' ),
+		);
+		register_nav_menus( $menus );
+
+		// Avoid database writes on the frontend.
+		if ( ! is_admin() ) {
+			return;
+		}
+
+		// Try to automatically link menus to each of the locations.
+		foreach ( $menus as $location => $label ) {
+			// if a location isn't wired up...
+			if ( ! has_nav_menu( $location ) ) {
+
+				// Get or create the nav menu.
+				$nav_menu = wp_get_nav_menu_object( $label );
+				if ( ! $nav_menu ) {
+					$new_menu_id = wp_create_nav_menu( $label );
+					$nav_menu = wp_get_nav_menu_object( $new_menu_id );
+				}
+
+				// Wire it up to the location.
+				$locations = get_theme_mod( 'nav_menu_locations' );
+				$locations[ $location ] = $nav_menu->term_id;
+				set_theme_mod( 'nav_menu_locations', $locations );
+			}
+		}
+
+	}
+
 	/**
 	 * Register image and media sizes associated with the theme
 	 */
