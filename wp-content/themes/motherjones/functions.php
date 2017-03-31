@@ -116,7 +116,7 @@ class MJ {
 
 		$menus = array(
 			'static-navbar' => __( 'Static Navbar', 'mj' ),
-			'main-nav' => __( 'Floating Navbar', 'mj' ),
+			'floating-nav' => __( 'Floating Navbar', 'mj' ),
 			'footer-list' => __( 'Footer List', 'mj' ),
 			'copyright' => __( 'Copyright', 'mj' ),
 		);
