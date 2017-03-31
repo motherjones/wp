@@ -217,7 +217,7 @@ blockquote {
 
 .dateline {
   font-size: 14px;
-  color: #ccc;
+  color: $neutral1;
   padding-top: 0;
   letter-spacing: 2px;
   font-family: $mallory;
@@ -258,12 +258,12 @@ blockquote {
     padding: 0;
     margin: 0;
     list-style-type: none;
-    border: 1px solid #ccc;
+    border: 1px solid $neutral1;
     border-bottom: 0;
   }
   li {
     padding: 3px 5px;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid $neutral1;
     line-height: normal;
     a {
       text-decoration: none;
@@ -337,16 +337,6 @@ blockquote {
   }
 }
 
-.article-master-image {
-  margin-bottom: 12px;
-  padding-bottom: 12px;
-  border-bottom: 1px solid #ccc;
-  .master-image-data {
-    line-height: 20px;
-    margin: 10px 0 0;
-  }
-}
-
 .section-lead {
   font-size: 20px;
   font-family: $mallory;
@@ -383,7 +373,7 @@ blockquote {
     font-weight: bold;
     text-align: left;
     margin-top: 18px;
-    color: #ccc;
+    color: $neutral1;
   }
   dd {
     display: block;
@@ -418,10 +408,10 @@ blockquote {
 .articles-list .article-item {
   margin: 20px 0;
   padding: 0 0 20px 0;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid $neutral1;
 }
 .photoessay-top {
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid $neutral1;
 }
 
 li.article-item {
@@ -448,7 +438,7 @@ li.article-item {
   background-image: none;
 }
 .top-article-item {
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid $neutral1;
   padding-bottom: 15px;
   h3 {
     margin: 15px 0 4px;
@@ -477,7 +467,7 @@ h2.widget-title {
     li {
       margin: 0 30px 15px;
       padding: 15px 0 0 0;
-      border-top: 1px solid #ccc;
+      border-top: 1px solid $neutral1;
       text-align: center;
       &:first-of-type {
         border-top: 0;
@@ -597,7 +587,7 @@ ul#prev-next {
 /* begin disqus */
 #comments {
 	padding: 15px 0;
-  border: solid #ccc;
+  border: solid $neutral1;
   border-width: 1px 0;
   margin: 15px 0;
 
@@ -608,9 +598,9 @@ ul#prev-next {
     margin-right: auto;
     display: block;
     text-align: center;
-    font-family: Mallory,sans-serif;
+    font-family: $mallory;
     font-weight: bold;
-    color: #ccc;
+    color: $neutral1;
     text-decoration: none;
     margin: 0!important;
     padding: 15px 0;
@@ -619,7 +609,7 @@ ul#prev-next {
     border: none;
     text-transform: lowercase;
     &:hover {
-      color: #ff6900;
+      color: $orange;
     }
   }
   i {

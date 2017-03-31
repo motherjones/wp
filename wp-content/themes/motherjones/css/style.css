@@ -1866,12 +1866,11 @@ ul.author-bios {
   line-height: 4px; }
 
 #homepage-top-story {
-  padding-left: 0; }
+  padding: 1em 0; }
   #homepage-top-story .article-data {
     position: absolute;
     bottom: 26px;
     width: 100%;
-    text-align: center;
     background: linear-gradient(transparent, #000); }
     #homepage-top-story .article-data a {
       text-shadow: none;
@@ -1893,13 +1892,29 @@ ul.author-bios {
   #homepage-top-story img {
     width: 100%;
     height: auto; }
+  @media only screen and (max-width: 768px) {
+    #homepage-top-story {
+      padding-bottom: 0; }
+      #homepage-top-story .article-data {
+        position: relative;
+        padding-bottom: 0.5em;
+        border-top: 5px solid #FF6900;
+        border-bottom: 1px solid #ccc;
+        background: white; }
+        #homepage-top-story .article-data a {
+          color: black; }
+      #homepage-top-story h1.hed {
+        font-size: 20px;
+        line-height: 24px; }
+      #homepage-top-story .dek {
+        display: none; } }
 
 #homepage-top-story-side {
   padding: 1em 0 1em 2em; }
   #homepage-top-story-side li {
     margin-top: 0;
-    padding-top: 1em;
-    padding-bottom: 0.25em;
+    padding-top: 1.5em;
+    padding-bottom: 1em;
     background-image: url("/wp-content/themes/motherjones/img/grey_line.png");
     background-repeat: no-repeat;
     background-position: top;
@@ -1916,7 +1931,8 @@ ul.author-bios {
       margin-top: 0.5em; }
   @media only screen and (max-width: 768px) {
     #homepage-top-story-side {
-      padding: 1em; } }
+      margin-top: 0;
+      padding: 0 1em 1em; } }
 
 #homepage-more-top-stories-main .promo {
   margin-top: 0; }
@@ -2040,7 +2056,8 @@ ul.author-bios {
   margin: 0;
   padding: 0; }
   #homepage-investigations-list li {
-    text-align: center; }
+    text-align: center;
+    padding: 1em; }
   #homepage-investigations-list img {
     width: 100%; }
 
@@ -2694,14 +2711,6 @@ blockquote {
 #content-area .master-image-caption a {
   display: inline; }
 
-.article-master-image {
-  margin-bottom: 12px;
-  padding-bottom: 12px;
-  border-bottom: 1px solid #ccc; }
-  .article-master-image .master-image-data {
-    line-height: 20px;
-    margin: 10px 0 0; }
-
 .section-lead {
   font-size: 20px;
   font-family: Mallory, sans-serif;
@@ -2923,7 +2932,7 @@ ul#prev-next {
     margin-right: auto;
     display: block;
     text-align: center;
-    font-family: Mallory,sans-serif;
+    font-family: Mallory, sans-serif;
     font-weight: bold;
     color: #ccc;
     text-decoration: none;
@@ -2934,7 +2943,7 @@ ul#prev-next {
     border: none;
     text-transform: lowercase; }
     #comments button#dcl_comment_btn:hover {
-      color: #ff6900; }
+      color: #FF6900; }
   #comments i {
     margin-right: 10px;
     position: relative;
