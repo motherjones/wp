@@ -107,6 +107,13 @@ footer#colophon #copyright a {
     cursor: pointer;
     font-family: $mallory;
     font-weight: bold;
+    position: absolute;
+    top: 2px;
+    right: 0px;
+  }
+  p {
+    max-width: 90%;
+    margin-left: 15px;
   }
 }
 /* end footer */
