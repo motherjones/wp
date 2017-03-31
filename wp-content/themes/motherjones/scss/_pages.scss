@@ -1,0 +1,50 @@
+.podcast-item {
+  padding-top: 30px;
+  &:not(:first-child) {
+    border-top: 1px solid $neutral1;
+  }
+  img {
+    height: auto;
+    position: relative;
+  }
+  p { 
+    line-height: 18px;
+  }
+  .title {
+    text-transform: none;
+    letter-spacing: 0;
+    font-size: 18px;
+    background-image: none;
+    margin: 0 0 15px;
+  }
+  .podcast-image {
+    padding: 0;
+    float: left;
+    margin-bottom: 30px;
+  }
+  .podcast-data {
+    padding-top: 0px;
+  }
+  .itunes-link {
+    position: relative;
+    &:hover { color: white; }
+    font-weight: bold;
+    text-align: center;
+    font-family: $mallory;
+    text-shadow: none;
+    width: 267px;
+    background: $orange;
+    color: white;
+    display: block;
+    margin: 30px auto;
+    clear: both;
+    padding: 10px;
+    img {
+      height: 16px;
+      width: auto;
+      top: 15px;
+      left: 20px;
+      position: absolute;
+    }
+  }
+}
