@@ -74,7 +74,7 @@ footer#colophon #footer-list a {
 }
 
 a::selection {
-  text-shadow: none!important;
+  text-shadow: none !important;
 }
 
 .accent {
@@ -448,6 +448,9 @@ li.article-item {
     font-size: 18px;
     line-height: 24px;
     margin: 0;
+  }
+  .article-data.grid__col-12 {
+    padding: 1em 0;
   }
 }
 

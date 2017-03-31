@@ -2847,6 +2847,8 @@ li.article-item {
     font-size: 18px;
     line-height: 24px;
     margin: 0; }
+  li.article-item .article-data.grid__col-12 {
+    padding: 1em 0; }
 
 #main li.photoessay-top a,
 #main li.top-article-item a,
