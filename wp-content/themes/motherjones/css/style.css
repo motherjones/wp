@@ -2459,6 +2459,49 @@ ul.author-bios {
     margin: 0 auto;
     padding: 0;
     max-width: 300px; } }
+.podcast-item {
+  padding-top: 30px; }
+  .podcast-item:not(:first-child) {
+    border-top: 1px solid #ccc; }
+  .podcast-item img {
+    height: auto;
+    position: relative; }
+  .podcast-item p {
+    line-height: 18px; }
+  .podcast-item .title {
+    text-transform: none;
+    letter-spacing: 0;
+    font-size: 18px;
+    background-image: none;
+    margin: 0 0 15px; }
+  .podcast-item .podcast-image {
+    padding: 0;
+    float: left;
+    margin-bottom: 30px; }
+  .podcast-item .podcast-data {
+    padding-top: 0px; }
+  .podcast-item .itunes-link {
+    position: relative;
+    font-weight: bold;
+    text-align: center;
+    font-family: Mallory, sans-serif;
+    text-shadow: none;
+    width: 267px;
+    background: #FF6900;
+    color: white;
+    display: block;
+    margin: 30px auto;
+    clear: both;
+    padding: 10px; }
+    .podcast-item .itunes-link:hover {
+      color: white; }
+    .podcast-item .itunes-link img {
+      height: 16px;
+      width: auto;
+      top: 15px;
+      left: 20px;
+      position: absolute; }
+
 body {
   padding-top: 0; }
 
