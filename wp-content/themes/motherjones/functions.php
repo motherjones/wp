@@ -77,6 +77,7 @@ class MJ {
 	private function load() {
 		$this->require_files();
 		$this->register_media_sizes();
+		$this->register_nav_menus();
 	}
 	/**
 	 * Load required files

@@ -1511,27 +1511,6 @@ footer#colophon {
   color: #ccc;
   text-align: center;
   padding-top: 32px; }
-  footer#colophon ul {
-    padding: 0;
-    margin: 0 auto 15px;
-    width: 165px;
-    clear: both; }
-    footer#colophon ul li {
-      list-style: none;
-      padding: 2px 0;
-      font-size: 12px;
-      background-position: 0% 100%; }
-  footer#colophon #footer-list {
-    font-family: Mallory, sans-serif;
-    font-weight: bold;
-    text-transform: uppercase;
-    width: 200px;
-    color: #FF6900; }
-    footer#colophon #footer-list li {
-      font-size: 15px; }
-    footer#colophon #footer-list a {
-      color: #FF6900;
-      margin: 0 5px; }
 
 a#footer-logo {
   background-image: none; }
@@ -1542,40 +1521,64 @@ a#footer-logo {
   margin: 0 auto;
   display: block; }
 
-#footer-social li {
-  display: block;
-  float: left; }
-#footer-social .share-text {
-  display: none; }
-#footer-social .toolbar-btn {
-  background-image: none;
-  margin: 20px 5px; }
-  #footer-social .toolbar-btn a {
-    color: #CCC;
-    text-decoration: none;
-    height: 0px; }
-  #footer-social .toolbar-btn i {
-    position: relative; }
-#footer-social .circled-icon {
-  width: 40px; }
-  #footer-social .circled-icon i {
-    font-size: 26px;
-    padding: 4px;
-    position: relative;
-    top: -3px;
-    left: 0; }
-  #footer-social .circled-icon.tweet i {
-    top: -2px; }
+#footer-social {
+  margin: 1em auto 0;
+  padding: 0; }
+  #footer-social li {
+    display: inline; }
+  #footer-social .share-text {
+    display: none; }
+  #footer-social .toolbar-btn {
+    background-image: none;
+    margin: 20px 5px; }
+    #footer-social .toolbar-btn a {
+      color: #CCC;
+      text-decoration: none;
+      height: 0px; }
+    #footer-social .toolbar-btn i {
+      position: relative; }
+  #footer-social .circled-icon {
+    width: 40px; }
+    #footer-social .circled-icon i {
+      font-size: 26px;
+      padding: 4px;
+      position: relative;
+      top: -3px;
+      left: 0; }
+    #footer-social .circled-icon.tweet i {
+      top: -2px; }
+
+#footer-list {
+  display: inline;
+  margin: 0 auto;
+  font-family: Mallory, sans-serif;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #FF6900; }
+  #footer-list li {
+    font-size: 15px;
+    white-space: nowrap;
+    display: inline; }
+  #footer-list a {
+    color: #FF6900;
+    margin: 0 5px; }
 
 #copyright {
   font-family: Calluna, serif;
   font-size: 14px;
-  margin: 35px auto 0; }
+  margin: 2em auto 0;
+  padding-bottom: 1em; }
 
 footer#colophon #copyright a {
   color: #ccc;
   margin: 0 5px;
   text-shadow: -1px 0 0 black, 0 1px 0 black, 1px 0 0 black, 0 -1px 0 b -1px -1px 0 black, 1px 1px 0 black, 1px -1px 0 black, -1px 1px 0 black; }
+
+#copyright-menu {
+  margin: 0 auto;
+  display: inline; }
+  #copyright-menu li {
+    display: inline; }
 
 #bottom-donate {
   position: fixed;
