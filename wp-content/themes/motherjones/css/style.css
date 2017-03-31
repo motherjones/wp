@@ -2754,6 +2754,9 @@ blockquote {
   display: inline;
   margin: 5px; }
 
+.DC-embed {
+  max-width: 100%; }
+
 /* end doccloud */
 /* timelines */
 .timeline dt {
