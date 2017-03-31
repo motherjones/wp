@@ -1400,6 +1400,12 @@ h5 {
       max-width: 90%;
       max-height: 28px;
       margin: 5px 5px 0; }
+  @media (max-width: 560px) {
+    #navbar .nav-title {
+      display: none; } }
+  @media (max-width: 320px) {
+    #navbar .twitter {
+      display: none; } }
 
 /* end navbar styling */
 /* menu styling */
@@ -1570,6 +1576,32 @@ footer#colophon #copyright a {
   color: #ccc;
   margin: 0 5px;
   text-shadow: -1px 0 0 black, 0 1px 0 black, 1px 0 0 black, 0 -1px 0 b -1px -1px 0 black, 1px 1px 0 black, 1px -1px 0 black, -1px 1px 0 black; }
+
+#bottom-donate {
+  position: fixed;
+  bottom: 0px;
+  background: black;
+  width: 100%;
+  z-index: 5999999;
+  text-align: center; }
+  #bottom-donate a {
+    color: #FF6900;
+    font-family: Mallory, sans-serif;
+    font-weight: bold;
+    margin-left: 5px; }
+  #bottom-donate span {
+    float: right;
+    margin-right: 30px;
+    text-transform: lowercase;
+    cursor: pointer;
+    font-family: Mallory, sans-serif;
+    font-weight: bold;
+    position: absolute;
+    top: 2px;
+    right: 0px; }
+  #bottom-donate p {
+    max-width: 90%;
+    margin-left: 15px; }
 
 /* end footer */
 /* Readers Like You */
