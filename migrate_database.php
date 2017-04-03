@@ -759,7 +759,9 @@ $meta_data->execute();
 
 $wp->beginTransaction();
 while ( $meta = $meta_data->fetch(PDO::FETCH_NUM)) {
-	$meta_insert->execute($meta);
+  if ($meta[1]) {
+    $meta_insert->execute($meta);
+  }
 }
 $wp->commit();
 
@@ -776,7 +778,9 @@ $meta_data->execute();
 
 $wp->beginTransaction();
 while ( $meta = $meta_data->fetch(PDO::FETCH_NUM)) {
-	$meta_insert->execute($meta);
+  if ($meta[1]) {
+    $meta_insert->execute($meta);
+  }
 }
 $wp->commit();
 
@@ -793,7 +797,9 @@ $meta_data->execute();
 
 $wp->beginTransaction();
 while ( $meta = $meta_data->fetch(PDO::FETCH_NUM)) {
-	$meta_insert->execute($meta);
+  if ($meta[1]) {
+    $meta_insert->execute($meta);
+  }
 }
 $wp->commit();
 
@@ -814,18 +820,24 @@ $meta_data->execute();
 
 $wp->beginTransaction();
 while ( $meta = $meta_data->fetch(PDO::FETCH_ASSOC)) {
-  $meta_insert->execute( array(
-    $meta['nid'],
-    'mj_social_hed',
-    $meta['field_social_title_value']
-  ) );
-  $meta_insert->execute( array(
-    $meta['nid'],
-    'mj_social_dek',
-    $meta['field_social_dek_value']
-  ) );
+  if ($meta['field_social_title_value']) {
+    $meta_insert->execute( array(
+      $meta['nid'],
+      'mj_social_hed',
+      $meta['field_social_title_value']
+    ) );
+  }
+  if ($meta['field_social_dek_value']) {
+    $meta_insert->execute( array(
+      $meta['nid'],
+      'mj_social_dek',
+      $meta['field_social_dek_value']
+    ) );
+  }
+  /* FIXME
   $meta_insert->execute( array($meta['nid'], 'mj_google_standout', false) );
   $meta_insert->execute( array($meta['nid'], 'mj_fb_instant_exclude', true) );
+   */
 }
 $wp->commit();
 
@@ -846,16 +858,20 @@ $meta_data->execute();
 
 $wp->beginTransaction();
 while ( $meta = $meta_data->fetch(PDO::FETCH_ASSOC)) {
-  $meta_insert->execute( array(
-    $meta['nid'],
-    'mj_promo_hed',
-    $meta['field_alternate_title_value']
-  ) );
-  $meta_insert->execute( array(
-    $meta['nid'],
-    'mj_promo_dek',
-    $meta['field_alternate_dek_value']
-  ) );
+  if ( $meta['field_alternate_title_value'] ) {
+    $meta_insert->execute( array(
+      $meta['nid'],
+      'mj_promo_hed',
+      $meta['field_alternate_title_value']
+    ) );
+  }
+  if ( $meta['field_alternate_dek_value'] ) {
+    $meta_insert->execute( array(
+      $meta['nid'],
+      'mj_promo_dek',
+      $meta['field_alternate_dek_value']
+    ) );
+  }
 }
 $wp->commit();
 
@@ -880,7 +896,9 @@ while ( $meta = $meta_data->fetch(PDO::FETCH_ASSOC)) {
     'css' => $meta['field_css_value'],
     'js' => $meta['field_javascript_value'],
   ) );
-	$meta_insert->execute(array($meta['nid'], 'css_js', $cssjs_value) );
+  if ( $cssjs_value ) {
+    $meta_insert->execute(array($meta['nid'], 'css_js', $cssjs_value) );
+  }
 }
 $wp->commit();
 
@@ -902,7 +920,9 @@ $wp->beginTransaction();
 while ( $meta = $meta_data->fetch(PDO::FETCH_ASSOC)) {
   $related_value = serialize( explode(',', $meta['relateds']) );
 
-	$meta_insert->execute(array($meta['nid'], 'mj_related_articles', $related_value) );
+  if ( $related_value ) {
+    $meta_insert->execute(array($meta['nid'], 'mj_related_articles', $related_value) );
+  }
 }
 $wp->commit();
 
@@ -1407,29 +1427,37 @@ VALUES (?, ?, ?)
 ");
 $wp->beginTransaction();
 foreach ( $master_meta_rows as $row ) {
-  $master_meta_insert->execute(array(
-    $row['nid'],
-    'featured-image-display',
-    $row['master_image_suppress']
-  ) );
+  if ( $row['master_image_suppress'] ) {
+    $master_meta_insert->execute(array(
+      $row['nid'],
+      'featured-image-display',
+      $row['master_image_suppress']
+    ) );
+  }
 
-  $master_meta_insert->execute(array(
-    $row['nid'],
-    '_thumbnail_id',
-    $row['image_id']
-  ) );
+  if ( $row['image_id'] ) {
+    $master_meta_insert->execute(array(
+      $row['nid'],
+      '_thumbnail_id',
+      $row['image_id']
+    ) );
+  }
 
-  $master_meta_insert->execute(array(
-    $row['image_id'],
-    '_wp_attached_file',
-    $row['filepath']
-  ) );
+  if ( $row['filepath'] ) {
+    $master_meta_insert->execute(array(
+      $row['image_id'],
+      '_wp_attached_file',
+      $row['filepath']
+    ) );
+  }
 
-  $master_meta_insert->execute(array(
-    $row['image_id'],
-    '_media_credit',
-    $row['master_image_byline']
-  ) );
+  if ( $row['master_image_byline'] ) {
+    $master_meta_insert->execute(array(
+      $row['image_id'],
+      '_media_credit',
+      $row['master_image_byline']
+    ) );
+  }
 
 }
 $wp->commit();
