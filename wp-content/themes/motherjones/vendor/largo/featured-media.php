@@ -52,7 +52,7 @@ function largo_get_hero( $post = null, $classes = '' ) {
 	$values = get_post_custom( $post->ID );
 
 	// If the box is checked to override the featured image display, obey it.
-	if ( isset( $values['featured-image-display'][0] ) ) {
+	if ( isset( $values['featured-image-display'][0] ) && 1 === $values['featured-image-display'][0] ) {
 		return $ret;
 	}
 
