@@ -4,47 +4,22 @@ footer#colophon {
   color: $neutral1;
   text-align: center;
   padding-top: 32px;
-  ul {
-    padding: 0;
-    margin: 0 auto 15px;
-    width: 165px;
-    clear: both;
-    li {
-      list-style: none;
-      padding: 2px 0;
-      font-size: 12px;
-      background-position: 0% 100%;
-    }
-  }
-  #footer-list {
-    font-family: $mallory;
-    font-weight: bold;
-    text-transform: uppercase;
-    width: 200px;
-    color: $orange;
-    li {
-      font-size: 15px;
-    }
-    a {
-      color: $orange;
-      margin: 0 5px;
-    }
-  }
 }
 
 a#footer-logo {
   background-image: none;
 }
-#footer-logo img{
+#footer-logo img {
   width: 274px;
   height: auto;
   margin: 0 auto;
   display: block;
 }
 #footer-social {
+  margin: 1em auto 0;
+  padding: 0;
   li {
-    display: block;
-    float: left;
+    display: inline;
   }
   .share-text {
     display: none;
@@ -75,16 +50,41 @@ a#footer-logo {
     }
   }
 }
+#footer-list {
+  display: inline;
+  margin: 0 auto;
+  font-family: $mallory;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: $orange;
+  li {
+    font-size: 15px;
+    white-space: nowrap;
+    display: inline;
+  }
+  a {
+    color: $orange;
+    margin: 0 5px;
+  }
+}
 #copyright {
   font-family: $calluna;
   font-size: 14px;
-  margin: 35px auto 0;
+  margin: 2em auto 0;
+  padding-bottom: 1em;
 }
 footer#colophon #copyright a {
   color: $neutral1;
   margin: 0 5px;
   text-shadow: -1px 0 0 $black, 0 1px 0 $black, 1px 0 0 $black, 0 -1px 0 b
   -1px -1px 0 $black, 1px 1px 0 $black, 1px -1px 0 $black, -1px 1px 0 $black
+}
+#copyright-menu {
+  margin: 0 auto;
+  display: inline;
+  li {
+    display: inline;
+  }
 }
 
 #bottom-donate {
