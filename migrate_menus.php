@@ -70,7 +70,7 @@ $static = Array(
       )
     ),
     Array(
-      'post_title' => 'Crime & Justice',
+      'post_title' => 'Crime &amp; Justice',
       'post_id' => '',
       'meta' => Array(
         '_menu_item_type' => 'taxonomy',
