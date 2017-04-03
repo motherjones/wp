@@ -234,8 +234,12 @@ class MJ_social_tags {
 		if ( ! is_single() ) {
 			return;
 		}
+		global $meta;
 		if ( ! empty( $this->get_news_keywords() ) ) {
 			echo '<meta name="news_keywords" content="' . esc_attr( $this->get_news_keywords() ) . '">';
+		}
+		if ( isset( $meta['mj_google_standout'][0] ) ) {
+			echo '<meta name="standout" content="' . esc_url( largo_get_current_url() ) . '"/>';
 		}
 	}
 
