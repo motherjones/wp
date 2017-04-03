@@ -159,7 +159,10 @@
   }
   li {
     display: inline-block;
-    padding: 0 45px 0 0;
+    padding: 0 44px 0 0;
+    &:nth-of-type(9) {
+      padding-right: 0;
+    }
   }
   a {
     font-family: $mallory;
