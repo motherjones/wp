@@ -18,6 +18,10 @@ body {
 #page {
   width: 55em;
   margin: 0 auto;
+  @media only screen and (max-width: 1020px) {
+    margin: 0 2%;
+    max-width: 96%;
+  }
 }
 
 .single,
