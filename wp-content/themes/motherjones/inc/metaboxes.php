@@ -270,9 +270,6 @@ function mj_tags_meta_box_display( $post ) {
 }
 
 
-
-
-
 largo_add_meta_box(
 	'mj_misc_social_toggles',
 	__( 'Meta Options', 'mj' ),
