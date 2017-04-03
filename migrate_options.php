@@ -1,17 +1,17 @@
 <?php
 
-$hostname="localhost";  
-$username="root";   
+$hostname="localhost";
+$username="root";
 $password=$argv[1];
-$d6_db = "mjd6";  
-$wp_db = "pantheon_wp";  
+$d6_db = "mjd6";
+$wp_db = "pantheon_wp";
 $FILEDIR_ABS = "http://dev-mjwordpress.pantheonsite.io/wp-content/uploads/";
 $FILEDIR = "wp-content/uploads/";
 
 
-$d6 = new PDO("mysql:host=$hostname;dbname=$d6_db", $username, $password);  
+$d6 = new PDO("mysql:host=$hostname;dbname=$d6_db", $username, $password);
 
-$wp = new PDO("mysql:host=$hostname;dbname=$wp_db", $username, $password);  
+$wp = new PDO("mysql:host=$hostname;dbname=$wp_db", $username, $password);
 
 $option_replace = $wp->prepare('
 REPLACE INTO pantheon_wp.wp_options
@@ -81,6 +81,7 @@ $active_plugins = Array(
   'mj_custom/mj_custom.php',
   'disqus-conditional-load/disqus-conditional-load.php',
   'fb-instant-articles/facebook-instant-articles.php',
+  'bwp-google-xml-sitemaps/bwp-simple-gxs.php',
 );
 $wp->beginTransaction();
 
