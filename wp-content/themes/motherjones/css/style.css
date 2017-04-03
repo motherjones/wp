@@ -2864,6 +2864,9 @@ blockquote {
 .main-index {
   text-align: center; }
 
+.article-item.blog .entry-header {
+  text-align: left; }
+
 .articles-list,
 .related-articles-list {
   list-style-type: none;
