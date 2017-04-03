@@ -834,10 +834,7 @@ while ( $meta = $meta_data->fetch(PDO::FETCH_ASSOC)) {
       $meta['field_social_dek_value']
     ) );
   }
-  /* FIXME
-  $meta_insert->execute( array($meta['nid'], 'mj_google_standout', false) );
   $meta_insert->execute( array($meta['nid'], 'mj_fb_instant_exclude', true) );
-   */
 }
 $wp->commit();
 
@@ -1314,7 +1311,6 @@ echo "authors done";
 /* end author data */
 
 
-//FIXME REPEAT FOR FULL WIDTH TITLES< content_field_top_of_content_image
 //for master images
 $master_data = $d6->prepare('
 SELECT DISTINCT
