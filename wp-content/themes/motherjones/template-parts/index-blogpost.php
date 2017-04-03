@@ -1,5 +1,5 @@
-<article class="blog">
-	<div class="entry-header blog">
+<li class="article-item blog">
+	<div class="entry-header">
 		<h1 class="blog hed">
 			<a href="<?php print esc_url( get_permalink() ); ?>">
 				<?php the_title(); ?>
@@ -45,4 +45,4 @@
 			);
 		}
 	?>
-</article>
+</li>
