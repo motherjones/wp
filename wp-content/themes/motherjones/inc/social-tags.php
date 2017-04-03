@@ -63,6 +63,7 @@ class MJ_social_tags {
 		}
 		$this->write_facebook_tags( $social_information );
 		$this->write_twitter_tags( $social_information );
+		$this->write_google_tags();
 	}
 
 	/**
@@ -223,6 +224,41 @@ class MJ_social_tags {
 				esc_attr( $content )
 			);
 		}
+	}
+
+	/**
+	 * Writes the meta tags for google from the data collected earlier and
+	 * the constants
+	 */
+	private function write_google_tags() {
+		if ( ! is_single() ) {
+			return;
+		}
+		if ( ! empty( $this->get_news_keywords() ) ) {
+			echo '<meta name="news_keywords" content="' . esc_attr( $this->get_news_keywords() ) . '">';
+		}
+	}
+
+	/**
+	 * Get up to 10 categories and tags to use for the goole news_keywords meta tag.
+	 */
+	private function get_news_keywords() {
+		$cats = get_the_category();
+		$tags = get_the_tags();
+		$output = array();
+		if ( $cats ) {
+			foreach ( $cats as $cat ) {
+				$output[] = $cat->name;
+			}
+		}
+		if ( $tags ) {
+			foreach ( $tags as $tag ) {
+				$output[] = $tag->name;
+			}
+		}
+		// limit to ten per google news guidelines.
+		$output = implode( ', ', array_slice( $output, 0, 10 ) );
+		return $output;
 	}
 }
 new MJ_social_tags;
