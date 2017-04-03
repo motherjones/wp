@@ -2502,6 +2502,78 @@ ul.author-bios {
       left: 20px;
       position: absolute; }
 
+.podcast-intro {
+  font-size: 16px;
+  line-height: 21px;
+  text-align: left;
+  margin-bottom: 0; }
+  .podcast-intro:after {
+    content: '';
+    clear: both;
+    display: block; }
+
+.podcast-follow {
+  float: left;
+  width: 215px;
+  height: 200px;
+  line-height: 25px;
+  list-style-type: none;
+  text-align: left;
+  padding: 0; }
+  .podcast-follow a {
+    font-family: Mallory, sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #ff6900;
+    font-size: 12px; }
+  .podcast-follow i {
+    margin-right: 5px;
+    color: black;
+    font-size: 15px;
+    width: 15px;
+    position: relative;
+    top: 2px; }
+    .podcast-follow i.fa-soundcloud {
+      font-size: 12px; }
+  .podcast-follow .stitcher img {
+    width: 15px;
+    margin-right: 5px; }
+
+.podcast-bio .author-bio .author-image img {
+  margin: 0px 10px 0px 0px;
+  width: 80px;
+  max-height: none; }
+.podcast-bio .author-image {
+  float: left; }
+.podcast-bio .author-data {
+  float: left;
+  width: 215px;
+  line-height: normal; }
+.podcast-bio .byline {
+  display: block; }
+.podcast-bio .author-position {
+  color: #ccc;
+  font-size: 12px; }
+.podcast-bio p {
+  width: 205px;
+  float: left;
+  font-size: 12px;
+  margin-top: 5px; }
+.podcast-bio .byline {
+  color: #FF6900;
+  font-size: 14px;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-family: Mallory, sans-serif;
+  font-weight: bold;
+  border-bottom: none;
+  letter-spacing: 2px; }
+
+.podcast-subhead {
+  border-bottom: 3px solid #FF6900;
+  display: inline-block;
+  margin: 30px 0 35px 0; }
+
 body {
   padding-top: 0; }
 
