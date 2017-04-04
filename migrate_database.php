@@ -1035,7 +1035,7 @@ foreach ( $uid_to_author_meta as $uid => $author ) {
     $author_meta_insert->execute();
   }
 
-  if (array_key_exists('mj_user_short_bio', $author)) {
+  if (array_key_exists('field_author_bio_short_value', $author)) {
     $key = "description";
     $value = $author['field_author_bio_short_value'];
     $author_meta_insert->execute();
@@ -1295,7 +1295,7 @@ foreach ( $author_name_to_author_meta as $author ) {
   ) {
     $author_meta_insert->execute(array(
       $author['wp_id'],
-      "author_image_id",
+      "mj_author_image_id",
       $author['image_id']
     ));
 
