@@ -18,8 +18,7 @@
 
 get_header(); ?>
 
-      <img src="<?php print get_template_directory_uri(); ?>/img/bite_banner.png"
-           alt="Bite" />
+<img src="<?php print get_template_directory_uri(); ?>/img/bite_banner.png" alt="Bite" />
 <main id="main" class="site-main grid " role="main">
 	<section class="main-index grid__col-md-8 grid__col-sm-9 grid__col-xs-12">
 		<header class="page-header">
@@ -98,7 +97,7 @@ get_header(); ?>
 	</section> <!-- .main-index -->
 
 	<aside id="sidebar-right" class="grid__col-4 hidden-sm hidden-xs hidden-xxs">
-<?php 
+<?php
 $widget = $wp_registered_widgets['text-9'];
 $params = Array(
 		array_merge(
@@ -113,7 +112,7 @@ $params = Array(
 		)
 
 );
-call_user_func_array($widget['callback'], $params);                                  
+call_user_func_array($widget['callback'], $params);
 
  ?>
 <ul class="podcast-bio author-bios group">
@@ -162,7 +161,7 @@ call_user_func_array($widget['callback'], $params);
     </div>
   </li>
 </ul>
-<?php 
+<?php
 $widget = $wp_registered_widgets['text-11'];
 $params = Array(
 		array_merge(
@@ -177,7 +176,7 @@ $params = Array(
 		)
 
 );
-call_user_func_array($widget['callback'], $params);                                  
+call_user_func_array($widget['callback'], $params);
 
  ?>
 	</aside>
