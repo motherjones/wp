@@ -32,7 +32,7 @@ $sidebars_widgets_options = Array(
 		'wp_inactive_widgets' => Array(),
 		'sidebar' => Array('text-9', 'text-6', 'mj_top_stories_widget-2', 'text-11'),  //RHC ad, RHC membership for  not blog posts, top stories, ad
 		'sidebar-blog' => Array('text-9', 'text-5', 'text-11'),  //RHC ad, RHC membership for blog posts and not blog posts, ad
-		'sidebar-bite' => Array('text-9', 'text-12', 'text-11'),  //RHC ad, bite author block, ad
+		'sidebar-bite' => Array('text-9', 'text-15', 'text-11'),  //RHC ad, bite author block, ad
 		'sidebar-inquiring-minds' => Array('text-9', 'text-13', 'text-11'),  //RHC ad, inq minds author block, ad
 		'ticker' => Array('text-7'), //Membership ticker
 		'homepage-more-top-stories' => Array('text-10'), //Membership ticker
@@ -70,9 +70,6 @@ $blocks[2] =	Array(
 HTML
 		,
 		'filter' => False,
-		'dw_include' => 0,
-		'dw_logged' => '',
-		'other_ids' => '',
 	); //END Ad Control
 $blocks[3] = Array(
 		'title' => 'Site wrap',
@@ -88,9 +85,6 @@ if (typeof(MJ_HideSiteWrap) === 'undefined') {
 HTML
 		,
 		'filter' => False, //this is the "show only on, show not on" toggle
-		'dw_include' => 0,
-		'dw_logged' => '',
-		'other_ids' => '',
 	); //END site wrap
 $blocks[4] =	Array(
 		'title' => 'Bottom adblock bar',
@@ -107,9 +101,6 @@ $blocks[4] =	Array(
 HTML
 		,
 		'filter' => False, //this is the "show only on, show not on" toggle
-		'dw_include' => 0,
-		'dw_logged' => '',
-		'other_ids' => '',
 	); //END bottom adblock bar
 $blocks[5] =	Array(
 		'title' => 'RHC membership for blog posts',
@@ -122,10 +113,6 @@ $blocks[5] =	Array(
 HTML
 		,
 		'filter' => False, //this is the "show only on, show not on" toggle
-		'dw_include' => 1,
-		'dw_logged' => '',
-		'other_ids' => '',
-		'type-mj_blog_post' => 1
 	); //END membership for blog posts
 $blocks[6] =	Array(
 		'title' => 'Membership RHC',
@@ -147,10 +134,6 @@ $blocks[6] =	Array(
 HTML
 		,
 		'filter' => False, //this is the "show only on, show not on" toggle
-		'dw_include' => 0,
-		'dw_logged' => '',
-		'other_ids' => '',
-		'type-mj_blog_post' => 1
 	); //END membership RHC
 $blocks[7] = Array(
 		'title' => 'Membership ticker bar',
@@ -162,9 +145,6 @@ Help us do it with <a href="https://secure.motherjones.com/fnx/?action=SUBSCRIPT
 HTML
 		,
 		'filter' => False, //this is the "show only on, show not on" toggle
-		'dw_include' => 0,
-		'dw_logged' => '',
-		'other_ids' => '', //FIXME get a list of all the full width asks and put the node ids in here separated by commas
 	); //END membership ticker bar
 $blocks[8] =	Array( //BEGIN members like you block
 		'title' => 'Members like you',
@@ -179,9 +159,6 @@ $blocks[8] =	Array( //BEGIN members like you block
 HTML
 		,
 		'filter' => False,
-		'dw_include' => 0,
-		'dw_logged' => '',
-		'other_ids' => '',
 	); //END members like you block
 $blocks[9] =	Array( //BEGIN RHC ad like you block
 		'title' => 'RHC ad',
@@ -201,9 +178,6 @@ $blocks[9] =	Array( //BEGIN RHC ad like you block
 HTML
 		,
 		'filter' => False,
-		'dw_include' => 0,
-		'dw_logged' => '',
-		'other_ids' => '',
 	); //END RHC adblock
 $blocks[10] =	Array( //BEGIN homepage promo block
 		'title' => 'Homepage Promo',
@@ -225,9 +199,6 @@ $blocks[10] =	Array( //BEGIN homepage promo block
 HTML
 		,
 		'filter' => False,
-		'dw_include' => 0,
-		'dw_logged' => '',
-		'other_ids' => '',
 	); //END homepage promo block
 $blocks[11] =	Array( //BEGIN Criteoscroller ad
 		'title' => 'RHC criteoscroller ad',
@@ -279,16 +250,53 @@ jQuery(window).load(function() {
 HTML
 		,
 		'filter' => False,
-		'dw_include' => 0,
-		'dw_logged' => '',
-		'other_ids' => '',
 	); //END Criteoscroller ad
-$blocks[12] =	Array( //BEGIN Bite authors block
-		'title' => 'RHC ad',
+$blocks[13] =	Array( //BEGIN inquiring minds block
+		'title' => 'Inquiring minds authors',
 		'text' => <<<'HTML'
 <ul class="podcast-bio author-bios group">
   <li class="author-bio group vcard">
-    <div class="author-image"><img src="<?php print get_template_directory_uri(); ?>/img/bite_profiles/philpott80x95.jpg" alt="Tom Philpott" /></div>
+    <div class="author-image"><img src="/wp-content/themes/motherjones/img/inq_minds_profiles/viskontas-indre60x71.jpg" alt="Indre Viskontas" /></div>
+    <div class="author-data">
+				<span class="byline">Indre Viskontas</span>
+				<span class="author-position">Inquiring Minds co-host</span>
+				<p>Indre Viskontas is a neuroscientist and artist. She's published more than 35 original research papers and book chapters on the neural basis of memory and creativity. </p>
+    </div>
+  </li>
+
+  <li class="author-bio group vcard">
+    <div class="author-image"><img src="/wp-content/themes/motherjones/img/inq_minds_profiles/kishorehari60x71.jpg" alt="Kishore Hari" /></div>
+    <div class="author-data">
+			<span class="byline">Kishore Hari</span>
+			<span class="author-position">Inquiring Minds co-host</span>
+			<p>Kishore Hari is a science educator with more than a decade's experience producing live science events. He's the director of the Bay Area Science Festival based out of UC-San Francisco.</p>
+    </div>
+  </li>
+
+  <li class="author-bio group vcard">
+    <div class="author-image"><img src="/wp-content/themes/motherjones/img/inq_minds_profiles/adam_headshot_2014-01.jpg" alt="Adam Isaak" /></div>
+    <div class="author-data">
+			<span class="byline">Adam Isaak</span> 
+			<span class="author-position">Inquiring Minds producer</span> 
+			<p>  Adam Isaak is a media producer with a decade of experience creating science-focused videos and podcasts. He produces the Inquiring Minds podcast.</p>
+    </div>
+  </li>
+</ul>
+
+<a href="https://itunes.apple.com/us/podcast/inquiring-minds/id711675943?mt=2">
+<img src="/wp-content/themes/motherjones/img/itunes300x109.gif" width="300px" height="109px" style="margin-top: 5px;" class="hover-opacity">
+</a>
+
+HTML
+		,
+		'filter' => False,
+	); //END inquiring minds block
+$blocks[15] =	Array( //BEGIN Bite podcast block
+		'title' => 'Bite podcast authors',
+		'text' => <<<'HTML'
+<ul class="podcast-bio author-bios group">
+  <li class="author-bio group vcard">
+    <div class="author-image"><img src="/wp-content/themes/motherjones/img/bite_profiles/philpott80x95.jpg" alt="Tom Philpott" /></div>
     <div class="author-data">
         <span class="byline">Tom Philpott</span>
         <span class="author-position">Bite co-host</span>
@@ -297,16 +305,19 @@ $blocks[12] =	Array( //BEGIN Bite authors block
   </li>
 
   <li class="author-bio group vcard">
-    <div class="author-image"><img src="<?php print get_template_directory_uri(); ?>/img/bite_profiles/kiera-butler80x95.jpg" /></div>
+    <div class="author-image"><img src="/wp-content/themes/motherjones/img/bite_profiles/kiera-butler80x95.jpg" alt="Kiera Butler" /></div>
     <div class="author-data">
         <span class="byline">Kiera Butler</span>
         <span class="author-position">Bite co-host</span>
-        <p>A senior editor at <em>Mother Jones</em>, Kiera covers health, food, and the environment. She is the author of the 2014 book <em>Raise: What 4-H Teaches 7 Million Kids—and How Its Lessons Could Change Food and Farming Forever</em>. </p>
+        <p>
+          A senior editor at <em>Mother Jones</em>, Kiera covers health, food, and the environment. 
+          She is the author of the 2014 book <em>Raise: What 4-H Teaches 7 Million Kids&emdash;and How Its Lessons Could Change Food and Farming Forever</em>. 
+        </p>
     </div>
   </li>
 
   <li class="author-bio group vcard">
-    <div class="author-image"><img src="<?php print get_template_directory_uri(); ?>/img/bite_profiles/maddie80x95.jpg" alt="Maddie Oatman" /></div>
+    <div class="author-image"><img src="/wp-content/themes/motherjones/img/bite_profiles/maddie80x95.jpg" alt="Maddie Oatman" /></div>
     <div class="author-data">
         <span class="byline">Maddie Oatman</span>
         <span class="author-position">Bite co-host</span>
@@ -315,7 +326,7 @@ $blocks[12] =	Array( //BEGIN Bite authors block
   </li>
 
   <li class="author-bio group vcard">
-    <div class="author-image"><img src="<?php print get_template_directory_uri(); ?>/img/bite_profiles/casey_miner80x95.jpg" alt="Casey Miner" /></div>
+    <div class="author-image"><img src="/wp-content/themes/motherjones/img/bite_profiles/casey_miner80x95.jpg" alt="Casey Miner" /></div>
     <div class="author-data">
         <span class="byline">Casey Miner</span>
         <span class="author-position">Sound Editor</span>
@@ -324,7 +335,7 @@ $blocks[12] =	Array( //BEGIN Bite authors block
   </li>
 
   <li class="author-bio group vcard">
-    <div class="author-image"><img src="<?php print get_template_directory_uri(); ?>/img/bite_profiles/seth_samuel_80x95.png" alt="Seth Samuel" /></div>
+    <div class="author-image"><img src="/wp-content/themes/motherjones/img/bite_profiles/seth_samuel_80x95.png" alt="Seth Samuel" /></div>
     <div class="author-data">
         <span class="byline">Seth Samuel</span>
         <span class="author-position">Composer and Interim Sound Editor</span>
@@ -335,54 +346,7 @@ $blocks[12] =	Array( //BEGIN Bite authors block
 HTML
 		,
 		'filter' => False,
-		'dw_include' => 0,
-		'dw_logged' => '',
-		'other_ids' => '',
-	); //END Bite authors block
-$blocks[13] =	Array( //BEGIN inquiring minds block
-		'title' => 'RHC ad',
-		'text' => <<<'HTML'
-<ul class="podcast-bio author-bios group">
-  <li class="author-bio group vcard">
-    <div class="author-image"><img src="<?php print get_template_directory_uri(); ?>/img/inq_minds_profiles/viskontas-indre60x71.jpg" alt="Indre Viskontas" /></div>
-    <div class="author-data">
-				<span class="byline">Indre Viskontas</span>
-				<span class="author-position">Inquiring Minds co-host</span>
-				<p>Indre Viskontas is a neuroscientist and artist. She's published more than 35 original research papers and book chapters on the neural basis of memory and creativity. </p>
-    </div>
-  </li>
-
-  <li class="author-bio group vcard">
-    <div class="author-image"><img src="<?php print get_template_directory_uri(); ?>/img/inq_minds_profiles/kishorehari60x71.jpg" alt="Kishore Hari" /></div>
-    <div class="author-data">
-			<span class="byline">Kishore Hari</span>
-			<span class="author-position">Inquiring Minds co-host</span>
-			<p>Kishore Hari is a science educator with more than a decade's experience producing live science events. He's the director of the Bay Area Science Festival based out of UC-San Francisco.</p>
-    </div>
-  </li>
-
-  <li class="author-bio group vcard">
-    <div class="author-image"><img src="<?php print get_template_directory_uri(); ?>/img/inq_minds_profiles/adam_headshot_2014-01.jpg" alt="Adam Isaak" /></div>
-    <div class="author-data">
-			<span class="byline">Adam Isaak</span> 
-			<span class="author-position">Inquiring Minds producer</span> 
-			<p>  Adam Isaak is a media producer with a decade of experience creating science-focused videos and podcasts. He produces the Inquiring Minds podcast.</p>
-    </div>
-  </li>
-</ul>
-
-<a href="https://itunes.apple.com/us/podcast/inquiring-minds/id711675943?mt=2">
-<img src="<?php print get_template_directory_uri(); ?>/img/itunes300x109.gif" width="300px" height="109px" style="margin-top: 5px;" class="hover-opacity">
-</a>
-
-HTML
-		,
-		'filter' => False,
-		'dw_include' => 0,
-		'dw_logged' => '',
-		'other_ids' => '',
-	); //END inquiring minds block
-$blocks[14] = "_multiwidget"; //below are the blocks
+	); //END Bite podcast block
 $blocks['_multiwidget'] = 1; //below are the blocks
 
 $wp->beginTransaction();
