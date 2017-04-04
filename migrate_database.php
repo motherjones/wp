@@ -1269,10 +1269,11 @@ $wp->beginTransaction();
 while ( $image = $author_image_data->fetch(PDO::FETCH_ASSOC)) {
   $uid  = $author_name_to_author_meta[$image['title']]['wp_id'];
   $guid = $FILEDIR_ABS . preg_replace('/files\//', '', $image['filepath']);
+  $post_name = preg_replace("/\.[^.]+$/", "", $image['filename'] );
   $author_image_insert->execute(array(
     ':post_author' => $uid,
-    ':post_title' => $image['filename'],
-    ':post_name' => $image['filename'],
+    ':post_title' => $post_name,
+    ':post_name' => $post_name,
     ':guid' => $guid,
     ':post_mime_type' => $image['filemime'],
   ));
@@ -1298,8 +1299,21 @@ foreach ( $author_name_to_author_meta as $author ) {
       "mj_author_image_id",
       $author['image_id']
     ));
+  }
+}
+$wp->commit();
 
-    $author_meta_insert->execute(array(
+$author_image_meta_insert = $wp->prepare("
+INSERT IGNORE INTO pantheon_wp.wp_postmeta (post_id, meta_key, meta_value)
+VALUES ( ?, ?, ? )
+;
+");
+$wp->beginTransaction();
+foreach ( $author_name_to_author_meta as $author ) {
+  if ( array_key_exists('image_id', $author) 
+    && array_key_exists('wp_id', $author)
+  ) {
+    $author_image_meta_insert->execute(array(
       $author['image_id'],
       '_wp_attached_file',
       $author['image_location']
@@ -1307,6 +1321,9 @@ foreach ( $author_name_to_author_meta as $author ) {
   }
 }
 $wp->commit();
+
+
+
 echo "authors done";
 
 
@@ -1544,7 +1561,6 @@ while ( $title = $title_data->fetch(PDO::FETCH_ASSOC)) {
   $title_meta_rows[] = array(
     'nid' => $title['nid'],
     'image_id' => $wp->lastInsertId(),
-    'filename' => $title['filename'],
     'filepath' => preg_replace('/files\//', $FILEDIR, $title['filepath']),
     'title_image_credit' => $title['field_title_image_credit_value'],
   );
@@ -1659,7 +1675,6 @@ while ( $file = $file_data->fetch(PDO::FETCH_ASSOC)) {
     'nid' => $file['nid'],
     'fid' => $wp->lastInsertId(),
     'filepath' => preg_replace('/files\//', $FILEDIR, $file['filepath']),
-    'filename' => $file['filename']
   );
 
 }
