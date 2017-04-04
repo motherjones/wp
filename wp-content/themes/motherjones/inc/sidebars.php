@@ -20,6 +20,16 @@ function mj_widgets_init() {
 	 		'description'   => __( 'Shows up instead of the main sidebar on blog posts', 'mj' )
 		),
 		array (
+			'name'          => __( 'Bite Sidebar', 'mj' ),
+	 		'id'            => 'sidebar-bite',
+	 		'description'   => __( 'Shows up instead of the main sidebar on the Bite page.', 'mj' )
+		),
+		array (
+			'name'          => __( 'Inquiring Minds Sidebar', 'mj' ),
+	 		'id'            => 'sidebar-inquiring-minds',
+	 		'description'   => __( 'Shows up instead of the main sidebar on the Inquiring Minds page.', 'mj' )
+		),
+		array (
 			'name'          => __( 'Homepage Top Stories Sidebar', 'mj' ),
 	 		'id'            => 'homepage-more-top-stories',
 	 		'description'   => __( 'Appears next to the "More Top Stories" section on the homepage', 'mj' )

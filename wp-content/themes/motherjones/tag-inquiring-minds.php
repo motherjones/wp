@@ -101,77 +101,7 @@ get_header(); ?>
 			?>
 	</section> <!-- .main-index -->
 
-	<aside id="sidebar-right" class="grid__col-4 hidden-sm hidden-xs hidden-xxs">
-<?php 
-$widget = $wp_registered_widgets['text-9'];
-$params = Array(
-		array_merge(
-			$wp_registered_sidebars['sidebar'],
-			Array(
-				'widget_id' => 'text-9',
-				'widget_name' => 'Text',
-			)
-		),
-		Array (
-				'number' => 9
-		)
-
-);
-call_user_func_array($widget['callback'], $params);                                  
-
- ?>
-<ul class="podcast-bio author-bios group">
-  <li class="author-bio group vcard">
-    <div class="author-image"><img src="<?php print get_template_directory_uri(); ?>/img/inq_minds_profiles/viskontas-indre60x71.jpg" alt="Indre Viskontas" /></div>
-    <div class="author-data">
-				<span class="byline">Indre Viskontas</span>
-				<span class="author-position">Inquiring Minds co-host</span>
-				<p>Indre Viskontas is a neuroscientist and artist. She's published more than 35 original research papers and book chapters on the neural basis of memory and creativity. </p>
-    </div>
-  </li>
-
-  <li class="author-bio group vcard">
-    <div class="author-image"><img src="<?php print get_template_directory_uri(); ?>/img/inq_minds_profiles/kishorehari60x71.jpg" alt="Kishore Hari" /></div>
-    <div class="author-data">
-			<span class="byline">Kishore Hari</span>
-			<span class="author-position">Inquiring Minds co-host</span>
-			<p>Kishore Hari is a science educator with more than a decade's experience producing live science events. He's the director of the Bay Area Science Festival based out of UC-San Francisco.</p>
-    </div>
-  </li>
-
-  <li class="author-bio group vcard">
-    <div class="author-image"><img src="<?php print get_template_directory_uri(); ?>/img/inq_minds_profiles/adam_headshot_2014-01.jpg" alt="Adam Isaak" /></div>
-    <div class="author-data">
-			<span class="byline">Adam Isaak</span> 
-			<span class="author-position">Inquiring Minds producer</span> 
-			<p>  Adam Isaak is a media producer with a decade of experience creating science-focused videos and podcasts. He produces the Inquiring Minds podcast.</p>
-    </div>
-  </li>
-</ul>
-
-<a href="https://itunes.apple.com/us/podcast/inquiring-minds/id711675943?mt=2">
-<img src="<?php print get_template_directory_uri(); ?>/img/itunes300x109.gif" width="300px" height="109px" style="margin-top: 5px;" class="hover-opacity">
-</a>
-
-<?php 
-$widget = $wp_registered_widgets['text-11'];
-$params = Array(
-		array_merge(
-			$wp_registered_sidebars['sidebar'],
-			Array(
-				'widget_id' => 'text-11',
-				'widget_name' => 'Text',
-			)
-		),
-		Array (
-				'number' => 11
-		)
-
-);
-call_user_func_array($widget['callback'], $params);                                  
-
- ?>
-	</aside>
+  <?php get_sidebar(); ?>
 </main><!-- .site-main -->
 
 <script>

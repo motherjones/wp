@@ -15,7 +15,11 @@ if ( ! is_active_sidebar( 'sidebar' ) ) {
 	<?php
 		if ( mj_is_article_type( 'blogpost', get_the_ID() ) ){
 			dynamic_sidebar( 'sidebar-blog' );
-		} else {
+		} else if ( is_tag('bite') ) {
+			dynamic_sidebar( 'sidebar-bite' );
+		} else if ( is_tag('inquiring-minds') ) {
+			dynamic_sidebar( 'sidebar-inquiring-minds' );
+    } else {
 			dynamic_sidebar( 'sidebar' );
 		}
 	?>
