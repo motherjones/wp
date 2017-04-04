@@ -18,21 +18,19 @@
 
 get_header(); ?>
 
-      <img src="<?php print get_template_directory_uri(); ?>/img/inquiring_minds_banner.jpeg"
-           alt="Bite" />
+<img src="<?php print get_template_directory_uri(); ?>/img/inquiring_minds_banner.jpeg" alt="Inquiring Minds" />
 <main id="main" class="site-main grid " role="main">
 	<section class="main-index grid__col-md-8 grid__col-sm-9 grid__col-xs-12">
 		<header class="page-header">
 			<link href="https://d2nx6ydw3e5y5d.cloudfront.net/assets/current.css" media="screen" rel="stylesheet" type="text/css">
-					<ul class="podcast-follow">
-      <li class="itunes"><a href="https://itunes.apple.com/us/podcast/inquiring-minds/id711675943?mt=2"><i class="fa fa-headphones"></i>Subscribe on iTunes</a></li>
-      <li class="twitter"><a href="https://twitter.com/inquiringshow"><i class="fa fa-twitter"></i>Follow us on Twitter</a></li>
-      <li class="facebook"><a href="https://www.facebook.com/inquiringmindspodcast"><i class="fa fa-facebook"></i>Like us on Facebook</a></li>
-      <li class="soundcloud"><a href="https://soundcloud.com/inquiringminds"><i class="fa fa-soundcloud"></i>Our SoundCloud page</a></li>
-      <li class="rss"><a href="http://feeds.feedburner.com/inquiring-minds"><i class="fa fa-rss"></i>Subscribe to RSS</a></li>
-      <li class="stitcher"><a href="http://www.stitcher.com/podcast/inquiring-minds"><img src="<?php print get_template_directory_uri(); ?>/img/stitcherIcon.png"></img>Subscribe on Stitcher</a></li>
-
-					</ul>
+			<ul class="podcast-follow">
+        <li class="itunes"><a href="https://itunes.apple.com/us/podcast/inquiring-minds/id711675943?mt=2"><i class="fa fa-headphones"></i>Subscribe on iTunes</a></li>
+        <li class="twitter"><a href="https://twitter.com/inquiringshow"><i class="fa fa-twitter"></i>Follow us on Twitter</a></li>
+        <li class="facebook"><a href="https://www.facebook.com/inquiringmindspodcast"><i class="fa fa-facebook"></i>Like us on Facebook</a></li>
+        <li class="soundcloud"><a href="https://soundcloud.com/inquiringminds"><i class="fa fa-soundcloud"></i>Our SoundCloud page</a></li>
+        <li class="rss"><a href="http://feeds.feedburner.com/inquiring-minds"><i class="fa fa-rss"></i>Subscribe to RSS</a></li>
+        <li class="stitcher"><a href="http://www.stitcher.com/podcast/inquiring-minds"><img src="<?php print get_template_directory_uri(); ?>/img/stitcherIcon.png"></img>Subscribe on Stitcher</a></li>
+			</ul>
 
       <p class="podcast-intro"> Each week the <em>Inquiring Minds</em> podcast brings you a new, in-depth exploration of the place where science, politics, and society collide. We're committed to the idea that making an effort to understand the world around you through science and critical thinking can benefit everyone—and lead to better decisions. We endeavor to find out what's true, what's left to discover, and why it all matters with weekly coverage of the latest headlines and probing discussions with leading scientists and thinkers.  </p>
 
@@ -40,7 +38,6 @@ get_header(); ?>
 
       <div class="art19-web-player awp-medium awp-theme-dark-blue" data-series-id="57a44066-708b-488c-99cc-588c98834fee" data-pick-from-series="latest"></div>
 			<script src="https://d2nx6ydw3e5y5d.cloudfront.net/assets/current.js" type="text/javascript"></script>
-
 
 			<h2 class="podcast-subhead">Full Archive</h2>
 
@@ -102,6 +99,7 @@ get_header(); ?>
 	</section> <!-- .main-index -->
 
   <?php get_sidebar(); ?>
+
 </main><!-- .site-main -->
 
 <script>
@@ -115,4 +113,3 @@ get_header(); ?>
 	}
 </script>
 <?php get_footer(); ?>
-

@@ -18,8 +18,7 @@
 
 get_header(); ?>
 
-      <img src="<?php print get_template_directory_uri(); ?>/img/bite_banner.png"
-           alt="Bite" />
+<img src="<?php print get_template_directory_uri(); ?>/img/bite_banner.png" alt="Bite" />
 <main id="main" class="site-main grid " role="main">
 	<section class="main-index grid__col-md-8 grid__col-sm-9 grid__col-xs-12">
 		<header class="page-header">
@@ -98,6 +97,7 @@ get_header(); ?>
 	</section> <!-- .main-index -->
 
   <?php get_sidebar(); ?>
+
 </main><!-- .site-main -->
 
 <script>
