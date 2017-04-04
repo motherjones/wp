@@ -1036,13 +1036,13 @@ foreach ( $uid_to_author_meta as $uid => $author ) {
   }
 
   if (array_key_exists('mj_user_short_bio', $author)) {
-    $key = "mj_user_short_bio";
+    $key = "description";
     $value = $author['field_author_bio_short_value'];
     $author_meta_insert->execute();
   }
 
   if (array_key_exists('field_author_bio_value', $author)) {
-    $key = "mj_user_bio";
+    $key = "mj_user_full_bio";
     $value = $author['field_author_bio_value'];
     $author_meta_insert->execute();
   }
@@ -1290,7 +1290,9 @@ VALUES ( ?, ?, ? )
 
 $wp->beginTransaction();
 foreach ( $author_name_to_author_meta as $author ) {
-  if ( array_key_exists('image_id', $author) ) {
+  if ( array_key_exists('image_id', $author) 
+    && array_key_exists('wp_id', $author)
+  ) {
     $author_meta_insert->execute(array(
       $author['wp_id'],
       "author_image_id",
@@ -1463,7 +1465,7 @@ $title_data = $d6->prepare('
 SELECT DISTINCT
 n.nid,
 n.uid,
-p.publication_date,
+p.published_at,
 n.changed,
 n.status,
 i.field_title_image_data,
@@ -1587,7 +1589,7 @@ $file_data = $d6->prepare('
 SELECT DISTINCT
 f.uid,
 u.nid,
-p.publication_date,
+p.published_at,
 n.changed,
 n.status,
 f.filemime,
