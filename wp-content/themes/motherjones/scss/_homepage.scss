@@ -7,6 +7,9 @@
 	#main section {
 		border-bottom: 1px solid $neutral1;
 		margin-bottom: 1em;
+		@media only screen and (max-width: $reflex-sm) {
+			border-bottom: 0;
+		}
 	}
 	.promo {
 		margin: 0 auto;
@@ -96,10 +99,10 @@
 		&:first-of-type {
 			margin-top: 16px;
 			padding-top: 0;
-			background-image: none;
+			background: none;
 		}
 		h3 {
-			line-height: 18px;
+			line-height: 24px;
 			margin-bottom: 0;
 		}
 		.byline {
@@ -107,8 +110,12 @@
 		}
 	}
 	@media only screen and (max-width: $reflex-sm) {
-		margin-top: 0;
-		padding: 0 1em 1em;
+		margin: 0;
+		padding: 0 1em;
+		li {
+			background: none;
+			padding-top: 0;
+		}
 	}
 }
 
@@ -138,6 +145,10 @@
 		}
 		.byline {
 			margin-top: 0.5em;
+		}
+		@media only screen and (max-width: $reflex-sm) {
+			margin-top: 0;
+			border-top: 0;
 		}
 	}
 }
@@ -190,6 +201,10 @@
 				padding-top: 0;
 				background-image: none;
 			}
+			@media only screen and (max-width: $reflex-sm) {
+				background: none;
+				padding: 0 1em 1em;
+			}
 		}
 		img {
 			width: 100%;
@@ -199,6 +214,10 @@
 			margin: 0 0 4px;
 			font-size: 16px;
 			line-height: 18px;
+			@media only screen and (max-width: $reflex-sm) {
+				font-size: 18px;
+				line-height: 24px;
+			}
 		}
 		.byline {
 			font-size: 11px;
@@ -222,8 +241,15 @@
 	padding: 0;
 }
 
-#homepage-kdrum .promo {
-	margin-bottom: 1em;
+#homepage-kdrum {
+	.promo {
+		margin-bottom: 1em;
+	}
+	@media only screen and (max-width: $reflex-sm) {
+		img.banner {
+			display: none;
+		}
+	}
 }
 #homepage-kdrum-side {
 	padding-left: 0;
@@ -237,12 +263,16 @@
 #kdrum-post-list {
 	padding: 0;
 	li {
-		margin-top: 4px;
-		padding-top: 30px;
+		padding-top: 1em;
+		padding-bottom: 0;
 		border-top: 1px solid $neutral1;
 		&:first-of-type {
 			padding-top: 0;
 			border-top: 0;
+		}
+		@media only screen and (max-width: $reflex-sm) {
+			border-top: 0;
+			padding-top: 0;
 		}
 	}
 	.dateline {
@@ -274,5 +304,10 @@
 	}
 	.homepage-art-byline {
 		margin-bottom: 1em;
+	}
+}
+@media only screen and (max-width:$reflex-sm) {
+	.home #main #homepage-featured {
+		margin-bottom: 0;
 	}
 }

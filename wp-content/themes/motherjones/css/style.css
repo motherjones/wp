@@ -1870,6 +1870,9 @@ ul.author-bios {
   .home #main section {
     border-bottom: 1px solid #ccc;
     margin-bottom: 1em; }
+    @media only screen and (max-width: 768px) {
+      .home #main section {
+        border-bottom: 0; } }
   .home .promo {
     margin: 0 auto; }
 
@@ -1944,16 +1947,19 @@ ul.author-bios {
     #homepage-top-story-side li:first-of-type {
       margin-top: 16px;
       padding-top: 0;
-      background-image: none; }
+      background: none; }
     #homepage-top-story-side li h3 {
-      line-height: 18px;
+      line-height: 24px;
       margin-bottom: 0; }
     #homepage-top-story-side li .byline {
       margin-top: 0.5em; }
   @media only screen and (max-width: 768px) {
     #homepage-top-story-side {
-      margin-top: 0;
-      padding: 0 1em 1em; } }
+      margin: 0;
+      padding: 0 1em; }
+      #homepage-top-story-side li {
+        background: none;
+        padding-top: 0; } }
 
 #homepage-more-top-stories-main {
   padding-left: 0; }
@@ -1978,6 +1984,10 @@ ul.author-bios {
       font-size: 18px; }
     #homepage-more-top-stories li .byline {
       margin-top: 0.5em; }
+    @media only screen and (max-width: 768px) {
+      #homepage-more-top-stories li {
+        margin-top: 0;
+        border-top: 0; } }
 
 #homepage-more-stories-sidebar {
   padding-right: 0; }
@@ -2018,6 +2028,10 @@ ul.author-bios {
     #homepage-sections-list .homepage-section li:first-of-type {
       padding-top: 0;
       background-image: none; }
+    @media only screen and (max-width: 768px) {
+      #homepage-sections-list .homepage-section li {
+        background: none;
+        padding: 0 1em 1em; } }
   #homepage-sections-list .homepage-section img {
     width: 100%;
     margin: 0; }
@@ -2025,6 +2039,10 @@ ul.author-bios {
     margin: 0 0 4px;
     font-size: 16px;
     line-height: 18px; }
+    @media only screen and (max-width: 768px) {
+      #homepage-sections-list .homepage-section h3 {
+        font-size: 18px;
+        line-height: 24px; } }
   #homepage-sections-list .homepage-section .byline {
     font-size: 11px;
     line-height: 12px; }
@@ -2044,6 +2062,9 @@ ul.author-bios {
 
 #homepage-kdrum .promo {
   margin-bottom: 1em; }
+@media only screen and (max-width: 768px) {
+  #homepage-kdrum img.banner {
+    display: none; } }
 
 #homepage-kdrum-side {
   padding-left: 0; }
@@ -2057,12 +2078,16 @@ ul.author-bios {
 #kdrum-post-list {
   padding: 0; }
   #kdrum-post-list li {
-    margin-top: 4px;
-    padding-top: 30px;
+    padding-top: 1em;
+    padding-bottom: 0;
     border-top: 1px solid #ccc; }
     #kdrum-post-list li:first-of-type {
       padding-top: 0;
       border-top: 0; }
+    @media only screen and (max-width: 768px) {
+      #kdrum-post-list li {
+        border-top: 0;
+        padding-top: 0; } }
   #kdrum-post-list .dateline {
     margin-top: 4px; }
   #kdrum-post-list .hed,
@@ -2087,6 +2112,9 @@ ul.author-bios {
   #homepage-investigations-list .homepage-art-byline {
     margin-bottom: 1em; }
 
+@media only screen and (max-width: 768px) {
+  .home #main #homepage-featured {
+    margin-bottom: 0; } }
 /* full width */
 .grid--bleed [class*="grid__col-"] {
   padding: 0; }

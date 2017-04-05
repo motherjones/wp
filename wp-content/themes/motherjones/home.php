@@ -151,7 +151,7 @@ $shown_ids = array();
 					<h2 class="promo">
 						<a href="/blog/kevin-drum">Kevin Drum</a>
 					</h2>
-					<img src="<?php echo esc_url( get_stylesheet_directory_uri() ); ?>/img/KEVIN.png"></img>
+					<img class="banner" src="<?php echo esc_url( get_template_directory_uri() ); ?>/img/KEVIN.png" alt="Kevin Drum"></img>
 					<ul id="kdrum-post-list">
 						<?php
 							$kdrum = new WP_Query( array(
