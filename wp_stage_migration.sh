@@ -133,7 +133,7 @@ echo "\n"
 
 expect <<- DONE
 
-spawn /home/bbreedlove/vendor/bin/terminus remote:wp $SITE.$ENV -- media regenerate --only-missing
+spawn /home/bbreedlove/vendor/bin/terminus remote:wp $SITE.$ENV -- media regenerate
 
 expect  "*?assword:*" { send "$PANT_PASS\r"  }
 

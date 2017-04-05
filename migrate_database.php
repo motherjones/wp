@@ -175,7 +175,7 @@ FROM_UNIXTIME(p.published_at),
 CONVERT_TZ(FROM_UNIXTIME(p.published_at), 'PST8PDT','UTC'),
 r.body,
 n.title,
-r.teaser,
+d.field_dek_value,
 IF(
 	LOCATE('/', a.dst),
 	SUBSTR(a.dst,
@@ -198,6 +198,8 @@ LEFT OUTER JOIN mjd6.url_alias a
 ON a.src = CONCAT('node/', n.nid)
 JOIN mjd6.publication_date p
 ON n.nid = p.nid
+INNER JOIN mjd6.content_field_dek d
+ON n.nid = d.nid
 WHERE n.type IN ('article', 'blogpost', 'full_width_article')
 ;
 ");
