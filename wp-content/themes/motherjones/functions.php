@@ -293,3 +293,9 @@ function mj_content_width() {
 	$GLOBALS['content_width'] = apply_filters( 'mj_content_width', 990 );
 }
 add_action( 'after_setup_theme', 'mj_content_width', 0 );
+
+function mj_should_post($value, $post) {
+  return !get_post_meta($post->get_the_id(), 'mj_fb_instant_exclude', true);
+}
+add_filter( 'instant_articles_should_submit_post', 'mj_should_post', 10, 2);
+
