@@ -32,9 +32,8 @@
   width: 100%;
   position: relative;
   text-align: center;
-  .hed {
+  .entry-title {
     text-transform: none;
-    margin: auto;
   }
   .dek {
     margin: 28px auto 15px;
@@ -71,7 +70,6 @@
       text-align: center;
     }
   }
-
   .pullquote-left,
   .pullquote-right {
     display: table-cell;
@@ -89,42 +87,24 @@
       width: percentage( 8 / 12);
       @include setupAutoCols();
     }
-    .right-rail, .inline-right {
+    .right-rail,
+    .inline-right {
       float: right;
       margin-left: 15px;
       text-align: left;
       @include setupAutoCols();
       width: percentage( 4 / 12 )!important;
-        * {
-          text-align: left;
-        }
+      * {
+        text-align: left;
       }
-      .inline-left {
-        width: auto!important;
-          * {
-            text-align: left;
-          }
-        }
+    }
+    .inline-left {
+      width: auto!important;
+      * {
+        text-align: left;
       }
-      #full-width-header-data {
-        padding-bottom: 20px;
-        * {
-          display: block;
-        }
-        .hed {
-          margin: 5px 40px;
-          font-size: 42px;
-        }
-        .dek {
-          margin: 28px 145px 0;
-        }
-        .byline-dateline {
-          margin: 16px;
-          * {
-            display: inline;
-          }
-        }
-      }
+    }
+  }
 }
 
 @media (min-width: $reflex-xs) {
@@ -136,9 +116,6 @@
     h1,
     h3 {
       color: $white;
-    }
-    h1.hed {
-      line-height: 1.2em;
     }
   }
 }

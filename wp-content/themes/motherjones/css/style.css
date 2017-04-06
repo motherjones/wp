@@ -2389,9 +2389,8 @@ ul.author-bios {
   width: 100%;
   position: relative;
   text-align: center; }
-  #full-width-header .hed {
-    text-transform: none;
-    margin: auto; }
+  #full-width-header .entry-title {
+    text-transform: none; }
   #full-width-header .dek {
     margin: 28px auto 15px;
     font-size: 20px; }
@@ -2437,7 +2436,8 @@ ul.author-bios {
     -ms-flex: 1 0 auto;
     -webkit-flex: 1 0 0px;
     flex: 1 0 0px; }
-  #fullwidth-body .right-rail, #fullwidth-body .inline-right {
+  #fullwidth-body .right-rail,
+  #fullwidth-body .inline-right {
     float: right;
     margin-left: 15px;
     text-align: left;
@@ -2445,26 +2445,13 @@ ul.author-bios {
     -webkit-flex: 1 0 0px;
     flex: 1 0 0px;
     width: 33.33333% !important; }
-    #fullwidth-body .right-rail *, #fullwidth-body .inline-right * {
+    #fullwidth-body .right-rail *,
+    #fullwidth-body .inline-right * {
       text-align: left; }
   #fullwidth-body .inline-left {
     width: auto !important; }
     #fullwidth-body .inline-left * {
-      text-align: left; }
-
-  #full-width-header-data {
-    padding-bottom: 20px; }
-    #full-width-header-data * {
-      display: block; }
-    #full-width-header-data .hed {
-      margin: 5px 40px;
-      font-size: 42px; }
-    #full-width-header-data .dek {
-      margin: 28px 145px 0; }
-    #full-width-header-data .byline-dateline {
-      margin: 16px; }
-      #full-width-header-data .byline-dateline * {
-        display: inline; } }
+      text-align: left; } }
 @media (min-width: 480px) {
   #full-width-header-data {
     position: absolute;
@@ -2473,9 +2460,7 @@ ul.author-bios {
     background: linear-gradient(transparent, black); }
     #full-width-header-data h1,
     #full-width-header-data h3 {
-      color: white; }
-    #full-width-header-data h1.hed {
-      line-height: 1.2em; } }
+      color: white; } }
 /* end full width */
 @media print {
   * {

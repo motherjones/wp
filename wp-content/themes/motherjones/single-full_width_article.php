@@ -19,7 +19,7 @@ while ( have_posts() ) : the_post();
 		echo '<div id="full-width-header-data">';
 	}
 
-	the_title( '<h1 class="article hed">', '</h1>' );
+	the_title( '<h1 class="entry-title">', '</h1>' );
 	if ( ! empty( $meta['mj_dek'][0] ) ) {
 		printf(
 			'<h3 class="dek">%s</h3>',
