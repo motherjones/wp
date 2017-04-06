@@ -108,9 +108,12 @@ class MJ_social_tags {
 				: get_template_directory_uri() . '/img/mojo_nomaster.jpg' ),
 		);
 
+		$category = get_the_category();
 		$story_social_data [] = array( 'published', get_the_date( 'c' ) ); // should be ISO 8601.
 		$story_social_data [] = array( 'modified', get_the_modified_date( 'c' ) );
-		$story_social_data [] = array( 'category', get_the_category()[0]->name );
+		if ( ! empty( $category ) ) {
+			$story_social_data [] = array( 'category', $category[0]->name );
+		}
 
 		$terms = get_the_terms( get_the_ID(), 'post_tag' ) ?: array();
 		foreach ( $terms as $term ) {
