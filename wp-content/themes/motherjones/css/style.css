@@ -2368,6 +2368,10 @@ ul.author-bios {
 
 .mj_article_type-full_width_article #page {
   width: 100%; }
+  @media only screen and (max-width: 768px) {
+    .mj_article_type-full_width_article #page {
+      width: 95%;
+      margin: 0 2.5%; } }
 .mj_article_type-full_width_article #TopROS970x250,
 .mj_article_type-full_width_article #masthead,
 .mj_article_type-full_width_article #main {
@@ -2386,7 +2390,7 @@ ul.author-bios {
   width: 66.66667%; }
   @media only screen and (max-width: 768px) {
     .mj_article_type-full_width_article .entry-footer {
-      max-width: 100%; } }
+      width: 85%; } }
 
 #full-width-header {
   width: 100%;
@@ -2414,7 +2418,7 @@ ul.author-bios {
   background-image: url("../img/border-black25.png");
   background-repeat: repeat-y;
   background-position: 660px;
-  margin: 0 12px 45px; }
+  margin: 0 1em 2em; }
   #fullwidth-body .right-rail,
   #fullwidth-body .inline-right,
   #fullwidth-body .inline-left {
@@ -2437,8 +2441,17 @@ ul.author-bios {
       text-align: center;
       font-size: 28px;
       line-height: 1.3em; }
+    @media only screen and (max-width: 768px) {
+      #fullwidth-body .pullquote-left,
+      #fullwidth-body .pullquote-right {
+        display: block; } }
   #fullwidth-body img {
     max-width: 100%; }
+  @media only screen and (max-width: 768px) {
+    #fullwidth-body {
+      background: none;
+      margin: 0 0 1em;
+      width: 85%; } }
 
 @media (min-width: 768px) {
   #fullwidth-body p {

@@ -5,6 +5,10 @@
 .mj_article_type-full_width_article {
   #page {
     width: 100%;
+    @media only screen and (max-width: $reflex-sm) {
+      width: 95%;
+      margin: 0 2.5%;
+    }
   }
   #TopROS970x250,
   #masthead,
@@ -28,7 +32,7 @@
   .entry-footer {
     width: percentage( 8 / 12);
     @media only screen and (max-width: $reflex-sm) {
-      max-width: 100%;
+      width: 85%;
     }
   }
 }
@@ -62,7 +66,7 @@
   background-image: url('../img/border-black25.png');
   background-repeat: repeat-y;
   background-position: 660px;
-  margin: 0 12px 45px;
+  margin: 0 1em 2em;
   .right-rail,
   .inline-right,
   .inline-left {
@@ -85,11 +89,18 @@
       font-size: 28px;
       line-height: 1.3em;
     }
+    @media only screen and (max-width: $reflex-sm) {
+      display: block;
+    }
   }
   img {
     max-width: 100%;
   }
-
+  @media only screen and (max-width: $reflex-sm) {
+    background: none;
+    margin: 0 0 1em;
+    width: 85%;
+  }
 }
 
 @media (min-width: $reflex-sm) {
