@@ -36,7 +36,7 @@ $sidebars_widgets_options = Array(
 		'sidebar-inquiring-minds' => Array('text-9', 'text-13', 'text-11'),  //RHC ad, inq minds author block, ad
 		'ticker' => Array('text-7'), //Membership ticker
 		'homepage-more-top-stories' => Array('text-10'), //Membership ticker
-		'content-end' => Array('text-16', 'mj-author-bio-widget-2', 'text-8', 'mj-related-articles-widget-2', 'mj-blog-pager-widget-2'), //FIXME needs to contain author bio, text block for members like you text-8, related articles, and blog pager
+		'content-end' => Array('mj-author-bio-widget-2', 'text-8', 'mj-related-articles-widget-2', 'mj-blog-pager-widget-2'), //FIXME needs to contain author bio, text block for members like you text-8, related articles, and blog pager
 		'page-end' => Array('text-4'), //bottom adblock ask
 		'page-top' => Array('text-2', 'text-3'),//Ad control, sitewrap
 		'array_version' => 3
@@ -347,34 +347,6 @@ HTML
 		,
 		'filter' => false,
 	); //END Bite podcast block
-$blocks[16] =	Array( //BEGIN bottom signup form
-		'title' => 'Newsletter signup form',
-		'text' => <<<'HTML'
-<div class="newsletter-signup">
-  <h5>Get the scoop, &nbsp;straight from Mother Jones.</h5>
-  <form action="https://api.maropost.com/accounts/585/forms/3289/subscribe/177d8ba3b7fe7d39e28dcba73123eeffbd01878b" method="post" style="margin: 0 auto;" onsubmit="return MJ_check_email(this);">
-    <table summary="Mother Jones Newsletter Sign Up Form" cellpadding="0" cellspacing="0">
-      <tbody>
-        <tr>
-          <td>
-            <input include_blank="true" start_year="1950" type="hidden" name="custom_fields[outreach_affiliate_code]" id="custom_fields_outreach_affiliate_code" value="Article_Bottom" />
-            <input include_blank="true" start_year="1950" type="hidden" name="custom_fields[signup_url]" id="signup_url" value="" />
-            <input type="hidden" value="" id="email_field" name="email_const_mp" />
-                                                <i class="icon-envelope"></i>
-            <input include_blank="true" start_year="1950" name="contact_fields[email]" id="cons_email" placeholder="ENTER YOUR EMAIL" type="text" />
-          </td>
-          <td>
-            <input id="newsletter-signup" type="submit" name="commit" id="submit" value="Submit" />
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </form>
-</div>
-HTML
-		,
-		'filter' => false, //this is the "show only on, show not on" toggle
-	); //END membership for blog posts
 $blocks['_multiwidget'] = 1; //below are the blocks
 
 $wp->beginTransaction();
