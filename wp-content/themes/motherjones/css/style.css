@@ -1870,7 +1870,7 @@ ul.author-bios {
     @media only screen and (max-width: 768px) {
       .home #main section {
         border-bottom: 0; } }
-  .home .promo {
+  .home h2 {
     margin: 0 auto; }
 
 .homepage-art-byline {
@@ -2057,8 +2057,6 @@ ul.author-bios {
 .homepage-section-list {
   padding: 0; }
 
-#homepage-kdrum .promo {
-  margin-bottom: 1em; }
 @media only screen and (max-width: 768px) {
   #homepage-kdrum img.banner {
     display: none; } }

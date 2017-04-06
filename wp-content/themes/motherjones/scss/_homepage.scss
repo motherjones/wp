@@ -11,7 +11,7 @@
 			border-bottom: 0;
 		}
 	}
-	.promo {
+	h2 {
 		margin: 0 auto;
 	}
 }
@@ -242,9 +242,6 @@
 }
 
 #homepage-kdrum {
-	.promo {
-		margin-bottom: 1em;
-	}
 	@media only screen and (max-width: $reflex-sm) {
 		img.banner {
 			display: none;
