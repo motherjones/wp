@@ -22,15 +22,17 @@ get_header(); ?>
 	<section class="main-index grid__col-md-8 grid__col-sm-9 grid__col-xs-12">
 		<header class="page-header">
 		<?php
-			if ( is_tag() || is_category() ) {
-				global $wp_query;
-				$term = $wp_query->get_queried_object();
-				echo '<h1 class="page-title promo">' . esc_html( $term->name ) . '</h1>';
-			} elseif ( is_author() ) {
-				the_widget( 'mj_author_bio_widget', array( 'title' => '' ) );
-			} else {
-				the_archive_title( '<h1 class="page-title promo">', '</h1>' );
-			}
+		if ( is_tag() || is_category() ) {
+			global $wp_query;
+			$term = $wp_query->get_queried_object();
+			echo '<h1 class="page-title promo">' . esc_html( $term->name ) . '</h1>';
+		} elseif ( is_author() ) {
+			the_widget( 'mj_author_bio_widget', array(
+				'title' => '',
+			) );
+		} else {
+			the_archive_title( '<h1 class="page-title promo">', '</h1>' );
+		}
 		?>
 		</header><!-- .page-header -->
 
@@ -39,14 +41,14 @@ get_header(); ?>
 			<?php
 				$posts_shown = 0;
 				// Start the Loop.
-				while ( $wp_query->have_posts() ) : $wp_query->the_post();
-					if ( 0 === $posts_shown ) {
-						get_template_part( 'template-parts/top-index-article' );
-					} else {
-						get_template_part( 'template-parts/content' );
-					}
+			while ( $wp_query->have_posts() ) : $wp_query->the_post();
+				if ( 0 === $posts_shown ) {
+					get_template_part( 'template-parts/top-index-article' );
+				} else {
+					get_template_part( 'template-parts/content' );
+				}
 
-					if ( 5 === $posts_shown ) { ?>
+				if ( 5 === $posts_shown ) { ?>
 						<script>
 							if (typeof MJ_HideSectionAdMobile === 'undefined') {
 								ad_code({
@@ -58,7 +60,7 @@ get_header(); ?>
 							}
 						</script>
 					<?php
-					} elseif ( 11 === $posts_shown ) { ?>
+				} elseif ( 11 === $posts_shown ) { ?>
 							<script>
 								if (typeof MJ_HideSectionPage970x250BB1 === 'undefined') {
 									ad_code({
@@ -70,9 +72,9 @@ get_header(); ?>
 								}
 							</script>
 					<?php
-					}
-					$posts_shown++;
-					// End the loop.
+				}
+				$posts_shown++;
+				// End the loop.
 				endwhile;
 			?>
 			</ul>
@@ -87,9 +89,9 @@ get_header(); ?>
 			</div>
 			<?php
 			// If no content, include the "No posts found" template.
-			} else {
-				get_template_part( 'template-parts/content', 'none' );
-			}
+} else {
+	get_template_part( 'template-parts/content', 'none' );
+}// End if().
 			?>
 	</section> <!-- .main-index -->
 

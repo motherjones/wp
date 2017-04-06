@@ -17,12 +17,12 @@ $article_classes = 'hnews hentry item grid__col-md-8 grid__col-sm-12';
 
 	<article class="entry-content" itemprop="articleBody">
 		<?php
-			if ( isset( $meta['css'][0] ) ) {
-				printf(
-					'<style>%s</style>',
-					esc_html( $meta['css'][0] )
-				);
-			}
+		if ( isset( $meta['css'][0] ) ) {
+			printf(
+				'<style>%s</style>',
+				esc_html( $meta['css'][0] )
+			);
+		}
 			largo_hero();
 			the_content();
 		?>

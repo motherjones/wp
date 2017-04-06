@@ -24,19 +24,19 @@ get_header(); ?>
 		<header class="page-header">
 			<link href="https://d2nx6ydw3e5y5d.cloudfront.net/assets/current.css" media="screen" rel="stylesheet" type="text/css">
 			<ul class="podcast-follow">
-        <li class="itunes"><a href="https://itunes.apple.com/us/podcast/inquiring-minds/id711675943?mt=2"><i class="fa fa-headphones"></i>Subscribe on iTunes</a></li>
-        <li class="twitter"><a href="https://twitter.com/inquiringshow"><i class="fa fa-twitter"></i>Follow us on Twitter</a></li>
-        <li class="facebook"><a href="https://www.facebook.com/inquiringmindspodcast"><i class="fa fa-facebook"></i>Like us on Facebook</a></li>
-        <li class="soundcloud"><a href="https://soundcloud.com/inquiringminds"><i class="fa fa-soundcloud"></i>Our SoundCloud page</a></li>
-        <li class="rss"><a href="http://feeds.feedburner.com/inquiring-minds"><i class="fa fa-rss"></i>Subscribe to RSS</a></li>
-        <li class="stitcher"><a href="http://www.stitcher.com/podcast/inquiring-minds"><img src="<?php print get_template_directory_uri(); ?>/img/stitcherIcon.png"></img>Subscribe on Stitcher</a></li>
+		<li class="itunes"><a href="https://itunes.apple.com/us/podcast/inquiring-minds/id711675943?mt=2"><i class="fa fa-headphones"></i>Subscribe on iTunes</a></li>
+		<li class="twitter"><a href="https://twitter.com/inquiringshow"><i class="fa fa-twitter"></i>Follow us on Twitter</a></li>
+		<li class="facebook"><a href="https://www.facebook.com/inquiringmindspodcast"><i class="fa fa-facebook"></i>Like us on Facebook</a></li>
+		<li class="soundcloud"><a href="https://soundcloud.com/inquiringminds"><i class="fa fa-soundcloud"></i>Our SoundCloud page</a></li>
+		<li class="rss"><a href="http://feeds.feedburner.com/inquiring-minds"><i class="fa fa-rss"></i>Subscribe to RSS</a></li>
+		<li class="stitcher"><a href="http://www.stitcher.com/podcast/inquiring-minds"><img src="<?php print get_template_directory_uri(); ?>/img/stitcherIcon.png"></img>Subscribe on Stitcher</a></li>
 			</ul>
 
-      <p class="podcast-intro"> Each week the <em>Inquiring Minds</em> podcast brings you a new, in-depth exploration of the place where science, politics, and society collide. We're committed to the idea that making an effort to understand the world around you through science and critical thinking can benefit everyone—and lead to better decisions. We endeavor to find out what's true, what's left to discover, and why it all matters with weekly coverage of the latest headlines and probing discussions with leading scientists and thinkers.  </p>
+	  <p class="podcast-intro"> Each week the <em>Inquiring Minds</em> podcast brings you a new, in-depth exploration of the place where science, politics, and society collide. We're committed to the idea that making an effort to understand the world around you through science and critical thinking can benefit everyone—and lead to better decisions. We endeavor to find out what's true, what's left to discover, and why it all matters with weekly coverage of the latest headlines and probing discussions with leading scientists and thinkers.  </p>
 
 			<h2 class="podcast-subhead">Latest Episode</h2>
 
-      <div class="art19-web-player awp-medium awp-theme-dark-blue" data-series-id="57a44066-708b-488c-99cc-588c98834fee" data-pick-from-series="latest"></div>
+	  <div class="art19-web-player awp-medium awp-theme-dark-blue" data-series-id="57a44066-708b-488c-99cc-588c98834fee" data-pick-from-series="latest"></div>
 			<script src="https://d2nx6ydw3e5y5d.cloudfront.net/assets/current.js" type="text/javascript"></script>
 
 			<h2 class="podcast-subhead">Full Archive</h2>
@@ -48,10 +48,10 @@ get_header(); ?>
 			<?php
 				$posts_shown = 0;
 				// Start the Loop.
-				while ( $wp_query->have_posts() ) : $wp_query->the_post();
-						get_template_part( 'template-parts/content' );
+			while ( $wp_query->have_posts() ) : $wp_query->the_post();
+				get_template_part( 'template-parts/content' );
 
-					if ( 5 === $posts_shown ) { ?>
+				if ( 5 === $posts_shown ) { ?>
 						<script>
 							if (typeof MJ_HideSectionAdMobile === 'undefined') {
 								ad_code({
@@ -63,7 +63,7 @@ get_header(); ?>
 							}
 						</script>
 					<?php
-					} elseif ( 11 === $posts_shown ) { ?>
+				} elseif ( 11 === $posts_shown ) { ?>
 							<script>
 								if (typeof MJ_HideSectionPage970x250BB1 === 'undefined') {
 									ad_code({
@@ -75,9 +75,9 @@ get_header(); ?>
 								}
 							</script>
 					<?php
-					}
-					$posts_shown++;
-					// End the loop.
+				}
+				$posts_shown++;
+				// End the loop.
 				endwhile;
 			?>
 			</ul>
@@ -92,13 +92,13 @@ get_header(); ?>
 			</div>
 			<?php
 			// If no content, include the "No posts found" template.
-			} else {
-				get_template_part( 'template-parts/content', 'none' );
-			}
+} else {
+	get_template_part( 'template-parts/content', 'none' );
+}// End if().
 			?>
 	</section> <!-- .main-index -->
 
-  <?php get_sidebar(); ?>
+	<?php get_sidebar(); ?>
 
 </main><!-- .site-main -->
 

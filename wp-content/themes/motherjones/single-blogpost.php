@@ -19,12 +19,12 @@ get_header();
 			get_sidebar();
 			comments_template();
 
-			if ( ! empty( $meta['js'][0] ) ) {
-				printf(
-					'script>%s</script>',
-					$meta['js'][0]
-				);
-			}
+		if ( ! empty( $meta['js'][0] ) ) {
+			printf(
+				'script>%s</script>',
+				$meta['js'][0]
+			);
+		}
 	?>
 	<script language="javascript">
 			<!--

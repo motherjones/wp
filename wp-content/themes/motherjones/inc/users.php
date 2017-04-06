@@ -252,7 +252,7 @@ class MJ_Avatar {
 			if ( isset( $_FILES[ self::META_FIELD ] ) ) {
 				$file = wp_upload_bits(
 					$_FILES[ self::META_FIELD ]['name'], null,
-					@file_get_contents( $_FILES[ self::META_FIELD ]['tmp_name'])
+					@file_get_contents( $_FILES[ self::META_FIELD ]['tmp_name'] )
 				);
 				if ( false === $file['error'] ) {
 					$mime_type = wp_check_filetype( $file['file'] );
@@ -287,9 +287,13 @@ class MJ_Avatar {
 		}
 		$ret = $this->remove_user_avatar( $user_id );
 		if ( ! empty( $ret ) ) {
-			echo wp_json_encode( array( 'success' => true ) );
+			echo wp_json_encode( array(
+				'success' => true,
+			) );
 		} else {
-			echo wp_json_encode( array( 'success' => false ) );
+			echo wp_json_encode( array(
+				'success' => false,
+			) );
 		}
 		wp_die();
 	}
@@ -401,7 +405,8 @@ class MJ_Avatar {
 	/**
 	 *  Hide the default profile image and show our custom version.
 	 */
-	function print_avatar_admin_css() { ?>
+	function print_avatar_admin_css() {
+	?>
 		<style type="text/css">
 			.user-profile-picture {
 				display: none;

@@ -13,15 +13,15 @@ if ( ! is_active_sidebar( 'sidebar' ) ) {
 ?>
 <aside id="sidebar-right" class="grid__col-4 hidden-sm hidden-xs hidden-xxs">
 	<?php
-		if ( mj_is_article_type( 'blogpost', get_the_ID() ) ){
+	if ( mj_is_article_type( 'blogpost', get_the_ID() ) ) {
 			dynamic_sidebar( 'sidebar-blog' );
-		} else if ( is_tag('bite') ) {
+	} elseif ( is_tag( 'bite' ) ) {
 			dynamic_sidebar( 'sidebar-bite' );
-		} else if ( is_tag('inquiring-minds') ) {
+	} elseif ( is_tag( 'inquiring-minds' ) ) {
 			dynamic_sidebar( 'sidebar-inquiring-minds' );
-    } else {
+	} else {
 			dynamic_sidebar( 'sidebar' );
-		}
+	}
 	?>
 	<script language="javascript">
 			<!--
