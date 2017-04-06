@@ -3,20 +3,45 @@
 @import "vendor/reflex/reflex/helpers";
 
 .mj_article_type-full_width_article {
-  #main {
+  #page {
     width: 100%;
+    @media only screen and (max-width: $reflex-sm) {
+      width: 95%;
+      margin: 0 2.5%;
+    }
+  }
+  #TopROS970x250,
+  #masthead,
+  #main {
+    width: 55em;
+    margin: 0 auto;
+  }
+  #ticker {
+    margin-bottom: 0.5em;
   }
   article.full-width {
     margin-top: 2em;
+  }
+  .social-container.top {
+    margin-bottom: 2em;
+    a {
+      background: none;
+      text-shadow: none;
+    }
+  }
+  .entry-footer {
+    width: percentage( 8 / 12);
+    @media only screen and (max-width: $reflex-sm) {
+      width: 85%;
+    }
   }
 }
 #full-width-header {
   width: 100%;
   position: relative;
   text-align: center;
-  .hed {
+  .entry-title {
     text-transform: none;
-    margin: auto;
   }
   .dek {
     margin: 28px auto 15px;
@@ -38,10 +63,10 @@
 }
 
 #fullwidth-body {
-  background-image: url('../img/border-$black25.png');
+  background-image: url('../img/border-black25.png');
   background-repeat: repeat-y;
   background-position: 660px;
-  margin: 0 12px 45px;
+  margin: 0 1em 2em;
   .right-rail,
   .inline-right,
   .inline-left {
@@ -53,16 +78,29 @@
       text-align: center;
     }
   }
-
   .pullquote-left,
   .pullquote-right {
     display: table-cell;
     width: 100%;
+    p {
+      width: 100%;
+      margin-top: 0.75em;
+      text-align: center;
+      font-size: 28px;
+      line-height: 1.3em;
+    }
+    @media only screen and (max-width: $reflex-sm) {
+      display: block;
+    }
   }
   img {
     max-width: 100%;
   }
-
+  @media only screen and (max-width: $reflex-sm) {
+    background: none;
+    margin: 0 0 1em;
+    width: 85%;
+  }
 }
 
 @media (min-width: $reflex-sm) {
@@ -71,42 +109,24 @@
       width: percentage( 8 / 12);
       @include setupAutoCols();
     }
-    .right-rail, .inline-right {
+    .right-rail,
+    .inline-right {
       float: right;
       margin-left: 15px;
       text-align: left;
       @include setupAutoCols();
       width: percentage( 4 / 12 )!important;
-        * {
-          text-align: left;
-        }
+      * {
+        text-align: left;
       }
-      .inline-left {
-        width: auto!important;
-          * {
-            text-align: left;
-          }
-        }
+    }
+    .inline-left {
+      width: auto!important;
+      * {
+        text-align: left;
       }
-      #full-width-header-data {
-        padding-bottom: 20px;
-        * {
-          display: block;
-        }
-        .hed {
-          margin: 5px 40px;
-          font-size: 42px;
-        }
-        .dek {
-          margin: 28px 145px 0;
-        }
-        .byline-dateline {
-          margin: 16px;
-          * {
-            display: inline;
-          }
-        }
-      }
+    }
+  }
 }
 
 @media (min-width: $reflex-xs) {
@@ -118,10 +138,6 @@
     h1,
     h3 {
       color: $white;
-    }
-    h1.hed {
-      line-height: 1.2em;
-      text-transform: uppercase;
     }
   }
 }

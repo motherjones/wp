@@ -19,7 +19,7 @@ while ( have_posts() ) : the_post();
 		echo '<div id="full-width-header-data">';
 	}
 
-	the_title( '<h1 class="article hed">', '</h1>' );
+	the_title( '<h1 class="entry-title">', '</h1>' );
 	if ( ! empty( $meta['mj_dek'][0] ) ) {
 		printf(
 			'<h3 class="dek">%s</h3>',
@@ -68,7 +68,7 @@ if ( isset( $title_img_meta['_media_credit'][0] ) && '' !== $title_img_meta['_me
 
 
 <main id="main" class="site-main" role="main">
-	<article class="full-width">
+	<article class="full-width entry-content">
 		<?php
 		if ( isset( $meta['css'][0] ) ) {
 			printf(

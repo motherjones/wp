@@ -2366,18 +2366,38 @@ ul.author-bios {
   .hidden-lg {
     display: none !important; } }
 
-.mj_article_type-full_width_article #main {
+.mj_article_type-full_width_article #page {
   width: 100%; }
+  @media only screen and (max-width: 768px) {
+    .mj_article_type-full_width_article #page {
+      width: 95%;
+      margin: 0 2.5%; } }
+.mj_article_type-full_width_article #TopROS970x250,
+.mj_article_type-full_width_article #masthead,
+.mj_article_type-full_width_article #main {
+  width: 55em;
+  margin: 0 auto; }
+.mj_article_type-full_width_article #ticker {
+  margin-bottom: 0.5em; }
 .mj_article_type-full_width_article article.full-width {
   margin-top: 2em; }
+.mj_article_type-full_width_article .social-container.top {
+  margin-bottom: 2em; }
+  .mj_article_type-full_width_article .social-container.top a {
+    background: none;
+    text-shadow: none; }
+.mj_article_type-full_width_article .entry-footer {
+  width: 66.66667%; }
+  @media only screen and (max-width: 768px) {
+    .mj_article_type-full_width_article .entry-footer {
+      width: 85%; } }
 
 #full-width-header {
   width: 100%;
   position: relative;
   text-align: center; }
-  #full-width-header .hed {
-    text-transform: none;
-    margin: auto; }
+  #full-width-header .entry-title {
+    text-transform: none; }
   #full-width-header .dek {
     margin: 28px auto 15px;
     font-size: 20px; }
@@ -2395,10 +2415,10 @@ ul.author-bios {
   min-width: 100%; }
 
 #fullwidth-body {
-  background-image: url("../img/border-$black25.png");
+  background-image: url("../img/border-black25.png");
   background-repeat: repeat-y;
   background-position: 660px;
-  margin: 0 12px 45px; }
+  margin: 0 1em 2em; }
   #fullwidth-body .right-rail,
   #fullwidth-body .inline-right,
   #fullwidth-body .inline-left {
@@ -2414,8 +2434,24 @@ ul.author-bios {
   #fullwidth-body .pullquote-right {
     display: table-cell;
     width: 100%; }
+    #fullwidth-body .pullquote-left p,
+    #fullwidth-body .pullquote-right p {
+      width: 100%;
+      margin-top: 0.75em;
+      text-align: center;
+      font-size: 28px;
+      line-height: 1.3em; }
+    @media only screen and (max-width: 768px) {
+      #fullwidth-body .pullquote-left,
+      #fullwidth-body .pullquote-right {
+        display: block; } }
   #fullwidth-body img {
     max-width: 100%; }
+  @media only screen and (max-width: 768px) {
+    #fullwidth-body {
+      background: none;
+      margin: 0 0 1em;
+      width: 85%; } }
 
 @media (min-width: 768px) {
   #fullwidth-body p {
@@ -2423,7 +2459,8 @@ ul.author-bios {
     -ms-flex: 1 0 auto;
     -webkit-flex: 1 0 0px;
     flex: 1 0 0px; }
-  #fullwidth-body .right-rail, #fullwidth-body .inline-right {
+  #fullwidth-body .right-rail,
+  #fullwidth-body .inline-right {
     float: right;
     margin-left: 15px;
     text-align: left;
@@ -2431,26 +2468,13 @@ ul.author-bios {
     -webkit-flex: 1 0 0px;
     flex: 1 0 0px;
     width: 33.33333% !important; }
-    #fullwidth-body .right-rail *, #fullwidth-body .inline-right * {
+    #fullwidth-body .right-rail *,
+    #fullwidth-body .inline-right * {
       text-align: left; }
   #fullwidth-body .inline-left {
     width: auto !important; }
     #fullwidth-body .inline-left * {
-      text-align: left; }
-
-  #full-width-header-data {
-    padding-bottom: 20px; }
-    #full-width-header-data * {
-      display: block; }
-    #full-width-header-data .hed {
-      margin: 5px 40px;
-      font-size: 42px; }
-    #full-width-header-data .dek {
-      margin: 28px 145px 0; }
-    #full-width-header-data .byline-dateline {
-      margin: 16px; }
-      #full-width-header-data .byline-dateline * {
-        display: inline; } }
+      text-align: left; } }
 @media (min-width: 480px) {
   #full-width-header-data {
     position: absolute;
@@ -2459,10 +2483,7 @@ ul.author-bios {
     background: linear-gradient(transparent, black); }
     #full-width-header-data h1,
     #full-width-header-data h3 {
-      color: white; }
-    #full-width-header-data h1.hed {
-      line-height: 1.2em;
-      text-transform: uppercase; } }
+      color: white; } }
 /* end full width */
 @media print {
   * {
@@ -2782,13 +2803,6 @@ blockquote {
   text-align: center;
   margin: 15px auto; }
 
-@media (max-width: 1200px) {
-  .pullquote-left,
-  .pullquote-right {
-    right: 0;
-    left: 0;
-    margin-right: 15px;
-    margin-left: 15px; } }
 .inline {
   width: auto !important;
   display: table;
