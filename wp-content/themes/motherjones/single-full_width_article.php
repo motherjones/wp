@@ -68,7 +68,7 @@ if ( isset( $title_img_meta['_media_credit'][0] ) && '' !== $title_img_meta['_me
 
 
 <main id="main" class="site-main" role="main">
-	<article class="full-width">
+	<article class="full-width entry-content">
 		<?php
 		if ( isset( $meta['css'][0] ) ) {
 			printf(

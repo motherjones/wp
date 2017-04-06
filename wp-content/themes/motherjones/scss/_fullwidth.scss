@@ -20,6 +20,10 @@
   }
   .social-container.top {
     margin-bottom: 2em;
+    a {
+      background: none;
+      text-shadow: none;
+    }
   }
   .entry-footer {
     width: percentage( 8 / 12);
@@ -74,6 +78,13 @@
   .pullquote-right {
     display: table-cell;
     width: 100%;
+    p {
+      width: 100%;
+      margin-top: 0.75em;
+      text-align: center;
+      font-size: 28px;
+      line-height: 1.3em;
+    }
   }
   img {
     max-width: 100%;
