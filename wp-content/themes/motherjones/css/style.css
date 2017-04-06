@@ -1769,6 +1769,52 @@ ul.author-bios {
     font-size: 16px;
     font-weight: bold; }
 
+/* Newsletter Signup */
+.newsletter-signup {
+  margin: 30px 0 10px 7.5px;
+  width: 100%;
+  max-width: 630px;
+  text-transform: uppercase;
+  font-family: Mallory, sans-serif;
+  font-weight: bold;
+  letter-spacing: -1px;
+  clear: both; }
+  .newsletter-signup table {
+    width: 100%; }
+  .newsletter-signup tr td:first-of-type {
+    padding-left: 15px;
+    position: relative;
+    border: 1px solid #ccc;
+    border-width: 1px 0 1px 1px; }
+  .newsletter-signup input,
+  .newsletter-signup input:active {
+    border: none !important;
+    outline: none;
+    font-family: Mallory, sans-serif;
+    font-weight: bold;
+    letter-spacing: -1px;
+    width: 100%; }
+  .newsletter-signup i {
+    position: absolute;
+    color: #E12300;
+    font-size: 24px;
+    top: 11px;
+    display: none; }
+  .newsletter-signup h5 {
+    text-align: left;
+    font-size: 18px;
+    line-height: 22px;
+    font-family: Mallory, sans-serif;
+    font-weight: bold;
+    margin-bottom: 15px; }
+  .newsletter-signup input[type="submit"] {
+    font-family: Mallory, sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+    padding: 15px 20px;
+    color: white;
+    background: #FF6900; }
+
 /* social buttons */
 .social-container a {
   text-decoration: none;

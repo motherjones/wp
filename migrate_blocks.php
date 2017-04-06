@@ -69,7 +69,7 @@ $blocks[2] =	Array(
 </script>
 HTML
 		,
-		'filter' => False,
+		'filter' => false,
 	); //END Ad Control
 $blocks[3] = Array(
 		'title' => 'Site wrap',
@@ -84,7 +84,7 @@ if (typeof(MJ_HideSiteWrap) === 'undefined') {
 </script>
 HTML
 		,
-		'filter' => False, //this is the "show only on, show not on" toggle
+		'filter' => false, //this is the "show only on, show not on" toggle
 	); //END site wrap
 $blocks[4] =	Array(
 		'title' => 'Bottom adblock bar',
@@ -100,7 +100,7 @@ $blocks[4] =	Array(
 </div>
 HTML
 		,
-		'filter' => False, //this is the "show only on, show not on" toggle
+		'filter' => false, //this is the "show only on, show not on" toggle
 	); //END bottom adblock bar
 $blocks[5] =	Array(
 		'title' => 'RHC membership for blog posts',
@@ -112,7 +112,7 @@ $blocks[5] =	Array(
 </div>
 HTML
 		,
-		'filter' => False, //this is the "show only on, show not on" toggle
+		'filter' => false, //this is the "show only on, show not on" toggle
 	); //END membership for blog posts
 $blocks[6] =	Array(
 		'title' => 'Membership RHC',
@@ -133,7 +133,7 @@ $blocks[6] =	Array(
 </div>
 HTML
 		,
-		'filter' => False, //this is the "show only on, show not on" toggle
+		'filter' => false, //this is the "show only on, show not on" toggle
 	); //END membership RHC
 $blocks[7] = Array(
 		'title' => 'Membership ticker bar',
@@ -144,7 +144,7 @@ Help us do it with <a href="https://secure.motherjones.com/fnx/?action=SUBSCRIPT
 </div>
 HTML
 		,
-		'filter' => False, //this is the "show only on, show not on" toggle
+		'filter' => false, //this is the "show only on, show not on" toggle
 	); //END membership ticker bar
 $blocks[8] =	Array( //BEGIN members like you block
 		'title' => 'Members like you',
@@ -158,7 +158,7 @@ $blocks[8] =	Array( //BEGIN members like you block
 </p>
 HTML
 		,
-		'filter' => False,
+		'filter' => false,
 	); //END members like you block
 $blocks[9] =	Array( //BEGIN RHC ad like you block
 		'title' => 'RHC ad',
@@ -177,7 +177,7 @@ $blocks[9] =	Array( //BEGIN RHC ad like you block
 </script>
 HTML
 		,
-		'filter' => False,
+		'filter' => false,
 	); //END RHC adblock
 $blocks[10] =	Array( //BEGIN homepage promo block
 		'title' => 'Homepage Promo',
@@ -198,7 +198,7 @@ $blocks[10] =	Array( //BEGIN homepage promo block
 </div>
 HTML
 		,
-		'filter' => False,
+		'filter' => false,
 	); //END homepage promo block
 $blocks[11] =	Array( //BEGIN Criteoscroller ad
 		'title' => 'RHC criteoscroller ad',
@@ -249,7 +249,7 @@ jQuery(window).load(function() {
 </script>
 HTML
 		,
-		'filter' => False,
+		'filter' => false,
 	); //END Criteoscroller ad
 $blocks[13] =	Array( //BEGIN inquiring minds block
 		'title' => 'Inquiring minds authors',
@@ -289,7 +289,7 @@ $blocks[13] =	Array( //BEGIN inquiring minds block
 
 HTML
 		,
-		'filter' => False,
+		'filter' => false,
 	); //END inquiring minds block
 $blocks[15] =	Array( //BEGIN Bite podcast block
 		'title' => 'Bite podcast authors',
@@ -345,7 +345,7 @@ $blocks[15] =	Array( //BEGIN Bite podcast block
 </ul>
 HTML
 		,
-		'filter' => False,
+		'filter' => false,
 	); //END Bite podcast block
 $blocks['_multiwidget'] = 1; //below are the blocks
 
