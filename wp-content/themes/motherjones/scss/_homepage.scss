@@ -242,9 +242,15 @@
 }
 
 #homepage-kdrum {
+	h2 {
+		margin-bottom: 0.5em;
+	}
 	@media only screen and (max-width: $reflex-sm) {
 		img.banner {
 			display: none;
+		}
+		h2 {
+			margin-bottom: 0;
 		}
 	}
 }
@@ -285,8 +291,8 @@
 #homepage-investigations {
 	width: 100%;
 	border-bottom: none !important;
-	.promo {
-		margin-bottom: 1em;
+	h2 {
+		margin-bottom: 0.5em;
 	}
 }
 #homepage-investigations-list {
