@@ -17,12 +17,12 @@ if ( mj_is_article_type( 'blogpost', get_the_ID() ) ) {
 <header class="<?php echo $header_classes; ?>">
 	<?php
 		the_title( '<h1 class="entry-title">', '</h1>' );
-		if ( ! empty( $meta['mj_dek'][0] ) && ! mj_is_article_type( 'blogpost', $post->ID ) ) {
-			printf(
-				'<h3 class="dek">%s</h3>',
-				esc_html( $meta['mj_dek'][0] )
-			);
-		}
+	if ( ! empty( $meta['mj_dek'][0] ) && ! mj_is_article_type( 'blogpost', $post->ID ) ) {
+		printf(
+			'<h3 class="dek">%s</h3>',
+			esc_html( $meta['mj_dek'][0] )
+		);
+	}
 	?>
 	<p class="byline-dateline">
 		<span class="byline">

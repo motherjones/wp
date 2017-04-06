@@ -80,7 +80,7 @@ $shown_ids = array();
 			</ul>
 			</div>
 			<div id="homepage-more-stories-sidebar" class="grid__col-4 hidden-sm hidden-xs hidden-xxs">
-        <?php dynamic_sidebar( 'homepage-more-top-stories' ); ?>
+		<?php dynamic_sidebar( 'homepage-more-top-stories' ); ?>
 			</div>
 		</section>
 

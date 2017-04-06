@@ -87,12 +87,12 @@ get_header();
 
 	<?php
 				get_sidebar();
-			if ( ! empty( $meta['js'][0] ) ) {
-				printf(
-					'script>%s</script>',
-					$meta['js'][0]
-				);
-			}
+	if ( ! empty( $meta['js'][0] ) ) {
+		printf(
+			'script>%s</script>',
+			$meta['js'][0]
+		);
+	}
 	?>
 	<script language="javascript">
 			<!--

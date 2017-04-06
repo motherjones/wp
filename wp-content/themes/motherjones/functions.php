@@ -173,30 +173,30 @@ class MJ {
 			true
 		);
 
-		add_filter( 'pre_option_thumbnail_size_w', function(){
+		add_filter( 'pre_option_thumbnail_size_w', function() {
 			return 208;
 		});
-		add_filter( 'pre_option_thumbnail_size_h', function(){
+		add_filter( 'pre_option_thumbnail_size_h', function() {
 			return 117;
 		});
 		add_filter( 'pre_option_thumbnail_crop', '__return_true' );
-		add_filter( 'pre_option_medium_size_w', function(){
+		add_filter( 'pre_option_medium_size_w', function() {
 			return MEDIUM_WIDTH;
 		});
-		add_filter( 'pre_option_medium_size_h', function(){
+		add_filter( 'pre_option_medium_size_h', function() {
 			return MEDIUM_HEIGHT;
 		});
-		add_filter( 'pre_option_large_size_w', function(){
+		add_filter( 'pre_option_large_size_w', function() {
 			return LARGE_WIDTH;
 		});
-		add_filter( 'pre_option_large_size_h', function(){
+		add_filter( 'pre_option_large_size_h', function() {
 			return LARGE_HEIGHT;
 		});
 		add_filter( 'pre_option_embed_autourls', '__return_true' );
-		add_filter( 'pre_option_embed_size_w', function(){
+		add_filter( 'pre_option_embed_size_w', function() {
 			return LARGE_WIDTH;
 		});
-		add_filter( 'pre_option_embed_size_h', function(){
+		add_filter( 'pre_option_embed_size_h', function() {
 			return LARGE_HEIGHT;
 		});
 
@@ -277,7 +277,7 @@ if ( ! function_exists( 'mj_setup' ) ) {
 		add_editor_style( 'css/admin/editor-style' . $suffix . '.css' );
 
 	}
-} // mj_setup
+} // End if().
 add_action( 'after_setup_theme', 'mj_setup' );
 
 /**
@@ -299,11 +299,11 @@ add_action( 'after_setup_theme', 'mj_content_width', 0 );
  *
  * Priority 0 to make it available to lower priority callbacks.
  *
- * @param bool $value should we post to fb instant or no?
+ * @param bool   $value should we post to fb instant or no?
  * @param object $post the post.
  */
 function mj_should_post_fb_instant( $value, $post ) {
-  return ! get_post_meta( $post->get_the_id(), 'mj_fb_instant_exclude', true );
+	return ! get_post_meta( $post->get_the_id(), 'mj_fb_instant_exclude', true );
 }
 add_filter( 'instant_articles_should_submit_post', 'mj_should_post_fb_instant', 10, 2 );
 

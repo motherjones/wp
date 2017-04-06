@@ -103,7 +103,9 @@ function mj_headline_extra_meta_box_display() {
 			</p>',
 			esc_attr( $field_slug ),
 			esc_html( $field_title ),
-			wp_kses( $field_desc, array( 'span' => array() ) ),
+			wp_kses( $field_desc, array(
+				'span' => array(),
+			) ),
 			esc_attr( $field_value )
 		);
 	}
@@ -158,7 +160,9 @@ function mj_custom_meta_box_display() {
 			</p>',
 			esc_attr( $field_slug ),
 			esc_html( $field_title ),
-			wp_kses( $field_desc, array( 'span' => array() ) ),
+			wp_kses( $field_desc, array(
+				'span' => array(),
+			) ),
 			esc_attr( $field_value )
 		);
 	}
@@ -205,7 +209,9 @@ function mj_custom_css_js_meta_box_display() {
 			</p>',
 			esc_attr( $field_slug ),
 			esc_html( $field_title ),
-			wp_kses( $field_desc, array( 'span' => array() ) ),
+			wp_kses( $field_desc, array(
+				'span' => array(),
+			) ),
 			esc_attr( $field_value )
 		);
 	}
@@ -238,7 +244,10 @@ largo_add_meta_box(
 	'default'
 );
 function mj_tags_meta_box_display( $post ) {
-	$all_tags = get_terms( array( 'taxonomy' => 'post_tag', 'hide_empty' => 0 ) );
+	$all_tags = get_terms( array(
+		'taxonomy' => 'post_tag',
+		'hide_empty' => 0,
+	) );
 
 	// Tags on this post already.
 	$post_tags = get_the_terms( $post->ID, 'post_tag' );
@@ -255,7 +264,7 @@ function mj_tags_meta_box_display( $post ) {
 	echo '<input type="hidden" name="tax_input[post_tag][]" value="0" />';
 	echo '<ul>';
 	foreach ( $all_tags as $tag ) {
-		//Unchecked by default.
+		// Unchecked by default.
 		$checked = '';
 		// Check the checkbox if the post has this tag.
 		if ( in_array( $tag->term_id, $ids, true ) ) {

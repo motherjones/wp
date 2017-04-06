@@ -93,9 +93,9 @@ get_header(); ?>
 
 		<?php
 		// If no content, include the "No posts found" template.
-		} else {
-			get_template_part( 'template-parts/content', 'none' );
-		}
+} else {
+	get_template_part( 'template-parts/content', 'none' );
+}// End if().
 		?>
 	</section>
 

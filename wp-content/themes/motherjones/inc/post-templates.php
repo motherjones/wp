@@ -33,8 +33,13 @@ add_filter( 'single_template', 'mj_get_post_template' );
  * @param object $post the post object.
  */
 function mj_article_type_meta_box( $post ) {
-	$terms = get_terms( 'mj_article_type', array( 'hide_empty' => false ) );
-	$article_type = wp_get_object_terms( $post->ID, 'mj_article_type', array( 'orderby' => 'term_id', 'order' => 'ASC' ) );
+	$terms = get_terms( 'mj_article_type', array(
+		'hide_empty' => false,
+	) );
+	$article_type = wp_get_object_terms( $post->ID, 'mj_article_type', array(
+		'orderby' => 'term_id',
+		'order' => 'ASC',
+	) );
 	echo '<label class="hidden" for="mj_article_type">' . esc_html_e( 'Article Type', 'mj' ) . '</label>';
 	echo '<select name="mj_article_type" id="mj_article_type" class="dropdown">';
 	foreach ( $terms as $term ) {

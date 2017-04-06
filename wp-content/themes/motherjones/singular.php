@@ -18,17 +18,17 @@ get_header();
 			$template_part = ( is_page() ) ? 'page' : 'single';
 			get_template_part( 'template-parts/content', $template_part );
 
-			if ( ! is_page() ) {
-				get_sidebar();
-				comments_template();
-			}
+		if ( ! is_page() ) {
+			get_sidebar();
+			comments_template();
+		}
 
-			if ( ! empty( $meta['js'][0] ) ) {
-				printf(
-					'script>%s</script>',
-					$meta['js'][0]
-				);
-			}
+		if ( ! empty( $meta['js'][0] ) ) {
+			printf(
+				'script>%s</script>',
+				$meta['js'][0]
+			);
+		}
 	?>
 	<script language="javascript">
 			<!--
