@@ -1870,7 +1870,7 @@ ul.author-bios {
     @media only screen and (max-width: 768px) {
       .home #main section {
         border-bottom: 0; } }
-  .home .promo {
+  .home h2 {
     margin: 0 auto; }
 
 .homepage-art-byline {
@@ -2057,11 +2057,13 @@ ul.author-bios {
 .homepage-section-list {
   padding: 0; }
 
-#homepage-kdrum .promo {
-  margin-bottom: 1em; }
+#homepage-kdrum h2 {
+  margin-bottom: 0.5em; }
 @media only screen and (max-width: 768px) {
   #homepage-kdrum img.banner {
-    display: none; } }
+    display: none; }
+  #homepage-kdrum h2 {
+    margin-bottom: 0; } }
 
 #homepage-kdrum-side {
   padding-left: 0; }
@@ -2095,8 +2097,8 @@ ul.author-bios {
 #homepage-investigations {
   width: 100%;
   border-bottom: none !important; }
-  #homepage-investigations .promo {
-    margin-bottom: 1em; }
+  #homepage-investigations h2 {
+    margin-bottom: 0.5em; }
 
 #homepage-investigations-list {
   margin: 0;
