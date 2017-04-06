@@ -4,21 +4,16 @@
     text-decoration: none;
     text-align: center;
     font-size: 18px;
-    position: relative;
-    border-bottom: none;
-    text-shadow: 0 0;
-    display: block;
-    background-image: none;
     border: 1px solid $orange;
     border-radius: 40px;
-    height: 30px;
-    width: 30px;
+    height: 36px;
+    width: 36px;
     display: inline-block;
   }
   i {
     display: block;
     font-size: 20px;
-    line-height: 30px;
+    line-height: 36px;
     &:hover {
       color: $orange;
     }
@@ -55,7 +50,6 @@
       padding-left: 0;
     }
     li {
-      display: inline;
       float: right;
       overflow: hidden;
       width: 48%;
@@ -67,6 +61,10 @@
     i {
       display: inline;
       margin-right: 5px;
+      line-height: 30px;
+      &:hover {
+        color: $white;
+      }
     }
     .share-text {
       vertical-align: top;
