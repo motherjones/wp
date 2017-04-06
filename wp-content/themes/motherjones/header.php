@@ -36,7 +36,8 @@
         ?>
       ad_keywords = '<?php print join('+', $keyword_terms);?>';
         is_post = true;
-        <?php if ($is_fullwidth ) { print 'is_fullwidth = true;'; 
+        <?php if ($is_fullwidth) {
+            print 'is_fullwidth = true;'; 
         } ?>
     <?php
     } elseif (is_archive()) { ?>
