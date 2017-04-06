@@ -24,10 +24,22 @@ VALUES (
 );
 ');
 $wp->beginTransaction();
-  $author_insert->execute();
-  $author_id = $wp->lastInsertId();
-  print($wp->lastInsertId());
-  print "\n user id ^^ \n";
+$author_insert->execute();
+$author_id = $wp->lastInsertId();
+$wp->commit();
+
+$rte_insert = $wp->prepare("
+REPLACE INTO pantheon_wp.wp_usermeta
+(meta_key, meta_value, user_id)
+VALUES ( 
+'rich_editing',
+true,
+?
+)
+;
+");
+$wp->beginTransaction();
+$rte_insert->execute( array( $author_id ) );
 $wp->commit();
 
 $roles_insert = $wp->prepare("
@@ -41,9 +53,7 @@ VALUES (
 ;
 ");
 $wp->beginTransaction();
-  $roles_insert->execute(Array($author_id));
-  print($wp->lastInsertId());
-  print "\n user meta ^^ \n";
+$roles_insert->execute(Array($author_id));
 $wp->commit();
 
 $level_insert = $wp->prepare("
@@ -58,7 +68,6 @@ VALUES (
 ");
 $wp->beginTransaction();
   $level_insert->execute(Array(2, $author_id));
-  print($wp->lastInsertId());
 $wp->commit();
 
 $editor_insert = $wp->prepare('
@@ -73,10 +82,8 @@ VALUES (
 );
 ');
 $wp->beginTransaction();
-  $editor_insert->execute();
-  $editor_id = $wp->lastInsertId();
-  print($wp->lastInsertId());
-  print "\n user id ^^ \n";
+$editor_insert->execute();
+$editor_id = $wp->lastInsertId();
 $wp->commit();
 
 
@@ -91,12 +98,13 @@ VALUES (
 ;
 ");
 $wp->beginTransaction();
-  $roles_insert->execute(Array($editor_id));
-  print($wp->lastInsertId());
-  print "\n user meta ^^ \n";
+$roles_insert->execute(Array($editor_id));
 $wp->commit();
 
 $wp->beginTransaction();
-  $level_insert->execute(Array(7, $editor_id));
-  print($wp->lastInsertId());
+$rte_insert->execute( array( $editor_id ) );
+$wp->commit();
+
+$wp->beginTransaction();
+$level_insert->execute(Array(7, $editor_id));
 $wp->commit();

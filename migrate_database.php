@@ -1064,6 +1064,9 @@ foreach ( $uid_to_author_meta as $uid => $author ) {
   $value = 1;
   $author_meta_insert->execute();
 
+  $key = 'rich_editing';
+  $value = true;
+  $author_meta_insert->execute();
 }
 $wp->commit();
 
