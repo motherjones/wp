@@ -1647,9 +1647,9 @@ ul.author-bios {
   .author-bio .byline {
     display: block;
     line-height: 14px; }
-    .author-bio .byline a {
-      display: inline-block;
-      background-position: 0% 100%; }
+    .author-bio .byline a.social-icon {
+      color: black;
+      padding-left: 0.5em; }
   .author-bio .author-image {
     float: left;
     margin-right: 15px;
@@ -1774,20 +1774,15 @@ ul.author-bios {
   text-decoration: none;
   text-align: center;
   font-size: 18px;
-  position: relative;
-  border-bottom: none;
-  text-shadow: 0 0;
-  display: block;
-  background-image: none;
   border: 1px solid #FF6900;
   border-radius: 40px;
-  height: 30px;
-  width: 30px;
+  height: 36px;
+  width: 36px;
   display: inline-block; }
 .social-container i {
   display: block;
   font-size: 20px;
-  line-height: 30px; }
+  line-height: 36px; }
   .social-container i:hover {
     color: #FF6900; }
 .social-container.top, .social-container.blog {
@@ -1816,7 +1811,6 @@ ul.author-bios {
   .social-container.bottom ul {
     padding-left: 0; }
   .social-container.bottom li {
-    display: inline;
     float: right;
     overflow: hidden;
     width: 48%; }
@@ -1825,7 +1819,10 @@ ul.author-bios {
       float: left; }
   .social-container.bottom i {
     display: inline;
-    margin-right: 5px; }
+    margin-right: 5px;
+    line-height: 30px; }
+    .social-container.bottom i:hover {
+      color: white; }
   .social-container.bottom .share-text {
     vertical-align: top;
     font-size: 14px; }
