@@ -18,11 +18,11 @@ get_header(); ?>
 					<?php
 						$posts_shown = 0;
 						// Start the Loop.
-						while ( $wp_query->have_posts() ) : $wp_query->the_post();
+					while ( $wp_query->have_posts() ) : $wp_query->the_post();
 
-							get_template_part( 'template-parts/content' );
+						get_template_part( 'template-parts/content' );
 
-							if ( 5 === $posts_shown ) { ?>
+						if ( 5 === $posts_shown ) { ?>
 									<script>
 										ad_code({
 												yieldmo: true,
@@ -32,9 +32,9 @@ get_header(); ?>
 										});
 									</script>
 							<?php
-							}
+						}
 
-							$posts_shown++;
+						$posts_shown++;
 
 						// End the loop.
 						endwhile;
@@ -50,9 +50,9 @@ get_header(); ?>
 				</div>
 				<?php
 				// If no content, include the "No posts found" template.
-				} else {
-					get_template_part( 'template-parts/content', 'none' );
-				}
+} else {
+	get_template_part( 'template-parts/content', 'none' );
+}// End if().
 				?>
 			</div>
 

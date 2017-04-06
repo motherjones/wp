@@ -28,41 +28,41 @@ get_header(); ?>
 				<ul class="articles-list">
 				<?php
 					$posts_shown = 0;
-					while ( $wp_query->have_posts() ) : $wp_query->the_post();
-						if ( 0 === $posts_shown ) {
-							get_template_part( 'template-parts/photoessay-top-article' );
-							print '<div class="main-index">';
-						} else {
-							get_template_part( 'template-parts/content' );
-						}
+				while ( $wp_query->have_posts() ) : $wp_query->the_post();
+					if ( 0 === $posts_shown ) {
+						get_template_part( 'template-parts/photoessay-top-article' );
+						print '<div class="main-index">';
+					} else {
+						get_template_part( 'template-parts/content' );
+					}
 
-						if ( 5 === $posts_shown ) { ?>
+					if ( 5 === $posts_shown ) { ?>
 							<script>
-                    if (typeof MJ_HideSectionAdMobile === 'undefined') {
-                        ad_code({
-                          yieldmo: true,
-                          docwrite: true,
-                          desktop: false,
-                          placement: 'ym_869408394552483686',
-                        });
-                    }
+					if (typeof MJ_HideSectionAdMobile === 'undefined') {
+						ad_code({
+						  yieldmo: true,
+						  docwrite: true,
+						  desktop: false,
+						  placement: 'ym_869408394552483686',
+						});
+					}
 							</script>
-            <?php } elseif ( 9 === $posts_shown ) { ?>
+			<?php } elseif ( 9 === $posts_shown ) { ?>
 							<script>
-                    if (typeof MJ_HideSectionPage970x250BB1 === 'undefined') {
-                        ad_code({
-                          yieldmo: false,
-                          docwrite: true,
-                          desktop: true,
-                          placement: 'SectionPage970x250BB1',
-                        });
-                    }
+					if (typeof MJ_HideSectionPage970x250BB1 === 'undefined') {
+						ad_code({
+						  yieldmo: false,
+						  docwrite: true,
+						  desktop: true,
+						  placement: 'SectionPage970x250BB1',
+						});
+					}
 							</script>
 						<?php }
 
-						$posts_shown++;
+				$posts_shown++;
 
-					// End the loop.
+			// End the loop.
 					endwhile;
 					?>
 			</ul>

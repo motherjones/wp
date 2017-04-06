@@ -16,11 +16,11 @@
 		<h3 class="hed">
 			<a href="<?php print esc_url( get_permalink() ); ?>">
 				<?php
-					if ( $hed = get_post_meta( get_the_ID(), 'mj_promo_hed', true ) ) {
-						echo esc_html( $hed );
-					} else {
-						the_title();
-					}
+				if ( $hed = get_post_meta( get_the_ID(), 'mj_promo_hed', true ) ) {
+					echo esc_html( $hed );
+				} else {
+					the_title();
+				}
 				?>
 			</a>
 		</h3>

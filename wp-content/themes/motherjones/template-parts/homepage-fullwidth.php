@@ -33,20 +33,20 @@ if ( $post_thumbnail_id ) {
 	<h1 class="entry-title">
 		<a href="<?php the_permalink(); ?>">
 		<?php
-			if ( $hed = get_post_meta( get_the_ID(), 'mj_promo_hed', true ) ) {
-				echo esc_html( $hed );
-			} else {
-				the_title();
-			}
+		if ( $hed = get_post_meta( get_the_ID(), 'mj_promo_hed', true ) ) {
+			echo esc_html( $hed );
+		} else {
+			the_title();
+		}
 		?>
 		</a>
 	</h1>
 	<?php
-		if ( $dek = get_post_meta( get_the_ID(), 'mj_promo_dek', true ) ) {
-			echo '<h4 class="dek"><a href="' . esc_url( get_permalink() ) . '">' . esc_html( $dek ) . '</a></h4>';
-		} elseif ( $dek = get_post_meta( get_the_ID(), 'mj_dek', true ) ) {
-			echo '<h4 class="dek"><a href="' . esc_url( get_permalink() ) . '">' . esc_html( $dek ) . '</a></h4>';
-		}
+	if ( $dek = get_post_meta( get_the_ID(), 'mj_promo_dek', true ) ) {
+		echo '<h4 class="dek"><a href="' . esc_url( get_permalink() ) . '">' . esc_html( $dek ) . '</a></h4>';
+	} elseif ( $dek = get_post_meta( get_the_ID(), 'mj_dek', true ) ) {
+		echo '<h4 class="dek"><a href="' . esc_url( get_permalink() ) . '">' . esc_html( $dek ) . '</a></h4>';
+	}
 	?>
 	<p class="byline">
 		<?php print mj_byline( get_the_ID() ); ?>

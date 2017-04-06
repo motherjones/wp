@@ -7,48 +7,52 @@
  * @since Mother Jones 1.0
  */
 
- /**
-  * Converts a HEX value to RGB.
-  *
-  * @since Mother Jones 1.0
-  *
-  * @param string $color The original color, in 3- or 6-digit hexadecimal form.
-  * @return array Array containing RGB (red, green, and blue) values for the given
-  *               HEX code, empty array otherwise.
-  */
+	/**
+	 * Converts a HEX value to RGB.
+	 *
+	 * @since Mother Jones 1.0
+	 *
+	 * @param string $color The original color, in 3- or 6-digit hexadecimal form.
+	 * @return array Array containing RGB (red, green, and blue) values for the given
+	 *               HEX code, empty array otherwise.
+	 */
 function mj_hex2rgb( $color ) {
- 	$color = trim( $color, '#' );
+		$color = trim( $color, '#' );
 
- 	if ( strlen( $color ) === 3 ) {
- 		$r = hexdec( substr( $color, 0, 1 ).substr( $color, 0, 1 ) );
- 		$g = hexdec( substr( $color, 1, 1 ).substr( $color, 1, 1 ) );
- 		$b = hexdec( substr( $color, 2, 1 ).substr( $color, 2, 1 ) );
- 	} else if ( strlen( $color ) === 6 ) {
- 		$r = hexdec( substr( $color, 0, 2 ) );
- 		$g = hexdec( substr( $color, 2, 2 ) );
- 		$b = hexdec( substr( $color, 4, 2 ) );
- 	} else {
- 		return array();
- 	}
- 	return array( 'red' => $r, 'green' => $g, 'blue' => $b );
+	if ( strlen( $color ) === 3 ) {
+		$r = hexdec( substr( $color, 0, 1 ) . substr( $color, 0, 1 ) );
+		$g = hexdec( substr( $color, 1, 1 ) . substr( $color, 1, 1 ) );
+		$b = hexdec( substr( $color, 2, 1 ) . substr( $color, 2, 1 ) );
+	} elseif ( strlen( $color ) === 6 ) {
+		$r = hexdec( substr( $color, 0, 2 ) );
+		$g = hexdec( substr( $color, 2, 2 ) );
+		$b = hexdec( substr( $color, 4, 2 ) );
+	} else {
+		return array();
+	}
+		return array(
+		'red' => $r,
+		'green' => $g,
+		'blue' => $b,
+	);
 }
 
 /**
  * @param string $slug the slug of the template file to render.
  * @param string $name the name identifier for the template file; works like get_template_part.
- * @param array $context an array with the variables that should be made available in the template being loaded.
+ * @param array  $context an array with the variables that should be made available in the template being loaded.
  * @since 0.4
  */
 function largo_render_template( $slug, $name = null, $context = array() ) {
-  global $wp_query;
-  if ( is_array( $name ) && empty( $context ) ) {
-    $context = $name;
-  }
-  if ( ! empty( $context ) ) {
-    $context = apply_filters( 'largo_render_template_context', $context, $slug, $name );
-    $wp_query->query_vars = array_merge( $wp_query->query_vars, $context );
-  }
-  get_template_part( $slug, $name );
+	global $wp_query;
+	if ( is_array( $name ) && empty( $context ) ) {
+		$context = $name;
+	}
+	if ( ! empty( $context ) ) {
+		$context = apply_filters( 'largo_render_template_context', $context, $slug, $name );
+		$wp_query->query_vars = array_merge( $wp_query->query_vars, $context );
+	}
+	get_template_part( $slug, $name );
 }
 
 /**
@@ -64,11 +68,11 @@ function largo_get_current_url() {
 /**
  * Returns a Facebook username or ID from the URL
  *
- * @param   string  $url a Facebook url
+ * @param   string $url a Facebook url
  * @return  string  the Facebook username or id extracted from the input string
  * @since   0.4
  */
-function fb_url_to_username( $url )  {
+function fb_url_to_username( $url ) {
 	$urlParts = explode( '/', $url );
 	if ( end( $urlParts ) == '' ) {
 		// URL has a trailing slash
@@ -81,8 +85,8 @@ function fb_url_to_username( $url )  {
 		$username = $matches[1];
 	} else {
 		// hopefully there's a username
-		preg_match( '/[^\?&#]+/', $username, $matches);
-		if ( isset( $matches[0] ) ){
+		preg_match( '/[^\?&#]+/', $username, $matches );
+		if ( isset( $matches[0] ) ) {
 			$username = $matches[0];
 		}
 	}
@@ -96,21 +100,21 @@ function fb_url_to_username( $url )  {
  * Users that can't be followed don't.
  * Users that don't exist don't.
  *
- * @param   string  $username a valid Facebook username or page name. They're generally indistinguishable, except pages get to use '-'
+ * @param   string $username a valid Facebook username or page name. They're generally indistinguishable, except pages get to use '-'
  * @uses    wp_remote_get
  * @return  bool    The user specified by the username or ID can be followed
  */
 function fb_user_is_followable( $username ) {
- 	// syntax for this iframe taken from https://developers.facebook.com/docs/plugins/follow-button/
- 	$get = wp_remote_get( 'https://www.facebook.com/plugins/follow.php?href=https%3A%2F%2Fwww.facebook.com%2F' . $username . '&amp;width&amp;height=80&amp;colorscheme=light&amp;layout=button&amp;show_faces=true' );
- 	if ( ! is_wp_error( $get ) ) {
- 		$response = $get['body'];
- 		if ( strpos( $response, 'table' ) !== false ) {
- 			return true; // can follow
- 		}
- 		return false; // cannot follow
- 	}
- }
+		// syntax for this iframe taken from https://developers.facebook.com/docs/plugins/follow-button/
+		$get = wp_remote_get( 'https://www.facebook.com/plugins/follow.php?href=https%3A%2F%2Fwww.facebook.com%2F' . $username . '&amp;width&amp;height=80&amp;colorscheme=light&amp;layout=button&amp;show_faces=true' );
+	if ( ! is_wp_error( $get ) ) {
+		$response = $get['body'];
+		if ( strpos( $response, 'table' ) !== false ) {
+			return true; // can follow
+		}
+		return false; // cannot follow
+	}
+}
 
 /**
  * Cleans a Facebook url to the bare username or id when the user is edited
@@ -120,8 +124,8 @@ function fb_user_is_followable( $username ) {
  * wp-admin/user-edit.php, which overwrites the user's contact methods. edit_user
  * reads from $_POST.
  *
- * @param  object  $user_id the WP_User object being edited
- * @param  array   $_POST
+ * @param  object $user_id the WP_User object being edited
+ * @param  array  $_POST
  * @since  0.4
  * @uses   fb_url_to_username
  * @link   http://codex.wordpress.org/Plugin_API/Action_Reference/edit_user_profile_update
@@ -132,7 +136,7 @@ function clean_user_fb_username( $user_id ) {
 		$fb = fb_url_to_username( $_POST['fb'] );
 		if ( preg_match( '/[^a-zA-Z0-9\.\-]/', $fb ) ) {
 			// it's not a valid Facebook username, because it uses an invalid character
-			$fb = "";
+			$fb = '';
 		}
 		update_user_meta( $user_id, 'fb', $fb );
 		if ( get_user_meta( $user_id, 'fb', true ) != $fb ) {
@@ -148,25 +152,25 @@ function clean_user_fb_username( $user_id ) {
  * @uses  fb_url_to_username
  * @uses  fb_user_is_followable
  * @param   $errors the error object
- * @param   bool    $update whether this is a user update
- * @param   object  $user a WP_User object
+ * @param   bool                    $update whether this is a user update
+ * @param   object                  $user a WP_User object
  * @link    http://codex.wordpress.org/Plugin_API/Action_Reference/user_profile_update_errors
  * @since   0.4
  */
 function validate_fb_username( $errors, $update, $user ) {
- 	if ( isset( $_POST['fb'] ) ) {
- 		$fb_suspect = trim( $_POST['fb'] );
- 		if( ! empty( $fb_suspect ) ) {
- 			$fb_user = largo_fb_url_to_username( $fb_suspect );
- 			if ( preg_match( '/[^a-zA-Z0-9\.\-]/', $fb_user ) ) {
- 				// it's not a valid Facebook username, because it uses an invalid character
- 				$errors->add( 'fb_username', '<b>' . $fb_suspect . '</b> ' . __( 'is an invalid Facebook username.', 'largo' ) . '</p>' . '<p>' . __('Facebook usernames only use the uppercase and lowercase alphabet letters (a-z A-Z), the Arabic numbers (0-9), periods (.) and dashes (-)', 'largo' ) );
-  			}
-  			if ( ! largo_fb_user_is_followable( $fb_user ) ) {
-  				$errors->add( 'fb_username',' <b>' . $fb_suspect . '</b> ' . __( 'does not allow followers on Facebook.', 'largo' ) . '</p>' . '<p>' . __('<a href="https://www.facebook.com/help/201148673283205#How-can-I-let-people-follow-me?">Follow these instructions</a> to allow others to follow you.', 'largo' ) );
-  			}
-  		}
- 	}
+	if ( isset( $_POST['fb'] ) ) {
+		$fb_suspect = trim( $_POST['fb'] );
+		if ( ! empty( $fb_suspect ) ) {
+			$fb_user = largo_fb_url_to_username( $fb_suspect );
+			if ( preg_match( '/[^a-zA-Z0-9\.\-]/', $fb_user ) ) {
+				// it's not a valid Facebook username, because it uses an invalid character
+				$errors->add( 'fb_username', '<b>' . $fb_suspect . '</b> ' . __( 'is an invalid Facebook username.', 'largo' ) . '</p>' . '<p>' . __( 'Facebook usernames only use the uppercase and lowercase alphabet letters (a-z A-Z), the Arabic numbers (0-9), periods (.) and dashes (-)', 'largo' ) );
+			}
+			if ( ! largo_fb_user_is_followable( $fb_user ) ) {
+				$errors->add( 'fb_username',' <b>' . $fb_suspect . '</b> ' . __( 'does not allow followers on Facebook.', 'largo' ) . '</p>' . '<p>' . __( '<a href="https://www.facebook.com/help/201148673283205#How-can-I-let-people-follow-me?">Follow these instructions</a> to allow others to follow you.', 'largo' ) );
+			}
+		}
+	}
 }
 
 /**
@@ -246,7 +250,7 @@ function validate_twitter_username( $errors, $update, $user ) {
 /**
  * Give it a YouTube URL, it'll give you just the video ID
  *
- * @param 	string 	$url a YouTube URL (e.g. - https://www.youtube.com/watch?v=i5vfw5f1CZo)
+ * @param 	string $url a YouTube URL (e.g. - https://www.youtube.com/watch?v=i5vfw5f1CZo)
  * @return 	string	just the video ID (e.g. - i5vfw5f1CZo)
  * @since 0.4
  */
@@ -259,35 +263,35 @@ function youtube_url_to_ID( $url ) {
 /**
  * For a given YouTube URL, return an iframe to embed
  *
- * @param 	string 	$url a YouTube URL (e.g. - https://www.youtube.com/watch?v=i5vfw5f1CZo)
- * @param 	bool 	$echo return or echo the output
+ * @param 	string $url a YouTube URL (e.g. - https://www.youtube.com/watch?v=i5vfw5f1CZo)
+ * @param 	bool   $echo return or echo the output
  * @return 	string	a standard YouTube iframe embed code
  * @uses 	largo_youtube_url_to_ID
  * @since 	0.4
  */
-function youtube_iframe_from_url( $url, $echo = TRUE ) {
+function youtube_iframe_from_url( $url, $echo = true ) {
 	$output = '<iframe  src="//www.youtube.com/embed/' . youtube_url_to_ID( $url ) . '" frameborder="0" allowfullscreen></iframe>';
-  if ( ! $echo ) {
-    return $output;
+	if ( ! $echo ) {
+		return $output;
 	}
-  echo $output;
+	echo $output;
 }
 
 /**
  * For a given YouTube URL, return the image url for various thumbnail sizes
  *
- * @param 	string 	$url a YouTube URL (e.g. - https://www.youtube.com/watch?v=i5vfw5f1CZo)
+ * @param 	string                                                                         $url a YouTube URL (e.g. - https://www.youtube.com/watch?v=i5vfw5f1CZo)
  * @param	string the image size you'd like (options are: thumb | small | medium | large)
- * @param 	bool 	$echo return or echo the output
+ * @param 	bool                                                                           $echo return or echo the output
  * @return 	string	a youtube image url
  * @uses 	largo_youtube_url_to_ID
  * @since 0.4
  */
-function youtube_image_from_url( $url, $size = large, $echo = TRUE ) {
+function youtube_image_from_url( $url, $size = large, $echo = true ) {
 	$id = youtube_url_to_ID( $url );
 
 	$output = 'http://img.youtube.com/vi/' . $id;
-	switch( $size ) {
+	switch ( $size ) {
 		case 'thumb':
 			$output .= '/default.jpg'; // 120 x 90
 			break;
@@ -303,9 +307,9 @@ function youtube_image_from_url( $url, $size = large, $echo = TRUE ) {
 	}
 
 	if ( ! $echo ) {
-    return $output;
+		return $output;
 	}
-  echo $output;
+	echo $output;
 }
 
 /**
