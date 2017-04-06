@@ -2013,7 +2013,7 @@ ul.author-bios {
 
 #homepage-sections-list {
   list-style-type: none; }
-  #homepage-sections-list .homepage-section .promo {
+  #homepage-sections-list .homepage-section h2 {
     margin-bottom: 1em;
     font-size: 15px;
     letter-spacing: 2px; }
