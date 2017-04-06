@@ -12,7 +12,7 @@
 	<ul>
 		<li class="logo">
 			<a href="/">
-				<img src="<?php echo esc_url( get_stylesheet_directory_uri() ); ?>/img/MJ_comp.png"
+				<img src="<?php echo esc_url( get_template_directory_uri() ); ?>/img/MJ_comp.png"
 				alt="MotherJones" />
 			</a>
 		</li>
@@ -37,7 +37,7 @@
 				</svg>
 			</a>
 		</li>
-		<li class="donate-link article-page hidden-xs hidden-xxs">
+		<li class="donate-link article-page">
 
 			<a href="https://secure.motherjones.com/fnp/?action=SUBSCRIPTION&list_source=7HEGP002&extra_don=1&abver=A"
 				target="_blank"
@@ -45,7 +45,7 @@
 				Donate
 			</a>
 		</li>
-		<li class="subscribe-link article-page hidden-sm hidden-xs hidden-xxs">
+		<li class="subscribe-link article-page hidden-xxs">
 			<a href="https://secure.motherjones.com/fnx/?action=SUBSCRIPTION&pub_code=MJM&term_pub=MJM&list_source=SEGYN1&base_country=US"
 				target="_blank"
 			>

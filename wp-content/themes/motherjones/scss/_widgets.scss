@@ -40,9 +40,9 @@ ul.author-bios {
   .byline {
     display: block;
     line-height: 14px;
-    a {
-      display: inline-block;
-      background-position: 0% 100%;
+    a.social-icon {
+      color: $black;
+      padding-left: 0.5em;
     }
   }
   .author-image {

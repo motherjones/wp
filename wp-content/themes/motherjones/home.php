@@ -64,7 +64,9 @@ $shown_ids = array();
 
 	<section id="homepage-more-top-stories-section" class="grid">
 		<div id="homepage-more-top-stories-main" class="grid__col-md-8 grid__col-sm-12">
-			<h2 class="promo">More Top Stories</h2>
+			<h2>
+				<span class="promo">More Top Stories</span>
+			</h2>
 			<ul id="homepage-more-top-stories">
 			<?php
 			if ( $top_stories->have_posts() ) {
@@ -107,8 +109,8 @@ $shown_ids = array();
 					$slug = ( 'Crime & Justice' === $section ) ? 'crime-justice' : strtolower( $section );
 				?>
 					<li class="homepage-section grid__col-md-auto">
-						<h2 class="promo">
-							<a href="/<?php echo esc_attr( $slug ); ?>"><?php echo esc_html( $section ); ?></a>
+						<h2>
+							<span class="promo"><a href="/<?php echo esc_attr( $slug ); ?>"><?php echo esc_html( $section ); ?></a></span>
 						</h2>
 						<ul class="homepage-section-list">
 							<?php
@@ -148,10 +150,10 @@ $shown_ids = array();
 
 			<section id="homepage-kdrum" class="grid">
 				<div id="homepage-kdrum-side" class="grid__col-md-8 grid__col-sm-12">
-					<h2 class="promo">
-						<a href="/blog/kevin-drum">Kevin Drum</a>
+					<h2>
+						<span class="promo"><a href="/blog/kevin-drum">Kevin Drum</a></span>
 					</h2>
-					<img src="<?php echo esc_url( get_stylesheet_directory_uri() ); ?>/img/KEVIN.png"></img>
+					<img class="banner" src="<?php echo esc_url( get_template_directory_uri() ); ?>/img/KEVIN.png" alt="Kevin Drum"></img>
 					<ul id="kdrum-post-list">
 						<?php
 							$kdrum = new WP_Query( array(
