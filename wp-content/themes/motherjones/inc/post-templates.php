@@ -15,7 +15,7 @@
 function mj_get_post_template( $template ) {
 	global $post;
 	if ( is_object( $post ) ) {
-		$template = get_the_terms( $post->ID, 'mj_article_type' );
+		$template = get_the_terms( $post->ID, 'mj_content_type' );
 		$custom_field = strtolower( $template[0]->slug );
 	}
 	if ( empty( $custom_field ) || in_array( $custom_field, array( 'article' ), true ) ) {
@@ -32,18 +32,17 @@ add_filter( 'single_template', 'mj_get_post_template' );
  *
  * @param object $post the post object.
  */
-function mj_article_type_meta_box( $post ) {
-	$terms = get_terms( 'mj_article_type', array(
+function mj_content_type_meta_box( $post ) {
+	$terms = get_terms( 'mj_content_type', array(
 		'hide_empty' => false,
 	) );
-	$article_type = wp_get_object_terms( $post->ID, 'mj_article_type', array(
+	$content_type = wp_get_object_terms( $post->ID, 'mj_content_type', array(
 		'orderby' => 'term_id',
 		'order' => 'ASC',
 	) );
-	echo '<label class="hidden" for="mj_article_type">' . esc_html_e( 'Article Type', 'mj' ) . '</label>';
-	echo '<select name="mj_article_type" id="mj_article_type" class="dropdown">';
+	echo '<select name="mj_content_type" id="mj_content_type" class="dropdown">';
 	foreach ( $terms as $term ) {
-		if ( isset( $article_type[0] ) && ( $article_type[0]->name === $term->name ) ) {
+		if ( isset( $content_type[0] ) && ( $content_type[0]->name === $term->name ) ) {
 			$selected = ' selected="selected"';
 		} else {
 			$selected = '';
@@ -58,43 +57,43 @@ function mj_article_type_meta_box( $post ) {
  *
  * @param int $post_id The ID of the post that's being saved.
  */
-function save_mj_article_type_meta_box( $post_id ) {
+function save_mj_content_type_meta_box( $post_id ) {
 	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
 		return;
 	}
-	if ( ! isset( $_POST['mj_article_type'] ) ) {
+	if ( ! isset( $_POST['mj_content_type'] ) ) {
 		return;
 	}
-	$article_type = sanitize_text_field( $_POST['mj_article_type'] );
+	$content_type = sanitize_text_field( $_POST['mj_content_type'] );
 
 	// set a default, just in case
-	if ( empty( $article_type ) ) {
-		$term = get_term_by( 'slug', 'article', 'mj_article_type' );
+	if ( empty( $content_type ) ) {
+		$term = get_term_by( 'slug', 'article', 'mj_content_type' );
 	} else {
-		$term = get_term_by( 'name', $article_type, 'mj_article_type' );
+		$term = get_term_by( 'name', $content_type, 'mj_content_type' );
 	}
 	if ( ! is_wp_error( $term ) ) {
-		wp_set_object_terms( $post_id, $term->term_id, 'mj_article_type', false );
+		wp_set_object_terms( $post_id, $term->term_id, 'mj_content_type', false );
 	}
 }
-add_action( 'save_post', 'save_mj_article_type_meta_box' );
+add_action( 'save_post', 'save_mj_content_type_meta_box' );
 
 /**
  * Add a class to the body element for styling purposes.
  *
  * @param array $classes the body classes a given post already has.
  */
-function mj_article_type_class( $classes ) {
+function mj_content_type_class( $classes ) {
 	if ( is_single() ) {
 		$post  = get_queried_object();
-		$template = get_the_terms( $post->ID, 'mj_article_type' );
+		$template = get_the_terms( $post->ID, 'mj_content_type' );
 		if ( ! empty( $template ) ) {
-			$classes[] = 'mj_article_type-' . $template[0]->slug;
+			$classes[] = 'mj_content_type-' . $template[0]->slug;
 		}
 	}
 	return $classes;
 }
-add_filter( 'body_class', 'mj_article_type_class' );
+add_filter( 'body_class', 'mj_content_type_class' );
 
 /**
  *  Utility function to see if we're looking at a given post type.
@@ -102,9 +101,9 @@ add_filter( 'body_class', 'mj_article_type_class' );
  * @param string $slug the slug for the term we want to check for.
  * @param int    $post_id the post id to check.
  */
-function mj_is_article_type( $slug, $post_id ) {
-	$article_type = get_the_terms( $post_id, 'mj_article_type' );
-	if ( $article_type && $article_type[0]->slug === $slug ) {
+function mj_is_content_type( $slug, $post_id ) {
+	$content_type = get_the_terms( $post_id, 'mj_content_type' );
+	if ( $content_type && $content_type[0]->slug === $slug ) {
 		return true;
 	}
 	return false;
