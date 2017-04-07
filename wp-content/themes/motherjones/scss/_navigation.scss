@@ -14,6 +14,9 @@
   &.lower {
     top: -5px;
   }
+  @media only screen and (max-width: 990px) {
+    top: -5px;
+  }
   ul {
     list-style-type: none;
     margin: 0;
@@ -103,6 +106,7 @@
     }
   }
   @media (max-width: 320px) {
+    .donate-link,
     .twitter {
       display: none;
     }

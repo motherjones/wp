@@ -1331,6 +1331,9 @@ h5 {
   /* ffs */ }
   #navbar.lower {
     top: -5px; }
+  @media only screen and (max-width: 990px) {
+    #navbar {
+      top: -5px; } }
   #navbar ul {
     list-style-type: none;
     margin: 0;
@@ -1404,6 +1407,7 @@ h5 {
     #navbar .nav-title {
       display: none; } }
   @media (max-width: 320px) {
+    #navbar .donate-link,
     #navbar .twitter {
       display: none; } }
 
