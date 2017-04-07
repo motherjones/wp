@@ -109,6 +109,9 @@ while ( $row = $taxonomy_data->fetch(PDO::FETCH_ASSOC)) {
 		break;
 	case "2":
 		$tax = "blog";
+		if ($tid === "14") { //is  kdrum
+			$tax = "category";
+		}
 		break;
 	case "61": //media type
 		if ($tid === "22221") { //is photoessay
