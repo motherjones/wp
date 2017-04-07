@@ -73,7 +73,7 @@ d.vid `taxonomy`
 FROM mjd6.term_data d
 INNER JOIN mjd6.term_node n
 USING(tid)
-WHERE (d.vid = 9 OR d.vid = 2 OR d.vid = 1
+WHERE (d.vid = 9 OR d.vid = 2 OR d.vid = 1 OR vid = 5
     OR d.tid = 22221 OR d.tid = 23631 OR d.tid = 22491)
 ;
 '
@@ -100,33 +100,35 @@ while ( $row = $taxonomy_data->fetch(PDO::FETCH_ASSOC)) {
 	$tid = $row['term_id'];
 	$tax = $row['taxonomy'];
 	switch ($tax) {
-		case "9":
-      if ($tid === "16720" || $tid === "16734") { //is crime & justice or food
-        $tax = "category";
-        break;
-      }
-			$tax = "post_tag";
-			break;
-		case "2":
-			$tax = "blog";
-			break;
-		case "61": //media type
-      if ($tid === "22221") { //is photoessay
-        $tax = "post_tag";
-        break;
-      }
-      continue 2;
-		case "1":
+	case "9":
+		if ($tid === "16720" || $tid === "16734") { //is crime & justice or food
 			$tax = "category";
 			break;
-    case "5": //secondary tag
-      if ($tid === "23631" || $tid === "22491") { //bite or inquiring minds
-        $tax = "post_tag";
-        break;
-      }
-      continue 2;
-    default:
-      continue 2;
+		}
+		$tax = "post_tag";
+		break;
+	case "2":
+		$tax = "blog";
+		break;
+	case "61": //media type
+		if ($tid === "22221") { //is photoessay
+			$tax = "post_tag";
+			break;
+		}
+		continue 2;
+	case "1":
+		$tax = "category";
+		break;
+	case "5": //secondary tag
+		if ($tid === "23631" || $tid === "22491") { //bite or inquiring minds
+			$tax = "post_tag";
+			break;
+		}
+		$tax = "mj_secondary_tags";
+		break;
+		continue 2;
+	default:
+		continue 2;
 	}
 	$tax_insert->execute();
   $term_to_tax_term[$row['term_id']] = $wp->lastInsertId();
