@@ -92,6 +92,7 @@ class MJ {
 			'/inc/enqueue.php',
 			'/inc/helpers.php',
 			'/inc/images.php',
+			'/inc/taxonomies.php',
 			'/inc/metaboxes.php',
 			'/inc/post-templates.php',
 			'/inc/sidebars.php',
@@ -306,4 +307,3 @@ function mj_should_post_fb_instant( $value, $post ) {
 	return ! get_post_meta( $post->get_the_id(), 'mj_fb_instant_exclude', true );
 }
 add_filter( 'instant_articles_should_submit_post', 'mj_should_post_fb_instant', 10, 2 );
-
