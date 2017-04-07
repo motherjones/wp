@@ -17,71 +17,71 @@
  */
 
 get_header(); ?>
-<div id="content" class="site-content">
 
-	<div id="primary" class="content-area">
-		<main id="main" class="site-main group" role="main">
-
-		<div class="page-header">
+<main id="main" class="site-main grid " role="main">
+	<section class="main-index grid__col-md-8 grid__col-sm-9 grid__col-xs-12">
+		<header class="page-header">
 			<?php
-				global $wp_query;
-				$term = $wp_query->get_queried_object();
-				if ( $term->name === "Kevin Drum" ) {
-					print '<img src="' . get_stylesheet_directory_uri() . '/img/KEVIN.png"></img>';
-				} else {
-					print '<h1 class="page-title promo">';
-					print $term->name;
-					print '</h1>';
-				}
+			global $wp_query;
+			$term = $wp_query->get_queried_object();
+			if ( 'Kevin Drum' === $term->name ) {
+				print '<img src="' . esc_url( get_stylesheet_directory_uri() ) . '/img/KEVIN.png"></img>';
+			} else {
+				print '<h1 class="page-title promo">';
+				print esc_html( $term->name );
+				print '</h1>';
+			}
 			?>
-		</div><!-- .page-header -->
+		</header><!-- .page-header -->
 
-		<div class="main-index">
-		<?php if ( have_posts() ) :
-
+		<?php if ( have_posts() ) { ?>
+		<ul class="articles-list">
+			<?php
 			$posts_shown = 0;
 			// Start the Loop.
 			while ( $wp_query->have_posts() ) : $wp_query->the_post();
 				get_template_part( 'template-parts/index-blogpost' );
 
 				$posts_shown++;
-				if ($posts_shown === 4): ?>
+				if ( 4 === $posts_shown ) { ?>
 					<script>
-            if (typeof MJ_HideSectionAdMobile === 'undefined') {
-              ad_code({
-                yieldmo: true,
-                docwrite: true,
-                desktop: false,
-                placement: 'ym_869408394552483686',
-              });
-            }
+						if (typeof MJ_HideSectionAdMobile === 'undefined') {
+							ad_code({
+								yieldmo: true,
+								docwrite: true,
+								desktop: false,
+								placement: 'ym_869408394552483686',
+							});
+						}
 					</script>
-      <?php elseif ($posts_shown === 3): ?>
+			<?php } elseif ( 3 === $posts_shown ) { ?>
 					<script>
-            if (typeof MJ_HideSectionPage970x250BB1 === 'undefined') {
-              ad_code({
-                yieldmo: false,
-                docwrite: true,
-                desktop: true,
-                placement: 'SectionPage970x250BB1',
-              });
-            }
+						if (typeof MJ_HideSectionPage970x250BB1 === 'undefined') {
+							ad_code({
+								yieldmo: false,
+								docwrite: true,
+								desktop: true,
+								placement: 'SectionPage970x250BB1',
+							});
+						}
 					</script>
-      <?php elseif ($posts_shown === 6): ?>
+			<?php } elseif ( 6 === $posts_shown ) { ?>
 					<script>
-            if (typeof MJ_HideSectionPage970x250BB2 === 'undefined') {
-              ad_code({
-                yieldmo: false,
-                docwrite: true,
-                desktop: true,
-                placement: 'SectionPage970x250BB2',
-              });
-            }
+						if (typeof MJ_HideSectionPage970x250BB2 === 'undefined') {
+							ad_code({
+								yieldmo: false,
+								docwrite: true,
+								desktop: true,
+								placement: 'SectionPage970x250BB2',
+							});
+						}
 					</script>
-      <?php endif;
+			<?php }
 			// End the loop.
 			endwhile;
 		?>
+		</ul>
+
 		<div id="pager">
 			<span class="pager_previous">
 				<?php previous_posts_link( 'Previous' ); ?>
@@ -93,25 +93,21 @@ get_header(); ?>
 
 		<?php
 		// If no content, include the "No posts found" template.
-		else :
-			get_template_part( 'template-parts/content', 'none' );
-
-		endif;
+} else {
+	get_template_part( 'template-parts/content', 'none' );
+}// End if().
 		?>
-		</div>
+	</section>
 
-		<div id="sidebar-right">
-			<?php get_sidebar(); ?>
-		</div>
+	<?php get_sidebar(); ?>
+</main><!-- .site-main -->
 
-		</main><!-- .site-main -->
-	</div><!-- .content-area -->
-	<script>
-		ad_code({
-			yieldmo: true,
-			docwrite: true,
-			desktop: false,
-			placement: 'ym_869408549909503847',
-		});
-	</script>
-	<?php get_footer(); ?>
+<script>
+	ad_code({
+		yieldmo: true,
+		docwrite: true,
+		desktop: false,
+		placement: 'ym_869408549909503847',
+	});
+</script>
+<?php get_footer(); ?>

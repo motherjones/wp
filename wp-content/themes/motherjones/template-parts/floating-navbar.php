@@ -1,22 +1,31 @@
-<!-- begin following navbar -->
+<?php
+/**
+ * Floating Navbar
+ *
+ * @package WordPress
+ * @subpackage Mother_Jones
+ * @since Mother Jones 1.0
+ */
+
+?>
 <div id="navbar">
 	<ul>
 		<li class="logo">
 			<a href="/">
-				<img src="<?php echo get_stylesheet_directory_uri(); ?>/img/MJ_comp.png"
+				<img src="<?php echo esc_url( get_template_directory_uri() ); ?>/img/MJ_comp.png"
 				alt="MotherJones" />
 			</a>
 		</li>
-		<?php if( $wp_query->found_posts === 1 && $wp_query->query_vars['post_type'] !== 'mj_author' ): //is an articlish thing ?>
-      <li class="nav-title">
-        <?php print $wp_query->posts[0]->post_title; ?>
-      </li>
-      <li class="share-button facebook">
-        <?php print mj_flat_facebook_button( $wp_query->posts[0]->ID );?>
-      </li>
-      <li class="share-button twitter">
-        <?php print mj_flat_twitter_button( $wp_query->posts[0]->ID );?>
-      </li>
+		<?php if ( 1 === $wp_query->found_posts && 'mj_author' !== $wp_query->query_vars['post_type'] ) : // Is an articlish thing. ?>
+			<li class="nav-title">
+				<?php print esc_html( $wp_query->posts[0]->post_title ); ?>
+			</li>
+			<li class="share-button facebook">
+				<?php print mj_flat_facebook_button( $wp_query->posts[0]->ID );?>
+			</li>
+			<li class="share-button twitter">
+				<?php print mj_flat_twitter_button( $wp_query->posts[0]->ID );?>
+			</li>
 		<?php endif; ?>
 		<li class="menu-button">
 			<a onclick="expandMenu();">
@@ -28,7 +37,7 @@
 				</svg>
 			</a>
 		</li>
-		<li class="donate-link article-page hidden-xs hidden-xxs">
+		<li class="donate-link article-page">
 
 			<a href="https://secure.motherjones.com/fnp/?action=SUBSCRIPTION&list_source=7HEGP002&extra_don=1&abver=A"
 				target="_blank"
@@ -36,7 +45,7 @@
 				Donate
 			</a>
 		</li>
-		<li class="subscribe-link article-page hidden-sm hidden-xs hidden-xxs">
+		<li class="subscribe-link article-page hidden-xxs">
 			<a href="https://secure.motherjones.com/fnx/?action=SUBSCRIPTION&pub_code=MJM&term_pub=MJM&list_source=SEGYN1&base_country=US"
 				target="_blank"
 			>
@@ -44,26 +53,12 @@
 			</a>
 		</li>
 	</ul>
-	<div id="mj_menu_select" class="">
-			<ul id="mj_menu_options">
-					<li id="menu_search_select"><a href="/search/apachesolr_search">Search</a></li>
-					<li id="menu_newsletter"><a href="/about/interact-engage/free-email-newsletter">Newsletter</a></li>
-					<li id="menu_magazine"><a href="/magazine">Magazine</a></li>
-					<li id="menu_politics_select"><a href="/politics">Politics</a></li>
-					<li id="menu_environment_select"><a href="/environment">Environment</a></li>
-					<li id="menu_culture_select"><a href="/media">Media</a></li>
-					<li id="menu_justice_select"><a href="/crime-justice">Crime and Justice</a></li>
-					<li id="menu_food_select"><a href="/food">Food</a></li>
-					<li id="menu_guns_select"><a href="/guns">Guns</a></li>
-					<li id="menu_dark_money_select"><a href="/dark-money">Dark Money</a></li>
-					<li id="menu_photo_select"><a href="/photoessays">Photos</a></li>
-					<li id="menu_investigations_select"><a href="/topics/investigations">Investigations</a></li>
-					<li id="menu_podcast_select"><a href="/podcasts">Podcasts</a></li>
-					<li id="menu_drum_select"><a href="/blog/kevin-drum">Kevin Drum</a></li>
-					<li id="menu_about_select"><a href="/about">About</a></li>
-					<li id="menu_subscribe_select"><a target="_blank" href="https://secure.motherjones.com/fnx/?action=SUBSCRIPTION&pub_code=MJM&term_pub=MJM&list_source=SEGYN1A&base_country=US">Subscribe</a></li>
-					<li id="menu_donate_select"><a target="_blank" href="https://secure.motherjones.com/fnp/?action=SUBSCRIPTION&list_source=7HEGP003&extra_don=1&abver=A">Donate</a></li>
-			</ul>
-	</div>
+	<?php
+	wp_nav_menu( array(
+		'theme_location' => 'floating-nav',
+		'container_id' => 'mj_menu_select',
+		'items_wrap' => '<ul id="mj_menu_options">%3$s</ul>',
+	) );
+	?>
 </div>
 <!-- end following navbar -->

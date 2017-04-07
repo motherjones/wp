@@ -7,43 +7,53 @@
  * @since Mother Jones 1.0
  */
 function mj_widgets_init() {
-	$sidebars = array (
+	$sidebars = array(
 		// the default widget areas
-		array (
+		array(
 			'name'          => __( 'Sidebar', 'mj' ),
 	 		'id'            => 'sidebar',
-	 		'description'   => __( 'Shows up on article pages', 'mj' )
+	 		'description'   => __( 'Shows up on article pages', 'mj' ),
 		),
-		array (
+		array(
 			'name'          => __( 'Blog Sidebar', 'mj' ),
 	 		'id'            => 'sidebar-blog',
-	 		'description'   => __( 'Shows up instead of the main sidebar on blog posts', 'mj' )
+	 		'description'   => __( 'Shows up instead of the main sidebar on blog posts', 'mj' ),
 		),
-		array (
+		array(
+			'name'          => __( 'Bite Sidebar', 'mj' ),
+	 		'id'            => 'sidebar-bite',
+	 		'description'   => __( 'Shows up instead of the main sidebar on the Bite page.', 'mj' ),
+		),
+		array(
+			'name'          => __( 'Inquiring Minds Sidebar', 'mj' ),
+	 		'id'            => 'sidebar-inquiring-minds',
+	 		'description'   => __( 'Shows up instead of the main sidebar on the Inquiring Minds page.', 'mj' ),
+		),
+		array(
 			'name'          => __( 'Homepage Top Stories Sidebar', 'mj' ),
 	 		'id'            => 'homepage-more-top-stories',
-	 		'description'   => __( 'Appears next to the "More Top Stories" section on the homepage', 'mj' )
+	 		'description'   => __( 'Appears next to the "More Top Stories" section on the homepage', 'mj' ),
 		),
-		array (
+		array(
 			'name'          => __( 'Ticker', 'mj' ),
 	 		'id'            => 'ticker',
-	 		'description'   => __( 'Shows up right beneath the top menu', 'mj' )
+	 		'description'   => __( 'Shows up right beneath the top menu', 'mj' ),
 		),
-		array (
+		array(
 			'name'          => __( 'End of content', 'mj' ),
 	 		'id'            => 'content-end',
-	 		'description'   => __( 'Between the comments and the footer', 'mj' )
+	 		'description'   => __( 'Between the comments and the footer', 'mj' ),
 		),
-		array (
+		array(
 			'name'          => __( 'End of page', 'mj' ),
 	 		'id'            => 'page-end',
-	 		'description'   => __( 'after EVERYTHING else.', 'mj' )
+	 		'description'   => __( 'after EVERYTHING else.', 'mj' ),
 		),
-		array (
+		array(
 			'name'          => __( 'Top of page', 'mj' ),
 	 		'id'            => 'page-top',
-	 		'description'   => __( 'before EVERYTHING else.', 'mj' )
-		)
+	 		'description'   => __( 'before EVERYTHING else.', 'mj' ),
+		),
 	);
 	foreach ( $sidebars as $sidebar ) {
 		register_sidebar( array(

@@ -6,7 +6,7 @@
   clear: both;
   padding-top: 0;
   padding-bottom: 20px;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid $neutral1;
   margin-bottom: 15px;
   margin-top: 20px;
   em {
@@ -23,14 +23,14 @@
 /* Author Bios */
 ul.author-bios {
   padding: 0;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid $neutral1;
 }
 .author-data {
   float: left;
   max-width: 535px;
 }
 .author-position {
-  color: #ccc;
+  color: $neutral1;
 }
 .author-bio {
   clear: both;
@@ -40,9 +40,9 @@ ul.author-bios {
   .byline {
     display: block;
     line-height: 14px;
-    a {
-      display: inline-block;
-      background-position: 0% 100%;
+    a.social-icon {
+      color: $black;
+      padding-left: 0.5em;
     }
   }
   .author-image {
@@ -72,7 +72,7 @@ ul.author-bios {
   display: block;
   float: right;
   height: 721px;
-  background-image: url('/wp-content/themes/motherjones/img/Membership_AD-421.jpg');
+  background-image: url('../img/Membership_AD-421.jpg');
   background-size: contain;
   .donation {
     display: block;
@@ -155,7 +155,7 @@ ul.author-bios {
   }
   &.blog {
     height: 298px;
-    background-image: url('/wp-content/themes/motherjones/img/Membership_ADSBasic_9_Short2_.png');
+    background-image: url('../img/Membership_ADSBasic_9_Short2_.png');
     .donation {
       top: 132px;
       &.monthly {
@@ -171,7 +171,7 @@ ul.author-bios {
 }
 
 .ticker-content {
-  background-image: url('/wp-content/themes/motherjones/img/membership-background-bar-lite-2.png');
+  background-image: url('../img/membership-background-bar-lite-2.png');
   padding: 2px 5px 4px;
   width: 100%;
   a {
@@ -187,4 +187,60 @@ ul.author-bios {
     font-size: 16px;
     font-weight: bold;
   }
+}
+
+/* Newsletter Signup */
+.newsletter-signup {
+	margin: 30px 0 10px 7.5px;
+	width: 100%;
+	max-width: 630px;
+	text-transform: uppercase;
+	font-family: $mallory;
+	font-weight: bold;
+	letter-spacing: -1px;
+	clear: both;
+	table {
+		width: 100%;
+	}
+	tr td:first-of-type {
+		padding-left: 15px;
+		position: relative;
+		border: 1px solid $neutral1;
+		border-width: 1px 0 1px 1px;
+	}
+	input,
+	input:active {
+		border: none !important;
+		outline: none;
+		font-family: $mallory;
+		font-weight: bold;
+		letter-spacing: -1px;
+		width: 100%;
+	}
+	i {
+		position: absolute;
+		color: $red;
+		font-size: 24px;
+		top: 11px;
+		display:none;
+	}
+
+	h5 {
+		text-align: left;
+		font-size: 18px;
+		line-height: 22px;
+		font-family: $mallory;
+		font-weight: bold;
+		margin-bottom: 15px;
+	}
+
+	input[type="submit"] {
+		font-family: $mallory;
+		font-weight: bold;
+		font-size: 20px;
+		padding: 15px 20px;
+		color: $white;
+		background: $orange;
+	}
+
 }

@@ -12,3 +12,6 @@ $facebook: #3A5795;
 
 $mallory: Mallory, sans-serif;
 $calluna: Calluna, serif;
+
+// load the grid variables so we can use them in the main css
+@import 'vendor/reflex/reflex/_variables.scss';

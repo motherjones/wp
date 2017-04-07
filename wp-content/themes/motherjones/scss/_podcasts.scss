@@ -1,0 +1,89 @@
+.podcast-intro {
+	font-size: 16px;
+  line-height: 21px;
+	text-align: left;
+  margin-bottom: 0;
+  &:after {
+    content: '';
+    clear: both;
+    display: block;
+  }
+}
+.podcast-follow {
+  float: left;
+  width: 215px;
+  height: 200px;
+  line-height: 25px;
+	list-style-type: none;
+	text-align: left;
+	padding: 0;
+	a {
+		font-family: Mallory, sans-serif;
+		font-weight: bold;
+		text-transform: uppercase;
+		color: #ff6900;
+		font-size: 12px;
+	}
+
+	i {
+		margin-right: 5px;
+    color: black;
+    font-size: 15px;
+    width: 15px;
+    position: relative;
+    top: 2px;
+    &.fa-soundcloud {
+      font-size: 12px;
+    }
+	}
+  .stitcher img {
+    width: 15px;
+    margin-right: 5px;
+  }
+}
+
+.podcast-bio {
+	.author-bio .author-image img {
+		margin:0px 10px 0px 0px;
+    width: 80px;
+    max-height: none;
+	}
+  .author-image {
+		float:left;
+  }
+  .author-data {
+    float: left;
+    width: 215px;
+    line-height: normal
+  }
+
+	.byline {
+		display: block
+	}
+
+	.author-position {
+		color: $neutral1;
+		font-size: 12px;
+	}
+	p {
+		width: 205px;
+		float: left;
+		font-size: 12px;
+		margin-top: 5px;
+	}
+  .byline {
+    color: $orange;
+    font-size: 14px;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-family: $mallory;
+    font-weight: bold;
+    border-bottom: none;
+    letter-spacing: 2px; 
+  }
+}
+.podcast-subhead {
+	border-bottom: 3px solid $orange;
+	display: inline-block;
+	margin: 30px 0 35px 0;
+}

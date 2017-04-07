@@ -10,6 +10,8 @@
 @import 'homepage';
 @import 'fullwidth';
 @import 'print';
+@import 'pages';
+@import 'podcasts';
 
 body {
   padding-top: 0;
@@ -17,26 +19,30 @@ body {
 #page {
   width: 55em;
   margin: 0 auto;
+  @media only screen and (max-width: 1020px) {
+    margin: 0 2%;
+    max-width: 96%;
+  }
 }
 
 .single,
 .archive {
   section.grid__col-md-8 {
     padding-left: 0;
-    @media only screen and (max-width: 768px) {
+    @media only screen and (max-width: $reflex-sm) {
   		padding-left: 1em;
   	}
   }
   #sidebar-right {
     padding-right: 0;
-    @media only screen and (max-width: 768px) {
+    @media only screen and (max-width: $reflex-sm) {
   		padding-right: 1em;
   	}
   }
 }
 
 ::selection {
-  background-color: #ddd;
+  background-color: $neutral1;
 }
 
 a {
@@ -53,7 +59,7 @@ img {
 footer#colophon #copyright a,
 footer#colophon #footer-list a,
 .entry-content a {
-  background-image: url('/wp-content/themes/motherjones/img/orange-border.png');
+  background-image: url('../img/orange-border.png');
   background-repeat: repeat-x;
   text-decoration: none;
   text-shadow: -1px 0 0 $white, 0 1px 0 $white, 1px 0 0 $white, 0 -1px 0 $white,
@@ -74,7 +80,7 @@ footer#colophon #footer-list a {
 }
 
 a::selection {
-  text-shadow: none!important;
+  text-shadow: none !important;
 }
 
 .accent {
@@ -118,7 +124,7 @@ button.accent {
 .entry-header {
   text-align: center;
   padding: 0;
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: $reflex-sm) {
     padding: 0.5em 1em;
   }
 }
@@ -138,12 +144,12 @@ h1.entry-title {
 }
 .dek {
   font-family: $calluna;
-  @media only screen and (max-width:768px) {
+  @media only screen and (max-width: $reflex-sm) {
     font-size: 18px;
     margin: 0.5em;
   }
 }
-@media only screen and (max-width:768px) {
+@media only screen and (max-width: $reflex-sm) {
   h1.entry-title {
     font-size: 30px;
 		line-height: 35px;
@@ -177,7 +183,7 @@ blockquote {
   font-weight: bold;
   font-style: italic;
   font-family: $mallory;
-  @media only screen and (max-width:768px) {
+  @media only screen and (max-width: $reflex-sm) {
     left: 0;
     float: none;
     width: 100%;
@@ -198,15 +204,6 @@ blockquote {
 .inline-center {
   text-align: center;
   margin: 15px auto;
-}
-@media (max-width: 1200px){
-    .pullquote-left,
-    .pullquote-right {
-      right: 0;
-      left: 0;
-      margin-right: 15px;
-      margin-left: 15px;
-    }
 }
 
 .inline {
@@ -418,7 +415,9 @@ blockquote {
 .main-index {
   text-align: center;
 }
-
+.article-item.blog .entry-header {
+  text-align: left;
+}
 .articles-list,
 .related-articles-list {
   list-style-type: none;
@@ -448,6 +447,9 @@ li.article-item {
     font-size: 18px;
     line-height: 24px;
     margin: 0;
+  }
+  .article-data.grid__col-12 {
+    padding: 1em 0;
   }
 }
 

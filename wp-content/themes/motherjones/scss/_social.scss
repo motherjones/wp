@@ -4,21 +4,16 @@
     text-decoration: none;
     text-align: center;
     font-size: 18px;
-    position: relative;
-    border-bottom: none;
-    text-shadow: 0 0;
-    display: block;
-    background-image: none;
     border: 1px solid $orange;
     border-radius: 40px;
-    height: 30px;
-    width: 30px;
+    height: 36px;
+    width: 36px;
     display: inline-block;
   }
   i {
     display: block;
     font-size: 20px;
-    line-height: 30px;
+    line-height: 36px;
     &:hover {
       color: $orange;
     }
@@ -27,7 +22,7 @@
   &.blog {
     height: 17px;
     margin-bottom: 20px;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid $neutral1;
     ul {
       list-style-type: none;
       display: block;
@@ -49,13 +44,12 @@
   &.bottom {
     clear: both;
     padding: 0 0 30px;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid $neutral1;
     overflow: auto;
     ul {
       padding-left: 0;
     }
     li {
-      display: inline;
       float: right;
       overflow: hidden;
       width: 48%;
@@ -67,6 +61,10 @@
     i {
       display: inline;
       margin-right: 5px;
+      line-height: 30px;
+      &:hover {
+        color: $white;
+      }
     }
     .share-text {
       vertical-align: top;
@@ -82,20 +80,20 @@
     }
     .facebook a {
       background-color: $facebook;
-      border-color: #365391;
+      border-color: darken($facebook,10%);
       border-radius: 3px;
       font-size: 16px;
       &:hover {
-        background-color: #304D8A;
+        background-color: lighten($facebook,10%);
       }
     }
     .twitter a {
       background-color: $twitter;
-      border-color: #578dc1;
+      border-color: darken($twitter,10%);
       border-radius: 3px;
       font-size: 16px;
       &:hover {
-        background-color: #478db1;
+        background-color: lighten($twitter,10%);
       }
     }
   }

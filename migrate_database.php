@@ -175,7 +175,7 @@ FROM_UNIXTIME(p.published_at),
 CONVERT_TZ(FROM_UNIXTIME(p.published_at), 'PST8PDT','UTC'),
 r.body,
 n.title,
-r.teaser,
+d.field_dek_value,
 IF(
 	LOCATE('/', a.dst),
 	SUBSTR(a.dst,
@@ -198,6 +198,8 @@ LEFT OUTER JOIN mjd6.url_alias a
 ON a.src = CONCAT('node/', n.nid)
 JOIN mjd6.publication_date p
 ON n.nid = p.nid
+INNER JOIN mjd6.content_field_dek d
+ON n.nid = d.nid
 WHERE n.type IN ('article', 'blogpost', 'full_width_article')
 ;
 ");
@@ -288,7 +290,7 @@ JOIN mjd6.publication_date p
 ON n.nid = p.nid
 WHERE n.type = 'page'
 AND a.dst LIKE '%about%'
-AND n.nid IS NOT 64
+AND n.nid != 64
 ;
 ");
 $page_data->execute();
@@ -759,7 +761,9 @@ $meta_data->execute();
 
 $wp->beginTransaction();
 while ( $meta = $meta_data->fetch(PDO::FETCH_NUM)) {
-	$meta_insert->execute($meta);
+  if ($meta[1]) {
+    $meta_insert->execute($meta);
+  }
 }
 $wp->commit();
 
@@ -776,7 +780,9 @@ $meta_data->execute();
 
 $wp->beginTransaction();
 while ( $meta = $meta_data->fetch(PDO::FETCH_NUM)) {
-	$meta_insert->execute($meta);
+  if ($meta[1]) {
+    $meta_insert->execute($meta);
+  }
 }
 $wp->commit();
 
@@ -793,7 +799,9 @@ $meta_data->execute();
 
 $wp->beginTransaction();
 while ( $meta = $meta_data->fetch(PDO::FETCH_NUM)) {
-	$meta_insert->execute($meta);
+  if ($meta[1]) {
+    $meta_insert->execute($meta);
+  }
 }
 $wp->commit();
 
@@ -814,17 +822,20 @@ $meta_data->execute();
 
 $wp->beginTransaction();
 while ( $meta = $meta_data->fetch(PDO::FETCH_ASSOC)) {
-  $meta_insert->execute( array(
-    $meta['nid'],
-    'mj_social_hed',
-    $meta['field_social_title_value']
-  ) );
-  $meta_insert->execute( array(
-    $meta['nid'],
-    'mj_social_dek',
-    $meta['field_social_dek_value']
-  ) );
-  $meta_insert->execute( array($meta['nid'], 'mj_google_standout', false) );
+  if ($meta['field_social_title_value']) {
+    $meta_insert->execute( array(
+      $meta['nid'],
+      'mj_social_hed',
+      $meta['field_social_title_value']
+    ) );
+  }
+  if ($meta['field_social_dek_value']) {
+    $meta_insert->execute( array(
+      $meta['nid'],
+      'mj_social_dek',
+      $meta['field_social_dek_value']
+    ) );
+  }
   $meta_insert->execute( array($meta['nid'], 'mj_fb_instant_exclude', true) );
 }
 $wp->commit();
@@ -846,16 +857,20 @@ $meta_data->execute();
 
 $wp->beginTransaction();
 while ( $meta = $meta_data->fetch(PDO::FETCH_ASSOC)) {
-  $meta_insert->execute( array(
-    $meta['nid'],
-    'mj_promo_hed',
-    $meta['field_alternate_title_value']
-  ) );
-  $meta_insert->execute( array(
-    $meta['nid'],
-    'mj_promo_dek',
-    $meta['field_alternate_dek_value']
-  ) );
+  if ( $meta['field_alternate_title_value'] ) {
+    $meta_insert->execute( array(
+      $meta['nid'],
+      'mj_promo_hed',
+      $meta['field_alternate_title_value']
+    ) );
+  }
+  if ( $meta['field_alternate_dek_value'] ) {
+    $meta_insert->execute( array(
+      $meta['nid'],
+      'mj_promo_dek',
+      $meta['field_alternate_dek_value']
+    ) );
+  }
 }
 $wp->commit();
 
@@ -880,7 +895,9 @@ while ( $meta = $meta_data->fetch(PDO::FETCH_ASSOC)) {
     'css' => $meta['field_css_value'],
     'js' => $meta['field_javascript_value'],
   ) );
-	$meta_insert->execute(array($meta['nid'], 'css_js', $cssjs_value) );
+  if ( $cssjs_value ) {
+    $meta_insert->execute(array($meta['nid'], 'css_js', $cssjs_value) );
+  }
 }
 $wp->commit();
 
@@ -902,7 +919,9 @@ $wp->beginTransaction();
 while ( $meta = $meta_data->fetch(PDO::FETCH_ASSOC)) {
   $related_value = serialize( explode(',', $meta['relateds']) );
 
-	$meta_insert->execute(array($meta['nid'], 'mj_related_articles', $related_value) );
+  if ( $related_value ) {
+    $meta_insert->execute(array($meta['nid'], 'mj_related_articles', $related_value) );
+  }
 }
 $wp->commit();
 
@@ -1018,14 +1037,14 @@ foreach ( $uid_to_author_meta as $uid => $author ) {
     $author_meta_insert->execute();
   }
 
-  if (array_key_exists('mj_user_short_bio', $author)) {
-    $key = "mj_user_short_bio";
+  if (array_key_exists('field_author_bio_short_value', $author)) {
+    $key = "description";
     $value = $author['field_author_bio_short_value'];
     $author_meta_insert->execute();
   }
 
   if (array_key_exists('field_author_bio_value', $author)) {
-    $key = "mj_user_bio";
+    $key = "mj_user_full_bio";
     $value = $author['field_author_bio_value'];
     $author_meta_insert->execute();
   }
@@ -1045,6 +1064,9 @@ foreach ( $uid_to_author_meta as $uid => $author ) {
   $value = 1;
   $author_meta_insert->execute();
 
+  $key = 'rich_editing';
+  $value = true;
+  $author_meta_insert->execute();
 }
 $wp->commit();
 
@@ -1252,10 +1274,11 @@ $wp->beginTransaction();
 while ( $image = $author_image_data->fetch(PDO::FETCH_ASSOC)) {
   $uid  = $author_name_to_author_meta[$image['title']]['wp_id'];
   $guid = $FILEDIR_ABS . preg_replace('/files\//', '', $image['filepath']);
+  $post_name = preg_replace("/\.[^.]+$/", "", $image['filename'] );
   $author_image_insert->execute(array(
     ':post_author' => $uid,
-    ':post_title' => $image['filename'],
-    ':post_name' => $image['filename'],
+    ':post_title' => $post_name,
+    ':post_name' => $post_name,
     ':guid' => $guid,
     ':post_mime_type' => $image['filemime'],
   ));
@@ -1273,14 +1296,29 @@ VALUES ( ?, ?, ? )
 
 $wp->beginTransaction();
 foreach ( $author_name_to_author_meta as $author ) {
-  if ( array_key_exists('image_id', $author) ) {
+  if ( array_key_exists('image_id', $author) 
+    && array_key_exists('wp_id', $author)
+  ) {
     $author_meta_insert->execute(array(
       $author['wp_id'],
-      "author_image_id",
+      "mj_author_image_id",
       $author['image_id']
     ));
+  }
+}
+$wp->commit();
 
-    $author_meta_insert->execute(array(
+$author_image_meta_insert = $wp->prepare("
+INSERT IGNORE INTO pantheon_wp.wp_postmeta (post_id, meta_key, meta_value)
+VALUES ( ?, ?, ? )
+;
+");
+$wp->beginTransaction();
+foreach ( $author_name_to_author_meta as $author ) {
+  if ( array_key_exists('image_id', $author) 
+    && array_key_exists('wp_id', $author)
+  ) {
+    $author_image_meta_insert->execute(array(
       $author['image_id'],
       '_wp_attached_file',
       $author['image_location']
@@ -1288,13 +1326,15 @@ foreach ( $author_name_to_author_meta as $author ) {
   }
 }
 $wp->commit();
+
+
+
 echo "authors done";
 
 
 /* end author data */
 
 
-//FIXME REPEAT FOR FULL WIDTH TITLES< content_field_top_of_content_image
 //for master images
 $master_data = $d6->prepare('
 SELECT DISTINCT
@@ -1407,29 +1447,37 @@ VALUES (?, ?, ?)
 ");
 $wp->beginTransaction();
 foreach ( $master_meta_rows as $row ) {
-  $master_meta_insert->execute(array(
-    $row['nid'],
-    'featured-image-display',
-    $row['master_image_suppress']
-  ) );
+  if ( $row['master_image_suppress'] ) {
+    $master_meta_insert->execute(array(
+      $row['nid'],
+      'featured-image-display',
+      $row['master_image_suppress']
+    ) );
+  }
 
-  $master_meta_insert->execute(array(
-    $row['nid'],
-    '_thumbnail_id',
-    $row['image_id']
-  ) );
+  if ( $row['image_id'] ) {
+    $master_meta_insert->execute(array(
+      $row['nid'],
+      '_thumbnail_id',
+      $row['image_id']
+    ) );
+  }
 
-  $master_meta_insert->execute(array(
-    $row['image_id'],
-    '_wp_attached_file',
-    $row['filepath']
-  ) );
+  if ( $row['filepath'] ) {
+    $master_meta_insert->execute(array(
+      $row['image_id'],
+      '_wp_attached_file',
+      $row['filepath']
+    ) );
+  }
 
-  $master_meta_insert->execute(array(
-    $row['image_id'],
-    '_media_credit',
-    $row['master_image_byline']
-  ) );
+  if ( $row['master_image_byline'] ) {
+    $master_meta_insert->execute(array(
+      $row['image_id'],
+      '_media_credit',
+      $row['master_image_byline']
+    ) );
+  }
 
 }
 $wp->commit();
@@ -1439,7 +1487,7 @@ $title_data = $d6->prepare('
 SELECT DISTINCT
 n.nid,
 n.uid,
-p.publication_date,
+p.published_at,
 n.changed,
 n.status,
 i.field_title_image_data,
@@ -1518,7 +1566,6 @@ while ( $title = $title_data->fetch(PDO::FETCH_ASSOC)) {
   $title_meta_rows[] = array(
     'nid' => $title['nid'],
     'image_id' => $wp->lastInsertId(),
-    'filename' => $title['filename'],
     'filepath' => preg_replace('/files\//', $FILEDIR, $title['filepath']),
     'title_image_credit' => $title['field_title_image_credit_value'],
   );
@@ -1563,7 +1610,7 @@ $file_data = $d6->prepare('
 SELECT DISTINCT
 f.uid,
 u.nid,
-p.publication_date,
+p.published_at,
 n.changed,
 n.status,
 f.filemime,
@@ -1633,7 +1680,6 @@ while ( $file = $file_data->fetch(PDO::FETCH_ASSOC)) {
     'nid' => $file['nid'],
     'fid' => $wp->lastInsertId(),
     'filepath' => preg_replace('/files\//', $FILEDIR, $file['filepath']),
-    'filename' => $file['filename']
   );
 
 }

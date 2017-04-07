@@ -7,11 +7,14 @@
   top: -50px;
   left: 0px;
   transition: top .5s cubic-bezier(0.5, -0.5, 0.5, 1.5);
-  box-shadow: 0 5px 10px 0 rgba(0,0,0,0.15),0 -5px 3px -10px #fff;
+  box-shadow: 0 5px 10px 0 rgba(0,0,0,0.15),0 -5px 3px -10px $white;
   height: 45px;
   padding: 5px 0 0 0; /* must be taller so the bounce doesn't have empty space on top */
   z-index: 5999999; /* ffs */
   &.lower {
+    top: -5px;
+  }
+  @media only screen and (max-width: 990px) {
     top: -5px;
   }
   ul {
@@ -70,7 +73,7 @@
     float: right;
     width: 95px;
     a {
-      color: #ccc;
+      color: $neutral1;
       font-size: 14px;
       text-transform: uppercase;
       letter-spacing: .5px;
@@ -103,6 +106,7 @@
     }
   }
   @media (max-width: 320px) {
+    .donate-link,
     .twitter {
       display: none;
     }
@@ -122,7 +126,7 @@
   position: absolute;
   right: 0;
   top: 40px;
-  box-shadow: -3px 5px 5px #ccc;
+  box-shadow: -3px 5px 5px $neutral1;
   #mj_menu_options li {
     display: list-item;
     float: none;
@@ -136,7 +140,7 @@
   fill: $orange;
 }
 #navbar .menu-button.open {
-  box-shadow: -3px -4px 4px #ccc;
+  box-shadow: -3px -4px 4px $neutral1;
 }
 #navbar #mj_menu_select.open { /*only when nav is lowed, please */
   max-height: 0px;
@@ -152,14 +156,17 @@
     list-style-type: none;
     position: relative;
     padding: 0;
-    border-bottom: 1px solid #CCC;
+    border-bottom: 1px solid $neutral1;
     margin-bottom: 20px;
     margin-top: 20px;
     padding-bottom: 21px;
   }
   li {
     display: inline-block;
-    padding: 0 45px 0 0;
+    padding: 0 44px 0 0;
+    &:nth-of-type(9) {
+      padding-right: 0;
+    }
   }
   a {
     font-family: $mallory;
@@ -200,8 +207,8 @@
     padding: 0;
     a {
       padding: 6px;
-      color: #ccc;
-      border: 1px solid #ccc;
+      color: $neutral1;
+      border: 1px solid $neutral1;
       font-size: 16px;
       letter-spacing: 0px;
       &:hover {

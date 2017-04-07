@@ -183,7 +183,7 @@ input[type="search"]::-webkit-search-decoration {
 }
 
 fieldset {
-	border: 1px solid #d1d1d1;
+	border: 1px solid $neutral1;
 	margin: 0 0 1.75em;
 	padding: 0.875em;
 }
@@ -216,7 +216,7 @@ pre {
 }
 
 pre {
-	border: 1px solid #d1d1d1;
+	border: 1px solid $neutral1;
 	font-size: 16px;
 	font-size: 1rem;
 	line-height: 1.3125;
@@ -230,20 +230,20 @@ pre {
 }
 
 code {
-	background-color: #d1d1d1;
+	background-color: $neutral1;
 	padding: 0.125em 0.25em;
 }
 
 abbr,
 acronym {
-	border-bottom: 1px dotted #d1d1d1;
+	border-bottom: 1px dotted $neutral1;
 	cursor: help;
 }
 
 mark,
 ins {
-	background: #007acc;
-	color: #fff;
+	background: $blue;
+	color: $white;
 	padding: 0.125em 0.25em;
 	text-decoration: none;
 }

@@ -7,8 +7,11 @@
 	#main section {
 		border-bottom: 1px solid $neutral1;
 		margin-bottom: 1em;
+		@media only screen and (max-width: $reflex-sm) {
+			border-bottom: 0;
+		}
 	}
-	.promo {
+	h2 {
 		margin: 0 auto;
 	}
 }
@@ -21,7 +24,7 @@
 	text-align: right;
 	line-height: 4px;
 	margin: 0;
-	@media only screen and (max-width:768px) {
+	@media only screen and (max-width: $reflex-sm) {
 		display: none;
 	}
 }
@@ -32,7 +35,7 @@
 		position: absolute;
 		bottom: 26px;
 		width: 100%;
-		background: linear-gradient(transparent,#000);
+		background: linear-gradient(transparent,$black);
 		a {
 			text-shadow: none;
 			color: $white;
@@ -60,7 +63,7 @@
 		width: 100%;
 		height: auto;
 	}
-	@media only screen and (max-width:768px) {
+	@media only screen and (max-width: $reflex-sm) {
 		padding-bottom: 0;
 		.article-data {
 			position: relative;
@@ -88,7 +91,7 @@
 		margin-top: 0;
 		padding-top: 1.5em;
 		padding-bottom: 1em;
-		background-image: url('/wp-content/themes/motherjones/img/grey_line.png');
+		background-image: url('../img/grey_line.png');
 		background-repeat: no-repeat;
 		background-position: top;
 		text-align: center;
@@ -96,19 +99,23 @@
 		&:first-of-type {
 			margin-top: 16px;
 			padding-top: 0;
-			background-image: none;
+			background: none;
 		}
 		h3 {
-			line-height: 18px;
+			line-height: 24px;
 			margin-bottom: 0;
 		}
 		.byline {
 			margin-top: 0.5em;
 		}
 	}
-	@media only screen and (max-width: 768px) {
-		margin-top: 0;
-		padding: 0 1em 1em;
+	@media only screen and (max-width: $reflex-sm) {
+		margin: 0;
+		padding: 0 1em;
+		li {
+			background: none;
+			padding-top: 0;
+		}
 	}
 }
 
@@ -117,7 +124,7 @@
 	.promo {
 		margin-top: 0;
 	}
-	@media only screen and (max-width: 768px) {
+	@media only screen and (max-width: $reflex-sm) {
 		padding-left: 1em;
 	}
 }
@@ -139,14 +146,20 @@
 		.byline {
 			margin-top: 0.5em;
 		}
+		@media only screen and (max-width: $reflex-sm) {
+			margin-top: 0;
+			border-top: 0;
+		}
 	}
 }
-
+#homepage-more-stories-sidebar {
+	padding-right: 0;
+}
 .homepage-fullwidth {
 	.section-label {
 		display: inline-block;
 		padding: 0 20px;
-		background-color: #fff;
+		background-color: $white;
 		margin: 0 auto 0.5em;
 	}
 	.article-data {
@@ -162,7 +175,7 @@
 	}
 	h4.dek {
 		margin: 1em 0;
-		@media only screen and (max-width: 768px) {
+		@media only screen and (max-width: $reflex-sm) {
 			display: none;
 		}
 	}
@@ -171,7 +184,7 @@
 #homepage-sections-list {
 	list-style-type: none;
 	.homepage-section {
-		.promo {
+		h2 {
 			margin-bottom: 1em;
 			font-size: 15px;
 			letter-spacing: 2px;
@@ -180,13 +193,17 @@
 			margin-top: 0;
 			padding-top: 1.25em;
 			padding-bottom: 0.5em;
-			background-image: url('/wp-content/themes/motherjones/img/grey_line.png');
+			background-image: url('../img/grey_line.png');
 			background-repeat: no-repeat;
 			background-position: top;
 			text-align: center;
 			&:first-of-type {
 				padding-top: 0;
 				background-image: none;
+			}
+			@media only screen and (max-width: $reflex-sm) {
+				background: none;
+				padding: 0 1em 1em;
 			}
 		}
 		img {
@@ -197,6 +214,10 @@
 			margin: 0 0 4px;
 			font-size: 16px;
 			line-height: 18px;
+			@media only screen and (max-width: $reflex-sm) {
+				font-size: 18px;
+				line-height: 24px;
+			}
 		}
 		.byline {
 			font-size: 11px;
@@ -204,13 +225,13 @@
 		}
 		&:first-child {
 			padding-left: 0;
-			@media only screen and (max-width: 768px) {
+			@media only screen and (max-width: $reflex-sm) {
 				padding: 1em;
 			}
 		}
 		&:last-child {
 			padding-right: 0;
-			@media only screen and (max-width: 768px) {
+			@media only screen and (max-width: $reflex-sm) {
 				padding: 1em;
 			}
 		}
@@ -220,12 +241,22 @@
 	padding: 0;
 }
 
-#homepage-kdrum .promo {
-	margin-bottom: 1em;
+#homepage-kdrum {
+	h2 {
+		margin-bottom: 0.5em;
+	}
+	@media only screen and (max-width: $reflex-sm) {
+		img.banner {
+			display: none;
+		}
+		h2 {
+			margin-bottom: 0;
+		}
+	}
 }
 #homepage-kdrum-side {
 	padding-left: 0;
-	@media only screen and (max-width: 768px) {
+	@media only screen and (max-width: $reflex-sm) {
 		padding: 1em;
 	}
 }
@@ -235,12 +266,16 @@
 #kdrum-post-list {
 	padding: 0;
 	li {
-		margin-top: 4px;
-		padding-top: 30px;
+		padding-top: 1em;
+		padding-bottom: 0;
 		border-top: 1px solid $neutral1;
 		&:first-of-type {
 			padding-top: 0;
 			border-top: 0;
+		}
+		@media only screen and (max-width: $reflex-sm) {
+			border-top: 0;
+			padding-top: 0;
 		}
 	}
 	.dateline {
@@ -256,8 +291,8 @@
 #homepage-investigations {
 	width: 100%;
 	border-bottom: none !important;
-	.promo {
-		margin-bottom: 1em;
+	h2 {
+		margin-bottom: 0.5em;
 	}
 }
 #homepage-investigations-list {
@@ -272,5 +307,10 @@
 	}
 	.homepage-art-byline {
 		margin-bottom: 1em;
+	}
+}
+@media only screen and (max-width:$reflex-sm) {
+	.home #main #homepage-featured {
+		margin-bottom: 0;
 	}
 }

@@ -77,6 +77,7 @@ class MJ {
 	private function load() {
 		$this->require_files();
 		$this->register_media_sizes();
+		$this->register_nav_menus();
 	}
 	/**
 	 * Load required files
@@ -107,6 +108,46 @@ class MJ {
 			require_once dirname( __FILE__ ) . '/vendor/largo/media-credit.php';
 		}
 	}
+
+	/**
+	 * Register the nav menus for the theme
+	 */
+	private function register_nav_menus() {
+
+		$menus = array(
+			'static-navbar' => __( 'Static Navbar', 'mj' ),
+			'floating-nav' => __( 'Floating Navbar', 'mj' ),
+			'footer-list' => __( 'Footer List', 'mj' ),
+			'copyright' => __( 'Copyright', 'mj' ),
+		);
+		register_nav_menus( $menus );
+
+		// Avoid database writes on the frontend.
+		if ( ! is_admin() ) {
+			return;
+		}
+
+		// Try to automatically link menus to each of the locations.
+		foreach ( $menus as $location => $label ) {
+			// if a location isn't wired up...
+			if ( ! has_nav_menu( $location ) ) {
+
+				// Get or create the nav menu.
+				$nav_menu = wp_get_nav_menu_object( $label );
+				if ( ! $nav_menu ) {
+					$new_menu_id = wp_create_nav_menu( $label );
+					$nav_menu = wp_get_nav_menu_object( $new_menu_id );
+				}
+
+				// Wire it up to the location.
+				$locations = get_theme_mod( 'nav_menu_locations' );
+				$locations[ $location ] = $nav_menu->term_id;
+				set_theme_mod( 'nav_menu_locations', $locations );
+			}
+		}
+
+	}
+
 	/**
 	 * Register image and media sizes associated with the theme
 	 */
@@ -132,30 +173,30 @@ class MJ {
 			true
 		);
 
-		add_filter( 'pre_option_thumbnail_size_w', function(){
+		add_filter( 'pre_option_thumbnail_size_w', function() {
 			return 208;
 		});
-		add_filter( 'pre_option_thumbnail_size_h', function(){
+		add_filter( 'pre_option_thumbnail_size_h', function() {
 			return 117;
 		});
 		add_filter( 'pre_option_thumbnail_crop', '__return_true' );
-		add_filter( 'pre_option_medium_size_w', function(){
+		add_filter( 'pre_option_medium_size_w', function() {
 			return MEDIUM_WIDTH;
 		});
-		add_filter( 'pre_option_medium_size_h', function(){
+		add_filter( 'pre_option_medium_size_h', function() {
 			return MEDIUM_HEIGHT;
 		});
-		add_filter( 'pre_option_large_size_w', function(){
+		add_filter( 'pre_option_large_size_w', function() {
 			return LARGE_WIDTH;
 		});
-		add_filter( 'pre_option_large_size_h', function(){
+		add_filter( 'pre_option_large_size_h', function() {
 			return LARGE_HEIGHT;
 		});
 		add_filter( 'pre_option_embed_autourls', '__return_true' );
-		add_filter( 'pre_option_embed_size_w', function(){
+		add_filter( 'pre_option_embed_size_w', function() {
 			return LARGE_WIDTH;
 		});
-		add_filter( 'pre_option_embed_size_h', function(){
+		add_filter( 'pre_option_embed_size_h', function() {
 			return LARGE_HEIGHT;
 		});
 
@@ -236,7 +277,7 @@ if ( ! function_exists( 'mj_setup' ) ) {
 		add_editor_style( 'css/admin/editor-style' . $suffix . '.css' );
 
 	}
-} // mj_setup
+} // End if().
 add_action( 'after_setup_theme', 'mj_setup' );
 
 /**
@@ -252,3 +293,17 @@ function mj_content_width() {
 	$GLOBALS['content_width'] = apply_filters( 'mj_content_width', 990 );
 }
 add_action( 'after_setup_theme', 'mj_content_width', 0 );
+
+/**
+ * Sets the content width in pixels, based on the theme's design and stylesheet.
+ *
+ * Priority 0 to make it available to lower priority callbacks.
+ *
+ * @param bool   $value should we post to fb instant or no?
+ * @param object $post the post.
+ */
+function mj_should_post_fb_instant( $value, $post ) {
+	return ! get_post_meta( $post->get_the_id(), 'mj_fb_instant_exclude', true );
+}
+add_filter( 'instant_articles_should_submit_post', 'mj_should_post_fb_instant', 10, 2 );
+

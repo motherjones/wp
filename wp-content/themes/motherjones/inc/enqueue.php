@@ -89,7 +89,7 @@ if ( ! function_exists( 'mj_enqueue' ) ) {
 			'collapse' => __( 'collapse child menu', 'mj' ),
 		) );
 	}
-}
+}// End if().
 add_action( 'wp_enqueue_scripts', 'mj_enqueue' );
 
 /**
@@ -219,43 +219,43 @@ function mj_enqueue_footer_js() {
 	</script>
 	<!-- End ga (Google Analytics) Tag -->
 
-  <!-- start adblock donate ask -->
-  <script>
-    function set_cookie(cname, cvalue, exdays) {
-        var d = new Date();
-        d.setTime(d.getTime() + (exdays*24*60*60*1000));
-        var expires = "expires="+ d.toUTCString();
-        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-    }
-    function get_cookie(cname) {
-        var name = cname + "=";
-        var decodedCookie = decodeURIComponent(document.cookie);
-        var ca = decodedCookie.split(';');
-        for(var i = 0; i <ca.length; i++) {
-            var c = ca[i];
-            while (c.charAt(0) == ' ') {
-                c = c.substring(1);
-            }
-            if (c.indexOf(name) == 0) {
-                return c.substring(name.length, c.length);
-            }
-        }
-        return "";
-    }
-    jQuery(document).ready(function() {
-      if (typeof noadblocking === "undefined") {
-          var checked = get_cookie('noad');
-          if (!checked) {
-            set_cookie('noad', true, 0.25, '/');
-            jQuery('#bottom-donate').show();
-            ga('send', 'event', 'AdblockDetected', 'DonateDisplayed', window.location.href);
-          } else {
-            ga('send', 'event', 'AdblockDetected', 'NoDonateDisplayed', window.location.href);
-          }
-      }
-    });
-  </script>
-  <!-- end adblock donate ask -->
+	<!-- start adblock donate ask -->
+	<script>
+	function set_cookie(cname, cvalue, exdays) {
+		var d = new Date();
+		d.setTime(d.getTime() + (exdays*24*60*60*1000));
+		var expires = "expires="+ d.toUTCString();
+		document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+	}
+	function get_cookie(cname) {
+		var name = cname + "=";
+		var decodedCookie = decodeURIComponent(document.cookie);
+		var ca = decodedCookie.split(';');
+		for(var i = 0; i <ca.length; i++) {
+			var c = ca[i];
+			while (c.charAt(0) == ' ') {
+				c = c.substring(1);
+			}
+			if (c.indexOf(name) == 0) {
+				return c.substring(name.length, c.length);
+			}
+		}
+		return "";
+	}
+	jQuery(document).ready(function() {
+	  if (typeof noadblocking === "undefined") {
+		  var checked = get_cookie('noad');
+		  if (!checked) {
+			set_cookie('noad', true, 0.25, '/');
+			jQuery('#bottom-donate').show();
+			ga('send', 'event', 'AdblockDetected', 'DonateDisplayed', window.location.href);
+		  } else {
+			ga('send', 'event', 'AdblockDetected', 'NoDonateDisplayed', window.location.href);
+		  }
+	  }
+	});
+	</script>
+	<!-- end adblock donate ask -->
 
 <?php
 }
