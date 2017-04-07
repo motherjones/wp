@@ -590,7 +590,7 @@ INSERT IGNORE INTO pantheon_wp.wp_term_taxonomy
 (term_id, taxonomy, description, parent)
 VALUES (
 ?,
-"mj_article_type",
+"mj_content_type",
 "",
 0
 )
