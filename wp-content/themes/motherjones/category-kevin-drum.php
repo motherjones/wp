@@ -21,17 +21,8 @@ get_header(); ?>
 <main id="main" class="site-main grid " role="main">
 	<section class="main-index grid__col-md-8 grid__col-sm-9 grid__col-xs-12">
 		<header class="page-header">
-			<?php
-			global $wp_query;
-			$term = $wp_query->get_queried_object();
-			if ( 'Kevin Drum' === $term->name ) {
-				print '<img src="' . esc_url( get_stylesheet_directory_uri() ) . '/img/KEVIN.png"></img>';
-			} else {
-				print '<h1 class="page-title promo">';
-				print esc_html( $term->name );
-				print '</h1>';
-			}
-			?>
+			<img src="<?php echo esc_url( get_stylesheet_directory_uri() ); ?>/img/KEVIN.png"></img>
+			<h1 class="page-title visuallyhidden">Kevin Drum</h1>
 		</header><!-- .page-header -->
 
 		<?php if ( have_posts() ) { ?>

@@ -151,7 +151,7 @@ $shown_ids = array();
 			<section id="homepage-kdrum" class="grid">
 				<div id="homepage-kdrum-side" class="grid__col-md-8 grid__col-sm-12">
 					<h2>
-						<span class="promo"><a href="/blog/kevin-drum">Kevin Drum</a></span>
+						<span class="promo"><a href="/kevin-drum">Kevin Drum</a></span>
 					</h2>
 					<img class="banner" src="<?php echo esc_url( get_template_directory_uri() ); ?>/img/KEVIN.png" alt="Kevin Drum"></img>
 					<ul id="kdrum-post-list">
