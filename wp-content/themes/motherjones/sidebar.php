@@ -13,7 +13,7 @@ if ( ! is_active_sidebar( 'sidebar' ) ) {
 ?>
 <aside id="sidebar-right" class="grid__col-4 hidden-sm hidden-xs hidden-xxs">
 	<?php
-	if ( mj_is_article_type( 'blogpost', get_the_ID() ) ) {
+	if ( mj_is_content_type( 'blogpost', get_the_ID() ) ) {
 			dynamic_sidebar( 'sidebar-blog' );
 	} elseif ( is_tag( 'bite' ) ) {
 			dynamic_sidebar( 'sidebar-bite' );

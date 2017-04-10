@@ -118,7 +118,7 @@ $shown_ids = array();
 								'category_name' => $slug,
 								'tax_query' => array(
 									array(
-										'taxonomy' => 'mj_article_type',
+										'taxonomy' => 'mj_content_type',
 										'field' => 'slug',
 										'terms' => 'blogpost',
 										'operator' => 'NOT IN',
@@ -157,18 +157,7 @@ $shown_ids = array();
 					<ul id="kdrum-post-list">
 						<?php
 							$kdrum = new WP_Query( array(
-								'tax_query' => array(
-									array(
-										'taxonomy' => 'blog',
-										'field' => 'slug',
-										'terms' => 'kevin-drum',
-									),
-									array(
-										'taxonomy' => 'mj_article_type',
-										'field' => 'slug',
-										'terms' => 'blogpost',
-									),
-								),
+								'categorfy_name' => 'kevin-drum',
 								'posts_per_page' => 4,
 								'post_status' => 'publish',
 								'post__not_in' 	=> $shown_ids,
@@ -199,7 +188,7 @@ $shown_ids = array();
 						'tag' => 'photoessays',
 						'tax_query' => array(
 							array(
-								'taxonomy' => 'mj_article_type',
+								'taxonomy' => 'mj_content_type',
 								'field' => 'slug',
 								'terms' => 'blogpost',
 								'operator' => 'NOT IN',
@@ -241,7 +230,7 @@ $shown_ids = array();
 							'tag' => 'investigations',
 							'tax_query' => array(
 								array(
-									'taxonomy' => 'mj_article_type',
+									'taxonomy' => 'mj_content_type',
 									'field' => 'slug',
 									'terms' => 'blogpost',
 									'operator' => 'NOT IN',
