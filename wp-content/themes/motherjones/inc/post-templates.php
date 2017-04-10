@@ -36,10 +36,7 @@ function mj_content_type_meta_box( $post ) {
 	$terms = get_terms( 'mj_content_type', array(
 		'hide_empty' => false,
 	) );
-	$content_type = wp_get_object_terms( $post->ID, 'mj_content_type', array(
-		'orderby' => 'term_id',
-		'order' => 'ASC',
-	) );
+	$content_type = get_the_terms( $post->ID, 'mj_content_type' );
 	echo '<select name="mj_content_type" id="mj_content_type" class="dropdown">';
 	foreach ( $terms as $term ) {
 		if ( isset( $content_type[0] ) && ( $content_type[0]->name === $term->name ) ) {
