@@ -26,7 +26,7 @@ class mj_blog_pager extends WP_Widget {
 		global $post;
 
 		// Bail if this isn't a blog post.
-		if ( ! mj_is_article_type( 'blogpost', $post->ID ) ) {
+		if ( ! mj_is_content_type( 'blogpost', $post->ID ) ) {
 			return;
 		}
 		?>
