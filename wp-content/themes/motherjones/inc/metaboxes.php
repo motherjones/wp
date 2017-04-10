@@ -298,6 +298,7 @@ function mj_misc_social_toggles_meta_box_display( $post ) {
 	$fields = array(
 		'mj_google_standout' => 'Mark as Google News Standout?',
 		'mj_fb_instant_exclude' => 'Exclude from Facebook Instant?',
+		'mj_hide_ads' => 'Hide ads on this post?',
 	);
 	wp_nonce_field( 'mj_misc_social_toggles', 'mj_misc_social_toggles_nonce' );
 	foreach ( $fields as $field => $copy ) {
@@ -327,7 +328,7 @@ function mj_misc_social_toggles_save( $post_id, $post ) {
 		return $post_id;
 	}
 
-	$fields = array( 'mj_google_standout', 'mj_fb_instant_exclude' );
+	$fields = array( 'mj_google_standout', 'mj_fb_instant_exclude', 'mj_hide_ads' );
 
 	foreach ( $fields as $meta_key ) {
 		// Get the posted data and sanitize it for use as an HTML class.
