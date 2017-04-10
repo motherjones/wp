@@ -8,6 +8,8 @@
  * @subpackage Mother_Jones
  * @since Mother Jones 1.0
  */
+
+global $mj;
 ?>
 <!DOCTYPE html>
 <html <?php language_attributes(); ?> class="no-js">
@@ -44,25 +46,25 @@
 	} ?>
 	</script>
 
-	<link rel="apple-touch-icon-precomposed" sizes="57x57" href="<?php print get_template_directory_uri(); ?>/img/apple-touch-icon-57x57.png" />
-	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="<?php print get_template_directory_uri(); ?>/img/apple-touch-icon-114x114.png" />
-	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="<?php print get_template_directory_uri(); ?>/img/apple-touch-icon-72x72.png" />
-	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="<?php print get_template_directory_uri(); ?>/img/apple-touch-icon-144x144.png" />
-	<link rel="apple-touch-icon-precomposed" sizes="60x60" href="<?php print get_template_directory_uri(); ?>/img/apple-touch-icon-60x60.png" />
-	<link rel="apple-touch-icon-precomposed" sizes="120x120" href="<?php print get_template_directory_uri(); ?>/img/apple-touch-icon-120x120.png" />
-	<link rel="apple-touch-icon-precomposed" sizes="76x76" href="<?php print get_template_directory_uri(); ?>/img/apple-touch-icon-76x76.png" />
-	<link rel="apple-touch-icon-precomposed" sizes="152x152" href="<?php print get_template_directory_uri(); ?>/img/apple-touch-icon-152x152.png" />
-	<link rel="icon" type="image/png" href="<?php print get_template_directory_uri(); ?>/img/favicon-196x196.png" sizes="196x196" />
-	<link rel="icon" type="image/png" href="<?php print get_template_directory_uri(); ?>/img/favicon-96x96.png" sizes="96x96" />
-	<link rel="icon" type="image/png" href="<?php print get_template_directory_uri(); ?>/img/favicon-32x32.png" sizes="32x32" />
-	<link rel="icon" type="image/png" href="<?php print get_template_directory_uri(); ?>/img/favicon-128.png" sizes="128x128" />
+	<link rel="apple-touch-icon-precomposed" sizes="57x57" href="<?php echo esc_url( get_template_directory_uri() ); ?>/img/apple-touch-icon-57x57.png" />
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="<?php echo esc_url( get_template_directory_uri() ); ?>/img/apple-touch-icon-114x114.png" />
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="<?php echo esc_url( get_template_directory_uri() ); ?>/img/apple-touch-icon-72x72.png" />
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="<?php echo esc_url( get_template_directory_uri() ); ?>/img/apple-touch-icon-144x144.png" />
+	<link rel="apple-touch-icon-precomposed" sizes="60x60" href="<?php echo esc_url( get_template_directory_uri() ); ?>/img/apple-touch-icon-60x60.png" />
+	<link rel="apple-touch-icon-precomposed" sizes="120x120" href="<?php echo esc_url( get_template_directory_uri() ); ?>/img/apple-touch-icon-120x120.png" />
+	<link rel="apple-touch-icon-precomposed" sizes="76x76" href="<?php echo esc_url( get_template_directory_uri() ); ?>/img/apple-touch-icon-76x76.png" />
+	<link rel="apple-touch-icon-precomposed" sizes="152x152" href="<?php echo esc_url( get_template_directory_uri() ); ?>/img/apple-touch-icon-152x152.png" />
+	<link rel="icon" type="image/png" href="<?php echo esc_url( get_template_directory_uri() ); ?>/img/favicon-196x196.png" sizes="196x196" />
+	<link rel="icon" type="image/png" href="<?php echo esc_url( get_template_directory_uri() ); ?>/img/favicon-96x96.png" sizes="96x96" />
+	<link rel="icon" type="image/png" href="<?php echo esc_url( get_template_directory_uri() ); ?>/img/favicon-32x32.png" sizes="32x32" />
+	<link rel="icon" type="image/png" href="<?php echo esc_url( get_template_directory_uri() ); ?>/img/favicon-128.png" sizes="128x128" />
 	<meta name="application-name" content="Mother Jones Magazine"/>
 	<meta name="msapplication-TileColor" content="#FFFFFF" />
-	<meta name="msapplication-TileImage" content="<?php print get_template_directory_uri(); ?>/img/mstile-144x144.png" />
-	<meta name="msapplication-square70x70logo" content="<?php print get_template_directory_uri(); ?>/img/mstile-70x70.png" />
-	<meta name="msapplication-square150x150logo" content="<?php print get_template_directory_uri(); ?>/img/mstile-150x150.png" />
-	<meta name="msapplication-wide310x150logo" content="<?php print get_template_directory_uri(); ?>/img/mstile-310x150.png" />
-	<meta name="msapplication-square310x310logo" content="<?php print get_template_directory_uri(); ?>/img/mstile-310x310.png" />
+	<meta name="msapplication-TileImage" content="<?php echo esc_url( get_template_directory_uri() ); ?>/img/mstile-144x144.png" />
+	<meta name="msapplication-square70x70logo" content="<?php echo esc_url( get_template_directory_uri() ); ?>/img/mstile-70x70.png" />
+	<meta name="msapplication-square150x150logo" content="<?php echo esc_url( get_template_directory_uri() ); ?>/img/mstile-150x150.png" />
+	<meta name="msapplication-wide310x150logo" content="<?php echo esc_url( get_template_directory_uri() ); ?>/img/mstile-310x150.png" />
+	<meta name="msapplication-square310x310logo" content="<?php echo esc_url( get_template_directory_uri() ); ?>/img/mstile-310x310.png" />
 
 	<?php wp_head(); ?>
 </head>
@@ -71,7 +73,7 @@
 <?php get_template_part( 'template-parts/floating-navbar' ); ?>
 <?php dynamic_sidebar( 'page-top' ); ?>
 <div id="page" class="grid">
-	<?php if ( get_the_ID() ) : ?>
+	<?php if ( get_the_ID() && ! isset( $mj['meta']['mj_hide_ads'] ) ) : ?>
 		<div id="TopROS970x250" class="ad-unit grid__col-12" >
 			<script>
 	    	<!--

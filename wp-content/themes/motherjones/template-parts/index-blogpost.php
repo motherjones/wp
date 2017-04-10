@@ -1,3 +1,13 @@
+<?php
+/**
+ * The template for displaying blog posts on an archive page.
+ *
+ * @package WordPress
+ * @subpackage Mother_Jones
+ * @since Mother Jones 1.0
+ */
+
+?>
 <li class="article-item blog">
 	<div class="entry-header">
 		<h1 class="blog hed">
@@ -6,10 +16,10 @@
 			</a>
 		</h1>
 		<?php
-		if ( ! empty( $meta['mj_dek'][0] ) ) {
+		if ( $dek = get_post_meta( get_the_ID(), 'mj_dek', true ) ) {
 			printf(
 				'<h3 class="dek">%s</h3>',
-				esc_html( $meta['mj_dek'][0] )
+				esc_html( $dek )
 			);
 		}
 		?>
@@ -24,12 +34,6 @@
 	</div><!-- .entry-header -->
 
 	<?php
-	if ( isset( $meta['css'][0] ) ) {
-		printf(
-			'<style>%s</style>',
-			esc_html( $meta['css'][0] )
-		);
-	}
 		largo_hero();
 		the_content();
 	?>
@@ -37,12 +41,5 @@
 	<footer class="entry-footer">
 		<?php mj_share_tools( 'blog' );?>
 	</footer>
-	<?php
-	if ( ! empty( $meta['js'][0] ) ) {
-		printf(
-			'script>%s</script>',
-			$meta['js'][0]
-		);
-	}
-	?>
+
 </li>
