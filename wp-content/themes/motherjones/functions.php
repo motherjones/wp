@@ -259,6 +259,7 @@ if ( ! function_exists( 'mj_setup' ) ) {
 			'caption',
 		) );
 
+		/*
 		add_theme_support( 'mfi-reloaded', array(
 			'mj_title_image' => array(
 				'post_types' => array( 'post' ),
@@ -271,6 +272,16 @@ if ( ! function_exists( 'mj_setup' ) ) {
 				),
 			),
 		) );
+		*/
+		if ( class_exists( 'MultiPostThumbnails' ) ) {
+			new MultiPostThumbnails(
+				array(
+						'label' => 'Title Image',
+						'id' => 'mj_title_image',
+						'post_type' => 'post',
+				)
+			);
+		}
 
 		add_filter( 'tiny_mce_before_init', 'mj_wysiwyg_config' );
 

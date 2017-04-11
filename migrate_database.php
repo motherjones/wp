@@ -1200,12 +1200,12 @@ while ( $role = $roles_data->fetch(PDO::FETCH_ASSOC)) {
   $roles_insert->execute(Array(
     'a:1:{s:6:"author";s:1:"1";}',
     'wp_capabilities',
-    $user_id 
+    $user_id
   ));
   $roles_insert->execute(Array(
     2,
     'wp_user_level',
-    $user_id 
+    $user_id
   ));
 }
 $wp->commit();
@@ -1301,7 +1301,7 @@ VALUES ( ?, ?, ? )
 
 $wp->beginTransaction();
 foreach ( $author_name_to_author_meta as $author ) {
-  if ( array_key_exists('image_id', $author) 
+  if ( array_key_exists('image_id', $author)
     && array_key_exists('wp_id', $author)
   ) {
     $author_meta_insert->execute(array(
@@ -1320,7 +1320,7 @@ VALUES ( ?, ?, ? )
 ");
 $wp->beginTransaction();
 foreach ( $author_name_to_author_meta as $author ) {
-  if ( array_key_exists('image_id', $author) 
+  if ( array_key_exists('image_id', $author)
     && array_key_exists('wp_id', $author)
   ) {
     $author_image_meta_insert->execute(array(
@@ -1587,11 +1587,10 @@ VALUES (?, ?, ?)
 $wp->beginTransaction();
 foreach ( $title_meta_rows as $row ) {
 
-  $title_image_array = Array( 'mj_title_image' => $row['image_id'] );
   $title_meta_insert->execute(array(
     $row['nid'],
-    'mfi-reloaded-images',
-    serialize($title_image_array)
+    'post_mj_title_image_thumbnail_id',
+    $row['image_id']
   ) );
 
   $title_meta_insert->execute(array(
