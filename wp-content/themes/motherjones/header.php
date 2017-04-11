@@ -73,7 +73,7 @@ global $mj;
 <?php get_template_part( 'template-parts/floating-navbar' ); ?>
 <?php dynamic_sidebar( 'page-top' ); ?>
 <div id="page" class="grid">
-	<?php if ( get_the_ID() && ! isset( $mj['meta']['mj_hide_ads'] ) ) : ?>
+	<?php if ( ! is_home()  && ! isset( $mj['meta']['mj_hide_ads'] ) ) : ?>
 		<div id="TopROS970x250" class="ad-unit grid__col-12" >
 			<script>
 	    	<!--
