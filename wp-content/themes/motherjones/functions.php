@@ -259,20 +259,6 @@ if ( ! function_exists( 'mj_setup' ) ) {
 			'caption',
 		) );
 
-		/*
-		add_theme_support( 'mfi-reloaded', array(
-			'mj_title_image' => array(
-				'post_types' => array( 'post' ),
-				'labels' => array(
-					'name' => __( 'Title Image' ),
-					'set' => __( 'Set title image' ),
-					'remove' => __( 'Remove title image' ),
-					'popup_title' => __( 'Set Title Image' ),
-					'popup_select' => __( 'Set title image' ),
-				),
-			),
-		) );
-		*/
 		if ( class_exists( 'MultiPostThumbnails' ) ) {
 			new MultiPostThumbnails(
 				array(
