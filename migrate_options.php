@@ -48,7 +48,7 @@ $option_replace->execute(Array(
 $analytics_code = <<<'HTML'
 {"embed_code_enabled":"1","embed_code":"<script>\r\n  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){\r\n  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),\r\n  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)\r\n  })(window,document,'script','https:\/\/www.google-analytics.com\/analytics.js','ga');\r\n  ga('create', 'UA-2458520-1', 'auto');\r\n  var dimensionValue = 'Facebook_Instant';\r\n  ga('set', 'dimension2', dimensionValue);\r\n  ga('set', 'campaignSource', 'Facebook');\r\n  ga('set', 'campaignMedium', 'Social Instant Article');\r\n  ga('send', 'pageview');\r\n  ga('send', 'event', 'Author', \"$byline\", window.location.href);\r\n\r\n    var _sf_async_config={};\r\n    \/** CONFIGURATION START **\/ \r\n    _sf_async_config.uid = 10683;\r\n    _sf_async_config.domain = 'motherjones.com';\r\n    _sf_async_config.sections = ''; \r\n    _sf_async_config.authors = ''; \r\n    \/** CONFIGURATION END **\/ \r\n    window._sf_endpt = (new Date()).getTime();\r\n var _comscore = _comscore || [];\r\n _comscore.push({ c1: \"2\", c2: \"8027488\", comscorekw: \"fbia\" });\r\n (function() {\r\n   var s = document.createElement(\"script\"), el = document.getElementsByTagName(\"script\")[0]; s.async = true;\r\n   s.src = (document.location.protocol == \"https:\" ? \"https:\/\/sb\" : \"http:\/\/b\") + \".scorecardresearch.com\/beacon.js\";\r\n   el.parentNode.insertBefore(s, el);\r\n })();\r\n\r\n<\/script>"}
 HTML;
-$option_replace->execute(Array( 
+$option_replace->execute(Array(
   'instant-articles-option-analytics',
 	$analytics_code
 ));
@@ -88,14 +88,12 @@ $wp->commit();
 
 // Activate plugins
 $active_plugins = Array(
-  'mfi-reloaded-master/mfi-reloaded.php',
-  'coauthors/co-authors-plus.php',
+  'multiple-post-thumbnails/multi-post-thumbnails.php',
+  'co-authors-plus/co-authors-plus.php',
   'redirection/redirection.php',
   'zoninator/zoninator.php',
-  'mj_custom/mj_custom.php',
   'disqus-conditional-load/disqus-conditional-load.php',
   'fb-instant-articles/facebook-instant-articles.php',
-  'bwp-google-xml-sitemaps/bwp-simple-gxs.php',
 );
 $wp->beginTransaction();
 

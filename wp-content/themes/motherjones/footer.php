@@ -8,6 +8,8 @@
  * @subpackage Mother_Jones
  * @since Mother Jones 1.0
  */
+
+global $mj;
 ?>
 
 		</main>
@@ -54,28 +56,29 @@
 					) );
 					?>
 			</div>
+			<?php if ( ! isset( $mj['meta']['mj_hide_ads'] ) )  { ?>
+				<script language="javascript">
+				<!--  //FIXME make this check to see if it's an article or blogpost.
+				if ((typeof MJ_HideInContentAds === 'undefined') && (!(jQuery(".inline-right")[0])) && (!(jQuery(".inline-subnav")[0])))  {
+					ad_code({
+						desktop: true,
+						placement: 'InContentAdUnit',
+						height: 16,
+						doc_write: true,
+					});
+				}
 
-			<script language="javascript">
-			<!--  //FIXME make this check to see if it's an article or blogpost.
-			if ((typeof MJ_HideInContentAds === 'undefined') && (!(jQuery(".inline-right")[0])) && (!(jQuery(".inline-subnav")[0])))  {
-				ad_code({
-					desktop: true,
-					placement: 'InContentAdUnit',
-					height: 16,
-					doc_write: true,
-				});
-			}
-
-			if (typeof MJ_HideOverlayAds === 'undefined') {
-				ad_code({
-					desktop: true,
-					placement: 'overlay',
-					height: 67,
-					doc_write: true,
-				});
-			}
-			//-->
-			</script>
+				if (typeof MJ_HideOverlayAds === 'undefined') {
+					ad_code({
+						desktop: true,
+						placement: 'overlay',
+						height: 67,
+						doc_write: true,
+					});
+				}
+				//-->
+				</script>
+			<?php } ?>
 
 			<div id="bottom-donate" style="display:none">
 				<p>

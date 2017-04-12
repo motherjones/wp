@@ -73,7 +73,7 @@ d.vid `taxonomy`
 FROM mjd6.term_data d
 INNER JOIN mjd6.term_node n
 USING(tid)
-WHERE (d.vid = 9 OR d.vid = 2 OR d.vid = 1
+WHERE (d.vid = 9 OR d.vid = 2 OR d.vid = 1 OR d.vid = 5
     OR d.tid = 22221 OR d.tid = 23631 OR d.tid = 22491)
 ;
 '
@@ -100,33 +100,38 @@ while ( $row = $taxonomy_data->fetch(PDO::FETCH_ASSOC)) {
 	$tid = $row['term_id'];
 	$tax = $row['taxonomy'];
 	switch ($tax) {
-		case "9":
-      if ($tid === "16720" || $tid === "16734") { //is crime & justice or food
-        $tax = "category";
-        break;
-      }
-			$tax = "post_tag";
-			break;
-		case "2":
-			$tax = "blog";
-			break;
-		case "61": //media type
-      if ($tid === "22221") { //is photoessay
-        $tax = "post_tag";
-        break;
-      }
-      continue 2;
-		case "1":
+	case "9":
+		if ($tid === "16720" || $tid === "16734") { //is crime & justice or food
 			$tax = "category";
 			break;
-    case "5": //secondary tag
-      if ($tid === "23631" || $tid === "22491") { //bite or inquiring minds
-        $tax = "post_tag";
-        break;
-      }
-      continue 2;
-    default:
-      continue 2;
+		}
+		$tax = "post_tag";
+		break;
+	case "2":
+		$tax = "blog";
+		if ($tid === "14") { //is  kdrum
+			$tax = "category";
+		}
+		break;
+	case "61": //media type
+		if ($tid === "22221") { //is photoessay
+			$tax = "post_tag";
+			break;
+		}
+		continue 2;
+	case "1":
+		$tax = "category";
+		break;
+	case "5": //secondary tag
+		if ($tid === "23631" || $tid === "22491") { //bite or inquiring minds
+			$tax = "post_tag";
+			break;
+		}
+		$tax = "mj_secondary_tags";
+		break;
+		continue 2;
+	default:
+		continue 2;
 	}
 	$tax_insert->execute();
   $term_to_tax_term[$row['term_id']] = $wp->lastInsertId();
@@ -590,7 +595,7 @@ INSERT IGNORE INTO pantheon_wp.wp_term_taxonomy
 (term_id, taxonomy, description, parent)
 VALUES (
 ?,
-"mj_article_type",
+"mj_content_type",
 "",
 0
 )
@@ -1195,12 +1200,12 @@ while ( $role = $roles_data->fetch(PDO::FETCH_ASSOC)) {
   $roles_insert->execute(Array(
     'a:1:{s:6:"author";s:1:"1";}',
     'wp_capabilities',
-    $user_id 
+    $user_id
   ));
   $roles_insert->execute(Array(
     2,
     'wp_user_level',
-    $user_id 
+    $user_id
   ));
 }
 $wp->commit();
@@ -1296,7 +1301,7 @@ VALUES ( ?, ?, ? )
 
 $wp->beginTransaction();
 foreach ( $author_name_to_author_meta as $author ) {
-  if ( array_key_exists('image_id', $author) 
+  if ( array_key_exists('image_id', $author)
     && array_key_exists('wp_id', $author)
   ) {
     $author_meta_insert->execute(array(
@@ -1315,7 +1320,7 @@ VALUES ( ?, ?, ? )
 ");
 $wp->beginTransaction();
 foreach ( $author_name_to_author_meta as $author ) {
-  if ( array_key_exists('image_id', $author) 
+  if ( array_key_exists('image_id', $author)
     && array_key_exists('wp_id', $author)
   ) {
     $author_image_meta_insert->execute(array(
@@ -1582,11 +1587,10 @@ VALUES (?, ?, ?)
 $wp->beginTransaction();
 foreach ( $title_meta_rows as $row ) {
 
-  $title_image_array = Array( 'mj_title_image' => $row['image_id'] );
   $title_meta_insert->execute(array(
     $row['nid'],
-    'mfi-reloaded-images',
-    serialize($title_image_array)
+    'post_mj_title_image_thumbnail_id',
+    $row['image_id']
   ) );
 
   $title_meta_insert->execute(array(

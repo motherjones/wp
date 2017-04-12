@@ -14,10 +14,10 @@
  */
 function mj_exclude_blogs( $query ) {
 	if ( ! is_admin() && $query->is_main_query() ) {
-		if ( is_category() ) {
+		if ( is_category() || is_tag() ) {
 			$tax_query = $query->get( 'tax_query' ) ?: array();
 			$tax_query[] = array(
-				'taxonomy' => 'mj_article_type',
+				'taxonomy' => 'mj_content_type',
 				'field' => 'slug',
 				'terms' => 'blogpost',
 				'operator' => 'NOT IN',
