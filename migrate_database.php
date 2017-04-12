@@ -73,7 +73,7 @@ d.vid `taxonomy`
 FROM mjd6.term_data d
 INNER JOIN mjd6.term_node n
 USING(tid)
-WHERE (d.vid = 9 OR d.vid = 2 OR d.vid = 1 OR vid = 5
+WHERE (d.vid = 9 OR d.vid = 2 OR d.vid = 1 OR d.vid = 5
     OR d.tid = 22221 OR d.tid = 23631 OR d.tid = 22491)
 ;
 '
