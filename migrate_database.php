@@ -689,7 +689,10 @@ WHERE ID=?
 
 $wp->beginTransaction();
 while ( $content = $post_content->fetch(PDO::FETCH_NUM)) {
-	$content_insert->execute(Array($content[1], $content[0]));
+	$content_insert->execute(array(
+		preg_replace( '/\[\[nid:\d+]]/', '', $content[1] ),
+		$content[0],
+	));
 }
 $wp->commit();
 
@@ -722,7 +725,10 @@ $post_content->execute();
 
 $wp->beginTransaction();
 while ( $content = $post_content->fetch(PDO::FETCH_NUM)) {
-	$content_insert->execute(Array($content[1], $content[0]));
+	$content_insert->execute(array(
+		preg_replace( '/\[\[nid:\d+]]/', '', $content[1] ),
+		$content[0],
+	));
 }
 $wp->commit();
 
@@ -741,7 +747,10 @@ $post_content->execute();
 
 $wp->beginTransaction();
 while ( $content = $post_content->fetch(PDO::FETCH_NUM)) {
-	$content_insert->execute(Array($content[1], $content[0]));
+	$content_insert->execute(array(
+		preg_replace( '/\[\[nid:\d+]]/', '', $content[1] ),
+		$content[0],
+	));
 }
 $wp->commit();
 
