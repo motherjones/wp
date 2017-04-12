@@ -104,6 +104,7 @@ if ( isset( $title_img_meta['_media_credit'][0] ) && '' !== $title_img_meta['_me
 			<?php
 				mj_share_tools( 'bottom' );
 				dynamic_sidebar( 'content-end' );
+				do_action( 'post_end', get_post() );
 				comments_template();
 				if ( ! isset( $mj['meta']['mj_hide_ads'] ) ) {
 			?>

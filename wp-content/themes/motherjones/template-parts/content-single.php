@@ -30,6 +30,7 @@ $article_classes = 'hnews hentry item grid__col-md-8 grid__col-sm-12';
 
 	<footer class="entry-footer">
 		<?php
+			do_action( 'post_end', get_post() );
 			get_template_part( 'template-parts/newsletter-signup' );
 			mj_share_tools( 'bottom' );
 			dynamic_sidebar( 'content-end' );

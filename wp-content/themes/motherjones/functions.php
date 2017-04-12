@@ -299,14 +299,36 @@ function mj_content_width() {
 add_action( 'after_setup_theme', 'mj_content_width', 0 );
 
 /**
- * Sets the content width in pixels, based on the theme's design and stylesheet.
+ * Determines if a post should be shown on facebook instant.
  *
- * Priority 0 to make it available to lower priority callbacks.
- *
- * @param bool   $value should we post to fb instant or no?
+ * @param bool   $value should we post to fb instant or no.
  * @param object $post the post.
  */
 function mj_should_post_fb_instant( $value, $post ) {
 	return ! get_post_meta( $post->get_the_id(), 'mj_fb_instant_exclude', true );
 }
 add_filter( 'instant_articles_should_submit_post', 'mj_should_post_fb_instant', 10, 2 );
+
+/**
+ * Writes a little banner at the bottom of the post if it's a topic that has banners
+ *
+ * @param object $post the post.
+ */
+function mj_topical_banner( $post ) {
+	$mj_topic_banner_mapping = array(
+		'dark-money' => 'dark-money-footer-2.png',
+		'climate-desk' => 'CDWeb_block-UPDATED-Feb2017_1000px.png',
+	);
+	$terms = get_the_terms( $post->ID, 'post_tag' );
+	foreach ( $terms as $term ) {
+		if ( array_key_exists( $term->slug, $mj_topic_banner_mapping ) ) {
+			echo '<a href="/topics/' . rawurlencode( $term->slug ) . '">'
+				. '<img src="' . esc_url(get_template_directory_uri()
+				. '/img/topic_banners/' . rawurlencode( $mj_topic_banner_mapping[ $term->slug ] ) )
+					. '" ' .
+					'alt="More MotherJones reporting on ' . esc_attr( $term->name ) . '" />'
+			. '</a>';
+		}
+	}
+}
+add_action( 'post_end', 'mj_topical_banner' );
