@@ -58,6 +58,12 @@ if ( ! defined( 'MEDIUM_HEIGHT' ) ) {
 	define( 'MEDIUM_HEIGHT', 273 );
 }
 
+/**
+ * Setup the $mj utility var.
+ */
+if ( ! isset( $mj ) ) {
+	$mj = array();
+}
 
 /**
  * A class to represent the one true MJ theme instance

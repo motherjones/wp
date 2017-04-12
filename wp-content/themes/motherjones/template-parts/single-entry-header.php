@@ -7,7 +7,7 @@
  * @since Mother Jones 1.0
  */
 
-global $meta;
+global $mj;
 
 $header_classes = 'entry-header grid__col-12';
 if ( mj_is_content_type( 'blogpost', get_the_ID() ) ) {
@@ -17,10 +17,10 @@ if ( mj_is_content_type( 'blogpost', get_the_ID() ) ) {
 <header class="<?php echo esc_attr( $header_classes ); ?>">
 	<?php
 		the_title( '<h1 class="entry-title">', '</h1>' );
-	if ( ! empty( $meta['mj_dek'][0] ) && ! mj_is_content_type( 'blogpost', $post->ID ) ) {
+	if ( ! empty( $mj['meta']['mj_dek'][0] ) && ! mj_is_content_type( 'blogpost', $post->ID ) ) {
 		printf(
 			'<h3 class="dek">%s</h3>',
-			esc_html( $meta['mj_dek'][0] )
+			esc_html( $mj['meta']['mj_dek'][0] )
 		);
 	}
 	?>

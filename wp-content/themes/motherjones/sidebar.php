@@ -7,6 +7,7 @@
  * @since Mother Jones 1.0
  */
 
+global $mj;
 if ( ! is_active_sidebar( 'sidebar' ) ) {
 	return;
 }
@@ -22,17 +23,19 @@ if ( ! is_active_sidebar( 'sidebar' ) ) {
 	} else {
 			dynamic_sidebar( 'sidebar' );
 	}
+	if ( ! isset( $mj['meta']['mj_hide_ads'] ) ) {
 	?>
-	<script language="javascript">
-			<!--
-			if (typeof MJ_HideRightColAds === 'undefined') {
-				ad_code({
-					desktop: true,
-					placement: 'RightTopROS300x600',
-					height: 529,
-					doc_write: true,
-				});
-			}
-			//-->
-	</script>
+		<script language="javascript">
+				<!--
+				if (typeof MJ_HideRightColAds === 'undefined') {
+					ad_code({
+						desktop: true,
+						placement: 'RightTopROS300x600',
+						height: 529,
+						doc_write: true,
+					});
+				}
+				//-->
+		</script>
+	<?php } ?>
 </aside>

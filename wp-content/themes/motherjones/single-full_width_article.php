@@ -7,10 +7,11 @@
  * @since Mother Jones 1.0
  */
 
+global $mj;
+$mj['meta'] = get_post_meta( get_the_ID() );
 get_header();
 
 while ( have_posts() ) : the_post();
-	$meta = get_post_meta( get_the_ID() );
 ?>
 <header id="full-width-header" class="group">
 	<?php
@@ -20,10 +21,10 @@ while ( have_posts() ) : the_post();
 	}
 
 	the_title( '<h1 class="entry-title">', '</h1>' );
-	if ( ! empty( $meta['mj_dek'][0] ) ) {
+	if ( ! empty( $mj['meta']['mj_dek'][0] ) ) {
 		printf(
 			'<h3 class="dek">%s</h3>',
-			esc_html( $meta['mj_dek'][0] )
+			esc_html( $mj['meta']['mj_dek'][0] )
 		);
 	}
 	?>
@@ -70,10 +71,10 @@ if ( isset( $title_img_meta['_media_credit'][0] ) && '' !== $title_img_meta['_me
 <main id="main" class="site-main" role="main">
 	<article class="full-width entry-content">
 		<?php
-		if ( isset( $meta['css'][0] ) ) {
+		if ( isset( $mj['meta']['css'][0] ) ) {
 			printf(
 				'<style>%s</style>',
-				esc_html( $meta['css'][0] )
+				esc_html( $mj['meta']['css'][0] )
 			);
 		}
 		mj_share_tools( 'top' );
@@ -88,26 +89,28 @@ if ( isset( $title_img_meta['_media_credit'][0] ) && '' !== $title_img_meta['_me
 				mj_share_tools( 'bottom' );
 				dynamic_sidebar( 'content-end' );
 				comments_template();
+				if ( ! isset( $mj['meta']['mj_hide_ads'] ) ) {
 			?>
-			<script>
-				//<!--
-				if (typeof MJ_HideBottomMobile === 'undefined') {
-					ad_code({
-						placement: 'ym_869408549909503847',
-						yieldmo: true,
-						docwrite: true,
-						desktop: false,
-					});
-				}
-				//-->
-			</script>
+				<script>
+					//<!--
+					if (typeof MJ_HideBottomMobile === 'undefined') {
+						ad_code({
+							placement: 'ym_869408549909503847',
+							yieldmo: true,
+							docwrite: true,
+							desktop: false,
+						});
+					}
+					//-->
+				</script>
+			<?php } ?>
 		</footer><!-- .entry-footer -->
 	</article><!-- #post-## -->
 	<?php
-	if ( ! empty( $meta['js'][0] ) ) {
+	if ( ! empty( $mj['meta']['js'][0] ) ) {
 		printf(
 			'script>%s</script>',
-			esc_js( $meta['js'][0] )
+			esc_js( $mj['meta']['js'][0] )
 		);
 	}
 endwhile;
