@@ -3,7 +3,21 @@
  * Test Co-Authors Plus' modifications of author queries
  */
 
-class Test_Author_Queries extends CoAuthorsPlus_TestCase {
+class Test_Author_Queried_Object extends CoAuthorsPlus_TestCase {
+
+	/**
+	 * Set up for test
+	 *
+	 * Don't create tables as 'temporary'.
+	 *
+	 * @see https://github.com/Automattic/Co-Authors-Plus/issues/398
+	 */
+	function setUp() {
+		parent::setUp();
+
+		remove_filter( 'query', array( $this, '_create_temporary_tables' ) );
+		remove_filter( 'query', array( $this, '_drop_temporary_tables' ) );
+	}
 
 	/**
 	 * On author pages, the queried object should only be set
@@ -12,7 +26,7 @@ class Test_Author_Queries extends CoAuthorsPlus_TestCase {
 	 *
 	 * @see https://core.trac.wordpress.org/changeset/27290
 	 */
-	function test_author_queried_object_fix() {
+	function test__author_queried_object_fix() {
 		global $wp_rewrite, $coauthors_plus;
 
 		/**
