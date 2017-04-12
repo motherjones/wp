@@ -1,6 +1,7 @@
 <?php
 /**
- * Author Bio Widget
+ * Floating Ad Widget
+ * This generates the markup for the floating ad on single articles.
  *
  * @package WordPress
  * @subpackage Mother_Jones
@@ -23,6 +24,10 @@ class mj_floating_ad_widget extends WP_Widget {
 	 * Render the widget output
 	 */
 	function widget( $args, $instance ) {
+		global $mj;
+		if ( isset( $mj['meta']['mj_hide_ads'] ) ) {
+			return;
+		}
 		extract( $args );
 		echo $before_widget;
 		?>
