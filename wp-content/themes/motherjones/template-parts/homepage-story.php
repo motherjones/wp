@@ -1,6 +1,6 @@
 <?php
 /**
- * The template for displaying the second post in the homepage sections list.
+ * The template for displaying stories in most homepage sections.
  *
  * @package WordPress
  * @subpackage Mother_Jones
