@@ -23,19 +23,18 @@ if ( ! is_active_sidebar( 'sidebar' ) ) {
 	} else {
 			dynamic_sidebar( 'sidebar' );
 	}
-	if ( ! isset( $mj['meta']['mj_hide_ads'] ) ) {
+	the_widget(
+		'mj_ad_unit_widget',
+		array(
+			'placement' => 'RightTopROS300x600',
+			'height' => 529,
+			'docwrite' => 1,
+			'desktop' => 1,
+		),
+		array(
+			'before_widget' => '',
+			'after_widget' => '',
+		)
+	);
 	?>
-		<script language="javascript">
-				<!--
-				if (typeof MJ_HideRightColAds === 'undefined') {
-					ad_code({
-						desktop: true,
-						placement: 'RightTopROS300x600',
-						height: 529,
-						doc_write: true,
-					});
-				}
-				//-->
-		</script>
-	<?php } ?>
 </aside>

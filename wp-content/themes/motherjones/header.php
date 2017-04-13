@@ -73,22 +73,23 @@ global $mj;
 <?php get_template_part( 'template-parts/floating-navbar' ); ?>
 <?php dynamic_sidebar( 'page-top' ); ?>
 <div id="page" class="grid">
-	<?php if ( ! is_home()  && ! isset( $mj['meta']['mj_hide_ads'] ) ) : ?>
-		<div id="TopROS970x250" class="ad-unit grid__col-12" >
-			<script>
-	    	<!--
-	      if ( typeof MJ_HideTopROS970x250 === 'undefined' ) {
-	        ad_code({
-	          desktop: true,
-	          placement: 'TopROS970x250',
-	          height: 2473,
-	          doc_write: true,
-	        });
-	      }
-	      //-->
-	    </script>
-		</div>
-	<?php endif; ?>
+	<?php
+	if ( ! is_home() ) {
+		the_widget(
+			'mj_ad_unit_widget',
+			array(
+				'placement' => 'TopROS970x250',
+				'height' => 2473,
+				'docwrite' => 1,
+				'desktop' => 1,
+			),
+			array(
+				'before_widget' => '<div id="TopROS970x250" class="ad-unit grid__col-12" >',
+				'after_widget' => '</div>',
+			)
+		);
+	}
+	?>
 
 	<header id="masthead" class="site-header grid__col-12 grid__col--bleed" role="banner">
 		<?php get_template_part( 'template-parts/static-navbar' ); ?>

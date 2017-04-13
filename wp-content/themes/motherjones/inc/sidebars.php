@@ -8,7 +8,7 @@
  */
 function mj_widgets_init() {
 	$sidebars = array(
-		// the default widget areas
+		// the default widget areas.
 		array(
 			'name'          => __( 'Sidebar', 'mj' ),
 	 		'id'            => 'sidebar',
