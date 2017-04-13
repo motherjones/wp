@@ -49,18 +49,21 @@ $shown_ids = array();
 		</ul>
 	</section>
 
-	<section id="homepage-first-ad" class="homepage-ad grid__col-12 hidden-sm hidden-xs hidden-xxs">
-		<script language="javascript">
-			<!--
-			ad_code({
-				desktop: true,
-				placement: 'HomepageATF970x250',
-				height: 2473,
-				doc_write: true,
-			});
-			//-->
-		</script>
-	</section>
+	<?php
+		the_widget(
+			'mj_ad_unit_widget',
+			array(
+				'placement' => 'HomepageATF970x250',
+				'height' => 2473,
+				'docwrite' => 1,
+				'desktop' => 1,
+			),
+			array(
+				'before_widget' => '<section id="homepage-first-ad" class="homepage-ad grid__col-12 hidden-sm hidden-xs hidden-xxs">',
+				'after_widget' => '</section>',
+			)
+		);
+	?>
 
 	<section id="homepage-more-top-stories-section" class="grid">
 		<div id="homepage-more-top-stories-main" class="grid__col-md-8 grid__col-sm-12">
@@ -169,16 +172,21 @@ $shown_ids = array();
 							}
 						?>
 				</div>
-				<div id="homepage-kdrum-ad" class="grid__col-4 hidden-sm hidden-xs hidden-xxs">
-					<script>
-						ad_code({
-							desktop: true,
-							placement: 'RightTopHP300x600',
-							height: 529,
-							doc_write: true,
-						});
-					</script>
-				</div>
+				<?php
+					the_widget(
+						'mj_ad_unit_widget',
+						array(
+							'placement' => 'RightTopHP300x600',
+							'height' => 529,
+							'docwrite' => 1,
+							'desktop' => 1,
+						),
+						array(
+							'before_widget' => '<div id="homepage-kdrum-ad" class="grid__col-4 hidden-sm hidden-xs hidden-xxs">',
+							'after_widget' => '</div>',
+						)
+					);
+				?>
 			</section>
 
 			<section id="homepage-exposure" class="homepage-fullwidth grid grid--bleed">
@@ -207,18 +215,21 @@ $shown_ids = array();
 				</div>
 			</section>
 
-			<section id="homepage-second-ad" class="homepage-ad grid__col-12 hidden-sm hidden-xs hidden-xxs">
-					<script language="javascript">
-						<!--
-						ad_code({
-							desktop: true,
-							placement: 'HomepageBTF970x250',
-							height: 2473,
-							doc_write: true,
-						});
-						-->
-					</script>
-			</section>
+			<?php
+				the_widget(
+					'mj_ad_unit_widget',
+					array(
+						'placement' => 'HomepageBTF970x250',
+						'height' => 2473,
+						'docwrite' => 1,
+						'desktop' => 1,
+					),
+					array(
+						'before_widget' => '<section id="homepage-second-ad" class="homepage-ad grid__col-12 hidden-sm hidden-xs hidden-xxs">',
+						'after_widget' => '</section>',
+					)
+				);
+			?>
 
 			<section id="homepage-investigations">
 				<h2 class="promo">
@@ -249,13 +260,18 @@ $shown_ids = array();
 				</ul>
 			</section>
 		</main><!-- .site-main -->
-
-	<script>
-		ad_code({
-				yieldmo: true,
-				docwrite: true,
-				desktop: false,
-			placement: 'ym_869408549909503847',
-		});
-	</script>
-<?php get_footer(); ?>
+<?php
+the_widget(
+	'mj_ad_unit_widget',
+	array(
+		'placement' => 'ym_869408549909503847',
+		'yieldmo' => 1,
+		'docwrite' => 1,
+		'desktop' => 0,
+	),
+	array(
+		'before_widget' => '',
+		'after_widget' => '',
+	)
+);
+get_footer();

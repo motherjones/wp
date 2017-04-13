@@ -37,18 +37,19 @@ class mj_ad_unit_widget extends WP_Widget {
 					echo "placement: '" . esc_js( $instance['placement'] ) . "',\n";
 				}
 				if ( isset( $instance['height'] ) ) {
-					echo "height: " . esc_js( $instance['height'] ) . ",\n";
+					echo 'height: ' . esc_js( $instance['height'] ) . ",\n";
 				}
+				// Not optional, set to false if mobile.
 				if ( $instance['desktop'] ) {
 					echo "desktop: true,\n";
 				} else {
 					echo "desktop: false,\n";
 				}
-
-				if ( $instance['docwrite'] ) {
+				// These are optional.
+				if ( isset( $instance['docwrite'] ) && $instance['docwrite'] ) {
 					echo "docwrite: true,\n";
 				}
-				if ( $instance['yieldmo'] ) {
+				if ( isset( $instance['yieldmo'] ) && $instance['yieldmo'] ) {
 					echo "yieldmo: true,\n";
 				}
 				?>
