@@ -31,7 +31,7 @@ global $mj;
 	    $keyword_term_objs = get_the_tags( get_the_ID() );
 	    $keyword_term_objs[] = get_the_category( get_the_ID() )[0];
 	    $keyword_terms = [];
-	    $is_fullwidth = get_post_type() === 'mj_full_width';
+	    $is_fullwidth = mj_is_content_type( 'full_width_article', get_the_ID() );
 	    foreach ( $keyword_term_objs as $obj ) {
 			$keyword_terms[] = str_replace( '+', '_', $obj->slug );
 	    }
