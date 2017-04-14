@@ -36,13 +36,10 @@ module.exports = function(grunt) {
           cwd: 'js',
           src: [
             'ad_code.js',
-            'color-scheme-control.js',
-            'customize-preview.js',
             'functions.js',
             'html5.js',
-            'keyboard-image-navigation.js',
+            'avatars.js',
             'nav.js',
-            'skip-link-focus-fix.js',
             'video-embed.js',
             'featured-media.js',
             '!*.min.js'
