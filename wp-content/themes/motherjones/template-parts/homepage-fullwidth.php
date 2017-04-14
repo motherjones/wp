@@ -7,7 +7,7 @@
  * @since Mother Jones 1.0
  */
 
-global $fullwidth_title, $post;
+global $mj, $post;
 
 $post_thumbnail_id = get_post_thumbnail_id( $post->ID );
 if ( $post_thumbnail_id ) {
@@ -19,8 +19,8 @@ if ( $post_thumbnail_id ) {
 
 <div class="article-data">
 	<?php
-	if ( ! empty( $fullwidth_title ) ) {
-		echo '<h2 class="section-label"><span class="promo">' . esc_html( $fullwidth_title ) . '<span></h2>';
+	if ( isset( $mj['fullwidth_title'] ) && ! empty( $mj['fullwidth_title'] ) ) {
+		echo '<h2 class="section-label"><span class="promo">' . esc_html( $mj['fullwidth_title'] ) . '<span></h2>';
 	}
 
 	if ( ! empty( $post_thumbnail_id ) ) {
