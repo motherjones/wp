@@ -7,8 +7,8 @@ var noadblocking = true;
  * placement, string, the identifier for the ad
  * height, string, tells us how tall to make it. optional
  * yieldmo, boolean, let us know it's meant to be a yieldmo ad
- * doc_write, boolean, tells us to doc write it instead of placing it
- * element, jquery element, tells us where to put it. optional. 
+ * docwrite, boolean, tells us to doc write it instead of placing it
+ * element, jquery element, tells us where to put it. optional.
  *   places after current script if not specified
  **/
 var desktop_ads = (screen.width > 630);
@@ -16,8 +16,8 @@ var ad_class = desktop_ads ? 'ad_desktop' : 'ad_mobile';
 
 var ad_code = function(config) {
   if (   (!config.desktop && desktop_ads)
-      || (config.desktop && !desktop_ads) 
-     ) { 
+      || (config.desktop && !desktop_ads)
+     ) {
     return false;
   } //do not do desktop ads if we're not on desktop, do not do mobile ads if we're not on mobile
   config.ad = create_ad(config);
@@ -25,13 +25,13 @@ var ad_code = function(config) {
   place_ad(config)
     if ( config.yieldmo || config.placement.match(/ym_/) ) {
       ym_script();
-    } 
+    }
 }
 
 var create_ad = function(config) {
   if ( config.yieldmo || config.placement.match(/ym_/) ) {
     return yieldmo_code(config.placement);
-  } else if (config.doc_write) {
+  } else if (config.docwrite) {
     return adtech_script(config);
   } else {
     return adtech_code(config);
@@ -39,11 +39,11 @@ var create_ad = function(config) {
 }
 
 var place_ad = function(config) {
-  if (config.doc_write) {
+  if (config.docwrite) {
     document.write(config.ad);
-  } else if (config.element) { 
+  } else if (config.element) {
     config.element.after(jQuery(config.ad));
-  } else { 
+  } else {
     jQuery('script').last().after(jQuery(config.ad));
   }
 }
@@ -60,28 +60,28 @@ var ym_script = function() {
 var adtech_code = function(config) {
   var width = desktop_ads ? '970' : '300';
   var loc = desktop_ads ? '2473' : '170';
-  return '<div class="advertisement ' + ad_class 
+  return '<div class="advertisement ' + ad_class
     + '"><iframe scrolling="no" frameborder="0" marginheight="0" marginwidth="0" '
-    + 'height="250" width="' 
+    + 'height="250" width="'
     + width + '" src="'
-    + 'http://adserver.adtechus.com/adiframe/3.0/5443.1/4003031/0/'+ loc 
+    + 'http://adserver.adtechus.com/adiframe/3.0/5443.1/4003031/0/'+ loc
     + '/ADTECH;target=_blank'
     + adtech_url_params(config)
-    + '">' 
+    + '">'
     + '</iframe></div>';
 }
 
 var adtech_script = function(config) {
   return '<script language="javascript1.1" src="http://adserver.adtechus.com/addyn/3.0/5443.1/0/0/' +
-    escape(config.height)+'/ADTECH;loc=100;target=_blank' + 
+    escape(config.height)+'/ADTECH;loc=100;target=_blank' +
     adtech_url_params(config) +
     '"></script>'
-    ; 
+    ;
 }
 
 var adtech_url_params = function(config) {
-  var curDateTime = new Date(); 
-  var offset = -(curDateTime.getTimezoneOffset()); 
+  var curDateTime = new Date();
+  var offset = -(curDateTime.getTimezoneOffset());
   if (offset > 0) { offset = "+" + offset; }
   return ';alias=' + escape(config.placement) +
     ';key=' + escape(window.ad_keywords) +
@@ -89,12 +89,12 @@ var adtech_url_params = function(config) {
     ';kvuri=' + escape(window.location.pathname) +
     ';misc=' + curDateTime.getTime() +
     ';aduho=' + offset
-    ; 
+    ;
 }
 
 jQuery('document').ready(function() {
-  if (   (!is_post) 
-      || (desktop_ads && !is_fullwidth) 
+  if (   (!is_post)
+      || (desktop_ads && !is_fullwidth)
       || (typeof MJ_HideInContentAds !== "undefined") ) {
     return;
   }
@@ -114,11 +114,11 @@ var fullwidth_inline_ads = function() {
   var wordcount = 0;
   var words_before_ad_can_be_placed = 650;
   var ads_placed = 0;
-  var ads_desired = 10; 
+  var ads_desired = 10;
   var mobile_placement_prefix = 'InContentMob300x250_BB';
   var desktop_placement_prefix = 'InContent970_c';
-  var placement_prefix = desktop_ads 
-    ? desktop_placement_prefix 
+  var placement_prefix = desktop_ads
+    ? desktop_placement_prefix
     : mobile_placement_prefix;
   var ad_height = 250;
 
@@ -164,7 +164,7 @@ var inline_ads = function() {
       ad_code({
         element: jQuery(jQuery("article > p")[i]) ,
         placement: ym_codes[ads_placed],
-        desktop: false, //yea mobile only 
+        desktop: false, //yea mobile only
       });
       count_till_ad = separating_ps;
       ads_placed++;

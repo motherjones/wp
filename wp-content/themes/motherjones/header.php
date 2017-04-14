@@ -27,23 +27,24 @@ global $mj;
 	var is_fullwidth = false;
 
 	<?php
+	$keyword_terms = [];
+	$domain = $_SERVER['SERVER_NAME'];
+	$keyword_terms[] = substr( $domain, 0, strpos( $domain, '.' ) );
 	if ( is_singular() ) {
-	    $keyword_term_objs = get_the_tags( get_the_ID() );
-	    $keyword_term_objs[] = get_the_category( get_the_ID() )[0];
-	    $keyword_terms = [];
-	    $is_fullwidth = get_post_type() === 'mj_full_width';
-	    foreach ( $keyword_term_objs as $obj ) {
+		$keyword_term_objs = get_the_tags( get_the_ID() );
+		$keyword_term_objs[] = get_the_category( get_the_ID() )[0];
+		foreach ( $keyword_term_objs as $obj ) {
 			$keyword_terms[] = str_replace( '+', '_', $obj->slug );
-	    }
-		?>
-	    ad_keywords = '<?php print join( '+', $keyword_terms );?>';
-	    is_post = true;
-	    <?php if ( $is_fullwidth ) { print 'is_fullwidth = true;'; } ?>
-	<?php
-	} elseif ( is_archive() ) { ?>
-	  ad_keywords = '<?php print get_queried_object()->slug; ?>';
-	<?php
-	} ?>
+		}
+		echo "is_post = true;\n";
+		if ( mj_is_content_type( 'full_width_article', get_the_ID() ) ) {
+			echo "is_fullwidth = true;\n";
+		}
+	} elseif ( is_archive() ) {
+		$keyword_terms[] = get_queried_object()->slug;
+	}
+	echo "ad_keywords = '" . join( '+', $keyword_terms ) . "';";
+	?>
 	</script>
 
 	<link rel="apple-touch-icon-precomposed" sizes="57x57" href="<?php echo esc_url( get_template_directory_uri() ); ?>/img/apple-touch-icon-57x57.png" />
@@ -73,22 +74,23 @@ global $mj;
 <?php get_template_part( 'template-parts/floating-navbar' ); ?>
 <?php dynamic_sidebar( 'page-top' ); ?>
 <div id="page" class="grid">
-	<?php if ( ! is_home()  && ! isset( $mj['meta']['mj_hide_ads'] ) ) : ?>
-		<div id="TopROS970x250" class="ad-unit grid__col-12" >
-			<script>
-	    	<!--
-	      if ( typeof MJ_HideTopROS970x250 === 'undefined' ) {
-	        ad_code({
-	          desktop: true,
-	          placement: 'TopROS970x250',
-	          height: 2473,
-	          doc_write: true,
-	        });
-	      }
-	      //-->
-	    </script>
-		</div>
-	<?php endif; ?>
+	<?php
+	if ( ! is_home() ) {
+		the_widget(
+			'mj_ad_unit_widget',
+			array(
+				'placement' => 'TopROS970x250',
+				'height' => 2473,
+				'docwrite' => 1,
+				'desktop' => 1,
+			),
+			array(
+				'before_widget' => '<div id="TopROS970x250" class="ad-unit grid__col-12" >',
+				'after_widget' => '</div>',
+			)
+		);
+	}
+	?>
 
 	<header id="masthead" class="site-header grid__col-12 grid__col--bleed" role="banner">
 		<?php get_template_part( 'template-parts/static-navbar' ); ?>

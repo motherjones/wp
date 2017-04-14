@@ -22,16 +22,20 @@ get_header(); ?>
 
 						get_template_part( 'template-parts/content' );
 
-						if ( 5 === $posts_shown ) { ?>
-									<script>
-										ad_code({
-												yieldmo: true,
-											 docwrite: true,
-												desktop: false,
-											placement: 'ym_869408394552483686',
-										});
-									</script>
-							<?php
+						if ( 5 === $posts_shown ) {
+							the_widget(
+								'mj_ad_unit_widget',
+								array(
+									'placement' => 'ym_869408394552483686',
+									'yieldmo' => 1,
+									'docwrite' => 1,
+									'desktop' => 0,
+								),
+								array(
+									'before_widget' => '',
+									'after_widget' => '',
+								)
+							);
 						}
 
 						$posts_shown++;
@@ -52,24 +56,27 @@ get_header(); ?>
 				// If no content, include the "No posts found" template.
 } else {
 	get_template_part( 'template-parts/content', 'none' );
-}// End if().
+} // End if().
 				?>
 			</div>
 
 			<div id="sidebar-right">
-				<script language="javascript">
-						<!--
-						if ( typeof MJ_HideRightColAds === 'undefined' ) {
-							ad_code({
-								desktop: true,
-								placement: 'RightTopROS300x600',
-								height: 529,
-								doc_write: true,
-							});
-						}
-						//-->
-				</script>
-				<?php get_sidebar(); ?>
+				<?php
+				the_widget(
+					'mj_ad_unit_widget',
+					array(
+						'placement' => 'RightTopROS300x600',
+						'height' => 529,
+						'docwrite' => 1,
+						'desktop' => 1,
+					),
+					array(
+						'before_widget' => '',
+						'after_widget' => '',
+					)
+				);
+				get_sidebar();
+				?>
 			</div>
 		</main><!-- .site-main -->
 	</div><!-- .content-area -->

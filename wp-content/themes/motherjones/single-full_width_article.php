@@ -106,21 +106,20 @@ if ( isset( $title_img_meta['_media_credit'][0] ) && '' !== $title_img_meta['_me
 				dynamic_sidebar( 'content-end' );
 				do_action( 'post_end', get_post() );
 				comments_template();
-				if ( ! isset( $mj['meta']['mj_hide_ads'] ) ) {
+				the_widget(
+					'mj_ad_unit_widget',
+					array(
+						'placement' => 'ym_869408549909503847',
+						'yieldmo' => 1,
+						'docwrite' => 1,
+						'desktop' => 0,
+					),
+					array(
+						'before_widget' => '',
+						'after_widget' => '',
+					)
+				);
 			?>
-				<script>
-					//<!--
-					if (typeof MJ_HideBottomMobile === 'undefined') {
-						ad_code({
-							placement: 'ym_869408549909503847',
-							yieldmo: true,
-							docwrite: true,
-							desktop: false,
-						});
-					}
-					//-->
-				</script>
-			<?php } ?>
 		</footer><!-- .entry-footer -->
 	</article><!-- #post-## -->
 	<?php
