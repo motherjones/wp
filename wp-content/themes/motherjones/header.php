@@ -27,23 +27,24 @@ global $mj;
 	var is_fullwidth = false;
 
 	<?php
+	$keyword_terms = [];
+	$domain = $_SERVER['SERVER_NAME'];
+	$keyword_terms[] = substr( $domain, 0, strpos( $domain, '.' ) );
 	if ( is_singular() ) {
-	    $keyword_term_objs = get_the_tags( get_the_ID() );
-	    $keyword_term_objs[] = get_the_category( get_the_ID() )[0];
-	    $keyword_terms = [];
-	    $is_fullwidth = mj_is_content_type( 'full_width_article', get_the_ID() );
-	    foreach ( $keyword_term_objs as $obj ) {
+		$keyword_term_objs = get_the_tags( get_the_ID() );
+		$keyword_term_objs[] = get_the_category( get_the_ID() )[0];
+		foreach ( $keyword_term_objs as $obj ) {
 			$keyword_terms[] = str_replace( '+', '_', $obj->slug );
-	    }
-		?>
-	    ad_keywords = '<?php print join( '+', $keyword_terms );?>';
-	    is_post = true;
-	    <?php if ( $is_fullwidth ) { print 'is_fullwidth = true;'; } ?>
-	<?php
-	} elseif ( is_archive() ) { ?>
-	  ad_keywords = '<?php print get_queried_object()->slug; ?>';
-	<?php
-	} ?>
+		}
+		echo "is_post = true;\n";
+		if ( mj_is_content_type( 'full_width_article', get_the_ID() ) ) {
+			echo "is_fullwidth = true;\n";
+		}
+	} elseif ( is_archive() ) {
+		$keyword_terms[] = get_queried_object()->slug;
+	}
+	echo "ad_keywords = '" . join( '+', $keyword_terms ) . "';";
+	?>
 	</script>
 
 	<link rel="apple-touch-icon-precomposed" sizes="57x57" href="<?php echo esc_url( get_template_directory_uri() ); ?>/img/apple-touch-icon-57x57.png" />
