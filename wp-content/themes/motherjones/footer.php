@@ -56,29 +56,39 @@ global $mj;
 					) );
 					?>
 			</div>
-			<?php if ( ! isset( $mj['meta']['mj_hide_ads'] ) )  { ?>
-				<script language="javascript">
-				<!--  //FIXME make this check to see if it's an article or blogpost.
-				if ((typeof MJ_HideInContentAds === 'undefined') && (!(jQuery(".inline-right")[0])) && (!(jQuery(".inline-subnav")[0])))  {
-					ad_code({
-						desktop: true,
-						placement: 'InContentAdUnit',
-						height: 16,
-						doc_write: true,
-					});
+			<?php
+			if ( ! isset( $mj['meta']['mj_hide_ads'] ) ) {
+				if ( ! mj_is_content_type( 'full_width_article', get_the_ID() ) ) {
+					the_widget(
+						'mj_ad_unit_widget',
+						array(
+							'placement' => 'InContentAdUnit',
+							'height' => 16,
+							'docwrite' => 1,
+							'desktop' => 1,
+						),
+						array(
+							'before_widget' => '',
+							'after_widget' => '',
+						)
+					);
 				}
 
-				if (typeof MJ_HideOverlayAds === 'undefined') {
-					ad_code({
-						desktop: true,
-						placement: 'overlay',
-						height: 67,
-						doc_write: true,
-					});
-				}
-				//-->
-				</script>
-			<?php } ?>
+				the_widget(
+					'mj_ad_unit_widget',
+					array(
+						'placement' => 'overlay',
+						'height' => 67,
+						'docwrite' => 1,
+						'desktop' => 1,
+					),
+					array(
+						'before_widget' => '',
+						'after_widget' => '',
+					)
+				);
+			}
+			?>
 
 			<div id="bottom-donate" style="display:none">
 				<p>
