@@ -40,23 +40,6 @@ if ( ! function_exists( 'mj_enqueue' ) ) {
 		wp_script_add_data( 'mj-html5', 'conditional', 'lt ie 9' );
 
 		wp_enqueue_script(
-			'mj-skip-link-focus-fix',
-			get_template_directory_uri() . '/js/skip-link-focus-fix' . $suffix . '.js',
-			array(),
-			$version,
-			true
-		);
-
-		if ( is_singular() && wp_attachment_is_image() ) {
-			wp_enqueue_script(
-				'mj-keyboard-image-navigation',
-				get_template_directory_uri() . '/js/keyboard-image-navigation' . $suffix . '.js',
-				array( 'jquery' ),
-				$version
-			);
-		}
-
-		wp_enqueue_script(
 			'mj-script',
 			get_template_directory_uri() . '/js/functions' . $suffix . '.js',
 			array( 'jquery' ),
