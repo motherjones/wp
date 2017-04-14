@@ -48,31 +48,36 @@ get_header(); ?>
 					get_template_part( 'template-parts/content' );
 				}
 
-				if ( 5 === $posts_shown ) { ?>
-						<script>
-							if (typeof MJ_HideSectionAdMobile === 'undefined') {
-								ad_code({
-										yieldmo: true,
-										docwrite: true,
-										desktop: false,
-										placement: 'ym_869408394552483686',
-								});
-							}
-						</script>
-					<?php
-				} elseif ( 11 === $posts_shown ) { ?>
-							<script>
-								if (typeof MJ_HideSectionPage970x250BB1 === 'undefined') {
-									ad_code({
-											yieldmo: false,
-											docwrite: true,
-											desktop: true,
-											placement: 'SectionPage970x250BB1',
-									});
-								}
-							</script>
-					<?php
+				if ( 5 === $posts_shown ) {
+					the_widget(
+						'mj_ad_unit_widget',
+						array(
+							'placement' => 'ym_869408394552483686',
+							'yieldmo' => 1,
+							'docwrite' => 1,
+							'desktop' => 0,
+						),
+						array(
+							'before_widget' => '',
+							'after_widget' => '',
+						)
+					);
+				} elseif ( 11 === $posts_shown ) {
+					the_widget(
+						'mj_ad_unit_widget',
+						array(
+							'placement' => 'SectionPage970x250BB1',
+							'yieldmo' => 0,
+							'docwrite' => 1,
+							'desktop' => 1,
+						),
+						array(
+							'before_widget' => '',
+							'after_widget' => '',
+						)
+					);
 				}
+
 				$posts_shown++;
 				// End the loop.
 				endwhile;
@@ -98,14 +103,18 @@ get_header(); ?>
 	<?php get_sidebar(); ?>
 </main><!-- .site-main -->
 
-<script>
-	if (typeof MJ_HideBottomMobile === 'undefined') {
-		ad_code({
-			yieldmo: true,
-			docwrite: true,
-			desktop: false,
-			placement: 'ym_869408549909503847',
-		});
-	}
-</script>
-<?php get_footer(); ?>
+<?php
+the_widget(
+	'mj_ad_unit_widget',
+	array(
+		'placement' => 'ym_869408549909503847',
+		'yieldmo' => 1,
+		'docwrite' => 1,
+		'desktop' => 0,
+	),
+	array(
+		'before_widget' => '',
+		'after_widget' => '',
+	)
+);
+get_footer();

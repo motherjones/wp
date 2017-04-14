@@ -8,6 +8,8 @@
  * @subpackage Mother_Jones
  * @since Mother Jones 1.0
  */
+
+global $mj;
 ?>
 
 		</main>
@@ -54,28 +56,39 @@
 					) );
 					?>
 			</div>
+			<?php
+			if ( ! isset( $mj['meta']['mj_hide_ads'] ) ) {
+				if ( ! mj_is_content_type( 'full_width_article', get_the_ID() ) ) {
+					the_widget(
+						'mj_ad_unit_widget',
+						array(
+							'placement' => 'InContentAdUnit',
+							'height' => 16,
+							'docwrite' => 1,
+							'desktop' => 1,
+						),
+						array(
+							'before_widget' => '',
+							'after_widget' => '',
+						)
+					);
+				}
 
-			<script language="javascript">
-			<!--  //FIXME make this check to see if it's an article or blogpost.
-			if ((typeof MJ_HideInContentAds === 'undefined') && (!(jQuery(".inline-right")[0])) && (!(jQuery(".inline-subnav")[0])))  {
-				ad_code({
-					desktop: true,
-					placement: 'InContentAdUnit',
-					height: 16,
-					doc_write: true,
-				});
+				the_widget(
+					'mj_ad_unit_widget',
+					array(
+						'placement' => 'overlay',
+						'height' => 67,
+						'docwrite' => 1,
+						'desktop' => 1,
+					),
+					array(
+						'before_widget' => '',
+						'after_widget' => '',
+					)
+				);
 			}
-
-			if (typeof MJ_HideOverlayAds === 'undefined') {
-				ad_code({
-					desktop: true,
-					placement: 'overlay',
-					height: 67,
-					doc_write: true,
-				});
-			}
-			//-->
-			</script>
+			?>
 
 			<div id="bottom-donate" style="display:none">
 				<p>

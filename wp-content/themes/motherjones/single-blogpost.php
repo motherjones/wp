@@ -7,8 +7,8 @@
  * @since Mother Jones 1.0
  */
 
-global $meta;
-$meta = get_post_meta( get_the_ID() );
+global $mj;
+$mj['meta'] = get_post_meta( get_the_ID() );
 get_header();
 ?>
 
@@ -19,32 +19,37 @@ get_header();
 			get_sidebar();
 			comments_template();
 
-		if ( ! empty( $meta['js'][0] ) ) {
+		if ( ! empty( $mj['meta']['js'][0] ) ) {
 			printf(
 				'script>%s</script>',
-				$meta['js'][0]
+				esc_js( $mj['meta']['js'][0] )
 			);
 		}
-	?>
-	<script language="javascript">
-			<!--
-			if (typeof MJ_HideBottomROS970x250 === 'undefined') {
-				ad_code({
-					desktop: true,
-					placement: 'BottomROS970x250',
-					height: 2473,
-					doc_write: true,
-				});
-			}
-			if (typeof MJ_HideBottomMobile === 'undefined') {
-				ad_code({
-					placement: 'ym_869408549909503847',
-					yieldmo: true,
-					docwrite: true,
-					desktop: false,
-				});
-			}
-			//-->
-		</script>
-	<?php endwhile; ?>
+		the_widget(
+			'mj_ad_unit_widget',
+			array(
+				'placement' => 'BottomROS970x250',
+				'height' => 2473,
+				'docwrite' => 1,
+				'desktop' => 1,
+			),
+			array(
+				'before_widget' => '',
+				'after_widget' => '',
+			)
+		);
+		the_widget(
+			'mj_ad_unit_widget',
+			array(
+				'placement' => 'ym_869408549909503847',
+				'yieldmo' => 1,
+				'docwrite' => 1,
+				'desktop' => 0,
+			),
+			array(
+				'before_widget' => '',
+				'after_widget' => '',
+			)
+		);
+	endwhile; ?>
 <?php get_footer(); ?>

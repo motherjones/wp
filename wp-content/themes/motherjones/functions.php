@@ -58,6 +58,12 @@ if ( ! defined( 'MEDIUM_HEIGHT' ) ) {
 	define( 'MEDIUM_HEIGHT', 273 );
 }
 
+/**
+ * Setup the $mj utility var.
+ */
+if ( ! isset( $mj ) ) {
+	$mj = array();
+}
 
 /**
  * A class to represent the one true MJ theme instance
@@ -92,6 +98,7 @@ class MJ {
 			'/inc/enqueue.php',
 			'/inc/helpers.php',
 			'/inc/images.php',
+			'/inc/taxonomies.php',
 			'/inc/metaboxes.php',
 			'/inc/post-templates.php',
 			'/inc/sidebars.php',
@@ -258,18 +265,15 @@ if ( ! function_exists( 'mj_setup' ) ) {
 			'caption',
 		) );
 
-		add_theme_support( 'mfi-reloaded', array(
-			'mj_title_image' => array(
-				'post_types' => array( 'post' ),
-				'labels' => array(
-					'name' => __( 'Title Image' ),
-					'set' => __( 'Set title image' ),
-					'remove' => __( 'Remove title image' ),
-					'popup_title' => __( 'Set Title Image' ),
-					'popup_select' => __( 'Set title image' ),
-				),
-			),
-		) );
+		if ( class_exists( 'MultiPostThumbnails' ) ) {
+			new MultiPostThumbnails(
+				array(
+						'label' => 'Title Image',
+						'id' => 'mj_title_image',
+						'post_type' => 'post',
+				)
+			);
+		}
 
 		add_filter( 'tiny_mce_before_init', 'mj_wysiwyg_config' );
 
@@ -295,11 +299,9 @@ function mj_content_width() {
 add_action( 'after_setup_theme', 'mj_content_width', 0 );
 
 /**
- * Sets the content width in pixels, based on the theme's design and stylesheet.
+ * Determines if a post should be shown on facebook instant.
  *
- * Priority 0 to make it available to lower priority callbacks.
- *
- * @param bool   $value should we post to fb instant or no?
+ * @param bool   $value should we post to fb instant or no.
  * @param object $post the post.
  */
 function mj_should_post_fb_instant( $value, $post ) {
@@ -307,3 +309,26 @@ function mj_should_post_fb_instant( $value, $post ) {
 }
 add_filter( 'instant_articles_should_submit_post', 'mj_should_post_fb_instant', 10, 2 );
 
+/**
+ * Writes a little banner at the bottom of the post if it's a topic that has banners
+ *
+ * @param object $post the post.
+ */
+function mj_topical_banner( $post ) {
+	$mj_topic_banner_mapping = array(
+		'dark-money' => 'dark-money-footer-2.png',
+		'climate-desk' => 'CDWeb_block-UPDATED-Feb2017_1000px.png',
+	);
+	$terms = get_the_terms( $post->ID, 'post_tag' );
+	foreach ( $terms as $term ) {
+		if ( array_key_exists( $term->slug, $mj_topic_banner_mapping ) ) {
+			echo '<a href="/topics/' . rawurlencode( $term->slug ) . '">'
+				. '<img src="' . esc_url(get_template_directory_uri()
+				. '/img/topic_banners/' . rawurlencode( $mj_topic_banner_mapping[ $term->slug ] ) )
+					. '" ' .
+					'alt="More MotherJones reporting on ' . esc_attr( $term->name ) . '" />'
+			. '</a>';
+		}
+	}
+}
+add_action( 'post_end', 'mj_topical_banner' );

@@ -103,7 +103,7 @@ class MJ_social_tags {
 		$story_social_data [] = array(
 			'image',
 			get_the_post_thumbnail_url( null, 'social_card' )
-			?: ( has_term( 'kevin-drum', 'blog' )
+			?: ( has_term( 'kevin-drum', 'category' )
 				? get_template_directory_uri() . '/img/drum_1024.jpg'
 				: get_template_directory_uri() . '/img/mojo_nomaster.jpg' ),
 		);

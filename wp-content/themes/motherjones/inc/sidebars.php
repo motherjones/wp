@@ -8,7 +8,7 @@
  */
 function mj_widgets_init() {
 	$sidebars = array(
-		// the default widget areas
+		// the default widget areas.
 		array(
 			'name'          => __( 'Sidebar', 'mj' ),
 	 		'id'            => 'sidebar',
@@ -92,6 +92,8 @@ function mj_widgets() {
 		'mj_related_articles' => '/inc/widgets/mj-related-articles.php',
 		'mj_blog_pager' => '/inc/widgets/mj-blog-pager.php',
 		'mj_top_stories_widget' => '/inc/widgets/mj-top-stories.php',
+		'mj_floating_ad_widget' => '/inc/widgets/mj-floating-ad.php',
+		'mj_ad_unit_widget' => '/inc/widgets/mj-ad-unit.php',
 	);
 	foreach ( $register as $key => $val ) {
 		require_once( get_template_directory() . $val );

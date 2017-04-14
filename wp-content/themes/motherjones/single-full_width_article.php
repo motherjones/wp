@@ -7,23 +7,27 @@
  * @since Mother Jones 1.0
  */
 
+global $mj;
+$mj['meta'] = get_post_meta( get_the_ID() );
 get_header();
 
 while ( have_posts() ) : the_post();
-	$meta = get_post_meta( get_the_ID() );
 ?>
 <header id="full-width-header" class="group">
 	<?php
-	$has_image = mfi_reloaded_has_image( 'mj_title_image' );
+	$has_image = false;
+	if ( class_exists( 'MultiPostThumbnails' ) && MultiPostThumbnails::has_post_thumbnail( 'post', 'mj_title_image' ) ) {
+		$has_image = true;
+	}
 	if ( $has_image ) {
 		echo '<div id="full-width-header-data">';
 	}
 
 	the_title( '<h1 class="entry-title">', '</h1>' );
-	if ( ! empty( $meta['mj_dek'][0] ) ) {
+	if ( ! empty( $mj['meta']['mj_dek'][0] ) ) {
 		printf(
 			'<h3 class="dek">%s</h3>',
-			esc_html( $meta['mj_dek'][0] )
+			esc_html( $mj['meta']['mj_dek'][0] )
 		);
 	}
 	?>
@@ -39,7 +43,16 @@ while ( have_posts() ) : the_post();
 	if ( $has_image ) { ?>
 		</div>
 		<div id="full-width-header-image">
-			<?php mfi_reloaded_the_image( 'mj_title_image', 'full_width_giant' ); ?>
+			<?php
+			if ( class_exists( 'MultiPostThumbnails' ) ) {
+		    MultiPostThumbnails::the_post_thumbnail(
+		        get_post_type(),
+		        'mj_title_image',
+						get_the_ID(),
+						'full_width_giant'
+		    );
+			}
+			?>
 		</div>
 	<?php
 	}
@@ -48,8 +61,12 @@ while ( have_posts() ) : the_post();
 
 <?php
 // Title image credit.
-$title_img_id = mfi_reloaded_get_image_id( 'mj_title_image', get_the_ID() );
-$title_img_meta = get_post_custom( $title_img_id );
+if ( class_exists( 'MultiPostThumbnails' ) ) {
+	$title_img_id = MultiPostThumbnails::get_post_thumbnail_id( 'post', 'mj_title_image', get_the_ID() );
+}
+if ( isset( $title_img_id ) ) {
+	$title_img_meta = get_post_custom( $title_img_id );
+}
 if ( isset( $title_img_meta['_media_credit'][0] ) && '' !== $title_img_meta['_media_credit'][0] ) {
 	if ( isset( $title_img_meta['_media_credit_url'][0] ) && '' !== $title_img_meta['_media_credit_url'][0] ) {
 		printf(
@@ -70,10 +87,10 @@ if ( isset( $title_img_meta['_media_credit'][0] ) && '' !== $title_img_meta['_me
 <main id="main" class="site-main" role="main">
 	<article class="full-width entry-content">
 		<?php
-		if ( isset( $meta['css'][0] ) ) {
+		if ( isset( $mj['meta']['css'][0] ) ) {
 			printf(
 				'<style>%s</style>',
-				esc_html( $meta['css'][0] )
+				esc_html( $mj['meta']['css'][0] )
 			);
 		}
 		mj_share_tools( 'top' );
@@ -87,27 +104,29 @@ if ( isset( $title_img_meta['_media_credit'][0] ) && '' !== $title_img_meta['_me
 			<?php
 				mj_share_tools( 'bottom' );
 				dynamic_sidebar( 'content-end' );
+				do_action( 'post_end', get_post() );
 				comments_template();
+				the_widget(
+					'mj_ad_unit_widget',
+					array(
+						'placement' => 'ym_869408549909503847',
+						'yieldmo' => 1,
+						'docwrite' => 1,
+						'desktop' => 0,
+					),
+					array(
+						'before_widget' => '',
+						'after_widget' => '',
+					)
+				);
 			?>
-			<script>
-				//<!--
-				if (typeof MJ_HideBottomMobile === 'undefined') {
-					ad_code({
-						placement: 'ym_869408549909503847',
-						yieldmo: true,
-						docwrite: true,
-						desktop: false,
-					});
-				}
-				//-->
-			</script>
 		</footer><!-- .entry-footer -->
 	</article><!-- #post-## -->
 	<?php
-	if ( ! empty( $meta['js'][0] ) ) {
+	if ( ! empty( $mj['meta']['js'][0] ) ) {
 		printf(
 			'script>%s</script>',
-			esc_js( $meta['js'][0] )
+			esc_js( $mj['meta']['js'][0] )
 		);
 	}
 endwhile;

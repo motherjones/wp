@@ -2,7 +2,7 @@
 @import "vendor/reflex/reflex/mixins";
 @import "vendor/reflex/reflex/helpers";
 
-.mj_article_type-full_width_article {
+.mj_content_type-full_width_article {
   #page {
     width: 100%;
     @media only screen and (max-width: $reflex-sm) {
@@ -115,7 +115,7 @@
       margin-left: 15px;
       text-align: left;
       @include setupAutoCols();
-      width: percentage( 4 / 12 )!important;
+      width: 29%!important;
       * {
         text-align: left;
       }

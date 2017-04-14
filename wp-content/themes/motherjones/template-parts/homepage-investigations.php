@@ -7,13 +7,11 @@
  * @since Mother Jones 1.0
  */
 
-global $post;
-
-$post_thumbnail_id = get_post_thumbnail_id( $post->ID );
 ?>
 
 <li class="article-item grid__col-md-6 grid__col-sm-12">
 	<?php
+	$post_thumbnail_id = get_post_thumbnail_id( $post->ID );
 	if ( $post_thumbnail_id ) {
 		echo '<div class="article-image"><a href="' . esc_url( get_permalink() ) . '">';
 		the_post_thumbnail( 'medium' );

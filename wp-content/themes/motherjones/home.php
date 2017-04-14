@@ -15,7 +15,7 @@
  */
 
 get_header();
-global $fullwidth_title;
+global $mj;
 
 $shown_ids = array();
 ?>
@@ -42,25 +42,28 @@ $shown_ids = array();
 			for ( $i = 0; $i < 3; $i++ ) {
 				$top_stories->the_post();
 				$shown_ids[] = get_the_ID();
-				get_template_part( 'template-parts/homepage-top-story-side' );
+				get_template_part( 'template-parts/homepage-story' );
 			}
 		}
 		?>
 		</ul>
 	</section>
 
-	<section id="homepage-first-ad" class="homepage-ad grid__col-12 hidden-sm hidden-xs hidden-xxs">
-		<script language="javascript">
-			<!--
-			ad_code({
-				desktop: true,
-				placement: 'HomepageATF970x250',
-				height: 2473,
-				doc_write: true,
-			});
-			//-->
-		</script>
-	</section>
+	<?php
+		the_widget(
+			'mj_ad_unit_widget',
+			array(
+				'placement' => 'HomepageATF970x250',
+				'height' => 2473,
+				'docwrite' => 1,
+				'desktop' => 1,
+			),
+			array(
+				'before_widget' => '<section id="homepage-first-ad" class="homepage-ad grid__col-12 hidden-sm hidden-xs hidden-xxs">',
+				'after_widget' => '</section>',
+			)
+		);
+	?>
 
 	<section id="homepage-more-top-stories-section" class="grid">
 		<div id="homepage-more-top-stories-main" class="grid__col-md-8 grid__col-sm-12">
@@ -73,14 +76,14 @@ $shown_ids = array();
 				for ( $i = 0; $i < 6; $i++ ) {
 					$top_stories->the_post();
 					$shown_ids[] = get_the_ID();
-					get_template_part( 'template-parts/homepage-top-story-side' );
+					get_template_part( 'template-parts/homepage-story' );
 				}
 			}
 			?>
 			</ul>
 			</div>
 			<div id="homepage-more-stories-sidebar" class="grid__col-4 hidden-sm hidden-xs hidden-xxs">
-		<?php dynamic_sidebar( 'homepage-more-top-stories' ); ?>
+				<?php dynamic_sidebar( 'homepage-more-top-stories' ); ?>
 			</div>
 		</section>
 
@@ -95,7 +98,7 @@ $shown_ids = array();
 					);
 					$featured_story->the_post();
 					$shown_ids[] = get_the_ID();
-					$fullwidth_title = 'Featured';
+					$mj['fullwidth_title'] = 'Featured';
 					get_template_part( 'template-parts/homepage-fullwidth' );
 				?>
 			</div>
@@ -118,7 +121,7 @@ $shown_ids = array();
 								'category_name' => $slug,
 								'tax_query' => array(
 									array(
-										'taxonomy' => 'mj_article_type',
+										'taxonomy' => 'mj_content_type',
 										'field' => 'slug',
 										'terms' => 'blogpost',
 										'operator' => 'NOT IN',
@@ -128,16 +131,13 @@ $shown_ids = array();
 								'post__not_in' 	=> $shown_ids,
 							) );
 							if ( $cat_query->have_posts() ) {
-								$count = 1;
+								$mj['count'] = 1;
 								while ( $cat_query->have_posts() ) : $cat_query->the_post();
 									$shown_ids[] = get_the_ID();
-									if ( 1 === $count ) {
-										get_template_part( 'template-parts/homepage-section-first' );
-										$count++;
-									} else {
-										get_template_part( 'template-parts/homepage-section' );
-									}
+									get_template_part( 'template-parts/homepage-story' );
+									$mj['count']++;
 								endwhile;
+								unset( $mj['count'] );
 							}
 							?>
 						</ul>
@@ -151,24 +151,13 @@ $shown_ids = array();
 			<section id="homepage-kdrum" class="grid">
 				<div id="homepage-kdrum-side" class="grid__col-md-8 grid__col-sm-12">
 					<h2>
-						<span class="promo"><a href="/blog/kevin-drum">Kevin Drum</a></span>
+						<span class="promo"><a href="/kevin-drum">Kevin Drum</a></span>
 					</h2>
 					<img class="banner" src="<?php echo esc_url( get_template_directory_uri() ); ?>/img/KEVIN.png" alt="Kevin Drum"></img>
 					<ul id="kdrum-post-list">
 						<?php
 							$kdrum = new WP_Query( array(
-								'tax_query' => array(
-									array(
-										'taxonomy' => 'blog',
-										'field' => 'slug',
-										'terms' => 'kevin-drum',
-									),
-									array(
-										'taxonomy' => 'mj_article_type',
-										'field' => 'slug',
-										'terms' => 'blogpost',
-									),
-								),
+								'category_name' => 'kevin-drum',
 								'posts_per_page' => 4,
 								'post_status' => 'publish',
 								'post__not_in' 	=> $shown_ids,
@@ -176,20 +165,25 @@ $shown_ids = array();
 							while ( $kdrum->have_posts() ) {
 								$kdrum->the_post();
 								$shown_ids[] = get_the_ID();
-								get_template_part( 'template-parts/homepage-kdrum-story' );
+								get_template_part( 'template-parts/homepage-story' );
 							}
 						?>
 				</div>
-				<div id="homepage-kdrum-ad" class="grid__col-4 hidden-sm hidden-xs hidden-xxs">
-					<script>
-						ad_code({
-							desktop: true,
-							placement: 'RightTopHP300x600',
-							height: 529,
-							doc_write: true,
-						});
-					</script>
-				</div>
+				<?php
+					the_widget(
+						'mj_ad_unit_widget',
+						array(
+							'placement' => 'RightTopHP300x600',
+							'height' => 529,
+							'docwrite' => 1,
+							'desktop' => 1,
+						),
+						array(
+							'before_widget' => '<div id="homepage-kdrum-ad" class="grid__col-4 hidden-sm hidden-xs hidden-xxs">',
+							'after_widget' => '</div>',
+						)
+					);
+				?>
 			</section>
 
 			<section id="homepage-exposure" class="homepage-fullwidth grid grid--bleed">
@@ -199,7 +193,7 @@ $shown_ids = array();
 						'tag' => 'photoessays',
 						'tax_query' => array(
 							array(
-								'taxonomy' => 'mj_article_type',
+								'taxonomy' => 'mj_content_type',
 								'field' => 'slug',
 								'terms' => 'blogpost',
 								'operator' => 'NOT IN',
@@ -211,25 +205,28 @@ $shown_ids = array();
 					if ( $exposure_story->have_posts() ) {
 						$exposure_story->the_post();
 						$shown_ids[] = get_the_ID();
-						$fullwidth_title = 'Exposure';
+						$mj['fullwidth_title'] = 'Exposure';
 						get_template_part( 'template-parts/homepage-fullwidth' );
 					}
 				?>
 				</div>
 			</section>
 
-			<section id="homepage-second-ad" class="homepage-ad grid__col-12 hidden-sm hidden-xs hidden-xxs">
-					<script language="javascript">
-						<!--
-						ad_code({
-							desktop: true,
-							placement: 'HomepageBTF970x250',
-							height: 2473,
-							doc_write: true,
-						});
-						-->
-					</script>
-			</section>
+			<?php
+				the_widget(
+					'mj_ad_unit_widget',
+					array(
+						'placement' => 'HomepageBTF970x250',
+						'height' => 2473,
+						'docwrite' => 1,
+						'desktop' => 1,
+					),
+					array(
+						'before_widget' => '<section id="homepage-second-ad" class="homepage-ad grid__col-12 hidden-sm hidden-xs hidden-xxs">',
+						'after_widget' => '</section>',
+					)
+				);
+			?>
 
 			<section id="homepage-investigations">
 				<h2 class="promo">
@@ -241,7 +238,7 @@ $shown_ids = array();
 							'tag' => 'investigations',
 							'tax_query' => array(
 								array(
-									'taxonomy' => 'mj_article_type',
+									'taxonomy' => 'mj_content_type',
 									'field' => 'slug',
 									'terms' => 'blogpost',
 									'operator' => 'NOT IN',
@@ -260,13 +257,18 @@ $shown_ids = array();
 				</ul>
 			</section>
 		</main><!-- .site-main -->
-
-	<script>
-		ad_code({
-				yieldmo: true,
-				docwrite: true,
-				desktop: false,
-			placement: 'ym_869408549909503847',
-		});
-	</script>
-<?php get_footer(); ?>
+<?php
+the_widget(
+	'mj_ad_unit_widget',
+	array(
+		'placement' => 'ym_869408549909503847',
+		'yieldmo' => 1,
+		'docwrite' => 1,
+		'desktop' => 0,
+	),
+	array(
+		'before_widget' => '',
+		'after_widget' => '',
+	)
+);
+get_footer();
