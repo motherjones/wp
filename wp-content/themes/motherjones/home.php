@@ -15,7 +15,7 @@
  */
 
 get_header();
-global $fullwidth_title;
+global $mj;
 
 $shown_ids = array();
 ?>
@@ -42,7 +42,7 @@ $shown_ids = array();
 			for ( $i = 0; $i < 3; $i++ ) {
 				$top_stories->the_post();
 				$shown_ids[] = get_the_ID();
-				get_template_part( 'template-parts/homepage-top-story-side' );
+				get_template_part( 'template-parts/homepage-story' );
 			}
 		}
 		?>
@@ -76,14 +76,14 @@ $shown_ids = array();
 				for ( $i = 0; $i < 6; $i++ ) {
 					$top_stories->the_post();
 					$shown_ids[] = get_the_ID();
-					get_template_part( 'template-parts/homepage-top-story-side' );
+					get_template_part( 'template-parts/homepage-story' );
 				}
 			}
 			?>
 			</ul>
 			</div>
 			<div id="homepage-more-stories-sidebar" class="grid__col-4 hidden-sm hidden-xs hidden-xxs">
-		<?php dynamic_sidebar( 'homepage-more-top-stories' ); ?>
+				<?php dynamic_sidebar( 'homepage-more-top-stories' ); ?>
 			</div>
 		</section>
 
@@ -98,7 +98,7 @@ $shown_ids = array();
 					);
 					$featured_story->the_post();
 					$shown_ids[] = get_the_ID();
-					$fullwidth_title = 'Featured';
+					$mj['fullwidth_title'] = 'Featured';
 					get_template_part( 'template-parts/homepage-fullwidth' );
 				?>
 			</div>
@@ -131,16 +131,13 @@ $shown_ids = array();
 								'post__not_in' 	=> $shown_ids,
 							) );
 							if ( $cat_query->have_posts() ) {
-								$count = 1;
+								$mj['count'] = 1;
 								while ( $cat_query->have_posts() ) : $cat_query->the_post();
 									$shown_ids[] = get_the_ID();
-									if ( 1 === $count ) {
-										get_template_part( 'template-parts/homepage-section-first' );
-										$count++;
-									} else {
-										get_template_part( 'template-parts/homepage-section' );
-									}
+									get_template_part( 'template-parts/homepage-story' );
+									$mj['count']++;
 								endwhile;
+								unset( $mj['count'] );
 							}
 							?>
 						</ul>
@@ -160,7 +157,7 @@ $shown_ids = array();
 					<ul id="kdrum-post-list">
 						<?php
 							$kdrum = new WP_Query( array(
-								'categorfy_name' => 'kevin-drum',
+								'category_name' => 'kevin-drum',
 								'posts_per_page' => 4,
 								'post_status' => 'publish',
 								'post__not_in' 	=> $shown_ids,
@@ -168,7 +165,7 @@ $shown_ids = array();
 							while ( $kdrum->have_posts() ) {
 								$kdrum->the_post();
 								$shown_ids[] = get_the_ID();
-								get_template_part( 'template-parts/homepage-kdrum-story' );
+								get_template_part( 'template-parts/homepage-story' );
 							}
 						?>
 				</div>
@@ -208,7 +205,7 @@ $shown_ids = array();
 					if ( $exposure_story->have_posts() ) {
 						$exposure_story->the_post();
 						$shown_ids[] = get_the_ID();
-						$fullwidth_title = 'Exposure';
+						$mj['fullwidth_title'] = 'Exposure';
 						get_template_part( 'template-parts/homepage-fullwidth' );
 					}
 				?>
