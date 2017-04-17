@@ -100,10 +100,8 @@ get_header(); ?>
 			?>
 	</section> <!-- .main-index -->
 
-	<?php get_sidebar(); ?>
-</main><!-- .site-main -->
-
 <?php
+get_sidebar();
 the_widget(
 	'mj_ad_unit_widget',
 	array(
