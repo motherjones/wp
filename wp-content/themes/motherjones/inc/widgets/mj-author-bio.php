@@ -6,6 +6,7 @@
  * @subpackage Mother_Jones
  * @since Mother Jones 1.0
  */
+
 class mj_author_bio_widget extends WP_Widget {
 
 	function __construct() {
@@ -24,7 +25,7 @@ class mj_author_bio_widget extends WP_Widget {
 	 */
 	function widget( $args, $instance ) {
 
-		global $post;
+		global $post, $mj;
 		extract( $args );
 
 		if ( is_singular() || is_author() ) {
@@ -69,9 +70,9 @@ class mj_author_bio_widget extends WP_Widget {
 							}
 							echo '</span>';
 							if ( is_author() ) {
-								echo '<p class="author-bio-text">' . esc_html( $author->mj_user_full_bio ) . '</p>';
+								echo '<p class="author-bio-text">' . wp_kses( $author->mj_user_full_bio, $mj['allowed_tags'] ) . '</p>';
 							} else {
-								echo '<p class="author-bio-text">' . esc_html( $author->description ) . '</p>';
+								echo '<p class="author-bio-text">' . wp_kses( $author->description, $mj['allowed_tags'] ) . '</p>';
 							}
 							echo '</div>'; // author-data.
 						?>

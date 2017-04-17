@@ -7,6 +7,18 @@
  * @since Mother Jones 1.0
  */
 
+global $mj;
+
+// A canonical list of allowed tags to pass to wp_kses() when we need it.
+$mj['allowed_tags'] = array(
+	'a' => array(
+		'href' => array(),
+		'title' => array(),
+	),
+	'em' => array(),
+	'strong' => array(),
+);
+
 /**
  * Set wysiwyg config.
  *
