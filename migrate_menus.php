@@ -87,28 +87,28 @@ $static = Array(
       'post_title' => 'Photos',
       'post_id' => '',
       'meta' => Array(
-        '_menu_item_type' => 'custom',
+        '_menu_item_type' => 'taxonomy',
         '_menu_item_menu_item_parent' => 0,
-        '_menu_item_object_id' => '',
-        '_menu_item_object' => 'custom',
+        '_menu_item_object_id' => 22221,
+        '_menu_item_object' => 'post_tag',
         '_menu_item_target' => '',
         '_menu_item_classes' => 'a:1:{i:0;s:0:"";}',
         '_menu_item_xfn' => '',
-        '_menu_item_url' => '/photoessays'
+        '_menu_item_url' => '',
       )
     ),
     Array(
       'post_title' => 'Investigations',
       'post_id' => '',
       'meta' => Array(
-        '_menu_item_type' => 'custom',
+        '_menu_item_type' => 'taxonomy',
         '_menu_item_menu_item_parent' => 0,
-        '_menu_item_object_id' => '',
-        '_menu_item_object' => 'custom',
+        '_menu_item_object_id' => 23611,
+        '_menu_item_object' => 'post_tag',
         '_menu_item_target' => '',
         '_menu_item_classes' => 'a:1:{i:0;s:0:"";}',
         '_menu_item_xfn' => '',
-        '_menu_item_url' => 'topics/investigations'
+        '_menu_item_url' => '',
       )
     ),
     Array(
@@ -235,56 +235,56 @@ $floating = Array(
       'post_title' => 'Guns',
       'post_id' => '',
       'meta' => Array(
-        '_menu_item_type' => 'custom',
+        '_menu_item_type' => 'taxonomy',
         '_menu_item_menu_item_parent' => 0,
-        '_menu_item_object_id' => '',
-        '_menu_item_object' => 'custom',
+        '_menu_item_object_id' => 22171,
+        '_menu_item_object' => 'post_tag',
         '_menu_item_target' => '',
         '_menu_item_classes' => 'a:1:{i:0;s:0:"";}',
         '_menu_item_xfn' => '',
-        '_menu_item_url' => 'topics/guns'
+        '_menu_item_url' => '',
       )
     ),
     Array(
       'post_title' => 'Dark Money',
       'post_id' => '',
       'meta' => Array(
-        '_menu_item_type' => 'custom',
+        '_menu_item_type' => 'taxonomy',
         '_menu_item_menu_item_parent' => 0,
-        '_menu_item_object_id' => '',
-        '_menu_item_object' => 'custom',
+        '_menu_item_object_id' => 20426,
+        '_menu_item_object' => 'post_tag',
         '_menu_item_target' => '',
         '_menu_item_classes' => 'a:1:{i:0;s:0:"";}',
         '_menu_item_xfn' => '',
-        '_menu_item_url' => 'topics/dark-money'
+        '_menu_item_url' => '',
       )
     ),
     Array(
       'post_title' => 'Photos',
       'post_id' => '',
       'meta' => Array(
-        '_menu_item_type' => 'custom',
+        '_menu_item_type' => 'taxonomy',
         '_menu_item_menu_item_parent' => 0,
-        '_menu_item_object_id' => '',
-        '_menu_item_object' => 'custom',
+        '_menu_item_object_id' => 22221,
+        '_menu_item_object' => 'post_tag',
         '_menu_item_target' => '',
         '_menu_item_classes' => 'a:1:{i:0;s:0:"";}',
         '_menu_item_xfn' => '',
-        '_menu_item_url' => '/photoessays'
+        '_menu_item_url' => '',
       )
     ),
     Array(
       'post_title' => 'Investigations',
       'post_id' => '',
       'meta' => Array(
-        '_menu_item_type' => 'custom',
+        '_menu_item_type' => 'taxonomy',
         '_menu_item_menu_item_parent' => 0,
-        '_menu_item_object_id' => '',
-        '_menu_item_object' => 'custom',
+        '_menu_item_object_id' => 23611,
+        '_menu_item_object' => 'post_tag',
         '_menu_item_target' => '',
         '_menu_item_classes' => 'a:1:{i:0;s:0:"";}',
         '_menu_item_xfn' => '',
-        '_menu_item_url' => 'topics/investigations'
+        '_menu_item_url' => '',
       )
     ),
     Array(
@@ -298,21 +298,21 @@ $floating = Array(
         '_menu_item_target' => '',
         '_menu_item_classes' => 'a:1:{i:0;s:0:"";}',
         '_menu_item_xfn' => '',
-        '_menu_item_url' => 'podcasts'
+        '_menu_item_url' => '/podcasts'
       )
     ),
     Array(
       'post_title' => 'Kevin Drum',
       'post_id' => '',
       'meta' => Array(
-        '_menu_item_type' => 'custom',
+        '_menu_item_type' => 'taxonomy',
         '_menu_item_menu_item_parent' => 0,
-        '_menu_item_object_id' => '',
-        '_menu_item_object' => 'custom',
+        '_menu_item_object_id' => 14,
+        '_menu_item_object' => 'category',
         '_menu_item_target' => '',
         '_menu_item_classes' => 'a:1:{i:0;s:0:"";}',
         '_menu_item_xfn' => '',
-        '_menu_item_url' => 'blog/kevin-drum'
+        '_menu_item_url' => '',
       )
     ),
     Array(
