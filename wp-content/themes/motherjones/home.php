@@ -256,7 +256,7 @@ $shown_ids = array();
 					?>
 				</ul>
 			</section>
-		</main><!-- .site-main -->
+
 <?php
 the_widget(
 	'mj_ad_unit_widget',
