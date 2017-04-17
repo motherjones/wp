@@ -40,20 +40,10 @@ if ( ! function_exists( 'mj_byline' ) ) {
 	 * @param int $id the post ID.
 	 */
 	function mj_byline( $id ) {
+		global $mj;
 		$override = get_post_meta( $id, 'mj_byline_override', true );
 		if ( trim( $override ) ) {
-			$output = wp_kses(
-				$override,
-				array(
-					'a' => array(
-						'href' => array(),
-						'title' => array(),
-					),
-					'br' => array(),
-					'em' => array(),
-					'strong' => array(),
-				)
-			);
+			$output = wp_kses( $override, $mj['allowed_tags'] );
 			return $output;
 		} elseif ( function_exists( 'coauthors_posts_links' ) ) {
 			return coauthors_posts_links( ', ', null, null, null, false );
