@@ -54,7 +54,7 @@ var yieldmo_code = function( placement ) {
 }
 
 var ym_script = function() {
-  (function(e,t){if(t._ym===void 0){t._ym="";var m=e.createElement("script");m.type="text/javascript",m.async=!0,m.src="//static.yieldmo.com/ym.m5.js",(e.getElementsByTagName("head")[0]||e.getElementsByTagName("body")[0]).appendChild(m)}else t._ym instanceof String||void 0===t._ym.chkPls||t._ym.chkPls()})(document,window);
+  (function(e,t){if(t._ym===void 0){t._ym="";var m=e.createElement("script");m.async=!0,m.src="//static.yieldmo.com/ym.m5.js",(e.getElementsByTagName("head")[0]||e.getElementsByTagName("body")[0]).appendChild(m)}else t._ym instanceof String||void 0===t._ym.chkPls||t._ym.chkPls()})(document,window);
 }
 
 var adtech_code = function(config) {
@@ -72,7 +72,7 @@ var adtech_code = function(config) {
 }
 
 var adtech_script = function(config) {
-  return '<script language="javascript1.1" src="http://adserver.adtechus.com/addyn/3.0/5443.1/0/0/' +
+  return '<script src="http://adserver.adtechus.com/addyn/3.0/5443.1/0/0/' +
     escape(config.height)+'/ADTECH;loc=100;target=_blank' +
     adtech_url_params(config) +
     '"></script>'
