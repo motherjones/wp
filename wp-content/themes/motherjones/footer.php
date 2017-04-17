@@ -17,7 +17,7 @@ global $mj;
 
 	<footer id="colophon" class="site-footer" role="contentinfo">
 
-			<a href="/" id="footer-logo" class=>
+			<a href="/" id="footer-logo">
 				<img src="<?php echo esc_url( get_stylesheet_directory_uri() ); ?>/img/MJ_comp_grey.png" alt="Mother Jones" />
 			</a>
 			<ul id="footer-social">
