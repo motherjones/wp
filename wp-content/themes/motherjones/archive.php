@@ -39,8 +39,8 @@ get_header(); ?>
 		<?php if ( have_posts() ) { ?>
 			<ul class="articles-list">
 			<?php
-				$posts_shown = 0;
-				// Start the Loop.
+			$posts_shown = 0;
+			// Start the Loop.
 			while ( $wp_query->have_posts() ) : $wp_query->the_post();
 				if ( 0 === $posts_shown ) {
 					get_template_part( 'template-parts/top-index-article' );
