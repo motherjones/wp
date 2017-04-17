@@ -15,30 +15,28 @@ class mj_top_stories_widget extends WP_Widget {
 	// Creating widget front-end
 	// This is where the action happens.
 	public function widget( $args, $instance ) {
-		global $post;
 		extract( $args );
+		echo $before_widget;
 
-		// This is where you run the code and display the output.
-		print '<div class="top-stories">';
-		print '<h2 class="promo">Top News</h2>';
-		print '<ul class="article-list">';
+		echo '<h2><span class="promo">Top News</span></h2>';
+		echo '<ul class="article-list">';
 		$posts = z_get_zone_query( 'top_stories', array(
 			'posts_per_page' => 3,
 		));
 		while ( $posts->have_posts() ) : $posts->the_post(); ?>
-				<li class="article-item">
-					<h3 class="hed">
-						<a href="<?php print esc_url( get_permalink() ); ?>">
-							<?php the_title(); ?>
-						</a>
-					</h3>
-					<p class="byline">
-					 <?php print mj_byline( get_the_ID() ); ?>
-					</p>
-				</li>
-<?php
+			<li class="article-item">
+				<h3 class="hed">
+					<a href="<?php print esc_url( get_permalink() ); ?>">
+						<?php the_title(); ?>
+					</a>
+				</h3>
+				<p class="byline">
+					<?php print mj_byline( get_the_ID() ); ?>
+				</p>
+			</li>
+		<?php
 		endwhile;
-		print '</ul></div>';
+		echo '</ul>';
 		echo $after_widget;
 	}
 

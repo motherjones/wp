@@ -81,17 +81,16 @@ if ( ! function_exists( 'mj_flat_twitter_button' ) ) {
 	 * @param int $id the post ID.
 	 */
 	function mj_flat_twitter_button( $id ) {
+		$twitter_share = '<a class="social" target="_blank" href="https://twitter.com/intent/tweet?text=%1$s&url=%2$s%3$s"><i class="fa fa-twitter fw"></i><span class="share-text">%4$s</span></a>';
 		$id = $id ? $id : get_the_ID();
 		$social = trim( get_post_meta( $id, 'mj_social_hed', true ) );
 		$status = $social ? $social : get_the_title( $id );
-		$href = 'http://twitter.com/home?status=' . $status . ' '
-			. esc_url( get_permalink( $id ) ) . ' via @MotherJones';
 		return sprintf(
-			'<a class="social" href="%s" target="_blank">
-				<i class="fa fa-twitter fw"></i>
-				<span class="share-text">Share on Twitter</span>
-			</a>',
-			$href
+			$twitter_share,
+			rawurlencode( html_entity_decode( $status , ENT_QUOTES, 'UTF-8' ) ),
+			rawurlencode( get_permalink( $id ) ),
+			__( '&via=MotherJones', 'mj' ),
+			__( 'Share on Twitter', 'mj' )
 		);
 	}
 }
@@ -104,7 +103,7 @@ if ( ! function_exists( 'mj_flat_facebook_button' ) ) {
 	 */
 	function mj_flat_facebook_button( $id ) {
 		$id = $id ? $id : get_the_ID();
-		$href = 'http://facebook.com/sharer.php?u=' . esc_url( get_permalink( $id ) );
+		$href = 'http://facebook.com/sharer.php?u=' . rawurlencode( get_permalink( $id ) );
 		return sprintf(
 			'<a class="social" href="%s" target="_blank">
 				<i class="fa fa-facebook fw"></i>

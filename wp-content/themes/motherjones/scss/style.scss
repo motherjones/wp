@@ -481,31 +481,6 @@ h2.widget-title {
   display: none;
 }
 
-/* sidebar items */
-
-#sidebar-right {
-  .promo {
-    margin-bottom: 15px;
-  }
-  .top-stories {
-    text-align: center;
-    ul {
-      padding: 0;
-    }
-    li {
-      margin: 0 30px 15px;
-      padding: 15px 0 0 0;
-      border-top: 1px solid $neutral1;
-      text-align: center;
-      &:first-of-type {
-        border-top: 0;
-        padding-top: 0;
-      }
-    }
-  }
-}
-/* end sidebar items */
-
 /* begin responsive video styling */
 .responsive_video_embed_container {
   height: 0;

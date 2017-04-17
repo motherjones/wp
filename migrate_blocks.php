@@ -10,7 +10,7 @@ $wp_db = "pantheon_wp";
 $wp = new PDO("mysql:host=$hostname;dbname=$wp_db", $username, $password);
 
 
-$widgets = Array('mj_top_stories_widget', 'mj-author-bio-widget', 
+$widgets = Array('mj_top_stories_widget', 'mj-author-bio-widget',
 	'mj-floating-ad-widget', 'mj-related-articles-widget', 'mj-blog-pager-widget');
 $widget_options = $wp->prepare("
 REPLACE INTO wp_options
@@ -97,7 +97,7 @@ HTML
 $blocks[3] = Array(
 		'title' => 'Site wrap',
 		'text' => <<<'HTML'
-<script language="javascript">
+<script>
 <!--
 if (typeof(MJ_HideSiteWrap) === 'undefined') {
   jQuery('head').append('<link rel="stylesheet" href="http://assets.motherjones.com/advertising/2014/05/sierra_club_sitewrap.css" type="text/css" />');
@@ -229,8 +229,8 @@ $blocks[13] =	Array( //BEGIN inquiring minds block
   <li class="author-bio group vcard">
     <div class="author-image"><img src="/wp-content/themes/motherjones/img/inq_minds_profiles/adam_headshot_2014-01.jpg" alt="Adam Isaak" /></div>
     <div class="author-data">
-			<span class="byline">Adam Isaak</span> 
-			<span class="author-position">Inquiring Minds producer</span> 
+			<span class="byline">Adam Isaak</span>
+			<span class="author-position">Inquiring Minds producer</span>
 			<p>  Adam Isaak is a media producer with a decade of experience creating science-focused videos and podcasts. He produces the Inquiring Minds podcast.</p>
     </div>
   </li>
@@ -263,8 +263,8 @@ $blocks[15] =	Array( //BEGIN Bite podcast block
         <span class="byline">Kiera Butler</span>
         <span class="author-position">Bite co-host</span>
         <p>
-          A senior editor at <em>Mother Jones</em>, Kiera covers health, food, and the environment. 
-          She is the author of the 2014 book <em>Raise: What 4-H Teaches 7 Million Kids&emdash;and How Its Lessons Could Change Food and Farming Forever</em>. 
+          A senior editor at <em>Mother Jones</em>, Kiera covers health, food, and the environment.
+          She is the author of the 2014 book <em>Raise: What 4-H Teaches 7 Million Kids&emdash;and How Its Lessons Could Change Food and Farming Forever</em>.
         </p>
     </div>
   </li>
