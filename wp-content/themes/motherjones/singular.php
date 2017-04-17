@@ -21,13 +21,7 @@ get_header();
 			get_sidebar();
 			comments_template();
 		}
-
-		if ( ! empty( $mj['meta']['js'][0] ) ) {
-			printf(
-				'script>%s</script>',
-				esc_js( $mj['meta']['js'][0] )
-			);
-		}
+		
 		the_widget(
 			'mj_ad_unit_widget',
 			array(
