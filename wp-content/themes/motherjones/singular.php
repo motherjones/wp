@@ -21,7 +21,7 @@ get_header();
 			get_sidebar();
 			comments_template();
 		}
-		
+
 		the_widget(
 			'mj_ad_unit_widget',
 			array(
