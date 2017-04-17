@@ -320,15 +320,17 @@ function mj_topical_banner( $post ) {
 		'climate-desk' => 'CDWeb_block-UPDATED-Feb2017_1000px.png',
 	);
 	$terms = get_the_terms( $post->ID, 'post_tag' );
-	foreach ( $terms as $term ) {
-		if ( array_key_exists( $term->slug, $mj_topic_banner_mapping ) ) {
-			echo '<a href="/topics/' . rawurlencode( $term->slug ) . '">'
-				. '<img src="' . esc_url(get_template_directory_uri()
-				. '/img/topic_banners/' . rawurlencode( $mj_topic_banner_mapping[ $term->slug ] ) )
-					. '" ' .
-					'alt="More MotherJones reporting on ' . esc_attr( $term->name ) . '" />'
-			. '</a>';
+	if ( ! empty( $terms ) ) {
+		foreach ( $terms as $term ) {
+			if ( array_key_exists( $term->slug, $mj_topic_banner_mapping ) ) {
+				printf(
+					'<a href="/topics/%s"><img src="%s" alt="More MotherJones reporting on %s" /></a>',
+					rawurlencode( $term->slug ),
+					esc_url( get_template_directory_uri() . '/img/topic_banners/' . rawurlencode( $mj_topic_banner_mapping[ $term->slug ] ) ),
+					esc_attr( $term->name )
+				);
+			}
 		}
 	}
 }
-add_action( 'post_end', 'mj_topical_banner' );
+add_action( 'mj_post_end', 'mj_topical_banner' );
