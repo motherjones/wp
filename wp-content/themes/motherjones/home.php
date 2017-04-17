@@ -153,21 +153,24 @@ $shown_ids = array();
 					<h2>
 						<span class="promo"><a href="/kevin-drum">Kevin Drum</a></span>
 					</h2>
-					<img class="banner" src="<?php echo esc_url( get_template_directory_uri() ); ?>/img/KEVIN.png" alt="Kevin Drum"></img>
-					<ul id="kdrum-post-list">
-						<?php
-							$kdrum = new WP_Query( array(
-								'category_name' => 'kevin-drum',
-								'posts_per_page' => 4,
-								'post_status' => 'publish',
-								'post__not_in' 	=> $shown_ids,
-							) );
+					<img class="banner" src="<?php echo esc_url( get_template_directory_uri() ); ?>/img/KEVIN.png" alt="Kevin Drum" />
+					<?php
+						$kdrum = new WP_Query( array(
+							'category_name' => 'kevin-drum',
+							'posts_per_page' => 4,
+							'post_status' => 'publish',
+							'post__not_in' 	=> $shown_ids,
+						) );
+						if ( $kdrum->have_posts() ) {
+							echo '<ul id="kdrum-post-list">';
 							while ( $kdrum->have_posts() ) {
 								$kdrum->the_post();
 								$shown_ids[] = get_the_ID();
 								get_template_part( 'template-parts/homepage-story' );
 							}
-						?>
+							echo '</ul>';
+						}
+					?>
 				</div>
 				<?php
 					the_widget(
