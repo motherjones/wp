@@ -56,10 +56,10 @@
     margin: 20px 50px 0 50px;
     line-height: 42px; }
 
-#set-featured-media-button .dashicons {
-  position: relative;
-  top: 2px;
-  color: #888; }
+#set-featured-media-button {
+  display: block;
+  clear: both;
+  max-width: 147px; }
 
 #wp-content-media-buttons .spinner {
   position: relative;

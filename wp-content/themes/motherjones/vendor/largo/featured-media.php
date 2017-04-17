@@ -411,7 +411,7 @@ function largo_featured_image_metabox_callback( $post, $metabox ) {
 
 	$checked = 'false' === get_post_meta( $post->ID, 'featured-image-display', true ) ? 'checked="checked"' : '';
 	echo wp_nonce_field( basename( __FILE__ ), 'featured_image_display_nonce' );
-
+	echo '<p>Please do not reuse photos in the image library. Do not use images from social media without the photographer’s permission. For a list of other images you should avoid, <a href="">go here</a>.</p>';
 	echo '<a href="#" class="set-featured-media">' . get_the_post_thumbnail() . '</a>';
 	echo '<a href="#" id="set-featured-media-button" class="button set-featured-media add_media" data-editor="content" title="' . esc_html( $language ) . '"></span> ' . esc_html( $language ) . '</a> <span class="spinner" style="display: none;"></span>';
 
