@@ -14,6 +14,9 @@
  */
 function mj_exclude_blogs( $query ) {
 	if ( ! is_admin() && $query->is_main_query() ) {
+		if ( is_category( 'kevin-drum' ) ) {
+			return;
+		}
 		if ( is_category() || is_tag() ) {
 			$tax_query = $query->get( 'tax_query' ) ?: array();
 			$tax_query[] = array(

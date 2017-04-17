@@ -417,6 +417,12 @@ blockquote {
 }
 .article-item.blog .entry-header {
   text-align: left;
+  h1 {
+    font-size: 36px;
+    line-height: 44px;
+    text-transform: none;
+    margin-bottom: 0;
+  }
 }
 .articles-list,
 .related-articles-list {
