@@ -51,6 +51,7 @@ get_header(); ?>
 						)
 					);
 				} elseif ( 9 === $posts_shown ) {
+					echo '</ul><div class="ad">';
 					the_widget(
 						'mj_ad_unit_widget',
 						array(
@@ -64,10 +65,11 @@ get_header(); ?>
 							'after_widget' => '',
 						)
 					);
-				}
+					echo '</div><ul class="articles-list">';
+				} // End if().
 				$posts_shown++;
 
-			// End the loop.
+				// End the loop.
 			endwhile;
 			?>
 		</ul>
@@ -85,7 +87,7 @@ get_header(); ?>
 		// If no content, include the "No posts found" template.
 		} else {
 			get_template_part( 'template-parts/content', 'none' );
-		}
+		} // End if().
 		?>
 	</section>
 

@@ -66,6 +66,7 @@ get_header(); ?>
 						)
 					);
 				} elseif ( 11 === $posts_shown ) {
+					echo '</ul><div class="ad">';
 					the_widget(
 						'mj_ad_unit_widget',
 						array(
@@ -79,6 +80,7 @@ get_header(); ?>
 							'after_widget' => '',
 						)
 					);
+					echo '</div><ul class="articles-list">';
 				}
 				$posts_shown++;
 				// End the loop.
