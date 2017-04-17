@@ -103,7 +103,7 @@ if ( ! function_exists( 'mj_flat_facebook_button' ) ) {
 	 */
 	function mj_flat_facebook_button( $id ) {
 		$id = $id ? $id : get_the_ID();
-		$href = 'http://facebook.com/sharer.php?u=' . esc_url( get_permalink( $id ) );
+		$href = 'http://facebook.com/sharer.php?u=' . rawurlencode( get_permalink( $id ) );
 		return sprintf(
 			'<a class="social" href="%s" target="_blank">
 				<i class="fa fa-facebook fw"></i>
