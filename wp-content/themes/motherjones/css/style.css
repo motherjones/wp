@@ -2060,7 +2060,7 @@ ul.author-bios {
 
 #homepage-sections-list {
   list-style-type: none; }
-  #homepage-sections-list .homepage-section h2 {
+  #homepage-sections-list .homepage-section h2 .promo {
     margin-bottom: 1em;
     font-size: 15px;
     letter-spacing: 2px; }
