@@ -49,7 +49,6 @@ get_header(); ?>
 						)
 					);
 				} elseif ( 3 === $posts_shown ) {
-					echo '</ul><div class="ad">';
 					the_widget(
 						'mj_ad_unit_widget',
 						array(
@@ -59,13 +58,11 @@ get_header(); ?>
 							'desktop' => 1,
 						),
 						array(
-							'before_widget' => '',
-							'after_widget' => '',
+							'before_widget' => '</ul><div class="ad">',
+							'after_widget' => '</div><ul class="articles-list">',
 						)
 					);
-					echo '</div><ul class="articles-list">';
 				} elseif ( 6 === $posts_shown ) {
-					echo '</ul><div class="ad">';
 					the_widget(
 						'mj_ad_unit_widget',
 						array(
@@ -75,11 +72,10 @@ get_header(); ?>
 							'desktop' => 1,
 						),
 						array(
-							'before_widget' => '',
-							'after_widget' => '',
+							'before_widget' => '</ul><div class="ad">',
+							'after_widget' => '</div><ul class="articles-list">',
 						)
 					);
-					echo '</div><ul class="articles-list">';
 				} // End if().
 			endwhile;
 		?>
