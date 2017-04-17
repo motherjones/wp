@@ -90,16 +90,6 @@ global $mj;
 			}
 			?>
 
-			<div id="bottom-donate" style="display:none">
-				<p>
-					We noticed you have an ad blocker on.
-					Support nonprofit investigative reporting by pitching in a few
-					bucks.
-					<a href="https://secure.motherjones.com/fnp/?action=SUBSCRIPTION&list_source=7HEGZS1A&extra_don=1&abver=A">DONATE</a>
-					<span onclick="jQuery('#bottom-donate').remove();">X</span>
-				</p>
-			</div>
-
 			<?php dynamic_sidebar( 'page-end' ); ?>
 	</footer><!-- .site-footer -->
 	<?php wp_footer(); ?>
