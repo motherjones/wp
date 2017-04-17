@@ -20,7 +20,7 @@ function mj_remove_metaboxes() {
 	// Show these for admins only.
 	if ( ! current_user_can( 'manage_options' ) ) {
 		$remove[] = 'postcustom';
-		$remove[] = 'mj_custom_css_js';
+		$remove[] = 'mj_custom_css';
 	}
 	foreach ( $remove as $box ) {
 		remove_meta_box( $box, 'post', 'normal' );
@@ -172,9 +172,9 @@ function mj_custom_meta_box_display() {
  * Register the custom css/js metabox.
  */
 largo_add_meta_box(
-	'mj_custom_css_js',
-	__( 'Custom CSS and JavaScript', 'mj' ),
-	'mj_custom_css_js_meta_box_display',
+	'mj_custom_css',
+	__( 'Custom CSS', 'mj' ),
+	'mj_custom_css_meta_box_display',
 	'post',
 	'normal',
 	'low'
@@ -182,7 +182,7 @@ largo_add_meta_box(
 /**
  * And output the markup.
  */
-function mj_custom_css_js_meta_box_display() {
+function mj_custom_css_meta_box_display() {
 	global $post;
 	$values = get_post_custom( $post->ID );
 	$prefix = 'mj_';
@@ -190,10 +190,6 @@ function mj_custom_css_js_meta_box_display() {
 		'custom_css' => array(
 			'title' => 'Custom CSS',
 			'desc' => 'Inline CSS to be applied to this post.',
-		),
-		'custom_js' => array(
-			'title' => 'Custom JavaScript',
-			'desc' => 'Inline javascript to be output for this post.',
 		),
 	);
 	wp_nonce_field( 'largo_meta_box_nonce', 'meta_box_nonce' );
@@ -230,7 +226,6 @@ largo_register_meta_input(
 		'mj_byline_override',
 		'mj_dateline_override',
 		'mj_custom_css',
-		'mj_custom_js',
 	),
 	'sanitize_text_field'
 );

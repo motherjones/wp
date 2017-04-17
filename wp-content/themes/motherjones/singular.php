@@ -13,21 +13,16 @@ get_header();
 ?>
 
 <main id="main" class="site-main grid" role="main">
-	<?php while ( have_posts() ) : the_post();
-			$template_part = ( is_page() ) ? 'page' : 'single';
-			get_template_part( 'template-parts/content', $template_part );
+<?php
+	while ( have_posts() ) : the_post();
+		$template_part = ( is_page() ) ? 'page' : 'single';
+		get_template_part( 'template-parts/content', $template_part );
 
 		if ( ! is_page() ) {
 			get_sidebar();
 			comments_template();
 		}
 
-		if ( ! empty( $mj['meta']['js'][0] ) ) {
-			printf(
-				'script>%s</script>',
-				esc_js( $mj['meta']['js'][0] )
-			);
-		}
 		the_widget(
 			'mj_ad_unit_widget',
 			array(
@@ -41,6 +36,7 @@ get_header();
 				'after_widget' => '',
 			)
 		);
+
 		the_widget(
 			'mj_ad_unit_widget',
 			array(

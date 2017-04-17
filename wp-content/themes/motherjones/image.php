@@ -64,12 +64,6 @@ get_header(); ?>
 			if ( ! is_page() ) {
 				comments_template();
 			}
-			if ( ! empty( $meta['js'][0] ) ) {
-				printf(
-					'script>%s</script>',
-					esc_js( $meta['js'][0] )
-				);
-			}
 			the_widget(
 				'mj_ad_unit_widget',
 				array(
