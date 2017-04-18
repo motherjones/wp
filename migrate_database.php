@@ -1463,7 +1463,7 @@ foreach ( $master_meta_rows as $row ) {
     $master_meta_insert->execute(array(
       $row['nid'],
       'featured-image-display',
-      $row['master_image_suppress']
+      'false',
     ) );
   }
 
