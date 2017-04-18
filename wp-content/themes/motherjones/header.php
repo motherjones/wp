@@ -71,6 +71,7 @@ global $mj;
 </head>
 
 <body <?php body_class(); ?>>
+<a href="#main" class="visuallyhidden">Skip to main content</a>
 <?php get_template_part( 'template-parts/floating-navbar' ); ?>
 <?php dynamic_sidebar( 'page-top' ); ?>
 <div id="page" class="grid">

@@ -8,7 +8,7 @@
  */
 
 ?>
-<div id="static-navbar">
+<nav id="static-navbar" role="navigation">
 	<a name="navigation" id="navigation"></a>
 	<ul class="menu">
 		<li class="first menu-item-home">
@@ -26,4 +26,4 @@
 		<li class="menu-item-subscribe"><a href="https://secure.motherjones.com/fnx/?action=SUBSCRIPTION&amp;pub_code=MJM&amp;term_pub=MJM&amp;list_source=SEGYN&amp;base_country=US" title="Subscribe">Subscribe</a></li>
 		<li class="last menu-item-donate"><a href="https://secure.motherjones.com/fnp/?action=SUBSCRIPTION&amp;list_source=7HEGP001&amp;extra_don=1&amp;abver=A" title="Donate">Donate</a></li>
 	</ul>
-</div>
+</nav>
