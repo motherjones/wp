@@ -2474,7 +2474,9 @@ ul.author-bios {
   font-family: Mallory, sans-serif;
   font-weight: bold;
   font-style: italic;
-  font-size: 12px; }
+  font-size: 12px;
+  width: 100%;
+  height: 0; }
 
 #full-width-header-image img {
   min-width: 100%; }
