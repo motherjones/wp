@@ -888,16 +888,13 @@ while ( $meta = $meta_data->fetch(PDO::FETCH_ASSOC)) {
 }
 $wp->commit();
 
-//for css, js
+//for css
 $meta_data = $d6->prepare('
 SELECT DISTINCT
 n.nid,
-c.field_css_value,
-j.field_javascript_value
+c.field_css_value
 FROM mjd6.node n
 INNER JOIN mjd6.content_field_css c
-USING(vid)
-INNER JOIN mjd6.content_field_javascript j
 USING(vid)
 ;
 ');
@@ -905,12 +902,12 @@ $meta_data->execute();
 
 $wp->beginTransaction();
 while ( $meta = $meta_data->fetch(PDO::FETCH_ASSOC)) {
-  $cssjs_value = serialize( array(
-    'css' => $meta['field_css_value'],
-    'js' => $meta['field_javascript_value'],
-  ) );
-  if ( $cssjs_value ) {
-    $meta_insert->execute(array($meta['nid'], 'css_js', $cssjs_value) );
+  if ( $css = $meta['field_css_value'] ) {
+	  $meta_insert->execute(array(
+		  $meta['nid'],
+		  'mj_custom_css',
+		  $css,
+	  ) );
   }
 }
 $wp->commit();
