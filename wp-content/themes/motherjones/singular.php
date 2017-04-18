@@ -13,9 +13,10 @@ get_header();
 ?>
 
 <main id="main" class="site-main grid" role="main">
-	<?php while ( have_posts() ) : the_post();
-			$template_part = ( is_page() ) ? 'page' : 'single';
-			get_template_part( 'template-parts/content', $template_part );
+<?php
+	while ( have_posts() ) : the_post();
+		$template_part = ( is_page() ) ? 'page' : 'single';
+		get_template_part( 'template-parts/content', $template_part );
 
 		if ( ! is_page() ) {
 			get_sidebar();
@@ -35,6 +36,7 @@ get_header();
 				'after_widget' => '',
 			)
 		);
+
 		the_widget(
 			'mj_ad_unit_widget',
 			array(

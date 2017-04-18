@@ -10,9 +10,9 @@
 global $mj;
 $mj['meta'] = get_post_meta( get_the_ID() );
 get_header();
-
 while ( have_posts() ) : the_post();
 ?>
+
 <header id="full-width-header" class="group">
 	<?php
 	$has_image = false;
@@ -45,12 +45,12 @@ while ( have_posts() ) : the_post();
 		<div id="full-width-header-image">
 			<?php
 			if ( class_exists( 'MultiPostThumbnails' ) ) {
-		    MultiPostThumbnails::the_post_thumbnail(
-		        get_post_type(),
-		        'mj_title_image',
-						get_the_ID(),
-						'full_width_giant'
-		    );
+				MultiPostThumbnails::the_post_thumbnail(
+					get_post_type(),
+					'mj_title_image',
+					get_the_ID(),
+					'full_width_giant'
+				);
 			}
 			?>
 		</div>
@@ -82,7 +82,6 @@ if ( isset( $title_img_meta['_media_credit'][0] ) && '' !== $title_img_meta['_me
 	}
 }
 ?>
-
 
 <main id="main" class="site-main" role="main">
 	<article class="full-width entry-content">
@@ -122,13 +121,6 @@ if ( isset( $title_img_meta['_media_credit'][0] ) && '' !== $title_img_meta['_me
 			?>
 		</footer><!-- .entry-footer -->
 	</article><!-- #post-## -->
-	<?php
-	if ( ! empty( $mj['meta']['js'][0] ) ) {
-		printf(
-			'script>%s</script>',
-			esc_js( $mj['meta']['js'][0] )
-		);
-	}
+<?php
 endwhile;
-
 get_footer();
