@@ -19,6 +19,7 @@ $wp->exec('
 TRUNCATE TABLE wp_terms;
 TRUNCATE TABLE wp_term_taxonomy;
 TRUNCATE pantheon_wp.wp_term_relationships;
+SET GROUP_CONCAT_MAX_LEN = 1073741824;
 ');
 $wp->commit();
 
