@@ -8,7 +8,7 @@
  */
 
 ?>
-<div id="navbar">
+<nav id="navbar" role="navigation">
 	<ul>
 		<li class="logo">
 			<a href="/">
@@ -60,5 +60,5 @@
 		'items_wrap' => '<ul id="mj_menu_options">%3$s</ul>',
 	) );
 	?>
-</div>
+</nav>
 <!-- end following navbar -->
