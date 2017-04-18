@@ -1994,7 +1994,7 @@ ul.author-bios {
         display: none; } }
 
 #homepage-top-story-side {
-  padding: 1em 0 1em 2em; }
+  padding: 0 0 1em 2em; }
   #homepage-top-story-side li {
     margin-top: 0;
     padding-top: 1.5em;
@@ -2005,7 +2005,7 @@ ul.author-bios {
     text-align: center;
     font-size: 16px; }
     #homepage-top-story-side li:first-of-type {
-      margin-top: 16px;
+      margin-top: 0.5em;
       padding-top: 0;
       background: none; }
     #homepage-top-story-side li h3 {
