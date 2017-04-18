@@ -2541,13 +2541,13 @@ ul.author-bios {
     #fullwidth-body .inline-left * {
       text-align: left; } }
 @media (min-width: 480px) {
-  #full-width-header-data {
+  #full-width-overlay-data {
     position: absolute;
     bottom: 0px;
     width: 100%;
     background: linear-gradient(transparent, black); }
-    #full-width-header-data h1,
-    #full-width-header-data h3 {
+    #full-width-overlay-data h1,
+    #full-width-overlay-data h3 {
       color: white; } }
 /* end full width */
 @media print {

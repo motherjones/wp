@@ -20,7 +20,7 @@ while ( have_posts() ) : the_post();
 		$has_image = true;
 	}
 	if ( $has_image ) {
-		echo '<div id="full-width-header-data">';
+		echo '<div id="full-width-overlay-data">';
 	}
 
 	the_title( '<h1 class="entry-title">', '</h1>' );
@@ -86,10 +86,10 @@ if ( isset( $title_img_meta['_media_credit'][0] ) && '' !== $title_img_meta['_me
 <main id="main" class="site-main" role="main">
 	<article class="full-width entry-content">
 		<?php
-		if ( isset( $mj['meta']['css'][0] ) ) {
+		if ( isset( $mj['meta']['mj_custom_css'][0] ) ) {
 			printf(
 				'<style>%s</style>',
-				esc_html( $mj['meta']['css'][0] )
+				esc_html( $mj['meta']['mj_custom_css'][0] )
 			);
 		}
 		mj_share_tools( 'top' );
