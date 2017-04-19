@@ -56,6 +56,7 @@ while ( have_posts() ) : the_post();
 		</div>
 	<?php
 	}
+	mj_post_metadata( get_the_ID() );
 	?>
 </header>
 
