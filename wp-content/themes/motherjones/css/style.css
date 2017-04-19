@@ -2952,31 +2952,6 @@ blockquote {
   float: none;
   margin: 1em auto; }
 
-.wp-media-credit {
-  margin: 0;
-  text-align: right; }
-
-.caption,
-.caption a,
-.photo-byline,
-.photo-byline a,
-.wp-media-credit {
-  background: white;
-  color: #FF6900;
-  font-weight: normal;
-  text-transform: none;
-  font-family: Mallory, sans-serif;
-  font-weight: bold;
-  font-style: italic;
-  font-size: 12px;
-  background-position: 0% 100%;
-  letter-spacing: normal; }
-
-.photo-byline {
-  margin: 5px 0; }
-
-.caption strong,
-.master-image-caption,
 .wp-caption-text {
   color: black;
   font-style: normal;
@@ -2986,10 +2961,16 @@ blockquote {
   margin: 10px 0 0 0;
   line-height: 17px;
   font-weight: normal; }
-
-.caption strong a,
-.wp-caption-text a {
-  color: black; }
+  .wp-caption-text .media-caption {
+    padding-right: 5px; }
+  .wp-caption-text .media-credit {
+    font-weight: bold;
+    color: #ccc; }
+    .wp-caption-text .media-credit a {
+      background: none;
+      color: #FF6900; }
+      .wp-caption-text .media-credit a:hover {
+        color: #ff8733; }
 
 #content-area .inline a {
   border-bottom: none; }

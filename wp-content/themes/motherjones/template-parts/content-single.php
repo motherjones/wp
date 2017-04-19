@@ -23,8 +23,8 @@ $article_classes = 'hnews hentry item grid__col-md-8 grid__col-sm-12';
 				esc_html( $mj['meta']['mj_custom_css'][0] )
 			);
 		}
-			mj_hero();
-			the_content();
+		mj_hero();
+		the_content();
 		?>
 	</article>
 
@@ -38,4 +38,3 @@ $article_classes = 'hnews hentry item grid__col-md-8 grid__col-sm-12';
 	</footer>
 
 </section>
-

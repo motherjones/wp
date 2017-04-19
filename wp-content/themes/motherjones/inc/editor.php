@@ -63,12 +63,6 @@ function mj_wysiwyg_config( $config ) {
 			'classes' => 'pullquote-left',
 			'wrapper' => false,
 		),
-		array(
-			'title' => 'Right Rail',
-			'block' => 'div',
-			'classes' => 'right-rail',
-			'wrapper' => false,
-		),
 	);
 	// Insert the array, JSON ENCODED, into 'style_formats'.
 	$config['style_formats'] = wp_json_encode( $style_formats );

@@ -145,10 +145,10 @@ $blocks[6] =	Array(
 <a class="monthly donation" target="_blank" href="https://secure.motherjones.com/fnp/?action=SUBSCRIPTION&list_source=7HEGPAM1&extra_don=1&abver=B"></a>
 
 <form action="https://api.maropost.com/accounts/585/forms/3289/subscribe/177d8ba3b7fe7d39e28dcba73123eeffbd01878b" method="post" id="emailForm" onsubmit="return MJ_check_email(this);">
-  <button alt="SIGN UP" border="0" height="25" name="commit" id="submit" onclick="ga('send', 'event', 'TopRightFollowBox', 'Email|Click', window.location.pathname);" type="image" value="Submit">SIGN UP</button>
-  <input gtbfieldid="27" include_blank="true" start_year="1950" name="contact_fields[email]" id="cons_email" placeholder="YOUR EMAIL" type="text" />
-  <input include_blank="true" start_year="1950" type="hidden" name="custom_fields[outreach_affiliate_code]" id="custom_fields_outreach_affiliate_code" value="Article_Membership_Box" />
-  <input include_blank="true" start_year="1950" type="hidden" name="custom_fields[signup_url]" id="signup_url" value="" />
+  <button name="commit" id="submit" onclick="ga('send', 'event', 'TopRightFollowBox', 'Email|Click', window.location.pathname);" value="Submit">SIGN UP</button>
+  <input name="contact_fields[email]" id="cons_email" placeholder="YOUR EMAIL" type="text" />
+  <input type="hidden" name="custom_fields[outreach_affiliate_code]" id="custom_fields_outreach_affiliate_code" value="Article_Membership_Box" />
+  <input type="hidden" name="custom_fields[signup_url]" id="signup_url" value="" />
   <input type="hidden" value="" id="email_field" name="email_const_mp" />
 </form>
 <a class="subscribe_cover" target="_blank" href="https://secure.motherjones.com/fnx/?action=SUBSCRIPTION&pub_code=MJM&term_pub=MJM&list_source=SEGYN2&base_country=US "></a>
