@@ -2550,7 +2550,9 @@ ul.author-bios {
     background: linear-gradient(transparent, black); }
     #full-width-overlay-data h1,
     #full-width-overlay-data h3 {
-      color: white; } }
+      color: white; }
+    #full-width-overlay-data a:hover {
+      color: #FF6900; } }
 /* end full width */
 @media print {
   * {
