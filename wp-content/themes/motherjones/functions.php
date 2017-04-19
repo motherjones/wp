@@ -98,13 +98,13 @@ class MJ {
 			'/inc/enqueue.php',
 			'/inc/helpers.php',
 			'/inc/images.php',
-			'/inc/taxonomies.php',
 			'/inc/metaboxes.php',
 			'/inc/post-templates.php',
-			'/inc/sidebars.php',
 			'/inc/social-tags.php',
+			'/inc/taxonomies.php',
 			'/inc/template-tags.php',
 			'/inc/users.php',
+			'/inc/widgets.php',
 		);
 		foreach ( $includes as $include ) {
 			require_once( get_template_directory() . $include );
