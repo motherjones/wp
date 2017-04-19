@@ -66,7 +66,7 @@ if ( ! function_exists( 'mj_dateline' ) ) {
 		if ( ! $id ) {
 			$id = get_the_ID();
 		}
-		$override = get_post_meta( $id, 'mj_dateline_override', true );
+		$override = get_post_meta( $id, 'mj_issue_date', true );
 		if ( trim( $override ) ) {
 			return $override;
 		}

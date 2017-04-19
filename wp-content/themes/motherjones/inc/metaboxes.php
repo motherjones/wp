@@ -142,9 +142,9 @@ function mj_custom_meta_box_display() {
 			'title' => 'Byline Override',
 			'desc' => 'Text to display instead of the default byline.',
 		),
-		'dateline_override' => array(
-			'title' => 'Dateline Override',
-			'desc' => 'Text (for example, issue number/date) to display instead of the default dateline.',
+		'issue_date' => array(
+			'title' => 'Issue Date',
+			'desc' => 'Issue number/date to display instead of the default dateline.',
 		),
 	);
 	wp_nonce_field( 'largo_meta_box_nonce', 'meta_box_nonce' );
@@ -224,7 +224,7 @@ largo_register_meta_input(
 		'mj_promo_hed',
 		'mj_promo_dek',
 		'mj_byline_override',
-		'mj_dateline_override',
+		'mj_issue_date',
 		'mj_custom_css',
 	),
 	'sanitize_text_field'
