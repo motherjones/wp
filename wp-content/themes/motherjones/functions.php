@@ -342,7 +342,7 @@ add_action( 'mj_post_end', 'mj_topical_banner' );
  */
 function mj_hero() {
 	global $mj;
-	if ( $mj && 'false' !== $mj['meta']['featured-image-display'][0] ) {
+	if ( $mj && ! isset( $mj['meta']['featured-image-display'][0] ) ) {
 		largo_hero();
 	}
 }
