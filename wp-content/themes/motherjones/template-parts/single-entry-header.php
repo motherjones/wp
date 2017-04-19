@@ -32,5 +32,8 @@ if ( mj_is_content_type( 'blogpost', get_the_ID() ) ) {
 			<?php print mj_dateline( get_the_ID() ); ?>
 		</span>
 	</p>
-	<?php mj_share_tools( 'top' ); ?>
+	<?php
+		mj_share_tools( 'top' );
+		mj_post_metadata( get_the_ID() );
+	?>
 </header><!-- .entry-header -->
