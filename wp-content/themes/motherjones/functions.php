@@ -334,3 +334,15 @@ function mj_topical_banner( $post ) {
 	}
 }
 add_action( 'mj_post_end', 'mj_topical_banner' );
+
+
+/**
+ * Creates the master image. Just a wrapper around largo_hero, tbh.
+ * We do check to make sure that we're meant to display the image though.
+ */
+function mj_hero() {
+	global $mj;
+	if ( $mj && 'false' !== $mj['meta']['featured-image-display'][0] ) {
+		largo_hero();
+	}
+}

@@ -34,7 +34,7 @@
 	</div><!-- .entry-header -->
 
 	<?php
-		largo_hero();
+		mj_hero();
 		the_content();
 	?>
 

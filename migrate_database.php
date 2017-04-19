@@ -19,6 +19,7 @@ $wp->exec('
 TRUNCATE TABLE wp_terms;
 TRUNCATE TABLE wp_term_taxonomy;
 TRUNCATE pantheon_wp.wp_term_relationships;
+SET GROUP_CONCAT_MAX_LEN = 1073741824;
 ');
 $wp->commit();
 
@@ -1462,7 +1463,7 @@ foreach ( $master_meta_rows as $row ) {
     $master_meta_insert->execute(array(
       $row['nid'],
       'featured-image-display',
-      $row['master_image_suppress']
+      'false',
     ) );
   }
 
