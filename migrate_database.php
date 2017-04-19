@@ -783,7 +783,7 @@ $wp->commit();
 
 //for dateline override
 $meta_data = $d6->prepare('
-SELECT DISTINCT n.nid, "mj_dateline_override", d.field_issue_date_value
+SELECT DISTINCT n.nid, "mj_issue_date", d.field_issue_date_value
 FROM mjd6.node n
 INNER JOIN mjd6.content_field_issue_date d
 USING(vid)
