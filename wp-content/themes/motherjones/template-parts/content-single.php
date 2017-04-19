@@ -23,8 +23,8 @@ $article_classes = 'hnews hentry item grid__col-md-8 grid__col-sm-12';
 				esc_html( $mj['meta']['mj_custom_css'][0] )
 			);
 		}
-			largo_hero();
-			the_content();
+		largo_hero();
+		the_content();
 		?>
 	</article>
 
