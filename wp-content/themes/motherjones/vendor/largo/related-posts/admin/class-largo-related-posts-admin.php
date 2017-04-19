@@ -177,6 +177,7 @@ class Largo_Related_Posts_Admin {
 			AND `post_status` LIKE \'publish\'
 			AND `post_type` IN ("' . implode( '", "', $post_types ) . '")
 		ORDER BY ID DESC
+		LIMIT 50
 		';
 
 		$suggestions = array();
