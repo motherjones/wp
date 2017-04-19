@@ -2694,6 +2694,21 @@ ul.author-bios {
   display: inline-block;
   margin: 30px 0 35px 0; }
 
+.inline .caption {
+  line-height: 17px;
+  color: #FF6900;
+  font-family: Mallory, sans-serif;
+  font-weight: bold;
+  font-size: 12px; }
+  .inline .caption strong {
+    font-weight: normal;
+    color: black;
+    font-family: Calluna, serif;
+    font-size: 14px; }
+
+.inline p {
+  margin: 0; }
+
 body {
   padding-top: 0; }
 
