@@ -1,6 +1,6 @@
 <?php
 /**
- * Register all the sidebars
+ * Register all the widget areas
  *
  * @package WordPress
  * @subpackage Mother_Jones
