@@ -851,7 +851,7 @@ while ( $meta = $meta_data->fetch(PDO::FETCH_ASSOC)) {
       $meta['field_social_dek_value']
     ) );
   }
-  $meta_insert->execute( array($meta['nid'], 'mj_fb_instant_exclude', true) );
+  $meta_insert->execute( array($meta['nid'], 'mj_fb_instant_exclude', 'true') );
 }
 $wp->commit();
 
@@ -1077,7 +1077,7 @@ foreach ( $uid_to_author_meta as $uid => $author ) {
   $author_meta_insert->execute();
 
   $key = 'rich_editing';
-  $value = true;
+  $value = 'true';
   $author_meta_insert->execute();
 }
 $wp->commit();
