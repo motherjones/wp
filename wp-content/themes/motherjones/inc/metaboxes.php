@@ -16,7 +16,7 @@ function mj_remove_metaboxes() {
 	global $current_user;
 	wp_get_current_user();
 	// Remove these for everyone.
-	$remove = array( 'trackbacksdiv', 'revisionsdiv', 'commentstatusdiv', 'postexcerpt', 'slugdiv' );
+	$remove = array( 'trackbacksdiv', 'revisionsdiv', 'commentstatusdiv', 'postexcerpt', 'slugdiv', 'post-mj_title_image' );
 	// Show these for admins only.
 	if ( ! current_user_can( 'manage_options' ) ) {
 		$remove[] = 'postcustom';
