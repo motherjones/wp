@@ -19,6 +19,7 @@ $wp->exec('
 TRUNCATE TABLE wp_terms;
 TRUNCATE TABLE wp_term_taxonomy;
 TRUNCATE pantheon_wp.wp_term_relationships;
+SET GROUP_CONCAT_MAX_LEN = 1073741824;
 ');
 $wp->commit();
 
@@ -783,7 +784,7 @@ $wp->commit();
 
 //for dateline override
 $meta_data = $d6->prepare('
-SELECT DISTINCT n.nid, "mj_dateline_override", d.field_issue_date_value
+SELECT DISTINCT n.nid, "mj_issue_date", d.field_issue_date_value
 FROM mjd6.node n
 INNER JOIN mjd6.content_field_issue_date d
 USING(vid)
@@ -850,7 +851,7 @@ while ( $meta = $meta_data->fetch(PDO::FETCH_ASSOC)) {
       $meta['field_social_dek_value']
     ) );
   }
-  $meta_insert->execute( array($meta['nid'], 'mj_fb_instant_exclude', true) );
+  $meta_insert->execute( array($meta['nid'], 'mj_fb_instant_exclude', 'true') );
 }
 $wp->commit();
 
@@ -888,16 +889,13 @@ while ( $meta = $meta_data->fetch(PDO::FETCH_ASSOC)) {
 }
 $wp->commit();
 
-//for css, js
+//for css
 $meta_data = $d6->prepare('
 SELECT DISTINCT
 n.nid,
-c.field_css_value,
-j.field_javascript_value
+c.field_css_value
 FROM mjd6.node n
 INNER JOIN mjd6.content_field_css c
-USING(vid)
-INNER JOIN mjd6.content_field_javascript j
 USING(vid)
 ;
 ');
@@ -905,12 +903,12 @@ $meta_data->execute();
 
 $wp->beginTransaction();
 while ( $meta = $meta_data->fetch(PDO::FETCH_ASSOC)) {
-  $cssjs_value = serialize( array(
-    'css' => $meta['field_css_value'],
-    'js' => $meta['field_javascript_value'],
-  ) );
-  if ( $cssjs_value ) {
-    $meta_insert->execute(array($meta['nid'], 'css_js', $cssjs_value) );
+  if ( $css = $meta['field_css_value'] ) {
+	  $meta_insert->execute(array(
+		  $meta['nid'],
+		  'mj_custom_css',
+		  $css,
+	  ) );
   }
 }
 $wp->commit();
@@ -1079,7 +1077,7 @@ foreach ( $uid_to_author_meta as $uid => $author ) {
   $author_meta_insert->execute();
 
   $key = 'rich_editing';
-  $value = true;
+  $value = 'true';
   $author_meta_insert->execute();
 }
 $wp->commit();
@@ -1465,7 +1463,7 @@ foreach ( $master_meta_rows as $row ) {
     $master_meta_insert->execute(array(
       $row['nid'],
       'featured-image-display',
-      $row['master_image_suppress']
+      'false',
     ) );
   }
 

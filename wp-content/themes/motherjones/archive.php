@@ -72,8 +72,8 @@ get_header(); ?>
 							'desktop' => 1,
 						),
 						array(
-							'before_widget' => '',
-							'after_widget' => '',
+							'before_widget' => '</ul><div class="ad">',
+							'after_widget' => '</div><ul class="articles-list">',
 						)
 					);
 				}
@@ -100,10 +100,8 @@ get_header(); ?>
 			?>
 	</section> <!-- .main-index -->
 
-	<?php get_sidebar(); ?>
-</main><!-- .site-main -->
-
 <?php
+get_sidebar();
 the_widget(
 	'mj_ad_unit_widget',
 	array(

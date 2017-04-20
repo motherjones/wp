@@ -1,0 +1,16 @@
+.inline .caption { 
+	line-height: 17px;
+	color: $orange;
+	font-family: $mallory;
+	font-weight: bold;
+	font-size: 12px;
+	strong {
+		font-weight: normal;
+		color: black;
+		font-family: $calluna;
+		font-size: 14px;
+	}
+}
+.inline p {
+	margin: 0;
+}

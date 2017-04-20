@@ -33,7 +33,7 @@ REPLACE INTO pantheon_wp.wp_usermeta
 (meta_key, meta_value, user_id)
 VALUES ( 
 'rich_editing',
-true,
+'true',
 ?
 )
 ;

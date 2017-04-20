@@ -33,7 +33,7 @@
 	padding: 1em 0;
 	.article-data {
 		position: absolute;
-		bottom: 26px;
+		bottom: 60px;
 		width: 100%;
 		background: linear-gradient(transparent,$black);
 		a {
@@ -184,7 +184,7 @@
 #homepage-sections-list {
 	list-style-type: none;
 	.homepage-section {
-		h2 {
+		h2 .promo {
 			margin-bottom: 1em;
 			font-size: 15px;
 			letter-spacing: 2px;

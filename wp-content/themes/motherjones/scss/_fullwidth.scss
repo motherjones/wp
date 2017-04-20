@@ -57,6 +57,8 @@
   font-weight: bold;
   font-style: italic;
   font-size: 12px;
+  width: 100%;
+  height: 0;
 }
 #full-width-header-image img {
   min-width: 100%;
@@ -130,7 +132,7 @@
 }
 
 @media (min-width: $reflex-xs) {
-  #full-width-header-data {
+  #full-width-overlay-data {
     position: absolute;
     bottom: 0px;
     width: 100%;
@@ -139,6 +141,9 @@
     h3 {
       color: $white;
     }
+	  a:hover {
+      color: $orange;
+	  }
   }
 }
 

@@ -1819,6 +1819,19 @@ ul.author-bios {
     color: white;
     background: #FF6900; }
 
+.mj_top_stories_widget {
+  text-align: center; }
+  .mj_top_stories_widget ul {
+    padding: 0; }
+  .mj_top_stories_widget li.article-item {
+    margin: 0 30px 15px;
+    padding: 15px 0 0 0;
+    border-top: 1px solid #ccc;
+    text-align: center; }
+    .mj_top_stories_widget li.article-item:first-of-type {
+      border-top: 0;
+      padding-top: 0; }
+
 /* social buttons */
 .social-container a {
   text-decoration: none;
@@ -1940,7 +1953,7 @@ ul.author-bios {
   padding: 1em 0; }
   #homepage-top-story .article-data {
     position: absolute;
-    bottom: 26px;
+    bottom: 60px;
     width: 100%;
     background: linear-gradient(transparent, black); }
     #homepage-top-story .article-data a {
@@ -2060,7 +2073,7 @@ ul.author-bios {
 
 #homepage-sections-list {
   list-style-type: none; }
-  #homepage-sections-list .homepage-section h2 {
+  #homepage-sections-list .homepage-section h2 .promo {
     margin-bottom: 1em;
     font-size: 15px;
     letter-spacing: 2px; }
@@ -2461,7 +2474,9 @@ ul.author-bios {
   font-family: Mallory, sans-serif;
   font-weight: bold;
   font-style: italic;
-  font-size: 12px; }
+  font-size: 12px;
+  width: 100%;
+  height: 0; }
 
 #full-width-header-image img {
   min-width: 100%; }
@@ -2528,14 +2543,16 @@ ul.author-bios {
     #fullwidth-body .inline-left * {
       text-align: left; } }
 @media (min-width: 480px) {
-  #full-width-header-data {
+  #full-width-overlay-data {
     position: absolute;
     bottom: 0px;
     width: 100%;
     background: linear-gradient(transparent, black); }
-    #full-width-header-data h1,
-    #full-width-header-data h3 {
-      color: white; } }
+    #full-width-overlay-data h1,
+    #full-width-overlay-data h3 {
+      color: white; }
+    #full-width-overlay-data a:hover {
+      color: #FF6900; } }
 /* end full width */
 @media print {
   * {
@@ -2676,6 +2693,21 @@ ul.author-bios {
   border-bottom: 3px solid #FF6900;
   display: inline-block;
   margin: 30px 0 35px 0; }
+
+.inline .caption {
+  line-height: 17px;
+  color: #FF6900;
+  font-family: Mallory, sans-serif;
+  font-weight: bold;
+  font-size: 12px; }
+  .inline .caption strong {
+    font-weight: normal;
+    color: black;
+    font-family: Calluna, serif;
+    font-size: 14px; }
+
+.inline p {
+  margin: 0; }
 
 body {
   padding-top: 0; }
@@ -2935,31 +2967,6 @@ blockquote {
   float: none;
   margin: 1em auto; }
 
-.wp-media-credit {
-  margin: 0;
-  text-align: right; }
-
-.caption,
-.caption a,
-.photo-byline,
-.photo-byline a,
-.wp-media-credit {
-  background: white;
-  color: #FF6900;
-  font-weight: normal;
-  text-transform: none;
-  font-family: Mallory, sans-serif;
-  font-weight: bold;
-  font-style: italic;
-  font-size: 12px;
-  background-position: 0% 100%;
-  letter-spacing: normal; }
-
-.photo-byline {
-  margin: 5px 0; }
-
-.caption strong,
-.master-image-caption,
 .wp-caption-text {
   color: black;
   font-style: normal;
@@ -2969,10 +2976,16 @@ blockquote {
   margin: 10px 0 0 0;
   line-height: 17px;
   font-weight: normal; }
-
-.caption strong a,
-.wp-caption-text a {
-  color: black; }
+  .wp-caption-text .media-caption {
+    padding-right: 5px; }
+  .wp-caption-text .media-credit {
+    font-weight: bold;
+    color: #ccc; }
+    .wp-caption-text .media-credit a {
+      background: none;
+      color: #FF6900; }
+      .wp-caption-text .media-credit a:hover {
+        color: #ff8733; }
 
 #content-area .inline a {
   border-bottom: none; }
@@ -3091,23 +3104,6 @@ li.article-item {
 h2.widget-title {
   display: none; }
 
-/* sidebar items */
-#sidebar-right .promo {
-  margin-bottom: 15px; }
-#sidebar-right .top-stories {
-  text-align: center; }
-  #sidebar-right .top-stories ul {
-    padding: 0; }
-  #sidebar-right .top-stories li {
-    margin: 0 30px 15px;
-    padding: 15px 0 0 0;
-    border-top: 1px solid #ccc;
-    text-align: center; }
-    #sidebar-right .top-stories li:first-of-type {
-      border-top: 0;
-      padding-top: 0; }
-
-/* end sidebar items */
 /* begin responsive video styling */
 .responsive_video_embed_container {
   height: 0;

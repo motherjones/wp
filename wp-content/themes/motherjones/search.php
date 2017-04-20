@@ -7,7 +7,8 @@
  * @since Mother Jones 1.0
  */
 
-get_header(); ?>
+get_header();
+?>
 
 <div id="content" class="site-content">
 	<div id="primary" class="content-area">

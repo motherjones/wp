@@ -10,7 +10,7 @@ $wp_db = "pantheon_wp";
 $wp = new PDO("mysql:host=$hostname;dbname=$wp_db", $username, $password);
 
 
-$widgets = Array('mj_top_stories_widget', 'mj-author-bio-widget', 
+$widgets = Array('mj_top_stories_widget', 'mj-author-bio-widget',
 	'mj-floating-ad-widget', 'mj-related-articles-widget', 'mj-blog-pager-widget');
 $widget_options = $wp->prepare("
 REPLACE INTO wp_options
@@ -97,7 +97,7 @@ HTML
 $blocks[3] = Array(
 		'title' => 'Site wrap',
 		'text' => <<<'HTML'
-<script language="javascript">
+<script>
 <!--
 if (typeof(MJ_HideSiteWrap) === 'undefined') {
   jQuery('head').append('<link rel="stylesheet" href="http://assets.motherjones.com/advertising/2014/05/sierra_club_sitewrap.css" type="text/css" />');
@@ -145,10 +145,10 @@ $blocks[6] =	Array(
 <a class="monthly donation" target="_blank" href="https://secure.motherjones.com/fnp/?action=SUBSCRIPTION&list_source=7HEGPAM1&extra_don=1&abver=B"></a>
 
 <form action="https://api.maropost.com/accounts/585/forms/3289/subscribe/177d8ba3b7fe7d39e28dcba73123eeffbd01878b" method="post" id="emailForm" onsubmit="return MJ_check_email(this);">
-  <button alt="SIGN UP" border="0" height="25" name="commit" id="submit" onclick="ga('send', 'event', 'TopRightFollowBox', 'Email|Click', window.location.pathname);" type="image" value="Submit">SIGN UP</button>
-  <input gtbfieldid="27" include_blank="true" start_year="1950" name="contact_fields[email]" id="cons_email" placeholder="YOUR EMAIL" type="text" />
-  <input include_blank="true" start_year="1950" type="hidden" name="custom_fields[outreach_affiliate_code]" id="custom_fields_outreach_affiliate_code" value="Article_Membership_Box" />
-  <input include_blank="true" start_year="1950" type="hidden" name="custom_fields[signup_url]" id="signup_url" value="" />
+  <button name="commit" id="submit" onclick="ga('send', 'event', 'TopRightFollowBox', 'Email|Click', window.location.pathname);" value="Submit">SIGN UP</button>
+  <input name="contact_fields[email]" id="cons_email" placeholder="YOUR EMAIL" type="text" />
+  <input type="hidden" name="custom_fields[outreach_affiliate_code]" id="custom_fields_outreach_affiliate_code" value="Article_Membership_Box" />
+  <input type="hidden" name="custom_fields[signup_url]" id="signup_url" value="" />
   <input type="hidden" value="" id="email_field" name="email_const_mp" />
 </form>
 <a class="subscribe_cover" target="_blank" href="https://secure.motherjones.com/fnx/?action=SUBSCRIPTION&pub_code=MJM&term_pub=MJM&list_source=SEGYN2&base_country=US "></a>
@@ -229,8 +229,8 @@ $blocks[13] =	Array( //BEGIN inquiring minds block
   <li class="author-bio group vcard">
     <div class="author-image"><img src="/wp-content/themes/motherjones/img/inq_minds_profiles/adam_headshot_2014-01.jpg" alt="Adam Isaak" /></div>
     <div class="author-data">
-			<span class="byline">Adam Isaak</span> 
-			<span class="author-position">Inquiring Minds producer</span> 
+			<span class="byline">Adam Isaak</span>
+			<span class="author-position">Inquiring Minds producer</span>
 			<p>  Adam Isaak is a media producer with a decade of experience creating science-focused videos and podcasts. He produces the Inquiring Minds podcast.</p>
     </div>
   </li>
@@ -263,8 +263,8 @@ $blocks[15] =	Array( //BEGIN Bite podcast block
         <span class="byline">Kiera Butler</span>
         <span class="author-position">Bite co-host</span>
         <p>
-          A senior editor at <em>Mother Jones</em>, Kiera covers health, food, and the environment. 
-          She is the author of the 2014 book <em>Raise: What 4-H Teaches 7 Million Kids&emdash;and How Its Lessons Could Change Food and Farming Forever</em>. 
+          A senior editor at <em>Mother Jones</em>, Kiera covers health, food, and the environment.
+          She is the author of the 2014 book <em>Raise: What 4-H Teaches 7 Million Kids&emdash;and How Its Lessons Could Change Food and Farming Forever</em>.
         </p>
     </div>
   </li>

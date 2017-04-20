@@ -12,6 +12,7 @@
 @import 'print';
 @import 'pages';
 @import 'podcasts';
+@import 'legacy';
 
 body {
   padding-top: 0;
@@ -301,33 +302,7 @@ blockquote {
   float: none;
   margin: 1em auto;
 }
-.wp-media-credit {
-  margin: 0;
-  text-align: right;
-}
-.caption,
-.caption a,
-.photo-byline,
-.photo-byline a,
-.wp-media-credit {
-  background: $white;
-  color: $orange;
-  font-weight: normal;
-  text-transform: none;
-  font-family: $mallory;
-  font-weight: bold;
-  font-style: italic;
-  font-size: 12px;
-  background-position: 0% 100%;
-  letter-spacing: normal;
-}
-.photo-byline {
-  margin: 5px 0;
-}
-
-.caption strong,
-.master-image-caption,
-.wp-caption-text  {
+.wp-caption-text {
   color: $black;
   font-style: normal;
   text-transform: none;
@@ -336,11 +311,22 @@ blockquote {
   margin: 10px 0 0 0;
   line-height: 17px;
   font-weight: normal;
+  .media-caption {
+    padding-right: 5px;
+  }
+  .media-credit {
+    font-weight: bold;
+    color: $neutral1;
+    a {
+      background: none;
+      color: $orange;
+      &:hover {
+        color: lighten( $orange, 10% );
+      }
+    }
+  }
 }
-.caption strong a,
-.wp-caption-text a {
-  color: $black;
-}
+
 #content-area {
   .inline a {
     border-bottom: none;
@@ -480,31 +466,6 @@ li.article-item {
 h2.widget-title {
   display: none;
 }
-
-/* sidebar items */
-
-#sidebar-right {
-  .promo {
-    margin-bottom: 15px;
-  }
-  .top-stories {
-    text-align: center;
-    ul {
-      padding: 0;
-    }
-    li {
-      margin: 0 30px 15px;
-      padding: 15px 0 0 0;
-      border-top: 1px solid $neutral1;
-      text-align: center;
-      &:first-of-type {
-        border-top: 0;
-        padding-top: 0;
-      }
-    }
-  }
-}
-/* end sidebar items */
 
 /* begin responsive video styling */
 .responsive_video_embed_container {

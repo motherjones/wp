@@ -30,7 +30,7 @@ class mj_ad_unit_widget extends WP_Widget {
 		extract( $args );
 		echo $before_widget;
 		?>
-		<script language="javascript">
+		<script>
 			ad_code({
 				<?php
 				if ( isset( $instance['placement'] ) ) {

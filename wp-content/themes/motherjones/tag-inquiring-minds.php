@@ -75,8 +75,8 @@ get_header(); ?>
 							'desktop' => 1,
 						),
 						array(
-							'before_widget' => '',
-							'after_widget' => '',
+							'before_widget' => '</ul><div class="ad">',
+							'after_widget' => '</div><ul class="articles-list">',
 						)
 					);
 				}
