@@ -11,7 +11,7 @@ $wp = new PDO("mysql:host=$hostname;dbname=$wp_db", $username, $password);
 
 
 $widgets = Array('mj_top_stories_widget', 'mj-author-bio-widget',
-								'mj-related-articles-widget', 'mj-blog-pager-widget');
+	'mj-floating-ad-widget', 'mj-related-articles-widget', 'mj-blog-pager-widget');
 $widget_options = $wp->prepare("
 REPLACE INTO wp_options
 (option_name, option_value)
@@ -27,13 +27,36 @@ foreach ($widgets as $widget) {
 }
 $wp->commit();
 
-// be aware that the -9 here refers to the index in the array below
+$rhc_ads = $wp->prepare("
+REPLACE INTO wp_options
+(option_name, option_value)
+VALUES (
+'widget_mj-ad-unit-widget',
+?
+)
+;
+");
+$rhc_ad_array = Array(
+	'placement' => 'RightTopROS300x600',
+	'height' => 529,
+	'docwrite' => '1',
+	'desktop' => '1',
+	'yieldmo' => '0',
+);
+$rhc_all_ads = Array();
+$rhc_all_ads[2] = $rhc_all_ads[3] = $rhc_all_ads[4] = $rhc_all_ads[5] = $rhc_ad_array;
+$rhc_all_ads['_multiwidget'] = 1; //below are the blocks
+$wp->beginTransaction();
+$rhc_ads->execute(Array(serialize($rhc_all_ads)));
+$wp->commit();
+
+// be aware that the -9 here refers to the index in the array below.
 $sidebars_widgets_options = Array(
 		'wp_inactive_widgets' => Array(),
-		'sidebar' => Array('text-9', 'text-6', 'mj_top_stories_widget-2', 'text-11'),  //RHC ad, RHC membership for  not blog posts, top stories, ad
-		'sidebar-blog' => Array('text-9', 'text-5', 'text-11'),  //RHC ad, RHC membership for blog posts and not blog posts, ad
-		'sidebar-bite' => Array('text-9', 'text-15', 'text-11'),  //RHC ad, bite author block, ad
-		'sidebar-inquiring-minds' => Array('text-9', 'text-13', 'text-11'),  //RHC ad, inq minds author block, ad
+		'sidebar' => Array('mj-ad-unit-widget-2', 'text-6', 'mj_top_stories_widget-2', 'mj-floating-ad-widget-2'),  //RHC ad, RHC membership for  not blog posts, top stories, ad
+		'sidebar-blog' => Array('mj-ad-unit-widget-3', 'text-5', 'mj-floating-ad-widget-2'),  //RHC ad, RHC membership for blog posts and not blog posts, ad
+		'sidebar-bite' => Array('mj-ad-unit-widget-4', 'text-15', 'mj-floating-ad-widget-2'),  //RHC ad, bite author block, ad
+		'sidebar-inquiring-minds' => Array('mj-ad-unit-widget-5', 'text-13', 'mj-floating-ad-widget-2'),  //RHC ad, inq minds author block, ad
 		'ticker' => Array('text-7'), //Membership ticker
 		'homepage-more-top-stories' => Array('text-10'), //Membership ticker
 		'content-end' => Array('mj-author-bio-widget-2', 'text-8', 'mj-related-articles-widget-2', 'mj-blog-pager-widget-2'), //FIXME needs to contain author bio, text block for members like you text-8, related articles, and blog pager
@@ -74,7 +97,7 @@ HTML
 $blocks[3] = Array(
 		'title' => 'Site wrap',
 		'text' => <<<'HTML'
-<script language="javascript">
+<script>
 <!--
 if (typeof(MJ_HideSiteWrap) === 'undefined') {
   jQuery('head').append('<link rel="stylesheet" href="http://assets.motherjones.com/advertising/2014/05/sierra_club_sitewrap.css" type="text/css" />');
@@ -122,10 +145,10 @@ $blocks[6] =	Array(
 <a class="monthly donation" target="_blank" href="https://secure.motherjones.com/fnp/?action=SUBSCRIPTION&list_source=7HEGPAM1&extra_don=1&abver=B"></a>
 
 <form action="https://api.maropost.com/accounts/585/forms/3289/subscribe/177d8ba3b7fe7d39e28dcba73123eeffbd01878b" method="post" id="emailForm" onsubmit="return MJ_check_email(this);">
-  <button alt="SIGN UP" border="0" height="25" name="commit" id="submit" onclick="ga('send', 'event', 'TopRightFollowBox', 'Email|Click', window.location.pathname);" type="image" value="Submit">SIGN UP</button>
-  <input gtbfieldid="27" include_blank="true" start_year="1950" name="contact_fields[email]" id="cons_email" placeholder="YOUR EMAIL" type="text" />
-  <input include_blank="true" start_year="1950" type="hidden" name="custom_fields[outreach_affiliate_code]" id="custom_fields_outreach_affiliate_code" value="Article_Membership_Box" />
-  <input include_blank="true" start_year="1950" type="hidden" name="custom_fields[signup_url]" id="signup_url" value="" />
+  <button name="commit" id="submit" onclick="ga('send', 'event', 'TopRightFollowBox', 'Email|Click', window.location.pathname);" value="Submit">SIGN UP</button>
+  <input name="contact_fields[email]" id="cons_email" placeholder="YOUR EMAIL" type="text" />
+  <input type="hidden" name="custom_fields[outreach_affiliate_code]" id="custom_fields_outreach_affiliate_code" value="Article_Membership_Box" />
+  <input type="hidden" name="custom_fields[signup_url]" id="signup_url" value="" />
   <input type="hidden" value="" id="email_field" name="email_const_mp" />
 </form>
 <a class="subscribe_cover" target="_blank" href="https://secure.motherjones.com/fnx/?action=SUBSCRIPTION&pub_code=MJM&term_pub=MJM&list_source=SEGYN2&base_country=US "></a>
@@ -160,25 +183,6 @@ HTML
 		,
 		'filter' => false,
 	); //END members like you block
-$blocks[9] =	Array( //BEGIN RHC ad like you block
-		'title' => 'RHC ad',
-		'text' => <<<'HTML'
-<script language="javascript">
-		<!--
-		if (typeof MJ_HideRightColAds === 'undefined') {
-			ad_code({
-				desktop: true,
-				placement: 'RightTopROS300x600',
-				height: 529,
-				doc_write: true,
-			});
-		}
-		//-->
-</script>
-HTML
-		,
-		'filter' => false,
-	); //END RHC adblock
 $blocks[10] =	Array( //BEGIN homepage promo block
 		'title' => 'Homepage Promo',
 		'text' => <<<'HTML'
@@ -200,57 +204,6 @@ HTML
 		,
 		'filter' => false,
 	); //END homepage promo block
-$blocks[11] =	Array( //BEGIN Criteoscroller ad
-		'title' => 'RHC criteoscroller ad',
-		'text' => <<<'HTML'
-<div class="advertise-top"></div>
-
-<div id="criteoscroller">
-
-<script type="text/javascript" src="http://aka-cdn-ns.adtechus.com/dt/common/DAC.js"></script>
-
-
-<div id="4170840"><noscript><a href="http://adserver.adtechus.com/adlink|3.0|5443.1|4170840|0|529|ADTECH;loc=300;key=key1+key2+key3+key4;alias=" target="_blank"><img src="http://adserver.adtechus.com/adserv|3.0|5443.1|4170840|0|529|ADTECH;loc=300;key=key1+key2+key3+key4;alias=" border="0" width="300" height="600"></a></noscript></div>
-
-</div>
-<script type="text/javascript">
-jQuery(window).load(function() {
-  if (typeof MJ_HideRightColAds === 'undefined' &&   jQuery('#page-closure').offset().top > 2800 ) {
-
-    ADTECH.config.page = { protocol: 'http', server: 'adserver.adtechus.com', network: '5443.1', pageid: 634599, params: { loc: '100' }};
-    ADTECH.config.placements[4170840] = { sizeid: 529, params: { alias: '', target: '_blank' }};
-    ADTECH.loadAd(4170840);
-    // Set a function to load an ad every 55,000 miliseconds (55 seconds)
-    setInterval(function(){ ADTECH.loadAd(4170840); }, 30000);
-
-    var criteo_scrollingAd = jQuery('#criteoscroller');var criteo_adTop = criteo_scrollingAd.offset().top;
-    function fixDiv() {
-        var criteo_stoppingHeight = jQuery('#page-closure').offset().top;
-        if (jQuery(window).scrollTop() >= (criteo_stoppingHeight - 650))
-            criteo_scrollingAd.css({
-                'position': 'relative',
-                'top': (criteo_stoppingHeight - criteo_adTop - 650) + 'px'
-            });
-        else if (jQuery(window).scrollTop() >= (criteo_adTop - 50))
-            criteo_scrollingAd.css({
-                'position': 'fixed',
-                'top': '50px'
-            });
-        else
-            criteo_scrollingAd.css({
-                'position': 'static',
-                'top': 'auto'
-            });
-    }
-    jQuery(window).scroll(fixDiv);
-    fixDiv();
-  }
-});
-</script>
-HTML
-		,
-		'filter' => false,
-	); //END Criteoscroller ad
 $blocks[13] =	Array( //BEGIN inquiring minds block
 		'title' => 'Inquiring minds authors',
 		'text' => <<<'HTML'
@@ -276,8 +229,8 @@ $blocks[13] =	Array( //BEGIN inquiring minds block
   <li class="author-bio group vcard">
     <div class="author-image"><img src="/wp-content/themes/motherjones/img/inq_minds_profiles/adam_headshot_2014-01.jpg" alt="Adam Isaak" /></div>
     <div class="author-data">
-			<span class="byline">Adam Isaak</span> 
-			<span class="author-position">Inquiring Minds producer</span> 
+			<span class="byline">Adam Isaak</span>
+			<span class="author-position">Inquiring Minds producer</span>
 			<p>  Adam Isaak is a media producer with a decade of experience creating science-focused videos and podcasts. He produces the Inquiring Minds podcast.</p>
     </div>
   </li>
@@ -310,8 +263,8 @@ $blocks[15] =	Array( //BEGIN Bite podcast block
         <span class="byline">Kiera Butler</span>
         <span class="author-position">Bite co-host</span>
         <p>
-          A senior editor at <em>Mother Jones</em>, Kiera covers health, food, and the environment. 
-          She is the author of the 2014 book <em>Raise: What 4-H Teaches 7 Million Kids&emdash;and How Its Lessons Could Change Food and Farming Forever</em>. 
+          A senior editor at <em>Mother Jones</em>, Kiera covers health, food, and the environment.
+          She is the author of the 2014 book <em>Raise: What 4-H Teaches 7 Million Kids&emdash;and How Its Lessons Could Change Food and Farming Forever</em>.
         </p>
     </div>
   </li>

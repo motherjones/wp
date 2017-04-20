@@ -219,6 +219,45 @@ AND n.status = 1
 
 $wp->beginTransaction();
 while ( $redirect = $page_redirects->fetch(PDO::FETCH_NUM)) {
-	$redirect_update_insert->execute($redirect);
+	$redirect_item_insert->execute($redirect);
+}
+$wp->commit();
+
+
+/**
+ * GET POSTS WITH THE WRONG MONTH IN THE URL
+ * drupal makes the url w/ the month set by created date, not post date
+ * So we're gonna make those old urls point to new good urls
+ */
+
+$month_redirects = $d6->prepare('
+SELECT DISTINCT n.nid,
+r.dst
+FROM mjd6.url_alias r
+JOIN mjd6.node n
+ON ( n.nid = REPLACE(r.src, "node/", "") )
+JOIN mjd6.publication_date p
+ON ( n.nid = p.nid )
+WHERE r.src LIKE "node%" AND r.src NOT LIKE "%feed"
+AND n.status = 1 AND 
+(n.type = "article" OR n.type = "blogpost" OR n.type = "full_width_article")
+AND 
+MONTH( FROM_UNIXTIME(p.published_at) )
+!=
+TRIM( LEADING "0" FROM
+  SUBSTRING_INDEX(
+	  SUBSTRING_INDEX( r.dst, "/", -2 ),
+  "/", 1)
+)
+;'
+);
+$month_redirects->execute();
+
+$wp->beginTransaction();
+while ($redirect = $month_redirects->fetch(PDO::FETCH_ASSOC)) {
+	$redirect_item_insert->execute(Array(
+		$redirect['dst'],
+		'?p=' . $redirect['nid'],
+	));
 }
 $wp->commit();

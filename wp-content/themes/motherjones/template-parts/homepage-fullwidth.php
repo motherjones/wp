@@ -20,7 +20,7 @@ if ( $post_thumbnail_id ) {
 <div class="article-data">
 	<?php
 	if ( isset( $mj['fullwidth_title'] ) && ! empty( $mj['fullwidth_title'] ) ) {
-		echo '<h2 class="section-label"><span class="promo">' . esc_html( $mj['fullwidth_title'] ) . '<span></h2>';
+		echo '<h2 class="section-label"><span class="promo">' . esc_html( $mj['fullwidth_title'] ) . '</span></h2>';
 	}
 
 	if ( ! empty( $post_thumbnail_id ) ) {

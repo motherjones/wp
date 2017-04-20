@@ -21,7 +21,7 @@ get_header(); ?>
 <main id="main" class="site-main grid " role="main">
 	<section class="main-index grid__col-md-8 grid__col-sm-9 grid__col-xs-12">
 		<header class="page-header">
-			<img src="<?php echo esc_url( get_stylesheet_directory_uri() ); ?>/img/KEVIN.png"></img>
+			<img src="<?php echo esc_url( get_template_directory_uri() ); ?>/img/KEVIN.png"></img>
 			<h1 class="page-title visuallyhidden">Kevin Drum</h1>
 		</header><!-- .page-header -->
 
@@ -58,8 +58,8 @@ get_header(); ?>
 							'desktop' => 1,
 						),
 						array(
-							'before_widget' => '',
-							'after_widget' => '',
+							'before_widget' => '</ul><div class="ad">',
+							'after_widget' => '</div><ul class="articles-list">',
 						)
 					);
 				} elseif ( 6 === $posts_shown ) {
@@ -72,12 +72,11 @@ get_header(); ?>
 							'desktop' => 1,
 						),
 						array(
-							'before_widget' => '',
-							'after_widget' => '',
+							'before_widget' => '</ul><div class="ad">',
+							'after_widget' => '</div><ul class="articles-list">',
 						)
 					);
-				}
-			// End the loop.
+				} // End if().
 			endwhile;
 		?>
 		</ul>

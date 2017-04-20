@@ -170,11 +170,15 @@ class Navis_Media_Credit {
 		}
 
 		$out = sprintf( '<div %s class="wp-caption %s" style="max-width: %spx;">%s', $id, $align, $width, do_shortcode( $content ) );
-		if ( $credit ) {
-			$out .= sprintf( '<p class="wp-media-credit">%s</p>', $credit );
-		}
-		if ( $caption ) {
-			$out .= sprintf( '<p class="wp-caption-text">%s</p>', $caption );
+		if ( $caption || $credit ) {
+			$out .= '<p class="wp-caption-text">';
+			if ( $caption ) {
+				$out .= sprintf( '<span class="media-caption">%s</span>', $caption );
+			}
+			if ( $credit ) {
+				$out .= sprintf( '<span class="media-credit">%s</span>', $credit );
+			}
+			$out .= '</p>';
 		}
 		$out .= '</div>';
 		return $out;
@@ -211,13 +215,21 @@ class Media_Credit {
 		);
 	}
 	function to_string() {
-		if ( $this->credit && $this->org ) {
-			return sprintf( '%s / %s', esc_attr( $this->credit ), esc_attr( $this->org ) );
-		} elseif ( $this->credit ) {
-			return esc_attr( $this->credit );
-		} elseif ( $this->org ) {
-			return esc_attr( $this->org );
+		$out = '';
+		if ( $this->credit_url ) {
+			$out .= sprintf( '<a href="%s">', esc_url( $this->credit_url ) );
 		}
+		if ( $this->credit && $this->org ) {
+			$out .= sprintf( '%s / %s', esc_attr( $this->credit ), esc_attr( $this->org ) );
+		} elseif ( $this->credit ) {
+			$out .= esc_attr( $this->credit );
+		} elseif ( $this->org ) {
+			$out .= esc_attr( $this->org );
+		}
+		if ( $this->credit_url ) {
+			$out .= '</a>';
+		}
+		return $out;
 	}
 	function update( $field, $value ) {
 		return update_post_meta( $this->post_id, '_' . $field, $value );

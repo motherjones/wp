@@ -17,7 +17,7 @@ global $mj;
 
 	<footer id="colophon" class="site-footer" role="contentinfo">
 
-			<a href="/" id="footer-logo" class=>
+			<a href="/" id="footer-logo">
 				<img src="<?php echo esc_url( get_stylesheet_directory_uri() ); ?>/img/MJ_comp_grey.png" alt="Mother Jones" />
 			</a>
 			<ul id="footer-social">
@@ -89,16 +89,6 @@ global $mj;
 				);
 			}
 			?>
-
-			<div id="bottom-donate" style="display:none">
-				<p>
-					We noticed you have an ad blocker on.
-					Support nonprofit investigative reporting by pitching in a few
-					bucks.
-					<a href="https://secure.motherjones.com/fnp/?action=SUBSCRIPTION&list_source=7HEGZS1A&extra_don=1&abver=A">DONATE</a>
-					<span onclick="jQuery('#bottom-donate').remove();">X</span>
-				</p>
-			</div>
 
 			<?php dynamic_sidebar( 'page-end' ); ?>
 	</footer><!-- .site-footer -->

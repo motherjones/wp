@@ -7,6 +7,18 @@
  * @since Mother Jones 1.0
  */
 
+global $mj;
+
+// A canonical list of allowed tags to pass to wp_kses() when we need it.
+$mj['allowed_tags'] = array(
+	'a' => array(
+		'href' => array(),
+		'title' => array(),
+	),
+	'em' => array(),
+	'strong' => array(),
+);
+
 /**
  * Set wysiwyg config.
  *
@@ -49,12 +61,6 @@ function mj_wysiwyg_config( $config ) {
 			'title' => 'Pullquote',
 			'block' => 'blockquote',
 			'classes' => 'pullquote-left',
-			'wrapper' => false,
-		),
-		array(
-			'title' => 'Right Rail',
-			'block' => 'div',
-			'classes' => 'right-rail',
 			'wrapper' => false,
 		),
 	);

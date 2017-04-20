@@ -166,24 +166,30 @@ class Largo_Related_Posts_Admin {
 	 */
 	public function related_posts_ajax_search() {
 		global $wpdb;
-		$search = like_escape($_REQUEST['term']);
+		$search = like_escape( $_REQUEST['term'] );
 		$post_types = apply_filters( 'largo_related_posts_types', array( 'post' ) );
 
-		$query = 'SELECT post_title, ID FROM wp_posts
+		$query =
+		'
+		SELECT post_title, ID
+		FROM wp_posts
 		WHERE post_title LIKE \'%' . $search . '%\'
-		AND `post_status` LIKE \'publish\'
-		AND `post_type` IN ("' . implode( '", "', $post_types ) . '")';
+			AND `post_status` LIKE \'publish\'
+			AND `post_type` IN ("' . implode( '", "', $post_types ) . '")
+		ORDER BY ID DESC
+		LIMIT 50
+		';
 
 		$suggestions = array();
 
-		foreach ($wpdb->get_results($query) as $row) {
+		foreach ( $wpdb->get_results( $query ) as $row ) {
 			$suggestion['value'] = $row->ID;
 			$suggestion['label'] = $row->post_title;
 
 			$suggestions[] = $suggestion;
 		}
 
-		$response = json_encode( $suggestions );
+		$response = wp_json_encode( $suggestions );
 		echo $response;
 		die();
 	}

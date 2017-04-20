@@ -224,7 +224,6 @@ ul.author-bios {
 		top: 11px;
 		display:none;
 	}
-
 	h5 {
 		text-align: left;
 		font-size: 18px;
@@ -233,7 +232,6 @@ ul.author-bios {
 		font-weight: bold;
 		margin-bottom: 15px;
 	}
-
 	input[type="submit"] {
 		font-family: $mallory;
 		font-weight: bold;
@@ -242,5 +240,21 @@ ul.author-bios {
 		color: $white;
 		background: $orange;
 	}
+}
 
+.mj_top_stories_widget {
+  text-align: center;
+  ul {
+    padding: 0;
+  }
+  li.article-item {
+    margin: 0 30px 15px;
+    padding: 15px 0 0 0;
+    border-top: 1px solid $neutral1;
+    text-align: center;
+    &:first-of-type {
+      border-top: 0;
+      padding-top: 0;
+    }
+  }
 }

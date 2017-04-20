@@ -19,8 +19,11 @@ while ( have_posts() ) : the_post();
 	if ( class_exists( 'MultiPostThumbnails' ) && MultiPostThumbnails::has_post_thumbnail( 'post', 'mj_title_image' ) ) {
 		$has_image = true;
 	}
-	if ( $has_image ) {
-		echo '<div id="full-width-header-data">';
+
+	if ( $has_image && ! isset( $mj['meta']['mj_overlay_hide'] ) ) {
+		echo '<div id="full-width-overlay-data">';
+	} else {
+		echo '<div id="full-width-overlay-data" class="visuallyhidden">';
 	}
 
 	the_title( '<h1 class="entry-title">', '</h1>' );
@@ -56,6 +59,7 @@ while ( have_posts() ) : the_post();
 		</div>
 	<?php
 	}
+	mj_post_metadata( get_the_ID() );
 	?>
 </header>
 
@@ -86,10 +90,10 @@ if ( isset( $title_img_meta['_media_credit'][0] ) && '' !== $title_img_meta['_me
 <main id="main" class="site-main" role="main">
 	<article class="full-width entry-content">
 		<?php
-		if ( isset( $mj['meta']['css'][0] ) ) {
+		if ( isset( $mj['meta']['mj_custom_css'][0] ) ) {
 			printf(
 				'<style>%s</style>',
-				esc_html( $mj['meta']['css'][0] )
+				esc_html( $mj['meta']['mj_custom_css'][0] )
 			);
 		}
 		mj_share_tools( 'top' );

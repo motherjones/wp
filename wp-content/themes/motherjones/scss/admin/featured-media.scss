@@ -77,10 +77,10 @@
     }
   }
 }
-#set-featured-media-button .dashicons {
-  position: relative;
-  top: 2px;
-  color: #888;
+#set-featured-media-button {
+  display: block;
+  clear: both;
+  max-width: 147px;
 }
 #wp-content-media-buttons .spinner {
   position: relative;

@@ -17,20 +17,20 @@ $article_classes = 'hnews hentry item grid__col-md-8 grid__col-sm-12';
 
 	<article class="entry-content" itemprop="articleBody">
 		<?php
-		if ( isset( $mj['meta']['css'][0] ) ) {
+		if ( isset( $mj['meta']['mj_custom_css'][0] ) ) {
 			printf(
 				'<style>%s</style>',
-				esc_html( $mj['meta']['css'][0] )
+				esc_html( $mj['meta']['mj_custom_css'][0] )
 			);
 		}
-			largo_hero();
-			the_content();
+		mj_hero();
+		the_content();
 		?>
 	</article>
 
 	<footer class="entry-footer">
 		<?php
-			do_action( 'post_end', get_post() );
+			do_action( 'mj_post_end', get_post() );
 			get_template_part( 'template-parts/newsletter-signup' );
 			mj_share_tools( 'bottom' );
 			dynamic_sidebar( 'content-end' );
