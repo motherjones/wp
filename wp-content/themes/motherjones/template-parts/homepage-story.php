@@ -35,9 +35,9 @@ global $mj;
 		</h3>
 		<?php
 		if ( ! in_category( 'kevin-drum' ) ) {
-			echo '<p class="byline">' . mj_byline( $post->ID ) . '</p>';
+			echo '<p class="byline">' . wp_kses( mj_byline( $post->ID ), $mj['allowed_tags'] ) . '</p>';
 		} else {
-			echo '<p class="dateline">' . mj_dateline( $post->ID ) . '</p>';
+			echo '<p class="dateline">' . wp_kses( mj_dateline( $post->ID ) , $mj['allowed_tags'] ) . '</p>';
 		}
 		?>
 	</div>

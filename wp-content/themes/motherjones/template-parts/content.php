@@ -7,6 +7,7 @@
  * @since Mother Jones 1.0
  */
 
+global $mj;
 ?>
 <li id="post-<?php echo esc_attr( get_the_ID() ); ?>" <?php post_class( 'article-item grid' ); ?>>
 
@@ -34,7 +35,7 @@
 		</h3>
 		<p class="byline">
 			<?php
-			echo mj_byline( get_the_ID() );
+			echo wp_kses( mj_byline( get_the_ID() ), $mj['allowed_tags'] );
 			edit_post_link( 'edit this post', '| <span class="edit-link">', '</span>' );
 			?>
 		</p>

@@ -34,10 +34,8 @@ if ( $post_thumbnail_id ) {
 	} elseif ( $dek = get_post_meta( get_the_ID(), 'mj_dek', true ) ) {
 		echo '<h4 class="dek"><a href="' . esc_url( get_permalink() ) . '">' . esc_html( $dek ) . '</a></h4>';
 	}
+	echo '<p class="byline">' . wp_kses( mj_byline( $post->ID ), $mj['allowed_tags'] ) . '</p>';
 	?>
-	<p class="byline">
-		<?php print mj_byline( get_the_ID() ); ?>
-	</p>
 </div>
 <?php
 if ( ! empty( $post_thumbnail_id ) ) {

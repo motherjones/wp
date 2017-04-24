@@ -24,12 +24,10 @@
 		}
 		?>
 		<p class="byline-dateline">
-			<span class="byline">
-				<?php print mj_byline( get_the_ID() ); ?>
-			</span>
-			<span class="dateline">
-				<?php print mj_dateline( get_the_ID() ); ?>
-			</span>
+			<?php
+			echo '<span class="byline">' . wp_kses( mj_byline( $post->ID ), $mj['allowed_tags'] ) . '</span>';
+			echo '<span class="dateline">' . wp_kses( mj_dateline( $post->ID ), $mj['allowed_tags'] ) . '</span>';
+			?>
 		</p>
 	</div><!-- .entry-header -->
 
