@@ -7,6 +7,7 @@
  * @since Mother Jones 1.0
  */
 
+global $mj;
 ?>
 
 <li class="article-item grid__col-md-6 grid__col-sm-12">
@@ -38,8 +39,6 @@
 				?>
 			</a>
 		</h3>
-		<p class="byline">
-			<?php print mj_byline( get_the_ID() ); ?>
-		</p>
+		<?php echo '<p class="byline">' . wp_kses( mj_byline( $post->ID ), $mj['allowed_tags'] ) . '</p>'; ?>
 	</div>
 </li>

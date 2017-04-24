@@ -43,8 +43,7 @@ if ( ! function_exists( 'mj_byline' ) ) {
 		global $mj;
 		$override = get_post_meta( $id, 'mj_byline_override', true );
 		if ( trim( $override ) ) {
-			$output = wp_kses( $override, $mj['allowed_tags'] );
-			return $output;
+			return $override;
 		} elseif ( function_exists( 'coauthors_posts_links' ) ) {
 			return coauthors_posts_links( ', ', null, null, null, false );
 		} else {

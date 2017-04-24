@@ -24,8 +24,6 @@
 				?>
 			</a>
 		</h3>
-		<p class="byline">
-			<?php print mj_byline( get_the_ID() ); ?>
-		</p>
+		<?php echo '<p class="byline">' . wp_kses( mj_byline( $post->ID ), $mj['allowed_tags'] ) . '</p>'; ?>
 	</div>
 </li>
