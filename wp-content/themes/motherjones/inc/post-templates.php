@@ -16,9 +16,9 @@ function mj_get_post_template( $template ) {
 	global $post;
 	if ( is_object( $post ) ) {
 		$template = get_the_terms( $post->ID, 'mj_content_type' );
-		$custom_field = strtolower( $template[0]->slug );
+		$custom_field = ! empty( $template ) ? strtolower( $template[0]->slug ) : false;
 	}
-	if ( empty( $custom_field ) || in_array( $custom_field, array( 'article' ), true ) ) {
+	if ( ! $custom_field || in_array( $custom_field, array( 'article' ), true ) ) {
 		$template = get_stylesheet_directory() . '/singular.php';
 	} else {
 		$template = get_stylesheet_directory() . '/single-' . $custom_field . '.php';
