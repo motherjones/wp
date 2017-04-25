@@ -198,11 +198,9 @@ $page_redirects = $d6->prepare('
 SELECT DISTINCT
 a.dst,
 REPLACE(
-  SUBSTR(a.dst, 
-    LOCATE("/", a.dst) + 1
-  ), 
-  "/",
-  "-"
+	a.dst,
+    "/",
+    "-"
 )
 FROM mjd6.node n
 INNER JOIN mjd6.node_revisions r
@@ -223,6 +221,34 @@ while ( $redirect = $page_redirects->fetch(PDO::FETCH_NUM)) {
 }
 $wp->commit();
 
+$page_redirects = $d6->prepare('
+SELECT DISTINCT
+a.dst,
+CONCAT("about/",
+	REPLACE(
+	  SUBSTR(a.dst, 
+		LOCATE("/", a.dst) + 1
+	  ), 
+	  "/",
+	  "-"
+	)
+)
+FROM mjd6.node n
+INNER JOIN mjd6.node_revisions r
+USING(vid)
+LEFT OUTER JOIN mjd6.url_alias a
+ON a.src = CONCAT("node/", n.nid)
+WHERE n.type = "page"
+AND a.dst LIKE "%about%"
+AND n.status = 1
+;
+');
+
+$wp->beginTransaction();
+while ( $redirect = $page_redirects->fetch(PDO::FETCH_NUM)) {
+	$redirect_item_insert->execute($redirect);
+}
+$wp->commit();
 
 /**
  * GET POSTS WITH THE WRONG MONTH IN THE URL
