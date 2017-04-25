@@ -173,15 +173,12 @@ $wp->beginTransaction();
 $redirect_item_insert->execute(Array('photoessays', 'topics/photoessays'));
 $wp->commit();
 
-// Add kdrum redirect
-$wp->beginTransaction();
-$redirect_item_insert->execute(Array('kevin-drum', 'blog/kevin-drum'));
-$wp->commit();
-
 
 //GET MANUAL REDIRECTS
 $manual_redirects = $d6->prepare('
-SELECT source, redirect FROM path_redirect WHERE redirect NOT LIKE "node%"
+SELECT source, redirect FROM path_redirect 
+WHERE redirect NOT LIKE "node%"
+AND source != redirect
 ;'
 );
 $manual_redirects->execute();
@@ -198,11 +195,9 @@ $page_redirects = $d6->prepare('
 SELECT DISTINCT
 a.dst,
 REPLACE(
-  SUBSTR(a.dst, 
-    LOCATE("/", a.dst) + 1
-  ), 
-  "/",
-  "-"
+	a.dst,
+    "/",
+    "-"
 )
 FROM mjd6.node n
 INNER JOIN mjd6.node_revisions r
@@ -216,6 +211,7 @@ AND a.dst LIKE "%/%"
 AND n.status = 1
 ;
 ');
+$page_redirects->execute();
 
 $wp->beginTransaction();
 while ( $redirect = $page_redirects->fetch(PDO::FETCH_NUM)) {
@@ -223,6 +219,35 @@ while ( $redirect = $page_redirects->fetch(PDO::FETCH_NUM)) {
 }
 $wp->commit();
 
+$page_redirects = $d6->prepare('
+SELECT DISTINCT
+a.dst,
+CONCAT("/about/",
+	REPLACE(
+	  SUBSTR(a.dst, 
+		LOCATE("/", a.dst) + 1
+	  ), 
+	  "/",
+	  "-"
+	)
+)
+FROM mjd6.node n
+INNER JOIN mjd6.node_revisions r
+USING(vid)
+LEFT OUTER JOIN mjd6.url_alias a
+ON a.src = CONCAT("node/", n.nid)
+WHERE n.type = "page"
+AND a.dst LIKE "about/%/%"
+AND n.status = 1
+;
+');
+$page_redirects->execute();
+
+$wp->beginTransaction();
+while ( $redirect = $page_redirects->fetch(PDO::FETCH_NUM)) {
+	$redirect_item_insert->execute($redirect);
+}
+$wp->commit();
 
 /**
  * GET POSTS WITH THE WRONG MONTH IN THE URL
@@ -257,7 +282,7 @@ $wp->beginTransaction();
 while ($redirect = $month_redirects->fetch(PDO::FETCH_ASSOC)) {
 	$redirect_item_insert->execute(Array(
 		$redirect['dst'],
-		'?p=' . $redirect['nid'],
+		'/?p=' . $redirect['nid'],
 	));
 }
 $wp->commit();

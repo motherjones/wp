@@ -275,8 +275,12 @@ CONVERT_TZ(FROM_UNIXTIME(p.published_at), 'PST8PDT','UTC'),
 r.body,
 n.title,
 r.teaser,
-SUBSTR(a.dst,
-  CHAR_LENGTH(a.dst) - LOCATE('about/', REVERSE(a.dst)) + 2
+REPLACE(
+	SUBSTR(a.dst,
+	  CHAR_LENGTH('/about/')
+	),
+    '/',
+    '-'
 )
 ,
 '',
