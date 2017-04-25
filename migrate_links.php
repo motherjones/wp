@@ -237,7 +237,7 @@ USING(vid)
 LEFT OUTER JOIN mjd6.url_alias a
 ON a.src = CONCAT("node/", n.nid)
 WHERE n.type = "page"
-AND a.dst LIKE "%about%"
+AND a.dst LIKE "about/%/%"
 AND n.status = 1
 ;
 ');
