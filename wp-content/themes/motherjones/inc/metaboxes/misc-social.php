@@ -29,11 +29,15 @@ function mj_misc_social_toggles_meta_box_display( $post ) {
 	$fields = array(
 		'mj_google_standout' => 'Mark as Google News Standout?',
 		'mj_fb_instant_exclude' => 'Exclude from Facebook Instant?',
-		'mj_hide_ads' => 'Hide ads on this post?',
 		'mj_overlay_hide' => 'Hide text overlay on title image?',
+		'mj_hide_ads' => 'Hide ads on this post?',
 	);
 	wp_nonce_field( 'mj_misc_social_toggles', 'mj_misc_social_toggles_nonce' );
 	foreach ( $fields as $field => $copy ) {
+		// only show the hide ads box for editors and above.
+		if ( 'mj_hide_ads' === $field && ! current_user_can( 'edit_pages' ) ) {
+			return;
+		}
 		$checked = ( 1 === intval( get_post_meta( $post->ID, $field, true ) ) ) ? 'checked="checked"' : '';
 		echo '<p><label class="selectit"><input type="checkbox" value="true" name="' . esc_attr( $field ) . '"' . esc_attr( $checked ) . '> ' . esc_html( $copy ) . '</label></p>';
 	}
