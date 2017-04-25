@@ -168,7 +168,7 @@ class Largo_Related_Posts_Admin {
 		global $wpdb;
 		$search = like_escape( $_REQUEST['term'] );
 		$post_types = apply_filters( 'largo_related_posts_types', array( 'post' ) );
-		$post_statuses = apply_filters( 'largo_related_posts_statuses', array( 'publish', 'draft' ) );
+		$post_statuses = apply_filters( 'largo_related_posts_statuses', array( 'publish', 'draft', 'future' ) );
 
 		$query =
 		'
