@@ -173,15 +173,12 @@ $wp->beginTransaction();
 $redirect_item_insert->execute(Array('photoessays', 'topics/photoessays'));
 $wp->commit();
 
-// Add kdrum redirect
-$wp->beginTransaction();
-$redirect_item_insert->execute(Array('kevin-drum', 'blog/kevin-drum'));
-$wp->commit();
-
 
 //GET MANUAL REDIRECTS
 $manual_redirects = $d6->prepare('
-SELECT source, redirect FROM path_redirect WHERE redirect NOT LIKE "node%"
+SELECT source, redirect FROM path_redirect 
+WHERE redirect NOT LIKE "node%"
+AND source != redirect
 ;'
 );
 $manual_redirects->execute();
@@ -225,7 +222,7 @@ $wp->commit();
 $page_redirects = $d6->prepare('
 SELECT DISTINCT
 a.dst,
-CONCAT("about/",
+CONCAT("/about/",
 	REPLACE(
 	  SUBSTR(a.dst, 
 		LOCATE("/", a.dst) + 1
@@ -285,7 +282,7 @@ $wp->beginTransaction();
 while ($redirect = $month_redirects->fetch(PDO::FETCH_ASSOC)) {
 	$redirect_item_insert->execute(Array(
 		$redirect['dst'],
-		'?p=' . $redirect['nid'],
+		'/?p=' . $redirect['nid'],
 	));
 }
 $wp->commit();
