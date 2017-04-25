@@ -168,13 +168,14 @@ class Largo_Related_Posts_Admin {
 		global $wpdb;
 		$search = like_escape( $_REQUEST['term'] );
 		$post_types = apply_filters( 'largo_related_posts_types', array( 'post' ) );
+		$post_statuses = apply_filters( 'largo_related_posts_statuses', array( 'publish', 'draft' ) );
 
 		$query =
 		'
 		SELECT post_title, ID
 		FROM wp_posts
 		WHERE post_title LIKE \'%' . $search . '%\'
-			AND `post_status` LIKE \'publish\'
+			AND `post_status` IN ("' . implode( '", "', $post_statuses ) . '")
 			AND `post_type` IN ("' . implode( '", "', $post_types ) . '")
 		ORDER BY ID DESC
 		LIMIT 50
