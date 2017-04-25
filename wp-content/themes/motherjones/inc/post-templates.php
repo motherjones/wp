@@ -105,3 +105,16 @@ function mj_is_content_type( $slug, $post_id ) {
 	}
 	return false;
 }
+
+/**
+ *  Add body classes when we need them.
+ */
+function mj_body_classes() {
+	global $post, $mj;
+	$mj['body_classes'] = '';
+	// add a draft class if a single posts is not published.
+	if ( is_single() && 'draft' === get_post_status( $post->ID ) ) {
+		$mj['body_classes'] .= 'mj_post_status-draft';
+	}
+}
+add_action( 'wp_head', 'mj_body_classes' );

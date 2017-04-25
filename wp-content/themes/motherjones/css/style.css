@@ -2711,6 +2711,8 @@ ul.author-bios {
 
 body {
   padding-top: 0; }
+  body.mj_post_status-draft {
+    background-color: pink; }
 
 #page {
   width: 55em;

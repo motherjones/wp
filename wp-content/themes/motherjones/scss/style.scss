@@ -16,6 +16,9 @@
 
 body {
   padding-top: 0;
+  &.mj_post_status-draft {
+    background-color: pink;
+  }
 }
 #page {
   width: 55em;
