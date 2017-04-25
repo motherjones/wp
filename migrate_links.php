@@ -214,6 +214,7 @@ AND a.dst LIKE "%/%"
 AND n.status = 1
 ;
 ');
+$page_redirects->execute();
 
 $wp->beginTransaction();
 while ( $redirect = $page_redirects->fetch(PDO::FETCH_NUM)) {
@@ -243,6 +244,7 @@ AND a.dst LIKE "%about%"
 AND n.status = 1
 ;
 ');
+$page_redirects->execute();
 
 $wp->beginTransaction();
 while ( $redirect = $page_redirects->fetch(PDO::FETCH_NUM)) {
