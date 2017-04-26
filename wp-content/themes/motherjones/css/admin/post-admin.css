@@ -36,4 +36,7 @@ div#taxonomy-post_tag {
   max-height: 200px;
   overflow: auto; }
 
+.attachment-details .setting[data-setting="description"] {
+  display: none; }
+
 /*# sourceMappingURL=post-admin.css.map */
