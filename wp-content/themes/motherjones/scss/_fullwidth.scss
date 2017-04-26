@@ -145,9 +145,15 @@
     h3 {
       color: $white;
     }
-	  a:hover {
-      color: $orange;
-	  }
+	.dateline a {
+		color: $neutral1;
+	}
+	a {
+		&:hover { color: $orange; }
+	}
+	.byline-dateline span {
+		margin: 0 7.5px;
+	}
   }
 }
 

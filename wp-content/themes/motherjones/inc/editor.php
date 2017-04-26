@@ -84,3 +84,86 @@ function mj_change_title_text( $title ) {
 	return $title;
 }
 add_filter( 'enter_title_here', 'mj_change_title_text' );
+
+
+/**
+ * Publish_Confirm
+ * A slimmed down version of https://wordpress.org/plugins/publish-confirm/
+ * Basically just add a speedbump before publishing.
+ */
+class Publish_Confirm {
+	/**
+	 * Publish_Confirm constructor.
+	 */
+	public function __construct() {
+		// Check user role.
+		if ( ! current_user_can( 'publish_posts' ) ) {
+			return;
+		}
+		foreach ( array( 'post-new.php', 'post.php' ) as $page ) {
+			add_action( 'admin_footer-' . $page, array( $this, 'inject_js' ), 11 );
+		}
+	}
+
+	/**
+	 * Prepares the JS code integration
+	 *
+	 * @since   0.0.3
+	 * @version 0.0.4
+	 *
+	 * @hook    array  publish_confirm_message
+	 */
+	public static function inject_js() {
+
+		// Filter published posts.
+		if ( get_post()->post_status === 'publish' ) {
+			return;
+		}
+
+		// Is jQuery loaded.
+		if ( ! wp_script_is( 'jquery', 'done' ) ) {
+			return;
+		}
+
+		// Print javascript.
+		self::_print_js( esc_attr__( 'Are you sure you want to publish this now?', 'mj' ) );
+	}
+
+	/**
+	 * Prints the JS code into the footer
+	 *
+	 * @since   0.0.3
+	 * @version 2015-11-30
+	 *
+	 * @param   string $msg JS confirm message.
+	 */
+	private static function _print_js( $msg ) {
+
+		?>
+		<script type="text/javascript">
+			jQuery( document ).ready(
+				function( $ ) {
+					var scheduleLabel = postL10n.schedule; // if the language is English, this is "Schedule"
+					$( '#publish' ).on(
+						'click',
+						function( event ) {
+							if ( $( this ).attr( 'name' ) !== 'publish' || $( this ).attr( 'value' ) === scheduleLabel ) {
+								return;
+							}
+							if ( ! confirm( <?php echo wp_json_encode( $msg ) ?> ) ) {
+								event.preventDefault();
+							}
+						}
+					);
+				}
+			);
+		</script>
+	<?php }
+}
+/**
+ * New instance on the admin_init hook.
+ */
+function mj_publish_confirm() {
+	new Publish_Confirm;
+}
+add_action( 'admin_init', 'mj_publish_confirm' );

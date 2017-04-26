@@ -2558,8 +2558,12 @@ ul.author-bios {
     #full-width-overlay-data h1,
     #full-width-overlay-data h3 {
       color: white; }
+    #full-width-overlay-data .dateline a {
+      color: #ccc; }
     #full-width-overlay-data a:hover {
-      color: #FF6900; } }
+      color: #FF6900; }
+    #full-width-overlay-data .byline-dateline span {
+      margin: 0 7.5px; } }
 /* end full width */
 @media print {
   * {
