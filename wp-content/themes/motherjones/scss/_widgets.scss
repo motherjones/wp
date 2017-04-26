@@ -216,6 +216,10 @@ ul.author-bios {
 		font-weight: bold;
 		letter-spacing: -1px;
 		width: 100%;
+
+		@media only screen and (max-width: $reflex-sm) {
+			font-size: 16px;
+		}
 	}
 	i {
 		position: absolute;

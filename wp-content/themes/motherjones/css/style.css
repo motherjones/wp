@@ -1798,6 +1798,10 @@ ul.author-bios {
     font-weight: bold;
     letter-spacing: -1px;
     width: 100%; }
+    @media only screen and (max-width: 768px) {
+      .newsletter-signup input,
+      .newsletter-signup input:active {
+        font-size: 16px; } }
   .newsletter-signup i {
     position: absolute;
     color: #E12300;
@@ -1933,6 +1937,8 @@ ul.author-bios {
     @media only screen and (max-width: 768px) {
       .home #main section {
         border-bottom: 0; } }
+    .home #main section .widget {
+      border-bottom: 0; }
   .home h2 {
     margin: 0 auto; }
 
@@ -1954,6 +1960,7 @@ ul.author-bios {
   #homepage-top-story .article-data {
     position: absolute;
     bottom: 60px;
+    padding-bottom: 15px;
     width: 100%;
     background: linear-gradient(transparent, black); }
     #homepage-top-story .article-data a {
@@ -1964,12 +1971,12 @@ ul.author-bios {
       #homepage-top-story .article-data .byline a:hover {
         color: white; }
   #homepage-top-story h1.hed {
-    margin: 0.5em 1.5em;
+    margin: 0 1.5em;
     font-size: 30px;
     line-height: 35px;
     text-transform: none; }
   #homepage-top-story .dek {
-    margin: 0 2em;
+    margin: 10px 2em;
     font-family: Mallory, sans-serif;
     font-size: 16px;
     line-height: 18px; }
@@ -2032,8 +2039,9 @@ ul.author-bios {
 #homepage-more-top-stories {
   padding-left: 0; }
   #homepage-more-top-stories li {
-    padding-top: 0.75em;
-    margin-top: 0.75em;
+    padding-top: 30px;
+    margin-top: 30px;
+    padding-bottom: 0;
     border-top: 1px solid #ccc;
     text-align: center; }
     #homepage-more-top-stories li:first-of-type {
@@ -2451,6 +2459,8 @@ ul.author-bios {
   .mj_content_type-full_width_article .social-container.top a {
     background: none;
     text-shadow: none; }
+.mj_content_type-full_width_article .social-container.bottom {
+  margin: 0 1em; }
 .mj_content_type-full_width_article .entry-footer {
   width: 66.66667%; }
   @media only screen and (max-width: 768px) {
@@ -2545,6 +2555,7 @@ ul.author-bios {
 @media (min-width: 480px) {
   #full-width-overlay-data {
     position: absolute;
+    padding-bottom: 17px;
     bottom: 0px;
     width: 100%;
     background: linear-gradient(transparent, black); }
@@ -2863,6 +2874,7 @@ blockquote {
   width: 45%;
   margin: 1.5em 0;
   padding-left: 0;
+  padding-top: 15px;
   float: left;
   border-top: 0.5em solid black;
   font-size: 26px;
