@@ -1798,6 +1798,10 @@ ul.author-bios {
     font-weight: bold;
     letter-spacing: -1px;
     width: 100%; }
+    @media only screen and (max-width: 768px) {
+      .newsletter-signup input,
+      .newsletter-signup input:active {
+        font-size: 16px; } }
   .newsletter-signup i {
     position: absolute;
     color: #E12300;
