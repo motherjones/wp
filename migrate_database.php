@@ -807,11 +807,11 @@ $wp->commit();
 
 //for byline override
 $meta_data = $d6->prepare('
-SELECT DISTINCT n.nid, "mj_byline_override", b.field_issue_date_value
+SELECT DISTINCT n.nid, "mj_byline_override", b.field_byline_override_value
 FROM mjd6.node n
-INNER JOIN mjd6.field_byline_override_value b
+INNER JOIN mjd6.content_field_byline_override b
 USING(vid)
-WHERE d.field_byline_override_value IS NOT NULL
+WHERE b.field_byline_override_value IS NOT NULL
 ;
 ');
 $meta_data->execute();
