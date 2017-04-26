@@ -10,6 +10,9 @@
 		@media only screen and (max-width: $reflex-sm) {
 			border-bottom: 0;
 		}
+		.widget {
+			border-bottom: 0;
+		}
 	}
 	h2 {
 		margin: 0 auto;
@@ -34,6 +37,7 @@
 	.article-data {
 		position: absolute;
 		bottom: 60px;
+		padding-bottom: 15px;
 		width: 100%;
 		background: linear-gradient(transparent,$black);
 		a {
@@ -48,13 +52,13 @@
 		}
 	}
 	h1.hed {
-		margin: 0.5em 1.5em;
+		margin: 0 1.5em;
 		font-size: 30px;
 		line-height: 35px;
 		text-transform: none;
 	}
 	.dek {
-		margin: 0 2em;
+		margin: 10px 2em;
 		font-family: $mallory;
 		font-size: 16px;
 		line-height: 18px;
@@ -131,8 +135,9 @@
 #homepage-more-top-stories {
 	padding-left: 0;
 	li {
-		padding-top: 0.75em;
-		margin-top: 0.75em;
+		padding-top: 30px;
+		margin-top: 30px;
+		padding-bottom: 0;
 		border-top: 1px solid $neutral1;
 		text-align: center;
 		&:first-of-type {
