@@ -26,9 +26,19 @@ class Navis_Media_Credit {
 			'get_media_credit_for_attachment', 10, 2
 		);
 
+		add_shortcode(
+			'inline_image',
+			array( &$this, 'inline_image_shortcode' )
+		);
+
+		add_shortcode(
+			'credit',
+			array( &$this, 'credit_shortcode' )
+		);
+
 		add_filter(
 			'img_caption_shortcode',
-			array( &$this, 'caption_shortcode' ), 10, 3
+			array( &$this, 'do_caption_shortcode' ), 10, 3
 		);
 
 		if ( ! is_admin() ) {
@@ -52,7 +62,7 @@ class Navis_Media_Credit {
 
 		add_filter(
 			'image_send_to_editor',
-			array( &$this, 'add_caption_shortcode' ), 19, 8
+			array( &$this, 'add_inline_image_shortcode' ), 19, 8
 		);
 
 		add_filter(
@@ -63,6 +73,21 @@ class Navis_Media_Credit {
 
 	function admin_init() {
 		remove_filter( 'image_send_to_editor', 'image_add_caption', 20, 8 );
+		$this::setup_tinymce_shortcodes();
+	}
+
+	function setup_tinymce_shortcodes() {
+		if ( ! current_user_can( 'edit_posts' ) && ! current_user_can( 'edit_pages' ) ) {
+			return;
+		}
+		if ( get_user_option( 'rich_editing' ) !== 'true' ) {
+			return;
+		}
+		add_filter( 'mce_external_plugins', array( &$this, 'add_tinymce_shortcodes' ) );
+	}
+	function add_tinymce_shortcodes($plugin_array) {
+		$plugin_array['custom_link_class'] = get_template_directory_uri() . '/js/tinymce-inline-image.min.js';
+		return $plugin_array;
 	}
 
 	function get_media_credit_for_attachment( $text = '', $id ) {
@@ -120,67 +145,78 @@ class Navis_Media_Credit {
 	 * Replaces the built-in caption shortcode
 	 * with one that supports a credit field.
 	 */
-	 function add_caption_shortcode( $html, $id, $caption, $title, $align, $url, $size, $alt = '' ) {
-		 	$creditor = navis_get_media_credit( $id );
-			if ( empty( $caption ) && ! $creditor->to_string() ) {
-				return $html;
-			}
-			$id = ( 0 < (int) $id ) ? 'attachment_' . $id : '';
-			if ( ! preg_match( '/width="([0-9]+)/', $html, $matches ) ) {
-				return $html;
-			}
+	function add_inline_image_shortcode( $html, $id, $caption, $title, $align, $url, $size, $alt = '' ) {
+		$creditor = navis_get_media_credit( $id );
+		$credit = $creditor->to_string();
 
-			$width = $matches[1];
+		$id = ( 0 < (int) $id ) ? 'attachment_' . $id : '';
 
-			// XXX: not sure what this does
-			$html = preg_replace( '/(class=["\'][^\'"]*)align(none|left|right|center)\s?/', '$1', $html );
-			if ( empty($align) ) {
-				$align = 'none';
-			}
-
-			$shcode = '[caption id="' . $id . '" align="align' . $align .
-				'" width="' . $width . '" caption="' . $caption . '"]' . $html
-				. '[/caption]';
-			return $shcode;
+		$width = '';
+		if ( preg_match( '/width="([0-9]+)/', $html, $matches ) ) {
+			$width = 'width="' . $matches[1] . '"';
 		}
 
+		// XXX: not sure what this does.
+		$html = preg_replace( '/(class=["\'][^\'"]*)align(none|left|right|center)\s?/', '$1', $html );
+		if ( empty( $align ) ) {
+			$align = 'none';
+		}
+
+		$figcap = '';
+		if ( $caption || $credit ) {
+			$figcap .= '[caption]';
+			if ( $caption ) {
+				$figcap .= $caption;
+			}
+			if ( $credit ) {
+				$figcap .= sprintf( '[credit]%s[/credit]', $credit );
+			}
+			$figcap .= '[/caption]';
+		}
+
+		$shcode = '[inline_image id="' . $id . '" align="align' . $align .
+			'" ' . $width . ']' . $html . $figcap . '[/inline_image]';
+		return $shcode;
+	}
+
 	/**
-	 * Renders caption shortcodes with our layout
-	 * and credit field.
+	 * Renders caption shortcodes.
 	 */
-	function caption_shortcode( $text, $atts, $content ) {
+	function do_caption_shortcode( $text, $atts, $content ) {
+		$figcap = '<figcaption class="wp-caption-text">';
+		$figcap .= '<span class="media-caption">';
+		$figcap .= do_shortcode( $content );
+		$figcap .= '</span>';
+		$figcap .= '</figcaption>';
+		return $figcap;
+	}
+
+	/**
+	 * Renders credit shortcodes.
+	 */
+	function credit_shortcode( $atts, $content ) {
+		return sprintf( '</span><span class="media-credit">%s', $content );
+	}
+
+	/**
+	 * Renders inline image shortcodes.
+	 */
+	function inline_image_shortcode( $atts, $content ) {
 		$atts = shortcode_atts( array(
 			'id' => '',
 			'align' => 'alignnone',
 			'width' => '',
-			'credit' => '',
-			'caption' => '',
 		), $atts );
 		$atts = apply_filters( 'navis_image_layout_defaults', $atts );
 		extract( $atts );
-
-		if ( $id && ! $credit ) {
-			$post_id = str_replace( 'attachment_', '', $id );
-			$creditor = navis_get_media_credit( $post_id );
-			$credit = ! empty( $creditor ) ? $creditor->to_string() : '';
-		}
 
 		if ( $id ) {
 			$id = 'id="' . esc_attr( $id ) . '" ';
 		}
 
-		$out = sprintf( '<div %s class="wp-caption %s" style="max-width: %spx;">%s', $id, $align, $width, do_shortcode( $content ) );
-		if ( $caption || $credit ) {
-			$out .= '<p class="wp-caption-text">';
-			if ( $caption ) {
-				$out .= sprintf( '<span class="media-caption">%s</span>', $caption );
-			}
-			if ( $credit ) {
-				$out .= sprintf( '<span class="media-credit">%s</span>', $credit );
-			}
-			$out .= '</p>';
-		}
-		$out .= '</div>';
+		$out = sprintf( '<figure %s class="inline-image %s" style="max-width: %spx;">%s</figure>',
+			$id, $align, $width, do_shortcode( $content )
+		);
 		return $out;
 	}
 
