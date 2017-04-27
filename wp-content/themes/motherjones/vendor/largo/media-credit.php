@@ -120,29 +120,27 @@ class Navis_Media_Credit {
 	 * Replaces the built-in caption shortcode
 	 * with one that supports a credit field.
 	 */
-	 function add_caption_shortcode( $html, $id, $caption, $title, $align, $url, $size, $alt = '' ) {
-		 	$creditor = navis_get_media_credit( $id );
-			if ( empty( $caption ) && ! $creditor->to_string() ) {
-				return $html;
-			}
-			$id = ( 0 < (int) $id ) ? 'attachment_' . $id : '';
-			if ( ! preg_match( '/width="([0-9]+)/', $html, $matches ) ) {
-				return $html;
-			}
+	function add_caption_shortcode( $html, $id, $caption, $title, $align, $url, $size, $alt = '' ) {
+		$creditor = navis_get_media_credit( $id );
 
-			$width = $matches[1];
+		$id = ( 0 < (int) $id ) ? 'attachment_' . $id : '';
 
-			// XXX: not sure what this does
-			$html = preg_replace( '/(class=["\'][^\'"]*)align(none|left|right|center)\s?/', '$1', $html );
-			if ( empty($align) ) {
-				$align = 'none';
-			}
-
-			$shcode = '[caption id="' . $id . '" align="align' . $align .
-				'" width="' . $width . '" caption="' . $caption . '"]' . $html
-				. '[/caption]';
-			return $shcode;
+		$width = '';
+		if ( preg_match( '/width="([0-9]+)/', $html, $matches ) ) {
+			$width = ' width="' . $matches[1] . '" ';
 		}
+
+		// XXX: not sure what this does.
+		$html = preg_replace( '/(class=["\'][^\'"]*)align(none|left|right|center)\s?/', '$1', $html );
+		if ( empty( $align ) ) {
+			$align = 'none';
+		}
+
+		$shcode = '[caption id="' . $id . '" align="align' . $align .
+			'" ' . $width . ' caption="' . $caption . '"]' . $html
+			. '[/caption]';
+		return $shcode;
+	}
 
 	/**
 	 * Renders caption shortcodes with our layout

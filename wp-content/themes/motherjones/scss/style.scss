@@ -306,6 +306,13 @@ blockquote {
   float: none;
   margin: 1em auto;
 }
+
+.wp-caption {
+	a {
+		background-image: none;
+	}
+}
+
 .wp-caption-text {
   color: $black;
   font-style: normal;
