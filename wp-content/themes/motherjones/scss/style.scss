@@ -16,6 +16,9 @@
 
 body {
   padding-top: 0;
+  &.mj_post_status-draft {
+    background-color: mistyrose;
+  }
 }
 #page {
   width: 55em;
@@ -166,7 +169,7 @@ h1.entry-title {
 
 blockquote {
   padding-left: 20px;
-  margin-bottom: 2em;
+  margin: 2em 0;
 }
 
 .pullquote-left,
@@ -176,6 +179,7 @@ blockquote {
   width: 45%;
   margin: 1.5em 0;
   padding-left: 0;
+  padding-top: 15px;
   float: left;
   border-top: 0.5em solid $black;
   font-size: 26px;

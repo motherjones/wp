@@ -36,3 +36,13 @@ div#taxonomy-post_tag {
   max-height: 200px;
   overflow: auto;
 }
+.attachment-details .setting[data-setting="description"] {
+  display: none;
+}
+#related-posts-saved li {
+	overflow: hidden;
+	text-overflow: ellipsis;
+  a {
+    cursor: pointer;
+  }
+}

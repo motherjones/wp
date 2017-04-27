@@ -16,9 +16,9 @@ function mj_get_post_template( $template ) {
 	global $post;
 	if ( is_object( $post ) ) {
 		$template = get_the_terms( $post->ID, 'mj_content_type' );
-		$custom_field = strtolower( $template[0]->slug );
+		$custom_field = ! empty( $template ) ? strtolower( $template[0]->slug ) : false;
 	}
-	if ( empty( $custom_field ) || in_array( $custom_field, array( 'article' ), true ) ) {
+	if ( ! $custom_field || in_array( $custom_field, array( 'article' ), true ) ) {
 		$template = get_stylesheet_directory() . '/singular.php';
 	} else {
 		$template = get_stylesheet_directory() . '/single-' . $custom_field . '.php';
@@ -105,3 +105,16 @@ function mj_is_content_type( $slug, $post_id ) {
 	}
 	return false;
 }
+
+/**
+ *  Add body classes when we need them.
+ */
+function mj_body_classes() {
+	global $post, $mj;
+	$mj['body_classes'] = '';
+	// add a draft class if a single posts is not published.
+	if ( is_single() && 'draft' === get_post_status( $post->ID ) ) {
+		$mj['body_classes'] .= 'mj_post_status-draft';
+	}
+}
+add_action( 'wp_head', 'mj_body_classes' );

@@ -70,7 +70,7 @@ global $mj;
 	<?php wp_head(); ?>
 </head>
 
-<body <?php body_class(); ?>>
+<body <?php body_class( $mj['body_classes'] ); ?>>
 <a href="#main" class="visuallyhidden">Skip to main content</a>
 <?php get_template_part( 'template-parts/floating-navbar' ); ?>
 <?php dynamic_sidebar( 'page-top' ); ?>
@@ -97,6 +97,10 @@ global $mj;
 		<?php get_template_part( 'template-parts/static-navbar' ); ?>
 	</header><!-- .site-header -->
 
-	<div id="ticker" class="grid__col-12 grid__col--bleed">
-    <?php dynamic_sidebar( 'ticker' ); ?>
-	</div>
+	<?php
+	if ( ! isset( $mj['meta']['mj_hide_ads'] ) ) {
+		echo '<div id="ticker" class="grid__col-12 grid__col--bleed">';
+		dynamic_sidebar( 'ticker' );
+		echo '</div>';
+	}
+	?>

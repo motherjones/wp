@@ -61,6 +61,16 @@ function mj_metaboxes_require_files() {
 }
 add_action( 'init', 'mj_metaboxes_require_files' );
 
+/**
+ * Do the sanitation function with mj's allowed tags.
+ *
+ * @param string $string_to_sanitize The string that will be sanitized and returned.
+ *
+ * @returns string
+ */
+function mj_kses( $string_to_sanitize ) {
+	return wp_kses( $string_to_sanitize, $mj['allowed_tags'] );
+}
 
 /**
  * Register and sanitize input fields.
@@ -72,9 +82,14 @@ largo_register_meta_input(
 		'mj_social_dek',
 		'mj_promo_hed',
 		'mj_promo_dek',
-		'mj_byline_override',
-		'mj_issue_date',
 		'mj_custom_css',
 	),
 	'sanitize_text_field'
+);
+largo_register_meta_input(
+	array(
+		'mj_byline_override',
+		'mj_issue_date',
+	),
+	'mj_kses'
 );

@@ -100,12 +100,10 @@ class Largo_Related_Posts {
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-largo-related-posts-loader.php';
 
-
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-largo-related-posts-admin.php';
-
 
 		$this->loader = new Largo_Related_Posts_Loader();
 
@@ -122,12 +120,11 @@ class Largo_Related_Posts {
 
 		$plugin_admin = new Largo_Related_Posts_Admin( $this->get_plugin_name(), $this->get_version() );
 
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 
-		$this->loader->add_action('admin_footer', $plugin_admin, 'related_posts_ajax_js');
-		$this->loader->add_action('wp_ajax_related_posts_ajax_search', $plugin_admin, 'related_posts_ajax_search');
-		$this->loader->add_action('wp_ajax_related_posts_ajax_save', $plugin_admin, 'related_posts_ajax_save');
+		$this->loader->add_action( 'admin_footer', $plugin_admin, 'related_posts_ajax_js' );
+		$this->loader->add_action( 'wp_ajax_related_posts_ajax_search', $plugin_admin, 'related_posts_ajax_search' );
+		$this->loader->add_action( 'wp_ajax_related_posts_ajax_save', $plugin_admin, 'related_posts_ajax_save' );
 
 		$this->loader->add_action( 'add_meta_boxes', $plugin_admin, 'largo_add_related_posts_meta_box' );
 

@@ -29,6 +29,9 @@
       text-shadow: none;
     }
   }
+  .social-container.bottom {
+	  margin: 0 1em;
+  }
   .entry-footer {
     width: percentage( 8 / 12);
     @media only screen and (max-width: $reflex-sm) {
@@ -134,6 +137,7 @@
 @media (min-width: $reflex-xs) {
   #full-width-overlay-data {
     position: absolute;
+	padding-bottom: 17px;
     bottom: 0px;
     width: 100%;
     background: linear-gradient(transparent,$black);
@@ -141,9 +145,15 @@
     h3 {
       color: $white;
     }
-	  a:hover {
-      color: $orange;
-	  }
+	.dateline a {
+		color: $neutral1;
+	}
+	a {
+		&:hover { color: $orange; }
+	}
+	.byline-dateline span {
+		margin: 0 7.5px;
+	}
   }
 }
 
