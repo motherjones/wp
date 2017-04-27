@@ -167,18 +167,18 @@ class Navis_Media_Credit {
 			$id = 'id="' . esc_attr( $id ) . '" ';
 		}
 
-		$out = sprintf( '<div %s class="wp-caption %s" style="max-width: %spx;">%s', $id, $align, $width, do_shortcode( $content ) );
+		$out = sprintf( '<figure %s class="inline-image %s" style="max-width: %spx;">%s', $id, $align, $width, do_shortcode( $content ) );
 		if ( $caption || $credit ) {
-			$out .= '<p class="wp-caption-text">';
+			$out .= '<figcaption class="wp-caption-text">';
 			if ( $caption ) {
 				$out .= sprintf( '<span class="media-caption">%s</span>', $caption );
 			}
 			if ( $credit ) {
 				$out .= sprintf( '<span class="media-credit">%s</span>', $credit );
 			}
-			$out .= '</p>';
+			$out .= '</figcaption>';
 		}
-		$out .= '</div>';
+		$out .= '</figure>';
 		return $out;
 	}
 
