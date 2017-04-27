@@ -59,7 +59,7 @@ function mj_wysiwyg_config( $config ) {
 		),
 		array(
 			'title' => 'Pullquote',
-			'block' => 'blockquote',
+			'block' => 'p',
 			'classes' => 'pullquote-left',
 			'wrapper' => false,
 		),

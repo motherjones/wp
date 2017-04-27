@@ -49,20 +49,23 @@ a {
 }
 
 .pullquote-left,
-blockquote {
-  border-top: 10px solid black;
-  font-size: 26px;
-  position: relative;
+.pullquote-right {
   width: 45%;
-  padding: 15px 0 0 0;
+  margin: 1.5em 1em 0 0;
+  padding-top: 15px;
+  float: left;
+  border-top: 0.5em solid $black;
+  font-size: 26px;
   letter-spacing: -1px;
-  background: white;
+  background: $white;
   font-weight: bold;
   font-style: italic;
   font-family: $mallory;
-  margin-bottom: 30px;
-  margin-top: 20px;
-  float: left;
+}
+
+blockquote {
+  padding-left: 20px;
+  margin: 2em 0;
 }
 
 .right-rail,
