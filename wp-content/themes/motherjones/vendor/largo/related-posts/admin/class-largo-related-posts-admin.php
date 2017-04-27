@@ -97,7 +97,7 @@ class Largo_Related_Posts_Admin {
 						$("input#se_search_element_id").val('');
 
 						// Add the selected search term to the list below
-						$("#related-posts-saved ul").append("<li data-id='" + ui.item.value + "' data-title='" + ui.item.label + "'>" + ui.item.label + " | <a class='remove-related'>Remove</a></li>");
+						$("#related-posts-saved ul").append("<li data-id='" + ui.item.value + "' data-title='" + ui.item.label + "'><a href='" + ui.item.permalink + "'>" + ui.item.label + "</a> | <a class='remove-related'>Remove</a></li>");
 
 						// Select all items in the list
 						var optionTexts = [];
@@ -163,6 +163,7 @@ class Largo_Related_Posts_Admin {
 		foreach ( $wpdb->get_results( $query ) as $row ) {
 			$suggestion['value'] = $row->ID;
 			$suggestion['label'] = $row->post_title;
+			$suggestion['permalink'] = get_permalink( $row->ID );
 			$suggestions[] = $suggestion;
 		}
 
@@ -238,7 +239,8 @@ class Largo_Related_Posts_Admin {
 			if ( $related_posts ) {
 				foreach ( $related_posts as $related_post ) {
 					$title = get_the_title( $related_post );
-					echo '<li data-id="' . esc_attr( $related_post ) . '" data-title="' . esc_html( $title ) . '">' . esc_html( $title ) . ' | <a class="remove-related">Remove</a></li>';
+					$link = get_permalink( $related_post );
+					echo '<li data-id="' . esc_attr( $related_post ) . '" data-title="' . esc_html( $title ) . '"><a href="' . esc_url( $link ) . '">' . esc_html( $title ) . '</a> | <a class="remove-related">Remove</a></li>';
 				}
 			}
 			echo '</ul>';
