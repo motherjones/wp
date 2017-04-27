@@ -43,37 +43,14 @@ class Largo_Related_Posts_Admin {
 	/**
 	 * Initialize the class and set its properties.
 	 *
-	 * @since    1.0.0
-	 * @param      string    $plugin_name       The name of this plugin.
-	 * @param      string    $version    The version of this plugin.
+	 * @since 1.0.0
+	 * @param string $plugin_name The name of this plugin.
+	 * @param string $version The version of this plugin.
 	 */
 	public function __construct( $plugin_name, $version ) {
 
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
-
-	}
-
-	/**
-	 * Register the stylesheets for the admin area.
-	 *
-	 * @since    1.0.0
-	 */
-	public function enqueue_styles() {
-
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Largo_Related_Posts_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Largo_Related_Posts_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
-
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/largo-related-posts-admin.css', array(), $this->version, 'all' );
 
 	}
 
@@ -108,7 +85,7 @@ class Largo_Related_Posts_Admin {
 	public function related_posts_ajax_js() {
 		?>
 		<script type="text/javascript">
-			var se_ajax_url = '<?php echo admin_url('admin-ajax.php'); ?>';
+			var se_ajax_url = '<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>';
 
 			jQuery(document).ready(function($) {
 
@@ -120,7 +97,7 @@ class Largo_Related_Posts_Admin {
 						$("input#se_search_element_id").val('');
 
 						// Add the selected search term to the list below
-						$("#related-posts-saved ul").append("<li data-id='" + ui.item.value + "' data-title='" + ui.item.label + "'>" + ui.item.label + " | <a class='remove-related'>Remove</a></li>");
+						$("#related-posts-saved ul").append("<li data-id='" + ui.item.value + "' data-title='" + ui.item.label + "'><a href='" + ui.item.permalink + "'>" + ui.item.label + "</a> | <a class='remove-related'>Remove</a></li>");
 
 						// Select all items in the list
 						var optionTexts = [];
@@ -186,7 +163,7 @@ class Largo_Related_Posts_Admin {
 		foreach ( $wpdb->get_results( $query ) as $row ) {
 			$suggestion['value'] = $row->ID;
 			$suggestion['label'] = $row->post_title;
-
+			$suggestion['permalink'] = get_permalink( $row->ID );
 			$suggestions[] = $suggestion;
 		}
 
@@ -203,19 +180,17 @@ class Largo_Related_Posts_Admin {
 	public function related_posts_ajax_save() {
 
 		// Verify form submission is coming from WordPress using a nonce
-		if ( !isset( $_POST['largo_related_posts_nonce'] ) || !wp_verify_nonce( $_POST['largo_related_posts_nonce'], basename( __FILE__ ) ) ){
+		if ( ! isset( $_POST['largo_related_posts_nonce'] ) || ! wp_verify_nonce( $_POST['largo_related_posts_nonce'], basename( __FILE__ ) ) ) {
 			return;
 		}
 
 		$data = array();
 		foreach ( $_POST['data'] as $item ) {
 
-			// Skip over removed item, if set
+			// Skip over removed item, if set.
 			if ( isset( $_POST['remove'] ) && $item[0] == $_POST['remove'] ) {
 				continue;
 			} else {
-				// post_id as key, post title as value
-				//$data[$item[0]] = esc_html( $item[1] );
 				$data[] = $item[0];
 			}
 
@@ -246,33 +221,32 @@ class Largo_Related_Posts_Admin {
 	 *
 	 * Allows the user to set custom related posts for a post.
 	 *
-	 * @global $post
+	 * @param object $post the post.
 	 */
 	public function largo_related_posts_meta_box_display( $post ) {
 
-		// make sure the form request comes from WordPress
+		// Make sure the form request comes from WordPress.
 		wp_nonce_field( basename( __FILE__ ), 'largo_related_posts_nonce' );
 
 		$value = get_post_meta( $post->ID, 'largo_custom_related_posts', true );
 
-		echo __( 'Start typing to search by post title.', 'mj' ) . '</p>';
+		echo esc_html__( 'Start typing to search by post title.', 'mj' ) . '</p>';
 		echo '<input type="text" id="se_search_element_id" name="se_search_element_id" value="" />';
 
 		echo '<div id="related-posts-saved">';
 			echo '<ul>';
-				$related_posts = get_post_meta( $post->ID, 'mj_related_articles', true );
-
-				if ( $related_posts ) {
-					foreach ( $related_posts as $related_post ) {
-						$title = get_the_title( $related_post );
-						echo '<li data-id="' . esc_attr( $related_post ) . '" data-title="' . esc_html( $title ) . '">' . esc_html( $title ) . ' | <a class="remove-related">Remove</a></li>';
-					}
+			$related_posts = get_post_meta( $post->ID, 'mj_related_articles', true );
+			if ( $related_posts ) {
+				foreach ( $related_posts as $related_post ) {
+					$title = get_the_title( $related_post );
+					$link = get_permalink( $related_post );
+					echo '<li data-id="' . esc_attr( $related_post ) . '" data-title="' . esc_html( $title ) . '"><a href="' . esc_url( $link ) . '">' . esc_html( $title ) . '</a> | <a class="remove-related">Remove</a></li>';
 				}
+			}
 			echo '</ul>';
 		echo '</div>';
 
 		do_action( 'largo_related_posts_metabox' );
 	}
-
 
 }

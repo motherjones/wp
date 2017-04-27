@@ -39,3 +39,10 @@ div#taxonomy-post_tag {
 .attachment-details .setting[data-setting="description"] {
   display: none;
 }
+#related-posts-saved li {
+	overflow: hidden;
+	text-overflow: ellipsis;
+  a {
+    cursor: pointer;
+  }
+}
