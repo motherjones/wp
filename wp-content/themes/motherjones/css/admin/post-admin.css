@@ -39,4 +39,10 @@ div#taxonomy-post_tag {
 .attachment-details .setting[data-setting="description"] {
   display: none; }
 
+#related-posts-saved li {
+  overflow: hidden;
+  text-overflow: ellipsis; }
+  #related-posts-saved li a {
+    cursor: pointer; }
+
 /*# sourceMappingURL=post-admin.css.map */
