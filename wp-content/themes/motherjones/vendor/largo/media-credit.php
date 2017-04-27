@@ -153,7 +153,7 @@ class Navis_Media_Credit {
 
 		$width = '';
 		if ( preg_match( '/width="([0-9]+)/', $html, $matches ) ) {
-			$width = ' width="' . $matches[1] . '" ';
+			$width = 'width="' . $matches[1] . '"';
 		}
 
 		// XXX: not sure what this does.
@@ -164,8 +164,9 @@ class Navis_Media_Credit {
 
 		$figcap = '';
 		if ( $caption || $credit ) {
+			$figcap .= '[caption]';
 			if ( $caption ) {
-				$figcap .= sprintf( '[caption]%s', $caption );
+				$figcap .= $caption;
 			}
 			if ( $credit ) {
 				$figcap .= sprintf( '[credit]%s[/credit]', $credit );
