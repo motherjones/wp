@@ -42,6 +42,7 @@ module.exports = function(grunt) {
             'nav.js',
             'video-embed.js',
             'featured-media.js',
+            'tinymce-inline-image.js',
             '!*.min.js'
           ],
           dest: 'js',
