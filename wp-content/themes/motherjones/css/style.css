@@ -2848,10 +2848,35 @@ h1.entry-title {
 .dek {
   font-family: Calluna, serif;
   margin-bottom: 0; }
-  @media only screen and (max-width: 768px) {
-    .dek {
-      font-size: 18px;
-      margin: 0.5em; } }
+
+.byline,
+.dateline {
+  color: #FF6900;
+  font-size: 12px;
+  line-height: 14px;
+  text-transform: uppercase;
+  font-family: Mallory, sans-serif;
+  font-weight: bold;
+  border-bottom: none;
+  letter-spacing: 2px; }
+
+.byline a {
+  background-image: none;
+  color: #FF6900; }
+  .byline a:hover {
+    color: black; }
+
+.dateline {
+  color: #ccc; }
+
+.single .byline-dateline {
+  margin-bottom: 2em; }
+.single .byline,
+.single .dateline {
+  font-size: 14px;
+  line-height: 16px; }
+.single .dateline {
+  padding-left: 10px; }
 
 @media only screen and (max-width: 768px) {
   h1.entry-title {
@@ -2860,10 +2885,18 @@ h1.entry-title {
 
   .dek {
     font-size: 18px;
-    margin: 0.5em; }
+    line-height: 24px; }
 
-  .byline-dateline {
-    margin: 0; } }
+  .single .byline-dateline {
+    margin-bottom: 0; }
+  .single .byline,
+  .single .dateline {
+    font-size: 12px;
+    line-height: 14px; }
+  .single .hero.is-image {
+    margin-bottom: 0.5em;
+    padding-bottom: 0.75em;
+    border-bottom: 1px #ccc solid; } }
 blockquote {
   padding-left: 20px;
   margin: 2em 0; }
@@ -2923,38 +2956,6 @@ blockquote {
     padding-top: 10px;
     line-height: 17px;
     padding-bottom: 10px; }
-
-.byline,
-.dateline {
-  color: #FF6900;
-  font-size: 12px;
-  line-height: 14px;
-  text-transform: uppercase;
-  font-family: Mallory, sans-serif;
-  font-weight: bold;
-  border-bottom: none;
-  letter-spacing: 2px; }
-
-.byline a {
-  background-image: none;
-  color: #FF6900; }
-  .byline a:hover {
-    color: black; }
-
-.dateline {
-  color: #ccc; }
-
-.single .byline-dateline {
-  margin-bottom: 2em; }
-  @media only screen and (max-width: 768px) {
-    .single .byline-dateline {
-      margin-bottom: 0; } }
-.single .byline,
-.single .dateline {
-  font-size: 14px;
-  line-height: 16px; }
-.single .dateline {
-  padding-left: 10px; }
 
 /* start within article body */
 #mininav {
