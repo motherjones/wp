@@ -1668,6 +1668,7 @@ ul.author-bios {
 
 .author-bio-text {
   font-size: 12px;
+  line-height: 18px;
   margin-top: 5px;
   font-family: Mallory, sans-serif;
   text-align: left; }
