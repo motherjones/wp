@@ -7,7 +7,7 @@
  * @since Mother Jones 1.0
  */
 
-global $post;
+global $mj;
 $post_thumbnail_id = get_post_thumbnail_id( $post->ID );
 
 if ( $post_thumbnail_id ) {
