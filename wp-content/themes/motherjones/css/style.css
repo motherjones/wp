@@ -1668,6 +1668,7 @@ ul.author-bios {
 
 .author-bio-text {
   font-size: 12px;
+  line-height: 18px;
   margin-top: 5px;
   font-family: Mallory, sans-serif;
   text-align: left; }
@@ -2846,11 +2847,37 @@ h1.entry-title {
   text-transform: none; }
 
 .dek {
-  font-family: Calluna, serif; }
-  @media only screen and (max-width: 768px) {
-    .dek {
-      font-size: 18px;
-      margin: 0.5em; } }
+  font-family: Calluna, serif;
+  margin-bottom: 0; }
+
+.byline,
+.dateline {
+  color: #FF6900;
+  font-size: 12px;
+  line-height: 14px;
+  text-transform: uppercase;
+  font-family: Mallory, sans-serif;
+  font-weight: bold;
+  border-bottom: none;
+  letter-spacing: 2px; }
+
+.byline a {
+  background-image: none;
+  color: #FF6900; }
+  .byline a:hover {
+    color: black; }
+
+.dateline {
+  color: #ccc; }
+
+.single .byline-dateline {
+  margin-bottom: 2em; }
+.single .byline,
+.single .dateline {
+  font-size: 14px;
+  line-height: 16px; }
+.single .dateline {
+  padding-left: 10px; }
 
 @media only screen and (max-width: 768px) {
   h1.entry-title {
@@ -2859,10 +2886,18 @@ h1.entry-title {
 
   .dek {
     font-size: 18px;
-    margin: 0.5em; }
+    line-height: 24px; }
 
-  .byline-dateline {
-    margin: 0; } }
+  .single .byline-dateline {
+    margin-bottom: 0; }
+  .single .byline,
+  .single .dateline {
+    font-size: 12px;
+    line-height: 14px; }
+  .single .hero.is-image {
+    margin-bottom: 0.5em;
+    padding-bottom: 0.75em;
+    border-bottom: 1px #ccc solid; } }
 blockquote {
   padding-left: 20px;
   margin: 2em 0; }
@@ -2874,7 +2909,7 @@ blockquote {
   width: 45%;
   margin: 1.5em 0;
   padding-left: 0;
-  padding-top: 15px;
+  padding-top: 1em;
   float: left;
   border-top: 0.5em solid black;
   font-size: 26px;
@@ -2890,7 +2925,7 @@ blockquote {
       float: none;
       width: 100%;
       margin: 0;
-      padding: 0; } }
+      padding: 0.5em 0 0; } }
 
 .right-rail,
 .inline-right {
@@ -2922,35 +2957,6 @@ blockquote {
     padding-top: 10px;
     line-height: 17px;
     padding-bottom: 10px; }
-
-.dateline {
-  font-size: 14px;
-  color: #ccc;
-  padding-top: 0;
-  letter-spacing: 2px;
-  font-family: Mallory, sans-serif;
-  text-transform: uppercase;
-  font-weight: bold;
-  display: inline-block; }
-
-.byline {
-  color: #FF6900;
-  font-size: 12px;
-  line-height: 14px;
-  text-transform: uppercase;
-  font-family: Mallory, sans-serif;
-  font-weight: bold;
-  border-bottom: none;
-  letter-spacing: 2px; }
-  .byline a {
-    background-image: none;
-    color: #FF6900; }
-    .byline a:hover {
-      color: black; }
-
-.single .byline {
-  font-size: 14px;
-  line-height: 16px; }
 
 /* start within article body */
 #mininav {

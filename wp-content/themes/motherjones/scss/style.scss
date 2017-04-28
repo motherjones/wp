@@ -148,9 +148,43 @@ h1.entry-title {
 }
 .dek {
   font-family: $calluna;
-  @media only screen and (max-width: $reflex-sm) {
-    font-size: 18px;
-    margin: 0.5em;
+  margin-bottom: 0;
+}
+
+.byline,
+.dateline {
+  color: $orange;
+  font-size: 12px;
+  line-height: 14px;
+  text-transform: uppercase;
+  font-family: $mallory;
+  font-weight: bold;
+  border-bottom: none;
+  letter-spacing: 2px;
+}
+.byline {
+  a {
+    background-image: none;
+    color: $orange;
+    &:hover {
+      color: $black;
+    }
+  }
+}
+.dateline {
+  color: $neutral1;
+}
+.single {
+  .byline-dateline {
+    margin-bottom: 2em;
+  }
+  .byline,
+  .dateline {
+    font-size: 14px;
+    line-height: 16px;
+  }
+  .dateline {
+    padding-left: 10px;
   }
 }
 @media only screen and (max-width: $reflex-sm) {
@@ -160,10 +194,22 @@ h1.entry-title {
   }
   .dek {
     font-size: 18px;
-    margin: 0.5em;
+    line-height: 24px;
   }
-  .byline-dateline {
-    margin: 0;
+  .single {
+    .byline-dateline {
+      margin-bottom: 0;
+    }
+    .byline,
+    .dateline {
+      font-size: 12px;
+      line-height: 14px;
+    }
+    .hero.is-image {
+      margin-bottom: 0.5em;
+      padding-bottom: 0.75em;
+      border-bottom: 1px $neutral1 solid;
+    }
   }
 }
 
@@ -171,7 +217,6 @@ blockquote {
   padding-left: 20px;
   margin: 2em 0;
 }
-
 .pullquote-left,
 .pullquote-right {
   position: relative;
@@ -179,7 +224,7 @@ blockquote {
   width: 45%;
   margin: 1.5em 0;
   padding-left: 0;
-  padding-top: 15px;
+  padding-top: 1em;
   float: left;
   border-top: 0.5em solid $black;
   font-size: 26px;
@@ -193,7 +238,7 @@ blockquote {
     float: none;
     width: 100%;
     margin: 0;
-    padding: 0;
+    padding: 0.5em 0 0;
   }
 }
 
@@ -210,7 +255,6 @@ blockquote {
   text-align: center;
   margin: 15px auto;
 }
-
 .inline {
   width: auto!important;
   display: table;
@@ -233,40 +277,6 @@ blockquote {
     padding-bottom: 10px;
   }
 }
-
-.dateline {
-  font-size: 14px;
-  color: $neutral1;
-  padding-top: 0;
-  letter-spacing: 2px;
-  font-family: $mallory;
-  text-transform: uppercase;
-  font-weight: bold;
-  display: inline-block;
-}
-
-.byline {
-  color: $orange;
-  font-size: 12px;
-  line-height: 14px;
-  text-transform: uppercase;
-  font-family: $mallory;
-  font-weight: bold;
-  border-bottom: none;
-  letter-spacing: 2px;
-  a {
-    background-image: none;
-    color: $orange;
-    &:hover {
-      color: $black;
-    }
-  }
-}
-.single .byline {
-  font-size: 14px;
-  line-height: 16px;
-}
-
 
 /* start within article body */
 #mininav {
