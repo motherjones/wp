@@ -94,6 +94,7 @@ $shown_ids = array();
 						'homepage_featured',
 						array(
 							'posts_per_page' => 1,
+							'post__not_in' 	=> $shown_ids,
 						)
 					);
 					$featured_story->the_post();
@@ -191,21 +192,14 @@ $shown_ids = array();
 
 			<section id="homepage-exposure" class="homepage-fullwidth grid grid--bleed">
 				<div class="homepage-exposure-content grid__col-12">
-				<?php
-					$exposure_story = new WP_Query( array(
-						'tag' => 'photoessays',
-						'tax_query' => array(
+					<?php
+						$exposure_story = z_get_zone_query(
+							'homepage_photoessay',
 							array(
-								'taxonomy' => 'mj_content_type',
-								'field' => 'slug',
-								'terms' => 'blogpost',
-								'operator' => 'NOT IN',
-							),
-						),
-						'posts_per_page' => 1,
-						'post_status' => 'publish',
-					) );
-					if ( $exposure_story->have_posts() ) {
+								'posts_per_page' => 1,
+								'post__not_in' 	=> $shown_ids,
+							)
+						);
 						$exposure_story->the_post();
 						$shown_ids[] = get_the_ID();
 						$mj['fullwidth_title'] = 'Exposure';
@@ -237,20 +231,13 @@ $shown_ids = array();
 				</h2>
 				<ul id="homepage-investigations-list" class="grid">
 					<?php
-						$investigations = new WP_Query( array(
-							'tag' => 'investigations',
-							'tax_query' => array(
-								array(
-									'taxonomy' => 'mj_content_type',
-									'field' => 'slug',
-									'terms' => 'blogpost',
-									'operator' => 'NOT IN',
-								),
-							),
-							'posts_per_page' => 4,
-							'post_status' => 'publish',
-							'post__not_in' 	=> $shown_ids,
-						) );
+						$investigations = z_get_zone_query(
+							'homepage_investigations',
+							array(
+								'posts_per_page' => 4,
+								'post__not_in' 	=> $shown_ids,
+							)
+						);
 						while ( $investigations->have_posts() ) {
 							$investigations->the_post();
 							$shown_ids[] = get_the_ID();

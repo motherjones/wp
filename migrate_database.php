@@ -1733,11 +1733,15 @@ $zones = Array(
     324446, 324431, 324441, 324436, 324531,
     324576, 324296, 324626, 324616, 324426, 324586
   ),
-  'homepage_featured' => Array(324801)
+  'homepage_featured' => Array(324801),
+  'homepage_photoessay' => Array(),
+  'homepage_investigations' => Array(),
 );
 $zone_descriptions = Array(
-  'top_stories' => Array('description' => "For placement on the homepage, top story widget"),
-  'homepage_featured' => Array('description' => "Controls 'Featured' section on the homepage")
+  'top_stories' => Array('description' => 'Controls the top story, three side stories and six "more featured" stories on the homepage, as well as the top story widget on internal pages.'),
+  'homepage_featured' => Array('description' => 'Controls the "Featured" section on the homepage. This should only contain 1 story.'),
+  'homepage_photoessay' => Array('description' => 'Controls the "Exposure" section on the homepage. This should only contain 1 story.'),
+  'homepage_investigations' => Array('description' => 'Controls the "Investigations" section on the homepage. This should only contain 4 stories.'),
 );
 
 foreach ($zones as $zone => $queue) {
