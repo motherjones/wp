@@ -148,6 +148,7 @@ h1.entry-title {
 }
 .dek {
   font-family: $calluna;
+  margin-bottom: 0;
   @media only screen and (max-width: $reflex-sm) {
     font-size: 18px;
     margin: 0.5em;
@@ -179,7 +180,7 @@ blockquote {
   width: 45%;
   margin: 1.5em 0;
   padding-left: 0;
-  padding-top: 15px;
+  padding-top: 1em;
   float: left;
   border-top: 0.5em solid $black;
   font-size: 26px;
@@ -193,7 +194,7 @@ blockquote {
     float: none;
     width: 100%;
     margin: 0;
-    padding: 0;
+    padding: 0.5em 0 0;
   }
 }
 
@@ -234,18 +235,8 @@ blockquote {
   }
 }
 
+.byline,
 .dateline {
-  font-size: 14px;
-  color: $neutral1;
-  padding-top: 0;
-  letter-spacing: 2px;
-  font-family: $mallory;
-  text-transform: uppercase;
-  font-weight: bold;
-  display: inline-block;
-}
-
-.byline {
   color: $orange;
   font-size: 12px;
   line-height: 14px;
@@ -254,6 +245,8 @@ blockquote {
   font-weight: bold;
   border-bottom: none;
   letter-spacing: 2px;
+}
+.byline {
   a {
     background-image: none;
     color: $orange;
@@ -262,10 +255,26 @@ blockquote {
     }
   }
 }
-.single .byline {
-  font-size: 14px;
-  line-height: 16px;
+.dateline {
+  color: $neutral1;
 }
+.single {
+  .byline-dateline {
+    margin-bottom: 2em;
+    @media only screen and (max-width: $reflex-sm) {
+      margin-bottom: 0;
+    }
+  }
+  .byline,
+  .dateline {
+    font-size: 14px;
+    line-height: 16px;
+  }
+  .dateline {
+    padding-left: 10px;
+  }
+}
+
 
 
 /* start within article body */
