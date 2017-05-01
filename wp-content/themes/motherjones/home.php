@@ -204,8 +204,7 @@ $shown_ids = array();
 						$shown_ids[] = get_the_ID();
 						$mj['fullwidth_title'] = 'Exposure';
 						get_template_part( 'template-parts/homepage-fullwidth' );
-					}
-				?>
+					?>
 				</div>
 			</section>
 
